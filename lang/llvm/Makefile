@@ -147,6 +147,7 @@ post-extract:
 .endfor
 
 .include "../../devel/cmake/build.mk"
+.include "../../devel/libexecinfo/buildlink3.mk"
 .include "../../archivers/zstd/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../lang/python/application.mk"
