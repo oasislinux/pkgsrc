@@ -154,6 +154,7 @@ post-install:
 .endif
 
 .include "../../devel/cmake/build.mk"
+.include "../../devel/libexecinfo/buildlink3.mk"
 .include "../../mk/atomic64.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../lang/python/tool.mk"
