@@ -120,6 +120,7 @@ pkgbase := llvm
 .endif
 
 .include "../../archivers/zstd/buildlink3.mk"
+.include "../../devel/libexecinfo/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .endif	# LLVM_BUILDLINK3_MK
 
