@@ -4,6 +4,7 @@ MESON_REQD?=	0
 .for version in ${MESON_REQD}
 TOOL_DEPENDS+=	meson>=${version}:../../devel/meson
 .endfor
+USE_TOOLS+=	ninja
 
 CONFIGURE_DIRS?=	.
 BUILD_DIRS?=		${CONFIGURE_DIRS}
