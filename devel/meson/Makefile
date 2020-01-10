@@ -11,7 +11,7 @@ COMMENT=	Open source build system meant to be fast and user friendly
 LICENSE=	apache-2.0
 
 TOOL_DEPENDS+=	${PYPKGPREFIX}-setuptools>=78:../../devel/py-setuptools
-DEPENDS+=	ninja-build>=1.7:../../devel/ninja-build
+USE_TOOLS+=	ninja:run
 TEST_DEPENDS+=	${PYPKGPREFIX}-test>=0:../../devel/py-test
 
 CONFLICTS+=	py[0-9]*-meson-[0-9]*
