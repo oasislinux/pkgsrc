@@ -12,6 +12,7 @@ BUILDLINK_LIBDIRS.libLLVM?=	lib/libLLVM
 
 LLVM_CONFIG_PATH?=		${BUILDLINK_PREFIX.libLLVM}/libexec/libLLVM/llvm-config
 
+.include "../../devel/libexecinfo/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .endif	# LIBLLVM_BUILDLINK3_MK
 

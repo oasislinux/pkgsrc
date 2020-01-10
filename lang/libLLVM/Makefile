@@ -133,6 +133,7 @@ post-install:
 		${DESTDIR}${PREFIX}/lib/libLLVM/libLLVM-${PKGVERSION_NOREV}.${SOEXT}
 .endif
 
+.include "../../devel/libexecinfo/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../lang/python/tool.mk"
 .include "../../mk/bsd.pkg.mk"
