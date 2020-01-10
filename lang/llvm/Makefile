@@ -122,6 +122,7 @@ post-extract:
 	cp ../../mk/gnu-config/${f} ${WRKSRC}/cmake/${f}
 .endfor
 
+.include "../../devel/libexecinfo/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../lang/python/application.mk"
 .include "../../lang/python/tool.mk"
