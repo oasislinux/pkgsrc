@@ -127,6 +127,13 @@ CONFIGURE_ENV+=		gt_cv_func_gnugettext1_libintl="yes"
 	    empty(H_NGETTEXT_GETTEXT:M${LOCALBASE}/*)
 CONFIGURE_ENV+=		gt_cv_func_gnugettext2_libintl="yes"
 .        endif
+.      else
+CONFIGURE_ENV+=		gt_cv_func_gnugettext_libc="yes"
+CONFIGURE_ENV+=		gt_cv_func_gnugettext1_libc="yes"
+.        if empty(H_NGETTEXT_GETTEXT:M__nonexistent__) && \
+	    empty(H_NGETTEXT_GETTEXT:M${LOCALBASE}/*)
+CONFIGURE_ENV+=		gt_cv_func_gnugettext2_libc="yes"
+.        endif
 .      endif
 .    endif
 .  endif
