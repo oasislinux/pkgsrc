@@ -1,6 +1,7 @@
 # $NetBSD: build.mk,v 1.5 2020/02/25 04:54:35 rillig Exp $
 
 BUILD_DEPENDS+=	meson-[0-9]*:../../devel/meson
+USE_TOOLS+=	ninja
 
 CONFIGURE_DIRS?=	.
 BUILD_DIRS?=		${CONFIGURE_DIRS}

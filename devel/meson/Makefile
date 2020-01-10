@@ -12,7 +12,7 @@ LICENSE=	apache-2.0
 CONFLICTS=	${PYPKGPREFIX}-meson-[0-9]*
 SUPERSEDES=	${PYPKGPREFIX}-meson-[0-9]*
 
-DEPENDS+=	ninja-build>=1.7:../../devel/ninja-build
+USE_TOOLS+=	ninja:run
 
 PYTHON_VERSIONS_INCOMPATIBLE=	27
 

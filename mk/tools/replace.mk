@@ -619,6 +619,16 @@ TOOLS_PATH.mtree=		${LOCALBASE}/bin/mtree
 .  endif
 .endif
 
+.if !defined(TOOLS_IGNORE.ninja) && !empty(_USE_TOOLS:Mninja)
+.  if !empty(PKGPATH:Mdevel/ninja)
+MAKEFLAGS+=			TOOLS_IGNORE.ninja=
+.  elif !empty(_TOOLS_USE_PKGSRC.ninja:M[yY][eE][sS])
+TOOLS_DEPENDS.ninja?=		ninja-build-[0-9]*:../../devel/ninja-build
+TOOLS_CREATE+=			ninja
+TOOLS_PATH.ninja=		${LOCALBASE}/bin/ninja
+.  endif
+.endif
+
 .if !defined(TOOLS_IGNORE.openssl) && !empty(_USE_TOOLS:Mopenssl)
 #
 # Ensure we use pkgsrc openssl if we're not using builtin.
