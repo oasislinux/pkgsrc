@@ -11,5 +11,4 @@ SHA512 (runtimes-19.1.7.src.tar.xz) = 6b87dafe809b49560c72b9872f4e2795de70c66000
 Size (runtimes-19.1.7.src.tar.xz) = 7224 bytes
 SHA1 (patch-lib_Basic_Targets_OSTargets.h) = 4b511871c8a38d57f3fddc4a6c0e921ff53194cb
 SHA1 (patch-lib_Driver_ToolChain.cpp) = 33a8e346a72893140fde42245e4b108f3a9b9e3e
-SHA1 (patch-lib_Driver_ToolChains_Gnu.cpp) = c24056b86736a29fc9bef3b20f83dedb4a260535
-SHA1 (patch-lib_Interpreter_IncrementalParser.cpp) = c5ace959ce566478316447b1621e9bfd9a537cc5
+SHA1 (patch-lib_Driver_ToolChains_Gnu.cpp) = 0d2a892c74db37c615998c725279819fc1ff6bef
