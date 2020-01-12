@@ -5,6 +5,7 @@ SHA512 (clang-13.0.1.src.tar.xz) = 10abb601ce33ec0ec1e966221d958dd6206cfd5b178f8
 Size (clang-13.0.1.src.tar.xz) = 17847584 bytes
 SHA1 (patch-lib_Basic_Targets_OSTargets.h) = 02533d1de2c92a431d9c5d4567f348deff056b99
 SHA1 (patch-lib_Driver_ToolChain.cpp) = 33a8e346a72893140fde42245e4b108f3a9b9e3e
+SHA1 (patch-lib_Driver_ToolChains_Gnu.cpp) = 57d1a64cac8186dfa72c5a92002d6bf1ededebd1
 SHA1 (patch-lib_Driver_ToolChains_Solaris.cpp) = 1a139612ce181dfce1ea3a627dcd76bc81f05455
 SHA1 (patch-lib_Driver_ToolChains_Solaris.h) = 22d1ddef34b8df3cc29c4632108d45904797aff3
 SHA1 (patch-lib_Frontend_InitHeaderSearch.cpp) = 497ddbe1eac8726d736bed58557a795dce207d1a
