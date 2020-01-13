@@ -305,8 +305,12 @@ post-extract:
 	if ${TEST} -e ${WRKDIR}/rust-${RUST_STAGE0_VER}-${RUST_ARCH}/install.sh	\
 	  -a ! -e ${RUST_BOOTSTRAP_PATH}/bin/rustc; then \
 		cd ${WRKDIR}/rust-${RUST_STAGE0_VER}-${RUST_ARCH};		\
+		mv install.sh install.sh.orig;					\
+		sed -e "s,tr '\\\\-' '\\\\_',tr -- - _," install.sh.orig > install.sh; \
 		${TOOLS_BASH} ./install.sh --prefix=${RUST_BOOTSTRAP_PATH};	\
 		cd ${WRKDIR}/rust-std-${RUST_STAGE0_VER}-${RUST_ARCH};		\
+		mv install.sh install.sh.orig;					\
+		sed -e "s,tr '\\\\-' '\\\\_',tr -- - _," install.sh.orig > install.sh; \
 		${TOOLS_BASH} ./install.sh --prefix=${RUST_BOOTSTRAP_PATH};	\
 	fi
 # patch(1) in NetBSD does not handle .cargo-checksum.json like long width file.
