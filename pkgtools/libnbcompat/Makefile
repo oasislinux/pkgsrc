@@ -22,3 +22,7 @@ do-extract:
 	@${CP} -R ${FILESDIR} ${WRKSRC}
 
 .include "../../mk/bsd.pkg.mk"
+
+.if ${OPSYS} == "Linux"
+CONFIGURE_ENV+=		ac_cv_func_lchmod=no
+.endif
