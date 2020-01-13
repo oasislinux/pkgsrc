@@ -175,7 +175,14 @@ pre-build-fix:
 .endif
 .if !empty(MACHINE_PLATFORM:MLinux-*-x86_64) || make(distinfo) || make (makesum) || make(mdi)
 RUST_STAGE0_VER=	1.42.0
+.  if !empty(GLIBC_VERSION)
 RUST_ARCH:=		x86_64-unknown-linux-gnu
+.  else
+RUST_ARCH:=		x86_64-unknown-linux-musl
+CONFIGURE_ARGS+=	--build=$(RUST_ARCH)
+CONFIGURE_ARGS+=	--set=target.$(RUST_ARCH).crt-static=false
+CONFIGURE_ARGS+=	--musl-root=/
+.  endif
 RUST_STAGE0:=		rust-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
 RUST_STD_STAGE0:=	rust-std-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
 DISTFILES:=		${DISTFILES} ${RUST_STAGE0} ${RUST_STD_STAGE0}
