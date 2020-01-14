@@ -32,6 +32,8 @@ CMAKE_ARGS+=	-DCLANG_ENABLE_ARCMT=OFF
 CMAKE_ARGS.Darwin+=	-DCMAKE_LIBTOOL=/usr/bin/libtool
 .if defined(OSX_SDK_PATH)
 CMAKE_ARGS.Darwin+=	-DDEFAULT_SYSROOT=${OSX_SDK_PATH:Q}
+.else
+CMAKE_ARGS+=		-DDEFAULT_SYSROOT=/
 .endif
 
 REPLACE_PERL+=		test/make_test_dirs.pl
