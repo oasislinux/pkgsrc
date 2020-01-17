@@ -14,6 +14,7 @@ LICENSE=	gnu-lgpl-v2.1
 GNU_CONFIGURE=		yes
 MAKE_FILE=		makefile
 USE_LIBTOOL=		yes
+USE_TOOLS+=		gsed
 CONFIGURE_ARGS+=	--with-libtool
 
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
