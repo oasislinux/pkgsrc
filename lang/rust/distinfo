@@ -112,6 +112,7 @@ SHA1 (patch-compiler_rustc__codegen__ssa_src_back_linker.rs) = 5ccf764c09a77898c
 SHA1 (patch-compiler_rustc__llvm_build.rs) = cdbed7372d12d1404119867eceaafe43ae8acb6d
 SHA1 (patch-compiler_rustc__target_src_spec_aarch64__be__unknown__netbsd.rs) = acad7e2b0bbeb85f6453aeee74a0f2ca253d6a9b
 SHA1 (patch-compiler_rustc__target_src_spec_i586__unknown__netbsd.rs) = efae710b37c089702802c3d5aa678d1cc5f88cc2
+SHA1 (patch-compiler_rustc__target_src_spec_linux__musl__base.rs) = b55d1b4594638dd8f90551d2d8481c7c47da9307
 SHA1 (patch-compiler_rustc__target_src_spec_mod.rs) = 1a466bf358c50f16e0aa7b6553472ac51e13083d
 SHA1 (patch-compiler_rustc__target_src_spec_netbsd__base.rs) = 18e3cb9f32c4170679459b2c63c856abe0fac6a3
 SHA1 (patch-library_std_src_sys_unix_mod.rs) = f8669d680f169137ac2891af2977909619366a97
