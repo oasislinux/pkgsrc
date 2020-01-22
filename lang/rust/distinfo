@@ -118,6 +118,7 @@ SHA1 (patch-src_bootstrap_compile.rs) = 67d5ad13e13e6818535a319f55e990d511e7b83f
 SHA1 (patch-src_bootstrap_lib.rs) = 3277f2be69a269ac761a2a6ab4d5389d121e6ca6
 SHA1 (patch-src_librustc__codegen__ssa_back_linker.rs) = e7c592f78b9ee317521cf0258686173a31f1d2e0
 SHA1 (patch-src_librustc__llvm_build.rs) = 7cc2aa0568aa2cbf4eb1fdbb00922b10df0b3ff6
+SHA1 (patch-src_librustc__target_spec_linux__musl__base.rs) = 67b47cedc8990b79483c2ceb35bbc5785f3b9ef6
 SHA1 (patch-src_librustc__target_spec_solaris__base.rs) = 63bf74e64f01e918db0860c43eefe50185c9a0c2
 SHA1 (patch-src_librustc__target_spec_x86__64__sun__solaris.rs) = f6ad33b41906bbf83a1cbd0e2fe13a4da37266fa
 SHA1 (patch-src_libstd_build.rs) = 9cfa91a11a575d5fef6d3e208864745a24770850
