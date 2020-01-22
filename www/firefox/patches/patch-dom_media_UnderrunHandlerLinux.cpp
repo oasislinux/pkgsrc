@@ -1,0 +1,33 @@
+$NetBSD$
+
+--- dom/media/UnderrunHandlerLinux.cpp.orig	Wed Jan  8 01:23:31 2020
++++ dom/media/UnderrunHandlerLinux.cpp
+@@ -9,7 +9,6 @@
+ 
+ #include <mozilla/Sprintf.h>
+ #include <mozilla/Atomics.h>
+-#include "audio_thread_priority.h"
+ 
+ namespace mozilla {
+ 
+@@ -57,20 +56,6 @@ void InstallSoftRealTimeLimitHandler() {
+ }
+ 
+ void DemoteThreadFromRealTime() {
+-  atp_thread_info* info = atp_get_current_thread_info();
+-  if (!info) {
+-    NS_WARNING("Could not get current thread info when demoting thread.");
+-    return;
+-  }
+-  int rv = atp_demote_thread_from_real_time(info);
+-  if (rv) {
+-    NS_WARNING("Could not demote thread from real-time.");
+-    return;
+-  }
+-  rv = atp_free_thread_info(info);
+-  if (rv) {
+-    NS_WARNING("Could not free atp_thread_info struct");
+-  }
+   gRealtimeLimitReached = false;
+ }
+ 
