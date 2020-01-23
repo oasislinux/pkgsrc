@@ -127,6 +127,7 @@ SUBST_SED.fix-paths+=		-e 's,/usr/lib/mozilla/plugins,${PREFIX}/lib/netscape/plu
 SUBST_CLASSES+=			prefix
 SUBST_STAGE.prefix=		pre-configure
 SUBST_MESSAGE.prefix=		Setting PREFIX
+SUBST_FILES.prefix+=		${MOZILLA_DIR}security/sandbox/linux/broker/SandboxBrokerPolicyFactory.cpp
 SUBST_FILES.prefix+=		${MOZILLA_DIR}xpcom/build/BinaryPath.h
 SUBST_VARS.prefix+=		PREFIX
 
