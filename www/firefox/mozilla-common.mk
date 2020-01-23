@@ -76,12 +76,8 @@ do-test:
 	     ./run-mozilla.sh ${WRKSRC}/mach check-spidermonkey
 
 # tar(1) of OpenBSD 5.5 has no --exclude command line option.
-.if ${OPSYS} == "OpenBSD"
 TOOLS_PLATFORM.tar=	${TOOLS_PATH.bsdtar}
 USE_TOOLS+=		bsdtar
-.else
-USE_TOOLS+=		tar
-.endif
 
 .if ${MACHINE_ARCH} == "i386"
 # This is required for SSE2 code under i386.
