@@ -144,6 +144,12 @@ CONFIGURE_ENV+=		WASM_CXX=${PREFIX}/bin/clang++
 CONFIGURE_ARGS+=	--without-wasm-sandboxed-libraries
 .endif
 
+SUBST_CLASSES+=			prefix
+SUBST_STAGE.prefix=		pre-configure
+SUBST_MESSAGE.prefix=		Setting PREFIX
+SUBST_FILES.prefix+=		${MOZILLA_DIR}security/sandbox/linux/broker/SandboxBrokerPolicyFactory.cpp
+SUBST_VARS.prefix+=		PREFIX
+
 .include "../../sysutils/pciutils/libname.mk"
 SUBST_CLASSES+=				fix-libpci-soname
 SUBST_STAGE.fix-libpci-soname=		pre-configure
