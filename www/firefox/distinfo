@@ -42,6 +42,7 @@ SHA1 (patch-media_libpng_pngpriv.h) = c8084332560017cd7c9b519b61d125fa28af0dbc
 SHA1 (patch-nsprpub_pr_src_pthreads_ptsynch.c) = 13e512c7ee9fa1e14ba415d62fa853e5fbfc91c0
 SHA1 (patch-security_sandbox_linux_broker_SandboxBrokerPolicyFactory.cpp) = d2fb025da5107728b4008f96d8abff23c38c35ff
 SHA1 (patch-third__party_rust_libc_src_unix_bsd_netbsdlike_netbsd_mod.rs) = 3755f32fea84900cc0f00af3d9f53ed5fcfb0b4b
+SHA1 (patch-toolkit_components_remote_nsRemoteService.cpp) = c62dbd97070a5e8603bc8efc78c8ad046115167c
 SHA1 (patch-toolkit_components_terminator_nsTerminator.cpp) = e5700d95302ef9672b404ab19e13ef7ba3ede5cf
 SHA1 (patch-toolkit_library_rust_shared_Cargo.toml) = e48638980116cdf012fc5ca070b96fb97a66f0a9
 SHA1 (patch-toolkit_library_rust_shared_lib.rs) = 306e3dbc713e6917b7ccf4647a8cd2c22fc13c0f
