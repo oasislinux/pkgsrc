@@ -10,6 +10,7 @@ SHA1 (patch-configure) = d531b33e52facf960058f1223b70db680da35300
 SHA1 (patch-configure.ac) = 68793f40752f25ccaecc958c72c23a504670bea5
 SHA1 (patch-gdk_quartz_gdkquartz-gtk-only.h) = 24aefa2631c2546ef726eba0aee0f9460c1664ed
 SHA1 (patch-gdk_wayland_gdkdevice-wayland.c) = e283bd6533ea1307b971c524bc05f0d3ee90453d
+SHA1 (patch-gdk_wayland_gdkdisplay-wayland.c) = caa61b3b56a3cedba4524e4efe50f44902a576af
 SHA1 (patch-gdk_x11_gdkscreen-x11.h) = 455d6c3de8421984ba3c99baf51cd31982a3df78
 SHA1 (patch-gdk_x11_gdkwindow-x11.h) = c80f7c9d5a570817e54fd74fa903a53400dc6f64
 SHA1 (patch-gtk_a11y_gtkaccessibility.c) = 13232c85bd570f21ea03153dacde4ca98c7c76a8
