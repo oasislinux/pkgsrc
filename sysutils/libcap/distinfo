@@ -4,3 +4,4 @@ SHA1 (libcap-2.33.tar.gz) = 40ea31c0b14e9160843d10fdcdc76d16fd881383
 RMD160 (libcap-2.33.tar.gz) = 5dd092084b96c1986700065e81f4bbe7cbe5bccf
 SHA512 (libcap-2.33.tar.gz) = 2d471406e0a8c0ed655921fca5c9ea99fe15162ad5b355c1061b4713e2559a482581fdf871886d74bfaeae596a55aae2bd510fdb2c91714d6db8a2ca8a238f77
 Size (libcap-2.33.tar.gz) = 132961 bytes
+SHA1 (patch-libcap_psx.c) = 4debee88698c7224c5b83a887eb8b835474ce45e
