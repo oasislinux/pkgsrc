@@ -1,6 +1,6 @@
 $NetBSD: distinfo,v 1.1 2016/07/08 14:29:53 kamil Exp $
 
-SHA1 (libcap-2.25.tar.gz) = 0d6e242d70e80c243a7abeb787e007835b3f0d3d
-RMD160 (libcap-2.25.tar.gz) = b2f07c4f6e84c078ab16a87441d27b6d618f1960
-SHA512 (libcap-2.25.tar.gz) = 000d1dbcc1a30857ec269f761f04e04ca362c5d3090cdf64e54ec4c1b3af6ad2db464187250b368c71deb9a257a84679cbcb9ca69c301de80b16782a67288083
-Size (libcap-2.25.tar.gz) = 73732 bytes
+SHA1 (libcap-2.33.tar.gz) = 40ea31c0b14e9160843d10fdcdc76d16fd881383
+RMD160 (libcap-2.33.tar.gz) = 5dd092084b96c1986700065e81f4bbe7cbe5bccf
+SHA512 (libcap-2.33.tar.gz) = 2d471406e0a8c0ed655921fca5c9ea99fe15162ad5b355c1061b4713e2559a482581fdf871886d74bfaeae596a55aae2bd510fdb2c91714d6db8a2ca8a238f77
+Size (libcap-2.33.tar.gz) = 132961 bytes

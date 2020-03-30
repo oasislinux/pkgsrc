@@ -1,7 +1,6 @@
 # $NetBSD: Makefile,v 1.3 2019/08/11 13:23:09 wiz Exp $
 
-DISTNAME=	libcap-2.25
-PKGREVISION=	2
+DISTNAME=	libcap-2.33
 CATEGORIES=	sysutils
 MASTER_SITES=	https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/
 
@@ -10,7 +9,7 @@ HOMEPAGE=	https://sites.google.com/site/fullycapable/
 COMMENT=	Library for getting and setting POSIX.1e capabilities
 LICENSE=	gnu-gpl-v2
 
-USE_TOOLS+=	pkg-config gmake perl
+USE_TOOLS+=	pkg-config gmake gsed perl
 
 ONLY_FOR_PLATFORM=	Linux-*-*
 
@@ -21,6 +20,7 @@ MAKE_FLAGS+=	SBINDIR=${PREFIX}/sbin
 MAKE_FLAGS+=	INCDIR=${PREFIX}/include
 MAKE_FLAGS+=	MANDIR=${PREFIX}/${PKGMANDIR}
 MAKE_FLAGS+=	PKGCONFIGDIR=${PREFIX}/lib/pkgconfig
+MAKE_FLAGS+=	GOLANG=no
 
 INSTALL_MAKE_FLAGS+=	RAISE_SETFCAP=no
 INSTALL_MAKE_FLAGS+=	DESTDIR=${DESTDIR}
