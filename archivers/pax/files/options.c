@@ -107,6 +107,11 @@ __RCSID("$NetBSD: options.c,v 1.11 2010/03/21 16:35:01 joerg Exp $");
 #include "mtree.h"
 #endif	/* SMALL */
 
+char *chdname;
+#if !HAVE_NBTOOL_CONFIG_H
+int do_chroot;
+#endif
+
 /*
  * Routines which handle command line options
  */

@@ -214,10 +214,9 @@ OPLIST * opt_next(void);
 int opt_add(const char *);
 int bad_opt(void);
 int mkpath(char *);
-char *chdname;
 #if !HAVE_NBTOOL_CONFIG_H
 #ifdef HAVE_FCHROOT
-int do_chroot;
+extern int do_chroot;
 #endif /* HAVE_FCHROOT */
 #endif
 
