@@ -1,4 +1,4 @@
-$NetBSD: CHANGES-2020,v 1.3203 2020/05/27 08:00:51 adam Exp $
+$NetBSD: CHANGES-2020,v 1.3212 2020/05/27 15:03:06 adam Exp $
 
 Changes to the packages collection and infrastructure in 2020:
 
@@ -5093,3 +5093,19 @@ Changes to the packages collection and infrastructure in 2020:
 	Removed net/py-dnspython successor py-dns [adam 2020-05-26]
 	Updated net/py-zeroconf to 0.26.3 [adam 2020-05-27]
 	Updated databases/py-pypika to 0.37.7 [adam 2020-05-27]
+	Updated mail/thunderbird to 68.8.1 [ryoon 2020-05-27]
+	Updated mail/thunderbird-l10n to 68.8.1 [ryoon 2020-05-27]
+	Updated lang/py-six to 1.15.0 [adam 2020-05-27]
+	Updated net/py-botocore to 1.16.17 [adam 2020-05-27]
+	Updated net/py-boto3 to 1.13.17 [adam 2020-05-27]
+	Updated net/py-awscli to 1.18.67 [adam 2020-05-27]
+	Updated sysutils/py-crontab to 2.5.1 [adam 2020-05-27]
+	Updated www/py-beautifulsoup4 to 4.9.1 [adam 2020-05-27]
+	Updated security/openssh to 8.3p1 [sevan 2020-05-27]
+	Updated devel/py-modulegraph to 0.18 [adam 2020-05-27]
+	Updated devel/py-rope to 0.17.0 [adam 2020-05-27]
+	Updated net/knot to 2.9.5 [ryoon 2020-05-27]
+	Updated www/py-meinheld to 1.0.2 [adam 2020-05-27]
+	Updated sysutils/py-supervisor to 4.2.0 [adam 2020-05-27]
+	Updated security/py-nacl to 1.4.0 [adam 2020-05-27]
+	Updated devel/py-test-cov to 2.9.0 [adam 2020-05-27]
