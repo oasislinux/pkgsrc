@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.315 2020/05/22 19:54:55 nia Exp $
+# $NetBSD: Makefile,v 1.323 2020/05/31 17:02:14 nia Exp $
 #
 
 COMMENT=	Emulators for other operating systems
@@ -104,27 +104,27 @@ SUBDIR+=	libretro-bsnes-mercury-accuracy
 SUBDIR+=	libretro-bsnes-mercury-performance
 SUBDIR+=	libretro-cap32
 SUBDIR+=	libretro-core-info
-SUBDIR+=	libretro-database
 SUBDIR+=	libretro-desmume
 SUBDIR+=	libretro-dolphin
-SUBDIR+=	libretro-fbalpha
+SUBDIR+=	libretro-fbneo
 SUBDIR+=	libretro-fceumm
+SUBDIR+=	libretro-flycast
 SUBDIR+=	libretro-freeintv
 SUBDIR+=	libretro-fuse
 SUBDIR+=	libretro-gambatte
 SUBDIR+=	libretro-genesis-plus-gx
 SUBDIR+=	libretro-mame2010
 SUBDIR+=	libretro-mgba
-SUBDIR+=	libretro-mupen64plus
 SUBDIR+=	libretro-nestopia
 SUBDIR+=	libretro-np2kai
 SUBDIR+=	libretro-o2em
+SUBDIR+=	libretro-parallel-n64
 SUBDIR+=	libretro-pcsx-rearmed
 SUBDIR+=	libretro-picodrive
 SUBDIR+=	libretro-ppsspp
 SUBDIR+=	libretro-prosystem
-SUBDIR+=	libretro-reicast
 SUBDIR+=	libretro-sameboy
+SUBDIR+=	libretro-smsplus
 SUBDIR+=	libretro-snes9x
 SUBDIR+=	libretro-snes9x2005
 SUBDIR+=	libretro-snes9x2010
