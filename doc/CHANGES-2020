@@ -1,4 +1,4 @@
-$NetBSD: CHANGES-2020,v 1.3366 2020/06/04 06:25:36 adam Exp $
+$NetBSD: CHANGES-2020,v 1.3388 2020/06/05 17:29:15 micha Exp $
 
 Changes to the packages collection and infrastructure in 2020:
 
@@ -5332,3 +5332,30 @@ Changes to the packages collection and infrastructure in 2020:
 	Updated lang/openjdk11 to 1.11.0.7.10nb3 [ryoon 2020-06-04]
 	Updated devel/py-googleapis-common-protos to 1.52.0 [adam 2020-06-04]
 	Updated www/py-google-apitools to 0.5.31 [adam 2020-06-04]
+	Updated geography/py-googlemaps to 4.4.1 [kleink 2020-06-04]
+	Updated net/dhcpcd to 9.1.1 [roy 2020-06-04]
+	Updated textproc/p5-XML-Atom-SimpleFeed to 0.904 [kleink 2020-06-04]
+	Updated misc/py-anita to 2.4 [gson 2020-06-04]
+	Updated www/firefox to 77.0.1 [ryoon 2020-06-05]
+	Updated www/firefox-l10n to 77.0.1 [ryoon 2020-06-05]
+	Updated multimedia/mpv to 0.32.0nb13 [ryoon 2020-06-05]
+	Updated mail/thunderbird to 68.9.0 [ryoon 2020-06-05]
+	Updated mail/thunderbird-l10n to 68.9.0 [ryoon 2020-06-05]
+	Updated databases/sqlite3 to 3.32.2 [adam 2020-06-05]
+	Updated databases/sqlite3-docs to 3.32.2 [adam 2020-06-05]
+	Updated databases/sqlite3-tcl to 3.32.2 [adam 2020-06-05]
+	Updated devel/lemon to 1.0.3.32.2 [adam 2020-06-05]
+	Updated net/terraform-provider-aws to 2.65.0 [adam 2020-06-05]
+	Updated net/terraform-provider-random to 2.2.1nb1 [adam 2020-06-05]
+	Updated net/terraform-provider-local to 1.4.0nb1 [adam 2020-06-05]
+	Updated archivers/libzip to 1.7.0 [wiz 2020-06-05]
+	Updated devel/spdlog to 1.6.1 [ryoon 2020-06-05]
+	Updated www/py-flask-sqlalchemy to 2.4.3 [kleink 2020-06-05]
+	Updated graphics/giflib to 5.2.1nb3 [jperkin 2020-06-05]
+	Added net/minitube version 3.4 [ryoon 2020-06-05]
+	Added textproc/dwdiff version 2.1.2 [ryoon 2020-06-05]
+	Updated net/openconnect to 8.10 [bacon 2020-06-05]
+	Updated devel/smake to 1.3nb11 [micha 2020-06-05]
+	Updated archivers/star to 1.6.1nb8 [micha 2020-06-05]
+	Updated shells/bosh to 20200525 [micha 2020-06-05]
+	Updated shells/pbosh to 20200525 [micha 2020-06-05]
