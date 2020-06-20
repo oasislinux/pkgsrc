@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.185 2020/06/03 08:51:26 ryoon Exp $
+# $NetBSD: Makefile,v 1.187 2020/06/18 14:16:50 ryoon Exp $
 
 DISTNAME=		nss-${NSS_RELEASE:S/.0$//}
-NSS_RELEASE=		3.53.0
+NSS_RELEASE=		3.53.1
 CATEGORIES=		security
 MASTER_SITES=		${MASTER_SITE_MOZILLA_ALL:=security/nss/releases/NSS_${NSS_DIST_DIR_VERSION:S/_0$//}_RTM/src/}
 
@@ -124,7 +124,7 @@ do-install:
 	(cd ${DIST}/public && pax -Lrw . ${DESTDIR}${PREFIX}/include/nss/ )
 	(cd ${DIST}/*_OPT.OBJ/lib && \
 		pax -Lrw *.${SO_SUFFIX} ${DESTDIR}${PREFIX}/lib/nss/ )
-	${INSTALL_LIB} ${DIST}/*_OPT.OBJ/lib/libcrmf.a \
+	${INSTALL_DATA} ${DIST}/*_OPT.OBJ/lib/libcrmf.a \
 		${DESTDIR}${PREFIX}/lib/nss/
 	${INSTALL_DATA} ${WRKSRC}/nss.pc ${DESTDIR}${PREFIX}/lib/pkgconfig/nss.pc
 	${INSTALL_SCRIPT} ${WRKSRC}/nss-config ${DESTDIR}${PREFIX}/bin/nss-config

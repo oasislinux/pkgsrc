@@ -1,0 +1,23 @@
+@comment $NetBSD: PLIST,v 1.2 2020/06/20 16:13:30 nia Exp $
+share/fonts/X11/misc/t0-11-uni.pcf.gz
+share/fonts/X11/misc/t0-11b-uni.pcf.gz
+share/fonts/X11/misc/t0-12-uni.pcf.gz
+share/fonts/X11/misc/t0-12b-uni.pcf.gz
+share/fonts/X11/misc/t0-13-uni.pcf.gz
+share/fonts/X11/misc/t0-13b-uni.pcf.gz
+share/fonts/X11/misc/t0-14-uni.pcf.gz
+share/fonts/X11/misc/t0-14b-uni.pcf.gz
+share/fonts/X11/misc/t0-15-uni.pcf.gz
+share/fonts/X11/misc/t0-15b-uni.pcf.gz
+share/fonts/X11/misc/t0-15i-uni.pcf.gz
+share/fonts/X11/misc/t0-16-uni.pcf.gz
+share/fonts/X11/misc/t0-16b-uni.pcf.gz
+share/fonts/X11/misc/t0-16i-uni.pcf.gz
+share/fonts/X11/misc/t0-17-uni.pcf.gz
+share/fonts/X11/misc/t0-17b-uni.pcf.gz
+share/fonts/X11/misc/t0-17i-uni.pcf.gz
+share/fonts/X11/misc/t0-18-uni.pcf.gz
+share/fonts/X11/misc/t0-18b-uni.pcf.gz
+share/fonts/X11/misc/t0-18i-uni.pcf.gz
+share/fonts/X11/misc/t0-22-uni.pcf.gz
+share/fonts/X11/misc/t0-22b-uni.pcf.gz

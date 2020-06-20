@@ -1,4 +1,4 @@
-$NetBSD: patch-src_rustllvm_PassWrapper.cpp,v 1.2 2020/05/16 19:48:48 tnn Exp $
+$NetBSD: patch-src_rustllvm_PassWrapper.cpp,v 1.4 2020/06/08 11:19:33 he Exp $
 
 LLVM 10 compatibility
 

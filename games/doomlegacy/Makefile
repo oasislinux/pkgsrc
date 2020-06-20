@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.4 2020/05/19 11:20:16 micha Exp $
+# $NetBSD: Makefile,v 1.9 2020/06/19 09:52:22 micha Exp $
 
 VERS=			1.48.4
 PKGNAME=		doomlegacy-${VERS}
+PKGREVISION=		3
 CATEGORIES=		games
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=doomlegacy/}
-DISTNAME=		${PKGNAME:S/-/_/}_source
+DISTNAME=		${PKGNAME_NOREV:S/-/_/}_source
 DISTFILES=		${DEFAULT_DISTFILES} doomlegacy_${VERS}_common.zip
 EXTRACT_SUFX=		.tar.bz2
 
@@ -36,6 +37,7 @@ MAKE_FLAGS+=		OS=MAC
 # Other Unix (should work for GNU/Linux, OpenBSD and SunOS)
 MAKE_FLAGS+=		OS=LINUX
 CFLAGS.SunOS+=		-DSOLARIS
+LDFLAGS.SunOS+=		-lresolv -lsocket -lnsl
 .endif
 
 .if ${MACHINE_ENDIAN} == "big"

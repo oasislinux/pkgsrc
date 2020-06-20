@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3140 2020/06/04 08:56:12 maya Exp $
+# $NetBSD: Makefile,v 1.3144 2020/06/15 15:11:50 scole Exp $
 #
 
 COMMENT=	Development utilities
@@ -72,6 +72,7 @@ SUBDIR+=	R-whisker
 SUBDIR+=	R-withr
 SUBDIR+=	R-xfun
 SUBDIR+=	RBTools
+SUBDIR+=	RE-flex
 SUBDIR+=	Renaissance
 SUBDIR+=	SDL
 SUBDIR+=	SDL-intro-en
@@ -741,6 +742,7 @@ SUBDIR+=	libgnome
 SUBDIR+=	libgnomemm
 SUBDIR+=	libgnomeui
 SUBDIR+=	libgnomeuimm
+SUBDIR+=	libgnt
 SUBDIR+=	libgphoto2
 SUBDIR+=	libgsf
 SUBDIR+=	libgweather
@@ -2371,6 +2373,7 @@ SUBDIR+=	py-pathlib2
 SUBDIR+=	py-pathspec
 SUBDIR+=	py-pbr
 SUBDIR+=	py-pebble
+SUBDIR+=	py-pep517
 SUBDIR+=	py-pep8
 SUBDIR+=	py-pexpect
 SUBDIR+=	py-pip
@@ -2735,7 +2738,6 @@ SUBDIR+=	ruby-hashery
 SUBDIR+=	ruby-heckle
 SUBDIR+=	ruby-highline
 SUBDIR+=	ruby-hike
-SUBDIR+=	ruby-hike1
 SUBDIR+=	ruby-hocon
 SUBDIR+=	ruby-i18n
 SUBDIR+=	ruby-i18n12

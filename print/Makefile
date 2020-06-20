@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.775 2020/05/28 06:15:51 markd Exp $
+# $NetBSD: Makefile,v 1.777 2020/06/16 08:34:26 pin Exp $
 #
 
 COMMENT=	Desktop publishing
@@ -84,6 +84,7 @@ SUBDIR+=	libpaper
 SUBDIR+=	libspectre
 SUBDIR+=	lilypond
 SUBDIR+=	luatex
+SUBDIR+=	lumina-pdf
 SUBDIR+=	magicfilter
 SUBDIR+=	mktexlsr
 SUBDIR+=	mp
@@ -147,6 +148,7 @@ SUBDIR+=	ruby-prawn
 SUBDIR+=	ruby-rbpdf
 SUBDIR+=	ruby-rbpdf-font
 SUBDIR+=	scribus-qt4
+SUBDIR+=	scribus-qt5
 SUBDIR+=	seetexk
 SUBDIR+=	stylewriter
 SUBDIR+=	tcl-pdflib

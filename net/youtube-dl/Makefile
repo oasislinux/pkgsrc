@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.207 2020/05/30 17:58:16 leot Exp $
+# $NetBSD: Makefile,v 1.210 2020/06/16 00:17:40 leot Exp $
 
 # XXX: VERSION_DATE can contains also an optional part that indicates
 # XXX: possible same day revisions. PKGNAME preserves that dotted part as is.
-VERSION_DATE=	2020.05.29
+VERSION_DATE=	2020.06.16.1
 DISTNAME=	youtube-dl-${VERSION_DATE}
 PKGNAME=	${DISTNAME:S/.//:S/.//}
 CATEGORIES=	net

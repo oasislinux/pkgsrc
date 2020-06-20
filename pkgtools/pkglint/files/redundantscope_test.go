@@ -428,6 +428,7 @@ func (s *Suite) Test_RedundantScope__before_including_same_value(c *check.C) {
 		"NOTE: including.mk:2: Default assignment of VAR.def.asg has no effect because of included.mk:2.",
 		"NOTE: including.mk:4: Definition of VAR.asg.def is redundant because of included.mk:4.",
 		"NOTE: including.mk:5: Definition of VAR.asg.asg is redundant because of included.mk:5.",
+		"NOTE: including.mk:7: Definition of VAR.app.def is redundant because of included.mk:7.",
 		"WARN: including.mk:8: Variable VAR.app.asg is overwritten in included.mk:8.")
 }
 
@@ -1692,6 +1693,30 @@ func (s *Suite) Test_RedundantScope_checkAppendUnique__eval_assignment(c *check.
 	t.CheckOutputLines(
 		"NOTE: Makefile:5: Adding \"category\" to CATEGORIES is redundant " +
 			"because it will later be appended in included.mk:2.")
+}
+
+func (s *Suite) Test_RedundantScope_checkAppendUnique__not_redundant(c *check.C) {
+	t := s.Init(c)
+
+	t.SetUpCategory("perl")
+	t.SetUpPackage("category/package",
+		"CATEGORIES:=\tcategory",
+		".include \"included1.mk\"",
+		".include \"included2.mk\"")
+	t.Chdir("category/package")
+	t.CreateFileLines("included1.mk",
+		MkCvsID,
+		"CATEGORIES+=\tperl")
+	t.CreateFileLines("included2.mk",
+		MkCvsID,
+		"CATEGORIES+=\tperl")
+	t.FinishSetUp()
+
+	G.Check(".")
+
+	// The additions in included1.mk and included2.mk are not redundant
+	// since neither of them includes the other.
+	t.CheckOutputEmpty()
 }
 
 func (s *Suite) Test_includePath_includes(c *check.C) {

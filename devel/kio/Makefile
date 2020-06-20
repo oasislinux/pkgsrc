@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.43 2020/06/02 08:22:36 adam Exp $
+# $NetBSD: Makefile,v 1.46 2020/06/10 22:22:15 jperkin Exp $
 
-DISTNAME=	kio-${KF5VER}
-PKGREVISION=	4
+DISTNAME=	kio-5.70.1
+#DISTNAME=	kio-${KF5VER}
 CATEGORIES=	devel
 
 HOMEPAGE=	https://community.kde.org/Frameworks
@@ -11,8 +11,6 @@ LICENSE=	gnu-lgpl-v2.1
 .include "../../meta-pkgs/kde/kf5.mk"
 
 USE_TOOLS+=	msgmerge
-
-#CMAKE_ARGS+=	-DKAUTH_DBUS_DIR=${PREFIX}/share/examples/kio
 
 LDFLAGS.SunOS+=	-lsocket
 

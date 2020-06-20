@@ -1,5 +1,5 @@
 #! /bin/sh
-# $NetBSD: subst.sh,v 1.43 2020/05/19 05:14:18 rillig Exp $
+# $NetBSD: subst.sh,v 1.50 2020/06/20 16:26:11 rillig Exp $
 #
 # Tests for mk/subst.mk.
 #
@@ -38,6 +38,12 @@ test_case_set_up() {
 		WRKDIR=		$PWD
 		WRKSRC=		$PWD
 	EOF
+
+	create_file_lines "$mocked_pkgsrcdir/show-pkg-fail-reason.mk" \
+		'show-pkg-fail-reasons: .PHONY' \
+		'.if ${PKG_FAIL_REASON:M*}' \
+		'	@printf "fail reason: %s\n" ${PKG_FAIL_REASON} 1>&2 && exit 1' \
+		'.endif'
 }
 
 
@@ -1265,12 +1271,14 @@ if test_case_begin 'identity substitution implementation'; then
 	assert_identity 'yes'	-e 's!/dev/audio!/dev/audio!'
 
 	# There may be several identity substitutions in the same
-	# SUBST_SED.  As long as all these substitutions are identity
-	# substitutions, they may be skipped.  As soon as there is one
-	# other substitution, the whole SUBST_SED is treated as usual.
+	# SUBST_SED.  As long as any of these substitutions is an
+	# identity substitution, it can happen that a file stays the
+	# same.  It still might be modified in a different pkgsrc
+	# configuration.
 	assert_identity 'yes'	-e 's;from;from;' -e 's!second!second!'
-	assert_identity 'no'	-e 's,changing,x,' -e 's,id,id,'
-	assert_identity 'no'	-e 's,id,id,' -e 's,changing,x,'
+	assert_identity 'yes'	-e 's,changing,x,' -e 's,id,id,'
+	assert_identity 'yes'	-e 's,id,id,' -e 's,changing,x,'
+	assert_identity 'no'	-e 's,changing,x,' -e 's,changing,x,'
 
 	# A demonstration of all ASCII characters that may appear in an
 	# identity substitution.
@@ -1386,6 +1394,9 @@ if test_case_begin 'identity substitution, found in file'; then
 
 	assert_that "$tmpdir/output" --file-is-lines \
 		'=> Substituting "id" in file'
+	if [ -f "file.subst.sav" ]; then
+		assert_fail 'temporary file still exists\n'
+	fi
 
 	test_case_end
 fi
@@ -1522,6 +1533,42 @@ if test_case_begin 'SUBST_FILTER_CMD + SUBST_SED in NOOP_OK=no mode'; then
 fi
 
 
+if test_case_begin 'SUBST_FILTER_CMD + empty SUBST_SED'; then
+
+	# If SUBST_FILTER_CMD is defined for a SUBST class,
+	# the corresponding SUBST_SED and SUBST_VARS are ignored.
+	# To avoid redundant variable definitions, this case fails fast.
+	#
+	# This happens even if SUBST_SED or SUBST_VARS are empty since
+	# there is no point in setting these to empty values.
+	# In most cases they are constant and non-empty anyway.
+
+	create_file_lines 'testcase.mk' \
+		'SUBST_CLASSES+=	id' \
+		'SUBST_FILES.id=	file' \
+		'SUBST_FILTER_CMD.id=	tr -d "0-9"' \
+		'SUBST_SED.id=		# empty' \
+		'SUBST_VARS.id=		# empty' \
+		'SUBST_NOOP_OK.id=	no' \
+		'' \
+		'.include "prepare-subst.mk"' \
+		'.include "mk/subst.mk"' \
+		'.include "show-pkg-fail-reason.mk"'
+
+	run_bmake 'testcase.mk' 'show-pkg-fail-reasons' 'subst-id' 1> "$tmpdir/output" 2>&1 \
+	&& exitcode=0 || exitcode=$?
+
+	assert_that "$tmpdir/output" --file-is-lines \
+		'fail reason: [subst.mk:id] SUBST_FILTER_CMD and SUBST_SED/SUBST_VARS cannot be combined.' \
+		'*** Error code 1' \
+		'' \
+		'Stop.' \
+		"$make: stopped in $PWD"
+
+	test_case_end
+fi
+
+
 if test_case_begin 'effective SUBST_FILTER_CMD in NOOP_OK=no mode'; then
 
 	create_file_lines 'testcase.mk' \
@@ -1631,6 +1678,118 @@ if test_case_begin 'multiple sed commands with semicolon'; then
 		'' \
 		'Stop.' \
 		"$make: stopped in $PWD"
+
+	test_case_end
+fi
+
+
+if test_case_begin 'several substitutions, only one applies to file'; then
+
+	# https://mail-index.netbsd.org/pkgsrc-changes/2020/06/06/msg215480.html
+
+	create_file 'testcase.mk' <<-EOF
+		SUBST_CLASSES+=		id
+		SUBST_FILES.id=		first second
+		SUBST_SED.id=		-e 's,first,first-modified,'
+		SUBST_SED.id+=		-e 's,second,second,'
+		SUBST_NOOP_OK.id=	no
+
+		.include "prepare-subst.mk"
+		.include "mk/subst.mk"
+	EOF
+	create_file_lines 'first' 'first'
+	create_file_lines 'second' 'second'
+
+	run_bmake 'testcase.mk' 'subst-id' 1> "$tmpdir/output" 2>&1 \
+	&& exitcode=0 || exitcode=$?
+
+	# Each of the files contains at least one of the sed patterns,
+	# therefore the substitutions _could_ have an effect, depending
+	# on the pkgsrc configuration.
+	assert_that "$tmpdir/output" --file-is-lines \
+		'=> Substituting "id" in first second'
+	assert_that 'first' --file-contains-exactly 'first-modified'
+	assert_that 'second' --file-contains-exactly 'second'
+
+	test_case_end
+fi
+
+
+if test_case_begin 'identity substitution with newline'; then
+
+	# Ensures that the adjusted sed command line in the "found=" line
+	# in mk/subst.mk does not create shell syntax errors.
+
+	# This is the sed command after the "found=" line in mk/subst.mk.
+	# It tests whether any of the patterns is found.
+	# It only outputs the actually found lines (-n) by appending a "p"
+	# to the usual "s,from,to," commands.
+	mock_sed=$(
+		newline='
+'
+		args='-n'
+
+		# In this "usual" sed command, the "p" is added.
+		args="$args -e s,identity,identity,p"
+
+		# This is considered an "unusual" sed command because of
+		# the leading 1, therefore no "p" is added.
+		#
+		# Ideally this should be considered a "usual" sed command,
+		# even though it only applies to some of the lines.
+		# To do this, mk/scripts/subst-identity.awk has to parse
+		# sed addresses, in addition to substitutions.
+		args="$args -e 1s,first line,first line,"
+
+		# In the Makefile, the additional quotes at the beginning
+		# make this an "unusual" sed command, and the :C modifier
+		# in subst.mk doesn't see that after unquoting the word,
+		# the sed command is quite usual.  This is an edge case
+		# that doesn't occur in practice.
+		args="$args -e s,unusual,unusual,g"
+
+		# No "p" is added since this is not a "usual" substitution.
+		# If it had been found, the file would have changed anyway,
+		# and this sed command line would not be executed.
+		args="$args -e /not found/d"
+
+		# Same here.  Just make sure that the generated sed command
+		# line does not lead to a syntax error in the shell.
+		args="$args -e /not found/a\\${newline}added${newline}"
+
+		args="$args file"
+
+		mock_cmd 'mock-sed' \
+			--when-args "$args" --then-output 'identity'
+	)
+	create_file 'testcase.mk' <<-EOF
+		SUBST_CLASSES+=		id
+		SUBST_FILES.id=		file
+		SUBST_SED.id=		-e 's,identity,identity,'
+		SUBST_SED.id+=		-e '1s,first line,first line,'
+		SUBST_SED.id+=		-e '''''s,unusual,unusual,g'
+		SUBST_SED.id+=		-e '/not found/d'
+		SUBST_SED.id+=		-e '/not found/a\\\${.newline}added\${.newline}'
+		# Use the standard sed for the main part.
+		SUBST_FILTER_CMD.id=	LC_ALL=C sed \${SUBST_SED.id}
+
+		.include "prepare-subst.mk"
+		# Use the mocked sed for the "found=" part.
+		SED=			$mock_sed
+		.include "mk/subst.mk"
+		# ignore PKG_FAIL_REASON (SUBST_SED + SUBST_FILTER_CMD)
+	EOF
+	create_file 'file' <<-EOF
+		identity
+	EOF
+
+	run_bmake 'testcase.mk' 'subst-id' 1> "$tmpdir/output" 2>&1 \
+	&& exitcode=0 || exitcode=$?
+
+	assert_that "$tmpdir/output" --file-is-lines \
+		'=> Substituting "id" in file'
+	assert_that 'file' --file-is-lines \
+		'identity'
 
 	test_case_end
 fi

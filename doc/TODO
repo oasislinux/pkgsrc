@@ -1,4 +1,4 @@
-$NetBSD: TODO,v 1.19898 2020/06/05 11:23:12 ryoon Exp $
+$NetBSD: TODO,v 1.19924 2020/06/20 19:08:45 adam Exp $
 
 Suggested new packages
 ======================
@@ -375,7 +375,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o GMT-5.1.1
 	o GNUMail-1.2.2
 	o Gorm-1.2.22
-	o ImageMagick-7.0.10.15
 	o JBidwatcher-2.5.6 [wants launch4j]
 	o LPRng-core-3.8.35
 	o OdfConverter-4.0
@@ -492,7 +491,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o classpath-gui-0.99
 	o clawsker-0.7.13
 	o clusterssh-4.05
-	o codeblocks-17.12
 	o colorize-0.3.4
 	o colortail-0.3.3
 	o compiz-0.8.10
@@ -578,7 +576,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o fet-5.28.6
 	o fetchyahoo-2.14.0
 	o filerunner-14.06.18.10
-	o filezilla-3.48.1
 	o flashplayer-0.4.13
 	o flow-tools-0.411
 	o fortunes-calvin-0.3
@@ -662,11 +659,11 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o gok-2.30.1
 	o golem-0.0.6
 	o goocanvas-2.0.2
-	o gopls-0.4.1
 	o gossip-0.31
 	o gourmet-0.13.3
 	o gperiodic-3.0.2
 	o gps-6.1.1
+	o grafana-7.0.2
 	o gramofile-1.6P
 	o grantlee-5.0.0
 	o greed-4.1
@@ -766,9 +763,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o libbpg-0.9.6
 	o libcarddav-14.0.4
 	o libdrm-2.4.102
-	o libfilezilla-0.22.0
 	o libflash-0.4.13
-	o libfolks-0.10.1 [wip]
 	o libgfshare-2.0.0
 	o libgiigic-1.1.2
 	o libgnomekbd-3.4.0.2
@@ -780,7 +775,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o libmcs-0.7.2
 	o libmilter-8.16.0.16
 	o libmtag-0.3.6
-	o libntlm-1.6
 	o liboobs-2.32.0
 	o liboop-1.0.1
 	o libpgm-5.2.122
@@ -890,7 +884,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o openh323-1.19.1
 	o openmortal-0.7.1
 	o openoffice-4.1.7
-	o opensc-0.19.0
 	o openslp-2.0.0
 	o opensmtpd-6.0.0
 	o openvas-libraries-8.0.8
@@ -906,7 +899,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o pam-krb5-4.7
 	o pam-passwdqc-1.3.0
 	o pam-yubico-2.21
-	o pari-2.11.2
+	o pari-2.11.4
 	o parrot-7.11.0
 	o pcc-1.1.0
 	o pcc-current-20160305
@@ -916,6 +909,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o pgbuildfarm-4.17
 	o phoronix-9.2.1
 	o phoronix-test-suite-9.0.1
+	o php-baikal-0.7.0
 	o php-basercms-4.0.0
 	o php-concrete5-8.3.2
 	o php-gearman-2.0.6
@@ -967,6 +961,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o prelude-lml-3.1.0
 	o prelude-manager-3.1.0
 	o profit-2.5.3
+	o protobuf-3.12.3
 	o psmisc-22.20
 	o pspp-0.10.1
 	o ptlib-2.16.2
@@ -976,11 +971,9 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o py-Scientific-doc-2.5.5
 	o py-cairo-1.19.1 [drops python-2.x support]
 	o py-cassa-1.11.0
-	o py-codespell-1.17.1
+	o py-cmake-language-server-0.1.2
 	o py-configparser-5.0.0 [drops python-2.x support]
 	o py-ephem3-3.7.6.0
-	o py-google-api-python-client-1.8.4
-	o py-google-auth-1.16.0
 	o py-hgview-1.9.0
 	o py-input-pad-1.4.2
 	o py-keybinder-0.3.1
@@ -989,10 +982,13 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o py-omniORBpy-3.7
 	o py-pandas-1.0.0
 	o py-ptt-1.10.2
+	o py-rsa-4.6
 	o py-setuptools-47.1.1 [drops python-2.x support]
-	o py-setuptools_scm-4.1.1
+	o py-setuptools_scm-4.1.2
 	o py-simpletal-5.1
+	o py-sphinx-autoapi-1.4.0
 	o py-sybase-0.37
+	o py-vdirsyncer-0.16.8
 	o py-wxWidgets-4.0.0
 	o py-yubiauth-0.3.10
 	o pythontidy-1.23
@@ -1029,9 +1025,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o rt4-4.4.0
 	o rtty-4.0 [at ftp://ftp.isc.org/isc/rtty/]
 	o rubber-1.4
-	o ruby-jekyll-4.1.0
-	o ruby-mercenary-0.4.0
-	o ruby-redmine-4.0.5
 	o rump-20131213
 	o sabayon-2.30.1
 	o sablecc-3.7
@@ -1123,7 +1116,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o tomboy-1.10.2
 	o top-3.8beta1
 	o topgit-0.8
-	o tor-browser-https-everywhere-2020.5.20
 	o tripwire-2.3.1 [see also pkg/22362]
 	o trojita-0.6
 	o ts-0.7.5
@@ -1141,7 +1133,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o userppp-030706
 	o userspace-rcu-0.9.1
 	o utilisp-1.14
-	o vala-0.48.6
 	o varnish-5.1.3
 	o varnish-6.0
 	o vbetool-1.1
@@ -1157,7 +1148,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o visual-regexp-3.1
 	o vnc-4.0 [http://www.realvnc.com/download.html|pkgsrc-wip]
 	o vnstat-1.15
-	o vte3-0.60.2
 	o vtk-5.10.1
 	o wMosaic-3.8.22
 	o wap-utils-1.4.1
@@ -1229,7 +1219,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o zkt-1.1.3
 	o zoneminder-1.32.3
 	o zopeedit-0.8
-	o zstd-1.4.5
 	o zziplib-0.13.71
 
 Licenses of packages

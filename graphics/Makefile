@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.893 2020/06/01 11:03:46 pin Exp $
+# $NetBSD: Makefile,v 1.895 2020/06/17 08:47:30 nia Exp $
 #
 
 COMMENT=	Graphics tools and libraries
@@ -92,6 +92,7 @@ SUBDIR+=	digikam
 SUBDIR+=	djview4
 SUBDIR+=	djvulibre-lib
 SUBDIR+=	djvulibre-tools
+SUBDIR+=	drawing
 SUBDIR+=	dvipng
 SUBDIR+=	dx
 SUBDIR+=	dxsamples
@@ -419,6 +420,7 @@ SUBDIR+=	panomatic
 SUBDIR+=	paper-icon-theme
 SUBDIR+=	papirus-folders
 SUBDIR+=	papirus-icon-theme
+SUBDIR+=	pdfpc
 SUBDIR+=	pdiff
 SUBDIR+=	pear-Image_Canvas
 SUBDIR+=	pear-Image_Color

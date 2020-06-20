@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.171 2020/06/03 10:45:04 nia Exp $
+# $NetBSD: Makefile,v 1.180 2020/06/14 15:33:27 nia Exp $
 
 DISTNAME=	rustc-1.43.1-src
 PKGNAME=	${DISTNAME:S/rustc/rust/:S/-src//}
@@ -11,6 +11,8 @@ HOMEPAGE=	https://www.rust-lang.org/
 COMMENT=	Safe, concurrent, practical language
 LICENSE=	mit OR apache-2.0
 
+CONFLICTS+=	rust-bin-[0-9]*
+
 USE_GCC_RUNTIME=	yes
 USE_LANGUAGES=		c c++11
 USE_LIBTOOL=		yes
@@ -19,12 +21,6 @@ USE_TOOLS+=		bash ggrep gmake perl:build pkg-config
 # The NetBSD bootstraps are built for NetBSD 8 (because rust doesn't
 # build on 7).  Mark earlier versions as broken.
 BROKEN_ON_PLATFORM+=	NetBSD-[1-7].*-*
-
-.include "type.mk"
-
-.if ${RUST_TYPE} != "src"
-PKG_SKIP_REASON+=	"Rust source package, RUST_TYPE is bin"
-.endif
 
 HAS_CONFIGURE=			yes
 PYTHON_FOR_BUILD_ONLY=		yes
@@ -136,9 +132,50 @@ CONFIGURE_ARGS+=	--debuginfo-level-tests=0
 CONFIGURE_ARGS+=	--set llvm.targets="ARM;X86"
 .endif
 
-.if ${OPSYS} == "NetBSD" && !empty(MACHINE_PLATFORM:MNetBSD-9.99.*) && \
-    !empty(MACHINE_PLATFORM:MNetBSD-[1-9][0-9].*)
+.if ${OPSYS} == "NetBSD"
+# This block contains information about known trouble on NetBSD and workarounds.
+
+# Parallel builds failed on NetBSD due to dynamic linker locking bugs.
+# \todo Explain if the build is believed to be sound if not parallel,
+# or if a non-parallel build is merely more likely to work.
+#
+# See toolchain/54192 at
+#   http://gnats.netbsd.org/cgi-bin/query-pr-single.pl?number=54192
+# which was fixed in -current on 2020-04-19:
+#   http://mail-index.netbsd.org/source-changes/2020/04/16/msg116256.html
+#   http://mail-index.netbsd.org/source-changes/2020/04/19/msg116337.html
+# These  were pulled up to netbsd-9 on 2020-05-13:
+#   http://releng.netbsd.org/cgi-bin/req-9.cgi?show=907
+# This has not been pulled up to netbsd-8
+#   \todo Explain if it's not applicable, shouldn't be pulled up, should be
+#   but hasn't, is too hard, etc.
+#
+# On pkgbuild for 2020Q1 9.0_RELEASE amd64, rust did not build despite
+# MAKE_JOBS_SAFE=no, but setting MAKE_JOBS=1 resulted in success. (No
+# PR is open for this.)  \todo Understand and fix.
+#
+# If we aren't on 9-current, and are on 8.x or 9.x, avoid parallel.
+# \todo Consider avoiding setting this on netbsd-9 past the fix.
+.  if ${MACHINE_PLATFORM:MNetBSD-[1-9].*} && !${MACHINE_PLATFORM:MNetBSD-9.99.*}
 MAKE_JOBS_SAFE=	no
+.  endif
+
+# Open PRs
+# 
+# Broken package with PREFIX not /usr/pkg:
+#   http://gnats.netbsd.org/cgi-bin/query-pr-single.pl?number=54453
+#
+# NetBSD 8.1 earmv7hf: unknown configure option
+#   http://gnats.netbsd.org/cgi-bin/query-pr-single.pl?number=54621
+#
+# NetBSD 9 i386: bootstrap fails with missing libcurl.so.4
+#   http://gnats.netbsd.org/cgi-bin/query-pr-single.pl?number=55368
+
+# Stale PRs (a reason to believe they no longer apply)
+# 
+# NetBSD 8.1 sparc64: bootstrap fails with libssl.so.14 missing
+#   http://gnats.netbsd.org/cgi-bin/query-pr-single.pl?number=54622
+
 .endif
 
 #
@@ -306,6 +343,42 @@ SUBST_FILES.rpath+=	src/librustc_codegen_ssa/back/linker.rs
 SUBST_FILES.rpath+=	src/bootstrap/builder.rs
 SUBST_VARS.rpath=	PREFIX
 
+#
+# Generate list of subst entries for various .cargo-checksum.json files.  These
+# are all handled together in one big substitution to simplify things rather
+# than one substitution entry per file, but are kept separate below to ease
+# updating and verification.
+#
+CKSUM_CRATES+=	vendor/backtrace-sys
+CKSUMS+=	59763fc255248b54fba5d0761d61093a73d51fa4cb400b0df1b5f339b9c2f48a
+CKSUMS+=	ba66d192421fd536ceddb50616c4c4aea06f4e39450eb0bc2bbbaed0b1e684c1
+
+CKSUM_CRATES+=	vendor/libc
+CKSUMS+=	cd266cee38f25fe9ed896ba88ddd3530eca352c4d260671fb63d315890bc49e6
+CKSUMS+=	109a8e5a1638b09c4297e8e7ff95f35b4d16a3c0b42c8791b5fdd3f550612f8c
+
+CKSUM_CRATES+=	vendor/libssh2-sys
+CKSUMS+=	0d80edbdffcf36a165578b3cffe9bc4e9eab3b3ae94a170ec8bc18764159cabb
+CKSUMS+=	fd601d3ea2ff745c3d73a546cc553f656924f3e985b87bc4db025c5c51ed3db5
+
+CKSUM_CRATES+=	vendor/lzma-sys
+CKSUMS+=	51a9ca7a4576822dc4fa01b31bc4bbed21817777abb304f605ef5951f68c3ed2
+CKSUMS+=	807c3aa4b5a62a70ba790df151e9ecf19f4bb562f2858575d690908751262db3
+
+# Contain identical checksums
+CKSUM_CRATES+=	vendor/rand-0.6.1
+CKSUMS+=	1e732c2e3b4bd1561f11e0979bf9d20669a96eae7afe0deff9dfbb980ee47bf1
+CKSUMS+=	bc03f2345d7cfa7000f9da817120b6afa073359789c21a9a790ebd8676c50cca
+
+SUBST_CLASSES+=		cksum
+SUBST_STAGE.cksum=	pre-configure
+.for crate in ${CKSUM_CRATES}
+SUBST_FILES.cksum+=	${crate}/.cargo-checksum.json
+.endfor
+.for from to in ${CKSUMS}
+SUBST_SED.cksum+=	-e 's,${from},${to},g'
+.endfor
+
 post-extract:
 	set -e;									\
 	if ${TEST} -e ${WRKDIR}/rust-${RUST_STAGE0_VER}-${RUST_ARCH}/install.sh	\
@@ -319,34 +392,6 @@ post-extract:
 		sed -e "s,tr '\\\\-' '\\\\_',tr -- - _," install.sh.orig > install.sh; \
 		${TOOLS_BASH} ./install.sh --prefix=${RUST_BOOTSTRAP_PATH};	\
 	fi
-# patch(1) in NetBSD does not handle .cargo-checksum.json like long width file.
-	set -e; ${ECHO}								\
-	  vendor/libssh2-sys							\
-	  0d80edbdffcf36a165578b3cffe9bc4e9eab3b3ae94a170ec8bc18764159cabb	\
-	  fd601d3ea2ff745c3d73a546cc553f656924f3e985b87bc4db025c5c51ed3db5	\
-	  vendor/rand								\
-	  1e732c2e3b4bd1561f11e0979bf9d20669a96eae7afe0deff9dfbb980ee47bf1	\
-	  bc03f2345d7cfa7000f9da817120b6afa073359789c21a9a790ebd8676c50cca	\
-	  vendor/rand-0.6.1							\
-	  1e732c2e3b4bd1561f11e0979bf9d20669a96eae7afe0deff9dfbb980ee47bf1	\
-	  bc03f2345d7cfa7000f9da817120b6afa073359789c21a9a790ebd8676c50cca	\
-	  vendor/libc								\
-	  cd266cee38f25fe9ed896ba88ddd3530eca352c4d260671fb63d315890bc49e6	\
-	  109a8e5a1638b09c4297e8e7ff95f35b4d16a3c0b42c8791b5fdd3f550612f8c	\
-	  vendor/backtrace-sys							\
-	  59763fc255248b54fba5d0761d61093a73d51fa4cb400b0df1b5f339b9c2f48a	\
-	  ba66d192421fd536ceddb50616c4c4aea06f4e39450eb0bc2bbbaed0b1e684c1	\
-	  vendor/lzma-sys							\
-	  51a9ca7a4576822dc4fa01b31bc4bbed21817777abb304f605ef5951f68c3ed2	\
-	  807c3aa4b5a62a70ba790df151e9ecf19f4bb562f2858575d690908751262db3	\
-	| ${XARGS} -n 1 ${ECHO} | while read crate; do				\
-		read orig_cksum;						\
-		read cksum;							\
-		f="${WRKSRC}/$$crate/.cargo-checksum.json";			\
-		of="$$f.orig";							\
-		${CP} "$$f" "$$of";						\
-		${SED} -e "s/$$orig_cksum/$$cksum/g" < "$$of" > "$$f";		\
-	done
 .if ${OPSYS} == "NetBSD"
 	SDIR=${WRKDIR}/scripts; \
 	${MKDIR} $${SDIR}; \

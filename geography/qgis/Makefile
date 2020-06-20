@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.90 2020/06/05 12:49:06 jperkin Exp $
+# $NetBSD: Makefile,v 1.93 2020/06/17 14:01:15 gdt Exp $
 
 DISTNAME=	qgis-3.8.3
 PKGREVISION=	10
@@ -40,6 +40,7 @@ xapple_FIND_CMD=		cd ${WRKSRC} && \
 SUBST_FILES.xapple=		${xapple_FIND_CMD:sh}
 SUBST_SED.xapple+=		-e 's,APPLE,XAPPLE,'
 SUBST_SED.xapple+=		-e 's,MACOSX_BUNDLE ,,'
+SUBST_NOOP_OK.xapple=		yes # since SUBST_FILES is generated
 
 SUBST_CLASSES+=			pyqt
 SUBST_STAGE.pyqt=		pre-configure

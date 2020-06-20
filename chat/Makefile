@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.245 2020/03/30 09:11:53 nia Exp $
+# $NetBSD: Makefile,v 1.248 2020/06/13 08:40:27 wiz Exp $
 #
 
 COMMENT=	Communication programs
@@ -20,6 +20,7 @@ SUBDIR+=	cgiirc
 SUBDIR+=	coyim
 SUBDIR+=	ctrlproxy
 SUBDIR+=	dccserver
+SUBDIR+=	dino
 SUBDIR+=	eggdrop
 SUBDIR+=	ejabberd
 SUBDIR+=	ekg
@@ -40,8 +41,6 @@ SUBDIR+=	i2cbd
 SUBDIR+=	icb
 SUBDIR+=	icbirc
 SUBDIR+=	ii
-SUBDIR+=	inspircd
-SUBDIR+=	inspircd3
 SUBDIR+=	ircII
 SUBDIR+=	ircd-hybrid
 SUBDIR+=	irchat-pj
@@ -69,6 +68,7 @@ SUBDIR+=	libgadu
 SUBDIR+=	libmsn
 SUBDIR+=	libotr
 SUBDIR+=	libpurple
+SUBDIR+=	libsignal-protocol-c
 SUBDIR+=	libtelepathy
 SUBDIR+=	libtlen
 SUBDIR+=	loudmouth

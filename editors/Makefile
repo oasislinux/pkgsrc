@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.205 2020/06/02 08:49:15 sjmulder Exp $
+# $NetBSD: Makefile,v 1.208 2020/06/18 03:01:50 gutteridge Exp $
 #
 
 COMMENT=	Editors
@@ -92,6 +92,7 @@ SUBDIR+=	ng
 SUBDIR+=	nts
 SUBDIR+=	nvi
 SUBDIR+=	nvi-m17n
+SUBDIR+=	nvi2
 SUBDIR+=	obby
 SUBDIR+=	p5-Acme-Padre-PlayCode
 SUBDIR+=	p5-PPIx-EditorTools
@@ -143,6 +144,7 @@ SUBDIR+=	ted-no
 SUBDIR+=	ted-pl
 SUBDIR+=	ted-pt
 SUBDIR+=	ted-sv
+SUBDIR+=	tepl4
 SUBDIR+=	texmaker
 SUBDIR+=	texstudio
 SUBDIR+=	texworks

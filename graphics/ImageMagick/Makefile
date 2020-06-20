@@ -1,6 +1,5 @@
-# $NetBSD: Makefile,v 1.268 2020/06/02 08:22:42 adam Exp $
+# $NetBSD: Makefile,v 1.270 2020/06/19 10:31:06 wiz Exp $
 
-PKGREVISION= 2
 .include "Makefile.common"
 
 PKGNAME=	ImageMagick-${DISTVERSION}
@@ -83,8 +82,8 @@ SUBST_FILES.fix-pc+=	MagickWand/MagickWand-config.in
 SUBST_SED.fix-pc=	-e 's,@PKG_CONFIG@,pkg-config,g'
 
 # failed to convert strong functions and variables: Invalid type identifier
-CTF_FILES_SKIP+=	lib/libMagickCore-7.Q16HDRI.so.4.0.0
-CTF_FILES_SKIP+=	lib/libMagickWand-7.Q16HDRI.so.4.0.0
+CTF_FILES_SKIP+=	lib/libMagickCore-7.Q16HDRI.so.*
+CTF_FILES_SKIP+=	lib/libMagickWand-7.Q16HDRI.so.*
 
 .include "../../archivers/bzip2/buildlink3.mk"
 .include "../../archivers/xz/buildlink3.mk"

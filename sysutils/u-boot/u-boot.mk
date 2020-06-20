@@ -1,4 +1,4 @@
-# $NetBSD: u-boot.mk,v 1.25 2020/05/23 09:39:06 rillig Exp $
+# $NetBSD: u-boot.mk,v 1.27 2020/06/19 22:27:39 mrg Exp $
 
 .include "../../sysutils/u-boot/u-boot-version.mk"
 
@@ -24,6 +24,7 @@ PYTHON_FOR_BUILD_ONLY=	yes
 ALL_ENV+= 		PYTHON2=${PYTHONBIN} PYTHONCONFIG=${PYTHONCONFIG}
 ALL_ENV+=		PYTHONLIBPATH=-L$(LOCALBASE)/lib
 PYTHON_VERSIONS_ACCEPTED=	27
+.include "../../lang/python/tool.mk"
 
 .if defined(PKGREVISION) && !empty(PKGREVISION) && (${PKGREVISION} != "0")
 UBOOT_ENV+=	UBOOT_PKGREVISION=nb${PKGREVISION}
@@ -53,5 +54,3 @@ do-install:
 	${INSTALL_DATA} ${.CURDIR}/files/${UBOOT_INSTALLBOOT_PLIST} \
 	    ${DESTDIR}${PREFIX}/share/u-boot/${UBOOT_TARGET}/installboot.plist
 .endif
-
-.include "../../lang/python/tool.mk"

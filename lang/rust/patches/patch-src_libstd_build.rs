@@ -1,4 +1,4 @@
-$NetBSD: patch-src_libstd_build.rs,v 1.5 2019/09/19 17:37:29 jperkin Exp $
+$NetBSD: patch-src_libstd_build.rs,v 1.7 2020/06/08 11:19:33 he Exp $
 
 SunOS support:
  - Support PKGSRC_USE_SSP (ugly for now).

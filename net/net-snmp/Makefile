@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.128 2020/04/24 13:27:48 adam Exp $
+# $NetBSD: Makefile,v 1.130 2020/06/16 10:06:04 otis Exp $
 
 .include "Makefile.common"
 CATEGORIES=	net
-PKGREVISION=	13
 
 MAINTAINER=	adam@NetBSD.org
 COMMENT=	Extensible SNMP implementation
@@ -32,6 +31,8 @@ CFLAGS+=		-Dnetbsd1
 .  endif
 CFLAGS+=		-DSOL_IP=IPPROTO_IP
 .endif
+
+LDFLAGS.SunOS+=		-lkvm
 
 .if (${OPSYS} == "NetBSD") || !exists(/usr/bin/lpstat)
 CONFIGURE_ENV+=		ac_cv_path_LPSTAT_PATH=no
@@ -138,5 +139,6 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/agent/snmp_perl.pl \
 		${DESTDIR}${PREFIX}/share/snmp/
 
+.include "../../net/libpcap/buildlink3.mk"
 .include "../../security/tcp_wrappers/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

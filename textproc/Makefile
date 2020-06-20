@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1143 2020/06/05 12:45:14 ryoon Exp $
+# $NetBSD: Makefile,v 1.1148 2020/06/18 02:59:57 gutteridge Exp $
 #
 
 COMMENT=	Text processing utilities (does not include desktop publishing)
@@ -43,6 +43,7 @@ SUBDIR+=	R-yaml
 SUBDIR+=	WordNet
 SUBDIR+=	aha
 SUBDIR+=	aiksaurus
+SUBDIR+=	align
 SUBDIR+=	ansifilter
 SUBDIR+=	antiword
 SUBDIR+=	artha
@@ -902,6 +903,7 @@ SUBDIR+=	py-parse
 SUBDIR+=	py-parse_type
 SUBDIR+=	py-pdf-parser
 SUBDIR+=	py-pdfrw
+SUBDIR+=	py-peg2
 SUBDIR+=	py-phonenumbers
 SUBDIR+=	py-poyo
 SUBDIR+=	py-precis-i18n
@@ -915,6 +917,7 @@ SUBDIR+=	py-pyquery
 SUBDIR+=	py-pysrt
 SUBDIR+=	py-pytoml
 SUBDIR+=	py-ramlfications
+SUBDIR+=	py-rapidjson
 SUBDIR+=	py-rdflib
 SUBDIR+=	py-readme_renderer
 SUBDIR+=	py-rebulk
@@ -1120,6 +1123,7 @@ SUBDIR+=	trang
 SUBDIR+=	translate-shell
 SUBDIR+=	translate-toolkit
 SUBDIR+=	troffcvt
+SUBDIR+=	uchardet
 SUBDIR+=	unac
 SUBDIR+=	uncrustify
 SUBDIR+=	uni2ascii

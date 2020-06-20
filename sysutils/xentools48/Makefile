@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.32 2020/03/08 16:51:25 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2020/06/08 19:25:03 rillig Exp $
 #
 VERSION=	4.8.5
 VERSION_IPXE=	827dd1bfee67daa683935ce65316f7e0f057fe1c
@@ -137,17 +137,11 @@ SUBST_FILES.perlpath+=	../ipxe/src/util/sortobjdump.pl
 SUBST_FILES.perlpath+=	../ipxe/src/util/swapdevids.pl
 SUBST_FILES.perlpath+=	../ipxe/src/util/symcheck.pl
 SUBST_SED.perlpath=	-e "s|/usr/bin/perl|${PREFIX}/bin/perl|g"
-
-SUBST_CLASSES+=		pathsvar
-SUBST_STAGE.pathsvar=	pre-configure
-SUBST_FILES.pathsvar=	tools/Makefile \
-			tools/hotplug/Linux/init.d/sysconfig.xendomains
-SUBST_SED.pathsvar=	-e "s|/var/lib|${VARBASE}/run|g"
+SUBST_SED.perlpath+=	-e '1s,/usr/bin/env perl,${PREFIX}/bin/perl,'
 
 SUBST_CLASSES+=		conf
 SUBST_STAGE.conf=	pre-configure
-SUBST_FILES.conf+=	tools/ocaml/xenstored/define.ml
-SUBST_FILES.conf+=	tools/libxl/xl_cmdtable.c
+SUBST_FILES.conf=	tools/libxl/xl_cmdtable.c
 SUBST_FILES.conf+=	docs/misc/xl-disk-configuration.txt
 SUBST_SED.conf=		-e "s,@XENDCONFDIR@,${PKG_SYSCONFDIR},g"
 

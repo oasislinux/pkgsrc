@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.762 2020/05/31 15:53:44 kim Exp $
+# $NetBSD: Makefile,v 1.768 2020/06/16 10:30:32 nikita Exp $
 #
 
 COMMENT=	Security tools
@@ -62,6 +62,7 @@ SUBDIR+=	cy2-saml
 SUBDIR+=	cy2-scram
 SUBDIR+=	cy2-sql
 SUBDIR+=	cyrus-sasl
+SUBDIR+=	cyrus-sasl-xoauth2
 SUBDIR+=	cyrus-saslauthd
 SUBDIR+=	dcfldd
 SUBDIR+=	ddos-scan
@@ -365,6 +366,7 @@ SUBDIR+=	pam-tacplus
 SUBDIR+=	pam-yubico
 SUBDIR+=	pam_ssh_agent_auth
 SUBDIR+=	paperkey
+SUBDIR+=	passphrase
 SUBDIR+=	password-store
 SUBDIR+=	pcsc-lite
 SUBDIR+=	pcsc-tools
@@ -419,6 +421,7 @@ SUBDIR+=	py-asn1
 SUBDIR+=	py-asn1-modules
 SUBDIR+=	py-asn1crypto
 SUBDIR+=	py-asyncssh
+SUBDIR+=	py-authlib
 SUBDIR+=	py-backports.ssl_match_hostname
 SUBDIR+=	py-bcrypt
 SUBDIR+=	py-certbot
@@ -541,6 +544,7 @@ SUBDIR+=	ruby-nexpose
 SUBDIR+=	ruby-oauth
 SUBDIR+=	ruby-openid
 SUBDIR+=	ruby-openssl-ccm
+SUBDIR+=	ruby-openssl-cmac
 SUBDIR+=	ruby-openvas-omp
 SUBDIR+=	ruby-password
 SUBDIR+=	ruby-rack-openid
