@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.883 2020/06/20 17:47:18 thorpej Exp $
+# $NetBSD: Makefile,v 1.888 2020/06/21 19:44:29 thorpej Exp $
 #
 
 COMMENT=	System utilities
@@ -628,6 +628,7 @@ SUBDIR+=	ttyplot
 SUBDIR+=	u-boot-a10-olinuxino-lime
 SUBDIR+=	u-boot-a20-olinuxino-lime2
 SUBDIR+=	u-boot-a20-olinuxino-lime2-emmc
+SUBDIR+=	u-boot-a20-olinuxino-micro
 SUBDIR+=	u-boot-a20-olinuxino-micro-emmc
 SUBDIR+=	u-boot-bananapi
 SUBDIR+=	u-boot-bananapi-m2-zero
@@ -647,10 +648,14 @@ SUBDIR+=	u-boot-cubietruck
 SUBDIR+=	u-boot-cubietruck-plus
 SUBDIR+=	u-boot-de0-nanosoc
 SUBDIR+=	u-boot-hummingbird-a31
+SUBDIR+=	u-boot-jetson-nano
 SUBDIR+=	u-boot-jetson-tk1
 SUBDIR+=	u-boot-jetson-tx1
 SUBDIR+=	u-boot-jetson-tx2
 SUBDIR+=	u-boot-lamobo-r1
+SUBDIR+=	u-boot-libretech-all-h3-cc-h2-plus
+SUBDIR+=	u-boot-libretech-all-h3-cc-h3
+SUBDIR+=	u-boot-libretech-all-h3-cc-h5
 SUBDIR+=	u-boot-libretech-cc
 SUBDIR+=	u-boot-nanopi-duo2
 SUBDIR+=	u-boot-nanopi-m1
@@ -667,7 +672,8 @@ SUBDIR+=	u-boot-orangepi-one
 SUBDIR+=	u-boot-orangepi-plus2e
 SUBDIR+=	u-boot-orangepi-zero
 SUBDIR+=	u-boot-orangepi-zero-plus
-SUBDIR+=	u-boot-pine-h64
+SUBDIR+= 	u-boot-pandaboard
+SUBDIR+= 	u-boot-pine-h64
 SUBDIR+=	u-boot-pine64
 SUBDIR+=	u-boot-pinebook
 SUBDIR+=	u-boot-pinebook-pro
@@ -678,6 +684,7 @@ SUBDIR+=	u-boot-rockpro64-ayufan
 SUBDIR+=	u-boot-rpi3-32
 SUBDIR+=	u-boot-sopine-baseboard
 SUBDIR+=	u-boot-tinker
+SUBDIR+=	u-boot-zynq-zybo
 SUBDIR+=	u-boot-zynq-zybo-z7
 SUBDIR+=	ufetch
 SUBDIR+=	upower
