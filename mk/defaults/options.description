@@ -140,7 +140,6 @@ djbdns-tinydns64	Patch to fix tinydns-data on 64-bit platforms.
 djbfft-pentium		Optimize for Pentium{,MMX} processors.
 djbfft-ppro		Optimize for Pentium{Pro,II,III} processors.
 djbfft-sparc		Optimize for UltraSPARC-{I,II} processors.
-djbware-errno-hack	Patch to #include <errno.h> for correctness.
 djvu			Enable DjVuLibRe support.
 dkim-milter-arlib	ar(3) support for dkim-milter.
 dkim-stats		dkim-stats(8) support for dkim-milter.
@@ -498,6 +497,7 @@ lprng-suid		Install LPRng executables setuid root.
 lsof-less-secure-sockets	If 'lsof-more-secure' is set, allow all sockets to be viewed at all times.
 lsof-more-secure	Only allow root to view all open files with lsof.
 lua			Enable Lua support.
+luajit			Enable LuaJIT support.
 luit			Enable luit support.
 lwt			Enable Lwt support.
 lynx			Use and enable support for the lynx browser.
