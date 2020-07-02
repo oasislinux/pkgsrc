@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.4 2020/05/24 05:22:01 nia Exp $
+# $NetBSD: options.mk,v 1.6 2020/06/29 19:30:04 leot Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.nvi
 PKG_SUPPORTED_OPTIONS+=	wide-curses

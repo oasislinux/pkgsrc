@@ -1,4 +1,4 @@
-$NetBSD: TODO,v 1.19929 2020/06/28 14:45:08 wiz Exp $
+$NetBSD: TODO,v 1.19936 2020/06/30 11:59:49 adam Exp $
 
 Suggested new packages
 ======================
@@ -426,7 +426,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o ap22-limitipconn-0.24
 	o ap22-vhost-ldap-2.4.0
 	o apache-ant-1.10.8
-	o apache-maven-3.6.2
 	o apollo-1.7
 	o argtable-2.9
 	o argus-20121202
@@ -629,7 +628,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o gnome-3.36.1
 	o gnome-applets-3.14.0
 	o gnome-bluetooth-2.30.0
-	o gnome-chemistry-utils-0.14.11
 	o gnome-chess-3.12.3
 	o gnome-color-manager-2.32.0
 	o gnome-commander-1.6.4
@@ -977,7 +975,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o py-Scientific-doc-2.5.5
 	o py-cairo-1.19.1 [drops python-2.x support]
 	o py-cassa-1.11.0
-	o py-cmake-language-server-0.1.2
 	o py-configparser-5.0.0 [drops python-2.x support]
 	o py-ephem3-3.7.6.0
 	o py-hgview-1.9.0
@@ -1013,7 +1010,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o ratmen-2.2.3
 	o razor-qt-0.5.2
 	o rbldnsd-0.998
-	o rclone-1.52.2
 	o rdp-1.6
 	o regionset-0.2
 	o rep-gtk-0.90.8.1
@@ -1030,7 +1026,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o roxirc-2.0
 	o rp-l2tp-0.4
 	o rp-pppoe-3.11
-	o rsync-3.2.1
 	o rt4-4.4.0
 	o rtty-4.0 [at ftp://ftp.isc.org/isc/rtty/]
 	o rubber-1.4

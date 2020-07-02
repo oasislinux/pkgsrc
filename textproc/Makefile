@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1148 2020/06/18 02:59:57 gutteridge Exp $
+# $NetBSD: Makefile,v 1.1150 2020/06/29 13:04:01 nikita Exp $
 #
 
 COMMENT=	Text processing utilities (does not include desktop publishing)
@@ -230,8 +230,10 @@ SUBDIR+=	go-diff
 SUBDIR+=	go-glob
 SUBDIR+=	go-goldmark
 SUBDIR+=	go-inflect
+SUBDIR+=	go-kr-text
 SUBDIR+=	go-md2man
 SUBDIR+=	go-mmark
+SUBDIR+=	go-org
 SUBDIR+=	go-prose
 SUBDIR+=	go-regexp2
 SUBDIR+=	go-runewidth

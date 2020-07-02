@@ -1,9 +1,9 @@
 $NetBSD$
 
---- dom/media/GraphRunner.cpp.orig	Fri Apr  3 19:34:35 2020
+--- dom/media/GraphRunner.cpp.orig	Thu Jun 25 17:04:45 2020
 +++ dom/media/GraphRunner.cpp
 @@ -13,7 +13,6 @@
- #include "nsISupportsImpl.h"
+ #include "nsISupportsPriority.h"
  #include "prthread.h"
  #include "Tracing.h"
 -#include "audio_thread_priority.h"
@@ -20,13 +20,14 @@ $NetBSD$
    nsCOMPtr<nsIThreadInternal> threadInternal = do_QueryInterface(mThread);
    threadInternal->SetObserver(mGraph);
  
-@@ -119,9 +115,6 @@ NS_IMETHODIMP GraphRunner::Run() {
+@@ -117,10 +113,6 @@ NS_IMETHODIMP GraphRunner::Run() {
+     // Signal that mIterationResult was updated
+     mThreadState = ThreadState::Wait;
      mMonitor.Notify();
-   }
- 
+-  }
+-
 -  if (handle) {
 -    atp_demote_current_thread_from_real_time(handle);
--  }
+   }
  
-   dom::WorkletThread::DeleteCycleCollectedJSContext();
- 
+   return NS_OK;

@@ -1,6 +1,6 @@
 $NetBSD$
 
---- media/audioipc/server/Cargo.toml.orig	Fri Apr  3 19:34:52 2020
+--- media/audioipc/server/Cargo.toml.orig	Thu Jun 25 17:04:48 2020
 +++ media/audioipc/server/Cargo.toml
 @@ -9,7 +9,6 @@ description = "Remote cubeb server"
  edition = "2018"
@@ -8,5 +8,5 @@ $NetBSD$
  [dependencies]
 -audio_thread_priority = "0.22"
  audioipc = { path = "../audioipc" }
- cubeb-core = "0.6.0"
- futures = "0.1.18"
+ cubeb-core = "0.7.0"
+ futures = "0.1.29"

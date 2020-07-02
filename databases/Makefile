@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.604 2020/06/09 22:20:56 jym Exp $
+# $NetBSD: Makefile,v 1.608 2020/07/01 11:26:42 nia Exp $
 
 COMMENT=	Databases
 
@@ -19,6 +19,7 @@ SUBDIR+=	csharp-mysql
 #SUBDIR+=	cstore	# not enabled at present due to its size requirements
 SUBDIR+=	datadraw
 SUBDIR+=	db
+SUBDIR+=	db18
 SUBDIR+=	db3
 SUBDIR+=	db4
 SUBDIR+=	db5
@@ -88,9 +89,7 @@ SUBDIR+=	liquibase
 SUBDIR+=	lmdb
 SUBDIR+=	lua-sql-mysql
 SUBDIR+=	lua-sql-postgres
-SUBDIR+=	lua-sql-sqlite
 SUBDIR+=	lua-sql-sqlite3
-SUBDIR+=	lua-sqlite
 SUBDIR+=	lua-sqlite3
 SUBDIR+=	lua-tokyocabinet
 SUBDIR+=	mariadb-connector-c
@@ -375,7 +374,6 @@ SUBDIR+=	py-sqlalchemy
 SUBDIR+=	py-sqlalchemy-i18n
 SUBDIR+=	py-sqlalchemy-migrate
 SUBDIR+=	py-sqlalchemy-utils
-SUBDIR+=	py-sqlite
 SUBDIR+=	py-sqlite2
 SUBDIR+=	py-sqlite3
 SUBDIR+=	py-sqlparse

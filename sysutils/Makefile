@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.889 2020/06/26 23:27:24 gutteridge Exp $
+# $NetBSD: Makefile,v 1.891 2020/07/01 08:52:38 adam Exp $
 #
 
 COMMENT=	System utilities
@@ -477,6 +477,8 @@ SUBDIR+=	py-cpuinfo
 SUBDIR+=	py-crontab
 SUBDIR+=	py-dbus
 SUBDIR+=	py-diffoscope
+SUBDIR+=	py-eliot
+SUBDIR+=	py-eliot17
 SUBDIR+=	py-euca2ools
 SUBDIR+=	py-filetype
 SUBDIR+=	py-google-compute-engine
@@ -678,6 +680,7 @@ SUBDIR+=	u-boot-pine64
 SUBDIR+=	u-boot-pinebook
 SUBDIR+=	u-boot-pinebook-pro
 SUBDIR+=	u-boot-pocketchip
+SUBDIR+=	u-boot-roc-rk3328-cc
 SUBDIR+=	u-boot-rock64
 SUBDIR+=	u-boot-rockpro64
 SUBDIR+=	u-boot-rockpro64-ayufan
