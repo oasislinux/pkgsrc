@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.10 2020/07/01 11:06:40 nia Exp $
+# $NetBSD: Makefile,v 1.15 2020/07/02 20:53:10 nia Exp $
 
 DISTNAME=	luarocks-3.3.1
 PKGNAME=	${DISTNAME:S/luarocks/${LUA_PKGPREFIX}-rocks/}
-CATEGORIES=	devel
+PKGREVISION=	1
+CATEGORIES=	devel lua
 MASTER_SITES=	https://luarocks.org/releases/
 
-MAINTAINER=	alnsn@NetBSD.org
+MAINTAINER=	nia@NetBSD.org
 HOMEPAGE=	https://luarocks.org/
 COMMENT=	Deployment and management system for Lua modules
 LICENSE=	mit
@@ -18,6 +19,8 @@ USE_TOOLS+=	unzip:run	# extraction
 MAKE_FILE=	GNUmakefile
 
 .include "../../mk/bsd.prefs.mk"
+
+PREFER.unzip=	pkgsrc
 
 HAS_CONFIGURE=	yes
 USE_LANGUAGES=	# none
@@ -39,6 +42,11 @@ CONF_FILES=		${LUA_EXAMPLESDIR}/${LUAROCKS_CONF} \
 # XXX Add subst rules to ../../lang/lua/xxx.mk
 PLIST_SUBST+=		LUADOTVER=${_LUA_DOT_VERSION}
 FILES_SUBST+=		LUADOTVER=${_LUA_DOT_VERSION}
+
+SUBST_CLASSES+=		prefix
+SUBST_STAGE.prefix=	pre-configure
+SUBST_FILES.prefix=	src/luarocks/core/cfg.lua
+SUBST_VARS.prefix=	PREFIX
 
 .include "../../lang/lua/application.mk"
 .include "../../lang/lua/module.mk"

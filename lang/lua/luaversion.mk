@@ -1,4 +1,4 @@
-# $NetBSD: luaversion.mk,v 1.12 2020/06/30 14:45:05 nia Exp $
+# $NetBSD: luaversion.mk,v 1.14 2020/07/02 21:42:23 nia Exp $
 
 # This file determins which Lua version is used as a dependency for
 # a package.
