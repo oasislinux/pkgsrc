@@ -30,7 +30,9 @@ MAKE_ENV+=	QT_CONFIG+=gstreamer-1.0
 MAKE_ENV+=	QT_CONFIG+=-gstreamer-1.0
 .endif
 
+PLIST_VARS+=	openal
 .if !empty(PKG_OPTIONS:Mopenal)
+PLIST.openal=	yes
 MAKE_ENV+=	QT_CONFIG+=openal
 .include "../../audio/openal-soft/buildlink3.mk"
 .else
