@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST.Linux,v 1.7 2019/03/27 10:16:34 markd Exp $
+@comment $NetBSD: PLIST.Linux,v 1.8 2020/07/05 01:14:27 nia Exp $
 qt5/include/QtInputSupport/${PKGVERSION}/QtInputSupport/private/qevdevkeyboard_defaultmap_p.h
 qt5/include/QtInputSupport/${PKGVERSION}/QtInputSupport/private/qevdevkeyboardhandler_p.h
 qt5/include/QtInputSupport/${PKGVERSION}/QtInputSupport/private/qevdevkeyboardmanager_p.h

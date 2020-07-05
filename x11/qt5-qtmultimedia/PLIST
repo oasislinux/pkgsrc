@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.22 2020/06/02 06:41:01 adam Exp $
+@comment $NetBSD: PLIST,v 1.23 2020/07/05 01:12:14 nia Exp $
 lib/pkgconfig/Qt5Multimedia.pc
 lib/pkgconfig/Qt5MultimediaWidgets.pc
 qt5/include/QtMultimedia/${PKGVERSION}/QtMultimedia/private/qabstractvideobuffer_p.h
