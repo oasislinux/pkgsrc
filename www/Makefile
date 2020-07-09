@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1464 2020/06/21 20:26:57 wiz Exp $
+# $NetBSD: Makefile,v 1.1467 2020/07/08 14:58:49 nia Exp $
 #
 
 COMMENT=	Packages related to the World Wide Web
@@ -55,6 +55,7 @@ SUBDIR+=	august
 SUBDIR+=	aws
 SUBDIR+=	aws-demos
 SUBDIR+=	awstats
+SUBDIR+=	badwolf
 SUBDIR+=	bannerfilter
 SUBDIR+=	bins
 SUBDIR+=	bkedit
@@ -193,6 +194,8 @@ SUBDIR+=	llgal
 SUBDIR+=	loggerhead
 SUBDIR+=	logswan
 SUBDIR+=	lua-curl
+SUBDIR+=	lua-http
+SUBDIR+=	lua-psl
 SUBDIR+=	lynx
 SUBDIR+=	mMosaic
 SUBDIR+=	make_album

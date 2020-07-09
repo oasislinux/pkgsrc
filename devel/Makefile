@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3156 2020/07/06 15:28:22 schmonz Exp $
+# $NetBSD: Makefile,v 1.3165 2020/07/08 16:23:23 nia Exp $
 #
 
 COMMENT=	Development utilities
@@ -847,10 +847,14 @@ SUBDIR+=	lokalize
 SUBDIR+=	ltsa
 SUBDIR+=	lua-BitOp
 SUBDIR+=	lua-alt-getopt
+SUBDIR+=	lua-ansicolors
 SUBDIR+=	lua-argparse
 SUBDIR+=	lua-basexx
 SUBDIR+=	lua-binaryheap
 SUBDIR+=	lua-bitlib
+SUBDIR+=	lua-busted
+SUBDIR+=	lua-cliargs
+SUBDIR+=	lua-compat53
 SUBDIR+=	lua-coxpcall
 SUBDIR+=	lua-cqueues
 SUBDIR+=	lua-fifo
@@ -859,18 +863,23 @@ SUBDIR+=	lua-gi
 SUBDIR+=	lua-inspect
 SUBDIR+=	lua-ljsyscall
 SUBDIR+=	lua-lpeg
+SUBDIR+=	lua-lpeg-patterns
 SUBDIR+=	lua-lrexlib
 SUBDIR+=	lua-lrexlib-onig
 SUBDIR+=	lua-lrexlib-pcre
 SUBDIR+=	lua-lrexlib-posix
+SUBDIR+=	lua-luassert
 SUBDIR+=	lua-luv
+SUBDIR+=	lua-mediator
 SUBDIR+=	lua-mode
 SUBDIR+=	lua-penlight
 SUBDIR+=	lua-posix
 SUBDIR+=	lua-rocks
+SUBDIR+=	lua-say
 SUBDIR+=	lua-std-_debug
 SUBDIR+=	lua-std-normalize
 SUBDIR+=	lua-stdlib
+SUBDIR+=	lua-system
 SUBDIR+=	lua-term
 SUBDIR+=	lua-thrift
 SUBDIR+=	lutok

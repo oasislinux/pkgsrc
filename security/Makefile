@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.771 2020/07/02 17:59:02 nia Exp $
+# $NetBSD: Makefile,v 1.773 2020/07/08 12:41:12 nia Exp $
 #
 
 COMMENT=	Security tools
@@ -15,7 +15,6 @@ SUBDIR+=	PortableSigner
 SUBDIR+=	R-askpass
 SUBDIR+=	R-digest
 SUBDIR+=	R-openssl
-SUBDIR+=	TweetNaCl
 SUBDIR+=	acmesh
 SUBDIR+=	aide
 SUBDIR+=	aide06
@@ -31,7 +30,6 @@ SUBDIR+=	bcrypt
 SUBDIR+=	bearssl
 SUBDIR+=	beecrypt
 SUBDIR+=	bitstir
-SUBDIR+=	boringssl
 SUBDIR+=	botan
 SUBDIR+=	botan-devel
 SUBDIR+=	ca-certificates
@@ -209,6 +207,7 @@ SUBDIR+=	lsh
 SUBDIR+=	lua-arc4random
 SUBDIR+=	lua-argon2
 SUBDIR+=	lua-bcrypt
+SUBDIR+=	lua-ossl
 SUBDIR+=	lua-sec
 SUBDIR+=	lxqt-openssh-askpass
 SUBDIR+=	lxqt-policykit
@@ -232,7 +231,6 @@ SUBDIR+=	msu
 SUBDIR+=	msudir
 SUBDIR+=	multigest
 SUBDIR+=	munge
-SUBDIR+=	nacl
 SUBDIR+=	netpgp
 SUBDIR+=	netpgpverify
 SUBDIR+=	netramet
