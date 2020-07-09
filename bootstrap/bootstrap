@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# $NetBSD: bootstrap,v 1.283 2020/06/29 12:38:03 jperkin Exp $
+# $NetBSD: bootstrap,v 1.287 2020/07/07 11:50:04 jperkin Exp $
 #
 # Copyright (c) 2001-2011 Alistair Crooks <agc@NetBSD.org>
 # All rights reserved.
@@ -589,6 +589,15 @@ Darwin)
 		need_sed=yes
 	fi
 
+	# Avoid system shells on macOS versions that enable System Integrity
+	# Protection (SIP) as it affects packages that rely on variables such
+	# as LD_LIBRARY_PATH.  SIP unsets any variables that may affect
+	# security when using system binaries, i.e. /bin/*sh, but using a
+	# non-system shell is unaffected, at least for now.
+	if [ $macos_version -ge 1011 ]; then
+		need_mksh=yes
+	fi
+
 	case "$macos_version" in
 	100[7-9])
 		packagemaker=/Applications/PackageMaker.app/Contents/MacOS/PackageMaker
@@ -801,7 +810,7 @@ SunOS)
 		bootstrap_sh=${SH:-/usr/bin/bash}
 		bootstrap_sh_set=set
 	else
-		need_ksh=yes
+		need_mksh=yes
 	fi
 	idprog="/usr/xpg4/bin/id"
 	groupsprog="${idprog} -gn"
@@ -867,8 +876,13 @@ yes)
 	need_bsd_install=yes
 	need_awk=yes
 	need_sed=yes
-	need_ksh=yes
+	need_mksh=yes
 	;;
+esac
+
+# mksh and ksh are mutually exclusive, prefer mksh while we transition to it.
+case "$need_mksh" in
+yes)	need_ksh=no ;;
 esac
 
 case "$quiet" in
@@ -1174,6 +1188,20 @@ echo_msg "Building libnbcompat"
 copy_src $pkgsrcdir/pkgtools/libnbcompat/files libnbcompat
 run_cmd "(cd $wrkdir/libnbcompat; $shprog ./configure $configure_quiet_flags -C --prefix=$prefix --infodir=$infodir --mandir=$mandir --sysconfdir=$sysconfdir --enable-bsd-getopt --enable-db && $bmake $make_quiet_flags -j$make_jobs)"
 
+# bootstrap mksh if necessary
+case "$need_mksh" in
+yes)	echo_msg "Bootstrapping mksh"
+	copy_src $pkgsrcdir/shells/mksh/files mksh
+	run_cmd "(cd $wrkdir/mksh && env $BSTRAP_ENV CC=\"${CC}\" $shprog Build.sh -r)"
+	run_cmd "$install_sh -c -o $user -g $group -m 755 $wrkdir/mksh/mksh $wrkdir/bin/mksh"
+	echo "TOOLS_PLATFORM.sh?=               $prefix/bin/mksh" >> ${TARGET_MKCONF}
+	echo "TOOLS_PLATFORM.sh?=               $wrkdir/bin/mksh" >> ${BOOTSTRAP_MKCONF}
+	echo_msg "Rebootstrapping bmake for mksh"
+	bmakexargs="$bmakexargs --with-defshell=$wrkdir/bin/mksh"
+	bootstrap_bmake
+	;;
+esac
+
 # bootstrap ksh if necessary
 case "$need_ksh" in
 yes)	echo_msg "Bootstrapping ksh"
@@ -1350,6 +1378,9 @@ yes)
 		build_package "sysutils/install-sh"
 	fi
 	;;
+esac
+case "$need_mksh" in
+yes)	build_package "shells/mksh";;
 esac
 case "$need_ksh" in
 yes)	build_package "shells/pdksh";;
