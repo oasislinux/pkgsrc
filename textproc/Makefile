@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1157 2020/07/08 17:00:03 nia Exp $
+# $NetBSD: Makefile,v 1.1159 2020/07/09 21:30:16 nia Exp $
 #
 
 COMMENT=	Text processing utilities (does not include desktop publishing)
@@ -463,7 +463,9 @@ SUBDIR+=	lua-cmark
 SUBDIR+=	lua-dkjson
 SUBDIR+=	lua-etlua
 SUBDIR+=	lua-expat
+SUBDIR+=	lua-inifile
 SUBDIR+=	lua-lustache
+SUBDIR+=	lua-lyaml
 SUBDIR+=	lua-markdown
 SUBDIR+=	lua-rapidjson
 SUBDIR+=	lua-slnunicode
