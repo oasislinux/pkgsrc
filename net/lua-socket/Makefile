@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.11 2020/07/02 10:26:19 nia Exp $
+# $NetBSD: Makefile,v 1.13 2020/07/11 15:14:30 nia Exp $
 
 DISTNAME=		luasocket-3.0-rc1
 PKGNAME=		${LUA_PKGPREFIX}-${DISTNAME:S/lua//:S/-rc/rc/}

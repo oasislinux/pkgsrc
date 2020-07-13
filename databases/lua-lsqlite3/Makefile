@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1 2020/07/09 15:27:56 nia Exp $
+# $NetBSD: Makefile,v 1.4 2020/07/11 15:14:29 nia Exp $
 
 DISTNAME=	lsqlite3_fsl09y
 PKGNAME=	${LUA_PKGPREFIX}-lsqlite3-0.9.5

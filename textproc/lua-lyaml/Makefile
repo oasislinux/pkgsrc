@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1 2020/07/09 21:30:17 nia Exp $
+# $NetBSD: Makefile,v 1.4 2020/07/11 15:14:30 nia Exp $
 
 DISTNAME=	lyaml-6.2.5
 PKGNAME=	${LUA_PKGPREFIX}-${DISTNAME}

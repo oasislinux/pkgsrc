@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2020/07/10 10:24:31 nia Exp $
+# $NetBSD: Makefile,v 1.4 2020/07/11 17:02:30 nia Exp $
 
 DISTNAME=	busted-2.0.0
 PKGNAME=	${LUA_PKGPREFIX}-${DISTNAME}
@@ -28,6 +28,7 @@ USE_LANGUAGES=	# none
 REPLACE_LUA+=	bin/busted
 
 PLIST_SUBST+=	LUADOTVER=${_LUA_DOT_VERSION}
+FILES_SUBST+=	LUADOTVER=${_LUA_DOT_VERSION}
 
 INSTALLATION_DIRS+=	bin
 INSTALLATION_DIRS+=	${LUA_LDIR}/busted
@@ -37,6 +38,8 @@ INSTALLATION_DIRS+=	${LUA_LDIR}/busted/outputHandlers
 INSTALLATION_DIRS+=	${LUA_LDIR}/busted/languages
 
 do-install:
+	${INSTALL_SCRIPT} ${WRKSRC}/bin/busted \
+		${DESTDIR}${PREFIX}/bin/busted${_LUA_DOT_VERSION}
 	${INSTALL_DATA} ${WRKSRC}/busted/*.lua \
 		${DESTDIR}${PREFIX}/${LUA_LDIR}/busted
 	${INSTALL_DATA} ${WRKSRC}/busted/modules/*.lua \
@@ -47,8 +50,6 @@ do-install:
 		${DESTDIR}${PREFIX}/${LUA_LDIR}/busted/outputHandlers
 	${INSTALL_DATA} ${WRKSRC}/busted/languages/*.lua \
 	    	${DESTDIR}${PREFIX}/${LUA_LDIR}/busted/languages
-	${INSTALL_PROGRAM} ${WRKSRC}/bin/busted \
-		${DESTDIR}${PREFIX}/bin/busted${_LUA_DOT_VERSION}
 
 .include "../../lang/lua/application.mk"
 .include "../../lang/lua/module.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.15 2020/07/02 21:40:49 nia Exp $
+# $NetBSD: Makefile,v 1.18 2020/07/11 15:14:29 nia Exp $
 #
 
 DISTNAME=		luafilesystem-1.8.0

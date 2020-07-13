@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.6 2020/07/08 17:11:52 nia Exp $
+# $NetBSD: Makefile,v 1.8 2020/07/11 15:14:30 nia Exp $
 
 DISTNAME=	lua-cjson-2.1.0
 PKGNAME=	${LUA_PKGPREFIX}-${DISTNAME:S/^lua-//1}
