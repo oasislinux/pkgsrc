@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- gst-libs/gst/audio/Makefile.in.orig	Mon Jul 13 05:20:23 2020
++++ gst-libs/gst/audio/Makefile.in
+@@ -889,7 +889,8 @@ noinst_LTLIBRARIES = $(am__append_1)
+ @HAVE_X86_TRUE@	$(GST_LIB_LDFLAGS) \
+ @HAVE_X86_TRUE@	$(GST_ALL_LDFLAGS)
+ 
+-enum_headers = $(foreach h,$(glib_enum_headers),\n\#include \"$(h)\")
++hash := \#
++enum_headers = $(foreach h,$(glib_enum_headers),\n$(hash)include \"$(h)\")
+ 
+ # Introspection
+ @HAVE_INTROSPECTION_TRUE@BUILT_GIRSOURCES = GstAudio-@GST_API_VERSION@.gir

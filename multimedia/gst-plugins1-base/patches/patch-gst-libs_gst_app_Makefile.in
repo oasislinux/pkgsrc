@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- gst-libs/gst/app/Makefile.in.orig	Mon Jul 13 05:20:01 2020
++++ gst-libs/gst/app/Makefile.in
+@@ -613,7 +613,8 @@ glib_enum_headers = gstappsrc.h
+ built_sources = app-enumtypes.c
+ built_headers = app-enumtypes.h
+ BUILT_SOURCES = $(built_sources) $(built_headers)
+-enum_headers = $(foreach h,$(glib_enum_headers),\n\#include \"$(h)\")
++hash := \#
++enum_headers = $(foreach h,$(glib_enum_headers),\n$(hash)include \"$(h)\")
+ libgstapp_@GST_API_VERSION@_la_SOURCES = gstappsrc.c gstappsink.c
+ nodist_libgstapp_@GST_API_VERSION@_la_SOURCES = $(BUILT_SOURCES)
+ libgstapp_@GST_API_VERSION@_la_CFLAGS = $(GST_PLUGINS_BASE_CFLAGS) \

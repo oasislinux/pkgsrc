@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- gst/encoding/Makefile.in.orig	Mon Jul 13 05:13:47 2020
++++ gst/encoding/Makefile.in
+@@ -628,7 +628,8 @@ noinst_HEADERS = \
+ 	gstsmartencoder.h	\
+ 	gststreamcombinerpad.h
+ 
+-enum_headers = $(foreach h,$(glib_enum_headers),\n\#include \"$(h)\")
++hash := \#
++enum_headers = $(foreach h,$(glib_enum_headers),\n$(hash)include \"$(h)\")
+ all: all-am
+ 
+ .SUFFIXES:

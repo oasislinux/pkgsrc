@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- gst-libs/gst/tag/Makefile.in.orig	Mon Jul 13 05:19:32 2020
++++ gst-libs/gst/tag/Makefile.in
+@@ -675,7 +675,8 @@ glib_enum_headers = tag.h gsttagdemux.h
+ built_sources = tag-enumtypes.c
+ built_headers = tag-enumtypes.h
+ BUILT_SOURCES = $(built_sources) $(built_headers)
+-enum_headers = $(foreach h,$(glib_enum_headers),\n\#include \"$(h)\")
++hash := \#
++enum_headers = $(foreach h,$(glib_enum_headers),\n$(hash)include \"$(h)\")
+ libgsttaginclude_HEADERS = \
+ 	tag.h tag-prelude.h gsttagdemux.h gsttagmux.h xmpwriter.h
+ 

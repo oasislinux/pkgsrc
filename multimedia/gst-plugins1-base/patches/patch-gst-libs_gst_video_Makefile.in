@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- gst-libs/gst/video/Makefile.in.orig	Mon Jul 13 05:15:39 2020
++++ gst-libs/gst/video/Makefile.in
+@@ -820,7 +820,8 @@ libgstvideo_@GST_API_VERSION@_la_CFLAGS = $(GST_PLUGIN
+ 
+ libgstvideo_@GST_API_VERSION@_la_LIBADD = $(GST_BASE_LIBS) $(GST_LIBS) $(ORC_LIBS) $(LIBM)
+ libgstvideo_@GST_API_VERSION@_la_LDFLAGS = $(GST_LIB_LDFLAGS) $(GST_ALL_LDFLAGS) $(GST_LT_LDFLAGS)
+-enum_headers = $(foreach h,$(glib_enum_headers),\n\#include \"$(h)\")
++hash := \#
++enum_headers = $(foreach h,$(glib_enum_headers),\n$(hash)include \"$(h)\")
+ @HAVE_INTROSPECTION_TRUE@BUILT_GIRSOURCES = GstVideo-@GST_API_VERSION@.gir
+ @HAVE_INTROSPECTION_TRUE@gir_headers = $(patsubst %,$(srcdir)/%, \
+ @HAVE_INTROSPECTION_TRUE@	$(libgstvideo_@GST_API_VERSION@include_HEADERS)) \
