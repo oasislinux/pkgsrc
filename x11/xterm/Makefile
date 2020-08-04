@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.121 2019/11/03 09:14:21 rillig Exp $
+# $NetBSD: Makefile,v 1.123 2020/07/18 19:25:51 pin Exp $
 
-DISTNAME=	xterm-344
+DISTNAME=	xterm-358
 CATEGORIES=	x11
 MASTER_SITES=	ftp://ftp.invisible-island.net/xterm/
 EXTRACT_SUFX=	.tgz
@@ -19,6 +19,7 @@ CONFIGURE_ARGS+=	--enable-88-color
 CONFIGURE_ARGS+=	--enable-256-color
 CONFIGURE_ARGS+=	--enable-paste64
 CONFIGURE_ARGS+=	--enable-readline-mouse
+CONFIGURE_ARGS+=	--enable-sixel-graphics
 
 CONFIGURE_ARGS.standard=	# empty
 CONFIGURE_ARGS.3d=		--with-Xaw3d

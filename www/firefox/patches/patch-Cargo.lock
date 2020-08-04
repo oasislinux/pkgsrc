@@ -1,8 +1,8 @@
 $NetBSD$
 
---- Cargo.lock.orig	Thu Jun 25 18:13:44 2020
+--- Cargo.lock.orig	Mon Jul 20 22:49:36 2020
 +++ Cargo.lock
-@@ -112,24 +112,9 @@ dependencies = [
+@@ -110,24 +110,9 @@ dependencies = [
  ]
  
  [[package]]
@@ -27,7 +27,7 @@ $NetBSD$
   "bincode",
   "bytes 0.4.9",
   "cc",
-@@ -156,7 +141,6 @@ dependencies = [
+@@ -154,7 +139,6 @@ dependencies = [
  name = "audioipc-client"
  version = "0.4.0"
  dependencies = [
@@ -35,7 +35,7 @@ $NetBSD$
   "audioipc",
   "cubeb-backend",
   "futures 0.1.29",
-@@ -169,7 +153,6 @@ dependencies = [
+@@ -167,7 +151,6 @@ dependencies = [
  name = "audioipc-server"
  version = "0.2.3"
  dependencies = [
@@ -43,7 +43,7 @@ $NetBSD$
   "audioipc",
   "cubeb-core",
   "error-chain",
-@@ -1056,16 +1039,6 @@ dependencies = [
+@@ -1027,16 +1010,6 @@ dependencies = [
  ]
  
  [[package]]
@@ -60,15 +60,15 @@ $NetBSD$
  name = "deflate"
  version = "0.7.19"
  source = "registry+https://github.com/rust-lang/crates.io-index"
-@@ -1890,7 +1863,6 @@ dependencies = [
- name = "gkrust-shared"
+@@ -1867,7 +1840,6 @@ name = "gkrust-shared"
  version = "0.1.0"
  dependencies = [
+  "app_services_logger",
 - "audio_thread_priority",
   "audioipc-client",
   "audioipc-server",
   "authenticator",
-@@ -2538,15 +2510,6 @@ name = "libc"
+@@ -2516,15 +2488,6 @@ name = "libc"
  version = "0.2.59"
  source = "registry+https://github.com/rust-lang/crates.io-index"
  checksum = "3262021842bf00fe07dbd6cf34ff25c99d7a7ebef8deea84db72be3ea3bb0aff"

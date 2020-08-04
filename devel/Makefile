@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3173 2020/07/11 13:58:10 nia Exp $
+# $NetBSD: Makefile,v 1.3176 2020/08/01 21:51:17 mef Exp $
 #
 
 COMMENT=	Development utilities
@@ -41,6 +41,7 @@ SUBDIR+=	R-ini
 SUBDIR+=	R-inline
 SUBDIR+=	R-iterators
 SUBDIR+=	R-lazyeval
+SUBDIR+=	R-lifecycle
 SUBDIR+=	R-lintr
 SUBDIR+=	R-magrittr
 SUBDIR+=	R-memoise
@@ -66,6 +67,7 @@ SUBDIR+=	R-sessioninfo
 SUBDIR+=	R-tcltk2
 SUBDIR+=	R-testthat
 SUBDIR+=	R-tidyselect
+SUBDIR+=	R-tinytest
 SUBDIR+=	R-usethis
 SUBDIR+=	R-uuid
 SUBDIR+=	R-whisker
@@ -3049,6 +3051,7 @@ SUBDIR+=	yajl
 SUBDIR+=	yarn
 SUBDIR+=	yasm
 SUBDIR+=	z80-asm
+SUBDIR+=	zeal
 SUBDIR+=	zlib
 SUBDIR+=	zookeeper
 SUBDIR+=	zzuf

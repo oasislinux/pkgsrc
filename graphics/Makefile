@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.896 2020/06/29 12:40:53 nikita Exp $
+# $NetBSD: Makefile,v 1.901 2020/08/03 23:50:53 joerg Exp $
 #
 
 COMMENT=	Graphics tools and libraries
@@ -23,14 +23,18 @@ SUBDIR+=	R-colorspace
 SUBDIR+=	R-colourpicker
 SUBDIR+=	R-dichromat
 SUBDIR+=	R-effects
+SUBDIR+=	R-farver
 SUBDIR+=	R-ggExtra
 SUBDIR+=	R-ggplot2
 SUBDIR+=	R-ggtern
+SUBDIR+=	R-ggthemes
 SUBDIR+=	R-gridExtra
+SUBDIR+=	R-jpeg
 SUBDIR+=	R-labeling
 SUBDIR+=	R-latex2exp
 SUBDIR+=	R-latticeExtra
 SUBDIR+=	R-munsell
+SUBDIR+=	R-polyclip
 SUBDIR+=	R-scales
 SUBDIR+=	R-viridis
 SUBDIR+=	R-viridisLite
@@ -453,6 +457,7 @@ SUBDIR+=	ptex
 SUBDIR+=	py-OpenGL
 SUBDIR+=	py-OpenGL-accelerate
 SUBDIR+=	py-Pillow
+SUBDIR+=	py-Willow
 SUBDIR+=	py-aafigure
 SUBDIR+=	py-actdiag
 SUBDIR+=	py-altgraph

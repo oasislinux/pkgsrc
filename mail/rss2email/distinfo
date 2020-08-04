@@ -1,7 +1,6 @@
-$NetBSD: distinfo,v 1.31 2019/11/04 00:28:25 schmonz Exp $
+$NetBSD: distinfo,v 1.33 2020/08/03 07:57:43 schmonz Exp $
 
-SHA1 (rss2email-3.11/rss2email-3.11.tar.gz) = 6e6bb4c443364ec729b51e914adf7b2a5de6f705
-RMD160 (rss2email-3.11/rss2email-3.11.tar.gz) = d895c27e834c2513056653394a21afeead664039
-SHA512 (rss2email-3.11/rss2email-3.11.tar.gz) = 2efdef703a4b4774d85926f500a37689aea3a324f63a13a686a2322c9f69ac7b940c5b953f417d9259e1493b3dafde4c2e1ddb3433d085fb2400cd06001141bb
-Size (rss2email-3.11/rss2email-3.11.tar.gz) = 66441 bytes
-SHA1 (patch-rss2email_config.py) = f99a023a1f3b207da46e721da112321fa1e5153d
+SHA1 (rss2email-3.12.1/rss2email-3.12.1.tar.gz) = a8ac64eb640c01061737ffdf5ff518e45d5d67a6
+RMD160 (rss2email-3.12.1/rss2email-3.12.1.tar.gz) = 3a141e405b62b665b918b8129695ce54180a4917
+SHA512 (rss2email-3.12.1/rss2email-3.12.1.tar.gz) = 8b62a149172cf13c9b03841191f3b214cd1bc2c071f75150a76dacee3edf8a21e0a083a46eba8fabea695cb5077eb84aa4262a709e4aae1e15facee4bbecd1d6
+Size (rss2email-3.12.1/rss2email-3.12.1.tar.gz) = 73942 bytes

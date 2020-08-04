@@ -778,6 +778,66 @@ func (s *Suite) Test_PatchChecker_checkConfigure__configure_ac(c *check.C) {
 		"ERROR: ~/patch-aa:9: This code must not be included in patches.")
 }
 
+func (s *Suite) Test_PatchChecker_checkAddedLine__interpreter(c *check.C) {
+	t := s.Init(c)
+
+	lines := t.NewLines("patch-aa",
+		CvsID,
+		"",
+		"Documentation.",
+		"",
+		"--- a/aa",
+		"+++ b/aa",
+		"@@ -1,1 +1,1 @@",
+		"-old",
+		"+#! /home/my/pkgsrc/pkg/bin/bash")
+
+	CheckLinesPatch(lines, nil)
+
+	t.CheckOutputLines(
+		"ERROR: patch-aa:9: Patches must not add a hard-coded interpreter " +
+			"(/home/my/pkgsrc/pkg/bin/bash).")
+}
+
+func (s *Suite) Test_PatchChecker_checkAddedLine__interpreter_in_line_2(c *check.C) {
+	t := s.Init(c)
+
+	lines := t.NewLines("patch-aa",
+		CvsID,
+		"",
+		"Documentation.",
+		"",
+		"--- a/aa",
+		"+++ b/aa",
+		"@@ -1,1 +1,2 @@",
+		"-old",
+		"+new",
+		"+#! /home/my/pkgsrc/pkg/bin/bash")
+
+	CheckLinesPatch(lines, nil)
+
+	t.CheckOutputEmpty()
+}
+
+func (s *Suite) Test_PatchChecker_checkAddedLine__interpreter_placeholder(c *check.C) {
+	t := s.Init(c)
+
+	lines := t.NewLines("patch-aa",
+		CvsID,
+		"",
+		"Documentation.",
+		"",
+		"--- a/aa",
+		"+++ b/aa",
+		"@@ -1,1 +1,1 @@",
+		"-old",
+		"+#! @PREFIX@/bin/bash")
+
+	CheckLinesPatch(lines, nil)
+
+	t.CheckOutputEmpty()
+}
+
 func (s *Suite) Test_PatchChecker_checkAddedAbsPath(c *check.C) {
 	t := s.Init(c)
 
@@ -915,13 +975,15 @@ func (s *Suite) Test_PatchChecker_checkAddedAbsPath(c *check.C) {
 
 	// The dot before the "/etc" makes it a relative pathname.
 	test(
-		"cp ./etc/hostname /tmp")
+		"cp ./etc/hostname /tmp",
+		nil...)
 
 	// +>	+#	from /etc/inittab (SYSV systems)
 	// +ERROR: devel/tet3/patches/patch-ac:51: Patches must not hard-code the pkgsrc PKG_SYSCONFDIR.
 
 	test(
-		"# SysV /etc/install, /usr/sbin/install")
+		"# SysV /etc/install, /usr/sbin/install",
+		nil...)
 
 	// C or C++ program, macro definition.
 	// This is an absolute path since the PID_FILE is the macro name,
@@ -935,8 +997,28 @@ func (s *Suite) Test_PatchChecker_checkAddedAbsPath(c *check.C) {
 		"#define PID_FILE PREFIX \"/etc/conf\"",
 		nil...)
 
+	// In C-style block comments, absolute pathnames are ok,
+	// even though they could still be confusing.
 	test(
-		"#define L 150 /* Length of a line in /etc/passwd */",
+		"#define L 150 /* Length of a line in /etc/some/file */",
+		nil...)
+
+	// In multiline C-style block comment, absolute pathnames are ok,
+	// even though they could still be confusing.
+	test(
+		" * Length of a line in /etc/some/file",
+		nil...)
+
+	// In C-style end-of-line comments, absolute pathnames are ok,
+	//	// even though they could still be confusing.
+	test(
+		"#define L 150 // Length of a line in /etc/some/file",
+		nil...)
+
+	// Allow /etc/passwd, /etc/shadow, /etc/hosts and their variants.
+	// These belong to the base system, not to pkgsrc.
+	test(
+		"#define PATH_SHADOW \"/etc/master.passwd\"",
 		nil...)
 
 	test(

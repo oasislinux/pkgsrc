@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.54 2020/06/11 11:22:14 adam Exp $
+# $NetBSD: Makefile,v 1.57 2020/08/03 14:07:02 wiz Exp $
 
-DISTNAME=	redis-6.0.5
+DISTNAME=	redis-6.0.6
+PKGREVISION=	1
 CATEGORIES=	databases
 MASTER_SITES=	http://download.redis.io/releases/
 
@@ -12,7 +13,7 @@ LICENSE=	modified-bsd
 TEST_DEPENDS+=	tcl>=8.5:../../lang/tcl
 
 USE_LANGUAGES=	c99
-USE_TOOLS+=	gmake
+USE_TOOLS+=	gmake pkg-config
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -24,6 +25,7 @@ DOCFILES+=		00-RELEASENOTES BUGS COPYING README.md
 EGDIR=			${PREFIX}/share/examples/${PKGBASE}
 INSTALLATION_DIRS+=	bin ${DOCDIR} ${EGDIR} ${EGDIR}/utils ${EGDIR}/tests
 CONF_FILES=		${EGDIR}/redis.conf.example ${PKG_SYSCONFDIR}/redis.conf
+CONF_FILES_MODE=	0640
 
 BUILD_DEFS+=		VARBASE REDIS_USER REDIS_GROUP REDIS_DATADIR
 BUILD_DEFS+=		REDIS_LOGDIR REDIS_PIDDIR

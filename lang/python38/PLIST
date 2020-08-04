@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.4 2020/05/15 08:24:50 adam Exp $
+@comment $NetBSD: PLIST,v 1.6 2020/07/21 16:31:15 adam Exp $
 bin/2to3-${PY_VER_SUFFIX}
 bin/pydoc${PY_VER_SUFFIX}
 bin/python${PY_VER_SUFFIX}
@@ -1403,8 +1403,8 @@ lib/python${PY_VER_SUFFIX}/ensurepip/__init__.pyo
 lib/python${PY_VER_SUFFIX}/ensurepip/__main__.py
 lib/python${PY_VER_SUFFIX}/ensurepip/__main__.pyc
 lib/python${PY_VER_SUFFIX}/ensurepip/__main__.pyo
-lib/python${PY_VER_SUFFIX}/ensurepip/_bundled/pip-19.2.3-py2.py3-none-any.whl
-lib/python${PY_VER_SUFFIX}/ensurepip/_bundled/setuptools-41.2.0-py2.py3-none-any.whl
+lib/python${PY_VER_SUFFIX}/ensurepip/_bundled/pip-20.1.1-py2.py3-none-any.whl
+lib/python${PY_VER_SUFFIX}/ensurepip/_bundled/setuptools-47.1.0-py3-none-any.whl
 lib/python${PY_VER_SUFFIX}/ensurepip/_uninstall.py
 lib/python${PY_VER_SUFFIX}/ensurepip/_uninstall.pyc
 lib/python${PY_VER_SUFFIX}/ensurepip/_uninstall.pyo
@@ -3095,6 +3095,7 @@ lib/python${PY_VER_SUFFIX}/test/randv3.pck
 lib/python${PY_VER_SUFFIX}/test/re_tests.py
 lib/python${PY_VER_SUFFIX}/test/re_tests.pyc
 lib/python${PY_VER_SUFFIX}/test/re_tests.pyo
+lib/python${PY_VER_SUFFIX}/test/recursion.tar
 lib/python${PY_VER_SUFFIX}/test/regrtest.py
 lib/python${PY_VER_SUFFIX}/test/regrtest.pyc
 lib/python${PY_VER_SUFFIX}/test/regrtest.pyo

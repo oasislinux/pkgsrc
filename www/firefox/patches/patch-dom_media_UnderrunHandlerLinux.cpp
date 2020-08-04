@@ -1,16 +1,16 @@
 $NetBSD$
 
---- dom/media/UnderrunHandlerLinux.cpp.orig	Wed Jan  8 01:23:31 2020
+--- dom/media/UnderrunHandlerLinux.cpp.orig	Mon Jul 20 20:53:19 2020
 +++ dom/media/UnderrunHandlerLinux.cpp
 @@ -9,7 +9,6 @@
  
  #include <mozilla/Sprintf.h>
  #include <mozilla/Atomics.h>
 -#include "audio_thread_priority.h"
+ #include "nsDebug.h"
  
  namespace mozilla {
- 
-@@ -57,20 +56,6 @@ void InstallSoftRealTimeLimitHandler() {
+@@ -58,20 +57,6 @@ void InstallSoftRealTimeLimitHandler() {
  }
  
  void DemoteThreadFromRealTime() {

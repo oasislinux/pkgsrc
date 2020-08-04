@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.10 2020/07/07 16:49:19 bsiegert Exp $
+# $NetBSD: Makefile,v 1.12 2020/08/03 08:44:24 adam Exp $
 
-DISTNAME=	gsutil-4.51
+DISTNAME=	gsutil-4.52
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	net python
 MASTER_SITES=	${MASTER_SITE_PYPI:=g/gsutil/}
@@ -14,6 +14,8 @@ REPLACE_PYTHON+=	gslib/vendored/boto/boto/pyami/launch_ami.py
 REPLACE_PYTHON+=	gslib/vendored/boto/boto/services/bs.py
 REPLACE_PYTHON+=	gslib/vendored/boto/tests/fps/test.py
 REPLACE_PYTHON+=	gslib/vendored/boto/tests/test.py
+REPLACE_PYTHON+=	gslib/vendored/oauth2client/samples/django/django_user/manage.py
+REPLACE_PYTHON+=	gslib/vendored/oauth2client/samples/django/google_user/manage.py
 
 DEPENDS+=	${PYPKGPREFIX}-OpenSSL>=0.13:../../security/py-OpenSSL
 DEPENDS+=	${PYPKGPREFIX}-SocksiPy-branch>=1.01:../../net/py-socksipy-branch
@@ -30,6 +32,11 @@ DEPENDS+=	${PYPKGPREFIX}-retry_decorator>=1.0.0:../../devel/py-retry_decorator
 DEPENDS+=	${PYPKGPREFIX}-six>=1.12.0:../../lang/py-six
 
 USE_LANGUAGES=	# none
+
+CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/gslib/vendored/oauth2client/scripts/build_docs.sh
+CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/gslib/vendored/oauth2client/scripts/install.sh
+CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/gslib/vendored/oauth2client/scripts/run.sh
+CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/gslib/vendored/oauth2client/scripts/run_system_tests.sh
 
 post-install:
 	cd ${DESTDIR}${PREFIX}/bin && ${MV} gsutil gsutil-${PYVERSSUFFIX} || ${TRUE}

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1159 2020/07/09 21:30:16 nia Exp $
+# $NetBSD: Makefile,v 1.1162 2020/08/02 03:15:35 tnn Exp $
 #
 
 COMMENT=	Text processing utilities (does not include desktop publishing)
@@ -455,6 +455,7 @@ SUBDIR+=	libxslt
 SUBDIR+=	libyaml
 SUBDIR+=	link-grammar
 SUBDIR+=	lit2epub
+SUBDIR+=	log4cpp
 SUBDIR+=	lout
 SUBDIR+=	lowdown
 SUBDIR+=	lq-sp
@@ -1000,6 +1001,7 @@ SUBDIR+=	ruby-actionpack-xml_parser
 SUBDIR+=	ruby-actiontext60
 SUBDIR+=	ruby-albino
 SUBDIR+=	ruby-amrita
+SUBDIR+=	ruby-asciidoctor
 SUBDIR+=	ruby-bluecloth
 SUBDIR+=	ruby-buftok
 SUBDIR+=	ruby-builder
@@ -1135,6 +1137,7 @@ SUBDIR+=	translate-shell
 SUBDIR+=	translate-toolkit
 SUBDIR+=	troffcvt
 SUBDIR+=	uchardet
+SUBDIR+=	ugrep
 SUBDIR+=	unac
 SUBDIR+=	uncrustify
 SUBDIR+=	uni2ascii

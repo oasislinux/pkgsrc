@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.438 2020/07/12 01:37:50 ryoon Exp $
+# $NetBSD: Makefile,v 1.441 2020/07/31 01:26:43 maya Exp $
 
 FIREFOX_VER=		${MOZ_BRANCH}${MOZ_BRANCH_MINOR}
-MOZ_BRANCH=		78.0
-MOZ_BRANCH_MINOR=	.2
+MOZ_BRANCH=		79.0
+#MOZ_BRANCH_MINOR=	.1
 
 DISTNAME=	firefox-${FIREFOX_VER}.source
 PKGNAME=	${DISTNAME:S/.source//:S/b/beta/:S/esr//}
@@ -44,6 +44,9 @@ NOT_PAX_MPROTECT_SAFE+=	lib/${PKGBASE}/plugin-container
 BUILDLINK_TRANSFORM.SunOS+=	rm:-fdata-sections
 BUILDLINK_TRANSFORM.SunOS+=	rm:-ffunction-sections
 BUILDLINK_TRANSFORM.SunOS+=	rm:-pie
+
+# Workaround for https://bugs.llvm.org/show_bug.cgi?id=46366
+BUILDLINK_TRANSFORM.NetBSD+=	rm:-fexperimental-new-pass-manager
 
 SUBST_CLASSES+=			dfly_malloc_h
 SUBST_STAGE.dfly_malloc_h=	pre-configure

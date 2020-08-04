@@ -1,4 +1,4 @@
-$NetBSD: distinfo,v 1.16 2020/07/13 13:01:01 wiz Exp $
+$NetBSD: distinfo,v 1.18 2020/07/22 13:43:12 wiz Exp $
 
 SHA1 (transmission-3.00.tar.xz) = fd6bd78cfe5a612b422a49e8193d82df2486a3c4
 RMD160 (transmission-3.00.tar.xz) = 5286c3e183474cba6ed1c6cfc022f4f5afab4fda

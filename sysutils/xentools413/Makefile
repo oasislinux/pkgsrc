@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2020/06/08 09:12:46 bouyer Exp $
+# $NetBSD: Makefile,v 1.7 2020/07/26 08:49:38 rillig Exp $
 #
 VERSION=	4.13.1
 
@@ -67,40 +67,23 @@ REPLACE_PYTHON+=	tools/python/scripts/convert-legacy-stream
 REPLACE_PYTHON+=	tools/python/scripts/verify-stream-v2
 REPLACE_PYTHON+=	tools/xenmon/xenmon.py tools/misc/xencov_split
 
-SUBST_CLASSES+=		perlpath
-SUBST_STAGE.perlpath=	pre-configure
-SUBST_FILES.perlpath=	tools/misc/xencov_split
-SUBST_FILES.perlpath+=	tools/firmware/rombios/makesym.perl
-SUBST_FILES.perlpath+=	tools/qemu-xen-traditional/texi2pod.pl
-SUBST_FILES.perlpath+=	tools/examples/xeninfo.pl
-SUBST_FILES.perlpath+=	tools/include/xen-external/bsd-sys-queue-h-seddery
-SUBST_FILES.perlpath+=	tools/qemu-xen/scripts/texi2pod.pl
-SUBST_FILES.perlpath+=	tools/qemu-xen/scripts/get_maintainer.pl
-SUBST_FILES.perlpath+=	tools/qemu-xen/scripts/checkpatch.pl
-SUBST_FILES.perlpath+=	tools/libxl/libxl_save_msgs_gen.pl
-SUBST_FILES.perlpath+=	tools/libxl/check-libxl-api-rules
-SUBST_SED.perlpath=	-e "s|/usr/bin/perl|${PREFIX}/bin/perl|g"
-
-SUBST_CLASSES+=		pathsvar
-SUBST_STAGE.pathsvar=	pre-configure
-SUBST_FILES.pathsvar=	tools/Makefile \
-			tools/hotplug/Linux/init.d/sysconfig.xendomains
-SUBST_SED.pathsvar=	-e "s|/var/lib|${VARBASE}/run|g"
+REPLACE_PERL+=		tools/firmware/rombios/makesym.perl
+REPLACE_PERL+=		tools/qemu-xen-traditional/texi2pod.pl
+REPLACE_PERL+=		tools/examples/xeninfo.pl
+REPLACE_PERL+=		tools/include/xen-external/bsd-sys-queue-h-seddery
+REPLACE_PERL+=		tools/qemu-xen/scripts/texi2pod.pl
+REPLACE_PERL+=		tools/qemu-xen/scripts/get_maintainer.pl
+REPLACE_PERL+=		tools/qemu-xen/scripts/checkpatch.pl
+REPLACE_PERL+=		tools/libxl/libxl_save_msgs_gen.pl
+REPLACE_PERL+=		tools/libxl/check-libxl-api-rules
 
 SUBST_CLASSES+=		conf
 SUBST_STAGE.conf=	pre-configure
-SUBST_FILES.conf+=	tools/ocaml/xenstored/define.ml
-SUBST_FILES.conf+=	tools/libxl/xl_cmdtable.c
-SUBST_FILES.conf+=	docs/misc/block-scripts.txt
+SUBST_FILES.conf=	docs/misc/block-scripts.txt
 SUBST_FILES.conf+=	docs/misc/vtd.txt
 SUBST_SED.conf=		-e "s,@XENDCONFDIR@,${PKG_SYSCONFDIR},g"
 
 XEND_SCRIPTS=		block vif-bridge vif-ip qemu-ifup hotplugpath.sh locking.sh
-
-SUBST_CLASSES.NetBSD+=	proc
-SUBST_STAGE.proc=	pre-configure
-SUBST_FILES.proc+=	tools/ocaml/xenstored/define.ml
-SUBST_SED.proc=		-e "s|/proc|/kern|g"
 
 SUBST_CLASSES+=		getopt
 SUBST_STAGE.getopt=	pre-configure
@@ -113,15 +96,6 @@ PROCPATH.NetBSD=	/kern
 PROCPATH.*=		/proc
 
 .include "../../mk/bsd.prefs.mk"
-
-SUBST_CLASSES+=		procdev
-SUBST_STAGE.procdev=	pre-configure
-SUBST_FILES.procdev=	tools/ocaml/xenstored/define.ml
-.if ${OPSYS} == "NetBSD"
-SUBST_SED.procdev=	-e "s|@PROCDEV@|/dev|g"
-.else
-SUBST_SED.procdev=	-e "s|@PROCDEV@|/proc/xen|g"
-.endif
 
 .if ${OPSYS} == "NetBSD"
 MESSAGE_SRC=		${.CURDIR}/MESSAGE ${.CURDIR}/MESSAGE.NetBSD

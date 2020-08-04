@@ -1,4 +1,4 @@
-# $NetBSD: mozilla-common.mk,v 1.175 2020/07/12 01:37:50 ryoon Exp $
+# $NetBSD: mozilla-common.mk,v 1.177 2020/08/04 02:56:03 gutteridge Exp $
 #
 # common Makefile fragment for mozilla packages based on gecko 2.0.
 #
@@ -39,7 +39,7 @@ UNLIMIT_RESOURCES+=	datasize virtualsize
 # selection framework.
 USE_LANGUAGES+=		c99 c++
 
-TOOL_DEPENDS+=		cbindgen>=0.14.2:../../devel/cbindgen
+TOOL_DEPENDS+=		cbindgen>=0.14.3:../../devel/cbindgen
 .if ${MACHINE_ARCH} == "sparc64"
 CONFIGURE_ARGS+=	--disable-nodejs
 .else
@@ -224,10 +224,10 @@ CONFIGURE_ENV.NetBSD+=	ac_cv_needs_atomic=yes
 BUILDLINK_API_DEPENDS.libevent+=	libevent>=1.1
 .include "../../devel/libevent/buildlink3.mk"
 .include "../../devel/libffi/buildlink3.mk"
-BUILDLINK_API_DEPENDS.nspr+=	nspr>=4.25
+BUILDLINK_API_DEPENDS.nspr+=	nspr>=4.26
 .include "../../devel/nspr/buildlink3.mk"
 .include "../../textproc/icu/buildlink3.mk"
-BUILDLINK_API_DEPENDS.nss+=	nss>=3.53
+BUILDLINK_API_DEPENDS.nss+=	nss>=3.54
 .include "../../devel/nss/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 #.include "../../mk/jpeg.buildlink3.mk"
@@ -257,7 +257,7 @@ CWRAPPERS_PREPEND.cxx+= \
 	-stdlib++-isystem \
 	${BUILDLINK_PREFIX.gcc8}/gcc8/include/c++/backward
 .endif
-RUST_REQ=	1.41.0
+RUST_REQ=	1.43.0
 .include "../../lang/rust/rust.mk"
 # webrtc option requires internal libvpx
 #BUILDLINK_API_DEPENDS.libvpx+=	libvpx>=1.3.0

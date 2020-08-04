@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.891 2020/07/01 08:52:38 adam Exp $
+# $NetBSD: Makefile,v 1.894 2020/07/28 14:34:32 mef Exp $
 #
 
 COMMENT=	System utilities
@@ -49,6 +49,8 @@ SUBDIR+=	bacula-tray-monitor-qt5
 SUBDIR+=	baloo
 SUBDIR+=	baloo-widgets
 SUBDIR+=	baloo5
+SUBDIR+=	bareos
+SUBDIR+=	bareos-clientonly
 SUBDIR+=	bbsload
 SUBDIR+=	bchunk
 SUBDIR+=	bcmfw
@@ -82,6 +84,7 @@ SUBDIR+=	cdrkit
 SUBDIR+=	cdrtools
 SUBDIR+=	cfengine2
 SUBDIR+=	cfengine3
+SUBDIR+=	cfm
 SUBDIR+=	checkpassword
 SUBDIR+=	checkpassword-pam
 SUBDIR+=	checkperms
@@ -714,7 +717,6 @@ SUBDIR+=	vobcopy
 SUBDIR+=	vultr
 SUBDIR+=	vxargs
 SUBDIR+=	watchman
-SUBDIR+=	wbm-acl
 SUBDIR+=	wbm-apache
 SUBDIR+=	wbm-at
 SUBDIR+=	wbm-bandwidth
@@ -743,7 +745,6 @@ SUBDIR+=	wbm-net
 SUBDIR+=	wbm-openslp
 SUBDIR+=	wbm-postfix
 SUBDIR+=	wbm-postgresql
-SUBDIR+=	wbm-proc
 SUBDIR+=	wbm-qmailadmin
 SUBDIR+=	wbm-quota
 SUBDIR+=	wbm-sendmail
