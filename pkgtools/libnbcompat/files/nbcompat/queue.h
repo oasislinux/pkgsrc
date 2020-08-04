@@ -322,6 +322,11 @@ struct {								\
 #define	TAILQ_NEXT(elm, field)		((elm)->field.tqe_next)
 #endif
 
+#ifndef TAILQ_PREV
+#define TAILQ_PREV(elm, headname, field) \
+        (*(((struct headname *)(void *)((elm)->field.tqe_prev))->tqh_last))
+#endif
+
 #ifndef TAILQ_LAST
 #define	TAILQ_LAST(head, headname) \
 	(*(((struct headname *)((head)->tqh_last))->tqh_last))
