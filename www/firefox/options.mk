@@ -65,9 +65,6 @@ CONFIGURE_ARGS+=	--disable-pulseaudio
 CONFIGURE_ARGS+=	--enable-dbus
 .else
 CONFIGURE_ARGS+=	--disable-dbus
-.  if ${OPSYS} == "Linux"
-PKG_FAIL_REASON+=	"The dbus PKG_OPTION cannot be disabled on Linux."
-.  endif
 .endif
 
 #PLIST_VARS+=		branding nobranding
