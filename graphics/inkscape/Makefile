@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.213 2020/06/02 08:24:03 adam Exp $
+# $NetBSD: Makefile,v 1.215 2020/08/05 20:42:40 kamil Exp $
 
 DISTNAME=	inkscape-1.0
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	graphics
 MASTER_SITES=	https://media.inkscape.org/dl/resources/file/
 EXTRACT_SUFX=	.tar.xz
@@ -16,6 +16,7 @@ WRKSRC=		${WRKDIR}/inkscape-1.0_2020-05-01_4035a4fb49
 .if !exists(/usr/bin/iconv)
 BUILD_DEPENDS+=	libiconv-[0-9]*:../../converters/libiconv
 .endif
+DEPENDS+=	adwaita-icon-theme>0:../../graphics/adwaita-icon-theme
 DEPENDS+=	${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 # for inkex.py, needed by most python extension scripts
 DEPENDS+=	${PYPKGPREFIX}-lxml-[0-9]*:../../textproc/py-lxml
