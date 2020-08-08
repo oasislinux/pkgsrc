@@ -1,4 +1,4 @@
-$NetBSD: patch-config_makefiles_rust.mk,v 1.1 2020/04/30 19:08:50 maya Exp $
+$NetBSD: patch-config_makefiles_rust.mk,v 1.2 2020/08/07 08:29:42 maya Exp $
 
 NetBSD doesn't get along with parallel rust builds (it causes issues
 with ld.so) which are the default. Force -j1.

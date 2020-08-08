@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.1477 2020/08/06 12:03:06 joerg Exp $
+# $NetBSD: Makefile,v 1.1479 2020/08/07 01:57:55 brook Exp $
 #
 
 COMMENT=	Packages related to the World Wide Web
 
+SUBDIR+=	R-RCurl
 SUBDIR+=	R-curl
 SUBDIR+=	R-gh
 SUBDIR+=	R-htmlwidgets
 SUBDIR+=	R-httpuv
 SUBDIR+=	R-httr
 SUBDIR+=	R-miniUI
+SUBDIR+=	R-rvest
 SUBDIR+=	R-shiny
 SUBDIR+=	R-shinyjs
 SUBDIR+=	SOGo

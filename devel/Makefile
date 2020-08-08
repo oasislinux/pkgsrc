@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3177 2020/08/05 13:54:15 adam Exp $
+# $NetBSD: Makefile,v 1.3182 2020/08/07 00:14:22 brook Exp $
 #
 
 COMMENT=	Development utilities
@@ -22,6 +22,7 @@ SUBDIR+=	R-bindr
 SUBDIR+=	R-bit
 SUBDIR+=	R-bit64
 SUBDIR+=	R-blob
+SUBDIR+=	R-caTools
 SUBDIR+=	R-callr
 SUBDIR+=	R-checkmate
 SUBDIR+=	R-cli
@@ -860,12 +861,14 @@ SUBDIR+=	lua-compat53
 SUBDIR+=	lua-cov
 SUBDIR+=	lua-coxpcall
 SUBDIR+=	lua-cqueues
+SUBDIR+=	lua-epnf
 SUBDIR+=	lua-event
 SUBDIR+=	lua-fifo
 SUBDIR+=	lua-filesystem
 SUBDIR+=	lua-fun
 SUBDIR+=	lua-gi
 SUBDIR+=	lua-inspect
+SUBDIR+=	lua-linenoise
 SUBDIR+=	lua-ljsyscall
 SUBDIR+=	lua-loadkit
 SUBDIR+=	lua-lpeg
@@ -882,6 +885,7 @@ SUBDIR+=	lua-mode
 SUBDIR+=	lua-moses
 SUBDIR+=	lua-penlight
 SUBDIR+=	lua-posix
+SUBDIR+=	lua-repl
 SUBDIR+=	lua-rings
 SUBDIR+=	lua-rocks
 SUBDIR+=	lua-say
@@ -892,6 +896,7 @@ SUBDIR+=	lua-stdlib
 SUBDIR+=	lua-system
 SUBDIR+=	lua-term
 SUBDIR+=	lua-thrift
+SUBDIR+=	lua-vstruct
 SUBDIR+=	lutok
 SUBDIR+=	lwp
 SUBDIR+=	lxqt-build-tools
