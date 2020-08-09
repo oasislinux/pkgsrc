@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.4 2018/11/23 09:50:55 abs Exp $
+# $NetBSD: options.mk,v 1.6 2020/08/09 00:53:12 joerg Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.harfbuzz
 PKG_SUPPORTED_OPTIONS+=	icu
@@ -10,8 +10,8 @@ PLIST_VARS+=		icu
 
 .if !empty(PKG_OPTIONS:Micu)
 .include "../../textproc/icu/buildlink3.mk"
-CONFIGURE_ARGS+=	--with-icu=yes
+MESON_ARGS+=	-Dicu=enabled
 PLIST.icu=		yes
 .else
-CONFIGURE_ARGS+=	--with-icu=no
+MESON_ARGS+=	-Dicu=disabled
 .endif
