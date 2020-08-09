@@ -1,71 +1,127 @@
 $NetBSD$
 
---- media/audioipc/client/src/context.rs.orig	Fri Apr  3 19:34:57 2020
+--- media/audioipc/client/src/context.rs.orig	Mon Jul 20 22:49:41 2020
 +++ media/audioipc/client/src/context.rs
-@@ -6,10 +6,6 @@
- use crate::stream;
- use crate::{assert_not_in_callback, run_in_callback};
- use crate::{ClientStream, AUDIOIPC_INIT_PARAMS};
--#[cfg(target_os = "linux")]
--use audio_thread_priority::get_current_thread_info;
--#[cfg(not(target_os = "linux"))]
--use audio_thread_priority::promote_current_thread_to_real_time;
- use audioipc::codec::LengthDelimitedCodec;
+@@ -14,10 +14,13 @@ use audioipc::codec::LengthDelimitedCodec;
  use audioipc::frame::{framed, Framed};
  use audioipc::platformhandle_passing::{framed_with_platformhandles, FramedWithPlatformHandles};
-@@ -77,32 +73,7 @@ impl ClientContext {
-     }
+ use audioipc::{core, rpc};
+-use audioipc::{messages, messages::DeviceCollectionReq, messages::DeviceCollectionResp, ClientMessage, ServerMessage};
++use audioipc::{
++    messages, messages::DeviceCollectionReq, messages::DeviceCollectionResp, ClientMessage,
++    ServerMessage,
++};
+ use cubeb_backend::{
+-    ffi, Context, ContextOps, DeviceCollectionRef, DeviceId, DeviceType, Error, Ops, Result, Stream, StreamParams,
+-    StreamParamsRef,
++    ffi, Context, ContextOps, DeviceCollectionRef, DeviceId, DeviceType, Error, Ops, Result,
++    Stream, StreamParams, StreamParamsRef,
+ };
+ use futures::Future;
+ use futures_cpupool::{CpuFuture, CpuPool};
+@@ -35,8 +38,10 @@ struct CubebClient;
+ impl rpc::Client for CubebClient {
+     type Request = ServerMessage;
+     type Response = ClientMessage;
+-    type Transport =
+-        FramedWithPlatformHandles<audioipc::AsyncMessageStream, LengthDelimitedCodec<Self::Request, Self::Response>>;
++    type Transport = FramedWithPlatformHandles<
++        audioipc::AsyncMessageStream,
++        LengthDelimitedCodec<Self::Request, Self::Response>,
++    >;
  }
  
--#[cfg(target_os = "linux")]
--fn promote_thread(rpc: &rpc::ClientProxy<ServerMessage, ClientMessage>) {
--    match get_current_thread_info() {
--        Ok(info) => {
--            let bytes = info.serialize();
--            // Don't wait for the response, this is on the callback thread, which must not block.
--            rpc.call(ServerMessage::PromoteThreadToRealTime(bytes));
--        }
--        Err(_) => {
--            warn!("Could not remotely promote thread to RT.");
--        }
--    }
--}
+ pub const CLIENT_OPS: Ops = capi_new!(ClientContext, ClientStream);
+@@ -136,12 +141,16 @@ impl rpc::Server for DeviceCollectionServer {
+     type Request = DeviceCollectionReq;
+     type Response = DeviceCollectionResp;
+     type Future = CpuFuture<Self::Response, ()>;
+-    type Transport = Framed<audioipc::AsyncMessageStream, LengthDelimitedCodec<Self::Response, Self::Request>>;
++    type Transport =
++        Framed<audioipc::AsyncMessageStream, LengthDelimitedCodec<Self::Response, Self::Request>>;
  
--#[cfg(not(target_os = "linux"))]
--fn promote_thread(_rpc: &rpc::ClientProxy<ServerMessage, ClientMessage>) {
--    match promote_current_thread_to_real_time(0, 48000) {
--        Ok(_) => {
--            info!("Audio thread promoted to real-time.");
--        }
--        Err(_) => {
--            warn!("Could not promote thread to real-time.");
--        }
--    }
--}
--
- fn register_thread(callback: Option<extern "C" fn(*const ::std::os::raw::c_char)>) {
-     if let Some(func) = callback {
-         let thr = thread::current();
-@@ -117,13 +88,6 @@ fn unregister_thread(callback: Option<extern "C" fn()>
-     }
- }
+     fn process(&mut self, req: Self::Request) -> Self::Future {
+         match req {
+             DeviceCollectionReq::DeviceChange(device_type) => {
+-                trace!("ctx_thread: DeviceChange Callback: device_type={}", device_type);
++                trace!(
++                    "ctx_thread: DeviceChange Callback: device_type={}",
++                    device_type
++                );
  
--fn promote_and_register_thread(
--    rpc: &rpc::ClientProxy<ServerMessage, ClientMessage>,
--    callback: Option<extern "C" fn(*const ::std::os::raw::c_char)>,
--) {
--    promote_thread(rpc);
--    register_thread(callback);
--}
+                 let devtype = cubeb_backend::DeviceType::from_bits_truncate(device_type);
  
- #[derive(Default)]
- struct DeviceCollectionCallback {
-@@ -234,7 +198,7 @@ impl ContextOps for ClientContext {
+@@ -157,10 +166,14 @@ impl rpc::Server for DeviceCollectionServer {
+                 self.cpu_pool.spawn_fn(move || {
+                     run_in_callback(|| {
+                         if devtype.contains(cubeb_backend::DeviceType::INPUT) {
+-                            unsafe { input_cb.unwrap()(ptr::null_mut(), input_user_ptr as *mut c_void) }
++                            unsafe {
++                                input_cb.unwrap()(ptr::null_mut(), input_user_ptr as *mut c_void)
++                            }
+                         }
+                         if devtype.contains(cubeb_backend::DeviceType::OUTPUT) {
+-                            unsafe { output_cb.unwrap()(ptr::null_mut(), output_user_ptr as *mut c_void) }
++                            unsafe {
++                                output_cb.unwrap()(ptr::null_mut(), output_user_ptr as *mut c_void)
++                            }
+                         }
+                     });
+ 
+@@ -193,7 +206,8 @@ impl ContextOps for ClientContext {
+         let thread_create_callback = params.thread_create_callback;
+         let thread_destroy_callback = params.thread_destroy_callback;
+ 
+-        let server_stream = unsafe { audioipc::MessageStream::from_raw_fd(params.server_connection) };
++        let server_stream =
++            unsafe { audioipc::MessageStream::from_raw_fd(params.server_connection) };
+ 
+         let core = core::spawn_thread(
+             "AudioIPC Client RPC",
+@@ -217,8 +231,8 @@ impl ContextOps for ClientContext {
+         // will return errors the caller expects to handle.
+         let _ = send_recv!(rpc, ClientConnect(std::process::id()) => ClientConnected);
+ 
+-        let backend_id =
+-            send_recv!(rpc, ContextGetBackendId => ContextBackendId()).unwrap_or_else(|_| "(remote error)".to_string());
++        let backend_id = send_recv!(rpc, ContextGetBackendId => ContextBackendId())
++            .unwrap_or_else(|_| "(remote error)".to_string());
+         let backend_id = CString::new(backend_id).expect("backend_id query failed");
  
          let cpu_pool = futures_cpupool::Builder::new()
-             .name_prefix("AudioIPC")
--            .after_start(move || promote_and_register_thread(&rpc2, thread_create_callback))
-+            .after_start(move || register_thread(thread_create_callback))
-             .before_stop(move || unregister_thread(thread_destroy_callback))
-             .pool_size(params.pool_size)
-             .stack_size(params.stack_size)
+@@ -263,7 +277,11 @@ impl ContextOps for ClientContext {
+         send_recv!(self.rpc(), ContextGetPreferredSampleRate => ContextPreferredSampleRate())
+     }
+ 
+-    fn enumerate_devices(&mut self, devtype: DeviceType, collection: &DeviceCollectionRef) -> Result<()> {
++    fn enumerate_devices(
++        &mut self,
++        devtype: DeviceType,
++        collection: &DeviceCollectionRef,
++    ) -> Result<()> {
+         assert_not_in_callback();
+         let v: Vec<ffi::cubeb_device_info> = match send_recv!(self.rpc(),
+                              ContextGetDeviceEnumeration(devtype.bits()) =>
+@@ -286,7 +304,11 @@ impl ContextOps for ClientContext {
+         assert_not_in_callback();
+         unsafe {
+             let coll = &mut *collection.as_ptr();
+-            let mut devices = Vec::from_raw_parts(coll.device as *mut ffi::cubeb_device_info, coll.count, coll.count);
++            let mut devices = Vec::from_raw_parts(
++                coll.device as *mut ffi::cubeb_device_info,
++                coll.count,
++                coll.count,
++            );
+             for dev in &mut devices {
+                 if !dev.device_id.is_null() {
+                     let _ = CString::from_raw(dev.device_id as *mut _);
+@@ -361,7 +383,8 @@ impl ContextOps for ClientContext {
+                                  ContextSetupDeviceCollectionCallback =>
+                                  ContextSetupDeviceCollectionCallback())?;
+ 
+-            let stream = unsafe { audioipc::MessageStream::from_raw_fd(fds.platform_handles[0].into_raw()) };
++            let stream =
++                unsafe { audioipc::MessageStream::from_raw_fd(fds.platform_handles[0].into_raw()) };
+ 
+             // TODO: The lowest comms layer expects exactly 3 PlatformHandles, but we only
+             // need one here.  Drop the dummy handles the other side sent us to discard.

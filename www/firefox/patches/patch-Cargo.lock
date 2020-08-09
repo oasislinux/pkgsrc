@@ -2,85 +2,15 @@ $NetBSD$
 
 --- Cargo.lock.orig	Mon Jul 20 22:49:36 2020
 +++ Cargo.lock
-@@ -110,24 +110,9 @@ dependencies = [
- ]
+@@ -111,9 +111,9 @@ dependencies = [
  
  [[package]]
--name = "audio_thread_priority"
+ name = "audio_thread_priority"
 -version = "0.22.1"
--source = "registry+https://github.com/rust-lang/crates.io-index"
++version = "0.23.4"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
 -checksum = "f8fba1500e466a39dd3faa5aed20a50dfe0aa1b905264a453bbe9f49508994cc"
--dependencies = [
-- "cfg-if",
-- "dbus",
-- "libc",
-- "log",
-- "mach",
-- "winapi 0.3.7",
--]
--
--[[package]]
- name = "audioipc"
- version = "0.2.5"
++checksum = "cec7141c59547709f640219f15512026d416c0ca8ce7a5ac1524923ee65be2cb"
  dependencies = [
-- "audio_thread_priority",
-  "bincode",
-  "bytes 0.4.9",
-  "cc",
-@@ -154,7 +139,6 @@ dependencies = [
- name = "audioipc-client"
- version = "0.4.0"
- dependencies = [
-- "audio_thread_priority",
-  "audioipc",
-  "cubeb-backend",
-  "futures 0.1.29",
-@@ -167,7 +151,6 @@ dependencies = [
- name = "audioipc-server"
- version = "0.2.3"
- dependencies = [
-- "audio_thread_priority",
-  "audioipc",
-  "cubeb-core",
-  "error-chain",
-@@ -1027,16 +1010,6 @@ dependencies = [
- ]
- 
- [[package]]
--name = "dbus"
--version = "0.6.4"
--source = "registry+https://github.com/rust-lang/crates.io-index"
--checksum = "b9e1b39f3f6aa3d4a1522c4f0f9f1e9e9167bd93740a8690874caa7cf8ce47d7"
--dependencies = [
-- "libc",
-- "libdbus-sys",
--]
--
--[[package]]
- name = "deflate"
- version = "0.7.19"
- source = "registry+https://github.com/rust-lang/crates.io-index"
-@@ -1867,7 +1840,6 @@ name = "gkrust-shared"
- version = "0.1.0"
- dependencies = [
-  "app_services_logger",
-- "audio_thread_priority",
-  "audioipc-client",
-  "audioipc-server",
-  "authenticator",
-@@ -2516,15 +2488,6 @@ name = "libc"
- version = "0.2.59"
- source = "registry+https://github.com/rust-lang/crates.io-index"
- checksum = "3262021842bf00fe07dbd6cf34ff25c99d7a7ebef8deea84db72be3ea3bb0aff"
--
--[[package]]
--name = "libdbus-sys"
--version = "0.1.5"
--source = "registry+https://github.com/rust-lang/crates.io-index"
--checksum = "18cb88963258d00f4962205dbb5933d82780d9962c8c8a064b651d2ad7189210"
--dependencies = [
-- "pkg-config",
--]
- 
- [[package]]
- name = "libloading"
+  "cfg-if",
+  "dbus",
