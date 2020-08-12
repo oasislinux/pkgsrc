@@ -1,4 +1,4 @@
-$NetBSD: CHANGES-2020,v 1.4410 2020/08/11 16:02:23 tsutsui Exp $
+$NetBSD: CHANGES-2020,v 1.4424 2020/08/12 16:18:28 ryoon Exp $
 
 Changes to the packages collection and infrastructure in 2020:
 
@@ -6915,3 +6915,24 @@ Changes to the packages collection and infrastructure in 2020:
 	Updated filesystems/fuse-ext2 to 0.0.10 [nia 2020-08-11]
 	Updated graphics/ruby-cairo to 1.16.6 [tsutsui 2020-08-11]
 	Updated multimedia/adobe-flash-player to 32.0.0.414 [tsutsui 2020-08-11]
+	Updated www/nginx-devel to 1.19.2 [adam 2020-08-12]
+	Updated lang/nodejs to 14.8.0 [adam 2020-08-12]
+	Updated databases/openldap to 2.4.51 [adam 2020-08-12]
+	Updated databases/lmdb to 0.9.26 [adam 2020-08-12]
+	Updated devel/mdds to 1.6.0 [ryoon 2020-08-12]
+	Updated misc/libreoffice to 7.0.0.3 [ryoon 2020-08-12]
+	Updated devel/nspr to 4.27 [ryoon 2020-08-12]
+	Updated lang/openjdk11 to 1.11.0.8.10 [ryoon 2020-08-12]
+	Updated net/minitube to 3.5 [ryoon 2020-08-12]
+	Updated time/todotxt to 2.12.0 [leot 2020-08-12]
+	Updated security/lasso to 2.6.1 [manu 2020-08-12]
+	Added editors/emacs27 version 27.1 [ryoon 2020-08-12]
+	Added editors/emacs27-nox11 version 27.1 [ryoon 2020-08-12]
+	Updated mail/dovecot2 to 2.3.11.3 [taca 2020-08-12]
+	Updated mail/dovecot2-gssapi to 2.3.11.3 [taca 2020-08-12]
+	Updated mail/dovecot2-ldap to 2.3.11.3 [taca 2020-08-12]
+	Updated mail/dovecot2-mysql to 2.3.11.3 [taca 2020-08-12]
+	Updated mail/dovecot2-pgsql to 2.3.11.3 [taca 2020-08-12]
+	Updated mail/dovecot2-sqlite to 2.3.11.3 [taca 2020-08-12]
+	Updated mail/dovecot2-pigeonhole to 0.5.11 [taca 2020-08-12]
+	Updated net/nsd to 4.3.2 [ryoon 2020-08-12]
