@@ -18,6 +18,12 @@ post-install:
 	${LN} -f -s ${QTPREFIX}/lib/pkgconfig/${i} ${i}
 .endfor
 
+PLIST_VARS+=		dbus
+.include "../../x11/qt5-qtbase/buildlink3.mk"
+.if ${PKG_BUILD_OPTIONS.qt5-qtbase:Mdbus}
+PLIST.dbus=		yes
+.endif
+
 .include "../../x11/qt5-qtdeclarative/buildlink3.mk"
 .include "../../x11/qt5-qtsvg/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
