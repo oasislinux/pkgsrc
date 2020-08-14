@@ -23,7 +23,7 @@ REPLACE_AWK=		tbl2mim.awk
 
 .include "../../mk/bsd.prefs.mk"
 
-.if ${OPSYS} != "Linux"
+.if empty(GLIBC_VERSION)
 GLIBC=			glibc-2.3.6
 DISTFILES=		${DEFAULT_DISTFILES} ${GLIBC}.tar.gz
 SITES.${GLIBC}.tar.gz=	${MASTER_SITE_GNU:=glibc/}
