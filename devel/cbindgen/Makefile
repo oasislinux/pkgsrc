@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.17 2020/07/31 01:20:43 maya Exp $
+# $NetBSD: Makefile,v 1.19 2020/08/14 20:50:21 tnn Exp $
 
 DISTNAME=	cbindgen-0.14.3
 CATEGORIES=	devel
@@ -48,9 +48,6 @@ CARGO_CRATE_DEPENDS+=	winapi-i686-pc-windows-gnu-0.4.0
 CARGO_CRATE_DEPENDS+=	winapi-x86_64-pc-windows-gnu-0.4.0
 
 INSTALLATION_DIRS=	bin
-
-do-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${PREFIX}/bin/cargo build --locked --frozen --release -j${_MAKE_JOBS_N}
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/target/release/cbindgen ${DESTDIR}${PREFIX}/bin
