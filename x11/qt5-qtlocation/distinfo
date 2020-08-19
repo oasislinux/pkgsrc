@@ -4,5 +4,5 @@ SHA1 (qtlocation-everywhere-src-5.15.0.tar.xz) = 662ddf62ac76d1d11c1356a969bdb9f
 RMD160 (qtlocation-everywhere-src-5.15.0.tar.xz) = e04013e9ffa13a608a0e9ce21bd53bf92e052f7f
 SHA512 (qtlocation-everywhere-src-5.15.0.tar.xz) = 36efb5a9a0eaaa6f2997c4d7a18307c69a80ae4caf901ab1d0efcc6cd6202dda6a10c8dac01baee44e84c14b8ab23204db1085445e1f3b42e9a0a21549eb624e
 Size (qtlocation-everywhere-src-5.15.0.tar.xz) = 6542152 bytes
-SHA1 (patch-src_3rdparty_mapbox-gl-native_platform_default_thread.cpp) = 4d0039eddcb01a0986806e5d129532825b0f7a6f
+SHA1 (patch-src_3rdparty_mapbox-gl-native_platform_default_thread.cpp) = 2bb8e3769d0de0b18f8378e55dd9d8434e7e6000
 SHA1 (patch-src_location_configure.json) = 75d7280e8ff3cbc8b03dc776e2c4da5cdeac183e
