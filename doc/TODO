@@ -1,4 +1,4 @@
-$NetBSD: TODO,v 1.19997 2020/08/13 15:29:56 taca Exp $
+$NetBSD: TODO,v 1.20002 2020/08/18 04:41:02 tnn Exp $
 
 Suggested new packages
 ======================
@@ -368,8 +368,18 @@ Suggested new packages
 
 Suggested package updates
 =========================
-For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 
+	o ImageMagick-7.0.10.27
+	o hiredis-1.0.0
+	o ilmbase-2.5.3
+	o khal-0.10.2
+	o khard-0.17.0
+	o openexr-2.5.3
+	o poppler-20.08.0
+	o protobuf-3.13.0
+	o py-google-api-core-1.22.1
+	o py-parso-0.8.0
+	o py-test-cov-2.10.1
 	o rebar-3.13.2
 	o Chinput-3.0.1
 	o DarwinStreamingServer-6.0.3
@@ -426,7 +436,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o ap22-authnz-external-3.3.2
 	o ap22-limitipconn-0.24
 	o ap22-vhost-ldap-2.4.0
-	o apache24-2.4.46
 	o apollo-1.7
 	o argtable-2.9
 	o argus-20121202
@@ -438,7 +447,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o aspell-nb-2.0.10
 	o asterisk13-13.21.1
 	o autoconvert-0.3.16
-	o autogen-5.18.16
 	o avant-window-navigator-0.4.2
 	o avidemux-2.6.16
 	o avl-2.0.3 [2.x is not source and binary compatible with 1.x]
@@ -646,7 +654,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o gnu-crypto-2.1.0
 	o gnu-pw-mgr-2.0
 	o gnucap-20130423
-	o gnuradio-3.8.1.0 [in wip]
+	o gnuradio-3.8.1.0 [in wip] [can remove math/py-scipy12 after updating]
 	o gnustep-back-0.27.0
 	o gnustep-base-1.26.0
 	o gnustep-gui-0.24.1
@@ -985,7 +993,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o py-parso-0.8.0
 	o py-ptt-1.10.2
 	o py-rsa-4.6 [drops python-2.x support]
-	o py-setuptools-49.2.1 [drops python-2.x support]
+	o py-setuptools-49.6.0 [drops python-2.x support]
 	o py-setuptools_scm-4.1.2
 	o py-simpletal-5.1
 	o py-sphinx-autoapi-1.4.0
@@ -1106,6 +1114,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o telepathy-mission-control5-5.16.3
 	o tetrinetx-1.40c
 	o tfmxplay-1.1.6
+	o thunderbird-enigmail-2.1.7.1
 	o tig-2.2
 	o tigervnc-1.10.1 [quite unstable]
 	o tightvnc-2.7.10
@@ -1118,6 +1127,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html.
 	o tomboy-1.10.2
 	o top-3.8beta1
 	o topgit-0.8
+	o tor-browser-https-everywhere-2020.8.13
 	o tripwire-2.3.1 [see also pkg/22362]
 	o trojita-0.6
 	o ts-0.7.5

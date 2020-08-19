@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.43 2020/08/01 09:00:31 tnn Exp $
+# $NetBSD: Makefile,v 1.45 2020/08/18 04:36:57 tnn Exp $
 #
 
 COMMENT=	Wireless communication tools and applications
@@ -13,7 +13,6 @@ SUBDIR+=	fldigi
 SUBDIR+=	flxmlrpc
 SUBDIR+=	freedv
 SUBDIR+=	gmfsk
-SUBDIR+=	gnuradio-atsc
 SUBDIR+=	gnuradio-channels
 SUBDIR+=	gnuradio-companion
 SUBDIR+=	gnuradio-core
@@ -21,10 +20,7 @@ SUBDIR+=	gnuradio-ctrlport
 SUBDIR+=	gnuradio-digital
 SUBDIR+=	gnuradio-doxygen
 SUBDIR+=	gnuradio-dtv
-SUBDIR+=	gnuradio-fcd
 SUBDIR+=	gnuradio-fec
-SUBDIR+=	gnuradio-noaa
-SUBDIR+=	gnuradio-pager
 SUBDIR+=	gnuradio-qtgui
 SUBDIR+=	gnuradio-trellis
 SUBDIR+=	gnuradio-uhd
@@ -32,7 +28,6 @@ SUBDIR+=	gnuradio-utils
 SUBDIR+=	gnuradio-video-sdl
 SUBDIR+=	gnuradio-vocoder
 SUBDIR+=	gnuradio-wavelet
-SUBDIR+=	gnuradio-wxgui
 SUBDIR+=	gnuradio-zeromq
 SUBDIR+=	gpredict
 SUBDIR+=	gr-fcdproplus

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.85 2020/05/21 20:53:42 ryoon Exp $
+# $NetBSD: Makefile,v 1.87 2020/08/17 20:18:54 leot Exp $
 #
 
 DISTNAME=		aqsis-1.8.1
-PKGREVISION=		42
+PKGREVISION=		43
 CATEGORIES=		graphics
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=aqsis/}
 
@@ -15,7 +15,7 @@ USE_CMAKE=		yes
 USE_LANGUAGES=		c c++
 USE_TOOLS+=		pkg-config flex bison
 
-BROKEN=			Not valid C++11 code, but dependencies require C++11
+BROKEN=			"Not valid C++11 code, but dependencies require C++11"
 
 LDFLAGS.SunOS=		-lsocket -lnsl
 

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.63 2020/07/30 13:32:33 tnn Exp $
+# $NetBSD: Makefile,v 1.65 2020/08/18 03:44:52 tnn Exp $
 #
 
 DISTNAME=	putty-0.74
+PKGREVISION=	1
 CATEGORIES=	security
 MASTER_SITES=	http://the.earth.li/~sgtatham/putty/${PKGVERSION_NOREV}/
 
@@ -32,7 +33,7 @@ CFLAGS+=	-DBSD_PTYS
 
 LDFLAGS.SunOS+=	-lsocket -lnsl
 CFLAGS.SunOS+=	-DBSD_COMP
-CFLAGS.NetBSD+=	-DHAVE_FUTIMES
+CFLAGS.NetBSD+=	-DHAVE_FUTIMES -DHAVE_NO_SETRESUID
 CFLAGS.Linux+=	-DHAVE_FUTIMES -DHAVE_NO_SETRESUID
 LDFLAGS.Linux+=	-ldl
 

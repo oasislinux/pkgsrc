@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.77 2020/08/15 23:36:38 nia Exp $
+# $NetBSD: Makefile,v 1.80 2020/08/18 17:57:25 leot Exp $
 
 DISTNAME=	libsndfile-1.0.29
+PKGREVISION=	1
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_GITHUB:=erikd/}
 GITHUB_PROJECT=	libsndfile
@@ -18,6 +19,7 @@ USE_LIBTOOL=		yes
 USE_TOOLS+=		autogen autoconf autoreconf automake pkg-config
 PKGCONFIG_OVERRIDE=	sndfile.pc.in
 GNU_CONFIGURE=		yes
+PYTHON_FOR_BUILD_ONLY=	tool
 
 TEST_TARGET=		check
 
@@ -37,6 +39,7 @@ pre-configure:
 .include "../../audio/flac/buildlink3.mk"
 .include "../../audio/libopus/buildlink3.mk"
 .include "../../audio/libvorbis/buildlink3.mk"
+.include "../../lang/python/tool.mk"
 BUILDLINK_API_DEPENDS.libogg+=	libogg>=1.1.3
 .include "../../multimedia/libogg/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

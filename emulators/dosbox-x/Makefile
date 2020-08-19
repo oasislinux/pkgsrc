@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.18 2020/08/08 21:36:38 nia Exp $
+# $NetBSD: Makefile,v 1.20 2020/08/18 17:57:45 leot Exp $
 
 DISTNAME=	dosbox-x-0.83.4
+PKGREVISION=	2
 CATEGORIES=	emulators
 MASTER_SITES=	${MASTER_SITE_GITHUB:=joncampbell123/}
 GITHUB_TAG=	dosbox-x-v${PKGVERSION_NOREV}
