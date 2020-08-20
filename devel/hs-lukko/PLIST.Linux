@@ -1,0 +1,5 @@
+@comment $NetBSD$
+${HS_IMPL}/Lukko/OFD.dyn_hi
+${HS_IMPL}/Lukko/OFD.hi
+${HS_IMPL}/Lukko/OFD.p_hi
+${HS_DOCS}/html/Lukko-OFD.html
