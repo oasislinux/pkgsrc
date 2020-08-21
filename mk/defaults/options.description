@@ -217,6 +217,7 @@ ffmpegthumbnailer	Enable ffmpeg thumbnailing support.
 fftw			Use the fftw library for Discrete Fourier Transforms.
 fftw-fortran		Enable Fortran support.
 filter-design		Adding filter_design capability.
+fido			Enable U2F/FIDO/FIDO2/WebAuthn support.
 finger			Enable finger support.
 flac			Enable FLAC support.
 flambda			Enable Flambda optimisation passes
@@ -597,6 +598,7 @@ nis			Enable Network Information Service / Yellow Pages / YP.
 nls			Use native language support.
 nntp			Enable Network News Transport Protocol (NNTP) support.
 nntpcache-pgp		Enable pgp signed nocem support.
+notmuch			Enable notmuch support for indexing.
 notmuch-emacs		Install emacs support files for notmuch.
 nspluginwrapper		Enable running non native netscape compatible plugins.
 nss			Enable Network Security Services (NSS) support.

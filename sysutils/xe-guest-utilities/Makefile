@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2020/04/25 20:53:02 rillig Exp $
+# $NetBSD: Makefile,v 1.16 2020/08/20 11:31:04 bouyer Exp $
 #
 
 # Values from XenServer 7.0 = 7, 0, 0, 125243
