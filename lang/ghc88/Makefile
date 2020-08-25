@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2020/03/24 20:40:15 joerg Exp $
+# $NetBSD: Makefile,v 1.14 2020/08/24 17:48:51 pho Exp $
 # -----------------------------------------------------------------------------
 # Package metadata
 #
-DISTNAME=	ghc-8.8.1-src
-PKGREVISION=	2
+DISTNAME=	ghc-8.8.4-src
 PKGNAME=	${DISTNAME:S/-src$//}
 CATEGORIES=	lang
 MASTER_SITES=	https://downloads.haskell.org/~ghc/${PKGVERSION_NOREV}/
@@ -50,6 +49,12 @@ USE_TOOLS+=			autoconf gmake perl:run
 GNU_CONFIGURE=			yes
 USE_GNU_CONFIGURE_HOST=		no
 USE_LIBTOOL=			yes
+
+# TODO: Disable the splitter entirely so that we can drop the runtime
+# dependency on perl. The purpose of the splitter is to perform a dead
+# code elimination by breaking .o files into many pieces. This only
+# makes sense when linking executables statically, which is rarely
+# done these days.
 
 
 # -----------------------------------------------------------------------------
@@ -101,12 +106,13 @@ CONFIGURE_ENV+= \
 # The runtime system of GHC (rts) tends to conflict with PaX MPROTECT
 # because it needs to generate various kinds of code at run time. The
 # RTS linker, whose job is to load *static* objects at run time,
-# doesn't play nice with ASLR either. This means most executables
-# produced by GHC need them to be disabled. Perhaps we should patch
-# rts/sm/Storage.c so that it uses ffi_closure_alloc(3) on every
-# platform, not just Linux, and also drop support for static library
-# loading and switch to dynamic libraries entirely.
-# (Partially done: https://gitlab.haskell.org/ghc/ghc/merge_requests/2498)
+# doesn't play nice with ASLR either because it relies on
+# mmap(MAP_FIXED). This means most executables produced by GHC need
+# them to be disabled. Perhaps we should patch rts/sm/Storage.c so
+# that it uses ffi_closure_alloc(3) on every platform, not just Linux,
+# and also drop support for static library loading and switch to
+# dynamic libraries entirely.  (Partially done:
+# https://gitlab.haskell.org/ghc/ghc/merge_requests/2498)
 .for f in ghc ghc-iserv ghc-iserv-dyn ghc-iserv-prof ghc-pkg haddock hpc hsc2hs runghc
 NOT_PAX_MPROTECT_SAFE+=	lib/${PKGNAME_NOREV}/bin/${f}
 NOT_PAX_ASLR_SAFE+=	lib/${PKGNAME_NOREV}/bin/${f}
