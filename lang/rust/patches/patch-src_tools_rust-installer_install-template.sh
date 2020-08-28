@@ -2,9 +2,8 @@ $NetBSD: patch-src_tools_rust-installer_install-template.sh,v 1.3 2018/11/27 15:
 
 No logging to 'install.log'.
 Do not create 'uninstall.sh'.
-Remove non-standard tr(1) escapes (https://github.com/rust-lang/rust-installer/pull/99).
 
---- src/tools/rust-installer/install-template.sh.orig	Mon Dec 16 15:38:31 2019
+--- src/tools/rust-installer/install-template.sh.orig	2018-11-07 03:23:50.000000000 +0000
 +++ src/tools/rust-installer/install-template.sh
 @@ -15,20 +15,12 @@ set -u
  init_logging() {
@@ -27,16 +26,7 @@ Remove non-standard tr(1) escapes (https://github.com/rust-lang/rust-installer/p
  }
  
  msg() {
-@@ -169,7 +161,7 @@ valopt() {
-     local doc="$*"
-     if [ $HELP -eq 0 ]
-     then
--        local uop=$(echo $op | tr '[:lower:]' '[:upper:]' | tr '\-' '\_')
-+        local uop=$(echo $op | tr 'a-z-' 'A-Z_')
-         local v="CFG_${uop}"
-         eval $v="$default"
-         for arg in $CFG_ARGS
-@@ -972,7 +964,6 @@ write_to_file "$TEMPLATE_RUST_INSTALLER_VERSION" "$abs
+@@ -972,7 +964,6 @@ write_to_file "$TEMPLATE_RUST_INSTALLER_
  critical_need_ok "failed to write installer version"
  
  # Install the uninstaller

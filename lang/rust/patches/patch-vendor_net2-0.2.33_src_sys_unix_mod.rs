@@ -2,8 +2,8 @@ $NetBSD: patch-vendor_net2_src_sys_unix_mod.rs,v 1.1 2020/07/08 14:46:14 jperkin
 
 Support illumos.
 
---- vendor/net2/src/sys/unix/mod.rs.orig	2020-06-01 17:45:25.000000000 +0000
-+++ vendor/net2/src/sys/unix/mod.rs
+--- vendor/net2-0.2.33/src/sys/unix/mod.rs.orig	2020-06-01 17:45:25.000000000 +0000
++++ vendor/net2-0.2.33/src/sys/unix/mod.rs
 @@ -14,7 +14,7 @@ use std::mem;
  use std::net::{TcpListener, TcpStream, UdpSocket};
  use std::os::unix::io::FromRawFd;

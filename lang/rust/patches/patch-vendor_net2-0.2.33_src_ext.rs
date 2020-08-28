@@ -2,8 +2,8 @@ $NetBSD: patch-vendor_net2_src_ext.rs,v 1.1 2020/07/08 14:46:14 jperkin Exp $
 
 Support illumos.
 
---- vendor/net2/src/ext.rs.orig	2020-06-01 17:45:25.000000000 +0000
-+++ vendor/net2/src/ext.rs
+--- vendor/net2-0.2.33/src/ext.rs.orig	2020-06-01 17:45:25.000000000 +0000
++++ vendor/net2-0.2.33/src/ext.rs
 @@ -28,6 +28,7 @@ cfg_if! {
                   target_os = "netbsd",
                   target_os = "openbsd",

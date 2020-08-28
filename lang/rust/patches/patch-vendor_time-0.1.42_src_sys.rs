@@ -2,14 +2,14 @@ $NetBSD: patch-vendor_time_src_sys.rs,v 1.1 2020/07/08 14:46:14 jperkin Exp $
 
 Support illumos.
 
---- vendor/time/src/sys.rs.orig	2020-06-01 17:45:25.000000000 +0000
-+++ vendor/time/src/sys.rs
+--- vendor/time-0.1.42/src/sys.rs.orig	2020-08-24 15:28:58.000000000 +0000
++++ vendor/time-0.1.42/src/sys.rs
 @@ -359,7 +359,7 @@ mod inner {
      #[cfg(all(not(target_os = "macos"), not(target_os = "ios")))]
      pub use self::unix::*;
  
 -    #[cfg(target_os = "solaris")]
-+    #[cfg(any(target_os = "solaris", target_os = "illumos"))]
++    #[cfg(any(target_os = "illumos", target_os = "solaris"))]
      extern {
          static timezone: time_t;
          static altzone: time_t;
@@ -18,7 +18,7 @@ Support illumos.
      }
  
 -    #[cfg(any(target_os = "nacl", target_os = "solaris"))]
-+    #[cfg(any(target_os = "nacl", target_os = "solaris", target_os = "illumos"))]
++    #[cfg(any(target_os = "nacl", target_os = "illumos", target_os = "solaris"))]
      unsafe fn timegm(tm: *mut libc::tm) -> time_t {
          use std::env::{set_var, var_os, remove_var};
          extern {
@@ -27,7 +27,7 @@ Support illumos.
                  panic!("localtime_r failed: {}", io::Error::last_os_error());
              }
 -            #[cfg(target_os = "solaris")]
-+            #[cfg(any(target_os = "solaris", target_os = "illumos"))]
++            #[cfg(any(target_os = "illumos", target_os = "solaris"))]
              let gmtoff = {
                  ::tzset();
                  // < 0 means we don't know; assume we're not in DST.
@@ -36,7 +36,7 @@ Support illumos.
                  }
              };
 -            #[cfg(not(target_os = "solaris"))]
-+            #[cfg(not(any(target_os = "solaris", target_os = "illumos")))]
++            #[cfg(not(any(target_os = "illumos", target_os = "solaris")))]
              let gmtoff = out.tm_gmtoff;
              tm_to_rust_tm(&out, gmtoff as i32, tm);
          }
@@ -45,7 +45,7 @@ Support illumos.
          #[cfg(all(target_os = "android", target_pointer_width = "32"))]
          use libc::timegm64 as timegm;
 -        #[cfg(not(any(all(target_os = "android", target_pointer_width = "32"), target_os = "nacl", target_os = "solaris")))]
-+        #[cfg(not(any(all(target_os = "android", target_pointer_width = "32"), target_os = "nacl", target_os = "solaris", target_os = "illumos")))]
++        #[cfg(not(any(all(target_os = "android", target_pointer_width = "32"), target_os = "nacl", target_os = "illumos", target_os = "solaris")))]
          use libc::timegm;
  
          let mut tm = unsafe { mem::zeroed() };
