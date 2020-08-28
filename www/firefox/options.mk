@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.57 2020/08/04 14:00:03 tnn Exp $
+# $NetBSD: options.mk,v 1.58 2020/08/26 10:27:40 wiz Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.firefox
 

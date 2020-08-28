@@ -1,4 +1,4 @@
-$NetBSD: TODO,v 1.20033 2020/08/25 14:40:28 wiz Exp $
+$NetBSD: TODO,v 1.20037 2020/08/27 13:07:39 jperkin Exp $
 
 Suggested new packages
 ======================
@@ -305,10 +305,6 @@ Suggested new packages
 	Shotcut [pkgsrc-wip]
 	https://www.shotcut.org/
 	MLT-based video editor
-
-	luakit [pkgsrc-wip]
-	https://luakit.github.io/
-	Webkit based browser extensible with Lua
 
 	Aquaria [pkgsrc-wip]
 	https://github.com/AquariaOSE/Aquaria
@@ -655,7 +651,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o gourmet-0.13.3
 	o gperiodic-3.0.2
 	o gps-6.1.1
-	o grafana-7.0.2
 	o gramofile-1.6P
 	o grantlee-5.0.0
 	o greed-4.1
@@ -854,6 +849,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o nant-0.92
 	o nap-1.5.3
 	o nas-auscope-1.9.4
+	o nedit-5.7
 	o netbt-hcidump-5.37
 	o netramet-50
 	o newmail-1.0.2
@@ -966,7 +962,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o py-Scientific-doc-2.5.5
 	o py-cairo-1.19.1 [drops python-2.x support]
 	o py-cassa-1.11.0
-	o py-certbot-1.7.0
 	o py-configparser-5.0.0 [drops python-2.x support]
 	o py-ephem3-3.7.6.0
 	o py-hgview-1.9.0
