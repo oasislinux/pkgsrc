@@ -173,10 +173,11 @@ DISTFILES:=		${DISTFILES} ${RUST_STAGE0} ${RUST_STD_STAGE0}
 pre-build-fix:
 .endif
 .if !empty(MACHINE_PLATFORM:MLinux-*-x86_64) || make(distinfo) || make (makesum) || make(mdi)
-RUST_STAGE0_VER=	1.44.1
 .  if !empty(GLIBC_VERSION)
+RUST_STAGE0_VER=	1.44.1
 RUST_ARCH:=		x86_64-unknown-linux-gnu
 .  else
+RUST_STAGE0_VER=	1.45.2
 RUST_ARCH:=		x86_64-unknown-linux-musl
 CONFIGURE_ARGS+=	--build=$(RUST_ARCH)
 CONFIGURE_ARGS+=	--set=target.$(RUST_ARCH).crt-static=false
