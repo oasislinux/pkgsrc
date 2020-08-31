@@ -1,4 +1,4 @@
-$NetBSD: TODO,v 1.20038 2020/08/28 17:09:25 wiz Exp $
+$NetBSD: TODO,v 1.20041 2020/08/30 21:37:51 tnn Exp $
 
 Suggested new packages
 ======================
@@ -452,6 +452,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o borgbackup-1.1.8
 	o bos-2.5
 	o bottlerocket-0.05b3
+	o brotli-1.0.9
 	o bzr-explorer-1.3.0
 	o bzr-gtk-0.103.0
 	o bzr-svn-1.2.2
@@ -465,6 +466,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o calibre-4.23.0
 	o calligra-3.0.1 [in wip; koffice successor]
 	o cardboard-schedule-1.14c [at http://www.bright-green.com/downloads/]
+	o cascadia-ttf-2008.25
 	o catdoc-1.1
 	o catdoc-tk-1.1
 	o cddbd-1.5.2
@@ -638,7 +640,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o gnu-crypto-2.1.0
 	o gnu-pw-mgr-2.0
 	o gnucap-20130423
-	o gnuradio-3.8.1.0 [in wip] [can remove math/py-scipy12 after updating]
 	o gnustep-back-0.27.0
 	o gnustep-base-1.26.0
 	o gnustep-gui-0.24.1
@@ -774,7 +775,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o libquantum-1.1.0 [pkg/43728, development release]
 	o libressl-3.2.0
 	o libtecla-1.6.3
-	o libv4l-0.8.5
 	o libvirt-2.3
 	o libwnck3-3.32.0
 	o lincvs-2.1.4 [now called CrossVC]
@@ -965,6 +965,8 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o py-cassa-1.11.0
 	o py-configparser-5.0.0 [drops python-2.x support]
 	o py-ephem3-3.7.6.0
+	o py-google-api-python-client-1.11.0
+	o py-google-auth-1.21.0
 	o py-hgview-1.9.0
 	o py-input-pad-1.4.2
 	o py-keybinder-0.3.1
@@ -983,6 +985,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o qbzr-0.23.2
 	o qdirstat-1.7
 	o qlandkartegt-1.8.1 [pkg/53376]
+	o qrencode-4.1.0
 	o qt4-creator-3.4.0
 	o racket-7.1
 	o radiance-4R1
