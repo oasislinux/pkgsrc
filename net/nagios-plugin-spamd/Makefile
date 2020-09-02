@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.17 2020/03/02 17:07:58 gdt Exp $
+# $NetBSD: Makefile,v 1.19 2020/09/01 08:01:25 wiz Exp $
 
 DISTNAME=	check_spamd-1.6.0
 PKGNAME=	nagios-plugin-${DISTNAME:S/check_//1}
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	net mail
 MASTER_SITES=	# http://exchange.nagios.org/components/com_mtree/
 EXTRACT_SUFX=	.pl
@@ -13,7 +13,7 @@ COMMENT=	Nagios plugin for monitoring the SpamAssassin daemon
 LICENSE=	gnu-gpl-v3
 
 DEPENDS+=		nagios-plugins-[0-9]*:../../net/nagios-plugins
-DEPENDS+=		p5-Time-HiRes-[0-9]*:../../time/p5-Time-HiRes
+#DEPENDS+=		p5-Time-HiRes-[0-9]*:../../time/p5-Time-HiRes
 DEPENDS+=		p5-Switch-[0-9]*:../../lang/p5-Switch
 DEPENDS+=		spamassassin-[0-9]*:../../mail/spamassassin
 

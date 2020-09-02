@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.52 2020/08/25 16:42:21 gdt Exp $
+# $NetBSD: Makefile,v 1.54 2020/09/01 00:48:01 gdt Exp $
 
 VERSION=	1.29.0
 # Sometimes the distfile unpacks to ZoneMinder and sometimes zoneminder.
 NAME_DIST=	ZoneMinder
 NAME_LOWER=	zoneminder
-PKGREVISION=	2
+PKGREVISION=	4
 
 PKGNAME=	${DISTNAME:S/${NAME_DIST}-/${NAME_LOWER}-/}
 DISTNAME=	${NAME_DIST}-${VERSION}
@@ -182,15 +182,11 @@ REPLACE_PERL+=	scripts/zmx10.pl.in
 
 CHECK_INTERPRETER_SKIP+=	bin/zmsystemctl.pl
 
-#EXTRA_PERL+=			scripts/zmsystemctl.pl.in
-
-# \todo: Re-enable this, because it seems ok.
-#SUBST_CLASSES+=			systemd-perl
-#SUBST_MESSAGE.systemd-perl=	Adjusting systemd pkexec perl.
-#SUBST_STAGE.systemd-perl=	pre-configure
-#SUBST_FILES.systemd-perl=	scripts/zmsystemctl.pl.in
-#SUBST_SED.systemd-perl=		-e 's|/usr/bin/perl|${PERL5}|g'
-
+SUBST_CLASSES+=			systemd-perl
+SUBST_MESSAGE.systemd-perl=	Adjusting systemd pkexec perl.
+SUBST_STAGE.systemd-perl=	pre-configure
+SUBST_FILES.systemd-perl=	scripts/zmsystemctl.pl.in
+SUBST_SED.systemd-perl=		-e 's|/usr/bin/perl|${PERL5}|g'
 
 SUBST_CLASSES+=			dbpaths-path
 SUBST_MESSAGE.dbpaths-path=	Adjusting default paths in configuration.
