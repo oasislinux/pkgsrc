@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.28 2020/08/31 18:08:07 wiz Exp $
+# $NetBSD: Makefile,v 1.30 2020/09/04 12:22:53 wiz Exp $
 
 DISTNAME=	Git-CPAN-Patch-2.3.4
 PKGNAME=	p5-${DISTNAME}

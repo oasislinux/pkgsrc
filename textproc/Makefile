@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1165 2020/08/13 20:52:08 scole Exp $
+# $NetBSD: Makefile,v 1.1169 2020/09/04 13:49:25 wiz Exp $
 #
 
 COMMENT=	Text processing utilities (does not include desktop publishing)
@@ -530,7 +530,6 @@ SUBDIR+=	p5-Cz-Cstools
 SUBDIR+=	p5-Data-FormValidator
 SUBDIR+=	p5-Data-HexDump
 SUBDIR+=	p5-Dist-Zilla-Plugin-PodWeaver
-SUBDIR+=	p5-Encode
 SUBDIR+=	p5-Encode-Detect
 SUBDIR+=	p5-Encode-EUCJPASCII
 SUBDIR+=	p5-Encode-HanExtra
@@ -586,13 +585,11 @@ SUBDIR+=	p5-Pod-Coverage
 SUBDIR+=	p5-Pod-Coverage-TrustPod
 SUBDIR+=	p5-Pod-Elemental
 SUBDIR+=	p5-Pod-Elemental-PerlMunger
-SUBDIR+=	p5-Pod-Escapes
 SUBDIR+=	p5-Pod-Eventual
 SUBDIR+=	p5-Pod-Markdown
 SUBDIR+=	p5-Pod-POM
 SUBDIR+=	p5-Pod-Parser
 SUBDIR+=	p5-Pod-Readme
-SUBDIR+=	p5-Pod-Simple
 SUBDIR+=	p5-Pod-Spell
 SUBDIR+=	p5-Pod-Spell-CommonMistakes
 SUBDIR+=	p5-Pod-Strip
@@ -687,7 +684,6 @@ SUBDIR+=	p5-Text-SimpleTable-AutoWidth
 SUBDIR+=	p5-Text-Soundex
 SUBDIR+=	p5-Text-SpellChecker
 SUBDIR+=	p5-Text-Table
-SUBDIR+=	p5-Text-Tabs+Wrap
 SUBDIR+=	p5-Text-TabularDisplay
 SUBDIR+=	p5-Text-Template
 SUBDIR+=	p5-Text-Textile

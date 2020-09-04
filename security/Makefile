@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.778 2020/09/01 04:06:46 wiz Exp $
+# $NetBSD: Makefile,v 1.781 2020/09/04 11:10:02 wiz Exp $
 #
 
 COMMENT=	Security tools
@@ -317,7 +317,6 @@ SUBDIR+=	p5-CryptX
 SUBDIR+=	p5-Dancer-Plugin-Auth-RBAC
 SUBDIR+=	p5-Data-Password-passwdqc
 SUBDIR+=	p5-Data-SimplePassword
-SUBDIR+=	p5-Digest
 SUBDIR+=	p5-Digest-BubbleBabble
 SUBDIR+=	p5-Digest-CRC
 SUBDIR+=	p5-Digest-HMAC
@@ -325,11 +324,9 @@ SUBDIR+=	p5-Digest-Hashcash
 SUBDIR+=	p5-Digest-JHash
 SUBDIR+=	p5-Digest-MD2
 SUBDIR+=	p5-Digest-MD4
-SUBDIR+=	p5-Digest-MD5
 SUBDIR+=	p5-Digest-MD5-File
 SUBDIR+=	p5-Digest-Nilsimsa
 SUBDIR+=	p5-Digest-Perl-MD5
-SUBDIR+=	p5-Digest-SHA
 SUBDIR+=	p5-Digest-SHA1
 SUBDIR+=	p5-Digest-SHA3
 SUBDIR+=	p5-File-KeePass

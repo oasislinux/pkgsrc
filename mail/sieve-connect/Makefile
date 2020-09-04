@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.3 2020/08/31 18:10:09 wiz Exp $
-#
+# $NetBSD: Makefile,v 1.5 2020/09/04 13:35:41 wiz Exp $
 
 DISTNAME=		sieve-connect-0.89
-PKGREVISION=		2
+PKGREVISION=		4
 CATEGORIES=		mail
 MASTER_SITES=		https://people.spodhuis.org/phil.pennock/software/
 EXTRACT_SUFX=		.tar.bz2
@@ -23,11 +22,9 @@ DEPENDS+=		p5-Authen-SASL-[0-9]*:../../security/p5-Authen-SASL
 DEPENDS+=		p5-IO-Socket-INET6-[0-9]*:../../net/p5-IO-Socket-INET6
 DEPENDS+=		p5-IO-Socket-SSL>=1.14:../../security/p5-IO-Socket-SSL
 DEPENDS+=		p5-Net-DNS-[0-9]*:../../net/p5-Net-DNS
-DEPENDS+=		p5-Pod-Usage-[0-9]*:../../devel/p5-Pod-Usage
 
 # optional
 DEPENDS+=		p5-Term-ReadKey-[0-9]*:../../devel/p5-Term-ReadKey
-DEPENDS+=		p5-Term-ReadLine-[0-9]*:../../devel/p5-Term-ReadLine
 #DEPENDS+=		p5-Mozilla-PublicSuffix-[0-9]*:../../???/p5-Mozilla-PublicSuffix
 #DEPENDS+=		p5-Term-ReadLine-Gnu-[0-9]*:../../???/p5-Term-ReadLine-Gnu
 

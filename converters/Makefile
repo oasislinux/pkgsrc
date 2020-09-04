@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.177 2020/07/08 15:10:38 nia Exp $
+# $NetBSD: Makefile,v 1.181 2020/09/04 14:09:45 wiz Exp $
 #
 
 COMMENT=	Document format and character code converters
@@ -79,26 +79,22 @@ SUBDIR+=	p5-Data-Hexify
 SUBDIR+=	p5-JSON
 SUBDIR+=	p5-JSON-Any
 SUBDIR+=	p5-JSON-MaybeXS
-SUBDIR+=	p5-JSON-PP
 SUBDIR+=	p5-JSON-XS
 SUBDIR+=	p5-JSON-XS-VersionOneAndTwo
 SUBDIR+=	p5-Jcode
 SUBDIR+=	p5-MARC-Charset
 SUBDIR+=	p5-MARC-Crosswalk-DublinCore
 SUBDIR+=	p5-MIME-Base32
-SUBDIR+=	p5-MIME-Base64
 SUBDIR+=	p5-MIME-Base64-URLSafe
 SUBDIR+=	p5-Sereal
 SUBDIR+=	p5-Sereal-Decoder
 SUBDIR+=	p5-Sereal-Encoder
 SUBDIR+=	p5-Text-Iconv
-SUBDIR+=	p5-Unicode-Collate
 SUBDIR+=	p5-Unicode-EastAsianWidth
 SUBDIR+=	p5-Unicode-IMAPUtf7
 SUBDIR+=	p5-Unicode-Map
 SUBDIR+=	p5-Unicode-Map8
 SUBDIR+=	p5-Unicode-MapUTF8
-SUBDIR+=	p5-Unicode-Normalize
 SUBDIR+=	p5-Unicode-String
 SUBDIR+=	p5-Unicode-UTF8simple
 SUBDIR+=	p5-chkjis

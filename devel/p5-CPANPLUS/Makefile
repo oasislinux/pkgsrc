@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.25 2020/08/31 18:07:33 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2020/09/04 12:22:53 wiz Exp $
 
 DISTNAME=	CPANPLUS-0.9908
 PKGNAME=	p5-${DISTNAME}
