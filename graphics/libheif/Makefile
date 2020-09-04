@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1 2020/08/31 17:24:12 ryoon Exp $
+# $NetBSD: Makefile,v 1.3 2020/09/03 19:07:59 otis Exp $
 
 DISTNAME=	libheif-1.8.0
 CATEGORIES=	graphics
@@ -13,7 +13,7 @@ LICENSE=	gnu-lgpl-v3
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
-USE_TOOLS+=	pkg-config
+USE_TOOLS+=	pkg-config gmake
 USE_LANGUAGES=	c c++
 
 PKGCONFIG_OVERRIDE+=	libheif.pc.in
