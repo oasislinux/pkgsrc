@@ -3,6 +3,7 @@ $NetBSD: distinfo,v 1.28 2021/10/26 11:17:15 nia Exp $
 BLAKE2s (libssh-0.9.6.tar.xz) = 4b9a7c963614715ffa514dee686cb4867fb8f984058e2ae28386347c15d232cd
 SHA512 (libssh-0.9.6.tar.xz) = 4040ec4af937e95be2e41313ef6d4db60b46b8d4dea10c09402398127c1d1ca8843392d207088aeee3c7ef631c6ae7b66861327dcebf78ed3af0723777619fd1
 Size (libssh-0.9.6.tar.xz) = 1053056 bytes
+SHA1 (patch-CMakeLists.txt) = c3181ee11415f346811515330bbfa0beda65ed16
 SHA1 (patch-CompilerChecks.cmake) = 77b93572006132c557cb9a57698e8455f7874073
 SHA1 (patch-examples_sshd__direct-tcpip.c) = 62de8625d58dbc03c38b0eb23f6e7f20a46e91de
 SHA1 (patch-tests_CMakeLists.txt) = 61d9e21d612545766b00f577b3d342eb20a0a9a5
