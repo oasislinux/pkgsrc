@@ -1,4 +1,4 @@
-$NetBSD: CHANGES-2020,v 1.4803 2020/09/04 20:35:23 js Exp $
+$NetBSD: CHANGES-2020,v 1.4816 2020/09/05 18:04:35 scole Exp $
 
 Changes to the packages collection and infrastructure in 2020:
 
@@ -7397,3 +7397,16 @@ Changes to the packages collection and infrastructure in 2020:
 	Updated cad/py-gds to 1.6 [mef 2020-09-04]
 	Updated www/badwolf to 1.0.3 [pin 2020-09-04]
 	Added chat/matrix-synapse version 1.19.1 [js 2020-09-04]
+	Updated audio/py-music21 to 6.1.0nb1 [gutteridge 2020-09-05]
+	Updated devel/py-ruamel-yaml-clib to 0.2.2 [wiz 2020-09-05]
+	Updated devel/py-ruamel-yaml to 0.16.12 [wiz 2020-09-05]
+	Updated print/p5-LaTeX-Driver to 1.1.1 [wiz 2020-09-05]
+	Updated devel/py-setuptools to 50.2.0 [ryoon 2020-09-05]
+	Updated www/firefox to 80.0.1nb1 [ryoon 2020-09-05]
+	Updated security/gnupg2 to 2.2.23 [js 2020-09-05]
+	Updated math/libnumbertext to 1.0.6 [ryoon 2020-09-05]
+	Updated misc/libreoffice to 7.0.1.2 [ryoon 2020-09-05]
+	Updated parallel/threadingbuildingblocks to 2020.3 [ryoon 2020-09-05]
+	Updated graphics/blender to 2.90.0 [ryoon 2020-09-05]
+	Added graphics/blender-lts version 2.83.5 [ryoon 2020-09-05]
+	Updated textproc/split-thai to 0.9 [scole 2020-09-05]

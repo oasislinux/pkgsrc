@@ -1,4 +1,4 @@
-$NetBSD: patch-source_blender_blenlib_BLI__sys__types.h,v 1.2 2020/06/09 10:34:26 ryoon Exp $
+$NetBSD: patch-source_blender_blenlib_BLI__sys__types.h,v 1.1 2020/09/05 11:46:40 ryoon Exp $
 
 NetBSD also does not have uchar.h.
 

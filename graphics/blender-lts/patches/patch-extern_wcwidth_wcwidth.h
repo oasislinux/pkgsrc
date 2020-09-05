@@ -1,4 +1,4 @@
-$NetBSD: patch-extern_wcwidth_wcwidth.h,v 1.1 2020/02/21 16:36:54 nia Exp $
+$NetBSD: patch-extern_wcwidth_wcwidth.h,v 1.1 2020/09/05 11:46:40 ryoon Exp $
 
 NetBSD also does not have uchar.h.
 
