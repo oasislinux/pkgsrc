@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3227 2020/09/06 11:54:55 wiz Exp $
+# $NetBSD: Makefile,v 1.3230 2020/09/07 11:19:45 wiz Exp $
 #
 
 COMMENT=	Development utilities
@@ -1548,6 +1548,7 @@ SUBDIR+=	p5-MetaCPAN-API
 SUBDIR+=	p5-MetaCPAN-Client
 SUBDIR+=	p5-Method-Signatures
 SUBDIR+=	p5-Method-Signatures-Simple
+SUBDIR+=	p5-Metrics-Any
 SUBDIR+=	p5-Mixin-ExtraFields
 SUBDIR+=	p5-Mixin-ExtraFields-Param
 SUBDIR+=	p5-Mixin-Linewise
@@ -1914,6 +1915,7 @@ SUBDIR+=	p5-Test-Log4perl
 SUBDIR+=	p5-Test-LongString
 SUBDIR+=	p5-Test-Manifest
 SUBDIR+=	p5-Test-Memory-Cycle
+SUBDIR+=	p5-Test-Metrics-Any
 SUBDIR+=	p5-Test-MinimumVersion
 SUBDIR+=	p5-Test-Mock-LWP
 SUBDIR+=	p5-Test-MockModule
@@ -2035,6 +2037,7 @@ SUBDIR+=	p5-pango
 SUBDIR+=	p5-perl-headers
 SUBDIR+=	p5-pip
 SUBDIR+=	p5-prefork
+SUBDIR+=	p5-rlib
 SUBDIR+=	p5-signatures
 SUBDIR+=	p5-strictures
 SUBDIR+=	p5-subversion
