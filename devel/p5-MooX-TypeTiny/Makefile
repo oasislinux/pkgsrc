@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.4 2020/09/07 09:35:21 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2020/09/08 13:16:37 wiz Exp $
 
 DISTNAME=	MooX-TypeTiny-0.002003
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	devel
-MASTER_SITES=	https://cpan.metacpan.org/authors/id/H/HA/HAARG/
+MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/H/HA/HAARG/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	https://cpan.metacpan.org/authors/id/H/HA/HAARG/
+HOMEPAGE=	https://metacpan.org/pod/MooX::TypeTiny
 COMMENT=	Optimized type checks for Moo + Type::Tiny
 LICENSE=	${PERL5_LICENSE}
 

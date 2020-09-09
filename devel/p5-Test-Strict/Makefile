@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.4 2020/09/04 11:32:25 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2020/09/08 13:16:40 wiz Exp $
 
 DISTNAME=	Test-Strict-0.52
 PKGNAME=	p5-${DISTNAME}
 PKGREVISION=	1
 CATEGORIES=	devel
-MASTER_SITES=	https://cpan.metacpan.org/authors/id/M/MA/MANWAR/
+MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/M/MA/MANWAR/}
 
 MAINTAINER=	pkgsrc-users@pkgsrc.org
-HOMEPAGE=	https://cpan.metacpan.org/authors/id/M/MA/MANWAR/
+HOMEPAGE=	https://metacpan.org/pod/Test::Strict
 COMMENT=	Check syntax, presence of use strict; and test coverage
 LICENSE=	${PERL5_LICENSE}
 
