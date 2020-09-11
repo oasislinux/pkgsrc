@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3237 2020/09/08 12:43:03 wiz Exp $
+# $NetBSD: Makefile,v 1.3244 2020/09/10 16:50:13 taca Exp $
 #
 
 COMMENT=	Development utilities
@@ -2279,8 +2279,10 @@ SUBDIR+=	py-game
 SUBDIR+=	py-gcovr
 SUBDIR+=	py-generate
 SUBDIR+=	py-gflags
+SUBDIR+=	py-gitdb
 SUBDIR+=	py-gitinspector
 SUBDIR+=	py-gitinspector-devel
+SUBDIR+=	py-gitpython
 SUBDIR+=	py-gobject
 SUBDIR+=	py-gobject-shared
 SUBDIR+=	py-gobject3
@@ -2544,6 +2546,7 @@ SUBDIR+=	py-setuptools_trial
 SUBDIR+=	py-simplegeneric
 SUBDIR+=	py-singledispatch
 SUBDIR+=	py-slugify
+SUBDIR+=	py-smmap
 SUBDIR+=	py-sortedcontainers
 SUBDIR+=	py-speaklater
 SUBDIR+=	py-stem
@@ -2680,15 +2683,12 @@ SUBDIR+=	rttr
 SUBDIR+=	rubigen
 SUBDIR+=	ruby-SDL
 SUBDIR+=	ruby-abstract
-SUBDIR+=	ruby-activejob51
 SUBDIR+=	ruby-activejob52
 SUBDIR+=	ruby-activejob60
-SUBDIR+=	ruby-activemodel51
 SUBDIR+=	ruby-activemodel52
 SUBDIR+=	ruby-activemodel60
 SUBDIR+=	ruby-activestorage52
 SUBDIR+=	ruby-activestorage60
-SUBDIR+=	ruby-activesupport51
 SUBDIR+=	ruby-activesupport52
 SUBDIR+=	ruby-activesupport60
 SUBDIR+=	ruby-algorithms
@@ -2818,7 +2818,6 @@ SUBDIR+=	ruby-power_assert
 SUBDIR+=	ruby-priority-queue
 SUBDIR+=	ruby-protobuf-cucumber
 SUBDIR+=	ruby-racc
-SUBDIR+=	ruby-railties51
 SUBDIR+=	ruby-railties52
 SUBDIR+=	ruby-railties60
 SUBDIR+=	ruby-randexp

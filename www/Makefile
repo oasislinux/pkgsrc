@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1484 2020/09/08 11:54:20 wiz Exp $
+# $NetBSD: Makefile,v 1.1490 2020/09/10 16:44:08 taca Exp $
 #
 
 COMMENT=	Packages related to the World Wide Web
@@ -200,6 +200,7 @@ SUBDIR+=	logswan
 SUBDIR+=	lua-curl
 SUBDIR+=	lua-http
 SUBDIR+=	lua-psl
+SUBDIR+=	lua-web-sanitize
 SUBDIR+=	luakit
 SUBDIR+=	lynx
 SUBDIR+=	mMosaic
@@ -847,20 +848,16 @@ SUBDIR+=	qutebrowser
 SUBDIR+=	raggle
 SUBDIR+=	ramaze
 SUBDIR+=	rekonq
-SUBDIR+=	ruby-actioncable51
 SUBDIR+=	ruby-actioncable52
 SUBDIR+=	ruby-actioncable60
-SUBDIR+=	ruby-actionpack51
 SUBDIR+=	ruby-actionpack52
 SUBDIR+=	ruby-actionpack60
-SUBDIR+=	ruby-actionview51
 SUBDIR+=	ruby-actionview52
 SUBDIR+=	ruby-actionview60
 SUBDIR+=	ruby-borges
 SUBDIR+=	ruby-capybara
 SUBDIR+=	ruby-clearsilver
 SUBDIR+=	ruby-coffee-rails
-SUBDIR+=	ruby-coffee-rails4
 SUBDIR+=	ruby-compass
 SUBDIR+=	ruby-compass-core
 SUBDIR+=	ruby-compass-import-once
@@ -930,7 +927,6 @@ SUBDIR+=	ruby-rack-rewrite
 SUBDIR+=	ruby-rack-test
 SUBDIR+=	ruby-rack16
 SUBDIR+=	ruby-rails-html-sanitizer
-SUBDIR+=	ruby-rails51
 SUBDIR+=	ruby-rails52
 SUBDIR+=	ruby-rails60
 SUBDIR+=	ruby-raindrops

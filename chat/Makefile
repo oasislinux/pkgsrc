@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.250 2020/09/04 10:15:17 nia Exp $
+# $NetBSD: Makefile,v 1.254 2020/09/11 02:47:16 js Exp $
 #
 
 COMMENT=	Communication programs
@@ -74,7 +74,9 @@ SUBDIR+=	libtelepathy
 SUBDIR+=	libtlen
 SUBDIR+=	loudmouth
 SUBDIR+=	lurch-purple
+SUBDIR+=	matrix-synapse
 SUBDIR+=	matterircd
+SUBDIR+=	mautrix-hangouts
 SUBDIR+=	mcabber
 SUBDIR+=	meanwhile
 SUBDIR+=	miniircd
@@ -103,7 +105,9 @@ SUBDIR+=	py-axolotl
 SUBDIR+=	py-axolotl-curve25519
 SUBDIR+=	py-hangups
 SUBDIR+=	py-mastodon
+SUBDIR+=	py-mautrix
 SUBDIR+=	py-nbxmpp
+SUBDIR+=	py-tulir-hangups
 SUBDIR+=	py-xmpppy
 SUBDIR+=	quassel
 SUBDIR+=	quirc
