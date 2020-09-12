@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.18 2020/07/07 11:34:29 nia Exp $
+# $NetBSD: Makefile,v 1.20 2020/09/11 15:14:12 nia Exp $
 
 DISTNAME=	elixir-1.10.4
+PKGREVISION=	1
 CATEGORIES=	lang
 MASTER_SITES=	${MASTER_SITE_GITHUB:=elixir-lang/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
@@ -14,7 +15,7 @@ DEPENDS+=	erlang>=21.0:../../lang/erlang
 
 UNLIMIT_RESOURCES=	datasize virtualsize
 
-USE_TOOLS+=	gmake
+USE_TOOLS+=	gmake:run
 BUILD_TARGET=	compile
 TEST_TARGET=	test
 
