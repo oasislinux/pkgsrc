@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.38 2020/08/17 20:17:48 leot Exp $
+# $NetBSD: Makefile,v 1.40 2020/09/13 04:32:35 khorben Exp $
 #
 
-DISTNAME=	Panel-0.4.0
-PKGNAME=	deforaos-panel-0.4.0
-PKGREVISION=	3
+DISTNAME=	Panel-0.4.1
+PKGNAME=	deforaos-panel-0.4.1
 CATEGORIES=	x11
 MASTER_SITES=	https://ftp.defora.org/pub/DeforaOS/Apps/Desktop/src/Panel/
 

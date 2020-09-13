@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.781 2020/09/04 11:10:02 wiz Exp $
+# $NetBSD: Makefile,v 1.783 2020/09/13 08:17:06 wiz Exp $
 #
 
 COMMENT=	Security tools
@@ -20,6 +20,7 @@ SUBDIR+=	acmesh
 SUBDIR+=	aide
 SUBDIR+=	aide06
 SUBDIR+=	amap
+SUBDIR+=	amass
 SUBDIR+=	antonym
 SUBDIR+=	ap-modsecurity2
 SUBDIR+=	apg
@@ -289,6 +290,7 @@ SUBDIR+=	p5-Crypt-GPG
 SUBDIR+=	p5-Crypt-GeneratePassword
 SUBDIR+=	p5-Crypt-HSXKPasswd
 SUBDIR+=	p5-Crypt-IDEA
+SUBDIR+=	p5-Crypt-JWT
 SUBDIR+=	p5-Crypt-OpenPGP
 SUBDIR+=	p5-Crypt-OpenSSL-AES
 SUBDIR+=	p5-Crypt-OpenSSL-Bignum

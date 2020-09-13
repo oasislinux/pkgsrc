@@ -1,4 +1,4 @@
-$NetBSD: distinfo,v 1.91 2020/08/05 06:24:32 wiz Exp $
+$NetBSD: distinfo,v 1.93 2020/09/13 15:08:59 wiz Exp $
 
 SHA1 (aho-corasick-0.7.10.crate) = 46a5f4bc5d99c97eca60043752a0fd47d01fca7d
 RMD160 (aho-corasick-0.7.10.crate) = 925013ea0bce7c4a0ca5e1b017af0a1e553061fd
@@ -220,10 +220,10 @@ SHA1 (memory-module-sys-0.3.0.crate) = 9c253ccc4ced836c054d37f6b92cc0b992b5bbf5
 RMD160 (memory-module-sys-0.3.0.crate) = 3f6784e77d53af7281174a8feebc8dbde1591960
 SHA512 (memory-module-sys-0.3.0.crate) = 01df13b8073996098fa038292bb7113630a017e513896ceddfa5c9c760b1738aec5601957f5ca1c1defa205d8b6905b28edb2ef1c0f960600d29a1cd76baf972
 Size (memory-module-sys-0.3.0.crate) = 13808 bytes
-SHA1 (mercurial-5.5.tar.gz) = ff9b44836fb7342f6f3fbf401118cde8b61e8abf
-RMD160 (mercurial-5.5.tar.gz) = 40beaddc36912a6d57a2238346082b02f4f75f8f
-SHA512 (mercurial-5.5.tar.gz) = ed8f283a61aa13fd3638ae5b0473e989069128fbec99e9a0e5980db6041e5ea3bae6ff7647ba609c7fb3e6386aaa7398861d2cab6c6fb1165bfeb532855c331d
-Size (mercurial-5.5.tar.gz) = 7757631 bytes
+SHA1 (mercurial-5.5.1.tar.gz) = c74cbb8446f8279d59104a7212188e8f3021c0d8
+RMD160 (mercurial-5.5.1.tar.gz) = aaf7781ef0c235134fcfde60c7463247d445ca32
+SHA512 (mercurial-5.5.1.tar.gz) = 9cf02dd637154a5205d81eddf69681bd05405a29592c348c9d9cfa3b57ad3e678f98876fa6899d85d33a502b61f81e320262c7da394efb55fcca1d1219ca7cf5
+Size (mercurial-5.5.1.tar.gz) = 7759341 bytes
 SHA1 (micro-timer-0.3.0.crate) = e6a16e55091106648edce4cc0900f17965e648bf
 RMD160 (micro-timer-0.3.0.crate) = d04755052bd4e55ea39fb2676019297572024ef7
 SHA512 (micro-timer-0.3.0.crate) = 9a7150cc19f0a3b006df87097d6f3699313604005ef4fa2a770ae8eeec40f699bf00af19f5561e2b5b72913bd41103bcb2b21670359b5202bd5af828575f40e7
