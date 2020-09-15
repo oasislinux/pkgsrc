@@ -1,4 +1,4 @@
-$NetBSD$
+$NetBSD: patch-cmake_modules_FindLIBSSH.cmake,v 1.1 2020/09/15 10:19:20 wiz Exp $
 
 Fix detection of libssh >= 0.9.5. Upstream commit fd7739de6b.
 
