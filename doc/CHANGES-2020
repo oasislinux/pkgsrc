@@ -1,4 +1,4 @@
-$NetBSD: CHANGES-2020,v 1.5289 2020/09/16 22:15:19 js Exp $
+$NetBSD: CHANGES-2020,v 1.5313 2020/09/18 14:37:58 js Exp $
 
 Changes to the packages collection and infrastructure in 2020:
 
@@ -7420,6 +7420,7 @@ Changes to the packages collection and infrastructure in 2020:
 	Updated mail/sieve-connect to 0.89nb5 [wiz 2020-09-06]
 	Updated archivers/p5-Archive-Zip to 1.68 [wiz 2020-09-06]
 	Updated net/dhcpcd to 9.2.0 [roy 2020-09-06]
+	Updated sysutils/tealdeer to 1.4.1 [bsiegert 2020-09-06]
 	Updated archivers/p5-Compress-Bzip2 to 2.28 [wiz 2020-09-06]
 	Updated audio/p5-MP3-Tag to 1.15 [wiz 2020-09-06]
 	Updated audio/p5-MPEG-Audio-Frame to 0.10 [wiz 2020-09-06]
@@ -7963,3 +7964,28 @@ Changes to the packages collection and infrastructure in 2020:
 	Updated net/siproxd to 0.8.3 [hauke 2020-09-15]
 	Updated www/gnurl to 7.72.0 [nikita 2020-09-16]
 	Updated chat/matrix-synapse to 1.19.2 [js 2020-09-16]
+	Updated www/logswan to 2.1.7 [fcambus 2020-09-17]
+	Updated sysutils/etckeeper to 1.18.14 [schmonz 2020-09-17]
+	Updated security/py-m2crypto to 0.36.0 [jperkin 2020-09-17]
+	Updated net/libfilezilla to 0.24.1 [jperkin 2020-09-17]
+	Updated ham/chirp to 20200909 [gdt 2020-09-17]
+	Updated lang/gcc9 to 9.3.0nb4 [ryoon 2020-09-17]
+	Updated lang/gcc9-libs to 9.3.0nb5 [ryoon 2020-09-17]
+	Updated www/php-nextcloud to 19.0.3 [ryoon 2020-09-17]
+	Updated sysutils/zabbix-frontend to 4.0.24 [otis 2020-09-17]
+	Updated sysutils/zabbix to 4.0.24 [otis 2020-09-17]
+	Updated devel/gopls to 0.5.0 [bsiegert 2020-09-17]
+	Updated net/gh to 1.0.0nb1 [bsiegert 2020-09-17]
+	Updated textproc/libhighlight to 3.58 [schmonz 2020-09-17]
+	Updated textproc/po4a to 0.60 [schmonz 2020-09-17]
+	Updated lang/gcc8 to 8.4.0nb2 [ryoon 2020-09-17]
+	Updated lang/gcc8-libs to 8.4.0nb3 [ryoon 2020-09-17]
+	Updated math/py-z3solver to 4.8.9.0 [khorben 2020-09-18]
+	Updated graphics/ansilove to 4.1.3 [fcambus 2020-09-18]
+	Added devel/mob version 0.0.25 [schmonz 2020-09-18]
+	Updated net/filezilla to 3.50.0 [wiz 2020-09-18]
+	Updated devel/glib2 to 2.64.5nb1 [wiz 2020-09-18]
+	Updated net/remmina to 1.4.8 [ryoon 2020-09-18]
+	Updated databases/py-tortoise-orm to 0.16.15 [adam 2020-09-18]
+	Updated databases/py-apsw to 3.33.0 [adam 2020-09-18]
+	Added net/wireguard-tools version 1.0.20200827 [js 2020-09-18]
