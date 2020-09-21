@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1346 2020/09/12 14:53:55 leot Exp $
+# $NetBSD: Makefile,v 1.1349 2020/09/20 08:46:59 ryoon Exp $
 #
 
 COMMENT=	Networking tools
@@ -794,6 +794,8 @@ SUBDIR+=	ruby-connection_pool
 SUBDIR+=	ruby-dnsruby
 SUBDIR+=	ruby-domain_name
 SUBDIR+=	ruby-em-socksify
+SUBDIR+=	ruby-ffi-rzmq
+SUBDIR+=	ruby-ffi-rzmq-core
 SUBDIR+=	ruby-icmp
 SUBDIR+=	ruby-ipaddress
 SUBDIR+=	ruby-net-dhcp
@@ -962,6 +964,7 @@ SUBDIR+=	whois3
 SUBDIR+=	whoson
 SUBDIR+=	wide-dhcpv6
 SUBDIR+=	wimon
+SUBDIR+=	wireguard-tools
 SUBDIR+=	wireshark
 SUBDIR+=	wistumbler
 SUBDIR+=	wistumbler2
