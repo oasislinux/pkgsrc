@@ -1,4 +1,4 @@
-$NetBSD: CHANGES-2020,v 1.5411 2020/09/20 23:29:18 mef Exp $
+$NetBSD: CHANGES-2020,v 1.5421 2020/09/22 10:04:13 schmonz Exp $
 
 Changes to the packages collection and infrastructure in 2020:
 
@@ -8087,3 +8087,18 @@ Changes to the packages collection and infrastructure in 2020:
 	Updated math/R-PHYLOGR to 1.0.11 [mef 2020-09-20]
 	Updated math/R-RNetCDF to 2.4.2 [mef 2020-09-20]
 	Updated math/R-RandomFields to 3.3.8 [mef 2020-09-20]
+	Updated math/R-RcmdrMisc to 2.7.1 [mef 2020-09-20]
+	Updated math/R-car to 3.0.9 [mef 2020-09-20]
+	Updated math/R-Rcmdr to 2.7.0 [mef 2020-09-20]
+	mk/bsd.pkg.mk: started freeze for pkgsrc-2020Q3 branch [gdt 2020-09-21]
+	Added benchmarks/R-microbenchmark version 1.4.7 [mef 2020-09-21]
+	Updated pkgtools/pkg to 1.10.99.7 [khorben 2020-09-21]
+	Updated devel/p5-Coro to 6.57nb2 [wiz 2020-09-21]
+	Added devel/p5-File-Valet version 1.0.7 [mrg 2020-09-21]
+	Added misc/p5-Weather-PurpleAir-API version 0.04 [mrg 2020-09-21]
+	Updated devel/R-rversions to 2.0.2 [mef 2020-09-22]
+	Updated devel/R-pkgbuild to 1.1.0 [mef 2020-09-22]
+	Updated net/fehqlibs to 0.9.15b [schmonz 2020-09-22]
+	Updated net/ucspi-tcp6 to 1.11.6a [schmonz 2020-09-22]
+	Updated net/ucspi-ssl to 0.999.11.6a [schmonz 2020-09-22]
+	Updated sysutils/memtester to 4.5.0 [schmonz 2020-09-22]
