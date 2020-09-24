@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2020/08/31 18:08:45 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2020/09/23 23:34:52 mef Exp $
 
 DISTNAME=	RT-Extension-ArticleTemplates-1.02
 PKGNAME=	p5-${DISTNAME}
@@ -13,8 +13,8 @@ LICENSE=	gnu-gpl-v2
 
 PERL5_MODULE_TYPE=	Module::Install
 
-BUILD_DEPENDS+= p5-Module-Install-RTx>=0.40:../../devel/p5-Module-Install-RTx
-BUILD_DEPENDS+= p5-Module-Install-ReadmeFromPod>=0.30:../../devel/p5-Module-Install-ReadmeFromPod
+BUILD_DEPENDS+=	p5-Module-Install-RTx>=0.40:../../devel/p5-Module-Install-RTx
+BUILD_DEPENDS+=	p5-Module-Install-ReadmeFromPod>=0.30:../../devel/p5-Module-Install-ReadmeFromPod
 
 USE_TOOLS=	perl
 
@@ -23,6 +23,7 @@ MAKE_ENV+=	INSTALLDIRS="vendor"
 MAKE_ENV+=	DESTDIR=${DESTDIR}
 
 DEPENDS+=	rt4-[0-9]*:../../devel/rt4
+DEPENDS+=	p5-IO-All-[0-9]*:../../devel/p5-IO-All
 
 .include "../../devel/rt4/dirs.mk"
 
@@ -32,7 +33,7 @@ PERL5_API_cmd=	${TOOLS_CMD.perl} -e 'use Config; print $$Config{api_versionstrin
 PERL5_ARCH=	${PERL5_ARCH_cmd:sh}
 PERL5_ARCH_cmd=	${TOOLS_CMD.perl} -e 'use Config; print $$Config{archname};'
 
-PERL5_PACKLIST_DIR=	${PREFIX}/share/rt4/plugins/${PERL5_API}/${PERL5_ARCH}
+PERL5_PACKLIST_DIR=	${PREFIX}/share/rt4/plugins/RT-Extension-ArticleTemplates
 PERL5_PACKLIST=		auto/RT/Extension/ArticleTemplates/.packlist
 
 .include "../../lang/perl5/module.mk"
