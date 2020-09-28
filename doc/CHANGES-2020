@@ -1,4 +1,4 @@
-$NetBSD: CHANGES-2020,v 1.5431 2020/09/26 00:23:39 js Exp $
+$NetBSD: CHANGES-2020,v 1.5440 2020/09/27 22:02:25 wiz Exp $
 
 Changes to the packages collection and infrastructure in 2020:
 
@@ -8112,3 +8112,12 @@ Changes to the packages collection and infrastructure in 2020:
 	Updated biology/gnome-chemistry-utils to 0.14.16nb3 [gutteridge 2020-09-25]
 	Updated pkgtools/pkglint to 20.3.0 [rillig 2020-09-25]
 	Updated chat/matrix-synapse to 1.20.1 [js 2020-09-26]
+	Updated www/py-robobrowser to 0.5.3nb1 [leot 2020-09-26]
+	Updated filesystems/glusterfs to 8.2 [manu 2020-09-26]
+	mk/bsd.pkg.mk: freeze ended for pkgsrc-2020Q3 branch [gdt 2020-09-27]
+	Updated mail/neomutt to 20200925 [wiz 2020-09-27]
+	Updated devel/cbindgen to 0.14.5 [ryoon 2020-09-27]
+	Removed x11/Xrender successor x11/libXrender [wiz 2020-09-27]
+	Updated emulators/qemu to 5.1.0nb4 [jakllsch 2020-09-27]
+	Updated emulators/qemu to 5.1.0nb5 [jakllsch 2020-09-27]
+	Updated finance/gnucash to 4.2 [wiz 2020-09-27]
