@@ -1,4 +1,4 @@
-$NetBSD: CHANGES-2020,v 1.5440 2020/09/27 22:02:25 wiz Exp $
+$NetBSD: CHANGES-2020,v 1.5453 2020/09/28 14:12:48 ryoon Exp $
 
 Changes to the packages collection and infrastructure in 2020:
 
@@ -8121,3 +8121,17 @@ Changes to the packages collection and infrastructure in 2020:
 	Updated emulators/qemu to 5.1.0nb4 [jakllsch 2020-09-27]
 	Updated emulators/qemu to 5.1.0nb5 [jakllsch 2020-09-27]
 	Updated finance/gnucash to 4.2 [wiz 2020-09-27]
+	Updated devel/bison to 3.7.2 [adam 2020-09-28]
+	Updated devel/cmake to 3.18.3 [adam 2020-09-28]
+	Updated x11/xterm to 360 [pin 2020-09-28]
+	Added sysutils/fff version 2.2 [pin 2020-09-28]
+	Updated www/webkit-gtk to 2.30.1 [leot 2020-09-28]
+	Updated security/amass to 3.10.4 [leot 2020-09-28]
+	Updated games/woof to 2.3.0 [micha 2020-09-28]
+	Updated mail/msmtp to 1.8.12 [leot 2020-09-28]
+	Updated devel/cbindgen to 0.14.6 [ryoon 2020-09-28]
+	Updated www/firefox to 81.0 [ryoon 2020-09-28]
+	Updated www/firefox-l10n to 81.0 [ryoon 2020-09-28]
+	Updated graphics/libheif to 1.9.1 [ryoon 2020-09-28]
+	Updated mail/thunderbird to 78.3.1 [ryoon 2020-09-28]
+	Updated mail/thunderbird-l10n to 78.3.1 [ryoon 2020-09-28]
