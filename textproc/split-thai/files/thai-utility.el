@@ -1,3 +1,4 @@
+(require 'thingatpt)
 (require 'mule-util)
 (require 'thai-word)
 
@@ -32,14 +33,23 @@ uses recursion"
        ;; 1 => word at this depth
        ((equal complete 1)
 	(append (list thaistr)
-		(extract-thai-na (cddr nlist) thaistr) '()))
+		(extract-thai-na (cddr nlist) thaistr)))
        (t
 	(error "invalid parsing for complete var"))))
      
      ;; not finished
      (t
       (append (extract-thai-na (car nlist) thaistr)
-	      (extract-thai-na (cdr nlist) thaistr) '())))))
+	      (extract-thai-na (cdr nlist) thaistr))))))
+
+(defun thai-word-table-in-p(thaiword)
+ "return t if thaiword is in 'thai-word-table, nil otherwise"
+  (let ((result
+	 (lookup-nested-alist
+	  thaiword thai-word-table (length thaiword) 0 t)))
+    (and (listp result)
+	 (integerp (car result))
+	 (= 1 (car result)))))
 
 (defun thai-word-table-save(filename &optional alist)
   "save thai words extracted from a nested-alist table to
@@ -163,6 +173,26 @@ dictionary words."
       (indent-region (point-min) (point-max))
       (write-region nil nil lispfile))
     line_count))
+
+(defun split-thai-word()
+  "Break Thai word at point by inserting spaces at word
+boundaries. (wrapper for 'thai-break-words)"
+  (interactive)
+  (let* ((start (point))
+	 (bounds (bounds-of-thing-at-point 'word))
+	 (p1 (car bounds))
+	 (p2 (cdr bounds))
+	 (instr (buffer-substring-no-properties p1 p2))
+	 (outstr))
+    (with-temp-buffer
+      (insert instr)
+      (goto-char(point-min))
+      (thai-break-words " ")
+      (split-thai-numbers (point-min) (point-max))
+      (setq outstr (buffer-string)))
+    (delete-region p1 p2)
+    (insert outstr)
+    (goto-char start)))
 
 (defun split-thai-line()
   "Break Thai words from point to end of line by inserting a

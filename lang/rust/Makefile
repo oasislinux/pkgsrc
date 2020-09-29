@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.195 2020/09/25 12:21:02 gdt Exp $
+# $NetBSD: Makefile,v 1.197 2020/09/29 16:45:16 gdt Exp $
 
 DISTNAME=	rustc-1.46.0-src
 PKGNAME=	${DISTNAME:S/rustc/rust/:S/-src//}
@@ -132,14 +132,6 @@ MAKE_JOBS_SAFE=	no
 #
 # NetBSD 8.1 earmv7hf: unknown configure option
 #   http://gnats.netbsd.org/cgi-bin/query-pr-single.pl?number=54621
-#
-# NetBSD 9 i386: bootstrap fails with missing libcurl.so.4
-#   http://gnats.netbsd.org/cgi-bin/query-pr-single.pl?number=55368
-
-# Stale PRs (a reason to believe they no longer apply)
-#
-# NetBSD 8.1 sparc64: bootstrap fails with libssl.so.14 missing
-#   http://gnats.netbsd.org/cgi-bin/query-pr-single.pl?number=54622
 
 .endif
 
@@ -537,10 +529,16 @@ stage0-bootstrap: install
 # \todo Explain why this is limited to a small list of architectures,
 # and in particular why not x86_64.
 DEPENDS+=	compat80>=0:../../emulators/compat80
+.endif
+
+.if (${OPSYS} == "NetBSD") && \
+		((${MACHINE_ARCH} == "i386")) \
+	&& (empty(OS_VERSION:M[012345678].*) || \
+	    !empty(OS_VERSION:M8.99.*))
 # Bootstrap kits use openssl, which on NetBSD 8 comes from pkgsrc.
 # Therefore the pkgsrc openssl libs need to be present as well.
-# (Observed on i386, and presumed true on the other
-# bootstrap-built-for-8 systems.)  Then, when the package is built,
+# The 1.44.1 i686 bootstrap links with pkgsrc openssl.  The others do
+# not.  When the package is built,
 # cargo links against pkgsrc openssl, so it must be a run-time
 # dependency as well.  Forcing USE_BUILTIN.openssl=no results in a
 # mysterious heimdal error, but straight DEPENDS seems to result in a

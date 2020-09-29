@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.77 2020/09/08 11:48:35 wiz Exp $
+# $NetBSD: Makefile,v 1.82 2020/09/29 00:35:00 khorben Exp $
 #
 
 COMMENT=	Monetary, financial and related applications
@@ -38,9 +38,14 @@ SUBDIR+=	py-beancount
 SUBDIR+=	py-bitcoinlib
 SUBDIR+=	py-bitcoinrpc
 SUBDIR+=	py-braintree
+SUBDIR+=	py-crytic-compile
 SUBDIR+=	py-empyrical
+SUBDIR+=	py-eth-hash
+SUBDIR+=	py-eth-typing
+SUBDIR+=	py-eth-utils
 SUBDIR+=	py-fecon235
 SUBDIR+=	py-ofxparse
+SUBDIR+=	py-pyevmasm
 SUBDIR+=	py-pyfolio
 SUBDIR+=	py-quickbooks
 SUBDIR+=	py-stripe

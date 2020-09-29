@@ -1,9 +1,11 @@
-#	$NetBSD: version.mk,v 1.1 2020/08/18 20:24:57 riastradh Exp $
+#	$NetBSD: version.mk,v 1.3 2020/09/29 00:51:20 khorben Exp $
 
 # used by devel/py-ailment/Makefile
 # used by devel/py-archinfo/Makefile
 # used by devel/py-cle/Makefile
+# used by devel/py-manticore/Makefile
 # used by devel/py-pyvex/Makefile
+# used by devel/py-pyvex/buildlink3.mk
 # used by math/py-claripy/Makefile
 
-ANGR_VERSION=	8.20.7.27
+ANGR_VERSION=	9.0.4378
