@@ -5,6 +5,6 @@ RMD160 (zstd-1.4.5.tar.gz) = b7b9df3d4293eab050f84d2fc7f0a29c89905e87
 SHA512 (zstd-1.4.5.tar.gz) = b03c497c3e0590c3d384cb856e3024f144b2bfac0d805d80e68deafa612c68237f12a2d657416d476a28059e80936c79f099fc42331464b417593895ea214387
 Size (zstd-1.4.5.tar.gz) = 1987927 bytes
 SHA1 (patch-Makefile) = daf9d1946513ee24a4c4c187ec80878e9a578744
-SHA1 (patch-lib_Makefile) = 303d90e34bb78b402d15f16620f197c9cd3865c9
+SHA1 (patch-lib_Makefile) = c6d889a7bea73c6fee35d5cfbac3049fa15d76c6
 SHA1 (patch-programs_Makefile) = 2500df468c2994f1b33165c5d2774817bdc8addc
 SHA1 (patch-zlibWrapper_examples_minigzip.c) = 4ed0cb648bdd6efa61b3f66ba6eb1ea74b7767ec
