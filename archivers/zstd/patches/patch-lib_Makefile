@@ -1,4 +1,4 @@
-$NetBSD: patch-lib_Makefile,v 1.9 2020/06/14 13:51:55 adam Exp $
+$NetBSD: patch-lib_Makefile,v 1.10 2020/10/01 07:25:06 mcf Exp $
 
 Detect and use third-party libraries (taken from programs/Makefile).
 -fvisibility=hidden makes error when linking.
@@ -7,7 +7,7 @@ Fix pkgconfig installation path.
 
 --- lib/Makefile.orig	2020-05-22 05:04:00.000000000 +0000
 +++ lib/Makefile
-@@ -165,6 +165,43 @@ CPPFLAGS  += -DZSTD_LEGACY_SUPPORT=$(ZSTD_LEGACY_SUPPO
+@@ -165,6 +165,43 @@ CPPFLAGS  += -DZSTD_LEGACY_SUPPORT=$(ZST
  
  ZSTD_OBJ   := $(patsubst %.c,%.o,$(ZSTD_FILES))
  
@@ -69,7 +69,7 @@ Fix pkgconfig installation path.
  
  all: libzstd.pc
  
-@@ -287,11 +324,7 @@ $(error configured includedir ($(INCLUDEDIR)) is outsi
+@@ -287,11 +324,7 @@ $(error configured includedir ($(INCLUDE
  endif
  endif
  

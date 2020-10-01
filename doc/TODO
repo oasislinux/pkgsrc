@@ -1,4 +1,4 @@
-$NetBSD: TODO,v 1.20097 2020/09/29 17:04:43 adam Exp $
+$NetBSD: TODO,v 1.20102 2020/10/01 06:59:39 adam Exp $
 
 Suggested new packages
 ======================
@@ -427,7 +427,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o aribas-1.64
 	o arirang-1.70
 	o asapm-3.1
-	o asciidoc-9.0.2
 	o asn1c-0.9.27
 	o asp2php-2008-08-13
 	o aspell-nb-2.0.10
@@ -593,7 +592,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o ganglia-webfrontend-3.7.5
 	o gap-4r4p9
 	o gcal-4
-	o gcc-9.1
 	o gcin-1.5.5
 	o gcloud-golang-metadata-0.12.0
 	o gcombust-0.1.55
@@ -968,7 +966,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o pwlib-1.11.1
 	o py-HappyDoc-3.0
 	o py-Scientific-doc-2.5.5
-	o py-borgbackup-1.1.13
 	o py-cassa-1.11.0
 	o py-configparser-5.0.0 [drops python-2.x support]
 	o py-ephem3-3.7.6.0
@@ -977,7 +974,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o py-hypothesis-5.36.1
 	o py-input-pad-1.4.2
 	o py-keybinder-0.3.1
-	o py-more-itertools-8.5.0
+	o py-markdown-3.2.2 [drops python-2.x support]
 	o py-musicbrainz-0.7.4
 	o py-newt-0.52.20
 	o py-omniORBpy-3.7
