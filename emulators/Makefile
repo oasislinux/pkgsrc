@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.331 2020/07/17 06:10:34 wiz Exp $
+# $NetBSD: Makefile,v 1.334 2020/10/03 08:40:56 nia Exp $
 #
 
 COMMENT=	Emulators for other operating systems
@@ -22,6 +22,7 @@ SUBDIR+=	b-em
 SUBDIR+=	blastem
 SUBDIR+=	blinkensim
 SUBDIR+=	bochs
+SUBDIR+=	bsnes
 SUBDIR+=	cannonball
 SUBDIR+=	caprice32
 SUBDIR+=	ckmame
@@ -163,6 +164,7 @@ SUBDIR+=	osf1_lib
 SUBDIR+=	p11
 SUBDIR+=	palmosemulator
 SUBDIR+=	pcemu
+SUBDIR+=	pcsxr
 SUBDIR+=	pearpc
 SUBDIR+=	py-keystone
 SUBDIR+=	py-unicorn
@@ -400,6 +402,7 @@ SUBDIR+=	xhomer
 SUBDIR+=	xm7
 SUBDIR+=	xm8
 SUBDIR+=	xnp2
+SUBDIR+=	xroar
 SUBDIR+=	xtrs
 SUBDIR+=	xyame
 SUBDIR+=	yabause

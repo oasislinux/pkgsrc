@@ -1,4 +1,4 @@
-$NetBSD: TODO,v 1.20102 2020/10/01 06:59:39 adam Exp $
+$NetBSD: TODO,v 1.20113 2020/10/03 12:53:06 mef Exp $
 
 Suggested new packages
 ======================
@@ -570,7 +570,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o filerunner-14.06.18.10
 	o flashplayer-0.4.13
 	o flow-tools-0.411
-	o fluidsynth-2.1.5
 	o fortunes-calvin-0.3
 	o freedv-1.2.2
 	o freenet-0.7
@@ -641,9 +640,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o gnu-crypto-2.1.0
 	o gnu-pw-mgr-2.0
 	o gnucap-20130423
-	o gnustep-back-0.27.0
 	o gnustep-base-1.26.0
-	o gnustep-gui-0.24.1
 	o gnustep-make-2.7.0
 	o gnustep-objc-1.8.1
 	o gobby-0.5.0
@@ -732,7 +729,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o jetty9-9.3.7
 	o jools-1.0
 	o jpilot-syncmal-0.81
-	o json-c-0.15
 	o kaffe-1.1.9
 	o kapooka-0.3
 	o kbool-2.1 [kbool_2_1, next to boolean-7.1]
@@ -778,10 +774,8 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o libquantum-1.1.0 [pkg/43728, development release]
 	o libressl-3.2.0
 	o libtecla-1.6.3
-	o libuv-1.40.0
 	o libv4l-1.20.0
 	o libvirt-2.3
-	o libwnck3-3.32.0
 	o lincvs-2.1.4 [now called CrossVC]
 	o linpsk-1.2 [ld: cannot find -lqt-mt with qt4]
 	o liquidwar-6.0.0.11
@@ -814,7 +808,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o mcollective-2.3.2
 	o mcsim-5.6.5
 	o mecab-ipadic-2.7.0.20070801
-	o mediawiki-1.34
 	o memached-1.5.6
 	o merkaator-0.18.3
 	o mesure-0.7.2
@@ -843,10 +836,8 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o moserial-2.30.0
 	o mpdas-0.4.1
 	o mserv-devel-0.41
-	o mtr-0.94
 	o multitail-6.4.2
 	o muse-0.9.2
-	o musicpd-0.22
 	o myodbc-5.3.4
 	o mysql-connector-c++-8.0.17
 	o mysql-server-8.0.20
@@ -938,7 +929,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o pim6sd-20040824a
 	o pinfo-0.6.10
 	o pioneers-15.5
-	o pkgconf-1.7.3
 	o pks-0.9.6
 	o plan-1.10.1
 	o plasma-5.11
@@ -983,7 +973,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o py-simpletal-5.1
 	o py-sybase-0.37
 	o py-wxWidgets-4.0.0
-	o py-yarl-1.6.0
 	o py-yubiauth-0.3.10
 	o pythontidy-1.23
 	o qbzr-0.23.2
