@@ -6,7 +6,9 @@ PKG_SUGGESTED_OPTIONS=	python
 
 .include "../../mk/bsd.options.mk"
 
+PLIST_VARS+=	python
 .if !empty(PKG_OPTIONS:Mpython)
+PLIST.python=	yes
 CONFIGURE_ARGS+=	--with-python=${PYTHONBIN}
 PYTHON_VERSIONS_ACCEPTED=	 27
 .include "../../lang/python/application.mk"
