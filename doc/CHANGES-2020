@@ -1,4 +1,4 @@
-$NetBSD: CHANGES-2020,v 1.5656 2020/10/06 00:27:51 mrg Exp $
+$NetBSD: CHANGES-2020,v 1.5670 2020/10/06 20:59:25 mrg Exp $
 
 Changes to the packages collection and infrastructure in 2020:
 
@@ -8419,3 +8419,19 @@ Changes to the packages collection and infrastructure in 2020:
 	Updated devel/py-plumbum to 1.6.1.post0nb1 [wiz 2020-10-05]
 	Updated cad/dinotrace to 9.4f [mef 2020-10-05]
 	Updated audio/csound6 to 6.15.0 [mrg 2020-10-05]
+	Updated comms/openobex to 1.7.2 [mef 2020-10-06]
+	Updated cad/dinotrace-mode to 9.4f [mef 2020-10-06]
+	Updated security/py-google-auth to 1.22.1 [adam 2020-10-06]
+	Updated www/py-h11 to 0.11.0 [adam 2020-10-06]
+	Updated www/py-django-import-export to 2.4.0 [adam 2020-10-06]
+	Updated net/py-responses to 0.12.0 [adam 2020-10-06]
+	Updated devel/spdlog to 1.8.1 [wiz 2020-10-06]
+	Added net/mkvserver_mk2 version 0.0.0.20200117 [ryoon 2020-10-06]
+	Updated devel/py-hypothesis to 5.37.0 [wiz 2020-10-06]
+	Updated www/nginx-devel to 1.19.3nb1 [nils 2020-10-06]
+	Updated www/nginx to 1.18.0nb3 [nils 2020-10-06]
+	Updated devel/py-mercurial to 5.5.2 [wiz 2020-10-06]
+	mk/subst.mk: removed SUBST_NOOP_OK [rillig 2020-10-06]
+	Updated pkgtools/pkglint to 20.3.1 [rillig 2020-10-06]
+	Updated lang/vala to 0.50.1 [wiz 2020-10-06]
+	Updated audio/csound6-manual to 6.15.0 [mrg 2020-10-06]
