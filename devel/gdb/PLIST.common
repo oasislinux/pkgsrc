@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST.common,v 1.15 2020/10/06 21:13:38 mcf Exp $
+@comment $NetBSD: PLIST.common,v 1.16 2020/10/07 04:34:01 mcf Exp $
 ${PLIST.gcore}bin/gcore
 bin/gdb
 bin/gdb-add-index
