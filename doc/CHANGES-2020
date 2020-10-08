@@ -1,4 +1,4 @@
-$NetBSD: CHANGES-2020,v 1.5673 2020/10/07 12:57:50 adam Exp $
+$NetBSD: CHANGES-2020,v 1.5681 2020/10/08 03:31:41 mcf Exp $
 
 Changes to the packages collection and infrastructure in 2020:
 
@@ -8439,3 +8439,11 @@ Changes to the packages collection and infrastructure in 2020:
 	Updated security/tor-browser to 10.0 [wiz 2020-10-07]
 	Updated misc/py-tqdm to 4.50.1 [adam 2020-10-07]
 	Updated www/py-google-api-python-client to 1.12.3 [adam 2020-10-07]
+	Added devel/py-cachecontrol version 0.12.6 [schmonz 2020-10-07]
+	Updated mail/feed2exec to 0.16.0 [schmonz 2020-10-07]
+	Updated textproc/expat to 2.2.10 [wiz 2020-10-07]
+	Updated devel/appstream-glib to 0.7.18 [wiz 2020-10-07]
+	Updated benchmarks/google-benchmark to 1.5.2 [wiz 2020-10-07]
+	Updated textproc/oniguruma to 6.9.6rc1 [kim 2020-10-07]
+	Updated security/mit-krb5 to 1.18.2 [gdt 2020-10-07]
+	Updated devel/valgrind to 3.16.1 [mcf 2020-10-08]

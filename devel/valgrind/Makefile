@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.32 2020/08/31 18:09:22 wiz Exp $
+# $NetBSD: Makefile,v 1.33 2020/10/08 03:30:58 mcf Exp $
 #
 
 DISTNAME=		valgrind-3.16.1
@@ -12,7 +12,7 @@ COMMENT=		Debugging and profiling tools
 LICENSE=		gnu-gpl-v2
 
 USE_PKGLOCALEDIR=	yes
-PKGCONFIG_OVERRIDE+=	${WRKSRC}/valgrind.pc.in
+PKGCONFIG_OVERRIDE+=	valgrind.pc.in
 GNU_CONFIGURE=		yes
 
 ONLY_FOR_PLATFORM=	Darwin-*-i386 Darwin-*-x86_64 \
