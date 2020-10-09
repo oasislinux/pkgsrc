@@ -1,4 +1,4 @@
-/*	$NetBSD: perform.c,v 1.112 2020/07/01 10:03:19 jperkin Exp $	*/
+/*	$NetBSD: perform.c,v 1.113 2020/10/09 07:37:20 mcf Exp $	*/
 #if HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -6,7 +6,7 @@
 #if HAVE_SYS_CDEFS_H
 #include <sys/cdefs.h>
 #endif
-__RCSID("$NetBSD: perform.c,v 1.112 2020/07/01 10:03:19 jperkin Exp $");
+__RCSID("$NetBSD: perform.c,v 1.113 2020/10/09 07:37:20 mcf Exp $");
 
 /*-
  * Copyright (c) 2003 Grant Beattie <grant@NetBSD.org>

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.20 2020/08/18 17:57:45 leot Exp $
+# $NetBSD: Makefile,v 1.22 2020/10/09 07:40:44 nia Exp $
 
-DISTNAME=	dosbox-x-0.83.4
-PKGREVISION=	2
+DISTNAME=	dosbox-x-0.83.6
 CATEGORIES=	emulators
 MASTER_SITES=	${MASTER_SITE_GITHUB:=joncampbell123/}
 GITHUB_TAG=	dosbox-x-v${PKGVERSION_NOREV}
@@ -57,21 +56,22 @@ pre-configure:
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/src/dosbox-x ${DESTDIR}${PREFIX}/bin
-	${INSTALL_DATA} ${WRKSRC}/font/FREECG98.BMP \
+	${INSTALL_DATA} ${WRKSRC}/contrib/fonts/FREECG98.BMP \
 	    ${DESTDIR}${PREFIX}/share/dosbox-x
+	${INSTALL_DATA} ${WRKSRC}/contrib/icons/dosbox-x.png \
+	    ${DESTDIR}${PREFIX}/share/pixmaps/dosbox-x.png
+	${INSTALL_DATA} ${WRKSRC}/contrib/linux/dosbox-x.desktop \
+	    ${DESTDIR}${PREFIX}/share/applications
 	${INSTALL_DATA} ${WRKSRC}/CHANGELOG \
 	    ${DESTDIR}${PREFIX}/share/dosbox-x
 	${INSTALL_DATA} ${WRKSRC}/dosbox-x.reference.conf \
 	    ${DESTDIR}${PREFIX}/share/dosbox-x
-	${INSTALL_DATA} ${WRKSRC}/src/dosbox.png \
-	    ${DESTDIR}${PREFIX}/share/pixmaps/dosbox.png
-	${INSTALL_DATA} ${FILESDIR}/dosbox-x.desktop \
-	    ${DESTDIR}${PREFIX}/share/applications
 
 .include "options.mk"
 .include "../../audio/fluidsynth/buildlink3.mk"
 .include "../../devel/SDL2/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../net/libpcap/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/curses.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

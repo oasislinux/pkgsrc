@@ -1,4 +1,4 @@
-$NetBSD: CHANGES-2020,v 1.5694 2020/10/08 16:55:14 wiz Exp $
+$NetBSD: CHANGES-2020,v 1.5719 2020/10/09 16:15:54 ryoon Exp $
 
 Changes to the packages collection and infrastructure in 2020:
 
@@ -8462,3 +8462,30 @@ Changes to the packages collection and infrastructure in 2020:
 	Updated fonts/cascadia-ttf to 2009.22 [wiz 2020-10-08]
 	Updated audio/fasttracker2 to 1.36 [fox 2020-10-08]
 	Updated textproc/expat to 2.2.10nb1 [wiz 2020-10-08]
+	Added net/tinydyndns version 0.4.2 [schmonz 2020-10-08]
+	Added devel/py-bump2version version 1.0.1 [khorben 2020-10-08]
+	Updated sysutils/p5-Linux-Inotify2 to 2.2 [mcf 2020-10-08]
+	Added www/gumbo-parser version 0.10.1 [leot 2020-10-08]
+	Updated print/mupdf to 1.18.0 [leot 2020-10-08]
+	Updated x11/xcb-proto to 1.14.1 [wiz 2020-10-09]
+	Updated x11/py-xcbgen to 1.14.1 [wiz 2020-10-09]
+	Updated games/easyrpg-player to 0.6.2.2 [nia 2020-10-09]
+	Updated net/libtorrent-rasterbar to 1.2.10 [adam 2020-10-09]
+	Updated lang/nodejs12 to 12.19.0 [adam 2020-10-09]
+	Updated emulators/dosbox-x to 0.83.6 [nia 2020-10-09]
+	Updated converters/bdf2sfd to 1.1.4 [fcambus 2020-10-09]
+	Updated net/haproxy to 2.2.4 [adam 2020-10-09]
+	Updated multimedia/mkvtoolnix to 51.0.0 [adam 2020-10-09]
+	Added databases/postgresql-timescaledb version 1.7.4 [otis 2020-10-09]
+	Updated security/cvm to 0.97nb2 [schmonz 2020-10-09]
+	Updated news/sfeed_curses to 0.9.3 [leot 2020-10-09]
+	Updated sysutils/entr to 4.6 [leot 2020-10-09]
+	Updated security/snallygaster to 0.0.9 [leot 2020-10-09]
+	Updated net/sacc to 1.02 [leot 2020-10-09]
+	Updated www/tscrape to 0.6 [leot 2020-10-09]
+	Updated security/sqlmap to 1.4.10 [leot 2020-10-09]
+	Updated net/py-rt to 2.0.1 [leot 2020-10-09]
+	Updated misc/moreutils to 0.64 [leot 2020-10-09]
+	Updated misc/libreoffice to 7.0.2.2 [ryoon 2020-10-09]
+	Updated mail/thunderbird to 78.3.2 [ryoon 2020-10-09]
+	Updated mail/thunderbird-l10n to 78.3.2 [ryoon 2020-10-09]

@@ -1,4 +1,4 @@
-bumpversion is a small command line tool to simplify releasing software by
+bump2version is a small command line tool to simplify releasing software by
 updating all version strings in your source code by the correct increment. It
 also creates commits and tags:
 

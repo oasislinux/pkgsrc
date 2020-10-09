@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3268 2020/10/07 19:45:40 schmonz Exp $
+# $NetBSD: Makefile,v 1.3270 2020/10/08 21:56:10 khorben Exp $
 #
 
 COMMENT=	Development utilities
@@ -2186,7 +2186,7 @@ SUBDIR+=	py-buildbot-pkg
 SUBDIR+=	py-buildbot-waterfall-view
 SUBDIR+=	py-buildbot-worker
 SUBDIR+=	py-buildbot-www
-SUBDIR+=	py-bumpversion
+SUBDIR+=	py-bump2version
 SUBDIR+=	py-cachecontrol
 SUBDIR+=	py-cached-property
 SUBDIR+=	py-cachetools
