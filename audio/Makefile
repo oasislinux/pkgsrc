@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.609 2020/08/30 10:41:12 jmcneill Exp $
+# $NetBSD: Makefile,v 1.611 2020/10/11 13:41:19 pin Exp $
 #
 
 COMMENT=	Audio tools
@@ -253,6 +253,7 @@ SUBDIR+=	libopenspc
 SUBDIR+=	libopus
 SUBDIR+=	libopusenc
 SUBDIR+=	libreplaygain
+SUBDIR+=	librespot
 SUBDIR+=	libsamplerate
 SUBDIR+=	libsbsms
 SUBDIR+=	libshout
@@ -434,6 +435,7 @@ SUBDIR+=	sphinxtrain
 SUBDIR+=	spiralloops
 SUBDIR+=	spiralsynth
 SUBDIR+=	splay
+SUBDIR+=	spotify-qt
 SUBDIR+=	sptk
 SUBDIR+=	strawberry
 SUBDIR+=	streamripper
