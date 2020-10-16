@@ -1,4 +1,4 @@
-$NetBSD: CHANGES-2020,v 1.5770 2020/10/15 01:26:39 tpaul Exp $
+$NetBSD: CHANGES-2020,v 1.5782 2020/10/15 23:30:04 gdt Exp $
 
 Changes to the packages collection and infrastructure in 2020:
 
@@ -8550,3 +8550,18 @@ Changes to the packages collection and infrastructure in 2020:
 	Updated lang/lua53 to 5.3.6 [wiz 2020-10-14]
 	Updated lang/lua54 to 5.4.1 [wiz 2020-10-14]
 	Updated devel/php-composer to 1.10.15 [tpaul 2020-10-15]
+	Updated www/bozohttpd to 20201014 [mrg 2020-10-15]
+	Updated www/ruby-rouge to 3.24.0 [fcambus 2020-10-15]
+	Updated lang/go114 to 1.14.10 [bsiegert 2020-10-15]
+	Updated lang/go115 to 1.15.3 [bsiegert 2020-10-15]
+	Updated finance/py-stripe to 2.55.0 [adam 2020-10-15]
+	Updated security/py-authlib to 0.15.1 [adam 2020-10-15]
+	Updated www/py-nbformat to 5.0.8 [adam 2020-10-15]
+	Updated databases/py-alembic to 1.4.3 [adam 2020-10-15]
+	Updated www/apache-tomcat9 to 9.0.39 [otis 2020-10-15]
+	Updated www/apache-tomcat85 to 8.5.59 [otis 2020-10-15]
+	Updated www/apache-tomcat7 to 7.0.106 [otis 2020-10-15]
+	Updated print/foliate to 2.5.0 [fox 2020-10-15]
+	Updated textproc/hfstospell to 0.5.2 [bsiegert 2020-10-15]
+	Updated net/py-paho-mqtt to 1.5.1 [gdt 2020-10-15]
+	Updated ham/chirp to 20201014 [gdt 2020-10-15]
