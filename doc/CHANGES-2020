@@ -1,4 +1,4 @@
-$NetBSD: CHANGES-2020,v 1.5782 2020/10/15 23:30:04 gdt Exp $
+$NetBSD: CHANGES-2020,v 1.5791 2020/10/16 22:34:25 mcf Exp $
 
 Changes to the packages collection and infrastructure in 2020:
 
@@ -8565,3 +8565,12 @@ Changes to the packages collection and infrastructure in 2020:
 	Updated textproc/hfstospell to 0.5.2 [bsiegert 2020-10-15]
 	Updated net/py-paho-mqtt to 1.5.1 [gdt 2020-10-15]
 	Updated ham/chirp to 20201014 [gdt 2020-10-15]
+	Updated net/py-gcs-oauth2-boto-plugin to 2.7 [bsiegert 2020-10-16]
+	Updated net/py-gsutil to 4.53 [bsiegert 2020-10-16]
+	Updated chat/mumble to 1.3.3 [nia 2020-10-16]
+	Updated net/djbdns-run to 20201016 [schmonz 2020-10-16]
+	Updated net/tinydyndns to 0.4.2nb1 [schmonz 2020-10-16]
+	Updated finance/gnucash-docs to 4.2 [wiz 2020-10-16]
+	Updated print/cups-base to 2.3.3nb7 [prlw1 2020-10-16]
+	Updated print/cups-filters to 1.28.5 [prlw1 2020-10-16]
+	Updated sysutils/libcap to 2.44 [mcf 2020-10-16]
