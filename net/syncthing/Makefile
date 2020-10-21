@@ -1,24 +1,9 @@
-# $NetBSD: Makefile,v 1.120 2020/10/19 17:56:44 nia Exp $
+# $NetBSD: Makefile,v 1.124 2020/10/20 18:00:32 gdt Exp $
 
-# Upstream used to frequently break protocol compatibility, but since
-# 2018 or so this has been much better.  While users of pkgsrc
-# syncthing on multiple systems can update synchronously, an important
-# use case is interoperating with syncthing-android.
-#
-# Therefore, pkgsrc will update to a new syncthing version
-# (e.g. 0.14.x vs 1.0.x) if either there is no protocol break, or if a
-# corresponding syncthing-android version becomes available in the
-# f-droid.org repository:
-#   https://f-droid.org/repository/browse/?fdid=com.nutomic.syncthingandroid
-# Updates that could possibly break protocol compatibility with the
-# current syncthing-android in f-droid must be tested against the
-# android version from f-droid prior to commiting.  (This is an
-# attempt to avoid having to version syncthing in pkgsrc.)
-#
-# Minor version updates may be committed without asking.  Major
-# updates not following the above policy will be reverted.
+# Protocol breaks require tech-pkg@ discussion and MAINTAINER approval.
 DISTNAME=	syncthing-source-v1.10.0
 PKGNAME=	${DISTNAME:S,source-v,,}
+PKGREVISION=	1
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_GITHUB:=syncthing/}
 GITHUB_RELEASE=	v${PKGVERSION_NOREV}
@@ -93,9 +78,6 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/assets/logo-${s}.png  \
 		${DESTDIR}${PREFIX}/share/icons/hicolor/${s}x${s}/apps/syncthing.png
 .endfor
-
-# Remove after next update. As of 1.7.1, syncthing does not work with Go 1.15.
-GO_VERSION_DEFAULT=	114
 
 .include "../../lang/go/go-package.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
