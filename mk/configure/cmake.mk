@@ -43,15 +43,13 @@
 #       install_name_tool(1) on macOS. The default is ${PREFIX}/lib.
 #
 
-_CMAKE_DIR=	${BUILDLINK_DIR}/cmake-Modules
-
 CMAKE_USE_GNU_INSTALL_DIRS?=	yes
 
 CMAKE_INSTALL_PREFIX?=	${PREFIX}
 CMAKE_INSTALL_NAME_DIR?=${PREFIX}/lib
 
 CMAKE_ARGS+=	-DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
-CMAKE_ARGS+=	-DCMAKE_MODULE_PATH:PATH=${_CMAKE_DIR}
+CMAKE_ARGS+=	-DCMAKE_SYSTEM_PREFIX_PATH:PATH=${BUILDLINK_DIR}
 .if empty(CMAKE_PKGSRC_BUILD_FLAGS:M[nN][oO])
 CMAKE_ARGS+=    -DCMAKE_PKGSRC_BUILD_FLAGS:BOOL=TRUE
 .endif
@@ -75,27 +73,6 @@ CMAKE_ARGS+=	-DCMAKE_INSTALL_LOCALEDIR:PATH=${PKGLOCALEDIR}/locale
 .if defined(CMAKE_PREFIX_PATH)
 CMAKE_ARGS+=-DCMAKE_PREFIX_PATH:PATH=${CMAKE_PREFIX_PATH:ts;:Q}
 .endif
-
-CMAKE_MODULE_PATH_OVERRIDE+=	CMakeLists.txt
-
-### configure-cmake-override modifies the cmake CMakeLists.txt file in
-### ${WRKSRC} so that if CMAKE_MODULE_PATH is set we add our Module
-### directory before any others.
-###
-
-SUBST_CLASSES+=		cmake
-SUBST_STAGE.cmake=	do-configure-pre-hook
-SUBST_MESSAGE.cmake=	Fixing CMAKE_MODULE_PATH in CMakeLists.txt
-SUBST_FILES.cmake=	${CMAKE_MODULE_PATH_OVERRIDE}
-SUBST_SED.cmake=	\
-	-e 's|set *( *CMAKE_MODULE_PATH |set (CMAKE_MODULE_PATH "${_CMAKE_DIR}" |'
-SUBST_SED.cmake+=	\
-	-e 's|SET *( *CMAKE_MODULE_PATH |SET (CMAKE_MODULE_PATH "${_CMAKE_DIR}" |'
-SUBST_NOOP_OK.cmake=	yes # not all packages need this
-
-do-configure-pre-hook: __cmake-copy-module-tree
-__cmake-copy-module-tree: .PHONY
-	${RUN} cd ${PKGSRCDIR}/mk; ${CP} -R cmake-Modules ${_CMAKE_DIR}
 
 ### The cmake function export_library_dependencies() writes out
 ### library dependency info to a file and this may contain buildlink
