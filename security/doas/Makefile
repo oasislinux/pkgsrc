@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.9 2020/04/28 11:46:29 nikita Exp $
+# $NetBSD: Makefile,v 1.12 2020/10/21 19:32:39 pin Exp $
 
-DISTNAME=	doas-6.2p4
-PKGREVISION=	1
+DISTNAME=	doas-6.3p2
 CATEGORIES=	security
 MASTER_SITES=	${MASTER_SITE_GITHUB:=slicer69/}
 
@@ -17,6 +16,7 @@ USE_TOOLS+=	gmake yacc
 # Add any failing platforms as BROKEN_ON_PLATFORM.
 
 MAKE_ENV+=	MANDIR=${DESTDIR}${PREFIX}/${PKGMANDIR}
+MAKE_ENV+=	SYSCONFDIR=${PKG_SYSCONFDIR:Q}
 
 SPECIAL_PERMS+=		bin/doas ${SETUID_ROOT_PERMS}
 

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.26 2020/08/31 18:09:48 wiz Exp $
+# $NetBSD: Makefile,v 1.28 2020/10/23 00:45:48 gutteridge Exp $
 
 GCC_PKGNAME=		gcc6
 .include		"version.mk"
@@ -6,7 +6,7 @@ GCC_PKGNAME=		gcc6
 DISTNAME=	gcc-${GCC6_DIST_VERSION}
 PKGNAME=	${GCC_PKGNAME}-${GCC6_DIST_VERSION}
 ## When bumping the PKGREVISION of this package the PKGREVISION of
-## lang/gcc6-libs needs to be bump to be at least 1 more than the
+## lang/gcc6-libs needs to be bumped to be at least 1 more than the
 ## PKGREVISION of this package!
 PKGREVISION=	4
 CATEGORIES=	lang
@@ -176,6 +176,8 @@ SUBST_STAGE.ccs=	pre-configure
 SUBST_FILES.ccs=	contrib/make_sunver.pl
 SUBST_SED.ccs=		-e 's,/usr/ccs/bin,/usr/bin,g'
 .endif
+
+CTF_FILES_SKIP+=	*/gengtype	# CPU limit exceeded
 
 pre-configure:
 	${RUN} cd ${WRKSRC} && ${MKDIR} ${OBJDIR}
