@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.73 2020/10/24 18:22:08 kamil Exp $
+# $NetBSD: Makefile,v 1.75 2020/10/26 04:26:11 mcf Exp $
 
 DISTNAME=	gdb-10.1
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GNU:=gdb/}
 
@@ -9,7 +10,7 @@ HOMEPAGE=	https://www.gnu.org/software/gdb/gdb.html
 COMMENT=	Symbolic debugger for multiple language frontends
 LICENSE=	gnu-gpl-v3
 
-USE_LANGUAGES=		c c++11
+USE_LANGUAGES=		c gnu++11
 
 BROKEN_GETTEXT_DETECTION=	yes
 GNU_CONFIGURE=			yes
