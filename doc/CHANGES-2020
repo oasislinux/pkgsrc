@@ -1,4 +1,4 @@
-$NetBSD: CHANGES-2020,v 1.5913 2020/10/26 15:17:23 ryoon Exp $
+$NetBSD: CHANGES-2020,v 1.5921 2020/10/27 18:11:09 adam Exp $
 
 Changes to the packages collection and infrastructure in 2020:
 
@@ -8784,3 +8784,14 @@ Changes to the packages collection and infrastructure in 2020:
 	Updated x11/kitty to 0.19.1 [pin 2020-10-26]
 	Updated www/py-flask-admin to 1.5.7 [kleink 2020-10-26]
 	Updated lang/openjdk11 to 1.11.0.9.11 [ryoon 2020-10-26]
+	Updated pkgtools/pkglint to 20.3.2 [rillig 2020-10-26]
+	Updated databases/redis to 6.0.9 [adam 2020-10-27]
+	Updated devel/memcached to 1.6.8 [adam 2020-10-27]
+	Updated net/tinydyndns-run to 20201027 [schmonz 2020-10-27]
+	Updated audio/ncspot to 0.2.4 [pin 2020-10-27]
+	Updated sysutils/webmin to 1.960 [mef 2020-10-27]
+	Updated www/php-nextcloud to 20.0.1 [ryoon 2020-10-27]
+	Updated www/firefox to 82.0.1 [maya 2020-10-27]
+	Updated www/firefox-l10n to 82.0.1 [maya 2020-10-27]
+	Updated multimedia/libass to 0.15.0 [adam 2020-10-27]
+	Updated devel/py-setuptools to 50.3.2 [adam 2020-10-27]
