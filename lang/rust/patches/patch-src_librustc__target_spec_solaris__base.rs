@@ -1,4 +1,4 @@
-$NetBSD: patch-src_librustc__target_spec_solaris__base.rs,v 1.3 2020/03/13 18:34:53 jperkin Exp $
+$NetBSD: patch-src_librustc__target_spec_solaris__base.rs,v 1.4 2020/10/28 11:16:46 he Exp $
 
 Enable frame pointers on SunOS.
 
@@ -8,7 +8,7 @@ Enable frame pointers on SunOS.
          has_rpath: true,
          target_family: Some("unix".to_string()),
          is_like_solaris: true,
-+        eliminate_frame_pointer: false,
++	eliminate_frame_pointer: false,
          limit_rdylib_exports: false, // Linker doesn't support this
          eh_frame_header: false,
  

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.611 2020/10/11 13:41:19 pin Exp $
+# $NetBSD: Makefile,v 1.614 2020/10/30 15:47:01 nia Exp $
 #
 
 COMMENT=	Audio tools
@@ -69,6 +69,7 @@ SUBDIR+=	deforaos-mixer
 SUBDIR+=	din
 SUBDIR+=	disc-cover
 SUBDIR+=	distmp3
+SUBDIR+=	dssi
 SUBDIR+=	dumb
 SUBDIR+=	easyh10
 SUBDIR+=	easytag
@@ -226,6 +227,7 @@ SUBDIR+=	libcddb
 SUBDIR+=	libcuefile
 SUBDIR+=	libdca
 SUBDIR+=	libdiscid
+SUBDIR+=	libdssialsacompat
 SUBDIR+=	libebur128
 SUBDIR+=	libfishsound
 SUBDIR+=	libgpod
@@ -500,5 +502,6 @@ SUBDIR+=	xmms-wma
 SUBDIR+=	xmp
 SUBDIR+=	xmradio
 SUBDIR+=	xwave
+SUBDIR+=	zynaddsubfx
 
 .include "../mk/misc/category.mk"

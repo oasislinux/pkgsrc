@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.8 2020/10/17 16:44:37 js Exp $
+# $NetBSD: Makefile,v 1.10 2020/10/27 21:43:54 js Exp $
 
-DISTNAME=	mautrix-python-0.7.11
+DISTNAME=	mautrix-python-0.7.14
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/-python//}
-PKGREVISION=	2
 CATEGORIES=	chat python
 MASTER_SITES=	${MASTER_SITE_GITHUB:=tulir/}
 GITHUB_PROJECT=	mautrix-python
@@ -13,8 +12,7 @@ HOMEPAGE=	https://github.com/tulir/mautrix-python
 COMMENT=	Python 3 asyncio Matrix framework
 LICENSE=	mpl-2.0
 
-# 36 is too old, 39 doesn't work.
-PYTHON_VERSIONS_INCOMPATIBLE=	27 36 39
+PYTHON_VERSIONS_INCOMPATIBLE=	27 36
 
 DEPENDS+=	${PYPKGPREFIX}-setuptools-[0-9]*:../../devel/py-setuptools
 DEPENDS+=	${PYPKGPREFIX}-aiohttp>=3<4:../../www/py-aiohttp
