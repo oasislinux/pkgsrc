@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.617 2020/10/18 09:24:02 adam Exp $
+# $NetBSD: Makefile,v 1.619 2020/11/03 23:01:59 tnn Exp $
 
 COMMENT=	Databases
 
@@ -292,6 +292,7 @@ SUBDIR+=	postgres_exporter
 SUBDIR+=	postgresql-pgroonga
 SUBDIR+=	postgresql-pljava
 SUBDIR+=	postgresql-postgis2
+SUBDIR+=	postgresql-promscale_extension
 SUBDIR+=	postgresql-redislog
 SUBDIR+=	postgresql-timescaledb
 SUBDIR+=	postgresql10
@@ -343,6 +344,7 @@ SUBDIR+=	postgresql96-plpython
 SUBDIR+=	postgresql96-pltcl
 SUBDIR+=	postgresql96-server
 SUBDIR+=	prometheus
+SUBDIR+=	promscale
 SUBDIR+=	pxtools
 SUBDIR+=	py-PgSQL
 SUBDIR+=	py-aiosqlite

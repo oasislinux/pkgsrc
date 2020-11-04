@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.905 2020/10/24 22:40:01 wiz Exp $
+# $NetBSD: Makefile,v 1.907 2020/11/03 22:53:40 otis Exp $
 #
 
 COMMENT=	System utilities
@@ -427,6 +427,7 @@ SUBDIR+=	nvnet
 SUBDIR+=	nvramtool
 SUBDIR+=	oak
 SUBDIR+=	onefetch
+SUBDIR+=	openipmi
 SUBDIR+=	open-vm-tools
 SUBDIR+=	openstack_init
 SUBDIR+=	openxenmanager
@@ -837,6 +838,11 @@ SUBDIR+=	xuvmstat
 SUBDIR+=	ytree
 SUBDIR+=	zabbix
 SUBDIR+=	zabbix-frontend
+SUBDIR+=	zabbix50-agent
+SUBDIR+=	zabbix50-frontend
+SUBDIR+=	zabbix50-java
+SUBDIR+=	zabbix50-proxy
+SUBDIR+=	zabbix50-server
 SUBDIR+=	zidrav
 SUBDIR+=	znapzend
 
