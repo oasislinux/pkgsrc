@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.907 2020/11/03 22:53:40 otis Exp $
+# $NetBSD: Makefile,v 1.911 2020/11/04 20:55:25 pin Exp $
 #
 
 COMMENT=	System utilities
@@ -63,6 +63,7 @@ SUBDIR+=	bkpupsd
 SUBDIR+=	boxbackup-client
 SUBDIR+=	boxbackup-server
 SUBDIR+=	brasero
+SUBDIR+=	broot
 SUBDIR+=	bsdec2-image-upload
 SUBDIR+=	bsdinstall
 SUBDIR+=	bsign
@@ -235,6 +236,8 @@ SUBDIR+=	gkrellm-server
 SUBDIR+=	gkrellm-share
 SUBDIR+=	gnome-menus
 SUBDIR+=	gnome-nds-thumbnailer
+SUBDIR+=	gnome-tracker
+SUBDIR+=	gnome-tracker-miners
 SUBDIR+=	gnome-vfs
 SUBDIR+=	gnome-vfsmm
 SUBDIR+=	gnuit
@@ -409,6 +412,7 @@ SUBDIR+=	mtx
 SUBDIR+=	munin-common
 SUBDIR+=	munin-master
 SUBDIR+=	munin-node
+SUBDIR+=	nautilus
 SUBDIR+=	nbase
 SUBDIR+=	ncdu
 SUBDIR+=	ndesk-dbus
@@ -427,8 +431,8 @@ SUBDIR+=	nvnet
 SUBDIR+=	nvramtool
 SUBDIR+=	oak
 SUBDIR+=	onefetch
-SUBDIR+=	openipmi
 SUBDIR+=	open-vm-tools
+SUBDIR+=	openipmi
 SUBDIR+=	openstack_init
 SUBDIR+=	openxenmanager
 SUBDIR+=	osname

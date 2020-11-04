@@ -1,4 +1,4 @@
-$NetBSD: CHANGES-2020,v 1.6023 2020/11/03 23:01:59 tnn Exp $
+$NetBSD: CHANGES-2020,v 1.6038 2020/11/04 20:55:58 pin Exp $
 
 Changes to the packages collection and infrastructure in 2020:
 
@@ -8913,3 +8913,20 @@ Changes to the packages collection and infrastructure in 2020:
 	Added sysutils/zabbix50-proxy version 5.0.5 [otis 2020-11-03]
 	Added sysutils/zabbix50-server version 5.0.5 [otis 2020-11-03]
 	Added databases/postgresql-promscale_extension version 0.1.1 [tnn 2020-11-03]
+	Updated graphics/py-pygraphviz to 1.6 [adam 2020-11-04]
+	Updated textproc/py-regex to 2020.10.28 [adam 2020-11-04]
+	Updated devel/py-ipython to 7.19.0 [adam 2020-11-04]
+	Updated devel/py-pip to 20.2.4 [adam 2020-11-04]
+	Updated x11/gnome-desktop3 to 3.38.1 [nia 2020-11-04]
+	Added sysutils/gnome-tracker version 3.0.1 [nia 2020-11-04]
+	Added sysutils/gnome-tracker-miners version 3.0.1 [nia 2020-11-04]
+	Added archivers/gnome-autoar version 0.2.4 [nia 2020-11-04]
+	Added sysutils/nautilus version 3.38.1 [nia 2020-11-04]
+	Added archivers/file-roller version 3.38.0 [nia 2020-11-04]
+	Added geography/geocode-glib version 3.26.2 [nia 2020-11-04]
+	Updated devel/libgweather to 3.36.1 [nia 2020-11-04]
+	Updated geography/geoclue to 2.5.6 [nia 2020-11-04]
+	Updated net/snmptt to 1.4.2 [otis 2020-11-04]
+	Updated sysutils/onefetch to 2.6.0 [pin 2020-11-04]
+	Added security/libsecp256k1 version 0.1 [js 2020-11-04]
+	Added sysutils/broot version 1.0.4 [pin 2020-11-04]
