@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.784 2020/10/22 23:44:09 tnn Exp $
+# $NetBSD: Makefile,v 1.786 2020/11/06 18:10:41 tnn Exp $
 #
 
 COMMENT=	Security tools
@@ -27,6 +27,7 @@ SUBDIR+=	apg
 SUBDIR+=	argon2
 SUBDIR+=	arirang
 SUBDIR+=	asignify
+SUBDIR+=	authelia
 SUBDIR+=	avcheck
 SUBDIR+=	bcrypt
 SUBDIR+=	bearssl
@@ -193,6 +194,7 @@ SUBDIR+=	libpreludedb-pgsql
 SUBDIR+=	libpreludedb-python
 SUBDIR+=	libpreludedb-sqlite3
 SUBDIR+=	libressl
+SUBDIR+=	libsecp256k1
 SUBDIR+=	libsecret
 SUBDIR+=	libsodium
 SUBDIR+=	libssh

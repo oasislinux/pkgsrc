@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2020/10/23 00:21:04 gutteridge Exp $
+# $NetBSD: Makefile,v 1.11 2020/11/06 09:11:31 maya Exp $
 
 DISTNAME=	mozjs68_68.6.0.orig
 PKGNAME=	${DISTNAME:S/_/-/:S/.orig//}
-PKGREVISION=	4
+PKGREVISION=	7
 CATEGORIES=	lang
 MASTER_SITES=	http://deb.debian.org/debian/pool/main/m/mozjs68/
 EXTRACT_SUFX=	.tar.xz
@@ -38,8 +38,6 @@ CONFIGURE_ARGS+=	--host=${MACHINE_GNU_PLATFORM}
 
 PKGCONFIG_OVERRIDE+=	build/js.pc.in
 PKGCONFIG_OVERRIDE+=	ctypes/libffi/libffi.pc.in
-
-NOT_PAX_MPROTECT_SAFE+=	bin/js68
 
 # Python 2.7 and Python 3.6 or later are required simultaneously.
 PYTHON_VERSIONS_ACCEPTED=	27

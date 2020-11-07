@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.244 2020/11/04 15:17:56 nia Exp $
+# $NetBSD: Makefile,v 1.246 2020/11/06 15:06:49 nia Exp $
 
 VERREL=		7.0.3
 VERRC=		1
 VER=		${VERREL}.${VERRC}
 DISTNAME=	libreoffice-${VER}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	misc
 MASTER_SITES=	http://download.documentfoundation.org/libreoffice/src/${VERREL}/
 EXTRACT_SUFX=	.tar.xz
@@ -350,6 +350,7 @@ BUILDLINK_API_DEPENDS.libetonyek+=	libetonyek>=0.1.2
 .if ${LIBRSVG_TYPE} == "rust"
 #BUILDLINK_API_DEPENDS.harfbuzz+=	harfbuzz>=1.4.2
 .include "../../fonts/harfbuzz/buildlink3.mk"
+.include "../../fonts/harfbuzz-icu/buildlink3.mk"
 .include "../../graphics/graphite2/buildlink3.mk"
 .endif
 # Requires JCS_EXT_BGRA

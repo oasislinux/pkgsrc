@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.481 2020/09/04 12:07:40 wiz Exp $
+# $NetBSD: Makefile,v 1.483 2020/11/05 16:56:01 bacon Exp $
 
 COMMENT=	Mathematics
 
@@ -255,6 +255,9 @@ SUBDIR+=	ocaml-zarith
 SUBDIR+=	octave
 SUBDIR+=	odepack
 SUBDIR+=	openaxiom
+SUBDIR+=	openblas
+SUBDIR+=	openblas_openmp
+SUBDIR+=	openblas_pthread
 SUBDIR+=	openfst
 SUBDIR+=	ordCalc
 SUBDIR+=	otter
