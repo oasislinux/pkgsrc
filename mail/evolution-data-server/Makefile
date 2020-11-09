@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.195 2020/11/05 09:06:58 ryoon Exp $
+# $NetBSD: Makefile,v 1.197 2020/11/08 00:56:53 mef Exp $
 
 DISTNAME=	evolution-data-server-3.35.1
 PKGREVISION=	12
@@ -55,6 +55,7 @@ _TOOLS_USE_PKGSRC.xgettext=	yes
 .include "../../databases/sqlite3/buildlink3.mk"
 .include "../../devel/nspr/buildlink3.mk"
 .include "../../devel/nss/buildlink3.mk"
+.include "../../devel/gperf/buildlink3.mk"
 .include "../../net/libgdata/buildlink3.mk"
 .include "../../net/libsoup/buildlink3.mk"
 .include "../../security/gcr/buildlink3.mk"

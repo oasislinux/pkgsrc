@@ -1,4 +1,4 @@
-$NetBSD: TODO,v 1.20168 2020/11/05 17:12:40 nia Exp $
+$NetBSD: TODO,v 1.20183 2020/11/09 14:45:32 schmonz Exp $
 
 Suggested new packages
 ======================
@@ -367,10 +367,9 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o GMT-5.1.1
 	o GNUMail-1.2.2
 	o Gorm-1.2.22
-	o ImageMagick-7.0.10.35
 	o JBidwatcher-2.5.6 [wants launch4j]
 	o LPRng-core-3.8.35
-	o MesaLib-20.1.8
+	o MesaLib-20.2.1
 	o OdfConverter-4.0
 	o PACK-0.0.4
 	o Pantomime-1.2.2
@@ -422,7 +421,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o aribas-1.64
 	o arirang-1.70
 	o asapm-3.1
-	o asciidoc-9.0.4
 	o asn1c-0.9.27
 	o asp2php-2008-08-13
 	o aspell-nb-2.0.10
@@ -464,7 +462,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o calligra-3.0.1 [in wip; koffice successor]
 	o cantata-2.4.2
 	o cardboard-schedule-1.14c [at http://www.bright-green.com/downloads/]
-	o catch2-2.13.3
 	o catdoc-1.1
 	o catdoc-tk-1.1
 	o cddbd-1.5.2
@@ -637,7 +634,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o gok-2.30.1
 	o golem-0.0.6
 	o goocanvas-2.0.2
-	o gopls-0.5.2
 	o gossip-0.31
 	o gourmet-0.13.3
 	o gperiodic-3.0.2
@@ -813,7 +809,8 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o mined-2015.25
 	o mini_sendmail-1.3.9
 	o mit-scheme-bin-9.2
-	o modular-xorg-xquartz-1.18.0
+	o mitmproxy-5.3 [leot]
+	o modular-xorg-xquartz-1.20.9
 	o molden-4.8 [after which PR 40252 can be closed]
 	o molden-5.5
 	o mono-nat-1.1.0
@@ -824,7 +821,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o mserv-devel-0.41
 	o multitail-6.4.2
 	o muse-0.9.2
-	o musicpd-0.22.2
 	o myodbc-5.3.4
 	o mysql-connector-c++-8.0.17
 	o mysql-server-8.0.20
@@ -925,7 +921,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o policyd-weight-0.1.15.2
 	o polkit-0.118
 	o poppass-4.0.14
-	o poppler-20.10.0
+	o poppler-20.11.0
 	o postal-0.72
 	o pound-3.0d
 	o povray-3.7.0.0
@@ -1050,7 +1046,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o stegavorto-2011.05.26
 	o strace-4.23
 	o stratagus-2.2.5.5
-	o strawberry-0.8.3
 	o streamtuner-2.2.0
 	o sudo-1.9.3p1
 	o sunclock-3.57 [https://github.com/mdoege/Sunclock]
@@ -1099,7 +1094,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o ucview-0.33
 	o udpcast-20120424
 	o ufoai-2.3.1
-	o ugrep-3.0.4
 	o uhttpmock-0.5.0
 	o unicap-0.9.8
 	o units-2.12
