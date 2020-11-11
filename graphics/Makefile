@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.909 2020/09/08 21:27:19 wiz Exp $
+# $NetBSD: Makefile,v 1.911 2020/11/10 13:36:51 nia Exp $
 #
 
 COMMENT=	Graphics tools and libraries
@@ -82,6 +82,7 @@ SUBDIR+=	clutter-mx
 SUBDIR+=	cnxtview
 SUBDIR+=	cogl
 SUBDIR+=	colord
+SUBDIR+=	colord-gtk
 SUBDIR+=	comix
 SUBDIR+=	compface
 SUBDIR+=	cpia2view
@@ -204,6 +205,7 @@ SUBDIR+=	gnome-backgrounds
 SUBDIR+=	gnome-icon-theme
 SUBDIR+=	gnome-icon-theme-extras
 SUBDIR+=	gnome-icon-theme-symbolic
+SUBDIR+=	gnome-screenshot
 SUBDIR+=	gnome-themes-standard
 SUBDIR+=	gnuplot
 SUBDIR+=	go-gift
