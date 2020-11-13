@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.148 2020/11/04 13:02:52 nia Exp $
+# $NetBSD: Makefile,v 1.150 2020/11/12 01:20:02 gutteridge Exp $
 
 DISTNAME=	file-roller-3.38.0
 MASTER_SITES=	${MASTER_SITE_GNOME:=/sources/${PKGBASE}/${PKGVERSION_NOREV:R}/}
@@ -10,10 +10,19 @@ HOMEPAGE=	https://wiki.gnome.org/Apps/FileRoller
 COMMENT=	Archive manager for the GNOME desktop environment
 LICENSE=	gnu-gpl-v2
 
-USE_TOOLS+=	pkg-config
+USE_TOOLS+=	msgfmt pkg-config
+
+TOOL_DEPENDS+=	itstool-[0-9]*:../../textproc/itstool
 
 MESON_ARGS+=	-Dpackagekit=false
 MESON_ARGS+=	-Dnautilus-actions=false
+
+.include "../../mk/bsd.prefs.mk"
+
+# msgfmt: unknown option -- xml
+.if ${OPSYS} == "NetBSD"
+TOOLS_PLATFORM.msgfmt=
+.endif
 
 PYTHON_FOR_BUILD_ONLY=	tool
 
