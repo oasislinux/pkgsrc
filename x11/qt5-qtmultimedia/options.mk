@@ -50,3 +50,8 @@ MAKE_ENV+=	QT_CONFIG+=pulseaudio
 .else
 MAKE_ENV+=	QT_CONFIG+=-pulseaudio
 .endif
+
+PLIST_VARS+=		audioengine
+.if ${OPSYS} == "QNX" || ${OPSYS} == "Darwin" || empty(PKG_OPTIONS:Mgstreamer)
+PLIST.audioengine=	yes
+.endif
