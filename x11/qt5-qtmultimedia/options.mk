@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.4 2020/07/08 14:49:14 adam Exp $
+# $NetBSD: options.mk,v 1.5 2020/11/17 04:46:35 mcf Exp $
 
 PKG_OPTIONS_VAR=		PKG_OPTIONS.qt5-qtmultimedia
 PKG_SUPPORTED_OPTIONS=		alsa gstreamer openal pulseaudio

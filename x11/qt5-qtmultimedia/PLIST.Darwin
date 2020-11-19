@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST.Darwin,v 1.2 2020/01/21 20:25:38 adam Exp $
+@comment $NetBSD: PLIST.Darwin,v 1.3 2020/11/17 04:46:35 mcf Exp $
 qt5/lib/cmake/Qt5Multimedia/Qt5Multimedia_AVFMediaPlayerServicePlugin.cmake
 qt5/lib/cmake/Qt5Multimedia/Qt5Multimedia_AVFServicePlugin.cmake
 qt5/lib/cmake/Qt5Multimedia/Qt5Multimedia_CoreAudioPlugin.cmake
