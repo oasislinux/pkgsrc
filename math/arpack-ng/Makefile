@@ -13,6 +13,10 @@ LICENSE=	original-bsd
 USE_LANGUAGES=	c fortran
 USE_CMAKE=	yes
 
+# Required to build with gfortran 10. Fixed upstream in
+# https://github.com/opencollab/arpack-ng/commit/9418632214
+FFLAGS+=	-fallow-argument-mismatch
+
 OBJDIR=		obj
 
 CONFIGURE_DIRS=	${OBJDIR}
