@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2020/10/12 21:52:02 bacon Exp $
+# $NetBSD: Makefile,v 1.3 2020/11/19 19:58:27 mcf Exp $
 
 DISTNAME=	arpack-ng-3.7.0
 PKGREVISION=	1
