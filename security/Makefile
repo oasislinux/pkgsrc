@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.786 2020/11/06 18:10:41 tnn Exp $
+# $NetBSD: Makefile,v 1.789 2020/11/22 11:58:58 nia Exp $
 #
 
 COMMENT=	Security tools
@@ -46,6 +46,7 @@ SUBDIR+=	clusterssh
 SUBDIR+=	codecrypt
 SUBDIR+=	courier-authlib
 SUBDIR+=	crack
+SUBDIR+=	cracklib
 SUBDIR+=	credns
 SUBDIR+=	crypto++
 SUBDIR+=	cvm
@@ -93,7 +94,6 @@ SUBDIR+=	fsh
 SUBDIR+=	fwbuilder
 SUBDIR+=	gcr
 SUBDIR+=	gnome-keyring
-SUBDIR+=	gnome-keyring-manager
 SUBDIR+=	gnu-crypto
 SUBDIR+=	gnu-pw-mgr
 SUBDIR+=	gnupg
@@ -193,6 +193,7 @@ SUBDIR+=	libpreludedb-perl
 SUBDIR+=	libpreludedb-pgsql
 SUBDIR+=	libpreludedb-python
 SUBDIR+=	libpreludedb-sqlite3
+SUBDIR+=	libpwquality
 SUBDIR+=	libressl
 SUBDIR+=	libsecp256k1
 SUBDIR+=	libsecret

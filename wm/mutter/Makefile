@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2020/11/17 15:31:10 nia Exp $
+# $NetBSD: Makefile,v 1.5 2020/11/22 00:05:09 gutteridge Exp $
 
 DISTNAME=	mutter-3.38.1
 CATEGORIES=	wm gnome
@@ -10,7 +10,7 @@ HOMEPAGE=	https://gitlab.gnome.org/GNOME/mutter
 COMMENT=	GNOME window manager
 LICENSE=	gnu-gpl-v2
 
-USE_TOOLS+=		pkg-config
+USE_TOOLS+=		msgfmt pkg-config
 TOOL_DEPENDS+=		gdbus-codegen-[0-9]*:../../devel/gdbus-codegen
 
 .include "../../graphics/MesaLib/features.mk"
@@ -35,6 +35,7 @@ MESON_ARGS+=		-Dverbose=true
 
 .if ${OPSYS} == "NetBSD"
 MESON_ARGS+=		-Dopengl_libname=libGL.so
+TOOLS_PLATFORM.msgfmt=
 .endif
 
 PKGCONFIG_OVERRIDE_STAGE=	pre-install

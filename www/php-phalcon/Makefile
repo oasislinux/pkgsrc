@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2020/07/10 10:11:02 plunky Exp $
+# $NetBSD: Makefile,v 1.7 2020/11/21 14:52:58 otis Exp $
 #
 
 MODNAME=		phalcon
