@@ -1,4 +1,4 @@
-$NetBSD: TODO,v 1.20221 2020/11/24 17:33:42 nia Exp $
+$NetBSD: TODO,v 1.20226 2020/11/27 16:08:24 wiz Exp $
 
 Suggested new packages
 ======================
@@ -460,7 +460,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o calibre-4.11.0 [started in wip; needs QtWebEngineCore]
 	o calibre-5.5
 	o calligra-3.0.1 [in wip; koffice successor]
-	o cantata-2.4.2
 	o cardboard-schedule-1.14c [at http://www.bright-green.com/downloads/]
 	o catdoc-1.1
 	o catdoc-tk-1.1
@@ -477,7 +476,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o classpath-gui-0.99
 	o clawsker-0.7.13
 	o clusterssh-4.05
-	o cmake-3.19.0
 	o colorize-0.3.4
 	o colortail-0.3.3
 	o compiz-0.8.10
@@ -932,7 +930,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o py-configparser-5.0.0 [drops python-2.x support]
 	o py-ephem3-3.7.6.0
 	o py-hgview-1.9.0
-	o py-hypothesis-5.41.3
 	o py-input-pad-1.4.2
 	o py-keybinder-0.3.1
 	o py-markdown-3.2.2 [drops python-2.x support]
@@ -1105,7 +1102,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o wap-utils-1.4.1
 	o warmux-11.04.1
 	o wcalc-2.4
-	o webalizer-2.23.05
 	o websvn-2.3.3
 	o weewm-0.01
 	o whowatch-1.8.5
@@ -1169,7 +1165,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o zim-0.65
 	o zoneminder-1.32.3
 	o zopeedit-0.8
-	o zziplib-0.13.71
 
 Licenses of packages
 ====================

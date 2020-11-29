@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1180 2020/11/23 09:18:33 pin Exp $
+# $NetBSD: Makefile,v 1.1183 2020/11/28 20:55:43 pin Exp $
 #
 
 COMMENT=	Text processing utilities (does not include desktop publishing)
@@ -184,6 +184,7 @@ SUBDIR+=	dict-mueller7
 SUBDIR+=	dict-server
 SUBDIR+=	dictem
 SUBDIR+=	diction
+SUBDIR+=	diffr
 SUBDIR+=	diffsplit
 SUBDIR+=	diffstat
 SUBDIR+=	dikt
@@ -1103,6 +1104,7 @@ SUBDIR+=	source-highlight
 SUBDIR+=	sphinxsearch
 SUBDIR+=	split-thai
 SUBDIR+=	stardic
+SUBDIR+=	stava
 SUBDIR+=	sub2srt
 SUBDIR+=	sublib
 SUBDIR+=	subliminal
@@ -1191,6 +1193,5 @@ SUBDIR+=	yelp-xsl
 SUBDIR+=	yodl
 SUBDIR+=	yq
 SUBDIR+=	zoem
-SUBDIR+=	zoxide
 
 .include "../mk/misc/category.mk"

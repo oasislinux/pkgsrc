@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1362 2020/11/19 20:13:19 schmonz Exp $
+# $NetBSD: Makefile,v 1.1364 2020/11/26 15:53:29 schmonz Exp $
 #
 
 COMMENT=	Networking tools
@@ -412,6 +412,7 @@ SUBDIR+=	nanotodon
 SUBDIR+=	nap
 SUBDIR+=	napshare
 SUBDIR+=	nasd
+SUBDIR+=	nats-server
 SUBDIR+=	nbtscan
 SUBDIR+=	ncdc
 SUBDIR+=	ncftp3
@@ -937,6 +938,7 @@ SUBDIR+=	ucspi-proxy
 SUBDIR+=	ucspi-ssl
 SUBDIR+=	ucspi-tcp
 SUBDIR+=	ucspi-tcp6
+SUBDIR+=	ucspi-tools
 SUBDIR+=	ucspi-unix
 SUBDIR+=	udns
 SUBDIR+=	udpcast

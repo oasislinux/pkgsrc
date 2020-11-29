@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2020/11/21 02:42:03 gutteridge Exp $
+# $NetBSD: Makefile,v 1.9 2020/11/29 00:28:39 gutteridge Exp $
 
 DISTNAME=	mozjs78_78.4.0.orig
 PKGNAME=	${DISTNAME:S/_/-/:S/.orig//}
@@ -16,7 +16,7 @@ USE_TOOLS+=	autoconf213 gmake perl pkg-config
 USE_LANGUAGES=	c c++
 
 # "ERROR: Only GCC 7.1 or newer is supported"
-GCC_REQD+=	7	
+GCC_REQD+=	7
 
 HAS_CONFIGURE=		yes
 CONFIGURE_DIRS=		build
@@ -35,13 +35,24 @@ CONFIGURE_ARGS+=	--with-intl-api
 CONFIGURE_ARGS+=	--target=${MACHINE_GNU_PLATFORM}
 CONFIGURE_ARGS+=	--host=${MACHINE_GNU_PLATFORM}
 
+.if ${MACHINE_ARCH} == "i386"
+# 64 bit atomics
+CXXFLAGS+=		-march=i586
+.endif
+
+.include "../../mk/bsd.prefs.mk"
+
+.if !empty(MACHINE_PLATFORM:MNetBSD-*-powerpc)
+# 64 bit atomics
+.include "../../devel/libatomic/buildlink3.mk"
+.endif
+
 PKGCONFIG_OVERRIDE+=	build/js.pc.in
 PKGCONFIG_OVERRIDE+=	ctypes/libffi/libffi.pc.in
 
 PYTHON_VERSIONS_INCOMPATIBLE=	27
 PYTHON_FOR_BUILD_ONLY=		tool
 TOOL_DEPENDS+=			${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
-ALL_ENV+=			PYTHON3=${PYTHONBIN}
 
 pre-configure:
 	cd ${WRKSRC} && autoconf-2.13 old-configure.in > old-configure \
