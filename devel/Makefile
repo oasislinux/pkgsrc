@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3278 2020/11/21 13:49:50 otis Exp $
+# $NetBSD: Makefile,v 1.3284 2020/12/05 03:22:34 riastradh Exp $
 #
 
 COMMENT=	Development utilities
@@ -445,6 +445,7 @@ SUBDIR+=	go-locker
 SUBDIR+=	go-logrus
 SUBDIR+=	go-mapstructure
 SUBDIR+=	go-mapstructure-bep
+SUBDIR+=	go-mod
 SUBDIR+=	go-mow-cli
 SUBDIR+=	go-nbreader
 SUBDIR+=	go-nitro
@@ -702,6 +703,7 @@ SUBDIR+=	libarena
 SUBDIR+=	libargparse
 SUBDIR+=	libast
 SUBDIR+=	libatomic
+SUBDIR+=	libatomic-links
 SUBDIR+=	libatomic_ops
 SUBDIR+=	libbegemot
 SUBDIR+=	libbinio
@@ -2280,6 +2282,8 @@ SUBDIR+=	py-flake8-polyfill
 SUBDIR+=	py-flakes
 SUBDIR+=	py-flaky
 SUBDIR+=	py-flexmock
+SUBDIR+=	py-flit
+SUBDIR+=	py-flit_core
 SUBDIR+=	py-flufl.i18n
 SUBDIR+=	py-flufl.lock
 SUBDIR+=	py-flufl.testing
@@ -2327,6 +2331,7 @@ SUBDIR+=	py-importlib-resources
 SUBDIR+=	py-incremental
 SUBDIR+=	py-iniconfig
 SUBDIR+=	py-inquirer
+SUBDIR+=	py-intelhex
 SUBDIR+=	py-intervaltree
 SUBDIR+=	py-iowait
 SUBDIR+=	py-ipaddr
