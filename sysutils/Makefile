@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.920 2020/12/03 07:51:37 wiz Exp $
+# $NetBSD: Makefile,v 1.922 2020/12/11 13:38:57 nia Exp $
 #
 
 COMMENT=	System utilities
@@ -329,6 +329,7 @@ SUBDIR+=	i810switch
 SUBDIR+=	iat
 SUBDIR+=	idesk
 SUBDIR+=	install-sh
+SUBDIR+=	intel-backlight
 SUBDIR+=	intel-microcode-netbsd
 SUBDIR+=	intellij-fsnotifier
 SUBDIR+=	ioping
@@ -845,6 +846,7 @@ SUBDIR+=	xnc
 SUBDIR+=	xosview
 SUBDIR+=	xps
 SUBDIR+=	xuvmstat
+SUBDIR+=	yank
 SUBDIR+=	ytree
 SUBDIR+=	zabbix
 SUBDIR+=	zabbix-frontend
