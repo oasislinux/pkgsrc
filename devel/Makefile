@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3295 2020/12/11 14:42:01 nia Exp $
+# $NetBSD: Makefile,v 1.3298 2020/12/14 15:17:11 tnn Exp $
 #
 
 COMMENT=	Development utilities
@@ -22,6 +22,7 @@ SUBDIR+=	R-bindr
 SUBDIR+=	R-bit
 SUBDIR+=	R-bit64
 SUBDIR+=	R-blob
+SUBDIR+=	R-brio
 SUBDIR+=	R-caTools
 SUBDIR+=	R-callr
 SUBDIR+=	R-checkmate
@@ -33,6 +34,7 @@ SUBDIR+=	R-crayon
 SUBDIR+=	R-cyclocomp
 SUBDIR+=	R-desc
 SUBDIR+=	R-devtools
+SUBDIR+=	R-diffobj
 SUBDIR+=	R-evaluate
 SUBDIR+=	R-fansi
 SUBDIR+=	R-fs
@@ -73,6 +75,7 @@ SUBDIR+=	R-tidyselect
 SUBDIR+=	R-tinytest
 SUBDIR+=	R-usethis
 SUBDIR+=	R-uuid
+SUBDIR+=	R-waldo
 SUBDIR+=	R-whisker
 SUBDIR+=	R-withr
 SUBDIR+=	R-xfun
@@ -227,6 +230,7 @@ SUBDIR+=	cppcheck
 SUBDIR+=	cppunit
 SUBDIR+=	cpputest
 SUBDIR+=	cproto
+SUBDIR+=	cpu_features
 SUBDIR+=	cpuflags
 SUBDIR+=	cqual
 SUBDIR+=	cre2
@@ -484,6 +488,7 @@ SUBDIR+=	go-xerrors
 SUBDIR+=	go-yaml
 SUBDIR+=	gob2
 SUBDIR+=	gobject-introspection
+SUBDIR+=	golangci-lint
 SUBDIR+=	golint
 SUBDIR+=	google-api-go-client
 SUBDIR+=	google-glog

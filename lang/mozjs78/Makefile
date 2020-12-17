@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.11 2020/12/05 12:08:55 nia Exp $
+# $NetBSD: Makefile,v 1.14 2020/12/14 23:02:53 gutteridge Exp $
 
 DISTNAME=	mozjs78_78.4.0.orig
 PKGNAME=	${DISTNAME:S/_/-/:S/.orig//}
@@ -7,7 +7,7 @@ MASTER_SITES=	http://deb.debian.org/debian/pool/main/m/mozjs78/
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	https://packages.debian.org/bullseye/libmozjs-78-0
+HOMEPAGE=	https://mozilla-spidermonkey.github.io/
 COMMENT=	SpiderMonkey JavaScript library (78.x branch)
 LICENSE=	mpl-1.1
 
@@ -44,6 +44,8 @@ CONFIGURE_ARGS+=	--host=${MACHINE_GNU_PLATFORM}
 CXXFLAGS+=		-march=i586
 .endif
 
+# XXX This does not work entirely correctly at present. There are
+# 26 atomic type test failures on powerpc, where these pass on i386.
 .if !empty(MACHINE_PLATFORM:MNetBSD-*-powerpc)
 # 64 bit atomics
 .include "../../devel/libatomic/buildlink3.mk"
@@ -61,6 +63,10 @@ PKGCONFIG_OVERRIDE+=	js/src/ctypes/libffi/libffi.pc.in
 PYTHON_VERSIONS_INCOMPATIBLE=	27
 PYTHON_FOR_BUILD_ONLY=		tool
 TOOL_DEPENDS+=			${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
+
+TEST_DEPENDS+=			${PYPKGPREFIX}-six-[0-9]*:../../lang/py-six
+
+TEST_TARGET=			check-jstests
 
 pre-configure:
 	cd ${WRKSRC}/js/src && \
