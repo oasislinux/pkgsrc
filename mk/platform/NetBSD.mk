@@ -1,4 +1,4 @@
-# $NetBSD: NetBSD.mk,v 1.61 2020/12/14 21:45:43 js Exp $
+# $NetBSD: NetBSD.mk,v 1.64 2020/12/20 20:22:17 maya Exp $
 #
 # Variable definitions for the NetBSD operating system.
 
@@ -163,6 +163,12 @@ _OPSYS_SUPPORTS_SSP=	yes
 .if (${MACHINE_ARCH} == "i386") || \
     (${MACHINE_ARCH} == "x86_64")
 _OPSYS_SUPPORTS_STACK_CHECK=	yes
+.endif
+
+.if !defined(PKG_DBDIR) && exists(/var/db/pkg)
+PKG_DBDIR_ERROR=	Compatibility pkgdb location exists, but PKG_DBDIR not specified. \
+			This may cause unexpected issues. To avoid problems, add \
+			PKG_DBDIR=/var/db/pkg to /etc/mk.conf.
 .endif
 
 _OPSYS_SUPPORTS_CWRAPPERS=	yes
