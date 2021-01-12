@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.792 2020/12/21 14:48:42 mef Exp $
+# $NetBSD: Makefile,v 1.796 2021/01/01 14:29:55 pin Exp $
 #
 
 COMMENT=	Security tools
@@ -140,10 +140,7 @@ SUBDIR+=	hs-x509-validation
 SUBDIR+=	hydan
 SUBDIR+=	hydra
 SUBDIR+=	ike-scan
-SUBDIR+=	ipsec-tools
 SUBDIR+=	ipv6-toolkit
-SUBDIR+=	isakmpd
-SUBDIR+=	jessie
 SUBDIR+=	john
 SUBDIR+=	kauth
 SUBDIR+=	kdesu
@@ -253,6 +250,7 @@ SUBDIR+=	opencdk
 SUBDIR+=	openct
 SUBDIR+=	opendnssec
 SUBDIR+=	opendnssec2
+SUBDIR+=	opendoas
 SUBDIR+=	openpam
 SUBDIR+=	opensaml
 SUBDIR+=	opensc

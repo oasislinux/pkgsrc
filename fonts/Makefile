@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.346 2020/11/19 15:10:07 kleink Exp $
+# $NetBSD: Makefile,v 1.348 2021/01/02 00:05:03 uwe Exp $
 #
 
 COMMENT=	Fonts
@@ -33,6 +33,7 @@ SUBDIR+=	artwiz-fonts
 SUBDIR+=	asea-ttf
 SUBDIR+=	awesome-otf
 SUBDIR+=	awesome-ttf
+SUBDIR+=	babelstone-tibetan-ttf
 SUBDIR+=	baekmuk-ttf
 SUBDIR+=	bakoma-fonts
 SUBDIR+=	bdftopcf
@@ -138,6 +139,7 @@ SUBDIR+=	jisx0208fonts
 SUBDIR+=	jisx0212fonts
 SUBDIR+=	jisx0213fonts
 SUBDIR+=	jmk-fonts
+SUBDIR+=	jomolhari-ttf
 SUBDIR+=	jsMath-fonts
 SUBDIR+=	junicode
 SUBDIR+=	kanjistrokeorders-ttf

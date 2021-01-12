@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.924 2020/12/17 16:00:07 bacon Exp $
+# $NetBSD: Makefile,v 1.926 2021/01/05 12:59:46 pin Exp $
 #
 
 COMMENT=	System utilities
@@ -381,6 +381,7 @@ SUBDIR+=	logfinder
 SUBDIR+=	logrider
 SUBDIR+=	logrot
 SUBDIR+=	logrotate
+SUBDIR+=	lsd
 SUBDIR+=	lsof
 SUBDIR+=	lvm2
 SUBDIR+=	lxmenu-data
@@ -420,6 +421,7 @@ SUBDIR+=	munin-common
 SUBDIR+=	munin-master
 SUBDIR+=	munin-node
 SUBDIR+=	nautilus
+SUBDIR+=	navi
 SUBDIR+=	nbase
 SUBDIR+=	ncdu
 SUBDIR+=	ndesk-dbus

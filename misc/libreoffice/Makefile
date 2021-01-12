@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.247 2020/12/04 20:45:30 nia Exp $
+# $NetBSD: Makefile,v 1.250 2021/01/01 13:17:44 ryoon Exp $
 
-VERREL=		7.0.3
-VERRC=		1
+VERREL=		7.0.4
+VERRC=		2
 VER=		${VERREL}.${VERRC}
 DISTNAME=	libreoffice-${VER}
-PKGREVISION=	5
 CATEGORIES=	misc
 MASTER_SITES=	http://download.documentfoundation.org/libreoffice/src/${VERREL}/
 EXTRACT_SUFX=	.tar.xz
@@ -115,7 +114,7 @@ MORE_DISTFILES= \
 	lxml-4.1.1.tgz \
 	Amiri-0.111.zip \
 	ReemKufi-0.7.zip \
-	pdfium-4137.tar.bz2 \
+	pdfium-4306.tar.bz2 \
 	dtoa-20180411.tgz \
 	skia-m85-e684c6daef6bfb774a325a069eda1f76ca6ac26c.tar.xz
 
@@ -260,11 +259,6 @@ BUILD_MAKE_FLAGS+=	VERBOSE=true
 
 .if ${OPSYS} != "Linux"
 BUILDLINK_TRANSFORM+=	rm:-ldl
-.endif
-
-.if ${MACHINE_ARCH} == "i386"
-# For 64 bit atomic ops (PR/54826)
-CXXFLAGS+=		-march=i586
 .endif
 
 INSTALLATION_DIRS=	bin share/applications
@@ -419,5 +413,5 @@ BUILDLINK_API_DEPENDS.libodfgen+=       libodfgen>=0.1.4
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../graphics/gnome-icon-theme/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
-
+.include "../../mk/atomic64.mk"
 .include "../../mk/bsd.pkg.mk"

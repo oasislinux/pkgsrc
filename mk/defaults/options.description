@@ -190,6 +190,7 @@ epub			Enable epub support.
 erlang-hipe		Enable HiPE support.
 eucjp			Support EUC-JP, a character encoding for Japanese.
 evolution-data-server	Enable support for evolution-data-server.
+execline		Enable command execution with the execline language.
 exim-build-eximon	Also build the X based exim queue monitoring tool.
 exim-content-scan	Call virus and spam scanning direct from ACLs.
 exim-lookup-cdb		Support mail account lookup via a Constant Data Base.
@@ -716,6 +717,7 @@ rtree			Enable R-tree support.
 ruby			Enable Ruby support.
 ruby-build-ri-db	Build and install database for Ruby's ri utility.
 rust			Enable Rust support.
+rust-cargo-static	Build cargo semi-statically with built-in curl+openssl
 rust-llvm		Use Rust internal LLVM in builds.
 samba			Enable Samba file and print services support.
 samplerate		Enable libsamplerate support.
@@ -879,6 +881,7 @@ via-padlock		Enable support for the VIA PadLock Security Engine.
 vice-cpuhistory		Enable the 65xx cpu history feature.
 vice-ethernet		Enable Ethernet cartridge support.
 vice-fullscreen		Enable full-screen support.
+vice-headless		Choose the headless (no GUI) build.
 vice-hwscaling		Enable hardware-assisted screen scaling.
 vice-x64		Enable building of the old x64 emulator.
 vidix			Enable VIDIX (Video Interface for *niX support).

@@ -1,4 +1,4 @@
-# $NetBSD: mozilla-common.mk,v 1.191 2020/12/17 09:53:15 ryoon Exp $
+# $NetBSD: mozilla-common.mk,v 1.193 2021/01/06 11:21:40 triaxx Exp $
 #
 # common Makefile fragment for mozilla packages based on gecko 2.0.
 #
@@ -46,9 +46,8 @@ test:
 # tar(1) of OpenBSD 5.5 has no --exclude command line option.
 TOOLS_PLATFORM.tar=	${TOOLS_PATH.bsdtar}
 USE_TOOLS+=		bsdtar
+
 .if ${MACHINE_ARCH} == "i386"
-# Fix for PR pkg/48152.
-CXXFLAGS+=		-march=i586
 # This is required for SSE2 code under i386.
 CXXFLAGS+=		-mstackrealign
 .endif
@@ -159,18 +158,14 @@ CONFIGURE_ENV.NetBSD+=	ac_cv_thread_keyword=no
 # In unspecified case, clock_gettime(CLOCK_MONOTONIC, ...) fails.
 CONFIGURE_ENV.NetBSD+=	ac_cv_clock_monotonic=
 
-# PR pkg/55456
-.if ${OPSYS} == "NetBSD" && ${MACHINE_ARCH} == "i386"
-.include "../../devel/libatomic/buildlink3.mk"
-CONFIGURE_ENV.NetBSD+=	ac_cv_needs_atomic=yes
-.endif
+.include "../../mk/atomic64.mk"
 BUILDLINK_API_DEPENDS.libevent+=	libevent>=1.1
 .include "../../devel/libevent/buildlink3.mk"
 .include "../../devel/libffi/buildlink3.mk"
 BUILDLINK_API_DEPENDS.nspr+=	nspr>=4.26
 .include "../../devel/nspr/buildlink3.mk"
 .include "../../textproc/icu/buildlink3.mk"
-BUILDLINK_API_DEPENDS.nss+=	nss>=3.59
+BUILDLINK_API_DEPENDS.nss+=	nss>=3.59.1
 .include "../../devel/nss/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 #.include "../../mk/jpeg.buildlink3.mk"

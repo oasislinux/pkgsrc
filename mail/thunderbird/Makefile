@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.262 2020/12/07 12:30:56 ryoon Exp $
+# $NetBSD: Makefile,v 1.265 2021/01/01 12:58:32 ryoon Exp $
 
 DISTNAME=	thunderbird-${TB_VER}.source
 PKGNAME=	thunderbird-${TB_VER}
-TB_VER=		78.5.1
+TB_VER=		78.6.0
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_MOZILLA:=thunderbird/releases/${TB_VER}/source/}
 EXTRACT_SUFX=	.tar.xz
@@ -77,8 +77,6 @@ SUBST_SED.netbsdtag=	-e 's/__NetBSD__/__NEVER__/'
 
 post-extract:
 	${CP} ${FILESDIR}/cubeb_sun.c ${WRKSRC}/media/libcubeb/src/cubeb_sun.c
-	mv ${WRKSRC}${MOZILLA_DIR}/gfx/ycbcr/yuv_row_arm.s \
-		${WRKSRC}${MOZILLA_DIR}/gfx/ycbcr/yuv_row_arm.S
 
 pre-configure:
 	cd ${WRKSRC} && mkdir ${OBJDIR}

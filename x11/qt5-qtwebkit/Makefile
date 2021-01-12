@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.84 2020/11/21 23:13:11 wiz Exp $
+# $NetBSD: Makefile,v 1.86 2021/01/05 15:08:43 gdt Exp $
 
 QTWKVERSION=	5.212.0-alpha4
 DISTNAME=	qtwebkit-${QTWKVERSION}
@@ -73,11 +73,6 @@ BUILDLINK_TRANSFORM+=	rpath:${WRKSRC}/lib:${QTDIR}/lib
 LDFLAGS+=	-Wl,--no-keep-memory
 .endif
 
-# 64-bit atomic ops are required
-.if ${MACHINE_ARCH} == "i386"
-CXXFLAGS+=	-march=i586
-.endif
-
 post-install:
 .for i in Qt5WebKit.pc Qt5WebKitWidgets.pc
 	cd ${DESTDIR}${PREFIX}/lib/pkgconfig && \
@@ -101,6 +96,8 @@ post-install:
 .include "../../x11/qt5-qtlocation/buildlink3.mk"
 .include "../../x11/qt5-qtsensors/buildlink3.mk"
 .include "../../x11/qt5-qtwebchannel/buildlink3.mk"
+# Source/JavaScriptCore/bytecode/BytecodeList.json unexpected keyword 'encoding'
+PYTHON_VERSIONS_INCOMPATIBLE=	39
 PYTHON_FOR_BUILD_ONLY=	tool
 .include "../../lang/python/tool.mk"
 .include "../../lang/ruby/buildlink3.mk"
@@ -108,4 +105,5 @@ BUILDLINK_DEPMETHOD.${RUBY_BASE}=	build
 .include "../../mk/curses.buildlink3.mk"
 .include "../../mk/dlopen.buildlink3.mk"
 BUILDLINK_TRANSFORM+=	opt:-ldl:${BUILDLINK_LDADD.dl:Q}
+.include "../../mk/atomic64.mk"
 .include "../../mk/bsd.pkg.mk"

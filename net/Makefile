@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1367 2020/12/13 15:47:17 nia Exp $
+# $NetBSD: Makefile,v 1.1371 2021/01/09 21:33:56 pin Exp $
 #
 
 COMMENT=	Networking tools
@@ -35,6 +35,7 @@ SUBDIR+=	arping
 SUBDIR+=	arpwatch
 SUBDIR+=	autonet
 SUBDIR+=	avahi
+SUBDIR+=	avahi-ui
 SUBDIR+=	awhois
 SUBDIR+=	aws-sdk-go
 SUBDIR+=	balance
@@ -436,7 +437,7 @@ SUBDIR+=	netname
 SUBDIR+=	netpipes
 SUBDIR+=	nfdump
 SUBDIR+=	ngrep
-SUBDIR+=	nicotine
+SUBDIR+=	nicotine-plus
 SUBDIR+=	nicovideo-dl
 SUBDIR+=	nidentd
 SUBDIR+=	nipper
@@ -1007,6 +1008,7 @@ SUBDIR+=	xymon
 SUBDIR+=	xymonclient
 SUBDIR+=	yafc
 SUBDIR+=	yale-tftpd
+SUBDIR+=	yaydl
 SUBDIR+=	yaz
 SUBDIR+=	youtube-dl
 SUBDIR+=	ytalk

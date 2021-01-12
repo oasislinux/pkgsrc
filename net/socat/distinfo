@@ -1,6 +1,10 @@
-$NetBSD: distinfo,v 1.28 2020/05/18 11:19:13 nia Exp $
+$NetBSD: distinfo,v 1.31 2021/01/10 22:07:28 otis Exp $
 
-SHA1 (socat-1.7.3.4.tar.gz) = 2fa45073df61dd01b7ccbf2f8a8cc78580de7144
-RMD160 (socat-1.7.3.4.tar.gz) = b1cd5a3b893422b470d6a347a677f39835c7124d
-SHA512 (socat-1.7.3.4.tar.gz) = c5699fd1a703e90927076599d02323b85722d49e86bc2f627b4301a41d3df72c634af629f378425ff201cde78343da5cd0cad1044bf857665176c91357401fdd
-Size (socat-1.7.3.4.tar.gz) = 615381 bytes
+SHA1 (socat-1.7.4.1.tar.gz) = 9fe5a0a0b13dded556a66259b68eb672b900f1d1
+RMD160 (socat-1.7.4.1.tar.gz) = de37a31a8bf95ca301263ec6778dbb016b184301
+SHA512 (socat-1.7.4.1.tar.gz) = e43c8b23a841aea5ecc3ac324185ee4ada552a8284ec41b99245def2d8b493bca9caea1af6f646f434a7eda67a1dd71e4e037eea65fce0444840236eadb126a6
+Size (socat-1.7.4.1.tar.gz) = 648888 bytes
+SHA1 (patch-config.h.in) = e0cb8c4075ca96863e458f1c2384dc7a6b69e928
+SHA1 (patch-configure) = ba75b5f192c1359220bea019fa50603b2b5c7c3a
+SHA1 (patch-fdname.c) = c59bd921989e4d84375764fdd707b7cd6c49ceba
+SHA1 (patch-sysincludes.h) = d48307ade6bc82bea946920e7336bc5329714c08

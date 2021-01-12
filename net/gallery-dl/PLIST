@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.47 2020/12/12 22:39:54 leot Exp $
+@comment $NetBSD: PLIST,v 1.49 2021/01/09 17:47:39 leot Exp $
 bin/gallery-dl
 ${PYSITELIB}/${EGG_INFODIR}/PKG-INFO
 ${PYSITELIB}/${EGG_INFODIR}/SOURCES.txt
@@ -90,6 +90,9 @@ ${PYSITELIB}/gallery_dl/extractor/common.pyo
 ${PYSITELIB}/gallery_dl/extractor/danbooru.py
 ${PYSITELIB}/gallery_dl/extractor/danbooru.pyc
 ${PYSITELIB}/gallery_dl/extractor/danbooru.pyo
+${PYSITELIB}/gallery_dl/extractor/derpibooru.py
+${PYSITELIB}/gallery_dl/extractor/derpibooru.pyc
+${PYSITELIB}/gallery_dl/extractor/derpibooru.pyo
 ${PYSITELIB}/gallery_dl/extractor/deviantart.py
 ${PYSITELIB}/gallery_dl/extractor/deviantart.pyc
 ${PYSITELIB}/gallery_dl/extractor/deviantart.pyo
@@ -228,9 +231,6 @@ ${PYSITELIB}/gallery_dl/extractor/mangahere.pyo
 ${PYSITELIB}/gallery_dl/extractor/mangakakalot.py
 ${PYSITELIB}/gallery_dl/extractor/mangakakalot.pyc
 ${PYSITELIB}/gallery_dl/extractor/mangakakalot.pyo
-${PYSITELIB}/gallery_dl/extractor/mangapanda.py
-${PYSITELIB}/gallery_dl/extractor/mangapanda.pyc
-${PYSITELIB}/gallery_dl/extractor/mangapanda.pyo
 ${PYSITELIB}/gallery_dl/extractor/mangapark.py
 ${PYSITELIB}/gallery_dl/extractor/mangapark.pyc
 ${PYSITELIB}/gallery_dl/extractor/mangapark.pyo

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.31 2020/10/01 07:25:06 mcf Exp $
+# $NetBSD: Makefile,v 1.33 2021/01/05 07:38:22 wiz Exp $
 
-DISTNAME=	zstd-1.4.5
-PKGREVISION=	1
+DISTNAME=	zstd-1.4.8
 CATEGORIES=	archivers
 MASTER_SITES=	${MASTER_SITE_GITHUB:=facebook/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
@@ -13,8 +12,22 @@ LICENSE=	modified-bsd OR gnu-gpl-v2
 
 CHECK_PORTABILITY_SKIP+=	tests/playTests.sh
 
-# 1.4.5: ../lib/libzstd.so: file not recognized: file format not recognized
+# 1.4.8
+# ld: ../lib/libzstd.a: error adding symbols: no more archived files
+# ld:../lib/libzstd.a: file format not recognized; treating as linker script
+# ld:../lib/libzstd.a:1: syntax error
+# or
+# ld: ../lib/libzstd.a: error adding symbols: file format not recognized
+# reported as
+# https://github.com/facebook/zstd/issues/2453
 MAKE_JOBS_SAFE=		no
+
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} != "Linux"
+TOOL_DEPENDS+=		coreutils>=0:../../sysutils/coreutils
+MAKE_ENV+=		HASH=gmd5sum
+.endif
 
 USE_LANGUAGES=		c c++
 USE_TOOLS+=		ggrep gmake pkg-config

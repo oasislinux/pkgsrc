@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.585 2020/12/19 17:58:06 bsiegert Exp $
+# $NetBSD: Makefile,v 1.587 2021/01/03 15:17:40 taca Exp $
 #
 
 COMMENT=	Programming languages
 
 SUBDIR+=	Cg-compiler
 SUBDIR+=	LuaJIT2
+SUBDIR+=	R-cpp11
 SUBDIR+=	R-sourcetools
 SUBDIR+=	STk
 SUBDIR+=	a60
@@ -201,7 +202,6 @@ SUBDIR+=	perl5
 SUBDIR+=	pfe
 SUBDIR+=	pforth
 SUBDIR+=	php56
-SUBDIR+=	php72
 SUBDIR+=	php73
 SUBDIR+=	php74
 SUBDIR+=	picoc
