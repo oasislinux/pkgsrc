@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.3 2021/01/01 08:24:33 ryoon Exp $
+# $NetBSD: Makefile,v 1.5 2021/02/10 10:36:18 nia Exp $
 
-DISTNAME=	ncmpcpp-0.8.2
-PKGREVISION=	1
+DISTNAME=	ncmpcpp-0.9.2
 CATEGORIES=	audio
 MASTER_SITES=	https://rybczak.net/ncmpcpp/stable/
 EXTRACT_SUFX=	.tar.bz2

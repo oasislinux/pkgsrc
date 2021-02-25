@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.119 2021/01/03 18:24:00 adam Exp $
+# $NetBSD: Makefile,v 1.121 2021/02/07 06:30:32 ryoon Exp $
 
 DISTNAME=	stellarium-0.20.4
+PKGREVISION=	1
 CATEGORIES=	misc
 MASTER_SITES=	${MASTER_SITE_GITHUB:=Stellarium/}
 GITHUB_RELEASE=	v${PKGVERSION_NOREV}
@@ -15,6 +16,8 @@ USE_LANGUAGES=		c c++
 USE_TOOLS+=		msgfmt perl pod2man
 
 CMAKE_ARGS+=	-DENABLE_GPS=OFF
+
+LDFLAGS.SunOS+=	-lnsl -lsocket
 
 PLIST_VARS+=		desktop
 

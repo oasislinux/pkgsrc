@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.10 2021/01/11 20:20:28 schmonz Exp $
+# $NetBSD: Makefile,v 1.12 2021/02/04 14:08:43 schmonz Exp $
 
 DISTNAME=		fdtools-2020.05.04
-PKGREVISION=		1
+PKGREVISION=		2
 CATEGORIES=		sysutils
 MASTER_SITES=		${HOMEPAGE}/releases/
 EXTRACT_SUFX=		.tar.bz2
@@ -32,6 +32,7 @@ do-install:
 	  ${INSTALL_PROGRAM} $${i} ${DESTDIR}${PREFIX}/bin; \
 	done
 
+SKALIBS_TOLERATE_TARGET_SKEW=	no
 .include "../../devel/skalibs/buildlink3.mk"
 .include "../../mk/djbware.mk"
 .include "../../mk/bsd.pkg.mk"

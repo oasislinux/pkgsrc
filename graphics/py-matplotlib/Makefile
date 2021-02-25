@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.61 2021/01/10 20:27:33 adam Exp $
+# $NetBSD: Makefile,v 1.66 2021/02/07 15:31:44 adam Exp $
 
-DISTNAME=	matplotlib-3.3.3
+DISTNAME=	matplotlib-3.3.4
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	graphics python
 MASTER_SITES=	${MASTER_SITE_PYPI:=m/matplotlib/}
@@ -16,6 +16,7 @@ DEPENDS+=	${PYPKGPREFIX}-cycler>=0.10:../../graphics/py-cycler
 DEPENDS+=	${PYPKGPREFIX}-dateutil>=2.1:../../time/py-dateutil
 DEPENDS+=	${PYPKGPREFIX}-kiwisolver>=1.0.1:../../math/py-kiwisolver
 DEPENDS+=	${PYPKGPREFIX}-pyparsing>=2.2.0:../../devel/py-pyparsing
+DEPENDS+=	${PYPKGPREFIX}-certifi-[0-9]*:../../security/py-certifi
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-[0-9]*:../../devel/py-test
 
 USE_LANGUAGES=	c c++
@@ -30,4 +31,5 @@ PYTHON_VERSIONS_INCOMPATIBLE=	27
 .include "../../graphics/png/buildlink3.mk"
 .include "../../lang/python/egg.mk"
 .include "../../math/py-numpy/buildlink3.mk"
+.include "../../math/qhull/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

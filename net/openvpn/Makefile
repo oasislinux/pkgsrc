@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.78 2020/11/17 12:13:01 adam Exp $
+# $NetBSD: Makefile,v 1.80 2021/02/24 19:13:50 adam Exp $
 
 DISTNAME=	${OPENVPN_DISTNAME}
 CATEGORIES=	net

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.337 2020/11/27 13:10:25 ryoon Exp $
+# $NetBSD: Makefile,v 1.340 2021/02/20 22:56:33 ryoon Exp $
 #
 
-COMMENT=	Emulators for other operating systems
+COMMENT=	Emulators for other machines and systems
 
 SUBDIR+=	8086tiny
 SUBDIR+=	BasiliskII
@@ -170,6 +170,7 @@ SUBDIR+=	pearpc
 SUBDIR+=	py-keystone
 SUBDIR+=	py-unicorn
 SUBDIR+=	qemu
+SUBDIR+=	qemu51
 SUBDIR+=	raine
 SUBDIR+=	realboy
 SUBDIR+=	retroarch
@@ -410,6 +411,5 @@ SUBDIR+=	xroar
 SUBDIR+=	xtrs
 SUBDIR+=	xyame
 SUBDIR+=	yabause
-SUBDIR+=	z26
 
 .include "../mk/misc/category.mk"

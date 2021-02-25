@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.620 2020/12/05 09:04:58 otis Exp $
+# $NetBSD: Makefile,v 1.623 2021/02/17 09:59:27 adam Exp $
 
 COMMENT=	Databases
 
@@ -113,6 +113,7 @@ SUBDIR+=	mysql56-client
 SUBDIR+=	mysql56-server
 SUBDIR+=	mysql57-client
 SUBDIR+=	mysql57-server
+SUBDIR+=	mysqld_exporter
 SUBDIR+=	mysqltuner
 SUBDIR+=	mytop
 SUBDIR+=	nss-pgsql
@@ -365,7 +366,6 @@ SUBDIR+=	py-cx_Oracle
 SUBDIR+=	py-datapkg
 SUBDIR+=	py-dbfread
 SUBDIR+=	py-elasticsearch
-SUBDIR+=	py-elixir
 SUBDIR+=	py-gdbm
 SUBDIR+=	py-ldap
 SUBDIR+=	py-ldap3
@@ -422,6 +422,7 @@ SUBDIR+=	ruby-activeldap
 SUBDIR+=	ruby-activerecord-odbc
 SUBDIR+=	ruby-activerecord52
 SUBDIR+=	ruby-activerecord60
+SUBDIR+=	ruby-activerecord61
 SUBDIR+=	ruby-arel
 SUBDIR+=	ruby-arel-helpers
 SUBDIR+=	ruby-awesome_nested_set

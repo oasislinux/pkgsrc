@@ -1,4 +1,4 @@
-# $NetBSD: mozilla-common.mk,v 1.193 2021/01/06 11:21:40 triaxx Exp $
+# $NetBSD: mozilla-common.mk,v 1.198 2021/02/23 18:28:29 tsutsui Exp $
 #
 # common Makefile fragment for mozilla packages based on gecko 2.0.
 #
@@ -17,7 +17,10 @@ UNLIMIT_RESOURCES+=	datasize virtualsize
 
 USE_LANGUAGES+=		c c++
 
-TOOL_DEPENDS+=		cbindgen>=0.15.0:../../devel/cbindgen
+# ERROR: Only GCC 7.1 or newer is supported (found version 5.5.0).
+GCC_REQD+=		7
+
+TOOL_DEPENDS+=		cbindgen>=0.16.0:../../devel/cbindgen
 .if ${MACHINE_ARCH} == "sparc64"
 CONFIGURE_ARGS+=	--disable-nodejs
 .else
@@ -147,6 +150,7 @@ fix-clang-wrapper:
 # Firefox requires Clang during the build, even when building with GCC.
 # XXX: When using GCC, pkgsrc provides 'clang' wrappers that are actually gcc.
 # This breaks the build.
+# PR pkg/55647 https://gnats.netbsd.org/55647
 	${LN} -sf ${PREFIX}/bin/clang ${WRKDIR}/.cwrapper/bin/clang
 	${LN} -sf ${PREFIX}/bin/clang++ ${WRKDIR}/.cwrapper/bin/clang++
 	${LN} -sf ${PREFIX}/bin/clang-cpp ${WRKDIR}/.cwrapper/bin/clang-cpp
@@ -165,7 +169,7 @@ BUILDLINK_API_DEPENDS.libevent+=	libevent>=1.1
 BUILDLINK_API_DEPENDS.nspr+=	nspr>=4.26
 .include "../../devel/nspr/buildlink3.mk"
 .include "../../textproc/icu/buildlink3.mk"
-BUILDLINK_API_DEPENDS.nss+=	nss>=3.59.1
+BUILDLINK_API_DEPENDS.nss+=	nss>=3.61
 .include "../../devel/nss/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 #.include "../../mk/jpeg.buildlink3.mk"
@@ -189,7 +193,7 @@ CWRAPPERS_PREPEND.cxx+= \
 	-stdlib++-isystem \
 	${BUILDLINK_PREFIX.gcc8}/gcc8/include/c++/backward
 .endif
-RUST_REQ=	1.43.0
+RUST_REQ=	1.47.0
 .include "../../lang/rust/rust.mk"
 # webrtc option requires internal libvpx
 #BUILDLINK_API_DEPENDS.libvpx+=	libvpx>=1.3.0

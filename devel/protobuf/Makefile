@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.36 2020/12/31 20:04:11 nia Exp $
+# $NetBSD: Makefile,v 1.39 2021/02/24 09:45:10 adam Exp $
 
-DISTNAME=	protobuf-cpp-3.14.0
+DISTNAME=	protobuf-cpp-3.15.2
 PKGNAME=	${DISTNAME:S/-cpp//}
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GITHUB:=protocolbuffers/}

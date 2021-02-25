@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.183 2020/12/13 15:43:46 nia Exp $
+# $NetBSD: Makefile,v 1.186 2021/02/10 10:41:36 adam Exp $
 #
 
 COMMENT=	Document format and character code converters
@@ -109,6 +109,7 @@ SUBDIR+=	php-mbstring
 SUBDIR+=	php-recode
 SUBDIR+=	psiconv
 SUBDIR+=	pstotext
+SUBDIR+=	py-base58
 SUBDIR+=	py-cairosvg
 SUBDIR+=	py-chardet
 SUBDIR+=	py-confusable_homoglyphs

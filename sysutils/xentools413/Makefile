@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.14 2020/12/16 17:17:08 bouyer Exp $
+# $NetBSD: Makefile,v 1.16 2021/02/03 22:30:21 bouyer Exp $
 #
 VERSION=	4.13.2
 
 DIST_SUBDIR=		xen413
 DISTNAME=		xen-${VERSION}
 PKGNAME=		xentools413-${VERSION}
-PKGREVISION=		2
+PKGREVISION=		3
 #PKGREVISION=		0
 CATEGORIES=		sysutils
 MASTER_SITES=		https://downloads.xenproject.org/release/xen/${VERSION}/
@@ -73,7 +73,6 @@ MAKE_ENV+=		V=YES
 MAKE_ENV+=		NO_WERROR=1
 
 PY_PATCHPLIST=		yes
-REPLACE_PYTHON+=	tools/misc/xen-bugtool tools/misc/xen-ringwatch
 REPLACE_PYTHON+=	tools/misc/xencons
 REPLACE_PYTHON+=	tools/misc/xenpvnetboot tools/misc/xensymoops
 REPLACE_PYTHON+=	tools/python/scripts/convert-legacy-stream

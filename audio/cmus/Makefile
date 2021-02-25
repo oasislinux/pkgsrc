@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.92 2021/01/01 09:52:15 ryoon Exp $
+# $NetBSD: Makefile,v 1.94 2021/02/07 06:30:12 ryoon Exp $
 
-DISTNAME=		cmus-2.8.0
-PKGREVISION=		9
+DISTNAME=		cmus-2.9.1
+PKGREVISION=		1
 CATEGORIES=		audio
 MASTER_SITES=		${MASTER_SITE_GITHUB:=cmus/}
 GITHUB_TAG=		v${PKGVERSION_NOREV}

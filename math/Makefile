@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.485 2020/12/19 15:18:51 mef Exp $
+# $NetBSD: Makefile,v 1.490 2021/02/12 06:51:16 pin Exp $
 
 COMMENT=	Mathematics
 
@@ -172,6 +172,7 @@ SUBDIR+=	fgmp
 SUBDIR+=	fityk
 SUBDIR+=	fplll
 SUBDIR+=	fricas
+SUBDIR+=	funst
 SUBDIR+=	galculator
 SUBDIR+=	gap
 SUBDIR+=	gappa
@@ -217,6 +218,7 @@ SUBDIR+=	ipopt
 SUBDIR+=	isl
 SUBDIR+=	itpp
 SUBDIR+=	kalgebra
+SUBDIR+=	kalk
 SUBDIR+=	kcalc
 SUBDIR+=	lapack
 SUBDIR+=	libffm
@@ -312,6 +314,7 @@ SUBDIR+=	p5-Spreadsheet-Read
 SUBDIR+=	p5-Spreadsheet-ReadSXC
 SUBDIR+=	p5-Spreadsheet-WriteExcel
 SUBDIR+=	p5-Spreadsheet-XLSX
+SUBDIR+=	p5-Statistics-Basic
 SUBDIR+=	p5-Statistics-CaseResampling
 SUBDIR+=	p5-Statistics-Descriptive
 SUBDIR+=	p5-Statistics-Distributions
@@ -425,6 +428,8 @@ SUBDIR+=	tex-fp
 SUBDIR+=	tex-fp-doc
 SUBDIR+=	tex-kastrup
 SUBDIR+=	tex-kastrup-doc
+SUBDIR+=	tex-lualatex-math
+SUBDIR+=	tex-lualatex-math-doc
 SUBDIR+=	tex-mathpartir
 SUBDIR+=	tex-mathpartir-doc
 SUBDIR+=	tex-mathspec

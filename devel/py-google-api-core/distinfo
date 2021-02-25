@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.10 2021/01/03 22:43:16 adam Exp $
+$NetBSD: distinfo,v 1.13 2021/02/09 08:58:45 adam Exp $
 
-SHA1 (google-api-core-1.24.1.tar.gz) = f3158d8d4cb39d9a4d49ca0117b1512fa866266a
-RMD160 (google-api-core-1.24.1.tar.gz) = 9a740ead9153e18725ee85d3a10dc1d66d82f712
-SHA512 (google-api-core-1.24.1.tar.gz) = 47008463f2e20f0fd522204750786d7fedbc020ba40086af939755e4cf1295e23637dd6c1c3bb34b8036777a85d783b7cdd042e3328a2489052a14650d8ba046
-Size (google-api-core-1.24.1.tar.gz) = 93827 bytes
+SHA1 (google-api-core-1.26.0.tar.gz) = d02cd94da49bcb3d0464e359df23eaa264fa5ab7
+RMD160 (google-api-core-1.26.0.tar.gz) = a508497011c68af0f061cbf890e2cb35819f3b64
+SHA512 (google-api-core-1.26.0.tar.gz) = ee1e1dd62e7165ec0655436c4cbe12d837765d23b87e86dabffcf067b4c6d415a01ca0527fa15f48c1f7b9a275a14b41dbc73d24061c92d0faf383fafd7e2b2d
+Size (google-api-core-1.26.0.tar.gz) = 95550 bytes

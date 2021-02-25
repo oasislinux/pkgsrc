@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.6 2021/01/11 15:28:47 schmonz Exp $
+# $NetBSD: Makefile,v 1.8 2021/02/12 07:57:00 schmonz Exp $
 
-DISTNAME=	approvaltests-0.3.0
+DISTNAME=	approvaltests-0.3.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_PYPI:=a/approvaltests/}
@@ -15,6 +15,7 @@ DEPENDS+=	${PYPKGPREFIX}-pyperclip>=1.5.27:../../x11/py-pyperclip
 USE_LANGUAGES=	# none
 
 PYTHON_VERSIONED_DEPENDENCIES=	test
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 .include "../../lang/python/egg.mk"
 .include "../../lang/python/versioned_dependencies.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.796 2021/01/01 14:29:55 pin Exp $
+# $NetBSD: Makefile,v 1.804 2021/02/17 09:57:13 adam Exp $
 #
 
 COMMENT=	Security tools
@@ -12,9 +12,11 @@ SUBDIR+=	HElib
 SUBDIR+=	KeePass
 SUBDIR+=	PACK
 SUBDIR+=	PortableSigner
+SUBDIR+=	R-argon2
 SUBDIR+=	R-askpass
 SUBDIR+=	R-credentials
 SUBDIR+=	R-digest
+SUBDIR+=	R-getPass
 SUBDIR+=	R-openssl
 SUBDIR+=	TweetNaCl
 SUBDIR+=	acmesh
@@ -86,7 +88,9 @@ SUBDIR+=	ent
 SUBDIR+=	erlang-epam
 SUBDIR+=	erlang-fast_tls
 SUBDIR+=	erlang-jose
+SUBDIR+=	erlang-p1_acme
 SUBDIR+=	erlang-p1_oauth2
+SUBDIR+=	erlang-pkix
 SUBDIR+=	fail2ban
 SUBDIR+=	flawfinder
 SUBDIR+=	fprint-demo
@@ -397,11 +401,12 @@ SUBDIR+=	pinentry-fltk
 SUBDIR+=	pinentry-gnome3
 SUBDIR+=	pinentry-gtk2
 SUBDIR+=	pinentry-mac
-SUBDIR+=	pinentry-qt4
+SUBDIR+=	pinentry-qt5
 SUBDIR+=	pinepgp
 SUBDIR+=	pius
 SUBDIR+=	pkcs11-helper
 SUBDIR+=	pks
+SUBDIR+=	pleaser
 SUBDIR+=	policykit
 SUBDIR+=	policykit-gnome
 SUBDIR+=	polkit
@@ -458,7 +463,6 @@ SUBDIR+=	py-cryptopp
 SUBDIR+=	py-cybox
 SUBDIR+=	py-denyhosts
 SUBDIR+=	py-ecdsa
-SUBDIR+=	py-ezPyCrypto
 SUBDIR+=	py-fido2
 SUBDIR+=	py-gnupg
 SUBDIR+=	py-google-auth
@@ -585,6 +589,7 @@ SUBDIR+=	ruby-shadow
 SUBDIR+=	ruby-simple_oauth
 SUBDIR+=	ruby-sshkey
 SUBDIR+=	ruby-sshkit
+SUBDIR+=	ruby-sslshake
 SUBDIR+=	ruby-tcpwrap
 SUBDIR+=	ruby-twitter_oauth
 SUBDIR+=	rvault

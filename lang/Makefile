@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.587 2021/01/03 15:17:40 taca Exp $
+# $NetBSD: Makefile,v 1.592 2021/02/16 13:16:38 adam Exp $
 #
 
 COMMENT=	Programming languages
@@ -52,6 +52,7 @@ SUBDIR+=	erlang
 SUBDIR+=	erlang-doc
 SUBDIR+=	erlang-luerl
 SUBDIR+=	erlang-man
+SUBDIR+=	erlang21
 SUBDIR+=	execline
 SUBDIR+=	f2c
 SUBDIR+=	ficl
@@ -94,8 +95,10 @@ SUBDIR+=	ghc
 SUBDIR+=	ghc-bootstrap
 SUBDIR+=	ghc7
 SUBDIR+=	ghc80
+SUBDIR+=	ghc810
 SUBDIR+=	ghc84
 SUBDIR+=	ghc88
+SUBDIR+=	ghc90
 SUBDIR+=	gjs
 SUBDIR+=	gnat_util
 SUBDIR+=	gnucobol
@@ -174,7 +177,6 @@ SUBDIR+=	nim
 SUBDIR+=	nodejs
 SUBDIR+=	nodejs10
 SUBDIR+=	nodejs12
-SUBDIR+=	nodejs8
 SUBDIR+=	npm
 SUBDIR+=	nqp
 SUBDIR+=	nuitka
@@ -262,6 +264,8 @@ SUBDIR+=	ruby26
 SUBDIR+=	ruby26-base
 SUBDIR+=	ruby27
 SUBDIR+=	ruby27-base
+SUBDIR+=	ruby30
+SUBDIR+=	ruby30-base
 SUBDIR+=	runawk
 SUBDIR+=	rust
 SUBDIR+=	rust-bin

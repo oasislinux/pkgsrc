@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.563 2020/11/02 10:25:50 schmonz Exp $
+# $NetBSD: Makefile,v 1.566 2021/02/14 14:03:34 taca Exp $
 #
 
 COMMENT=	Electronic mail utilities
@@ -17,6 +17,7 @@ SUBDIR+=	autorespond
 SUBDIR+=	avenger
 SUBDIR+=	balsa
 SUBDIR+=	bbmail
+SUBDIR+=	bincimap
 SUBDIR+=	bmf
 SUBDIR+=	bogofilter
 SUBDIR+=	bulk_mailer
@@ -93,7 +94,6 @@ SUBDIR+=	fdm
 SUBDIR+=	feed2exec
 SUBDIR+=	fetchmail
 SUBDIR+=	fetchmailconf
-SUBDIR+=	fetchyahoo
 SUBDIR+=	fix-mime-charset
 SUBDIR+=	fml
 SUBDIR+=	fml4
@@ -341,8 +341,10 @@ SUBDIR+=	roundcube-plugin-zipdownload
 SUBDIR+=	rspamd
 SUBDIR+=	rss2email
 SUBDIR+=	ruby-actionmailbox60
+SUBDIR+=	ruby-actionmailbox61
 SUBDIR+=	ruby-actionmailer52
 SUBDIR+=	ruby-actionmailer60
+SUBDIR+=	ruby-actionmailer61
 SUBDIR+=	ruby-mail
 SUBDIR+=	ruby-mailfactory
 SUBDIR+=	ruby-mime-types

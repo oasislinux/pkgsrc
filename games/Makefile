@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.494 2020/09/30 08:07:56 nia Exp $
+# $NetBSD: Makefile,v 1.498 2021/02/03 16:09:25 nia Exp $
 #
 
 COMMENT=	Games
@@ -130,6 +130,8 @@ SUBDIR+=	flare-game
 SUBDIR+=	flightgear
 SUBDIR+=	flightgear-data
 SUBDIR+=	fltk-sudoku
+SUBDIR+=	fna
+SUBDIR+=	fnaify
 SUBDIR+=	foobillardplus
 SUBDIR+=	fortune
 SUBDIR+=	fortune-strfile
@@ -315,6 +317,7 @@ SUBDIR+=	oshu
 SUBDIR+=	pag
 SUBDIR+=	palapeli
 SUBDIR+=	picmi
+SUBDIR+=	pinball
 SUBDIR+=	pingus
 SUBDIR+=	pioneers
 SUBDIR+=	plib
@@ -339,7 +342,6 @@ SUBDIR+=	qonk
 SUBDIR+=	qqwing
 SUBDIR+=	qstat
 SUBDIR+=	quadrupleback
-SUBDIR+=	quake
 SUBDIR+=	quake2forge
 SUBDIR+=	quake6
 SUBDIR+=	quakedata

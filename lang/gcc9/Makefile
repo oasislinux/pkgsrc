@@ -1,11 +1,14 @@
-# $NetBSD: Makefile,v 1.25 2020/12/04 20:45:26 nia Exp $
+# $NetBSD: Makefile,v 1.29 2021/02/13 15:56:17 maya Exp $
 
 GCC_PKGNAME=	gcc9
 .include "version.mk"
-PKGREVISION=	5
 
 DISTNAME=	gcc-${GCC9_DIST_VERSION}
 PKGNAME=	${GCC_PKGNAME}-${GCC9_DIST_VERSION}
+## When bumping the PKGREVISION of this package the PKGREVISION of
+## lang/gcc9-libs needs to be bumped to be at least 1 more than the
+## PKGREVISION of this package!
+PKGREVISION=	6
 CATEGORIES=	lang
 MASTER_SITES=	${MASTER_SITE_GNU:=gcc/gcc-${GCC9_VERSION}/}
 EXTRACT_SUFX=	.tar.xz
@@ -41,16 +44,6 @@ UNLIMIT_RESOURCES=	datasize stacksize
 CHECK_PORTABILITY_SKIP+=	contrib/* # not needed during the build
 
 .include "../../mk/bsd.prefs.mk"
-
-# Prevent compilation error on RedHat EL 7:
-#
-# compute_powtab.c: In function 'mpn_compute_powtab_mul':
-# compute_powtab.c:142:3: error: 'for' loop initial declarations are only allowed in C99 mode
-#    for (long pi = start_idx; pi >= 0; pi--)
-#
-# I know that -std is not a preprocessor flag, but gcc9 ignores the CFLAGS,
-# for whatever reason.
-CPPFLAGS.Linux+=	-std=gnu99
 
 # Even though the build and target host is x86_64-sun-solaris2.11,
 # it fails to compile some seemingly linux-specific code.
@@ -199,12 +192,9 @@ post-install:
 	${TEST} -f ${DESTDIR}${GCC9_PREFIX}/bin/cc \
 	|| (cd ${DESTDIR}${GCC9_PREFIX}/bin && ${LN} -f gcc cc)
 
-PLIST_VARS+=		fixed-malloc
-.if ${MACHINE_PLATFORM:MNetBSD-9.*-*}
-PLIST.fixed-malloc=	yes
-.endif
-
-PRINT_PLIST_AWK+=	{ gsub("${MACHINE_GNU_PLATFORM}", "$${MACHINE_GNU_PLATFORM}"); }
+GENERATE_PLIST+= \
+	cd ${DESTDIR}${PREFIX} && \
+	${FIND} ${GCC9_SUBPREFIX} \( -type f -o -type l \) -print | ${SORT};
 
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../lang/python/application.mk"

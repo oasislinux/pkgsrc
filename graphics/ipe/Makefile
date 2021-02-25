@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.13 2021/01/01 09:52:30 ryoon Exp $
+# $NetBSD: Makefile,v 1.15 2021/02/07 06:30:27 ryoon Exp $
 
 DISTNAME=	ipe-7.2.7-src
 PKGNAME=	${DISTNAME:S/-src//}
-PKGREVISION=	11
+PKGREVISION=	12
 CATEGORIES=	graphics
 MASTER_SITES=	https://dl.bintray.com/otfried/generic/ipe/7.2/
 
@@ -18,7 +18,6 @@ MAKE_ENV+=	QT_SELECT=5
 MAKE_ENV+=	IPEPREFIX=${DESTDIR}${PREFIX}
 MAKE_ENV+=	LUA_PACKAGE=lua-5.3
 MAKE_ENV+=	DL_LIBS=${DL_LIBS}
-MAKE_ENV+=	MOC=${QTDIR}/bin/moc
 MAKE_ENV+=	IPEMANDIR=${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
 
 CHECK_INTERPRETER_SKIP=	share/ipe/${PKGVERSION_NOREV}/scripts/*.lua
