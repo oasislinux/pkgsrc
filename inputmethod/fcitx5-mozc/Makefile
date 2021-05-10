@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.1 2021/02/17 15:29:51 ryoon Exp $
+# $NetBSD: Makefile,v 1.4 2021/04/21 13:24:53 adam Exp $
 
 PKGNAME=	${DISTNAME:S/fcitx-/fcitx5-/}
+PKGREVISION=	3
 
 INSTALLATION_DIRS+=	lib/fcitx5
 INSTALLATION_DIRS+=	share/fcitx5/addon

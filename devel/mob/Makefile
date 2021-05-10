@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.10 2021/02/01 17:13:39 schmonz Exp $
+# $NetBSD: Makefile,v 1.16 2021/05/09 09:36:56 bsiegert Exp $
 
-DISTNAME=	${GITHUB_PROJECT}-1.2.0
+DISTNAME=	${GITHUB_PROJECT}-1.5.0
+PKGREVISION=	2
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GITHUB:=remotemobprogramming/}
 GITHUB_PROJECT=	mob
@@ -11,8 +12,7 @@ HOMEPAGE=	https://mob.sh/
 COMMENT=	Swift git handover during remote mob programming
 LICENSE=	mit
 
-GO_DIST_BASE=	${PKGNAME_NOREV}
-GO_SRCPATH=	github.com/remotemobprogramming/mob
+GO_BUILD_PATTERN=	.
 
-.include "../../lang/go/go-package.mk"
+.include "../../lang/go/go-module.mk"
 .include "../../mk/bsd.pkg.mk"

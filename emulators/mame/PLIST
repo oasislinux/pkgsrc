@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.51 2021/02/24 15:39:30 wiz Exp $
+@comment $NetBSD: PLIST,v 1.53 2021/05/01 18:12:32 wiz Exp $
 bin/castool
 bin/chdman
 bin/floptool
@@ -132,6 +132,7 @@ share/mame/hash/atom_rom.xml
 share/mame/hash/attache.xml
 share/mame/hash/aussiebyte.xml
 share/mame/hash/b2m.xml
+share/mame/hash/basf7100.xml
 share/mame/hash/bbc_cass.xml
 share/mame/hash/bbc_flop_32016.xml
 share/mame/hash/bbc_flop_6502.xml
@@ -257,7 +258,9 @@ share/mame/hash/fm77av.xml
 share/mame/hash/fm7_cass.xml
 share/mame/hash/fm7_disk.xml
 share/mame/hash/fmtowns_cd.xml
-share/mame/hash/fmtowns_flop.xml
+share/mame/hash/fmtowns_flop_cracked.xml
+share/mame/hash/fmtowns_flop_misc.xml
+share/mame/hash/fmtowns_flop_orig.xml
 share/mame/hash/galaxy.xml
 share/mame/hash/gamate.xml
 share/mame/hash/gameboy.xml
@@ -359,6 +362,7 @@ share/mame/hash/leapfrog_ltleappad_cart.xml
 share/mame/hash/leapfrog_mfleappad_cart.xml
 share/mame/hash/leapfrog_turboextreme_cart.xml
 share/mame/hash/leapfrog_turbotwistbrainquest_cart.xml
+share/mame/hash/leapfrog_zippity_cart.xml
 share/mame/hash/leapster.xml
 share/mame/hash/lisa.xml
 share/mame/hash/lisa2.xml
@@ -563,6 +567,7 @@ share/mame/hash/sg1000.xml
 share/mame/hash/sgi_mips.xml
 share/mame/hash/sgi_mips_hdd.xml
 share/mame/hash/sgx.xml
+share/mame/hash/singingstarkaraoke_cart.xml
 share/mame/hash/sitcom.xml
 share/mame/hash/smarttv_cart.xml
 share/mame/hash/smc777.xml
@@ -635,6 +640,9 @@ share/mame/hash/to7_qd.xml
 share/mame/hash/to8_cass.xml
 share/mame/hash/to8_qd.xml
 share/mame/hash/to_flop.xml
+share/mame/hash/trs80_cass.xml
+share/mame/hash/trs80_flop.xml
+share/mame/hash/trs80_quik.xml
 share/mame/hash/trs80m2.xml
 share/mame/hash/trsm100.xml
 share/mame/hash/tutor.xml
@@ -642,6 +650,7 @@ share/mame/hash/tvc_cart.xml
 share/mame/hash/tvc_cass.xml
 share/mame/hash/tvc_flop.xml
 share/mame/hash/tvgogo.xml
+share/mame/hash/u110_card.xml
 share/mame/hash/unichamp.xml
 share/mame/hash/ut88.xml
 share/mame/hash/uzebox.xml

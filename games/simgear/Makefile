@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.114 2021/01/16 14:46:38 nia Exp $
+# $NetBSD: Makefile,v 1.121 2021/05/03 16:28:46 gdt Exp $
 
-DISTNAME=	simgear-2019.1.1
-PKGREVISION=	17
+DISTNAME=	simgear-2020.3.6
+PKGREVISION=	6
 CATEGORIES=	games devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=flightgear/release-${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.bz2
@@ -12,7 +12,6 @@ COMMENT=	Simulator Construction Tools
 LICENSE=	gnu-lgpl-v2
 
 USE_LANGUAGES=		c c++
-USE_PKGLOCALEDIR=	yes
 USE_CMAKE=		yes
 
 CONFIGURE_DIRS=		sgbuild
@@ -20,11 +19,11 @@ BUILD_DIRS=		sgbuild
 CMAKE_ARG_PATH=		..
 
 CMAKE_ARGS+=		-DCMAKE_BUILD_TYPE=Release
+CMAKE_ARGS+=		-DSIMGEAR_SHARED=ON
+CMAKE_ARGS+=		-DSYSTEM_EXPAT=ON
+CMAKE_ARGS+=		-DSYSTEM_UDNS=ON
 
 LDFLAGS.SunOS+=		-lsocket -lnsl
-
-post-extract:
-	${MV} ${WRKSRC}/version ${WRKSRC}/version.txt
 
 # The cmake script warns against building in the source directory.
 pre-configure:
@@ -37,6 +36,8 @@ pre-configure:
 .include "../../graphics/MesaLib/buildlink3.mk"
 .include "../../graphics/glu/buildlink3.mk"
 .include "../../graphics/osg/buildlink3.mk"
+.include "../../net/udns/buildlink3.mk"
+.include "../../textproc/expat/buildlink3.mk"
 .include "../../www/curl/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

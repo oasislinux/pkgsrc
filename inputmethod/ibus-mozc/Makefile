@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.64 2021/02/15 14:50:22 ryoon Exp $
+# $NetBSD: Makefile,v 1.68 2021/04/21 13:24:53 adam Exp $
 
 PKGNAME=	ibus-${DISTNAME}
+PKGREVISION=	3
 
 INSTALLATION_DIRS+=	libexec share/ibus share/ibus/component \
 			share/ibus-mozc
@@ -9,6 +10,9 @@ DEPENDS+=	xdg-utils-[0-9]*:../../misc/xdg-utils
 DEPENDS+=	mozc-renderer-[0-9]*:../../inputmethod/mozc-renderer
 DEPENDS+=	mozc-server-[0-9]*:../../inputmethod/mozc-server
 DEPENDS+=	mozc-tool-[0-9]*:../../inputmethod/mozc-tool
+
+pre-configure:
+	${RM} ${WRKSRC}/unix/uim/uim.gyp
 
 do-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \

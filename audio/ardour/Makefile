@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.46 2021/01/01 08:24:33 ryoon Exp $
+# $NetBSD: Makefile,v 1.50 2021/05/02 10:24:47 nia Exp $
 
 DISTNAME=	Ardour-5.12.0
 PKGNAME=	${DISTNAME:tl}
-PKGREVISION=	12
+PKGREVISION=	15
 CATEGORIES=	audio
 # currently, distfiles must be downloaded by hand from ardour.org
 # and uploaded using `make upload-distfiles`.
@@ -17,10 +17,8 @@ LICENSE=	gnu-gpl-v2
 
 UNLIMIT_RESOURCES=	stacksize
 
-USE_TOOLS+=	pkg-config perl
+USE_TOOLS+=	pkg-config perl itstool
 USE_LANGUAGES=	c c++11
-
-TOOL_DEPENDS+=	itstool-[0-9]*:../../textproc/itstool
 
 EGDIR=		${PREFIX}/share/examples/ardour5
 
@@ -109,7 +107,7 @@ post-install:
 .include "../../devel/libusb1/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../lang/python/tool.mk"
-.include "../../math/fftwf/buildlink3.mk"
+.include "../../math/fftw/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../textproc/liblrdf/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"

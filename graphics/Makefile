@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.926 2021/02/24 19:56:15 markd Exp $
+# $NetBSD: Makefile,v 1.931 2021/05/04 14:34:46 prlw1 Exp $
 #
 
 COMMENT=	Graphics tools and libraries
@@ -193,6 +193,7 @@ SUBDIR+=	gimp-warp-sharp
 SUBDIR+=	gimp2-wideangle
 SUBDIR+=	giram
 SUBDIR+=	girara
+SUBDIR+=	gl2ps
 SUBDIR+=	gle
 SUBDIR+=	glew
 SUBDIR+=	glfw
@@ -437,6 +438,7 @@ SUBDIR+=	paper-icon-theme
 SUBDIR+=	papirus-folders
 SUBDIR+=	papirus-icon-theme
 SUBDIR+=	pastel
+SUBDIR+=	pcl
 SUBDIR+=	pdfpc
 SUBDIR+=	pdiff
 SUBDIR+=	pear-Image_Canvas
@@ -469,6 +471,7 @@ SUBDIR+=	ptex
 SUBDIR+=	py-OpenGL
 SUBDIR+=	py-OpenGL-accelerate
 SUBDIR+=	py-Pillow
+SUBDIR+=	py-Pillow6
 SUBDIR+=	py-Willow
 SUBDIR+=	py-aafigure
 SUBDIR+=	py-actdiag
@@ -519,6 +522,7 @@ SUBDIR+=	qiv
 SUBDIR+=	qore-glut-module
 SUBDIR+=	qore-opengl-module
 SUBDIR+=	qr-code-generator
+SUBDIR+=	qrrs
 SUBDIR+=	quesoglc
 SUBDIR+=	qvplay
 SUBDIR+=	rabbit
@@ -806,7 +810,6 @@ SUBDIR+=	viu
 SUBDIR+=	vnc2swf
 SUBDIR+=	vp
 SUBDIR+=	vtk
-SUBDIR+=	vtk-data
 SUBDIR+=	vtk-docs
 SUBDIR+=	vulkan-headers
 SUBDIR+=	wcslib

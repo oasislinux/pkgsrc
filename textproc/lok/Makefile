@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.1 2021/02/12 08:15:51 pin Exp $
+# $NetBSD: Makefile,v 1.4 2021/04/24 19:48:13 pin Exp $
 
-DISTNAME=	lok-0.1.2
+DISTNAME=	lok-0.1.4
 CATEGORIES=	textproc devel
 MASTER_SITES=	${MASTER_SITE_GITHUB:=wyhaya/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
 
-MAINTAINER=	pin@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/wyhaya/lok/
 COMMENT=	Count the number of codes
 LICENSE=	mit

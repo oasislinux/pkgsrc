@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.1 2020/11/27 10:19:38 schmonz Exp $
+# $NetBSD: Makefile,v 1.3 2021/05/01 08:07:24 schmonz Exp $
 
-DISTNAME=		libretls-3.3.0
+DISTNAME=		libretls-3.3.2
 CATEGORIES=		security
 MASTER_SITES=		https://causal.agency/libretls/
 

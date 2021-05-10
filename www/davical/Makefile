@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.45 2020/08/31 18:12:32 wiz Exp $
+# $NetBSD: Makefile,v 1.47 2021/05/09 20:35:50 khorben Exp $
 
 DISTNAME=	davical-${DAVICAL_VERSION}
 PKGNAME=	${PHP_PKG_PREFIX}-davical-${DAVICAL_VERSION}
-PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	-https://gitlab.com/davical-project/davical/repository/archive.tar.gz?ref=${GITLAB_TAG}
 
@@ -11,9 +10,9 @@ HOMEPAGE=	https://www.davical.org/
 COMMENT=	Simple CalDAV server using a PostgreSQL backend
 LICENSE=	gnu-gpl-v2 AND gnu-gpl-v3
 
-DAVICAL_VERSION=	1.1.9.3
+DAVICAL_VERSION=	1.1.10
 GITLAB_TAG=		r${DAVICAL_VERSION}
-GITLAB_REV=		55d485045f43b52ccdbedbded2bfebb33b781d57
+GITLAB_REV=		9da21ad116a2913bf788bd4b0b8c58c0de83d9da
 
 DAVICALDIR=	${PREFIX}/share/davical
 EGDIR=		${PREFIX}/share/examples/davical
@@ -131,6 +130,8 @@ do-install:
 	cd ${WRKSRC}/config && for f in *; do				\
 		${INSTALL_DATA} $$f ${DESTDIR}${EGDIR}/config/$$f;	\
 	done
+
+.include "options.mk"
 
 .include "../../mk/pgsql.buildlink3.mk"
 .include "../../devel/php-libawl/Makefile.common"

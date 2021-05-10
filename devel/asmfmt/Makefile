@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.2 2021/01/23 14:22:53 bsiegert Exp $
+# $NetBSD: Makefile,v 1.5 2021/05/09 09:45:28 bsiegert Exp $
 
 GITHUB_TAG=	v${PKGVERSION_NOREV}
-DISTNAME=	asmfmt-1.2.1
-PKGREVISION=	1
+DISTNAME=	asmfmt-1.3.0
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GITHUB:=klauspost/}
 
@@ -15,8 +14,5 @@ GO_SRCPATH=		github.com/klauspost/asmfmt
 GO_DIST_BASE=		${DISTNAME}
 GO_BUILD_PATTERN=	github.com/klauspost/asmfmt/cmd/asmfmt
 
-do-install:
-	${INSTALL_PROGRAM} ${WRKDIR}/bin/asmfmt ${DESTDIR}${PREFIX}/bin
-
-.include "../../lang/go/go-package.mk"
+.include "../../lang/go/go-module.mk"
 .include "../../mk/bsd.pkg.mk"

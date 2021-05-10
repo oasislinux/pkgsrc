@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.79 2020/11/20 19:08:05 wiz Exp $
+# $NetBSD: Makefile,v 1.83 2021/05/07 17:37:52 ryoon Exp $
 
+PKGREVISION= 2
 .include "../../print/poppler/Makefile.common"
 
 COMMENT=	PDF rendering library
 
-PKGCONFIG_OVERRIDE+=	${WRKSRC}/poppler-cairo.pc.cmake
 PKGCONFIG_OVERRIDE+=	${WRKSRC}/poppler.pc.cmake
 
 INSTALLATION_DIRS+=	include/poppler share/doc/poppler
@@ -19,6 +19,8 @@ CMAKE_ARGS+=	-DENABLE_UTILS=OFF
 CMAKE_ARGS+=	-DENABLE_CPP=OFF
 # Don't compile poppler qt5 wrapper.
 CMAKE_ARGS+=	-DENABLE_QT5=OFF
+# Don't compile poppler qt6 wrapper.
+CMAKE_ARGS+=	-DENABLE_QT6=OFF
 # Don't build libcurl based HTTP support. ## might want to include
 CMAKE_ARGS+=	-DENABLE_LIBCURL=OFF
 

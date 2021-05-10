@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.219 2021/02/18 16:01:35 wiz Exp $
+# $NetBSD: Makefile,v 1.236 2021/04/27 10:31:52 pho Exp $
 
-DISTNAME=	rustc-1.49.0-src
+DISTNAME=	rustc-1.50.0-src
 PKGNAME=	${DISTNAME:S/rustc/rust/:S/-src//}
+PKGREVISION=	2
 CATEGORIES=	lang
 MASTER_SITES=	https://static.rust-lang.org/dist/
 
@@ -48,11 +49,15 @@ CONFIGURE_ARGS+=		--disable-ninja
 # Include (optional) settings to cross-build rust
 .include "cross.mk"
 
+.if !empty(rust.BUILD_TARGET)
+BUILD_TARGET=	${rust.BUILD_TARGET}
+.endif
+
 .if !empty(TARGET)
 # Use "dist" build target for cross compile of bootstrap
-BUILD_TARGET=		dist
+BUILD_TARGET?=		dist
 .else
-BUILD_TARGET=		build
+BUILD_TARGET?=		build
 .endif
 
 # Getting RPATH with $ORIGIN into bootstrap may be troublesome, so
@@ -155,16 +160,48 @@ BUILDLINK_TRANSFORM.NetBSD+=	rm:-Wl,--enable-new-dtags
 #
 DISTFILES:=		${DEFAULT_DISTFILES}
 
+.if !empty(MACHINE_PLATFORM:MDarwin-*-aarch64) || make(distinfo) || make (makesum) || make(mdi)
+RUST_STAGE0_VER=	1.49.0
+RUST_ARCH:=		aarch64-apple-darwin
+RUST_STAGE0:=		rust-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
+RUST_STD_STAGE0:=	rust-std-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
+DISTFILES:=		${DISTFILES} ${RUST_STAGE0} ${RUST_STD_STAGE0}
+pre-build-fix:
+.endif
 .if !empty(MACHINE_PLATFORM:MDarwin-*-x86_64) || make(distinfo) || make (makesum) || make(mdi)
-RUST_STAGE0_VER=	1.48.0
+RUST_STAGE0_VER=	1.49.0
 RUST_ARCH:=		x86_64-apple-darwin
 RUST_STAGE0:=		rust-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
 RUST_STD_STAGE0:=	rust-std-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
 DISTFILES:=		${DISTFILES} ${RUST_STAGE0} ${RUST_STD_STAGE0}
 pre-build-fix:
 .endif
+.if !empty(MACHINE_PLATFORM:MLinux-*-aarch64) || make(distinfo) || make (makesum) || make(mdi)
+RUST_STAGE0_VER=	1.49.0
+RUST_ARCH:=		aarch64-unknown-linux-gnu
+RUST_STAGE0:=		rust-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
+RUST_STD_STAGE0:=	rust-std-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
+DISTFILES:=		${DISTFILES} ${RUST_STAGE0} ${RUST_STD_STAGE0}
+pre-build-fix:
+.endif
+.if !empty(MACHINE_PLATFORM:MLinux-*-earmv6hf) || make(distinfo) || make (makesum) || make(mdi)
+RUST_STAGE0_VER=	1.49.0
+RUST_ARCH:=		arm-unknown-linux-gnueabihf
+RUST_STAGE0:=		rust-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
+RUST_STD_STAGE0:=	rust-std-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
+DISTFILES:=		${DISTFILES} ${RUST_STAGE0} ${RUST_STD_STAGE0}
+pre-build-fix:
+.endif
+.if !empty(MACHINE_PLATFORM:MLinux-*-earmv7hf) || make(distinfo) || make (makesum) || make(mdi)
+RUST_STAGE0_VER=	1.49.0
+RUST_ARCH:=		armv7-unknown-linux-gnueabihf
+RUST_STAGE0:=		rust-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
+RUST_STD_STAGE0:=	rust-std-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
+DISTFILES:=		${DISTFILES} ${RUST_STAGE0} ${RUST_STD_STAGE0}
+pre-build-fix:
+.endif
 .if !empty(MACHINE_PLATFORM:MLinux-*-i386) || make(distinfo) || make (makesum) || make(mdi)
-RUST_STAGE0_VER=	1.48.0
+RUST_STAGE0_VER=	1.49.0
 RUST_ARCH:=		i686-unknown-linux-gnu
 RUST_STAGE0:=		rust-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
 RUST_STD_STAGE0:=	rust-std-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
@@ -172,7 +209,7 @@ DISTFILES:=		${DISTFILES} ${RUST_STAGE0} ${RUST_STD_STAGE0}
 pre-build-fix:
 .endif
 .if !empty(MACHINE_PLATFORM:MLinux-*-x86_64) || make(distinfo) || make (makesum) || make(mdi)
-RUST_STAGE0_VER=	1.48.0
+RUST_STAGE0_VER=	1.40.0
 .  if !empty(GLIBC_VERSION)
 RUST_ARCH:=		x86_64-unknown-linux-gnu
 .  else
@@ -192,7 +229,7 @@ pre-build-fix:
 # x86_64-sun-solaris bootstrap and comment out the overrides.
 #
 .if !empty(MACHINE_PLATFORM:MSunOS-*-x86_64) || make(distinfo) || make (makesum) || make(mdi)
-RUST_STAGE0_VER=	1.48.0
+RUST_STAGE0_VER=	1.49.0
 RUST_ARCH:=		x86_64-unknown-illumos
 RUST_STAGE0:=		rust-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
 SITES.${RUST_STAGE0}=	https://us-east.manta.joyent.com/pkgsrc/public/pkg-bootstraps/
@@ -205,16 +242,8 @@ CONFIGURE_ARGS+=	--host=${RUST_ARCH}
 CONFIGURE_ARGS+=	--target=${RUST_ARCH}
 pre-build-fix:
 .endif
-.if !empty(MACHINE_PLATFORM:MFreeBSD-*-i386) || make(distinfo) || make (makesum) || make(mdi)
-RUST_STAGE0_VER=	1.48.0
-RUST_ARCH:=		i686-unknown-freebsd
-RUST_STAGE0:=		rust-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
-RUST_STD_STAGE0:=	rust-std-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
-DISTFILES:=		${DISTFILES} ${RUST_STAGE0} ${RUST_STD_STAGE0}
-pre-build-fix:
-.endif
 .if !empty(MACHINE_PLATFORM:MFreeBSD-*-x86_64) || make(distinfo) || make (makesum) || make(mdi)
-RUST_STAGE0_VER=	1.48.0
+RUST_STAGE0_VER=	1.49.0
 RUST_ARCH:=		x86_64-unknown-freebsd
 RUST_STAGE0:=		rust-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
 RUST_STD_STAGE0:=	rust-std-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
@@ -222,7 +251,7 @@ DISTFILES:=		${DISTFILES} ${RUST_STAGE0} ${RUST_STD_STAGE0}
 pre-build-fix:
 .endif
 .if !empty(MACHINE_PLATFORM:MNetBSD-*-i386) || make(distinfo) || make (makesum) || make(mdi)
-RUST_STAGE0_VER=	1.48.0
+RUST_STAGE0_VER=	1.49.0
 RUST_ARCH=		i686-unknown-netbsd
 RUST_STAGE0:=		rust-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
 RUST_STD_STAGE0:=	rust-std-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
@@ -239,7 +268,7 @@ pre-build-fix:
 	${TOOLS_PLATFORM.paxctl} +am ${WRKDIR}/rust-bootstrap/bin/rustc
 .endif
 .if !empty(MACHINE_PLATFORM:MNetBSD-*-x86_64) || make(distinfo) || make (makesum) || make(mdi)
-RUST_STAGE0_VER=	1.48.0
+RUST_STAGE0_VER=	1.49.0
 RUST_ARCH=		x86_64-unknown-netbsd
 RUST_STAGE0:=		rust-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
 RUST_STD_STAGE0:=	rust-std-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
@@ -247,7 +276,7 @@ DISTFILES:=		${DISTFILES} ${RUST_STAGE0} ${RUST_STD_STAGE0}
 pre-build-fix:
 .endif
 .if !empty(MACHINE_PLATFORM:MNetBSD-*-powerpc) || make(distinfo) || make (makesum) || make(mdi)
-RUST_STAGE0_VER=	1.48.0
+RUST_STAGE0_VER=	1.49.0
 RUST_ARCH=		powerpc-unknown-netbsd
 
 # Cross-built against NetBSD 9.0
@@ -271,7 +300,7 @@ SITES.${RUST_STD_STAGE0}=	${MASTER_SITE_LOCAL:=rust/}
 pre-build-fix:
 .endif
 .if !empty(MACHINE_PLATFORM:MNetBSD-*-aarch64) || make(distinfo) || make (makesum) || make(mdi)
-RUST_STAGE0_VER=	1.48.0
+RUST_STAGE0_VER=	1.49.0
 RUST_ARCH=		aarch64-unknown-netbsd
 RUST_STAGE0:=		rust-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
 RUST_STD_STAGE0:=	rust-std-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
@@ -281,7 +310,7 @@ SITES.${RUST_STD_STAGE0}=	${MASTER_SITE_LOCAL:=rust/}
 pre-build-fix:
 .endif
 .if !empty(MACHINE_PLATFORM:MNetBSD-*-sparc64) || make(distinfo) || make (makesum) || make(mdi)
-RUST_STAGE0_VER=	1.48.0
+RUST_STAGE0_VER=	1.49.0
 RUST_ARCH=		sparc64-unknown-netbsd
 RUST_STAGE0:=		rust-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
 RUST_STD_STAGE0:=	rust-std-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
@@ -292,7 +321,7 @@ pre-build-fix:
 .endif
 .if !empty(MACHINE_PLATFORM:MNetBSD-*-earmv7hf) || make(distinfo) || make (makesum) || make(mdi)
 RUST_ARCH=		armv7-unknown-netbsd-eabihf
-RUST_STAGE0_VER=	1.48.0
+RUST_STAGE0_VER=	1.49.0
 RUST_STAGE0:=		rust-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
 RUST_STD_STAGE0:=	rust-std-${RUST_STAGE0_VER}-${RUST_ARCH}.tar.gz
 DISTFILES:=		${DISTFILES} ${RUST_STAGE0} ${RUST_STD_STAGE0}
@@ -349,7 +378,7 @@ CKSUMS+=	9e146a847e1f726fa7d7eae224aaa925030287f99770f950a012cb398e088d12
 
 CKSUM_CRATES+=	vendor/openssl-src
 CKSUMS+=	03dcdaac7de880b860ecfe859ba2ac3e46c8f46a7bf948aa674147eebee421b0
-CKSUMS+=	41ab6811d4ffde68f245e5097081ba8052a07a4b86df69a356ba11205e7e2210
+CKSUMS+=	90456c77ade1702fbf116d9cdc57c0c8dba5f059f591d3dffc9b54c7a7088be8
 
 SUBST_CLASSES+=		cksum
 SUBST_STAGE.cksum=	pre-configure
@@ -376,11 +405,13 @@ post-extract:
 	${RM} -f c++-wrap; \
 	${RM} -f clang++-wrap; \
 	${RM} -f clang-wrap; \
+	${RM} -f ar-wrap; \
 	${CP} ${.CURDIR}/files/gcc-wrap .; \
 	${CHMOD} +x gcc-wrap; \
 	${LN} -s gcc-wrap c++-wrap; \
 	${LN} -s gcc-wrap clang++-wrap; \
-	${LN} -s gcc-wrap clang-wrap
+	${LN} -s gcc-wrap clang-wrap; \
+	${LN} -s gcc-wrap ar-wrap
 .endif
 
 .if ${OPSYS} == "FreeBSD"
@@ -434,10 +465,15 @@ post-install: fix-darwin-install-name
 fix-darwin-install-name:
 	for f in ${DESTDIR}${PREFIX}/lib/librustc_macros-*.dylib \
 	    ${DESTDIR}${PREFIX}/lib/libtracing_attributes-*.dylib \
+	    ${DESTDIR}${PREFIX}/lib/libserde_derive-*.dylib \
 	    ${DESTDIR}${PREFIX}/lib/libchalk_derive-*.dylib; do \
 		install_name_tool -id `${ECHO} $$f | ${SED} -e 's,${DESTDIR},,g'` $$f; \
 	done
 .endif
+
+# MacOS X 10.7 is the oldest supported version. See
+# ${WRKSRC}/src/bootstrap/lib.rs
+MAKE_ENV.Darwin+=	MACOSX_DEPLOYMENT_TARGET="10.7"
 
 GENERATE_PLIST+=	${FIND} ${DESTDIR}${PREFIX} \( -type f -o -type l \) -print | \
 			${SED} -e 's,${DESTDIR}${PREFIX}/,,' | ${SORT} ;
@@ -450,7 +486,7 @@ GENERATE_PLIST+=	${FIND} ${DESTDIR}${PREFIX} \( -type f -o -type l \) -print | \
 #BOOTSTRAP_NAME=	${PKGNAME_NOREV:C/rust/rust-nightly/}-${RUST_ARCH}
 BOOTSTRAP_NAME=		${PKGNAME_NOREV}-${RUST_ARCH}
 BOOTSTRAP_TMPDIR=	${WRKDIR}/${BOOTSTRAP_NAME}
-USE_TOOLS+=		bsdtar
+USE_TOOLS+=		gtar
 
 # The NetBSD part is so far untested, because I could not convince
 # the rust build to use the gcc wrapper when building natively,
@@ -539,42 +575,15 @@ stage0-bootstrap: install
 
 ## Issues specific to: bootstrap AND NetBSD follow
 
-# (I wish this worked on powerpc, but it doesn't since
-# I can't build with the internal LLVM, ref.
-# https://github.com/rust-lang/rust/issues/65862)
-
-.if (${OPSYS} == "NetBSD") && \
-		((${MACHINE_ARCH} == "i386") || \
-		 (${MACHINE_ARCH} == "sparc64") || \
-		 (${MACHINE_ARCH} == "powerpc")) \
-	&& (empty(OS_VERSION:M[012345678].*) || \
-	    !empty(OS_VERSION:M8.99.*))
-# Bootstrap kits are built on 8.0, so that a single bootstrap can run
-# on multiple systems.  Thus later versions need the compat80 package.
-# \todo Explain why this is limited to a small list of architectures,
-# and in particular why not x86_64.
-DEPENDS+=	compat80>=0:../../emulators/compat80
-.endif
-
-.if (${OPSYS} == "NetBSD") && \
-		((${MACHINE_ARCH} == "i386")) \
-	&& (empty(OS_VERSION:M[012345678].*) || \
-	    !empty(OS_VERSION:M8.99.*))
-# Bootstrap kits use openssl, which on NetBSD 8 comes from pkgsrc.
-# Therefore the pkgsrc openssl libs need to be present as well.
-# The 1.44.1 i686 bootstrap links with pkgsrc openssl.  The others do
-# not.  When the package is built,
-# cargo links against pkgsrc openssl, so it must be a run-time
-# dependency as well.  Forcing USE_BUILTIN.openssl=no results in a
-# mysterious heimdal error, but straight DEPENDS seems to result in a
-# satisfactory package build.
-# While this is icky, it is for the time being better than no rust package.
-DEPENDS+=	openssl>=1.1:../../security/openssl
+# rust i386 bootstraps are built for 8.0 and still depend on libstdc++.so.8.
+# Pull in compat80 on 9.x and newer.
+.if !empty(MACHINE_PLATFORM:MNetBSD-*-i386) && empty(OS_VERSION:M8.*)
+BUILD_DEPENDS+=	compat80>=0:../../emulators/compat80
 .endif
 
 # This is for when we build natively:
-.if ((${OPSYS} == "NetBSD") && \
-    ((${MACHINE_ARCH} == "powerpc") || (${MACHINE_ARCH} == "i386")))
+.if !empty(MACHINE_PLATFORM:MNetBSD-*-powerpc) || \
+    !empty(MACHINE_PLATFORM:MNetBSD-*-i386)
 # LLVM needs libatomic for 64-bit atomics on powerpc and i386
 .include "../../devel/libatomic/buildlink3.mk"
 # Make those libraries available via a unique directory:

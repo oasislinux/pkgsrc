@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.566 2021/02/14 14:03:34 taca Exp $
+# $NetBSD: Makefile,v 1.569 2021/04/21 09:34:58 nia Exp $
 #
 
 COMMENT=	Electronic mail utilities
@@ -185,7 +185,6 @@ SUBDIR+=	oe2mbx
 SUBDIR+=	offlineimap
 SUBDIR+=	opendkim
 SUBDIR+=	opendmarc
-SUBDIR+=	opensmtpd
 SUBDIR+=	p5-App-Siesh
 SUBDIR+=	p5-Catalyst-View-Email
 SUBDIR+=	p5-Email-Abstract
@@ -299,7 +298,6 @@ SUBDIR+=	py-authres
 SUBDIR+=	py-email_validator
 SUBDIR+=	py-flufl.bounce
 SUBDIR+=	py-imapclient
-SUBDIR+=	py-libgmail
 SUBDIR+=	py-policyd-spf
 SUBDIR+=	py-sendmail-admin
 SUBDIR+=	py-spf
@@ -329,7 +327,6 @@ SUBDIR+=	queue-fix
 SUBDIR+=	queue-repair
 SUBDIR+=	quickml
 SUBDIR+=	rblcheck
-SUBDIR+=	re-alpine
 SUBDIR+=	relay-ctrl
 SUBDIR+=	ripmime
 SUBDIR+=	rmail-mime

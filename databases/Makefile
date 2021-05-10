@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.623 2021/02/17 09:59:27 adam Exp $
+# $NetBSD: Makefile,v 1.628 2021/05/08 19:47:15 jdolecek Exp $
 
 COMMENT=	Databases
 
@@ -98,6 +98,8 @@ SUBDIR+=	lua-sql-sqlite3
 SUBDIR+=	lua-sqlite3
 SUBDIR+=	lua-tokyocabinet
 SUBDIR+=	mariadb-connector-c
+SUBDIR+=	mariadb104-client
+SUBDIR+=	mariadb104-server
 SUBDIR+=	mariadb55-client
 SUBDIR+=	mariadb55-server
 SUBDIR+=	metakit-lib
@@ -152,7 +154,6 @@ SUBDIR+=	p5-Class-DBI-Plugin
 SUBDIR+=	p5-Class-DBI-Plugin-DeepAbstractSearch
 SUBDIR+=	p5-DBD-CSV
 SUBDIR+=	p5-DBD-DB2
-SUBDIR+=	p5-DBD-Google
 SUBDIR+=	p5-DBD-Mock
 SUBDIR+=	p5-DBD-ODBC
 SUBDIR+=	p5-DBD-Oracle
@@ -278,7 +279,7 @@ SUBDIR+=	php-pdo_pgsql
 SUBDIR+=	php-pdo_sqlite
 SUBDIR+=	php-pgsql
 SUBDIR+=	php-redis
-SUBDIR+=	php-redis3
+SUBDIR+=	php-redis4
 SUBDIR+=	php-rrd
 SUBDIR+=	php-sqlite3
 SUBDIR+=	php-sqlrelay
@@ -476,7 +477,6 @@ SUBDIR+=	ruby-mysql28
 SUBDIR+=	ruby-odbc
 SUBDIR+=	ruby-pg
 SUBDIR+=	ruby-pg_array_parser
-SUBDIR+=	ruby-postgres-pr
 SUBDIR+=	ruby-qdbm
 SUBDIR+=	ruby-rrdtool
 SUBDIR+=	ruby-sequel

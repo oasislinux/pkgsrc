@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.28 2021/02/07 06:30:16 ryoon Exp $
+# $NetBSD: Makefile,v 1.31 2021/04/21 13:24:27 adam Exp $
 
-DISTNAME=	mumble-1.3.3
-PKGREVISION=	4
+DISTNAME=	mumble-1.3.4
+PKGREVISION=	2
 CATEGORIES=	chat audio
 MASTER_SITES=	${MASTER_SITE_GITHUB:=mumble-voip/}
 GITHUB_PROJECT=	mumble
@@ -62,6 +62,8 @@ INSTALLATION_DIRS+=	share/icons/hicolor/512x512/apps
 INSTALLATION_DIRS+=	share/icons/hicolor/scalable/apps
 INSTALLATION_DIRS+=	share/pixmaps
 INSTALLATION_DIRS+=	${PKGMANDIR}/man1
+
+CHECK_PORTABILITY_SKIP+=	3rdparty/opus-src/doc/build_draft.sh
 
 do-configure:
 	cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} ${QTDIR}/bin/qmake -unix -recursive main.pro \

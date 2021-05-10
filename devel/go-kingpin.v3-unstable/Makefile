@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.23 2021/01/23 14:22:59 bsiegert Exp $
+# $NetBSD: Makefile,v 1.25 2021/05/08 15:02:42 bsiegert Exp $
 
 DISTNAME=	kingpin-3.0.0.0.20100811
 PKGNAME=	go-${DISTNAME:S/kingpin/kingpin.v3-unstable/}
-PKGREVISION=	22
+PKGREVISION=	24
 MASTER_SITES=	${MASTER_SITE_GITHUB:=alecthomas/}
 CATEGORIES=	devel
 GITHUB_PROJECT=	kingpin

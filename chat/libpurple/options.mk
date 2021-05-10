@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.31 2020/06/12 11:40:19 nia Exp $
+# $NetBSD: options.mk,v 1.34 2021/05/04 13:55:14 nia Exp $
 
 PKG_OPTIONS_VAR=		PKG_OPTIONS.libpurple
 PKG_OPTIONS_REQUIRED_GROUPS=	ssl
@@ -30,7 +30,7 @@ PLIST.nss=		yes
 CONFIGURE_ARGS+=	--enable-nss
 CONFIGURE_ARGS+= --with-nspr-includes=${BUILDLINK_PREFIX.nspr}/include/nspr
 CONFIGURE_ARGS+= --with-nspr-libs=${BUILDLINK_PREFIX.nspr}/lib/nspr
-CONFIGURE_ARGS+= --with-nss-includes=${BUILDLINK_PREFIX.nss}/include/nss/nss
+CONFIGURE_ARGS+= --with-nss-includes=${BUILDLINK_PREFIX.nss}/include/nss
 CONFIGURE_ARGS+= --with-nss-libs=${BUILDLINK_PREFIX.nss}/lib/nss
 .  include "../../devel/nss/buildlink3.mk"
 .endif
@@ -54,12 +54,13 @@ CONFIGURE_ARGS+=	--with-tclconfig=${BUILDLINK_PREFIX.tcl}/lib
 
 .if !empty(PKG_OPTIONS:Mdbus)
 CONFIGURE_ARGS+=	--enable-dbus
-CONFIGURE_ARGS+=	--with-python=${PYTHONBIN}
+CONFIGURE_ARGS+=	--with-python3=${PYTHONBIN}
 PLIST.dbus=		yes
 REPLACE_SH+=		libpurple/purple-send
 REPLACE_SH+=		libpurple/purple-send-async
 REPLACE_PYTHON+=	libpurple/purple-remote
 REPLACE_PYTHON+=	libpurple/purple-url-handler
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 .  include "../../sysutils/py-dbus/buildlink3.mk"
 .  include "../../sysutils/dbus/buildlink3.mk"
 .  include "../../sysutils/dbus-glib/buildlink3.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.94 2021/01/16 14:44:50 nia Exp $
+# $NetBSD: buildlink3.mk,v 1.101 2021/05/03 16:28:47 gdt Exp $
 
 BUILDLINK_TREE+=	osg
 
@@ -6,7 +6,7 @@ BUILDLINK_TREE+=	osg
 OSG_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.osg+=	osg>=2.8.3
-BUILDLINK_ABI_DEPENDS.osg+=	osg>=3.6.5
+BUILDLINK_ABI_DEPENDS.osg+=	osg>=3.6.5nb6
 BUILDLINK_PKGSRCDIR.osg?=	../../graphics/osg
 
 .include "../../mk/bsd.fast.prefs.mk"
@@ -15,7 +15,6 @@ BUILDLINK_PKGSRCDIR.osg?=	../../graphics/osg
 .include "../../graphics/MesaLib/buildlink3.mk"
 .include "../../graphics/giflib/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
-.include "../../graphics/tiff/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../mk/jpeg.buildlink3.mk"
 .endif
@@ -26,6 +25,7 @@ pkgbase := osg
 .include "../../graphics/freetype2/buildlink3.mk"
 .include "../../graphics/jasper/buildlink3.mk"
 .include "../../graphics/openexr/buildlink3.mk"
+.include "../../graphics/tiff/buildlink3.mk"
 .include "../../lang/lua52/buildlink3.mk"
 .include "../../www/curl/buildlink3.mk"
 .include "../../multimedia/ffmpeg4/buildlink3.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2020/11/22 00:05:09 gutteridge Exp $
+# $NetBSD: Makefile,v 1.7 2021/05/02 11:06:15 nia Exp $
 
 DISTNAME=	mutter-3.38.1
 CATEGORIES=	wm gnome
@@ -11,7 +11,7 @@ COMMENT=	GNOME window manager
 LICENSE=	gnu-gpl-v2
 
 USE_TOOLS+=		msgfmt pkg-config
-TOOL_DEPENDS+=		gdbus-codegen-[0-9]*:../../devel/gdbus-codegen
+USE_TOOLS+=		gdbus-codegen
 
 .include "../../graphics/MesaLib/features.mk"
 
@@ -46,6 +46,8 @@ PKGCONFIG_OVERRIDE+=		output/meson-private/mutter-clutter-x11-7.pc
 PKGCONFIG_OVERRIDE+=		output/meson-private/libmutter-7.pc
 
 LDFLAGS+=		${COMPILER_RPATH_FLAG}${PREFIX}/lib/mutter-7
+
+PYTHON_FOR_BUILD_ONLY=	tool
 
 .include "../../devel/meson/build.mk"
 .include "../../devel/glib2/schemas.mk"

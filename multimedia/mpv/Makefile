@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.122 2021/02/07 06:30:34 ryoon Exp $
+# $NetBSD: Makefile,v 1.125 2021/04/25 06:09:41 nia Exp $
 
-DISTNAME=	mpv-0.33.0
+DISTNAME=	mpv-0.33.1
 PKGREVISION=	2
 CATEGORIES=	multimedia
 MASTER_SITES=	${MASTER_SITE_GITHUB:=mpv-player/}
@@ -21,7 +21,6 @@ TOOL_DEPENDS+=	waf>=2.0.9:../../devel/waf
 WAF_REPLACE_EXECUTABLE=	yes
 WAF_CONFIGURE_ARGS+=	--bindir=${PREFIX}/bin
 WAF_CONFIGURE_ARGS+=	--enable-dvdnav
-WAF_CONFIGURE_ARGS+=	--disable-egl-x11
 WAF_CONFIGURE_ARGS+=	--enable-libmpv-shared
 
 PYTHON_FOR_BUILD_ONLY=	yes

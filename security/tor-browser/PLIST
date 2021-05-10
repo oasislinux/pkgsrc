@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.11 2021/02/04 13:34:16 wiz Exp $
+@comment $NetBSD: PLIST,v 1.13 2021/03/31 21:58:51 wiz Exp $
 bin/tor-browser
 lib/tor-browser/actors/AboutHttpsOnlyErrorChild.jsm
 lib/tor-browser/actors/AboutHttpsOnlyErrorParent.jsm

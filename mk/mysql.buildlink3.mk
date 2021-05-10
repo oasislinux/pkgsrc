@@ -1,4 +1,4 @@
-# $NetBSD: mysql.buildlink3.mk,v 1.28 2020/10/20 21:53:31 otis Exp $
+# $NetBSD: mysql.buildlink3.mk,v 1.30 2021/05/08 19:53:28 jdolecek Exp $
 #
 # This file is included by packages that require some version of the
 # MySQL database client.
@@ -8,7 +8,7 @@
 # MYSQL_VERSION_DEFAULT
 #	The preferred MySQL version.
 #
-#	Possible: 57 56 MARIADB55
+#	Possible: 57 56 MARIADB55 MARIADB104
 #	Default: 57
 #
 # Package-settable variables:
@@ -37,7 +37,7 @@ _SYS_VARS.mysql=	MYSQL_PKGSRCDIR
 .include "../../mk/bsd.prefs.mk"
 
 MYSQL_VERSION_DEFAULT?=		57
-MYSQL_VERSIONS_ACCEPTED?=	57 56 MARIADB55
+MYSQL_VERSIONS_ACCEPTED?=	57 56 MARIADB55 MARIADB104
 
 # transform the list into individual variables
 .for mv in ${MYSQL_VERSIONS_ACCEPTED}
@@ -46,30 +46,28 @@ _MYSQL_VERSION_${mv}_OK=	yes
 
 # check what is installed
 .if ${OPSYS} == "Darwin"
-.  if exists(${LOCALBASE}/lib/libmysqlclient.20.dylib)
-_MYSQL_VERSION_57_INSTALLED=	yes
-_MYSQL_VERSION_INSTALLED=	57
-.  endif
-.  if exists(${LOCALBASE}/lib/libmysqlclient.18.dylib)
-.    if exists(${LOCALBASE}/include/mysql/mysql/client_authentication.h)
-_MYSQL_VERSION_56_INSTALLED=	yes
-_MYSQL_VERSION_INSTALLED=	56
-.    endif
-.  endif
+_MYSQL_SO_57=	20.dylib
+_MYSQL_SO_56=	18.dylib
 .else
-.  if exists(${LOCALBASE}/lib/libmysqlclient.so.20)
+_MYSQL_SO_57=	so.20
+_MYSQL_SO_56=	so.18
+.endif
+
+.if exists(${LOCALBASE}/lib/libmysqlclient.${_MYSQL_SO_57})
 _MYSQL_VERSION_57_INSTALLED=	yes
 _MYSQL_VERSION_INSTALLED=	57
-.  endif
-.  if exists(${LOCALBASE}/lib/libmysqlclient.so.18)
-.    if exists(${LOCALBASE}/include/mysql/mysql/client_authentication.h)
+.endif
+.if exists(${LOCALBASE}/lib/libmysqlclient.${_MYSQL_SO_56})
+.  if exists(${LOCALBASE}/include/mysql/mysql/client_authentication.h)
 _MYSQL_VERSION_56_INSTALLED=	yes
 _MYSQL_VERSION_INSTALLED=	56
-.    elif exists(${LOCALBASE}/share/mariadb)
+.  elif exists(${LOCALBASE}/share/mariadb)
 _MYSQL_VERSION_MARIADB55_INSTALLED=	yes
 _MYSQL_VERSION_INSTALLED=	MARIADB55
-.    endif
 .  endif
+.elif exists(${LOCALBASE}/include/mysql/mariadb_version.h)
+_MYSQL_VERSION_MARIADB104_INSTALLED=	yes
+_MYSQL_VERSION_INSTALLED=	MARIADB104
 .endif
 
 
@@ -116,6 +114,8 @@ MYSQL_PKGSRCDIR=	../../databases/mysql57-client
 MYSQL_PKGSRCDIR=	../../databases/mysql56-client
 .elif ${_MYSQL_VERSION} == "MARIADB55"
 MYSQL_PKGSRCDIR=	../../databases/mariadb55-client
+.elif ${_MYSQL_VERSION} == "MARIADB104"
+MYSQL_PKGSRCDIR=	../../databases/mariadb104-client
 .else
 # force an error
 PKG_FAIL_REASON+=	"[mysql.buildlink3.mk] ${_MYSQL_VERSION} is not a valid mysql package."

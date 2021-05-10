@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.1 2021/02/20 21:29:29 ryoon Exp $
+# $NetBSD: Makefile,v 1.6 2021/04/21 13:24:53 adam Exp $
 
-DISTNAME=	fcitx5-chinese-addons-5.0.3
+DISTNAME=	fcitx5-chinese-addons-5.0.4
+PKGREVISION=	2
 CATEGORIES=	inputmethod
 MASTER_SITES=	https://download.fcitx-im.org/fcitx5/fcitx5-chinese-addons/
 EXTRACT_SUFX=	.tar.xz
@@ -21,8 +22,11 @@ SITES.${f}=	https://download.fcitx-im.org/data/
 .endfor
 EXTRACT_ONLY=	${DEFAULT_DISTFILES}
 
+BUILD_DEPENDS+=	extra-cmake-modules-[0-9]*:../../devel/extra-cmake-modules
+
 USE_CMAKE=		yes
 USE_PKGLOCALEDIR=	yes
+USE_TOOLS+=		pkg-config
 USE_LANGUAGES=		c c++
 
 post-extract:

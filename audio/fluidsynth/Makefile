@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.47 2021/02/07 06:30:12 ryoon Exp $
+# $NetBSD: Makefile,v 1.49 2021/04/05 10:54:15 wiz Exp $
 
-DISTNAME=	fluidsynth-2.1.7
-PKGREVISION=	1
+DISTNAME=	fluidsynth-2.2.0
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_GITHUB:=FluidSynth/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
@@ -12,6 +11,7 @@ COMMENT=	Software synthesizer based on SoundFont2
 LICENSE=	gnu-lgpl-v2
 
 USE_CMAKE=	yes
+USE_LANGUAGES=	c c++
 USE_TOOLS+=	pkg-config
 
 CMAKE_ARGS+=	-DMAN_INSTALL_DIR=${PREFIX}/${PKGMANDIR}/man1

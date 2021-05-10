@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2021/02/07 06:30:40 ryoon Exp $
+# $NetBSD: Makefile,v 1.9 2021/05/02 11:06:15 nia Exp $
 
 DISTNAME=	gnome-shell-3.38.1
-PKGREVISION=	3
+PKGREVISION=	6
 CATEGORIES=	x11 gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/${PKGBASE}/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.xz
@@ -11,7 +11,7 @@ HOMEPAGE=	https://wiki.gnome.org/Projects/GnomeShell
 COMMENT=	Next generation GNOME shell
 LICENSE=	gnu-gpl-v2
 
-USE_TOOLS+=	pkg-config perl msgfmt xgettext
+USE_TOOLS+=	pkg-config perl msgfmt xgettext gdbus-codegen
 
 MESON_ARGS+=	-Dnetworkmanager=false
 MESON_ARGS+=	-Dsystemd=false
@@ -20,7 +20,8 @@ MESON_ARGS+=	-Dextensions_tool=false
 
 TOOL_DEPENDS+=	sassc>=3.6:../../www/sassc
 TOOL_DEPENDS+=	asciidoc-[0-9]*:../../textproc/asciidoc
-TOOL_DEPENDS+=	gdbus-codegen>=2.64:../../devel/gdbus-codegen
+
+DEPENDS+=	libgdm>=40.0:../../x11/libgdm
 
 MAKE_ENV+=	LD_LIBRARY_PATH=${WRKSRC}/output/subprojects/gvc
 

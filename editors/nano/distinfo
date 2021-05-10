@@ -1,9 +1,9 @@
-$NetBSD: distinfo,v 1.64 2021/02/05 17:25:52 triaxx Exp $
+$NetBSD: distinfo,v 1.67 2021/04/29 18:44:14 wiedi Exp $
 
-SHA1 (nano-5.5.tar.xz) = b727bcd583498312f52307ed39b83d7515401c58
-RMD160 (nano-5.5.tar.xz) = 0aaec99f60c214081608e3278ecd662e48f95825
-SHA512 (nano-5.5.tar.xz) = cbd2b6e1dc7437caf4ec6b55252664430fb1d6243dcf51a7b29ca3683bd1e6a25809c7b9d514d42cc85eb1a615bf3365951c07bf7c3c183a8cbe71c8586d9481
-Size (nano-5.5.tar.xz) = 1427592 bytes
-SHA1 (patch-configure) = 5f34f74d20c9b18f21afa308ed5634daed98a25d
-SHA1 (patch-doc_nano.1) = 28dcfb77046774d09128986783bbc434a708e212
-SHA1 (patch-doc_nanorc.5) = a1c2151152d08348263a6f36be43fa04fb4eee15
+SHA1 (nano-5.7.tar.xz) = ae19875914a31859ccd52cceaac344d275df2e49
+RMD160 (nano-5.7.tar.xz) = 982b29f6ff25fa26b8234ba4cdcad2c354808c6c
+SHA512 (nano-5.7.tar.xz) = 7f604aff497afb01ea5ff31a3521c84ad225e420a61af2351f8705f5cca108c16a56e79ecf9cc1d6ea55b0818d11628a6e05d5269a593ceca5c01c18c88791dd
+Size (nano-5.7.tar.xz) = 1447076 bytes
+SHA1 (patch-configure) = 8df30018d732c00202b4173f1c3ae0e03aa56245
+SHA1 (patch-doc_nano.1) = 3d160aa6a4324400e79064d22cbd291a0d3de4f9
+SHA1 (patch-doc_nanorc.5) = 4d8af863bfa51eeac2a5e5cd04bd16aba3b6e29a

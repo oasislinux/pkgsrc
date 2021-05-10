@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.29 2021/01/23 14:23:01 bsiegert Exp $
+# $NetBSD: Makefile,v 1.31 2021/05/08 15:02:38 bsiegert Exp $
 
 DISTNAME=	properties-1.7.0
 PKGNAME=	go-${DISTNAME}
-PKGREVISION=	26
+PKGREVISION=	28
 MASTER_SITES=	${MASTER_SITE_GITHUB:=magiconair/}
 CATEGORIES=	devel
 GITHUB_TAG=	v${PKGVERSION_NOREV}

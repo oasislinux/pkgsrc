@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.5 2021/02/05 15:46:34 taca Exp $
+# $NetBSD: Makefile,v 1.10 2021/05/09 14:48:09 taca Exp $
 
-DISTNAME=	chef-utils-16.10.8
+DISTNAME=	chef-utils-16.13.16
 CATEGORIES=	sysutils
 
 MAINTAINER=	pkgsrc-users@NetBSD.org

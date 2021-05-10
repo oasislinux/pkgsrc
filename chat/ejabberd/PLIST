@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.56 2021/02/08 07:51:42 triaxx Exp $
+@comment $NetBSD: PLIST,v 1.58 2021/04/13 08:02:24 triaxx Exp $
 lib/${PKGNAME}/COPYING
 lib/${PKGNAME}/ebin/ELDAPv3.beam
 lib/${PKGNAME}/ebin/acl.beam
@@ -343,6 +343,7 @@ lib/${PKGNAME}/priv/msgs/pt-br.msg
 lib/${PKGNAME}/priv/msgs/pt.msg
 lib/${PKGNAME}/priv/msgs/ru.msg
 lib/${PKGNAME}/priv/msgs/sk.msg
+lib/${PKGNAME}/priv/msgs/sq.msg
 lib/${PKGNAME}/priv/msgs/sv.msg
 lib/${PKGNAME}/priv/msgs/th.msg
 lib/${PKGNAME}/priv/msgs/tr.msg
@@ -360,7 +361,7 @@ lib/${PKGNAME}/priv/sql/pg.new.sql
 lib/${PKGNAME}/priv/sql/pg.sql
 man/man5/ejabberd.yml.5
 sbin/ejabberdctl
-share/bash-completion.d/ejabberd
+share/bash-completion/completions/ejabberd
 share/doc/ejabberd/COPYING
 share/examples/ejabberd/ejabberd.yml
 share/examples/ejabberd/ejabberdctl.cfg

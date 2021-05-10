@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.1 2021/01/24 19:07:21 maya Exp $
+# $NetBSD: Makefile,v 1.3 2021/04/21 11:40:22 adam Exp $
 
 GITHUB_PROJECT=	FNA
 GITHUB_TAG=	21.01
 DISTNAME=	21.01
 PKGNAME=	${GITHUB_PROJECT:tl}-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	games
 MASTER_SITES=	${MASTER_SITE_GITHUB:=FNA-XNA/}
 DIST_SUBDIR=	${GITHUB_PROJECT}
@@ -65,5 +66,5 @@ do-install:
 .include "../../graphics/fna3d/buildlink3.mk"
 .include "../../graphics/SDL2_image/buildlink3.mk"
 .include "../../audio/faudio/buildlink3.mk"
-.include "../../lang/mono6/buildlink3.mk"
+.include "../../lang/mono/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

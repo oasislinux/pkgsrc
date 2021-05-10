@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.48 2021/01/23 14:23:13 bsiegert Exp $
+# $NetBSD: Makefile,v 1.54 2021/05/08 15:02:31 bsiegert Exp $
 
-DISTNAME=	gitea-1.12.6
+DISTNAME=	gitea-1.13.4
+PKGREVISION=	4
 MASTER_SITES=	${MASTER_SITE_GITHUB:=go-gitea/}
-PKGREVISION=	1
 CATEGORIES=	www
 GITHUB_TAG=	v${PKGVERSION_NOREV}
 
@@ -18,7 +18,7 @@ GO_SRCPATH=		code.gitea.io/gitea
 # The front-end files do not change every release, so only bump this when
 # necessary to avoid excessive uploads to LOCAL_PORTS.
 #
-FRONTEND=		gitea-1.12.6-frontend.tar.gz
+FRONTEND=		gitea-1.13.4-frontend.tar.gz
 SITES.${FRONTEND}=	${MASTER_SITE_LOCAL}
 DISTFILES:=		${DEFAULT_DISTFILES} ${FRONTEND}
 
@@ -104,8 +104,6 @@ do-install:
 	cd ${WRKSRC}/public && ${PAX} -rw -pp . ${DESTDIR}${PREFIX}/share/gitea/public/
 	cd ${WRKDIR}/public && ${PAX} -rw -pp . ${DESTDIR}${PREFIX}/share/gitea/public/
 	${CHMOD} -R g-w ${DESTDIR}${PREFIX}/share/gitea
-	${CHMOD} -x ${DESTDIR}${PREFIX}/share/gitea/public/vendor/plugins/tribute/tribute.css
-	${CHMOD} -x ${DESTDIR}${PREFIX}/share/gitea/public/vendor/plugins/tribute/tribute.min.js
 
 post-install:
 	${INSTALL_DATA} ${WRKDIR}/app.ini.sample ${DESTDIR}${EGDIR}

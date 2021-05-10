@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.119 2021/02/17 14:09:42 fcambus Exp $
+# $NetBSD: Makefile,v 1.121 2021/04/12 15:14:00 nia Exp $
 #
 
-COMMENT=	Communication utilities
+COMMENT=	Telephony and serial communication utilities
 
 SUBDIR+=	asterisk-sounds-de-x9media
 SUBDIR+=	asterisk13
-SUBDIR+=	asterisk14
 SUBDIR+=	asterisk15
 SUBDIR+=	asterisk16
 SUBDIR+=	binkd

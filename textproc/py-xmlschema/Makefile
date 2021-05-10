@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.20 2021/02/14 15:11:36 adam Exp $
+# $NetBSD: Makefile,v 1.25 2021/05/03 15:15:58 adam Exp $
 
-DISTNAME=	xmlschema-1.5.1
+DISTNAME=	xmlschema-1.6.2
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	textproc python
 MASTER_SITES=	${MASTER_SITE_PYPI:=x/xmlschema/}
@@ -12,7 +12,6 @@ LICENSE=	mit
 
 DEPENDS+=	${PYPKGPREFIX}-elementpath>=2.0.4:../../textproc/py-elementpath
 TEST_DEPENDS+=	${PYPKGPREFIX}-cElementTree-[0-9]*:../../textproc/py-cElementTree
-TOOL_DEPENDS+=	${PYPKGPREFIX}-pip-[0-9]*:../../devel/py-pip
 
 USE_LANGUAGES=	# none
 

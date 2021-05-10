@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.12 2021/02/05 07:55:02 adam Exp $
+# $NetBSD: Makefile,v 1.14 2021/05/05 07:06:29 adam Exp $
 
-DISTNAME=	Django-3.1.6
+DISTNAME=	Django-3.2.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:tl}
 CATEGORIES=	www python
 MASTER_SITES=	https://www.djangoproject.com/m/releases/${PKGVERSION_NOREV:R}/
@@ -11,7 +11,7 @@ HOMEPAGE=	https://www.djangoproject.com/
 COMMENT=	Django, a high-level Python Web framework
 LICENSE=	modified-bsd
 
-DEPENDS+=	${PYPKGPREFIX}-asgiref>=3.2:../../www/py-asgiref
+DEPENDS+=	${PYPKGPREFIX}-asgiref>=3.3.2:../../www/py-asgiref
 DEPENDS+=	${PYPKGPREFIX}-pytz-[0-9]*:../../time/py-pytz
 DEPENDS+=	${PYPKGPREFIX}-sqlparse>=0.2.2:../../databases/py-sqlparse
 

@@ -1,4 +1,4 @@
-$NetBSD: distinfo,v 1.1 2021/02/12 08:15:52 pin Exp $
+$NetBSD: distinfo,v 1.3 2021/03/09 09:01:24 pin Exp $
 
 SHA1 (ansi_term-0.11.0.crate) = 0c6f984f171ee890100780e038def5db2a8b7ab8
 RMD160 (ansi_term-0.11.0.crate) = 0bc10d826fc7a658ac1026dac333cc54f26f7c5b
@@ -60,10 +60,10 @@ SHA1 (libc-0.2.70.crate) = 420e9e207cfed9e6f1d60ba89e754d8ad2747dfd
 RMD160 (libc-0.2.70.crate) = 4ee4263af95b11ff4fb6bc8f142f15400fb62165
 SHA512 (libc-0.2.70.crate) = a543b972e73d5bf142988464cd62f4402b782796074aabf4ec9396e341050d545b83212c7e4c62c224d5e06de4d794c67fea91b83d605626df115b30d8f326de
 Size (libc-0.2.70.crate) = 472909 bytes
-SHA1 (lok-0.1.2.tar.gz) = 596262a21eb4ef27c5c35d2db1fdb71ffa7cd33b
-RMD160 (lok-0.1.2.tar.gz) = c6bf562d9741a49cf8714be8fdd79550fa1b0a9b
-SHA512 (lok-0.1.2.tar.gz) = 6625f29e9e9b46d9888cc81e3bbc72f3697782e8cb0dfed94dc0e863b057a71884ec2f80fdce441658b72d02fe04eb09c59a1075382f8cdef0854875360a5ff8
-Size (lok-0.1.2.tar.gz) = 12986 bytes
+SHA1 (lok-0.1.4.tar.gz) = 78dd42a615ec3ebd1b479b3d96c065a8b86dd809
+RMD160 (lok-0.1.4.tar.gz) = fbd52eb37311dc94aaaa981ab14cfd98a061d533
+SHA512 (lok-0.1.4.tar.gz) = 5d296e9850c4c7a32c92eca4aed2dbd236eeb9f4694a262f0f2e1283d0da86042d409e1be7676d0ad7847f460892c652e1974f1a8179f83637ebbc4bdacb1e5c
+Size (lok-0.1.4.tar.gz) = 13215 bytes
 SHA1 (memoffset-0.6.1.crate) = 68006c591d977f3972315d649f3a0b69d8cf143f
 RMD160 (memoffset-0.6.1.crate) = 869b469b9476329e77031ddcf5b6e3f9aa14c187
 SHA512 (memoffset-0.6.1.crate) = 74d081af00b7e442198b786d79e4ef35c243d2e78347ab9cb50e127569aed3fd77b47b95df6f361a716abce27c8cc6cb1dfa12c92b0b2208b21f9eb9527b61be

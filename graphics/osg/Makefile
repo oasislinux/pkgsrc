@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.121 2021/01/16 14:44:50 nia Exp $
+# $NetBSD: Makefile,v 1.128 2021/05/03 16:28:47 gdt Exp $
 
 DISTNAME=	osg-3.6.5
+PKGREVISION=	6
 CATEGORIES=	graphics devel
 MASTER_SITES=	${MASTER_SITE_GITHUB:=openscenegraph/}
 GITHUB_PROJECT=	OpenSceneGraph
@@ -21,7 +22,6 @@ PKGCONFIG_OVERRIDE+=	packaging/pkgconfig/openthreads.pc.in
 
 CMAKE_ARGS+=		-DCMAKE_BUILD_TYPE=Release
 CMAKE_ARGS+=		-DDYNAMIC_OPENSCENEGRAPH=ON
-CMAKE_ARGS+=		-DOSG_USE_LOCAL_LUA_SOURCE=OFF
 CMAKE_ARGS+=		-DBUILD_OSG_EXAMPLES=OFF
 CMAKE_ARGS+=		-DCMAKE_DISABLE_FIND_PACKAGE_Asio=TRUE
 CMAKE_ARGS+=		-DCMAKE_DISABLE_FIND_PACKAGE_SDL=TRUE # disable legacy SDL
@@ -57,6 +57,7 @@ CXXFLAGS+=	-D__STDC_LIMIT_MACROS
 .include "../../graphics/jasper/buildlink3.mk"
 .include "../../graphics/ilmbase/buildlink3.mk"
 .include "../../graphics/openexr/buildlink3.mk"
+.include "../../graphics/tiff/buildlink3.mk"
 .include "../../lang/lua52/buildlink3.mk"
 .include "../../multimedia/ffmpeg4/buildlink3.mk"
 .include "../../www/curl/buildlink3.mk"
@@ -65,7 +66,6 @@ PLIST.notdarwin=	yes
 .include "../../graphics/MesaLib/buildlink3.mk"
 .include "../../graphics/giflib/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
-.include "../../graphics/tiff/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXrandr/buildlink3.mk"
 .include "../../mk/jpeg.buildlink3.mk"
