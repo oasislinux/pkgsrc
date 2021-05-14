@@ -209,7 +209,7 @@ DISTFILES:=		${DISTFILES} ${RUST_STAGE0} ${RUST_STD_STAGE0}
 pre-build-fix:
 .endif
 .if !empty(MACHINE_PLATFORM:MLinux-*-x86_64) || make(distinfo) || make (makesum) || make(mdi)
-RUST_STAGE0_VER=	1.40.0
+RUST_STAGE0_VER=	1.49.0
 .  if !empty(GLIBC_VERSION)
 RUST_ARCH:=		x86_64-unknown-linux-gnu
 .  else
