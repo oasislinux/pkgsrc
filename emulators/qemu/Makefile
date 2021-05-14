@@ -15,11 +15,9 @@ LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2.1 AND mit AND modified-bsd
 
 TOOL_DEPENDS+=	${PYPKGPREFIX}-distlib-[0-9]*:../../devel/py-distlib
 TOOL_DEPENDS+=	meson-[0-9]*:../../devel/meson
-TOOL_DEPENDS+=	ninja-build-[0-9]*:../../devel/ninja-build
-
 USE_CURSES=		resize_term wide
 USE_LANGUAGES+=		c c++
-USE_TOOLS+=		bison gdbus-codegen flex makeinfo perl:build pod2man pkg-config
+USE_TOOLS+=		bison gdbus-codegen flex makeinfo ninja perl:build pod2man pkg-config
 UNLIMIT_RESOURCES=	datasize
 HAS_CONFIGURE=		yes
 
