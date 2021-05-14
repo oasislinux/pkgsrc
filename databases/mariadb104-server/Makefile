@@ -1,22 +1,12 @@
-# $NetBSD: Makefile,v 1.1 2021/05/08 19:47:16 jdolecek Exp $
+# $NetBSD: Makefile,v 1.3 2021/05/11 17:26:50 nia Exp $
 
 PKGNAME=	${DISTNAME:S/-/-server-/}
+PKGREVISION=	2
 COMMENT=	MariaDB 10.4, a free SQL database (server)
 
 CONFLICTS=	mysql-server-[0-9]*
 
 .include "../../databases/mariadb104-client/Makefile.common"
-
-.if !empty(PKG_OPTIONS:Membedded-server)
-CMAKE_ARGS+=			-DWITH_EMBEDDED_SERVER=ON
-PLIST_SRC+=			PLIST.embedded
-.else
-CMAKE_ARGS+=			-DWITH_EMBEDDED_SERVER=OFF
-# We only need readline to placate the configure script if we don't build
-# the embedded server as it is the only binary linked against "readline".
-BUILDLINK_DEPMETHOD.editline=	build
-BUILDLINK_DEPMETHOD.readline=	build
-.endif
 
 CMAKE_ARGS+=		-DPYTHON_SHEBANG=${PYTHONBIN}
 
@@ -72,6 +62,7 @@ REPLACE_BASH+=		scripts/mariadb-service-convert
 post-install:
 	${CHMOD} +x ${DESTDIR}${PREFIX}/bin/mysql_install_db
 
+.include "options.mk"
 .include "../../archivers/lz4/buildlink3.mk"
 .include "../../databases/mariadb104-client/buildlink3.mk"
 .include "../../devel/boost-libs/buildlink3.mk"

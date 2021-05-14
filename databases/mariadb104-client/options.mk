@@ -1,9 +1,9 @@
-# $NetBSD: options.mk,v 1.1 2021/05/08 19:47:16 jdolecek Exp $
+# $NetBSD: options.mk,v 1.3 2021/05/10 17:31:27 nia Exp $
 
-PKG_OPTIONS_VAR=	PKG_OPTIONS.mariadb-client
+PKG_OPTIONS_VAR=	PKG_OPTIONS.mysql-client
 
-PKG_SUPPORTED_OPTIONS+=	embedded-server ssl
-PKG_SUGGESTED_OPTIONS+=	embedded-server ssl
+PKG_SUPPORTED_OPTIONS+=	ssl
+PKG_SUGGESTED_OPTIONS+=	ssl
 
 .include "../../mk/bsd.options.mk"
 
