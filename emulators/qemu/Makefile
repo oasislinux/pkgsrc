@@ -11,11 +11,9 @@ HOMEPAGE=	http://www.qemu-project.org/
 COMMENT=	CPU emulator using dynamic translation
 LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2.1 AND mit AND modified-bsd
 
-TOOL_DEPENDS+=	ninja-build-[0-9]*:../../devel/ninja-build
-
 USE_CURSES=		resize_term wide
 USE_LANGUAGES+=		c c++
-USE_TOOLS+=		bison flex makeinfo perl:build pod2man pkg-config
+USE_TOOLS+=		bison flex makeinfo ninja perl:build pod2man pkg-config
 UNLIMIT_RESOURCES=	datasize
 HAS_CONFIGURE=		yes
 
