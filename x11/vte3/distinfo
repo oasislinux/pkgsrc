@@ -15,4 +15,5 @@ SHA1 (patch-src_parser-cat.cc) = 2ee7d7113b4688a631021bcbef13ee6196f534e9
 SHA1 (patch-src_pty.cc) = a9f52d89f356eb0a34de90748a7881d34ae27f12
 SHA1 (patch-src_vte.cc) = 6f8c3a7d64be7a813b740d098d51e17d3187b2ce
 SHA1 (patch-src_vtedraw.cc) = 1deab7738ae7c7bbb53e5b951df4d8a6ad9312f9
+SHA1 (patch-src_vtetypebuiltins.cc.template) = 7e0a595e353c3f70c3724ea57a50cb2c9b7f6d56
 SHA1 (patch-src_widget.cc) = adcecb612c6a0945f13c26e3b6a89131bcab4b1f
