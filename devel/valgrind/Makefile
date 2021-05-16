@@ -21,10 +21,12 @@ ONLY_FOR_PLATFORM=	Darwin-*-i386 Darwin-*-x86_64 \
 			Linux-*-arm*   \
 			SunOS-*-i386 SunOS-*-x86_64
 
-USE_TOOLS+=		gmake perl
+USE_TOOLS+=		gmake perl:run
 USE_LANGUAGES=		c c++
 TEST_TARGET=		regtest
 SSP_SUPPORTED=		no
+REPLACE_PERL+=		callgrind/callgrind_annotate.in
+REPLACE_PERL+=		callgrind/callgrind_control.in
 
 .include "../../mk/bsd.prefs.mk"
 
