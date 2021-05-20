@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3389 2021/05/13 12:24:01 bsiegert Exp $
+# $NetBSD: Makefile,v 1.3392 2021/05/16 16:38:44 bsiegert Exp $
 #
 
 COMMENT=	Development utilities
@@ -402,7 +402,6 @@ SUBDIR+=	gnustep-examples
 SUBDIR+=	gnustep-make
 SUBDIR+=	gnustep-objc
 SUBDIR+=	gnustep-objc-lf2
-SUBDIR+=	go-afero
 SUBDIR+=	go-amber
 SUBDIR+=	go-argv
 SUBDIR+=	go-assert
@@ -413,7 +412,6 @@ SUBDIR+=	go-cast
 SUBDIR+=	go-check
 SUBDIR+=	go-cli
 SUBDIR+=	go-cmp
-SUBDIR+=	go-cobra
 SUBDIR+=	go-colorable
 SUBDIR+=	go-colortext
 SUBDIR+=	go-colour
@@ -489,7 +487,6 @@ SUBDIR+=	go-thrift
 SUBDIR+=	go-tmc
 SUBDIR+=	go-tools
 SUBDIR+=	go-try
-SUBDIR+=	go-viper
 SUBDIR+=	go-walker
 SUBDIR+=	go-wordwrap
 SUBDIR+=	go-xerrors
