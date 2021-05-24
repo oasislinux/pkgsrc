@@ -6,4 +6,5 @@ Size (gdb-10.1.tar.gz) = 40245323 bytes
 SHA1 (patch-gdb_doc_Makefile.in) = f7205fe715779e8aed05d230d43320286f74fdd0
 SHA1 (patch-gdb_ppc-nbsd-nat.c) = e5ffda09347140242e8c2f98da26bf6efe74ec4a
 SHA1 (patch-gdb_ppc-nbsd-tdep.c) = 13fb2060bb2da2f4f627f98c668a335829c01c80
+SHA1 (patch-intl_configure) = 6b806f6ffc6e53f3297a6192ba97b5d38fd33580
 SHA1 (patch-sim_ppc_emul__netbsd.c) = e002283a52142fef74efd54e9a8b920b79838d1c
