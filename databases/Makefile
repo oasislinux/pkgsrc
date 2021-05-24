@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.630 2021/05/13 15:25:20 jdolecek Exp $
+# $NetBSD: Makefile,v 1.632 2021/05/23 15:32:47 nia Exp $
 
 COMMENT=	Databases
 
@@ -97,9 +97,10 @@ SUBDIR+=	lua-sql-postgres
 SUBDIR+=	lua-sql-sqlite3
 SUBDIR+=	lua-sqlite3
 SUBDIR+=	lua-tokyocabinet
-SUBDIR+=	mariadb-connector-c
 SUBDIR+=	mariadb104-client
 SUBDIR+=	mariadb104-server
+SUBDIR+=	mariadb105-client
+SUBDIR+=	mariadb105-server
 SUBDIR+=	metakit-lib
 SUBDIR+=	mongo-c-driver
 SUBDIR+=	mongo-tools
