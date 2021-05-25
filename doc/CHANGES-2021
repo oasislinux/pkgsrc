@@ -1,4 +1,4 @@
-$NetBSD: CHANGES-2021,v 1.2948 2021/05/23 19:32:34 nia Exp $
+$NetBSD: CHANGES-2021,v 1.2958 2021/05/24 18:56:23 bsiegert Exp $
 
 Changes to the packages collection and infrastructure in 2021:
 
@@ -4553,3 +4553,17 @@ Changes to the packages collection and infrastructure in 2021:
 	Updated sysutils/xplr to 0.10.2 [pin 2021-05-23]
 	Updated textproc/libxml2 to 2.9.12 [nia 2021-05-23]
 	Updated textproc/py-libxml2 to 2.9.12 [nia 2021-05-23]
+	Updated devel/php-composer to 2.0.14 [triaxx 2021-05-24]
+	Removed databases/postgresql95 [adam 2021-05-24]
+	Updated multimedia/mkvtoolnix to 57.0.0 [adam 2021-05-24]
+	Updated devel/py-radon to 4.5.2 [adam 2021-05-24]
+	Updated devel/py-dulwich to 0.20.22 [adam 2021-05-24]
+	Updated textproc/py-JWT to 2.1.0 [adam 2021-05-24]
+	Updated devel/py-cpplint to 1.5.5 [adam 2021-05-24]
+	Updated devel/py-approvaltests to 0.8.0 [schmonz 2021-05-24]
+	Updated misc/libreoffice to 7.1.3.2nb1 [ryoon 2021-05-24]
+	Updated emulators/qemu to 6.0.0 [ryoon 2021-05-24]
+	Updated cad/klayout to 0.26.11 [mef 2021-05-24]
+	Updated emulators/nono to 0.1.6 [ryoon 2021-05-24]
+	Updated lang/perl5 to 5.34.0 [wiz 2021-05-24]
+	Updated www/caddy to 2.4.1 [bsiegert 2021-05-24]
