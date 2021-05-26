@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3393 2021/05/23 09:44:23 taca Exp $
+# $NetBSD: Makefile,v 1.3395 2021/05/25 10:15:41 adam Exp $
 #
 
 COMMENT=	Development utilities
@@ -2302,6 +2302,7 @@ SUBDIR+=	py-daemon
 SUBDIR+=	py-daemonize
 SUBDIR+=	py-darcsver
 SUBDIR+=	py-dash
+SUBDIR+=	py-dataclasses
 SUBDIR+=	py-ddt
 SUBDIR+=	py-decorator
 SUBDIR+=	py-deepstate
@@ -2651,6 +2652,7 @@ SUBDIR+=	py-subversion
 SUBDIR+=	py-subvertpy
 SUBDIR+=	py-sure
 SUBDIR+=	py-sysctl
+SUBDIR+=	py-tenacity
 SUBDIR+=	py-termcolor
 SUBDIR+=	py-test
 SUBDIR+=	py-test-assume
