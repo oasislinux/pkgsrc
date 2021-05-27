@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.70 2021/03/24 18:23:33 bacon Exp $
+# $NetBSD: Makefile,v 1.74 2021/05/26 19:14:24 brook Exp $
 #
 
 COMMENT=	Software for the biological sciences
@@ -8,6 +8,7 @@ SUBDIR+=	ad2vcf
 SUBDIR+=	arka
 SUBDIR+=	azara
 SUBDIR+=	bcftools
+SUBDIR+=	beagle
 SUBDIR+=	bedtools
 SUBDIR+=	biolibc
 SUBDIR+=	bioperl
@@ -39,6 +40,8 @@ SUBDIR+=	igv
 SUBDIR+=	kallisto
 SUBDIR+=	lucy
 SUBDIR+=	maeparser
+SUBDIR+=	miniasm
+SUBDIR+=	minimap2
 SUBDIR+=	molsketch
 SUBDIR+=	mopac
 SUBDIR+=	mpqc
@@ -59,6 +62,7 @@ SUBDIR+=	py-cutadapt
 SUBDIR+=	py-dnaio
 SUBDIR+=	py-mol
 SUBDIR+=	py-pydicom
+SUBDIR+=	racon
 SUBDIR+=	rasmol
 SUBDIR+=	samtools
 SUBDIR+=	sewer
