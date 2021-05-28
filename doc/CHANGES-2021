@@ -1,4 +1,4 @@
-$NetBSD: CHANGES-2021,v 1.2989 2021/05/26 19:14:46 brook Exp $
+$NetBSD: CHANGES-2021,v 1.3010 2021/05/28 10:32:47 pin Exp $
 
 Changes to the packages collection and infrastructure in 2021:
 
@@ -4617,3 +4617,30 @@ Changes to the packages collection and infrastructure in 2021:
 	Added biology/minimap2 version 2.18 [brook 2021-05-26]
 	Added biology/racon version 1.4.3 [brook 2021-05-26]
 	Added biology/beagle version 5.2 [brook 2021-05-26]
+	Updated x11/xfce4-desktop to 4.14.4 [gutteridge 2021-05-26]
+	Updated sysutils/xfce4-thunar to 1.8.17 [gutteridge 2021-05-27]
+	Updated audio/faudio to 21.05 [adam 2021-05-27]
+	Updated security/sudo to 1.9.7 [adam 2021-05-27]
+	Updated net/tigervnc to 1.11.0.1.20.11nb2 [wiz 2021-05-27]
+	Updated devel/py-construct to 2.10.67 [adam 2021-05-27]
+	Updated devel/py-cookiecutter to 1.7.3 [adam 2021-05-27]
+	Updated net/isc-dhcp4 to 4.4.2p1 [taca 2021-05-27]
+	Updated net/isc-dhclient4 to 4.4.2p1 [taca 2021-05-27]
+	Updated net/isc-dhcpd4 to 4.4.2p1 [taca 2021-05-27]
+	Updated net/isc-dhcrelay4 to 4.4.2p1 [taca 2021-05-27]
+	Removed graphics/go-smartcrop [bsiegert 2021-05-27]
+	Removed graphics/go-resize [bsiegert 2021-05-27]
+	Removed graphics/go-imaging [bsiegert 2021-05-27]
+	Updated mail/opendmarc to 1.4.1.1 [manu 2021-05-27]
+	Added biology/filter-fastq version 0.0.0.20210527 [brook 2021-05-27]
+	Updated sysutils/xplr to 0.13.0 [pin 2021-05-27]
+	Updated math/kalk to 0.5.2 [pin 2021-05-27]
+	Added www/py-flask-sendmail version 0.1 [khorben 2021-05-27]
+	Added textproc/py-bracex version 2.1.1 [adam 2021-05-28]
+	Added textproc/py-wcmatch version 8.2 [adam 2021-05-28]
+	Updated x11/rxvt-unicode to 9.26 [triaxx 2021-05-28]
+	Updated net/radsecproxy to 1.9.0 [he 2021-05-28]
+	Updated sysutils/xplr to 0.13.1 [pin 2021-05-28]
+	Updated audio/schismtracker to 20210525 [fcambus 2021-05-28]
+	Updated www/stagit to 0.9.6 [fcambus 2021-05-28]
+	Updated audio/ncspot to 0.7.2 [pin 2021-05-28]
