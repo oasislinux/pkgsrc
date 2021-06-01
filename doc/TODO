@@ -1,4 +1,4 @@
-$NetBSD: TODO,v 1.20695 2021/05/30 15:56:35 mef Exp $
+$NetBSD: TODO,v 1.20713 2021/06/01 00:10:19 gutteridge Exp $
 
 Suggested new packages
 ======================
@@ -397,8 +397,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o R-blob-1.2.1
 	o R-brio-1.1.1
 	o R-caTools-1.18.2
-	o R-callr-3.7.0
-	o R-cli-2.4.0
 	o R-coda-0.19.4
 	o R-colorspace-2.0.0
 	o R-colourpicker-1.1.0
@@ -411,7 +409,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o R-date-1.2.39
 	o R-deldir-0.2.10
 	o R-desc-1.3.0
-	o R-devtools-2.4.0
 	o R-diffobj-0.3.4
 	o R-digest-0.6.27
 	o R-dplyr-1.0.5
@@ -452,12 +449,10 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o R-intervals-0.15.2
 	o R-iterators-1.0.13
 	o R-jsonlite-1.7.2
-	o R-knitr-1.32
 	o R-labeling-0.4.2
 	o R-later-1.1.0.1
 	o R-latex2exp-0.5.0
 	o R-latticeExtra-0.6.29
-	o R-lifecycle-1.0.0
 	o R-lme4-1.1.26
 	o R-lmm-1.3
 	o R-lmtest-0.9.38
@@ -465,7 +460,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o R-mapproj-3
 	o R-maptools-1.1.1
 	o R-markdown-1.1
-	o R-memoise-2.0.0
 	o R-mime-0.10
 	o R-mnormt-2.0.2
 	o R-mvtnorm-1.1.1
@@ -483,7 +477,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o R-pkgload-1.2.1
 	o R-poweRlaw-0.70.6
 	o R-prettyunits-1.1.1
-	o R-processx-3.5.1
 	o R-promises-1.2.0.1
 	o R-ps-1.6.0
 	o R-psych-2.1.3
@@ -529,17 +522,14 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o R-tidyr-1.1.3
 	o R-timeSeries-3062.100
 	o R-tinytest-1.2.4
-	o R-tinytex-0.31
 	o R-tseries-0.10.48
 	o R-units-0.7.1
-	o R-usethis-2.0.1
 	o R-utf8-1.2.1
 	o R-uuid-4
 	o R-viridis-0.6.0
 	o R-viridisLite-0.4.0
 	o R-waldo-0.2.5
 	o R-withr-2.4.2
-	o R-xfun-0.22
 	o R-xml2-1.3.2
 	o R-xmlparsedata-1.0.5
 	o R-xts-0.12.1
@@ -688,7 +678,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o ca-certificates-20210119
 	o cacti-1.2.16
 	o cacti-spine-1.2.16
-	o cairomm-1.16.0
 	o calc-2.11.10.1
 	o calcoo-2.1.0
 	o calibre-4.11.0 [started in wip; needs QtWebEngineCore]
@@ -699,7 +688,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o canu-2.1.1
 	o carbons-purple-0.2.3
 	o cardboard-schedule-1.14c [at http://www.bright-green.com/downloads/]
-	o cascadia-ttf-2105.24
 	o catch2-2.13.6
 	o catdoc-1.1
 	o catdoc-tk-1.1
@@ -893,7 +881,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o fuse-unionfs-2.1
 	o fvwm-devel-2.7.0
 	o fvwm2-themes-0.7.0
-	o fzf-0.27.1
 	o gajim-plugin-omemo-2.8.4
 	o gallery3-3.0.9
 	o gammu-1.42.0
@@ -971,7 +958,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o gnu-crypto-2.1.0
 	o gnucap-20210107
 	o gnutime-1.9
-	o gnutls-3.7.2
 	o go-afero-1.6.0
 	o go-appengine-1.6.7
 	o go-argv-0.1.0
@@ -1058,7 +1044,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o grep-3.6
 	o gromacs-2021.1
 	o groonga-11.0.1
-	o gsl-2.6
 	o gss-1.0.3
 	o gst-plugins0.10-bad-0.11.90
 	o gst-plugins1-omx-1.10.0
@@ -1318,7 +1303,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o libdsk-1.5.15
 	o libdwarf-20210305
 	o libepoxy-1.5.5
-	o libetonyek-0.1.10
 	o libextractor-1.11
 	o libflash-0.4.13
 	o libgfshare-2.0.0
@@ -1400,7 +1384,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o maelstrom-sdl-3.0.7
 	o magic-8.3.154
 	o magit-3.0
-	o mame-0.232
 	o man-pages-5.11
 	o mapcode-2.5.5
 	o mapserver-7.6.2
@@ -1610,7 +1593,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o ocamlgraph-1.81
 	o ocamlnet-4.1.9
 	o ocrad-0.25
-	o octave-6.2.0
 	o odbc-postgresql-9.06.0500
 	o offlineimap-7.3.3
 	o olvwm-4.5
@@ -1833,7 +1815,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o parrot-8.1.0
 	o pcc-1.1.0
 	o pcc-current-20210421
-	o pcre2-10.37
 	o pdf-redact-tools-0.1.2
 	o pdfpc-4.4.1
 	o pdmenu-1.2.87
@@ -2101,7 +2082,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o ruby-redmine-gitmike-theme-1.2.1
 	o ruby-redmine41-4.2.0
 	o rump-20131213
-	o rust-1.52.1
 	o rvault-0.4
 	o rvm-1.20
 	o sabayon-2.30.1
@@ -2365,7 +2345,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o xfce4-verve-plugin-2.0.1
 	o xfce4-wavelan-plugin-0.6.2
 	o xfce4-weather-plugin-0.11.0
-	o xfce4-whiskermenu-plugin-2.5.3
 	o xfce4-wm-4.16.1
 	o xfe-1.42 [pkg/52968]
 	o xforms-1.2.4

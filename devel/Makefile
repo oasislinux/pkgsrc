@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3399 2021/05/30 21:31:19 khorben Exp $
+# $NetBSD: Makefile,v 1.3402 2021/05/31 22:36:10 mef Exp $
 #
 
 COMMENT=	Development utilities
@@ -25,6 +25,7 @@ SUBDIR+=	R-blob
 SUBDIR+=	R-brio
 SUBDIR+=	R-caTools
 SUBDIR+=	R-callr
+SUBDIR+=	R-cachem
 SUBDIR+=	R-checkmate
 SUBDIR+=	R-cli
 SUBDIR+=	R-cliapp
@@ -38,6 +39,7 @@ SUBDIR+=	R-diffobj
 SUBDIR+=	R-disposables
 SUBDIR+=	R-evaluate
 SUBDIR+=	R-fansi
+SUBDIR+=	R-fastmap
 SUBDIR+=	R-filelock
 SUBDIR+=	R-fs
 SUBDIR+=	R-gert
@@ -145,6 +147,7 @@ SUBDIR+=	at-spi2-core
 SUBDIR+=	atf
 SUBDIR+=	atk
 SUBDIR+=	atkmm
+SUBDIR+=	atkmm2.36
 SUBDIR+=	autoconf
 SUBDIR+=	autoconf-archive
 SUBDIR+=	autoconf213
@@ -392,6 +395,7 @@ SUBDIR+=	glib
 SUBDIR+=	glib2
 SUBDIR+=	glib2-tools
 SUBDIR+=	glibmm
+SUBDIR+=	glibmm2.68
 SUBDIR+=	global
 SUBDIR+=	gmake
 SUBDIR+=	gmp
@@ -2110,6 +2114,7 @@ SUBDIR+=	p8-platform
 SUBDIR+=	palmpower
 SUBDIR+=	pango
 SUBDIR+=	pangomm
+SUBDIR+=	pangomm2.48
 SUBDIR+=	pangox-compat
 SUBDIR+=	papaya
 SUBDIR+=	pardiff
