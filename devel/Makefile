@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3402 2021/05/31 22:36:10 mef Exp $
+# $NetBSD: Makefile,v 1.3404 2021/06/03 07:43:18 wiz Exp $
 #
 
 COMMENT=	Development utilities
@@ -24,8 +24,8 @@ SUBDIR+=	R-bit64
 SUBDIR+=	R-blob
 SUBDIR+=	R-brio
 SUBDIR+=	R-caTools
-SUBDIR+=	R-callr
 SUBDIR+=	R-cachem
+SUBDIR+=	R-callr
 SUBDIR+=	R-checkmate
 SUBDIR+=	R-cli
 SUBDIR+=	R-cliapp
@@ -2953,6 +2953,7 @@ SUBDIR+=	ruby-redmine-purplemine2-theme
 SUBDIR+=	ruby-redmine-red-andy-theme
 SUBDIR+=	ruby-redmine-yh-theme
 SUBDIR+=	ruby-redmine41
+SUBDIR+=	ruby-redmine42
 SUBDIR+=	ruby-redmine_code_review
 SUBDIR+=	ruby-redmine_lightbox2
 SUBDIR+=	ruby-redmine_theme_changer
