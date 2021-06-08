@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3405 2021/06/06 10:05:42 js Exp $
+# $NetBSD: Makefile,v 1.3409 2021/06/07 19:56:12 schmonz Exp $
 #
 
 COMMENT=	Development utilities
@@ -415,7 +415,6 @@ SUBDIR+=	go-buffruneio
 SUBDIR+=	go-bytebufferpool
 SUBDIR+=	go-cast
 SUBDIR+=	go-check
-SUBDIR+=	go-cli
 SUBDIR+=	go-cmp
 SUBDIR+=	go-colorable
 SUBDIR+=	go-colortext
@@ -448,14 +447,12 @@ SUBDIR+=	go-gox
 SUBDIR+=	go-hashstructure
 SUBDIR+=	go-homedir
 SUBDIR+=	go-humanize
-SUBDIR+=	go-i18n
 SUBDIR+=	go-immutable-radix
 SUBDIR+=	go-ini
 SUBDIR+=	go-iochan
 SUBDIR+=	go-isatty
 SUBDIR+=	go-jwalterweatherman
 SUBDIR+=	go-jwt-go
-SUBDIR+=	go-kingpin.v3-unstable
 SUBDIR+=	go-kr-pretty
 SUBDIR+=	go-levenshtein
 SUBDIR+=	go-locker
@@ -2789,7 +2786,6 @@ SUBDIR+=	rt-mysql
 SUBDIR+=	rt-pgsql
 SUBDIR+=	rt4
 SUBDIR+=	rttr
-SUBDIR+=	rubigen
 SUBDIR+=	ruby-SDL
 SUBDIR+=	ruby-abstract
 SUBDIR+=	ruby-activejob52
@@ -2806,6 +2802,7 @@ SUBDIR+=	ruby-activesupport60
 SUBDIR+=	ruby-activesupport61
 SUBDIR+=	ruby-algorithms
 SUBDIR+=	ruby-amstd
+SUBDIR+=	ruby-approvaltests
 SUBDIR+=	ruby-assistance
 SUBDIR+=	ruby-atk
 SUBDIR+=	ruby-backports

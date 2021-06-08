@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.1549 2021/06/05 12:27:24 mef Exp $
+# $NetBSD: Makefile,v 1.1553 2021/06/08 01:58:06 mef Exp $
 #
 
 COMMENT=	Packages related to the World Wide Web
 
 SUBDIR+=	R-RCurl
+SUBDIR+=	R-bslib
 SUBDIR+=	R-curl
 SUBDIR+=	R-diffviewer
 SUBDIR+=	R-gh
@@ -138,10 +139,7 @@ SUBDIR+=	go-mux
 SUBDIR+=	go-parse
 SUBDIR+=	go-spritewell
 SUBDIR+=	go-tocss
-SUBDIR+=	go-toml-burntsushi
-SUBDIR+=	go-toml-pelletier
 SUBDIR+=	go-urlesc
-SUBDIR+=	go-webhooks
 SUBDIR+=	goaccess
 SUBDIR+=	grafana
 SUBDIR+=	gtkasp2php
