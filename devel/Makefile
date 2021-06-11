@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3409 2021/06/07 19:56:12 schmonz Exp $
+# $NetBSD: Makefile,v 1.3413 2021/06/11 00:42:41 bacon Exp $
 #
 
 COMMENT=	Development utilities
@@ -889,6 +889,7 @@ SUBDIR+=	libwhisker2
 SUBDIR+=	libwnck
 SUBDIR+=	libwnck3
 SUBDIR+=	libxenserver
+SUBDIR+=	libxtend
 SUBDIR+=	libyang
 SUBDIR+=	libzen
 SUBDIR+=	libzookeeper
@@ -2499,7 +2500,7 @@ SUBDIR+=	py-prefixspan
 SUBDIR+=	py-pretend
 SUBDIR+=	py-progressbar2
 SUBDIR+=	py-prompt_toolkit
-SUBDIR+=	py-prompt_toolkit2
+SUBDIR+=	py-prompt_toolkit1
 SUBDIR+=	py-proteus
 SUBDIR+=	py-protobuf
 SUBDIR+=	py-py
@@ -2700,6 +2701,7 @@ SUBDIR+=	py-tortoisehg
 SUBDIR+=	py-tox
 SUBDIR+=	py-traceback2
 SUBDIR+=	py-traitlets
+SUBDIR+=	py-traitlets4
 SUBDIR+=	py-treq
 SUBDIR+=	py-tryton
 SUBDIR+=	py-trytond
@@ -2942,6 +2944,7 @@ SUBDIR+=	ruby-rcsparse
 SUBDIR+=	ruby-rd-mode
 SUBDIR+=	ruby-readline
 SUBDIR+=	ruby-red-colors
+SUBDIR+=	ruby-red-datasets
 SUBDIR+=	ruby-redmine
 SUBDIR+=	ruby-redmine-flatly-light-theme
 SUBDIR+=	ruby-redmine-gitmike-theme
