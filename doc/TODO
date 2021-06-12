@@ -1,4 +1,4 @@
-$NetBSD: TODO,v 1.20766 2021/06/10 10:59:42 wiz Exp $
+$NetBSD: TODO,v 1.20774 2021/06/12 08:48:15 nia Exp $
 
 Suggested new packages
 ======================
@@ -402,7 +402,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o R-data.table-1.14.0
 	o R-date-1.2.39
 	o R-deldir-0.2.10
-	o R-desc-1.3.0
 	o R-digest-0.6.27
 	o R-dplyr-1.0.5
 	o R-e1071-1.7.6
@@ -426,7 +425,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o R-gtools-3.8.2
 	o R-haven-2.4.0
 	o R-htmlTable-2.1.0
-	o R-htmlwidgets-1.5.3
 	o R-hunspell-3.0.1
 	o R-igraph-1.2.6
 	o R-intervals-0.15.2
@@ -462,7 +460,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o R-rgdal-1.5.23
 	o R-rgeos-0.5.5
 	o R-rio-0.5.26
-	o R-rmarkdown-2.7
 	o R-robustbase-0.93.7
 	o R-rstudioapi-0.13
 	o R-rvest-1.0.0
@@ -491,7 +488,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o R-uuid-4
 	o R-viridis-0.6.0
 	o R-viridisLite-0.4.0
-	o R-withr-2.4.2
 	o R-xmlparsedata-1.0.5
 	o R-yaml-2.2.1
 	o RE-flex-3.0.2
@@ -708,7 +704,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o dar-2.4.14
 	o darcs-2.16.3
 	o darktable-3.4
-	o dash-0.5.11.3
 	o dateutils-0.4.8
 	o dcc-2.3.167
 	o dd_rescue-1.46
@@ -1441,7 +1436,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o nant-0.92
 	o nap-1.5.3
 	o nas-auscope-1.9.4
-	o ncbi-blast+-2.11.0
 	o ncview-2.1.8
 	o ne-3.17
 	o nedit-5.7
@@ -2169,7 +2163,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o threadweaver-5.81.0
 	o tightvnc-2.7.10
 	o tile-0.7.4
-	o tinc-1.0.36
 	o tinyproxy-1.11.0
 	o tkcon-2.7.3
 	o tkhylafax-3.2
@@ -2218,7 +2211,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o verifast-21.04
 	o vfu-4.09
 	o vicq-0.4.2
-	o viewvc-1.2.1
 	o vim-8.2.2792
 	o vinagre-3.16.1
 	o vino-3.16.0
