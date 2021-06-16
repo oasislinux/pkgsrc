@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3413 2021/06/11 00:42:41 bacon Exp $
+# $NetBSD: Makefile,v 1.3421 2021/06/14 17:00:13 gdt Exp $
 #
 
 COMMENT=	Development utilities
@@ -102,6 +102,7 @@ SUBDIR+=	SDL_ttf
 SUBDIR+=	SDLmm
 SUBDIR+=	SOPE
 SUBDIR+=	SOPE4
+SUBDIR+=	SOPE5
 SUBDIR+=	ZenTest
 SUBDIR+=	abseil
 SUBDIR+=	accerciser
@@ -411,7 +412,6 @@ SUBDIR+=	go-amber
 SUBDIR+=	go-argv
 SUBDIR+=	go-assert
 SUBDIR+=	go-blackfriday
-SUBDIR+=	go-buffruneio
 SUBDIR+=	go-bytebufferpool
 SUBDIR+=	go-cast
 SUBDIR+=	go-check
@@ -438,7 +438,6 @@ SUBDIR+=	go-godef
 SUBDIR+=	go-godirwalk
 SUBDIR+=	go-godotenv
 SUBDIR+=	go-golang-lru
-SUBDIR+=	go-goorgeous
 SUBDIR+=	go-gopkgs
 SUBDIR+=	go-goptlib
 SUBDIR+=	go-goreturns
@@ -457,12 +456,8 @@ SUBDIR+=	go-kr-pretty
 SUBDIR+=	go-levenshtein
 SUBDIR+=	go-locker
 SUBDIR+=	go-logrus
-SUBDIR+=	go-mapstructure
-SUBDIR+=	go-mapstructure-bep
 SUBDIR+=	go-mod
-SUBDIR+=	go-mow-cli
 SUBDIR+=	go-nbreader
-SUBDIR+=	go-nitro
 SUBDIR+=	go-osext
 SUBDIR+=	go-pflag
 SUBDIR+=	go-pkgconfig
@@ -472,7 +467,6 @@ SUBDIR+=	go-pty
 SUBDIR+=	go-purell
 SUBDIR+=	go-quicktest
 SUBDIR+=	go-radix
-SUBDIR+=	go-ratelimit
 SUBDIR+=	go-repr
 SUBDIR+=	go-review
 SUBDIR+=	go-sanitized_anchor_name
