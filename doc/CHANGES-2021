@@ -1,4 +1,4 @@
-$NetBSD: CHANGES-2021,v 1.3476 2021/06/18 12:04:16 schmonz Exp $
+$NetBSD: CHANGES-2021,v 1.3483 2021/06/22 04:10:41 thorpej Exp $
 
 Changes to the packages collection and infrastructure in 2021:
 
@@ -5554,3 +5554,15 @@ Changes to the packages collection and infrastructure in 2021:
 	Updated sysutils/broot to 1.6.0 [pin 2021-06-17]
 	Updated x11/kitty to 0.21.1 [pin 2021-06-18]
 	Updated textproc/py-feedparser to 6.0.6 [schmonz 2021-06-18]
+	Updated textproc/ruby-terminal-table to 2.0.0nb1 [taca 2021-06-19]
+	Updated net/bind916 to 9.16.18 [otis 2021-06-19]
+	Updated net/yaydl to 0.6.6 [pin 2021-06-21]
+	Updated www/hackernews-tui to 0.7.1 [pin 2021-06-21]
+	Updated mail/dovecot2 to 2.3.15 [taca 2021-06-21]
+	Updated mail/dovecot2-gssapi to 2.3.15 [taca 2021-06-21]
+	Updated mail/dovecot2-ldap to 2.3.15 [taca 2021-06-21]
+	Updated mail/dovecot2-mysql to 2.3.15 [taca 2021-06-21]
+	Updated mail/dovecot2-pgsql to 2.3.15 [taca 2021-06-21]
+	Updated mail/dovecot2-sqlite to 2.3.15 [taca 2021-06-21]
+	Updated mail/dovecot2-pigeonhole to 0.5.15 [taca 2021-06-21]
+	Updated emulators/qemu to 6.0.0nb2 [thorpej 2021-06-21]
