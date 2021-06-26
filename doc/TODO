@@ -1,4 +1,4 @@
-$NetBSD: TODO,v 1.20802 2021/06/23 20:44:46 tnn Exp $
+$NetBSD: TODO,v 1.20805 2021/06/25 12:22:36 tnn Exp $
 
 Suggested new packages
 ======================
@@ -1302,7 +1302,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o libxdg-basedir-1.2.3
 	o libxlsxwriter-1.0.3
 	o libyang-1.0.225
-	o libzip-1.8.0
 	o libzookeeper-3.7.0
 	o libzrtpcpp-4.6.6
 	o lilypond-2.22.1
@@ -1756,7 +1755,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o parrot-8.1.0
 	o pcc-1.1.0
 	o pcc-current-20210421
-	o pcre-8.45
 	o pdf-redact-tools-0.1.2
 	o pdfpc-4.4.1
 	o pdmenu-1.2.87
@@ -2192,8 +2190,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o userppp-030706
 	o userspace-rcu-0.12.2
 	o utilisp-1.14
-	o varnish-5.1.3
-	o varnish-6.0
 	o vault-1.7.1
 	o vbetool-1.1
 	o vera-1.24
