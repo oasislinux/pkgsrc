@@ -1,41 +1,24 @@
 $NetBSD$
 
---- linux-user/syscall.c.orig	Mon May 25 08:21:55 2020
+--- linux-user/syscall.c.orig	Thu Apr 29 17:18:59 2021
 +++ linux-user/syscall.c
-@@ -123,6 +123,14 @@
- #include "fd-trans.h"
- #include "tcg/tcg.h"
- 
-+#ifndef F_SHLCK
-+#define F_SHLCK                 8
-+#endif
-+
-+#ifndef F_EXLCK
-+#define F_EXLCK                 4
-+#endif
-+
- #ifndef CLONE_IO
- #define CLONE_IO                0x80000000      /* Clone io context */
- #endif
-@@ -6771,9 +6779,20 @@ static inline abi_long host_to_target_timex(abi_long t
+@@ -7393,6 +7393,10 @@ static inline abi_long host_to_target_timex64(abi_long
  }
  #endif
  
--static inline abi_long target_to_host_sigevent(struct sigevent *host_sevp,
-+struct host_sigevent {
-+    union sigval sigev_value;
-+    int sigev_signo;
-+    int sigev_notify;
-+    union {
-+       int _pad[64-sizeof(int) * 2 + sizeof(union sigval)];
-+       int _tid;
-+    } _sigev_un;
-+};
++#ifndef sigev_notify_thread_id
++#define sigev_notify_thread_id _sigev_un._tid
++#endif
 +
-+static inline abi_long target_to_host_sigevent(struct sigevent *sevp,
+ static inline abi_long target_to_host_sigevent(struct sigevent *host_sevp,
                                                 abi_ulong target_addr)
  {
-+    struct host_sigevent *host_sevp = (struct host_sigevent *)sevp;
-     struct target_sigevent *target_sevp;
+@@ -7413,7 +7417,7 @@ static inline abi_long target_to_host_sigevent(struct 
+     host_sevp->sigev_signo =
+         target_to_host_signal(tswap32(target_sevp->sigev_signo));
+     host_sevp->sigev_notify = tswap32(target_sevp->sigev_notify);
+-    host_sevp->_sigev_un._tid = tswap32(target_sevp->_sigev_un._tid);
++    host_sevp->sigev_notify_thread_id = tswap32(target_sevp->_sigev_un._tid);
  
-     if (!lock_user_struct(VERIFY_READ, target_sevp, target_addr, 1)) {
+     unlock_user_struct(target_sevp, target_addr, 1);
+     return 0;

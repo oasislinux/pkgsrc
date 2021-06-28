@@ -1,19 +1,14 @@
 $NetBSD$
 
---- linux-user/signal.c.orig	Fri Feb 28 20:08:38 2020
+--- linux-user/signal.c.orig	Thu Apr 29 17:18:58 2021
 +++ linux-user/signal.c
-@@ -25,6 +25,14 @@
- #include "trace.h"
- #include "signal-common.h"
- 
-+#ifndef __SIGRTMIN
-+#define __SIGRTMIN 32
+@@ -38,7 +38,9 @@ static void host_signal_handler(int host_signum, sigin
+  * Signal number 0 is reserved for use as kill(pid, 0), to test whether
+  * a process exists without sending it a signal.
+  */
++#ifdef __SIGRTMAX
+ QEMU_BUILD_BUG_ON(__SIGRTMAX + 1 != _NSIG);
 +#endif
-+
-+#ifndef __SIGRTMAX
-+#define __SIGRTMAX (NSIG-1)
-+#endif
-+
- static struct target_sigaction sigact_table[TARGET_NSIG];
- 
- static void host_signal_handler(int host_signum, siginfo_t *info,
+ static uint8_t host_to_target_signal_table[_NSIG] = {
+     [SIGHUP] = TARGET_SIGHUP,
+     [SIGINT] = TARGET_SIGINT,
