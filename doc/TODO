@@ -1,4 +1,4 @@
-$NetBSD: TODO,v 1.20805 2021/06/25 12:22:36 tnn Exp $
+$NetBSD: TODO,v 1.20828 2021/06/28 18:46:19 wiz Exp $
 
 Suggested new packages
 ======================
@@ -365,7 +365,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o GNUMail-1.2.2
 	o Gorm-1.2.26
 	o HElib-2.1.0
-	o ImageMagick-7.1.0.0
 	o ImageMagick6-6.9.12.8
 	o Inter-UI-3.18
 	o JBidwatcher-2.5.6 [wants launch4j]
@@ -491,8 +490,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o SOPE-2.4.0
 	o SOPE4-4.3.2
 	o SQLiteCpp-2.5.0
-	o Sigil-1.5.1 [wip]
-	o Sigil-1.6.0
+	o Sigil-1.6.0 [wip, waiting for qt5-qtwebengine import]
 	o TeXmacs-1.99.19
 	o TiffIO-140a
 	o YoSucker-81
@@ -515,7 +513,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o album-4.17
 	o alephone-20150620
 	o alevt-1.6.2
-	o alsa-lib-1.2.5
 	o alsa-plugins-1.1.0
 	o amass-3.12.2
 	o amavis-perl-0.3.12 [called just amavis]
@@ -656,7 +653,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o chrpath-0.16
 	o cim-5.1
 	o cjk-lyx-1.4.4
-	o clang-11.1.0
+	o clang-12.0.0
 	o classpath-0.99
 	o classpath-gui-0.99
 	o clawsker-0.7.13
@@ -828,7 +825,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o fuse-unionfs-2.1
 	o fvwm-devel-2.7.0
 	o fvwm2-themes-0.7.0
-	o fzf-0.27.2
 	o gajim-plugin-omemo-2.8.4
 	o gallery3-3.0.9
 	o gammu-1.42.0
@@ -845,7 +841,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o gcloud-golang-metadata-0.12.0
 	o gcombust-0.1.55
 	o gdb7-7.12
-	o gdbm-1.20
 	o gdm-2.32.2
 	o gdm-3.0.3
 	o gearboy-3.3.0
@@ -977,10 +972,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o golangci-lint-1.39.0
 	o golem-0.0.6
 	o goocanvas-2.0.2
-	o google-benchmark-1.5.5
 	o google-glog-2.2.2
-	o googletest-1.11.0
-	o gopls-0.7.0
 	o goreman-0.3.7
 	o gossip-0.31
 	o got-0.52
@@ -1042,7 +1034,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o hesiod-3.2.1
 	o heyu-2.9.0
 	o hiawatha-10.8.1
-	o hitch-1.7.0
 	o hivex-1.3.19
 	o hmmer-3.1b2
 	o homebank-5.5.1
@@ -1166,7 +1157,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o kdnssd-5.81.0
 	o kdoctools-5.81.0
 	o kdsoap-1.10.0
-	o keepassxc-2.6.6
 	o kemoticons-5.81.0
 	o keybinder-0.3.2
 	o kfilemetadata-5.81.0
@@ -1309,7 +1299,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o linpsk-1.2 [ld: cannot find -lqt-mt with qt4]
 	o liquidwar-6.0.0.11
 	o lirc-0.9.3
-	o llvm-11.1.0
+	o llvm-12.0.0
 	o lmbench-3
 	o log4cxx-0.11.0
 	o lohit-fonts-2.4.2
@@ -1330,7 +1320,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o lv2-5.4
 	o lyx-2.3.6.1
 	o lzma-9.18
-	o m4-1.4.19
 	o mDNSResponder-1310.80.1
 	o mDNSResponder-nss-1310.80.1
 	o maelstrom-sdl-3.0.7
@@ -1366,7 +1355,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o md-whois-5.5.9
 	o mdd-20201207
 	o mecab-ipadic-2.7.0.20070801
-	o mednafen-1.27.1
 	o memached-1.5.6
 	o memtestplus-5.31b
 	o merkaator-0.18.3
@@ -1446,7 +1434,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o ns-plugger-common-5.1.3
 	o nsd-4.3.6
 	o nsm-2.4.12
-	o nss-3.67
 	o ntop-5.0
 	o ntpsec-1.2.0
 	o nts-82
@@ -2059,7 +2046,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o slibtool-0.5.33
 	o smokeping-2.6.11
 	o smproxy-1.0.3
-	o snappy-1.1.9
 	o snd-21.3
 	o snobol-2.1.5
 	o snoopy-2.4.14
@@ -2142,7 +2128,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o terraform-provider-null-3.1.0
 	o terraform-provider-random-3.1.0
 	o tetrinetx-1.40c
-	o texlab-3.2.0
 	o texworks-0.6.6
 	o tfmxplay-1.1.6
 	o threadingbuildingblocks-2021.2.0
@@ -2159,7 +2144,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o tomboy-1.10.2
 	o top-3.8beta1
 	o topgit-0.8
-	o tor-0.4.6.5
 	o toxcore-0.2.12
 	o trafficserver-9.0.1
 	o translate-toolkit-3.3.4

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.12 2021/06/13 19:51:23 fcambus Exp $
+# $NetBSD: Makefile,v 1.13 2021/06/28 19:41:36 mcf Exp $
 
 DISTNAME=	cloc-1.90
 PKGREVISION=	2
