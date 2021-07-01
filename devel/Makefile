@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3422 2021/06/24 10:34:14 pin Exp $
+# $NetBSD: Makefile,v 1.3429 2021/06/29 10:04:40 nia Exp $
 #
 
 COMMENT=	Development utilities
@@ -408,7 +408,6 @@ SUBDIR+=	gnustep-examples
 SUBDIR+=	gnustep-make
 SUBDIR+=	gnustep-objc
 SUBDIR+=	gnustep-objc-lf2
-SUBDIR+=	go-amber
 SUBDIR+=	go-argv
 SUBDIR+=	go-assert
 SUBDIR+=	go-blackfriday
@@ -419,7 +418,6 @@ SUBDIR+=	go-cmp
 SUBDIR+=	go-colorable
 SUBDIR+=	go-colortext
 SUBDIR+=	go-colour
-SUBDIR+=	go-compress
 SUBDIR+=	go-consul-api
 SUBDIR+=	go-cpuid
 SUBDIR+=	go-debounce
@@ -427,15 +425,12 @@ SUBDIR+=	go-ed25519
 SUBDIR+=	go-emoji
 SUBDIR+=	go-errors
 SUBDIR+=	go-flags-svent
-SUBDIR+=	go-fnmatch
 SUBDIR+=	go-fs
 SUBDIR+=	go-fsnotify
 SUBDIR+=	go-gitmap
 SUBDIR+=	go-glog
 SUBDIR+=	go-gls
 SUBDIR+=	go-gocode
-SUBDIR+=	go-godef
-SUBDIR+=	go-godirwalk
 SUBDIR+=	go-godotenv
 SUBDIR+=	go-golang-lru
 SUBDIR+=	go-gopkgs
@@ -464,13 +459,11 @@ SUBDIR+=	go-pkgconfig
 SUBDIR+=	go-properties
 SUBDIR+=	go-protobuf
 SUBDIR+=	go-pty
-SUBDIR+=	go-purell
 SUBDIR+=	go-quicktest
 SUBDIR+=	go-radix
 SUBDIR+=	go-repr
 SUBDIR+=	go-review
 SUBDIR+=	go-sanitized_anchor_name
-SUBDIR+=	go-shellwords
 SUBDIR+=	go-shuffle
 SUBDIR+=	go-siphash
 SUBDIR+=	go-spew
