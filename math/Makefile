@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.508 2021/06/15 14:32:04 thor Exp $
+# $NetBSD: Makefile,v 1.510 2021/07/05 14:28:52 nia Exp $
 
 COMMENT=	Mathematics
 
@@ -186,7 +186,6 @@ SUBDIR+=	genius
 SUBDIR+=	glpk
 SUBDIR+=	gnome-calculator
 SUBDIR+=	gnumeric112
-SUBDIR+=	go-units
 SUBDIR+=	gp-autpgrp
 SUBDIR+=	gp-factint
 SUBDIR+=	gp-fplsa
@@ -423,6 +422,7 @@ SUBDIR+=	sc
 SUBDIR+=	sc-im
 SUBDIR+=	scilab
 SUBDIR+=	slatec
+SUBDIR+=	smath-studio
 SUBDIR+=	snns
 SUBDIR+=	sollya
 SUBDIR+=	speedcrunch

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.830 2021/06/25 10:13:57 micha Exp $
+# $NetBSD: Makefile,v 1.835 2021/07/05 14:36:47 nia Exp $
 #
 
 COMMENT=	Security and cryptography tools and libraries
@@ -105,11 +105,8 @@ SUBDIR+=	gnupg-pkcs11-scd
 SUBDIR+=	gnupg2
 SUBDIR+=	gnutls
 SUBDIR+=	go-asn1-ber
-SUBDIR+=	go-crypt
 SUBDIR+=	go-crypto
 SUBDIR+=	go-mkcert
-SUBDIR+=	go-sftp
-SUBDIR+=	go-xxhash
 SUBDIR+=	google-authenticator
 SUBDIR+=	gpa
 SUBDIR+=	gpg-tui
@@ -205,6 +202,7 @@ SUBDIR+=	libstark
 SUBDIR+=	libtasn1
 SUBDIR+=	libtcpa
 SUBDIR+=	libtomcrypt
+SUBDIR+=	libuecc
 SUBDIR+=	libykneomgr
 SUBDIR+=	libyubikey
 SUBDIR+=	log2timeline
@@ -494,6 +492,7 @@ SUBDIR+=	py-passlib
 SUBDIR+=	py-pbkdf2
 SUBDIR+=	py-prewikka
 SUBDIR+=	py-pydeep
+SUBDIR+=	py-requests-gssapi
 SUBDIR+=	py-requests-kerberos
 SUBDIR+=	py-requests-ntlm
 SUBDIR+=	py-requests-oauthlib

@@ -1,4 +1,4 @@
-$NetBSD: TODO,v 1.20833 2021/06/30 14:32:12 adam Exp $
+$NetBSD: TODO,v 1.20853 2021/07/07 13:12:24 nia Exp $
 
 Suggested new packages
 ======================
@@ -691,7 +691,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o dap-3.10
 	o dar-2.4.14
 	o darcs-2.16.3
-	o darktable-3.4
+	o darktable-3.6
 	o dateutils-0.4.8
 	o dcc-2.3.167
 	o dd_rescue-1.46
@@ -840,15 +840,10 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o gcloud-golang-metadata-0.12.0
 	o gcombust-0.1.55
 	o gdb7-7.12
-	o gdm-2.32.2
-	o gdm-3.0.3
-	o gearboy-3.3.0
-	o gearsystem-3.3.0
 	o geeklog-2.2.1sr1
 	o genius-1.0.26
 	o gens-2.15.5
 	o gfract-0.33
-	o gh-1.9.2
 	o ghdl-0.33
 	o gimp-docs-de-2.10.0
 	o gimp-docs-en-2.10.0
@@ -904,33 +899,24 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o gnutime-1.9
 	o go-afero-1.6.0
 	o go-appengine-1.6.7
-	o go-argv-0.1.0
 	o go-asn1-ber-1.5.3
 	o go-blackfriday-2.1.0
 	o go-buffruneio-0.3.0
-	o go-cast-1.3.1
 	o go-chroma-0.8.2
 	o go-cli-2.3.0
 	o go-cmp-0.5.5
 	o go-cobra-1.1.3
 	o go-colorable-0.1.8
-	o go-cpuid-2.0.6
 	o go-diff-1.2.0
 	o go-dns-1.1.41
-	o go-emoji-2.2.8
 	o go-errors-0.9.1
 	o go-ffuf-1.3.0
-	o go-framestream-0.3.0
 	o go-fsnotify-1.4.9
 	o go-gls-4.20.0
 	o go-godotenv-1.3.0
-	o go-goldmark-1.3.5
 	o go-grpc-1.37.0
-	o go-hashstructure-2.0.1
-	o go-homedir-1.1.0
 	o go-i18n-2.1.2
 	o go-imaging-1.6.2
-	o go-ini-1.62.0
 	o go-isatty-0.0.12
 	o go-kr-pretty-0.2.1
 	o go-ldap-3.3.0
@@ -944,22 +930,13 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o go-parse-2.5.15
 	o go-properties-1.8.5
 	o go-protobuf-1.5.2
-	o go-quicktest-1.11.3
-	o go-regexp2-1.4.0
 	o go-runewidth-0.0.12
 	o go-siphash-1.2.2
-	o go-sqlite3-2.0.6
 	o go-testify-1.7.0
 	o go-text-0.3.6
-	o go-textseg-13.0.0
-	o go-tocss-0.6.0
 	o go-toml-pelletier-1.9.0
 	o go-viper-1.7.1
-	o go-walker-0.1.2
 	o go-webhooks-5.17.0
-	o go-websocket-1.4.2
-	o go-wordwrap-1.0.1
-	o go-xxhash-2.1.1
 	o go-xz-0.5.10
 	o gobby-0.6.0
 	o gok-2.30.1
@@ -1067,7 +1044,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o icinga-base-2.12.3
 	o idzebra-2.2.2
 	o ike-2.0.1 [pkg/37032]
-	o ilmbase-3.0.4
+	o ilmbase-3.0.5
 	o imapfilter-2.7.5
 	o imapsync-1.727
 	o imp-6.2.12
@@ -1077,7 +1054,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o influxdb-2.0.4
 	o inform-6.34
 	o ingo-3.2.8
-	o inkscape-1.1 [wip]
 	o inn-2.6.4
 	o input-pad-1.4.2
 	o ioping-1.2
@@ -1240,6 +1216,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o libdwarf-20210305
 	o libepoxy-1.5.5
 	o libextractor-1.11
+	o libffi-3.4.2
 	o libflash-0.4.13
 	o libgfshare-2.0.0
 	o libgiigic-1.1.2
@@ -1272,8 +1249,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o librelp-1.10.0
 	o libressl-3.3.2
 	o libretro-core-info-1.9.1
-	o libretro-gearboy-3.3.0
-	o libretro-gearsystem-3.3.0
 	o libretro-sameboy-0.14.3
 	o libslang-2.2.4
 	o libspatialite-5.0.1
@@ -1380,7 +1355,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o mixxx-2.2.4
 	o modular-xorg-xquartz-1.20.9
 	o modular-xorg-xwayland-21.1.0
-	o mongo-c-driver-1.17.5.1
 	o monit-5.28.0
 	o mono-nat-1.1.0
 	o monocypher-3.1.2
@@ -1538,7 +1512,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o opencsg-1.4.2
 	o opendnssec-2.1.8
 	o opendoas-6.8.1
-	o openexr-3.0.4
+	o openexr-3.0.5
 	o opengrok-1.7.1
 	o openh323-1.19.1
 	o openimageio-2.2.13.1
@@ -1578,12 +1552,10 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o p5-Class-DBI-Plugin-1.04
 	o p5-Class-Measure-0.09
 	o p5-Clipboard-0.28
-	o p5-Clone-PP-1.08
 	o p5-Config-MVP-2.200012
 	o p5-Convert-Binary-C-0.84
 	o p5-Convert-Color-1.000001
 	o p5-Cpanel-JSON-XS-4.26
-	o p5-Crypt-JWT-0.032
 	o p5-Crypt-RIPEMD160-0.08
 	o p5-Curses-1.37
 	o p5-DBD-DB2-1.86
@@ -1595,7 +1567,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o p5-Data-ObjectDriver-0.21
 	o p5-Data-Peek-0.50
 	o p5-Data-Validate-IP-0.30
-	o p5-Digest-CRC-0.23
 	o p5-Dist-Zilla-6.017
 	o p5-Dumbbench-0.501
 	o p5-Email-Folder-2.0
@@ -1624,17 +1595,12 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o p5-JavaScript-Minifier-XS-0.14
 	o p5-LEOCHARRE-Dir-1.09
 	o p5-LWP-ConsoleLogger-0.000043
-	o p5-LaTeX-Driver-1.2.0
 	o p5-Lingua-EN-Inflect-1.905
 	o p5-Lingua-EN-Numbers-Ordinate-1.05
 	o p5-Lingua-Stem-2.31
 	o p5-Locale-Codes-3.67
 	o p5-Locale-Maketext-Gettext-1.32
 	o p5-Log-Agent-1.005
-	o p5-Log-Any-1.709
-	o p5-Log-Log4perl-1.54
-	o p5-Log-Report-1.32
-	o p5-Log-Report-Optional-1.07
 	o p5-MIME-Types-2.19
 	o p5-Mac-AppleScript-Glue-0.06
 	o p5-Mac-PropertyList-1.502
@@ -1803,6 +1769,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o podcastdl-0.3.3
 	o policyd-weight-0.1.15.2
 	o poppass-4.0.14
+	o poppler-21.07.0
 	o posh-0.14.1
 	o postal-0.72
 	o postgres_exporter-0.9.0
@@ -1863,7 +1830,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o py-configparser-5.0.0 [drops python-2.x support]
 	o py-django-debug-toolbar-3.2.1
 	o py-django-tagging-0.5.0
-	o py-dpkt-1.9.5
 	o py-ephem3-3.7.6.0
 	o py-fecon235-6.18.1203
 	o py-filebytes-0.10.2
@@ -2010,7 +1976,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o secpanel-0.6.1
 	o send-pr-4.0
 	o sendfile-20010424
-	o sendmail-8.16.1
 	o sendmail-cidrexpand-8.16.0.16
 	o sendmail-qtool-8.16.0.16
 	o ser-0.9.6

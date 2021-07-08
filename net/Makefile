@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1415 2021/06/27 16:33:38 wiz Exp $
+# $NetBSD: Makefile,v 1.1418 2021/07/07 12:49:54 nia Exp $
 #
 
 COMMENT=	Networking tools
@@ -137,6 +137,7 @@ SUBDIR+=	ettercap-gtk
 SUBDIR+=	exabgp
 SUBDIR+=	ez-ipupdate
 SUBDIR+=	fair-identd
+SUBDIR+=	fastd
 SUBDIR+=	fehqlibs
 SUBDIR+=	fetch
 SUBDIR+=	filezilla
@@ -196,9 +197,7 @@ SUBDIR+=	gnome-vfs-smb
 SUBDIR+=	gnugk
 SUBDIR+=	go-dns
 SUBDIR+=	go-dnstap
-SUBDIR+=	go-framestream
 SUBDIR+=	go-net
-SUBDIR+=	go-tcplisten
 SUBDIR+=	go-websocket
 SUBDIR+=	gofish
 SUBDIR+=	gopher

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.941 2021/06/08 01:43:55 mef Exp $
+# $NetBSD: Makefile,v 1.944 2021/07/05 14:41:29 nia Exp $
 #
 
 COMMENT=	Graphics tools and libraries
@@ -219,8 +219,6 @@ SUBDIR+=	gnome-icon-theme-symbolic
 SUBDIR+=	gnome-screenshot
 SUBDIR+=	gnome-themes-standard
 SUBDIR+=	gnuplot
-SUBDIR+=	go-gift
-SUBDIR+=	go-image
 SUBDIR+=	gocr
 SUBDIR+=	goocanvas2
 SUBDIR+=	gource
@@ -358,6 +356,7 @@ SUBDIR+=	libwebp
 SUBDIR+=	libwmf
 SUBDIR+=	libxmi
 SUBDIR+=	ljpeg
+SUBDIR+=	lsix
 SUBDIR+=	luminance-hdr
 SUBDIR+=	luv-icon-theme
 SUBDIR+=	lxde-icon-theme
