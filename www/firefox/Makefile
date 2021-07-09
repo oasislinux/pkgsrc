@@ -106,26 +106,30 @@ MOZILLA_NAME=	Browser
 # updating and verification.
 #
 
-#CKSUM_CRATES+=	third_party/rust/libc
+CKSUM_CRATES+=	third_party/rust/libc
 
-# patch-third__party_rust_libc_src_unix_bsd_netbsdlike_netbsd_mod.rs
-#CKSUMS+=	a3540eab4dbc52e006e84e288bad17e1dae3865fea49020e0ed8b5a7724a9532
-#CKSUMS+=	5e58a2109f5eff0f497dfac150c161c1d517a2227b49e086da96c3d66522ac3a
+# patch-third__party_rust_libc_src_unix_linux__like_linux_mod.rs
+CKSUMS+=	3dc8b1980062117edd7bdfdf2279065737f8cdcdcb883f57f23f27a1d0bbb8b2
+CKSUMS+=	8895b1ebe70ee03b5adc5b8005e7d2d71b09d69b9964f473b885cf312c45e56b
 
-#CKSUM_CRATES+=	third_party/rust/getrandom
+# patch-third__party_rust_libc_src_unix_linux__like_linux_gnu_mod.rs
+CKSUMS+=	c7924db757cf898c78029ad3772e6168ec99dd0dd1534df4132f8fe9717afed7
+CKSUMS+=	262a461a268c01e546f073495e23a3dad5aebc473b74904c2139ed565366d9fe
 
-# patch-third__party_rust_getrandom_src_lib.rs
-#CKSUMS+=	0e52f6bde42d7bb05c297ce1c25b9879d61b28caba98f6226a152bff538db6c2
-#CKSUMS+=	394425b4ba03c21c494e64d993678f7014575b1e3d590b9ee452b5c2d83ec4ac
+CKSUM_CRATES+=	third_party/rust/nix
 
-#SUBST_CLASSES+=	cksum
-#SUBST_STAGE.cksum=	pre-configure
-#.for crate in ${CKSUM_CRATES}
-#SUBST_FILES.cksum+=	${crate}/.cargo-checksum.json
-#.endfor
-#.for from to in ${CKSUMS}
-#SUBST_SED.cksum+=	-e 's,${from},${to},g'
-#.endfor
+# patch-third__party_rust_nix_src_sys_ptrace_linux.rs
+CKSUMS+=	f09b45148004f4b28d8503c397a8d112d31046c98e68335bf4e89425d5b33f07
+CKSUMS+=	550959b7d04e0e3435b0a96a2ca6e38ec8874ebf8728e16659107c1651b03bef
+
+SUBST_CLASSES+=		cksum
+SUBST_STAGE.cksum=	pre-configure
+.for crate in ${CKSUM_CRATES}
+SUBST_FILES.cksum+=	${crate}/.cargo-checksum.json
+.endfor
+.for from to in ${CKSUMS}
+SUBST_SED.cksum+=	-e 's,${from},${to},g'
+.endfor
 
 pre-configure:
 	cd ${WRKSRC} && autoconf
