@@ -1,6 +1,7 @@
 $NetBSD: patch-media_libcubeb_src_moz.build,v 1.20 2020/04/09 14:01:26 ryoon Exp $
 
 * Add Sun audio support
+* Allow building with sndiod on non-OpenBSD
 
 --- media/libcubeb/src/moz.build.orig	2020-04-03 19:35:03.000000000 +0000
 +++ media/libcubeb/src/moz.build
@@ -17,3 +18,18 @@ $NetBSD: patch-media_libcubeb_src_moz.build,v 1.20 2020/04/09 14:01:26 ryoon Exp
  if CONFIG['MOZ_PULSEAUDIO'] or CONFIG['MOZ_JACK']:
      SOURCES += [
          'cubeb_resampler.cpp',
+@@ -46,11 +52,13 @@ if CONFIG['OS_ARCH'] in ('DragonFly', 'FreeBSD', 'SunO
+     ]
+     DEFINES['USE_OSS'] = True
+ 
+-if CONFIG['OS_ARCH'] == 'OpenBSD':
++if CONFIG['MOZ_SNDIO']:
+     SOURCES += [
+         'cubeb_sndio.c',
+     ]
+     DEFINES['USE_SNDIO'] = True
++
++if CONFIG['OS_ARCH'] == 'OpenBSD':
+     DEFINES['DISABLE_LIBSNDIO_DLOPEN'] = True
+ 
+ if CONFIG['OS_TARGET'] == 'Darwin':

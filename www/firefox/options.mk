@@ -4,7 +4,7 @@ PKG_OPTIONS_VAR=	PKG_OPTIONS.firefox
 
 PKG_SUPPORTED_OPTIONS=	official-mozilla-branding
 PKG_SUPPORTED_OPTIONS+=	debug debug-info mozilla-jemalloc webrtc
-PKG_SUPPORTED_OPTIONS+=	alsa pulseaudio dbus
+PKG_SUPPORTED_OPTIONS+=	alsa pulseaudio sndio dbus
 
 .if ${OPSYS} == "Linux"
 PKG_SUGGESTED_OPTIONS+=	pulseaudio mozilla-jemalloc dbus webrtc
@@ -55,6 +55,13 @@ CONFIGURE_ARGS+=	--disable-debug
 CONFIGURE_ARGS+=	--enable-pulseaudio
 .else
 CONFIGURE_ARGS+=	--disable-pulseaudio
+.endif
+
+.if !empty(PKG_OPTIONS:Msndio)
+.include "../../wip/sndio/buildlink3.mk"
+CONFIGURE_ARGS+=	--enable-sndio
+.else
+CONFIGURE_ARGS+=	--disable-sndio
 .endif
 
 .if !empty(PKG_OPTIONS:Mdbus)
