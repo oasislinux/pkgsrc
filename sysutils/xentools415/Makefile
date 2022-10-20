@@ -1,25 +1,11 @@
-# $NetBSD: Makefile,v 1.9 2022/01/15 17:44:35 wiz Exp $
+# $NetBSD: Makefile,v 1.21 2022/10/08 11:05:57 bouyer Exp $
 #
-VERSION=	4.15.1
-
-DIST_SUBDIR=		xen415
-DISTNAME=		xen-${VERSION}
+# VERSION is set in version.mk as it is shared with other packages
+.include        "version.mk"
 PKGNAME=		xentools415-${VERSION}
-PKGREVISION=		3
+PKGREVISION=		1
+
 CATEGORIES=		sysutils
-MASTER_SITES=		https://downloads.xenproject.org/release/xen/${VERSION}/
-
-DISTFILES=		${DISTNAME}.tar.gz
-
-SEABIOS_VERSION=	1.14.0
-SEABIOS_DIST=		seabios-${SEABIOS_VERSION}.tar.gz
-DISTFILES+=		${SEABIOS_DIST}
-SITES.${SEABIOS_DIST}=	-http://xenbits.xen.org/gitweb/?p=seabios.git;a=snapshot;h=refs/tags/rel-${SEABIOS_VERSION};sf=tgz
-
-IPXE_VERSION=		988d2c13cdf0f0b4140685af35ced70ac5b3283c
-IPXE_DIST=		ipxe-${IPXE_VERSION}.tar.gz
-DISTFILES+=		${IPXE_DIST}	
-SITES.${IPXE_DIST}=	-https://github.com/ipxe/ipxe/archive/${IPXE_VERSION}.tar.gz
 
 MAINTAINER=		bouyer@NetBSD.org
 HOMEPAGE=		https://xenproject.org/
@@ -33,15 +19,18 @@ BUILD_DEPENDS+=	acpica-utils-[0-9]*:../../sysutils/acpica-utils
 .endif
 DEPENDS+=	${PYPKGPREFIX}-curses>=0:../../devel/py-curses
 
+TOOL_DEPENDS+=  ${PYPKGPREFIX}-setuptools-[0-9]*:../../devel/py-setuptools
+PYTHON_VERSIONS_INCOMPATIBLE=	27
+
 PKG_SYSCONFSUBDIR=	xen
 
-ONLY_FOR_PLATFORM=	NetBSD-9.99.6[4-9]-x86_64 NetBSD-9.99.[7-9]*-x86_64
+ONLY_FOR_PLATFORM=	NetBSD-9.99.*-x86_64
 ONLY_FOR_PLATFORM+=	NetBSD-9.[1-9]-x86_64
 ONLY_FOR_PLATFORM+=	NetBSD-9.[1-9]_*-x86_64
 ONLY_FOR_PLATFORM+=	NetBSD-9.0_STABLE-x86_64
 
 SSP_SUPPORTED=		no
-MKPIE_SUPPORTED= 	no
+MKPIE_SUPPORTED=	no
 
 CONFLICTS+=		libxen-[0-9]*
 CONFLICTS+=		xenstoretools-[0-9]*
@@ -59,7 +48,7 @@ USE_TOOLS+=		pod2man gmake pkg-config makeinfo perl bash cmake gsed bison
 USE_LANGUAGES=		c c++
 
 GNU_CONFIGURE=		YES
-CONFIGURE_ARGS+=	--enable-rpath
+CONFIGURE_ARGS+=	--enable-rpath --disable-golang
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFBASE}
 
 MAKE_ENV+=		PREFIX=${prefix:Q} WRKSRC=${WRKSRC}
@@ -67,7 +56,7 @@ MAKE_ENV+=		APPEND_LIB=${LDFLAGS:Q}
 MAKE_ENV+=		XEN_EXAMPLES_DIR=${EGDIR}
 MAKE_ENV+=		MV=${MV:Q} CP=${CP:Q}
 MAKE_ENV+=		PYTHON=${PYTHONBIN:Q} PYTHON_COMMAND=${PYTHONBIN:Q}
-MAKE_ENV+=		SED=${SED:Q}  
+MAKE_ENV+=		SED=${SED:Q}
 MAKE_ENV+=		V=YES
 MAKE_ENV+=		BARE_CPP="gcc -E"
 #MAKE_ENV+=		NO_WERROR=1
@@ -103,11 +92,11 @@ SUBST_MESSAGE.getopt=	Fixing getopt_long_only
 SUBST_FILES.getopt+=	tools/fuzz/x86_instruction_emulator/afl-harness.c
 SUBST_SED.getopt+=	-e 's,getopt_long_only,getopt_long,'
 
-SUBST_CLASSES+=		rpath-link
-SUBST_STAGE.rpath-link=	pre-configure
-SUBST_MESSAGE.rpath-link= Fixing rpath-link syntax
-SUBST_FILES.rpath-link+= tools/Rules.mk
-SUBST_SED.rpath-link+=	-e 's/-rpath-link=/-rpath-link,/g'
+SUBST_CLASSES+=			rpath-link
+SUBST_STAGE.rpath-link=		pre-configure
+SUBST_MESSAGE.rpath-link=	Fixing rpath-link syntax
+SUBST_FILES.rpath-link+=	tools/Rules.mk
+SUBST_SED.rpath-link+=		-e 's/-rpath-link=/-rpath-link,/g'
 
 OPSYSVARS+=		PROCPATH
 PROCPATH.NetBSD=	/kern
@@ -173,6 +162,7 @@ pre-build:
 
 INSTALLATION_DIRS=	${EGDIR} ${PKGMANDIR}/man1 ${PKGMANDIR}/man5
 INSTALLATION_DIRS+=	${PKGMANDIR}/man8 share/doc/xen
+INSTALLATION_DIRS+=	${PYSITELIB}
 
 BUILD_DEFS+=		VARBASE
 
@@ -211,8 +201,7 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/docs/misc/$f ${DESTDIR}${PREFIX}/share/doc/xen
 .endfor
 
-.if (${OPSYS} == "NetBSD" && \
-    (empty(OS_VERSION:M6.99.[3-9]?) && empty(OS_VERSION:M[7-9].*)))
+.if ${OPSYS} == "NetBSD" && ${OPSYS_VERSION} < 069900
 CPPFLAGS+=	-Dshm_open=open -Dshm_unlink=unlink
 .endif
 
@@ -236,11 +225,13 @@ BUILDLINK_TRANSFORM+=	rm:-falign-jumps=1 rm:-falign-loops=1 \
 MAKE_ENV+=	EXTRA_HOSTCFLAGS=${EXTRA_HOSTCFLAGS:Q} EXTRA_CFLAGS=${EXTRA_CFLAGS:M*:Q} TARGET_CC=${TARGET_CC}
 
 .include "../../lang/python/application.mk"
-.include "../../lang/python/egg.mk"
+.include "../../lang/python/extension.mk"
 #.include "../../devel/SDL/buildlink3.mk"
 .include "../../lang/ocaml/buildlink3.mk"
 .include "../../devel/ocaml-findlib/buildlink3.mk"
+BUILDLINK_API_DEPENDS.pciutils+=	pciutils>=3.8
 .include "../../sysutils/pciutils/buildlink3.mk"
+.include "../../archivers/zstd/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/yajl/buildlink3.mk"
 .include "../../devel/argp/buildlink3.mk"

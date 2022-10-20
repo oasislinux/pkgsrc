@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.38 2022/01/10 01:46:43 ryoon Exp $
+# $NetBSD: Makefile,v 1.43 2022/08/31 08:08:23 adam Exp $
 
-DISTNAME=	qbittorrent-4.3.9
-PKGREVISION=	2
+DISTNAME=	qbittorrent-4.4.5
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_GITHUB:=qbittorrent/}
 GITHUB_PROJECT=	qBittorrent
@@ -21,7 +20,7 @@ CMAKE_ARGS+=	-DCMAKE_BUILD_TYPE="Release"
 
 TOOL_DEPENDS+=	qt5-qttools-[0-9]*:../../x11/qt5-qttools
 
-GCC_REQD+=	6 # c++14
+GCC_REQD+=	10 # c++14
 
 LDFLAGS.NetBSD+=	-ljemalloc
 

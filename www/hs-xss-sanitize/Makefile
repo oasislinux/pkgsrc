@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.3 2022/01/18 02:48:32 pho Exp $
+# $NetBSD: Makefile,v 1.6 2022/02/26 03:58:36 pho Exp $
 
-DISTNAME=	xss-sanitize-0.3.6
+DISTNAME=	xss-sanitize-0.3.7
 PKGREVISION=	2
 CATEGORIES=	www
 

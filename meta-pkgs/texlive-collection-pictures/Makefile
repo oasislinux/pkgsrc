@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.31 2021/06/07 00:48:07 markd Exp $
+# $NetBSD: Makefile,v 1.34 2022/09/01 06:18:44 markd Exp $
 
 DISTNAME=	collection-pictures
-PKGNAME=	texlive-${DISTNAME}-2021pre1
+PKGNAME=	texlive-${DISTNAME}-2022pre1
 CATEGORIES=	meta-pkgs
 MASTER_SITES=	# empty
-TEXLIVE_REV=	59115
+TEXLIVE_REV=	64199
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.tug.org/texlive/
@@ -30,6 +30,7 @@ DEPENDS+=	tex-asyfig-[0-9]*:../../graphics/tex-asyfig
 # depend braids
 # depend bxeepic
 # depend byo-twemojis
+# depend byrne
 # depend cachepic
 # depend callouts
 # depend celtic
@@ -63,6 +64,7 @@ DEPENDS+=	tex-ellipse-[0-9]*:../../graphics/tex-ellipse
 # depend fast-diagram
 # depend fig4latex
 # depend figchild
+# depend figput
 # depend fitbox
 # depend flowchart
 # depend forest
@@ -83,11 +85,13 @@ DEPENDS+=	tex-here-[0-9]*:../../print/tex-here
 # depend hvfloat
 # depend istgame
 # depend kblocks
+# depend kinematikz
 # depend knitting
 # depend knittingpattern
 # depend ladder
 # depend lapdf
 # depend latex-make
+# depend liftarm
 # depend lpic
 # depend lroundrect
 # depend luamesh
@@ -102,6 +106,7 @@ DEPENDS+=	tex-here-[0-9]*:../../print/tex-here
 # depend modiagram
 # depend neuralnetwork
 # depend nl-interval
+# depend nndraw
 # depend numericplots
 DEPENDS+=	tex-pb-diagram-[0-9]*:../../print/tex-pb-diagram
 # depend penrose
@@ -109,6 +114,7 @@ DEPENDS+=	tex-pb-diagram-[0-9]*:../../print/tex-pb-diagram
 DEPENDS+=	tex-pgf-[0-9]*:../../print/tex-pgf
 # depend pgf-blur
 # depend pgf-cmykshadings
+# depend pgf-interference
 # depend pgf-pie
 # depend pgf-soroban
 # depend pgf-spectra
@@ -142,6 +148,7 @@ DEPENDS+=	tex-qrcode-[0-9]*:../../graphics/tex-qrcode
 # depend randomwalk
 # depend realhats
 # depend reotex
+# depend robotarm
 # depend rviewport
 # depend sa-tikz
 # depend schemabloc
@@ -150,10 +157,12 @@ DEPENDS+=	tex-qrcode-[0-9]*:../../graphics/tex-qrcode
 # depend scsnowman
 # depend setdeck
 # depend signchart
+# depend simplenodes
 # depend simpleoptics
 # depend smartdiagram
 # depend spath3
 # depend spectralsequences
+# depend strands
 # depend swimgraf
 # depend syntaxdi
 # depend table-fct
@@ -161,11 +170,13 @@ DEPENDS+=	tex-texdraw-[0-9]*:../../graphics/tex-texdraw
 # depend ticollege
 DEPENDS+=	tex-tikz-3dplot-[0-9]*:../../graphics/tex-tikz-3dplot
 # depend tikz-among-us
+# depend tikz-bagua
 # depend tikz-bayesnet
 # depend tikz-bbox
 DEPENDS+=	tex-tikz-cd-[0-9]*:../../graphics/tex-tikz-cd
 # depend tikz-dependency
 # depend tikz-dimline
+# depend tikz-ext
 # depend tikz-feynhand
 # depend tikz-feynman
 # depend tikz-imagelabels
@@ -185,11 +196,14 @@ DEPENDS+=	tex-tikz-cd-[0-9]*:../../graphics/tex-tikz-cd
 # depend tikz-qtree
 # depend tikz-relay
 # depend tikz-sfc
+# depend tikz-swigs
 # depend tikz-timing
 # depend tikz-trackschematic
 # depend tikz-truchet
+# depend tikzbricks
 # depend tikzcodeblocks
 # depend tikzducks
+# depend tikzfill
 DEPENDS+=	tex-tikzinclude-[0-9]*:../../graphics/tex-tikzinclude
 # depend tikzlings
 DEPENDS+=	tex-tikzmark-[0-9]*:../../graphics/tex-tikzmark
@@ -199,6 +213,7 @@ DEPENDS+=	tex-tikzorbital-[0-9]*:../../graphics/tex-tikzorbital
 DEPENDS+=	tex-tikzpagenodes-[0-9]*:../../graphics/tex-tikzpagenodes
 # depend tikzpeople
 DEPENDS+=	tex-tikzpfeile-[0-9]*:../../graphics/tex-tikzpfeile
+# depend tikzpingus
 DEPENDS+=	tex-tikzposter-[0-9]*:../../graphics/tex-tikzposter
 DEPENDS+=	tex-tikzscale-[0-9]*:../../graphics/tex-tikzscale
 DEPENDS+=	tex-tikzsymbols-[0-9]*:../../graphics/tex-tikzsymbols
@@ -213,14 +228,18 @@ DEPENDS+=	tex-tkz-fct-[0-9]*:../../graphics/tex-tkz-fct
 # depend tkz-graph
 # depend tkz-orm
 # depend tkz-tab
+# depend tkzexample
+# depend tonevalue
 # depend tqft
 # depend tsemlines
 DEPENDS+=	tex-tufte-latex-[0-9]*:../../print/tex-tufte-latex
+# depend twemojis
 # depend tzplot
 # depend utfsym
 DEPENDS+=	tex-venndiagram-[0-9]*:../../graphics/tex-venndiagram
 # depend visualpstricks
 # depend worldflags
+# depend xistercian
 # depend xpicture
 DEPENDS+=	tex-xypic-[0-9]*:../../graphics/tex-xypic
 

@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.62 2021/05/24 19:49:18 wiz Exp $
+# $NetBSD: Makefile,v 1.64 2022/09/25 07:46:22 nros Exp $
 #
 
 .include "../../comms/pilot-link/Makefile.common"
 
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		16
+PKGREVISION=		18
 
 COMMENT=		Perl bindings for pilot-link
 

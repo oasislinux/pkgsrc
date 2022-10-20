@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.4 2022/01/18 02:48:21 pho Exp $
+# $NetBSD: Makefile,v 1.7 2022/02/26 03:58:21 pho Exp $
 
-DISTNAME=	hackage-security-0.6.0.1
+DISTNAME=	hackage-security-0.6.2.0
 PKGREVISION=	2
 CATEGORIES=	security
 
@@ -15,6 +15,7 @@ LICENSE=	modified-bsd
 .include "../../archivers/hs-tar/buildlink3.mk"
 .include "../../archivers/hs-zlib/buildlink3.mk"
 .include "../../devel/hs-lukko/buildlink3.mk"
+.include "../../devel/hs-Cabal-syntax/buildlink3.mk"
 .include "../../net/hs-network/buildlink3.mk"
 .include "../../net/hs-network-uri/buildlink3.mk"
 .include "../../mk/haskell.mk"

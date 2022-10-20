@@ -1,11 +1,11 @@
 ===========================================================================
-$NetBSD: MESSAGE,v 1.5 2010/02/05 15:27:27 martin Exp $
+$NetBSD: MESSAGE,v 1.7 2022/09/03 13:04:32 martin Exp $
 
 Before you can use this program, you need to configure the MySQL
 connection in the open2300.conf file. The mysql user used by the
 program only needs "insert" priviledges.
 
-You need to creat a table 'weather' in the configured database.
+You need to create a table 'weather' in the configured database.
 The program code suggests the following table structure:
 
    CREATE TABLE `weather` (
@@ -30,7 +30,7 @@ The program code suggests the following table structure:
      UNIQUE KEY `timestamp` (`timestamp`)
    ) TYPE=MyISAM;
 
-Not that the actual field names are not used, but the structure
+Note that the actual field names are not used, but the structure
 needs to be compatible. This alternative structure (for newer MySQL
 versions) works as well:
 

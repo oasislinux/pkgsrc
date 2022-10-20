@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.8 2021/12/08 16:04:22 adam Exp $
+# $NetBSD: Makefile,v 1.10 2022/05/09 11:34:36 adam Exp $
 
 GITHUB_PROJECT=	ltfs-backends
 DISTNAME=	v0.2
 PKGNAME=	ltfs-ltotape-${DISTNAME:S/v//}
-PKGREVISION=	6
+PKGREVISION=	7
 CATEGORIES=	filesystems
 MASTER_SITES=	${MASTER_SITE_GITHUB:=LinearTapeFileSystem/}/${GITHUB_PROJECT}/archive/
 DIST_SUBDIR=	${GITHUB_PROJECT}
@@ -26,4 +26,5 @@ pre-configure:
 
 .include "../../filesystems/ltfs/buildlink3.mk"
 .include "../../textproc/icu/buildlink3.mk"
+.include "../../filesystems/fuse/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

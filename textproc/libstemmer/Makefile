@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.4 2021/05/24 19:54:26 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2022/06/28 11:36:12 wiz Exp $
 
 DISTNAME=	snowball-2.1.0
 PKGNAME=	${DISTNAME:S/snowball/libstemmer/}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_GITHUB:=snowballstem/}
 GITHUB_PROJECT=	snowball
@@ -17,6 +17,8 @@ USE_TOOLS+=	gmake perl
 MAKE_FILE=	GNUmakefile
 
 INSTALLATION_DIRS+=	bin include lib
+
+BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,--version-script=libstemmer/symbol.map
 
 do-install:
 	${INSTALL_DATA} ${WRKSRC}/include/libstemmer.h \

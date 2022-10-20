@@ -1,16 +1,16 @@
-# $NetBSD: Makefile,v 1.99 2021/12/08 16:06:51 adam Exp $
+# $NetBSD: Makefile,v 1.103 2022/05/10 11:50:55 nia Exp $
 
-DISTNAME=		sawfish_1.12.0
-PKGNAME=		${DISTNAME:S/_/-/}
-PKGREVISION=		6
-CATEGORIES=		wm x11
-MASTER_SITES=		http://download.tuxfamily.org/sawfish/
-EXTRACT_SUFX=		.tar.xz
+DISTNAME=	sawfish_1.13.0
+PKGNAME=	${DISTNAME:S/_/-/}
+PKGREVISION=	1
+CATEGORIES=	wm x11
+MASTER_SITES=	https://download.tuxfamily.org/sawfish/
+EXTRACT_SUFX=	.tar.xz
 
-MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		https://sawfish.tuxfamily.org/
-COMMENT=		Extensible window manager that is fully configurable in Lisp
-LICENSE=		gnu-gpl-v2
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	https://sawfish.tuxfamily.org/
+COMMENT=	Extensible window manager that is fully configurable in Lisp
+LICENSE=	gnu-gpl-v2 AND artistic-2.0 # the latter for sound files
 
 GNU_CONFIGURE=		yes
 INFO_FILES=		YES
@@ -34,7 +34,7 @@ SUBST_SED.env=		-e 's,exec rep,exec env ${REP_ENV_PKGSRC} rep,g'
 
 .include "../../mk/bsd.prefs.mk"
 
-.if ${OPSYS} == "NetBSD" && empty(OS_VERSION:M1.*)
+.if ${OPSYS} == "NetBSD"
 REP_ENV_PKGSRC=		LD_PRELOAD=/usr/lib/libpthread.so
 .else
 REP_ENV_PKGSRC=

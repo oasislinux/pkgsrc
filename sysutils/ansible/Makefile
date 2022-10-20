@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.45 2022/01/04 20:54:46 wiz Exp $
+# $NetBSD: Makefile,v 1.54 2022/10/14 11:27:41 adam Exp $
 
-DISTNAME=	ansible-3.4.0
-PKGREVISION=	1
+DISTNAME=	ansible-6.5.0
 CATEGORIES=	sysutils python
 MASTER_SITES=	${MASTER_SITE_PYPI:=a/ansible/}
 
@@ -12,19 +11,31 @@ LICENSE=	gnu-gpl-v3
 
 PREV_PKGPATH=	sysutils/ansible2
 
-DEPENDS+=	ansible-base>=2.10.5:../../sysutils/ansible-base
+DEPENDS+=	ansible-core>=2.13.3:../../sysutils/ansible-core
 
 USE_LANGUAGES=	# none
+
+CHECK_SHLIBS_SUPPORTED=	no
+CHECK_WRKREF_SKIP=	*
+CTF_SUPPORTED=		no
+STRIP_DEBUG_SUPPORTED=	no
 
 REPLACE_PYTHON+=	ansible_collections/*/*/.azure-pipelines/scripts/*.py
 REPLACE_PYTHON+=	ansible_collections/*/*/tests/*/*.py
 REPLACE_PYTHON+=	ansible_collections/*/*/tests/*/*/*.py
 REPLACE_PYTHON+=	ansible_collections/*/*/tests/*/*/*/*.py
+REPLACE_PYTHON+=	ansible_collections/cisco/meraki/scripts/sublime-build/build.py.generic
 REPLACE_PYTHON+=	ansible_collections/community/digitalocean/scripts/inventory/*.py
+REPLACE_PYTHON+=	ansible_collections/community/dns/update-docs-fragments.py
 REPLACE_PYTHON+=	ansible_collections/community/general/scripts/inventory/*.py
 REPLACE_PYTHON+=	ansible_collections/community/general/scripts/vault/*.py
 REPLACE_PYTHON+=	ansible_collections/community/general/tests/integration/targets/django_manage/files/base_test/*/*/*.py
+REPLACE_PYTHON+=	ansible_collections/community/hashi_vault/.github/actions/ansible-codecov/process.py
+REPLACE_PYTHON+=	ansible_collections/community/hashi_vault/.github/actions/docker-image-versions/versions.py
+REPLACE_PYTHON+=	ansible_collections/community/okd/ci/doc_fragment_modules.py
 REPLACE_PYTHON+=	ansible_collections/community/okd/ci/downstream_fragments.py
+REPLACE_PYTHON+=	ansible_collections/community/routeros/update-docs.py
+REPLACE_PYTHON+=	ansible_collections/community/sap_libs/plugins/module_utils/swpm2_parameters_inifile_generate.py
 REPLACE_PYTHON+=	ansible_collections/ngine_io/cloudstack/scripts/inventory/cloudstack.py
 REPLACE_PYTHON+=	ansible_collections/ovirt/ovirt/roles/disaster_recovery/files/*.py
 REPLACE_PYTHON+=	ansible_collections/ovirt/ovirt/roles/disaster_recovery/files/ovirt-dr
@@ -36,20 +47,25 @@ CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/*/*/tests/*/*.sh
 CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/*/*/tests/*/*/*.sh
 CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/*/*/tests/*/*/*/*.sh
 CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/netbox/netbox/hacking/*.sh
+CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/community/grafana/hacking/*.sh
+CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/community/hashi_vault/docs/preview/build.sh
 CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/community/kubernetes/utils/*.sh
 CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/community/okd/ci/*.sh
-CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/community/vmware/check-ignores-order
+CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/community/vmware/tools/check-ignores-order
 CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/community/zabbix/roles/zabbix_proxy/files/*.bsx
 CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/community/zabbix/roles/zabbix_server/files/*.bsx
 CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/cyberark/conjur/ci/*
+CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/cyberark/conjur/dev/*
 CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/cyberark/conjur/roles/conjur_host_identity/tests/test.sh*
 CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/infinidat/infinibox/bin/*.sh
 CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/ovirt/ovirt/automation/*.sh
 CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/ovirt/ovirt/build.sh
 CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/sensu/sensu_go/docker/*.sh
+CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/vmware/vmware_rest/manual/source/export_to_ansible_ansible.sh
 
 post-extract:
 	${FIND} ${WRKSRC}/ansible_collections -name .DS_Store -delete
+	${RM} -r ${WRKSRC}/ansible_collections/inspur/sm/venv
 
 .include "../../lang/python/application.mk"
 .include "../../lang/python/egg.mk"

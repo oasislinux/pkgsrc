@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.73 2021/12/30 09:05:45 wiz Exp $
+# $NetBSD: Makefile,v 1.77 2022/10/06 14:12:45 taca Exp $
 
-DISTNAME=	bulk-medium-20211229
+DISTNAME=	bulk-medium-20221006
 CATEGORIES=	meta-pkgs
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -77,9 +77,9 @@ BUILD_DEPENDS+=	${PYPKGPREFIX}-matplotlib-[0-9]*:../../graphics/py-matplotlib
 BUILD_DEPENDS+=	gawk-[0-9]*:../../lang/gawk
 BUILD_DEPENDS+=	php>=7.4<7.5:../../lang/php74
 BUILD_DEPENDS+=	php>=8.0<8.1:../../lang/php80
-BUILD_DEPENDS+=	ruby26-base-[0-9]*:../../lang/ruby26-base
 BUILD_DEPENDS+=	ruby27-base-[0-9]*:../../lang/ruby27-base
 BUILD_DEPENDS+=	ruby30-base-[0-9]*:../../lang/ruby30-base
+BUILD_DEPENDS+=	ruby31-base-[0-9]*:../../lang/ruby31-base
 BUILD_DEPENDS+=	openjdk8-[0-9]*:../../lang/openjdk8
 BUILD_DEPENDS+=	openjdk11-[0-9]*:../../lang/openjdk11
 BUILD_DEPENDS+=	python38-[0-9]*:../../lang/python38
@@ -91,7 +91,6 @@ BUILD_DEPENDS+=	mhonarc-[0-9]*:../../mail/mhonarc
 BUILD_DEPENDS+=	mutt-[0-9]*:../../mail/mutt
 BUILD_DEPENDS+=	alpine-[0-9]*:../../mail/alpine
 BUILD_DEPENDS+=	spamassassin-[0-9]*:../../mail/spamassassin
-BUILD_DEPENDS+=	bind>=9.11<9.12:../../net/bind911
 BUILD_DEPENDS+=	bind>=9.16<9.17:../../net/bind916
 BUILD_DEPENDS+=	clive-[0-9]*:../../net/clive
 BUILD_DEPENDS+=	nmap-[0-9]*:../../net/nmap
@@ -218,6 +217,7 @@ BUILD_DEPENDS+=	${LUA_PKGPREFIX}-stdlib-[0-9]*:../../devel/lua-stdlib
 BUILD_DEPENDS+=	bulk-small-[0-9]*:../../meta-pkgs/bulk-small
 
 PYTHON_FOR_BUILD_ONLY=	yes
+PYTHON_VERSIONS_INCOMPATIBLE=	27 37
 .include "../../lang/lua/luaversion.mk" # for LUA_PKGPREFIX
 .include "../../lang/python/pyversion.mk" # for PYPKGPREFIX
 .include "../../mk/bsd.pkg.mk"

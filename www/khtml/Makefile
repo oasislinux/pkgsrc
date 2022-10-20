@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.58 2021/12/08 16:02:46 adam Exp $
+# $NetBSD: Makefile,v 1.69 2022/09/29 01:23:23 markd Exp $
 
 DISTNAME=	khtml-${KF5VER}
-PKGREVISION=	5
 CATEGORIES=	www
 
 HOMEPAGE=	https://community.kde.org/Frameworks
@@ -12,14 +11,20 @@ LICENSE=	gnu-gpl-v3 AND gnu-lgpl-v2.1
 MASTER_SITES=	${MASTER_SITE_KDE:=frameworks/${KF5VER:R}/portingAids/}
 
 USE_TOOLS+=	perl msgfmt
+# Need gnu variant for built-in alloca()
+BUILDLINK_TRANSFORM+=	opt:-std=c99:-std=gnu99
+BUILDLINK_TRANSFORM+=	opt:-std=c++17:-std=gnu++17
+BUILDLINK_TRANSFORM+=	opt:-std=c++1z:-std=gnu++1z
+
+CMAKE_ARGS.SunOS+=	-DHAVE_ALLOCA_H=1
 
 # generation of kded.moc fails when ${PREFIX}/include in the moc include path
 SUBST_CLASSES+=		fix-moc
 SUBST_STAGE.fix-moc=	post-configure
 SUBST_MESSAGE.fix-moc=	Cleaning up MOC includes
-SUBST_FILES.fix-moc=	_KDE_build/src/CMakeFiles/khtmlpart_autogen.dir/AutogenInfo.json 
-SUBST_FILES.fix-moc+=	_KDE_build/src/CMakeFiles/khtmlimagepart_autogen.dir/AutogenInfo.json 
-SUBST_FILES.fix-moc+=	_KDE_build/src/kmultipart/CMakeFiles/kmultipart_autogen.dir/AutogenInfo.json 
+SUBST_FILES.fix-moc=	_KDE_build/src/CMakeFiles/khtmlpart_autogen.dir/AutogenInfo.json
+SUBST_FILES.fix-moc+=	_KDE_build/src/CMakeFiles/khtmlimagepart_autogen.dir/AutogenInfo.json
+SUBST_FILES.fix-moc+=	_KDE_build/src/kmultipart/CMakeFiles/kmultipart_autogen.dir/AutogenInfo.json
 SUBST_NOOP_OK.fix-moc=	yes
 SUBST_SED.fix-moc=	-e 's;"${PREFIX}/include",;;g'
 

@@ -1,6 +1,9 @@
-# $NetBSD: Makefile,v 1.1 2022/01/11 19:19:56 adam Exp $
+# $NetBSD: Makefile,v 1.3 2022/10/06 13:07:19 gdt Exp $
 
-DISTNAME=	poetry-core-1.0.7
+# Do not update to 1.3.x without understanding the impacts of a change
+# that breaks at least some poetry-using programs.  -gdt
+# https://github.com/matrix-org/synapse/issues/14079
+DISTNAME=	poetry-core-1.0.8
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_PYPI:=p/poetry-core/}

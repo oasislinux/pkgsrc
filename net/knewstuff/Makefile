@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.51 2021/12/08 16:02:28 adam Exp $
+# $NetBSD: Makefile,v 1.58 2022/09/29 01:09:06 markd Exp $
 
 DISTNAME=	knewstuff-${KF5VER}
-PKGREVISION=	4
 CATEGORIES=	net
 
 HOMEPAGE=	https://community.kde.org/Frameworks
@@ -14,6 +13,7 @@ USE_TOOLS+=	msgmerge
 
 .include "../../devel/kio/buildlink3.mk"
 .include "../../devel/kpackage/buildlink3.mk"
+.include "../../www/syndication/buildlink3.mk"
 .include "../../x11/kirigami2/buildlink3.mk"
 .include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

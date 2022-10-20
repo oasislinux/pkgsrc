@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.10 2021/08/27 14:11:07 ryoon Exp $
+# $NetBSD: Makefile,v 1.12 2022/10/09 02:37:03 ryoon Exp $
 
 .include "../../cross/mingw-w64-x86_64-crt/Makefile.common"
 

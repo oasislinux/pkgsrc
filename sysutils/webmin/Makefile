@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.58 2021/05/24 19:54:21 wiz Exp $
+# $NetBSD: Makefile,v 1.61 2022/06/30 11:18:52 nia Exp $
 
 PKGREVISION= 2
 .include "version.mk"
@@ -81,6 +81,7 @@ REPLACE_PERL=	\
 	bin/enable-proxy \
 	bin/language-manager \
 	bin/list-config \
+	bin/passwd \
 	bin/set-config \
 	bin/update-devel \
 	bin/webmin

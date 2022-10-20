@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.291 2021/12/16 12:59:43 tnn Exp $
+# $NetBSD: Makefile,v 1.304 2022/09/17 14:05:36 tnn Exp $
 
-DISTNAME=	qemu-6.2.0
+DISTNAME=	qemu-7.1.0
 CATEGORIES=	emulators
 MASTER_SITES=	https://download.qemu.org/
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.qemu-project.org/
+HOMEPAGE=	https://www.qemu.org/
 COMMENT=	CPU emulator using dynamic translation
 LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2.1 AND mit AND modified-bsd
 
@@ -19,17 +19,11 @@ HAS_CONFIGURE=		yes
 # https://github.com/qemu/qemu/commit/56208a0d473c6db263cc333c787ca48b502d72ab
 GCC_REQD+=		7
 
-PYTHON_VERSIONED_DEPENDENCIES=	sphinx:tool
-BUILD_DEPENDS+=		${PYPKGPREFIX}-sphinx-rtd-theme>=0.4.3:../../textproc/py-sphinx-rtd-theme
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
-SUBST_CLASSES+=			sphinx-build
-SUBST_STAGE.sphinx-build=	pre-configure
-SUBST_MESSAGE.sphinx-build=	Fix hardcoded sphinx-build
-SUBST_FILES.sphinx-build+=	configure
-SUBST_FILES.sphinx-build+=	docs/meson.build
-SUBST_FILES.sphinx-build+=	roms/skiboot/doc/Makefile
-SUBST_FILES.sphinx-build+=	roms/u-boot/doc/Makefile
-SUBST_SED.sphinx-build+=	-e 's/sphinx-build/sphinx-build-${PYVERSSUFFIX}/g'
+TOOL_DEPENDS+=		${PYPKGPREFIX}-sphinx-[0-9]*:../../textproc/py-sphinx
+TOOL_DEPENDS+=		${PYPKGPREFIX}-sphinx-rtd-theme>=0.4.3:../../textproc/py-sphinx-rtd-theme
+CONFIGURE_ARGS+=	--sphinx-build=${PREFIX}/bin/sphinx-build-${PYVERSSUFFIX}
 
 .include "options.mk"
 
@@ -109,6 +103,7 @@ UE_ARCHS+=		aarch64 aarch64_be
 UE_ARCHS+=		alpha arm armeb cris
 UE_ARCHS+=		hexagon hppa
 UE_ARCHS+=		i386
+UE_ARCHS+=		loongarch64
 UE_ARCHS+=		m68k microblaze microblazeel
 UE_ARCHS+=		mips mips64 mips64el mipsel mipsn32 mipsn32el
 UE_ARCHS+=		nios2
@@ -136,14 +131,24 @@ PLIST.nbd=			yes
 .elif ${OPSYS} == "Linux"
 USER_EMUL=			${UE_ARCHS}
 PLIST.bridge-helper=		yes
+PLIST.ga=			yes
 PLIST.nbd=			yes
 PLIST.pr-helper=		yes
 .elif !empty(MACHINE_PLATFORM:MSunOS-5.11-*)
+PLIST.ga=			yes
 PLIST.nbd=			yes
 CONFIGURE_ARGS+=		--disable-coroutine-pool
 .endif
 
-PLIST_VARS+=		${UE_ARCHS} bridge-helper keymap nbd pr-helper
+PLIST_VARS+=		plugins
+.if ${OPSYS} != "SunOS"
+PLIST.plugins=		yes
+CONFIGURE_ARGS+=	--enable-plugins
+.else
+CONFIGURE_ARGS+=	--disable-plugins
+.endif
+
+PLIST_VARS+=		${UE_ARCHS} bridge-helper ga keymap nbd pr-helper
 .for pvar in ${USER_EMUL}
 PLIST.${pvar}=		yes
 .endfor
@@ -192,7 +197,7 @@ post-install:
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../lang/python/tool.mk"
-.include "../../lang/python/versioned_dependencies.mk"
+.include "../../net/libslirp/buildlink3.mk"
 .include "../../security/libgcrypt/buildlink3.mk"
 .include "../../www/curl/buildlink3.mk"
 .include "../../x11/pixman/buildlink3.mk"

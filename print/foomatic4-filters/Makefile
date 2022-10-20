@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.39 2021/05/24 19:53:44 wiz Exp $
+# $NetBSD: Makefile,v 1.41 2022/07/25 11:12:27 wiz Exp $
 
 DISTNAME=	foomatic-filters-4.0.17
-PKGREVISION=	15
+PKGREVISION=	16
 CATEGORIES=	print
 MASTER_SITES=	http://www.openprinting.org/download/foomatic/
 
@@ -11,7 +11,7 @@ COMMENT=	Spooler-independent PostScript printing filter
 
 CONFLICTS+=	foomatic-gswrapper-[0-9]*
 
-USE_TOOLS+=	gmake gs:run perl pkg-config
+USE_TOOLS+=	gmake gs:run perl
 
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}

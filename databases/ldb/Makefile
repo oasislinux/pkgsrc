@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.24 2021/11/10 13:32:10 adam Exp $
+# $NetBSD: Makefile,v 1.29 2022/08/02 09:20:43 adam Exp $
 
-# Before updating, make sure net/samba4 supports the newer version.
-DISTNAME=	ldb-2.2.3
+DISTNAME=	ldb-2.5.2
 CATEGORIES=	databases
 MASTER_SITES=	https://www.samba.org/ftp/ldb/
 
@@ -15,11 +14,10 @@ BUILD_DEPENDS+=	docbook-xsl-[0-9]*:../../textproc/docbook-xsl
 
 PYTHON_VERSIONS_INCOMPATIBLE=	27
 
+.include "../../mk/bsd.prefs.mk"
+
 USE_TOOLS+=		gmake pkg-config
 HAS_CONFIGURE=		yes
-CONFIG_SHELL=		${PYTHONBIN}
-CONFIGURE_SCRIPT=	${WRKSRC}/buildtools/bin/waf
-CONFIGURE_ARGS+=	configure
 CONFIGURE_ARGS+=	--mandir=${PREFIX}/${PKGMANDIR}
 CONFIGURE_ARGS+=	--abi-check-disable
 CONFIGURE_ARGS+=	--disable-symbol-versions
@@ -36,8 +34,6 @@ USE_GCC_RUNTIME=	yes
 PY_PATCHPLIST=		yes
 REPLACE_PYTHON+=	buildtools/bin/waf
 MAKE_FLAGS+=		WAF_BINARY=${PYTHONBIN}\ ${WRKSRC}/buildtools/bin/waf
-
-.include "../../mk/bsd.prefs.mk"
 
 .if ${SHLIB_TYPE} == "dylib"
 PLIST_SUBST+=	SOEXT=dylib
@@ -68,6 +64,7 @@ CONFIGURE_ARGS+=	--without-ldb-lmdb
 .include "../../devel/cmocka/buildlink3.mk"
 .include "../../devel/popt/buildlink3.mk"
 .include "../../devel/talloc/buildlink3.mk"
+BUILDLINK_API_DEPENDS.tevent+=	tevent>=0.11.0
 .include "../../devel/tevent/buildlink3.mk"
 .include "../../lang/python/application.mk"
 .include "../../lang/python/extension.mk"

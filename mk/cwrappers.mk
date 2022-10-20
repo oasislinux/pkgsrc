@@ -1,11 +1,11 @@
-# $NetBSD: cwrappers.mk,v 1.32 2022/01/18 01:41:09 pho Exp $
+# $NetBSD: cwrappers.mk,v 1.36 2022/04/10 19:54:02 riastradh Exp $
 #
 # This Makefile fragment implements integration of pkgtools/cwrappers.
 
 .include "../../mk/wrapper/wrapper-defs.mk"
 .include "../../mk/buildlink3/bsd.buildlink3.mk"
 
-BUILD_DEPENDS+=		cwrappers>=20150314:../../pkgtools/cwrappers
+TOOL_DEPENDS+=		cwrappers>=20150314:../../pkgtools/cwrappers
 
 # XXX This should be PREFIX, but USE_CROSSBASE overrides it.
 CWRAPPERS_SRC_DIR=	${LOCALBASE}/libexec/cwrappers
@@ -36,6 +36,12 @@ CWRAPPERS_ALIASES.imake=	imake
 CWRAPPERS_ALIASES.ld=		ld
 CWRAPPERS_ALIASES.libtool=	libtool
 CWRAPPERS_ALIASES.shlibtool=	shlibtool
+
+.if !empty(TOOLS_USE_CROSS_COMPILE:M[yY][eE][sS])
+CWRAPPERS_ALIASES.cc+=		${CC:T}
+CWRAPPERS_ALIASES.cxx+=		${CXX:T}
+CWRAPPERS_ALIASES.ld+=		${LD:T}
+.endif
 
 CWRAPPERS_WRAPPEE.as=		${AS:Ufalse}
 CWRAPPERS_WRAPPEE.cxx=		${PKG_CXX:Ufalse}
@@ -90,7 +96,7 @@ generate-cwrappers:
 .  endfor
 . if ${_PKGSRC_MKPIE} == "yes"
 .  if ${PKGSRC_OVERRIDE_MKPIE:tl} == "no"
-.    for arg in ${_MKPIE_LDFLAGS.gcc}
+.    for arg in ${_MKPIE_LDFLAGS}
 	${RUN}echo append_executable=${arg} >> ${CWRAPPERS_CONFIG_DIR}/${CWRAPPERS_CONFIG.${wrappee}}
 .    endfor
 .  endif

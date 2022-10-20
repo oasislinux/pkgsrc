@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.221 2022/01/21 11:25:58 leot Exp $
+# $NetBSD: Makefile,v 1.239 2022/10/08 11:06:35 nia Exp $
 
-DISTNAME=	webkitgtk-2.34.4
+DISTNAME=	webkitgtk-2.36.8
 PKGNAME=	${DISTNAME:S/webkitgtk/webkit-gtk/}
 CATEGORIES=	www
 MASTER_SITES=	https://www.webkitgtk.org/releases/
@@ -19,29 +19,20 @@ TOOL_DEPENDS+=	${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 
 USE_CMAKE=	yes
 USE_LANGUAGES=	c c++17
-USE_TOOLS+=	automake bash bison flex gmake perl pkg-config msgfmt
+USE_TOOLS+=	automake bash bison flex gdbus-codegen gmake perl pkg-config msgfmt
 
 # Enabling -gdwarf-2 hits GNU ar limits on file size.
 CTF_SUPPORTED=	no
 
 # GCC >= 8 is required, it no longer builds with lower versions.
 GCC_REQD+=		8
-USE_GCC_RUNTIME=	yes
 
 .include "../../mk/bsd.prefs.mk"
 
-# This package will link against libstdc++.so from the pkgsrc GCC when the
-# base OS GCC doesn't meet the minimum requirement. Thus we do this so the
-# appropriate gcc-libs package will be captured as a dependency, otherwise
-# binary packages will be broken. See also PR pkg/56604.
 .if ${OPSYS} == "NetBSD" && ${OPSYS_VERSION} < 099915
 USE_PKGSRC_GCC=		yes
 USE_PKGSRC_GCC_RUNTIME=	yes
 .endif
-
-# Using ld.gold subverts Pkgsrc wrappers, and this package also crashes buggy
-# versions of ld.gold.
-CMAKE_ARGS+=	-DUSE_LD_GOLD=OFF
 
 PKGCONFIG_OVERRIDE+=	Source/JavaScriptCore/javascriptcoregtk.pc.in
 PKGCONFIG_OVERRIDE+=	Source/WebKit/gtk/webkit2gtk-web-extension.pc.in
@@ -53,12 +44,17 @@ CMAKE_ARGS+=		-DENABLE_X11_TARGET=ON
 CMAKE_ARGS+=		-DENABLE_MINIBROWSER=ON
 CMAKE_ARGS+=		-DENABLE_GAMEPAD=OFF
 CMAKE_ARGS+=		-DENABLE_GEOLOCATION=OFF
+CMAKE_ARGS+=		-DENABLE_INTROSPECTION=ON
+CMAKE_ARGS+=		-DENABLE_JOURNALD_LOG=OFF
 CMAKE_ARGS+=		-DENABLE_BUBBLEWRAP_SANDBOX=OFF
 CMAKE_ARGS+=		-DUSE_GSTREAMER_GL=OFF
 CMAKE_ARGS+=		-DUSE_LIBHYPHEN=OFF
 CMAKE_ARGS+=		-DUSE_OPENJPEG=OFF
 CMAKE_ARGS+=		-DUSE_SOUP2=ON
-CMAKE_ARGS+=		-DUSE_SYSTEMD=OFF
+
+.if !empty(MACHINE_PLATFORM:MNetBSD-*-aarch64*)
+CMAKE_ARGS+=		-DAVOID_INT128=ON
+.endif
 
 REPLACE_PERL+=	Source/JavaScriptCore/Scripts/*.pl
 REPLACE_PERL+=	Source/JavaScriptCore/create_hash_table
@@ -110,7 +106,7 @@ REPLACE_RUBY+=		Source/WebKit/Scripts/*.rb
 
 SUBST_CLASSES+=		python
 SUBST_FILES.python+=	Source/WebInspectorUI/Scripts/copy-user-interface-resources.pl
-SUBST_SED.python+=	-e 's,\(.\)python.;,\1${PYTHONBIN}\1;,'
+SUBST_SED.python+=	-e 's,"python3","${PYTHONBIN}",'
 SUBST_STAGE.python=	pre-configure
 SUBST_MESSAGE.python=	Fixing path to python binary.
 
@@ -137,12 +133,20 @@ CFLAGS+=	-DRELEASE_WITHOUT_OPTIMIZATIONS
 NOT_PAX_MPROTECT_SAFE+=	libexec/webkit2gtk-4.0/WebKitWebProcess
 NOT_PAX_MPROTECT_SAFE+=	libexec/webkit2gtk-4.0/jsc
 
+CHECK_PORTABILITY_SKIP+=	Source/JavaScriptCore/Scripts/create-symlink-to-altroot.sh
+CHECK_PORTABILITY_SKIP+=	Source/WebCore/Scripts/create-symlink-to-altroot.sh
+CHECK_PORTABILITY_SKIP+=	Source/WebKit/Scripts/create-symlink-to-altroot.sh
+CHECK_PORTABILITY_SKIP+=	Source/WebKit/Scripts/generate-feature-flags-plist.sh
+
 .include "options.mk"
 
 BUILDLINK_API_DEPENDS.glib2+= glib2>=2.32.1
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../databases/sqlite3/buildlink3.mk"
+BUILDLINK_API_DEPENDS.gobject-introspection+=	gobject-introspection>=0.9.5
+BUILDLINK_DEPMETHOD.gobject-introspection+=	build
+.include "../../devel/gobject-introspection/buildlink3.mk"
 .include "../../devel/gperf/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
 .include "../../fonts/harfbuzz-icu/buildlink3.mk"

@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.7 2022/02/04 13:47:29 adam Exp $
+# $NetBSD: Makefile,v 1.10 2022/07/01 18:06:01 adam Exp $
 
-DISTNAME=	jupyter_console-6.4.0
+DISTNAME=	jupyter_console-6.4.4
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/_/-/}
-PKGREVISION=	2
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_PYPI:=j/jupyter_console/}
 
@@ -13,7 +12,7 @@ LICENSE=	modified-bsd
 
 DEPENDS+=	${PYPKGPREFIX}-ipython>=6.5:../../devel/py-ipython
 DEPENDS+=	${PYPKGPREFIX}-ipykernel>=5.1:../../devel/py-ipykernel
-DEPENDS+=	${PYPKGPREFIX}-jupyter_client>=6.1.7:../../devel/py-jupyter_client
+DEPENDS+=	${PYPKGPREFIX}-jupyter_client>=7.0.0:../../devel/py-jupyter_client
 DEPENDS+=	${PYPKGPREFIX}-prompt_toolkit>=3.0.2:../../devel/py-prompt_toolkit
 DEPENDS+=	${PYPKGPREFIX}-pygments>=2.3.1:../../textproc/py-pygments
 

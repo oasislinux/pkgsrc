@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.101 2022/01/18 17:42:26 gdt Exp $
+# $NetBSD: Makefile,v 1.106 2022/09/11 12:51:50 wiz Exp $
 
 DISTNAME=	merkaartor-0.18.4
-PKGREVISION=	13
+PKGREVISION=	18
 CATEGORIES=	geography
 MASTER_SITES=	${MASTER_SITE_GITHUB:=openstreetmap/}
 GITHUB_PROJECT=	merkaartor

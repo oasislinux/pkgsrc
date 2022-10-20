@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.14 2022/01/21 07:26:31 pin Exp $
+# $NetBSD: Makefile,v 1.18 2022/06/28 11:37:55 wiz Exp $
 
-DISTNAME=	lxqt-globalkeys-1.0.1
+DISTNAME=	lxqt-globalkeys-1.1.0
+PKGREVISION=	2
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_GITHUB:=lxqt/}
 GITHUB_RELEASE=	${PKGVERSION_NOREV}
@@ -29,7 +30,7 @@ CONF_FILES+=	${AUTOSTART_CONF}/lxqt-globalkeyshortcuts.desktop \
 pre-configure:
 	${MKDIR} -p ${WRKSRC}/build
 
-TOOL_DEPENDS+=	lxqt-build-tools>=0.10.0:../../devel/lxqt-build-tools
+TOOL_DEPENDS+=	lxqt-build-tools>=0.11.0:../../devel/lxqt-build-tools
 TOOL_DEPENDS+=	qt5-qttools-[0-9]*:../../x11/qt5-qttools
 
 .include "../../x11/qt5-qtbase/buildlink3.mk"

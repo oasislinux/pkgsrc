@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.53 2021/12/08 16:02:24 adam Exp $
+# $NetBSD: Makefile,v 1.61 2022/07/18 15:40:56 wiz Exp $
 
-DISTNAME=	gstreamer-1.18.5
+DISTNAME=	gstreamer-1.20.3
 PKGNAME=	${DISTNAME:S/gstreamer/gstreamer1/}
-PKGREVISION=	1
 CATEGORIES=	multimedia
 MASTER_SITES=	https://gstreamer.freedesktop.org/src/gstreamer/
 EXTRACT_SUFX=	.tar.xz
@@ -16,9 +15,9 @@ USE_TOOLS+=		bison flex perl pkg-config xgettext
 TEST_TARGET=		check
 FLEX_REQD=		2.5.31
 
-LDFLAGS.SunOS+=		-lsocket -lnsl -lrt
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
-.include "options.mk"
+LDFLAGS.SunOS+=		-lsocket -lnsl -lrt
 
 PKGCONFIG_OVERRIDE+=	pkgconfig/gstreamer-controller.pc.in
 PKGCONFIG_OVERRIDE+=	pkgconfig/gstreamer-check.pc.in
@@ -48,8 +47,12 @@ MAKE_ENV+=		LD_LIBRARY_PATH=${WRKSRC}/output/gst:${WRKSRC}/output/libs/gst/check
 
 .include "../../lang/python/application.mk"
 .include "../../devel/meson/build.mk"
+# test framework, only needed at test time
+BUILDLINK_DEPMETHOD.check=	build
 .include "../../devel/check/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
+BUILDLINK_DEPMETHOD.gobject-introspection=	build
+.include "../../devel/gobject-introspection/buildlink3.mk"
 .include "../../devel/gmp/buildlink3.mk"
 .include "../../math/gsl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

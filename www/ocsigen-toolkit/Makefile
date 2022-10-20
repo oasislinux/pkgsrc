@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.8 2021/03/08 08:13:09 jaapb Exp $
+# $NetBSD: Makefile,v 1.10 2022/06/03 12:51:32 jaapb Exp $
 
 GITHUB_PROJECT=	ocsigen-toolkit
-DISTNAME=	${GITHUB_PROJECT}-2.8.0
-PKGREVISION=	1
+DISTNAME=	${GITHUB_PROJECT}-3.2.0
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_GITHUB:=ocsigen/}
 
@@ -16,7 +15,7 @@ USE_TOOLS=	gmake
 
 OCAML_USE_FINDLIB=	yes
 
-.include "../../mk/ocaml.mk"
+.include "../../lang/ocaml/ocaml.mk"
 
 .if ${OCAML_USE_OPT_COMPILER} == "yes"
 MAKE_ENV+=	NATIVE=yes
@@ -24,7 +23,7 @@ MAKE_ENV+=	NATIVE=yes
 MAKE_ENV+=	NATIVE=no
 .endif
 
-DEPENDS+=	eliom>=6.7:../../www/eliom
+DEPENDS+=	eliom>=6.12.1:../../www/eliom
 
 post-install:
 	${RUN} cd ${WRKSRC} && opaline -install-cmd "${INSTALL_DATA}" \

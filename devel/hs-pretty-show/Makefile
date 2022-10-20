@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.6 2022/01/18 02:48:11 pho Exp $
+# $NetBSD: Makefile,v 1.8 2022/02/26 03:58:04 pho Exp $
 
 DISTNAME=	pretty-show-1.10
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	devel
 
 MAINTAINER=	pho@cielonegro.org

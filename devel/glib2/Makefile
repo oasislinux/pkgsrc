@@ -1,6 +1,5 @@
-# $NetBSD: Makefile,v 1.287 2021/12/08 16:01:52 adam Exp $
+# $NetBSD: Makefile,v 1.290 2022/08/09 12:08:28 jperkin Exp $
 
-PKGREVISION= 1
 .include "Makefile.common"
 
 CATEGORIES=	devel gnome
@@ -21,8 +20,22 @@ MAKE_ENV+=	LD_LIBRARY_PATH=${WRKSRC}/output/gio:${WRKSRC}/output/glib:${WRKSRC}/
 MAKE_ENV+=	DYLD_LIBRARY_PATH=${WRKSRC}/output/gio:${WRKSRC}/output/glib:${WRKSRC}/output/gobject:${WRKSRC}/output/gmodule
 
 CPPFLAGS.SunOS+=	-D_XOPEN_SOURCE=600 -D__EXTENSIONS__ -D__stub_epoll_create
-LDFLAGS.SunOS+=		-liconv -lintl -lnsl -lsocket
+LDFLAGS.SunOS+=		-lnsl -lsocket
 LDFLAGS.FreeBSD+=	-liconv
+
+.include "../../mk/bsd.prefs.mk"
+.if !empty(USE_CROSS_COMPILE:M[yY][eE][sS])
+MESON_CROSS_ARCH_VARS+=			growing_stack
+MESON_CROSS_OPSYS_VARS+=		have_c99_snprintf
+MESON_CROSS_OPSYS_VARS+=		have_c99_vsnprintf
+MESON_CROSS_OPSYS_VARS+=		have_strlcpy
+MESON_CROSS_OPSYS_VARS+=		have_unix98_printf
+MESON_CROSS.NetBSD.have_c99_snprintf=	true
+MESON_CROSS.NetBSD.have_c99_vsnprintf=	true
+MESON_CROSS.NetBSD.have_strlcpy=	true
+MESON_CROSS.NetBSD.have_unix98_printf=	true
+MESON_CROSS.hppa.growing_stack=		true
+.endif
 
 REPLACE_PYTHON+=	gio/gio-querymodules-wrapper.py
 REPLACE_PYTHON+=	gio/tests/gengiotypefuncs.py

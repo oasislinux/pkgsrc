@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.21 2021/12/02 18:15:25 nia Exp $
+# $NetBSD: Makefile,v 1.23 2022/08/14 19:25:13 tnn Exp $
 
-DISTNAME=	xf86-video-amdgpu-19.1.0
+DISTNAME=	xf86-video-amdgpu-22.0.0
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_XORG:=driver/}
-EXTRACT_SUFX=	.tar.bz2
+EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	joerg@NetBSD.org
 HOMEPAGE=	https://xorg.freedesktop.org/
@@ -18,7 +18,7 @@ RELRO_SUPPORTED=	partial
 
 CONFIGURE_ENV.SunOS+=	DRIVER_MAN_SUFFIX=4
 
-X11_BUILTIN_NAME=	xf86-video-amdgpu
+X11_DRV_NAME=	amdgpu
 .include "../../meta-pkgs/modular-xorg/avoid-duplicate.mk"
 .include "../../x11/libdrm/buildlink3.mk"
 .include "../../x11/modular-xorg-server/buildlink3.mk"

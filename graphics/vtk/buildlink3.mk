@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.4 2021/09/29 19:00:08 adam Exp $
+# $NetBSD: buildlink3.mk,v 1.8 2022/08/11 05:08:47 gutteridge Exp $
 
 BUILDLINK_TREE+=	vtk
 
@@ -6,7 +6,7 @@ BUILDLINK_TREE+=	vtk
 VTK_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.vtk+=	vtk>=9.0.1
-BUILDLINK_ABI_DEPENDS.vtk?=	vtk>=9.0.3nb1
+BUILDLINK_ABI_DEPENDS.vtk+=	vtk>=9.0.3nb6
 BUILDLINK_PKGSRCDIR.vtk?=	../../graphics/vtk
 
 .include "../../archivers/lz4/buildlink3.mk"
@@ -33,6 +33,9 @@ pkgbase := vtk
 .if ${PKG_BUILD_OPTIONS.vtk:Mqt}
 .  include "../../x11/qt5-qtbase/buildlink3.mk"
 .endif
+
+# Referenced in the CMake stuff and needs to be linked with it.
+BUILDLINK_FILES.vtk+=	bin/vtkProbeOpenGLVersion-9.0
 
 .endif	# VTK_BUILDLINK3_MK
 

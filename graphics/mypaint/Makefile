@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.54 2022/01/28 12:14:58 wiz Exp $
+# $NetBSD: Makefile,v 1.56 2022/08/11 05:08:45 gutteridge Exp $
 
 DISTNAME=	mypaint-2.0.0
-PKGREVISION=	9
+PKGREVISION=	11
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_GITHUB:=mypaint/}
 EXTRACT_SUFX=	.tar.xz

@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.27 2021/12/03 12:50:14 nia Exp $
+# $NetBSD: Makefile,v 1.29 2022/10/09 07:41:36 wiz Exp $
 
-DISTNAME=	xf86-input-vmmouse-13.1.0
-PKGREVISION=	2
+DISTNAME=	xf86-input-vmmouse-13.2.0
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_XORG:=driver/}
-EXTRACT_SUFX=	.tar.bz2
+EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	joerg@NetBSD.org
 HOMEPAGE=	https://xorg.freedesktop.org/
@@ -25,7 +24,7 @@ CONFIGURE_ENV.SunOS+=	DRIVER_MAN_SUFFIX=4
 # Currently libudev is unsupported in pkgsrc
 CONFIGURE_ARGS+=	--without-libudev
 
-X11_BUILTIN_NAME=	xf86-input-vmmouse
+X11_DRV_NAME=	vmmouse
 .include "../../meta-pkgs/modular-xorg/avoid-duplicate.mk"
 .include "../../x11/xorgproto/buildlink3.mk"
 .include "../../x11/modular-xorg-server/buildlink3.mk"

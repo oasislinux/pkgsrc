@@ -1,18 +1,19 @@
-# $NetBSD: Makefile,v 1.71 2022/01/07 23:06:19 tnn Exp $
+# $NetBSD: Makefile,v 1.76 2022/07/14 13:48:57 tnn Exp $
 
-DISTNAME=		synergy-core-1.14.2.36
+DISTNAME=		synergy-core-1.14.4.37
+PKGREVISION=		1
 PKGNAME=		${DISTNAME:S/-core//}
 CATEGORIES=		net x11
 MASTER_SITES=		${MASTER_SITE_GITHUB:=symless/}
 GITHUB_PROJECT=		synergy-core
-GITHUB_TAG=		${PKGVERSION_NOREV}-stable
+GITHUB_TAG=		v${PKGVERSION_NOREV}-stable
 DISTFILES=		${DEFAULT_DISTFILES}		\
 			  googletest-1.10.0.tar.gz	\
-			  pugixml-1.11.tar.gz
+			  pugixml-1.12.1.tar.gz
 SITES.googletest-1.10.0.tar.gz=	\
 	-${MASTER_SITE_GITHUB:=google/}googletest/archive/release-1.10.0.tar.gz
-SITES.pugixml-1.11.tar.gz=	\
-	-${MASTER_SITE_GITHUB:=zeux/}pugixml/releases/download/v1.11/pugixml-1.11.tar.gz
+SITES.pugixml-1.12.1.tar.gz=	\
+	-${MASTER_SITE_GITHUB:=zeux/}pugixml/archive/v1.12.1.tar.gz
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://synergy-project.org/
@@ -21,10 +22,11 @@ LICENSE=		gnu-gpl-v2
 
 USE_LANGUAGES=		c c++11
 USE_CMAKE=		yes
+USE_TOOLS+=		pkg-config
 CMAKE_ARGS+=		-DSYNERGY_BUILD_LEGACY_GUI=OFF
 CMAKE_ARGS+=		-DSYNERGY_BUILD_LEGACY_INSTALLER=OFF
 
-CONFIGURE_ENV+=		GIT_COMMIT=c6918b74
+CONFIGURE_ENV+=		GIT_COMMIT=218fa800
 
 EXAMPLES=	MacReadme.txt org.synergy-foss.org.synergyc.plist \
 		org.synergy-foss.org.synergys.plist synergy.conf.example \
@@ -35,7 +37,9 @@ SUBST_STAGE.fix-paths=		pre-configure
 SUBST_MESSAGE.fix-paths=	Fixing absolute paths.
 SUBST_FILES.fix-paths=		src/lib/arch/unix/ArchFileUnix.cpp
 SUBST_FILES.fix-paths+=		src/lib/arch/unix/ArchDaemonUnix.h
+SUBST_FILES.fix-paths+=		src/lib/synergy/unix/AppUtilUnix.cpp
 SUBST_SED.fix-paths=		-e 's,"/etc,"${PKG_SYSCONFDIR},g'
+SUBST_SED.fix-paths+=		-e 's,"/usr/share/X11,"${X11BASE}/share/X11,g'
 
 post-extract:
 	${RM} -rf ${WRKSRC}/ext/googletest

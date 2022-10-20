@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.61 2021/12/08 16:06:12 adam Exp $
+# $NetBSD: Makefile,v 1.65 2022/08/22 09:11:41 wiz Exp $
 
-DISTNAME=		auctex-11.92
+DISTNAME=		auctex-13.1
 PKGNAME=		${EMACS_PKGNAME_PREFIX}${DISTNAME}
-PKGREVISION=		13
 CATEGORIES=		print
 MASTER_SITES=		${MASTER_SITE_GNU:=auctex/}
 
@@ -12,7 +11,7 @@ COMMENT=		Enhanced LaTeX mode for Emacs
 LICENSE=		gnu-gpl-v3
 
 # Emacsen pre-22 lack graphics support
-EMACS_VERSIONS_ACCEPTED=	${_EMACS_VERSIONS_ALL:Nemacs2[01]*}
+EMACS_VERSIONS_ACCEPTED=	${_EMACS_VERSIONS_ALL:Nemacs2[01]*:Nxemacs*}
 
 BUILD_DEPENDS+=		tex-texlive-scripts-extra-[0-9]*:../../print/tex-texlive-scripts-extra
 DEPENDS+=		texlive-collection-latex>=2014:../../meta-pkgs/texlive-collection-latex

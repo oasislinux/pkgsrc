@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.30 2021/05/24 19:50:02 wiz Exp $
+# $NetBSD: Makefile,v 1.33 2022/06/30 11:18:16 nia Exp $
 #
 
 DISTNAME=	netbeans-8.2-201609300101
 PKGNAME=	netbeans-ide-8.2
-PKGREVISION=	7
+PKGREVISION=	9
 CATEGORIES=	devel editors
 MASTER_SITES=	http://download.netbeans.org/netbeans/${PKGVERSION_NOREV}/final/zip/
 EXTRACT_SUFX=	.zip
@@ -27,6 +27,8 @@ REPLACE_PYTHON=	extide/ant/bin/runant.py
 SHAREDIR=	${PREFIX}/share/${PKGBASE}
 
 CHECK_SHLIBS_SUPPORTED=	no
+CHECK_PIE_SUPPORTED=	no
+CHECK_RELRO_SUPPORTED=	no
 CHECK_SSP_SUPPORTED=	no
 AUTO_MKDIRS=		yes
 

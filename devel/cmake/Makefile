@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.190 2022/01/25 21:18:08 adam Exp $
+# $NetBSD: Makefile,v 1.199 2022/10/09 12:06:05 rhialto Exp $
 
 PKGREVISION=		1
 .include "Makefile.common"
 
+PKGREVISION=	1
 COMMENT=	Cross platform make
 
 USE_TOOLS+=		gmake
@@ -25,6 +26,17 @@ CONFIGURE_ARGS+=	--no-system-jsoncpp
 
 LDFLAGS.Darwin+=	-framework CoreServices # for LSOpenCFURLRef()
 LDFLAGS.SunOS+=		-lsocket -lnsl
+
+.include "../../mk/bsd.prefs.mk"
+
+.if ${INSTALL_UNSTRIPPED:Uno:tl} != yes
+INSTALL_TARGET=		install/strip
+.endif
+
+# Enforce arm64 to support building inside x86_64 chroots.
+.if !empty(MACHINE_PLATFORM:MDarwin-*-aarch64)
+CONFIGURE_ENV+=		CMAKE_OSX_ARCHITECTURES=arm64
+.endif
 
 PLIST_SUBST+=		CMAKE_API=${CMAKE_API}
 

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.2 2021/12/08 16:04:55 adam Exp $
+# $NetBSD: Makefile,v 1.5 2022/08/11 05:08:41 gutteridge Exp $
 
 DISTNAME=	gnome-screenshot-3.38.0
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/${PKGBASE}/${PKGVERSION_NOREV:R}/}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	graphics gnome
 EXTRACT_SUFX=	.tar.xz
 
@@ -13,16 +13,10 @@ LICENSE=	gnu-gpl-v2
 
 USE_TOOLS+=	pkg-config msgfmt xgettext
 
-.include "../../mk/bsd.prefs.mk"
-
-# msgfmt: unknown option -- desktop
-.if ${OPSYS} == "NetBSD"
-TOOLS_PLATFORM.msgfmt=
-.endif
-
 PYTHON_FOR_BUILD_ONLY=	tool
 
 .include "../../devel/meson/build.mk"
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
 .include "../../devel/glib2/schemas.mk"
 .include "../../audio/libcanberra/buildlink3.mk"
 .include "../../devel/libhandy1/buildlink3.mk"

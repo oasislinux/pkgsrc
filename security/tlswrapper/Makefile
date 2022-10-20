@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.3 2022/01/15 19:04:24 schmonz Exp $
+# $NetBSD: Makefile,v 1.6 2022/09/11 19:33:05 schmonz Exp $
 
-GITHUB_PROJECT=		tlswrapper
-GITHUB_TAG=		20220114
 DISTNAME=		${GITHUB_PROJECT}
 PKGNAME=		${GITHUB_PROJECT}-${GITHUB_TAG}
 CATEGORIES=		security net
 MASTER_SITES=		${MASTER_SITE_GITHUB:=janmojzis/}
+GITHUB_PROJECT=		tlswrapper
+GITHUB_TAG=		20220901
 
 MAINTAINER=		schmonz@NetBSD.org
 HOMEPAGE=		https://github.com/janmojzis/tlswrapper/

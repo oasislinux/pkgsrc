@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.74 2022/01/13 16:12:52 wiz Exp $
+# $NetBSD: Makefile,v 1.80 2022/09/20 17:13:24 nikita Exp $
 
-DISTNAME=		neomutt-20211029
+DISTNAME=		neomutt-20220429
 PKGREVISION=		2
 CATEGORIES=		mail
 MASTER_SITES=		${MASTER_SITE_GITHUB:=neomutt/}
 GITHUB_TAG=		${PKGVERSION_NOREV}
 
-MAINTAINER=		wiz@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		https://www.neomutt.org/
 COMMENT=		Fork of mutt with integrated community patches
 LICENSE=		gnu-gpl-v2 OR gnu-gpl-v3 # or newer

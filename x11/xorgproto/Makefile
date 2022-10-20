@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.20 2021/12/22 00:39:19 nia Exp $
+# $NetBSD: Makefile,v 1.22 2022/08/11 06:09:17 wiz Exp $
 
-DISTNAME=		xorgproto-2021.5
-PKGREVISION=		1
+DISTNAME=		xorgproto-2022.2
 CATEGORIES=		x11 devel
 MASTER_SITES=		${MASTER_SITE_XORG:=proto/}
-EXTRACT_SUFX=		.tar.bz2
+EXTRACT_SUFX=		.tar.xz
 
 MAINTAINER=		joerg@NetBSD.org
 HOMEPAGE=		https://xorg.freedesktop.org/

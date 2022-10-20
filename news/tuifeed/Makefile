@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.2 2021/11/18 13:08:22 pin Exp $
+# $NetBSD: Makefile,v 1.6 2022/08/30 11:20:43 pin Exp $
 
-DISTNAME=	tuifeed-0.1.1
+DISTNAME=	tuifeed-0.3.2
 CATEGORIES=	news
 MASTER_SITES=	${MASTER_SITE_GITHUB:=veeso/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
@@ -15,7 +15,8 @@ LICENSE=	mit
 INSTALLATION_DIRS=	bin
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/target/release/tuifeed ${DESTDIR}${PREFIX}/bin
+	${INSTALL_PROGRAM} ${WRKSRC}/target/release/tuifeed \
+		${DESTDIR}${PREFIX}/bin
 
 .include "../../lang/rust/cargo.mk"
 .include "../../mk/bsd.pkg.mk"

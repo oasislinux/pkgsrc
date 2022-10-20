@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.12 2021/12/01 13:01:14 nia Exp $
+# $NetBSD: Makefile,v 1.15 2022/08/30 18:23:39 wiz Exp $
 
-DISTNAME=		libXfont2-2.0.5
+DISTNAME=		libXfont2-2.0.6
 CATEGORIES=		x11 devel fonts
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
-EXTRACT_SUFX=		.tar.bz2
+EXTRACT_SUFX=		.tar.xz
 
 MAINTAINER=		joerg@NetBSD.org
 HOMEPAGE=		https://xorg.freedesktop.org/
@@ -18,9 +18,8 @@ USE_FEATURES+=		strnlen
 PKGCONFIG_OVERRIDE+=	xfont2.pc.in
 
 CONFIGURE_ARGS+=	--disable-devel-docs
-CPPFLAGS.NetBSD+=	-D_OPENBSD_SOURCE
 
-X11_BUILTIN_NAME?=		libXfont2
+X11_LIB_NAME?=		libXfont2
 .include "../../meta-pkgs/modular-xorg/avoid-duplicate.mk"
 .include "../../meta-pkgs/modular-xorg/hacks.mk"
 .include "../../devel/zlib/buildlink3.mk"

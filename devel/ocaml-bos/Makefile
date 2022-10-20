@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.3 2021/03/08 08:12:49 jaapb Exp $
+# $NetBSD: Makefile,v 1.5 2022/06/03 08:00:09 wiz Exp $
 
-DISTNAME=	bos-0.2.0
+DISTNAME=	bos-0.2.1
 PKGNAME=	ocaml-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	http://erratique.ch/software/bos/releases/
 EXTRACT_SUFX=	.tbz
@@ -18,7 +17,7 @@ INSTALLATION_DIRS+=	${OCAML_SITELIBDIR}/bos
 OCAML_USE_TOPKG=	yes
 OCAML_USE_OPAM=		yes
 
-.include "../../mk/ocaml.mk"
+.include "../../lang/ocaml/ocaml.mk"
 .include "../../devel/ocamlbuild/buildlink3.mk"
 .include "../../devel/ocaml-astring/buildlink3.mk"
 .include "../../devel/ocaml-fmt/buildlink3.mk"

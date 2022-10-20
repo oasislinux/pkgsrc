@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.47 2021/06/10 02:01:33 msaitoh Exp $
+# $NetBSD: Makefile,v 1.53 2022/08/10 01:23:06 msaitoh Exp $
 
-VERSION=	20210608
+VERSION=	20220809
 DISTNAME=	microcode-${VERSION}
 PKGNAME=	intel-microcode-netbsd-${VERSION}
 CATEGORIES=	sysutils
@@ -13,13 +13,16 @@ HOMEPAGE=	https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/
 COMMENT=	Firmware updates for Intel x86 processors
 LICENSE=	intel-microcode-license
 
-ONLY_FOR_PLATFORM+=	NetBSD-6.99.*-i386 \
-			NetBSD-6.99.*-x86_64 \
-			NetBSD-[7-9].*-i386 \
-			NetBSD-[7-9].*-x86_64
+ONLY_FOR_PLATFORM+=	NetBSD-*-i386 NetBSD-*-x86_64
 
 WRKSRC=		${WRKDIR}
 USE_LANGUAGES=	c
+
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "NetBSD" && ${OPSYS_VERSION} < 069900
+PKG_SKIP_REASON+=	"Loading microcode not supported"
+.endif
 
 FWDIR=	libdata/firmware/cpu_x86_intel1
 INSTALLATION_DIRS+= ${FWDIR}

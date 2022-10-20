@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.81 2021/12/08 16:06:32 adam Exp $
+# $NetBSD: Makefile,v 1.90 2022/09/29 19:32:48 markd Exp $
 
 DISTNAME=	kfilemetadata-${KF5VER}
 PKGNAME=	${DISTNAME:S/-/5-/}
-PKGREVISION=	11
 CATEGORIES=	sysutils
 
 HOMEPAGE=	https://community.kde.org/Frameworks
@@ -15,15 +14,21 @@ USE_TOOLS+=	msgmerge pkg-config
 
 DEPENDS+=	catdoc-[0-9]*:../../textproc/catdoc
 
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} != "SunOS"
+.include "../../sysutils/attr/buildlink3.mk"
+.endif
+
 .include "../../lang/python/tool.mk"
 .include "../../archivers/karchive/buildlink3.mk"
 .include "../../audio/taglib/buildlink3.mk"
 .include "../../devel/kcoreaddons/buildlink3.mk"
 .include "../../devel/ki18n/buildlink3.mk"
 .include "../../graphics/exiv2/buildlink3.mk"
+.include "../../graphics/kdegraphics-mobipocket/buildlink3.mk"
 .include "../../multimedia/ffmpeg4/buildlink3.mk"
 .include "../../print/poppler-qt5/buildlink3.mk"
-.include "../../sysutils/attr/buildlink3.mk"
 .include "../../textproc/ebook-tools/buildlink3.mk"
 .include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

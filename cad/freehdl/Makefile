@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.13 2021/05/24 19:49:12 wiz Exp $
-#
+# $NetBSD: Makefile,v 1.15 2022/07/25 11:12:20 wiz Exp $
 
 DISTNAME=	freehdl-0.0.7
-PKGREVISION=	9
+PKGREVISION=	10
 CATEGORIES=	cad
 MASTER_SITES=	http://seul.org/~enaroska/
 
@@ -13,7 +12,7 @@ COMMENT=	VHDL simulator
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
 USE_LANGUAGES=	c c++
-USE_TOOLS+=	gmake perl:run pkg-config
+USE_TOOLS+=	gmake perl:run
 INFO_FILES=	yes
 
 .include "../../mk/bsd.pkg.mk"

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.41 2021/12/08 16:01:50 adam Exp $
+# $NetBSD: Makefile,v 1.43 2022/04/18 19:09:43 adam Exp $
 
 DISTNAME=	Renaissance-0.9.0
-PKGREVISION=	22
+PKGREVISION=	23
 CATEGORIES=	devel gnustep
 MASTER_SITES=	http://www.gnustep.it/Renaissance/Download/
 
@@ -16,6 +16,9 @@ USE_LANGUAGES=	objc
 NO_CONFIGURE=	yes
 MAKE_JOBS_SAFE=	no
 MAKE_FILE=	GNUmakefile
+
+# "ld: -r and -pie may not be used together"
+MKPIE_SUPPORTED=	no
 
 .include "../../x11/gnustep-back/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

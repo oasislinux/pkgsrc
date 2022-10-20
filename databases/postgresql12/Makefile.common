@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.17 2021/11/16 10:14:37 adam Exp $
+# $NetBSD: Makefile.common,v 1.23 2022/10/10 12:06:19 gdt Exp $
 #
 # This Makefile fragment is included by all PostgreSQL packages built from
 # the main sources of the PostgreSQL distribution except jdbc-postgresql.
@@ -16,7 +16,7 @@
 # used by databases/postgresql12-pltcl/Makefile
 # used by databases/postgresql12-server/Makefile
 
-DISTNAME=	postgresql-12.9
+DISTNAME=	postgresql-12.12
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_PGSQL:=source/v${PKGVERSION_NOREV}/}
 EXTRACT_SUFX=	.tar.bz2
@@ -68,6 +68,12 @@ CONFIGURE_ARGS+=	--without-perl
 CONFIGURE_ARGS+=	--without-python
 CONFIGURE_ARGS+=	--without-tcl
 
+# Work around a bug in autoconf, that thinks almost all mkdir
+# implementations are deficient, and a bug someplace between postgis
+# and pgxs, that causes topology/Makefile.in to run pgxs's install-sh
+# but without a path.
+CONFIGURE_ENV+=		ac_cv_path_mkdir="mkdir"
+
 # avoid pointing to a wrapper
 CONFIGURE_ENV+=		MSGFMT=${TOOLS_PATH.msgfmt}
 
@@ -87,6 +93,13 @@ CONFIGURE_ENV+=		pgac_cv_prog_cc_ldflags__Wl___as_needed=no
 # and is "unlikely to work correctly".
 # https://www.postgresql.org/message-id/E1X0yaj-000753-N6%40gemulon.postgresql.org
 BROKEN_ON_PLATFORM+=	*-*-alpha
+
+# Sporadic failures with a _high_ number of MAKE_JOBS:
+# "fatal error: catalog/pg_type_d.h: No such file or directory"
+# Please override this locally if you can't reproduce it rather
+# than removing MAKE_JOBS_SAFE, since this is necessary for
+# bulk build stability.
+MAKE_JOBS_SAFE=		no
 
 .if ${MACHINE_ARCH} == "sparc"
 CFLAGS.NetBSD+=		-D__sparc_v8__

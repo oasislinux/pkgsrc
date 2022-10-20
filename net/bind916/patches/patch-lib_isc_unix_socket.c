@@ -1,12 +1,28 @@
-$NetBSD: patch-lib_isc_unix_socket.c,v 1.6 2021/10/24 06:40:28 taca Exp $
+$NetBSD: patch-lib_isc_unix_socket.c,v 1.8 2022/04/21 14:14:46 taca Exp $
 
 * Apply fixes from NetBSD base system.
-* Fix build on SmartOS. In this special case, _XOPEN_SOURCE has to be only
-  defined on SmartOS.
+* Fix build on SunOS. In this special case, _XOPEN_SOURCE has to be only
+  defined on SunOS.
 
---- lib/isc/unix/socket.c.orig	2021-09-07 09:37:05.000000000 +0000
+--- lib/isc/unix/socket.c.orig	2022-04-11 15:28:12.000000000 +0000
 +++ lib/isc/unix/socket.c
-@@ -360,6 +360,10 @@ struct isc_socket {
+@@ -13,6 +13,15 @@
+ 
+ /*! \file */
+ 
++/* needed for CMSG_DATA */
++#if defined(__sun)
++#if (__STDC_VERSION__ - 0 < 199901L)
++#define _XOPEN_SOURCE 500
++#else
++#define _XOPEN_SOURCE 600
++#endif
++#endif
++
+ #include <inttypes.h>
+ #include <stdbool.h>
+ #include <sys/param.h>
+@@ -362,6 +371,10 @@ struct isc_socket {
  	unsigned char overflow; /* used for MSG_TRUNC fake */
  #endif				/* ifdef ISC_PLATFORM_RECVOVERFLOW */
  
@@ -17,7 +33,7 @@ $NetBSD: patch-lib_isc_unix_socket.c,v 1.6 2021/10/24 06:40:28 taca Exp $
  	unsigned int dscp;
  };
  
-@@ -469,6 +473,14 @@ static bool
+@@ -471,6 +484,14 @@ static bool
  process_ctlfd(isc__socketthread_t *thread);
  static void
  setdscp(isc_socket_t *sock, isc_dscp_t dscp);
@@ -32,15 +48,15 @@ $NetBSD: patch-lib_isc_unix_socket.c,v 1.6 2021/10/24 06:40:28 taca Exp $
  
  #define SELECT_POKE_SHUTDOWN (-1)
  #define SELECT_POKE_NOTHING  (-2)
-@@ -1573,6 +1585,7 @@ doio_recv(isc_socket_t *sock, isc_socket
+@@ -1575,6 +1596,7 @@ doio_recv(isc_socket_t *sock, isc_socket
  	case isc_sockettype_udp:
  	case isc_sockettype_raw:
  		break;
 +	case isc_sockettype_fdwatch:
  	default:
- 		INSIST(0);
- 		ISC_UNREACHABLE();
-@@ -1781,9 +1794,26 @@ socketclose(isc__socketthread_t *thread,
+ 		UNREACHABLE();
+ 	}
+@@ -1782,9 +1804,26 @@ socketclose(isc__socketthread_t *thread,
  	 */
  	LOCK(&thread->fdlock[lockid]);
  	thread->fds[fd] = NULL;
@@ -68,7 +84,7 @@ $NetBSD: patch-lib_isc_unix_socket.c,v 1.6 2021/10/24 06:40:28 taca Exp $
  
  	inc_stats(thread->manager->stats, sock->statsindex[STATID_CLOSE]);
  
-@@ -2190,6 +2220,13 @@ again:
+@@ -2191,6 +2230,13 @@ again:
  			}
  #endif /* if defined(PF_ROUTE) */
  			break;
@@ -82,7 +98,7 @@ $NetBSD: patch-lib_isc_unix_socket.c,v 1.6 2021/10/24 06:40:28 taca Exp $
  		}
  	} else {
  		sock->fd = dup(dup_socket->fd);
-@@ -2439,6 +2476,7 @@ socket_create(isc_socketmgr_t *manager, 
+@@ -2440,6 +2486,7 @@ socket_create(isc_socketmgr_t *manager, 
  
  	REQUIRE(VALID_MANAGER(manager));
  	REQUIRE(socketp != NULL && *socketp == NULL);
@@ -90,7 +106,7 @@ $NetBSD: patch-lib_isc_unix_socket.c,v 1.6 2021/10/24 06:40:28 taca Exp $
  
  	result = allocate_socket(manager, type, &sock);
  	if (result != ISC_R_SUCCESS) {
-@@ -2553,6 +2591,7 @@ isc_socket_open(isc_socket_t *sock) {
+@@ -2553,6 +2600,7 @@ isc_socket_open(isc_socket_t *sock) {
  	REQUIRE(isc_refcount_current(&sock->references) >= 1);
  	REQUIRE(sock->fd == -1);
  	REQUIRE(sock->threadid == -1);
@@ -98,7 +114,7 @@ $NetBSD: patch-lib_isc_unix_socket.c,v 1.6 2021/10/24 06:40:28 taca Exp $
  
  	result = opensocket(sock->manager, sock, NULL);
  
-@@ -2631,6 +2670,7 @@ isc_socket_close(isc_socket_t *sock) {
+@@ -2631,6 +2679,7 @@ isc_socket_close(isc_socket_t *sock) {
  
  	LOCK(&sock->lock);
  
@@ -106,7 +122,7 @@ $NetBSD: patch-lib_isc_unix_socket.c,v 1.6 2021/10/24 06:40:28 taca Exp $
  	REQUIRE(sock->fd >= 0 && sock->fd < (int)sock->manager->maxsocks);
  
  	INSIST(!sock->connecting);
-@@ -2661,6 +2701,24 @@ isc_socket_close(isc_socket_t *sock) {
+@@ -2661,6 +2710,24 @@ isc_socket_close(isc_socket_t *sock) {
  	return (ISC_R_SUCCESS);
  }
  
@@ -131,7 +147,7 @@ $NetBSD: patch-lib_isc_unix_socket.c,v 1.6 2021/10/24 06:40:28 taca Exp $
  /*
   * Dequeue an item off the given socket's read queue, set the result code
   * in the done event to the one provided, and send it to the task it was
-@@ -3101,6 +3159,58 @@ finish:
+@@ -3101,6 +3168,58 @@ finish:
  	}
  }
  
@@ -190,7 +206,7 @@ $NetBSD: patch-lib_isc_unix_socket.c,v 1.6 2021/10/24 06:40:28 taca Exp $
  /*
   * Process read/writes on each fd here.  Avoid locking
   * and unlocking twice if both reads and writes are possible.
-@@ -3148,7 +3258,7 @@ process_fd(isc__socketthread_t *thread, 
+@@ -3148,7 +3267,7 @@ process_fd(isc__socketthread_t *thread, 
  		if (sock->connecting) {
  			internal_connect(sock);
  		} else {
@@ -199,7 +215,7 @@ $NetBSD: patch-lib_isc_unix_socket.c,v 1.6 2021/10/24 06:40:28 taca Exp $
  		}
  	}
  
-@@ -3156,7 +3266,7 @@ process_fd(isc__socketthread_t *thread, 
+@@ -3156,7 +3275,7 @@ process_fd(isc__socketthread_t *thread, 
  		if (sock->listener) {
  			internal_accept(sock); /* unlocks sock */
  		} else {
@@ -208,7 +224,7 @@ $NetBSD: patch-lib_isc_unix_socket.c,v 1.6 2021/10/24 06:40:28 taca Exp $
  			UNLOCK(&sock->lock);
  		}
  	} else {
-@@ -3797,7 +3907,7 @@ isc_socketmgr_create2(isc_mem_t *mctx, i
+@@ -3797,7 +3916,7 @@ isc_socketmgr_create2(isc_mem_t *mctx, i
  		isc_thread_create(netthread, &manager->threads[i],
  				  &manager->threads[i].thread);
  		char tname[1024];
@@ -217,7 +233,7 @@ $NetBSD: patch-lib_isc_unix_socket.c,v 1.6 2021/10/24 06:40:28 taca Exp $
  		isc_thread_setname(manager->threads[i].thread, tname);
  	}
  
-@@ -5218,7 +5328,7 @@ static isc_once_t hasreuseport_once = IS
+@@ -5218,7 +5337,7 @@ static isc_once_t hasreuseport_once = IS
  static bool hasreuseport = false;
  
  static void
@@ -226,7 +242,7 @@ $NetBSD: patch-lib_isc_unix_socket.c,v 1.6 2021/10/24 06:40:28 taca Exp $
  /*
   * SO_REUSEPORT works very differently on *BSD and on Linux (because why not).
   * We only want to use it on Linux, if it's available. On BSD we want to dup()
-@@ -5272,6 +5382,8 @@ _socktype(isc_sockettype_t type) {
+@@ -5272,6 +5391,8 @@ _socktype(isc_sockettype_t type) {
  		return ("tcp");
  	case isc_sockettype_unix:
  		return ("unix");
@@ -235,7 +251,7 @@ $NetBSD: patch-lib_isc_unix_socket.c,v 1.6 2021/10/24 06:40:28 taca Exp $
  	default:
  		return ("not-initialized");
  	}
-@@ -5502,3 +5614,113 @@ error:
+@@ -5502,3 +5623,113 @@ error:
  	return (result);
  }
  #endif /* HAVE_JSON_C */

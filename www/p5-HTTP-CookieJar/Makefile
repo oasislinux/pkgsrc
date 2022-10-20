@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.8 2021/08/11 12:09:40 wen Exp $
+# $NetBSD: Makefile,v 1.10 2022/09/11 01:04:59 wen Exp $
 
-DISTNAME=	HTTP-CookieJar-0.012
+DISTNAME=	HTTP-CookieJar-0.014
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=HTTP/}

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.4 2022/01/26 22:37:05 tm Exp $
+# $NetBSD: Makefile,v 1.6 2022/04/18 19:10:46 adam Exp $
 #
 
 DISTNAME=	SOPE-5.5.0
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	https://packages.inverse.ca/SOGo/sources/
 
@@ -17,6 +18,9 @@ WRKSRC=		${WRKDIR}/SOPE
 HAS_CONFIGURE=	yes
 
 CONFIGURE_ARGS=	--with-gnustep --enable-debug --disable-strip
+
+# ld: -r and -pie may not be used together
+MKPIE_SUPPORTED=	no
 
 # options.mk are not supported because gnustep-make/-base set
 # PKG_OPTIONS_VAR to support the fragile option.

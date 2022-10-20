@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.79 2022/01/10 16:13:27 ryoon Exp $
+# $NetBSD: Makefile,v 1.85 2022/08/26 13:12:38 ryoon Exp $
 
-DISTNAME=	notmuch-0.34.3
+DISTNAME=	notmuch-0.37
 CATEGORIES=	mail
 MASTER_SITES=	https://notmuchmail.org/releases/
 EXTRACT_SUFX=	.tar.xz
@@ -17,7 +17,8 @@ MAKE_FLAGS+=	PYTHON=${PYTHONBIN}
 INFO_FILES=	yes
 TEST_TARGET=	check
 
-PYTHON_FOR_BUILD_ONLY=	tool
+PYTHON_FOR_BUILD_ONLY=		tool
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 REPLACE_BASH+=	emacs/notmuch-emacs-mua
 
@@ -25,7 +26,7 @@ REPLACE_BASH+=	emacs/notmuch-emacs-mua
 
 CONFIGURE_ARGS+=	--prefix=${PREFIX}
 CONFIGURE_ARGS+=	--mandir=${PREFIX}/${PKGMANDIR}
-CONFIGURE_ARGS+=	--infodir=${PREFIX}/info
+CONFIGURE_ARGS+=	--infodir=${PREFIX}/${PKGINFODIR}
 CONFIGURE_ARGS+=	--without-ruby
 
 SUBST_CLASSES.SunOS+=	gnuld

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.16 2021/12/08 16:02:55 adam Exp $
+# $NetBSD: Makefile,v 1.20 2022/05/11 00:30:42 gutteridge Exp $
 
-DISTNAME=	libqtxdg-3.8.0
-PKGREVISION=	1
+DISTNAME=	libqtxdg-3.9.1
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_GITHUB:=lxqt/}
 GITHUB_RELEASE=	${PKGVERSION_NOREV}
@@ -19,6 +18,7 @@ USE_LANGUAGES=	c c++
 CONFIGURE_DIRS=	build
 CMAKE_ARG_PATH=	..
 
+QTXDG_CONF=		share/lxqt
 PKG_SYSCONFSUBDIR=	xdg
 
 SUBST_CLASSES+=		prefix
@@ -28,6 +28,11 @@ SUBST_FILES.prefix=	src/qtxdg/xdgdirs.cpp
 SUBST_SED.prefix=	-e 's,/etc/xdg,${PKG_SYSCONFDIR},g'
 SUBST_SED.prefix+=	-e 's,/usr/share,${PREFIX}/share,g'
 
+CONF_FILES=	${QTXDG_CONF}/lxqt-qtxdg.conf \
+		${PKG_SYSCONFDIR}/lxqt-qtxdg.conf
+CONF_FILES+=	${QTXDG_CONF}/qtxdg.conf \
+		${PKG_SYSCONFDIR}/qtxdg.conf
+
 BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,-Bsymbolic
 BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,-Bsymbolic-functions
 BUILDLINK_TRANSFORM.SunOS+=	rm:-fuse-linker-plugin
@@ -35,12 +40,12 @@ BUILDLINK_TRANSFORM.SunOS+=	rm:-fuse-linker-plugin
 pre-configure:
 	${MKDIR} -p ${WRKSRC}/build
 
-TOOL_DEPENDS+=	lxqt-build-tools>=0.10.0:../../devel/lxqt-build-tools
+TOOL_DEPENDS+=	lxqt-build-tools>=0.11.0:../../devel/lxqt-build-tools
 TOOL_DEPENDS+=	qt5-qttools-[0-9]*:../../x11/qt5-qttools
 
 .include "../../mk/bsd.prefs.mk"
 .if ${OPSYS} != "NetBSD" || ${X11_TYPE} == "modular"
-DEPENDS+=	xterm-[0-9]*:../../x11/xterm
+DEPENDS+=	{xterm,mxterm}-[0-9]*:../../x11/xterm
 .endif
 
 .include "../../devel/glib2/buildlink3.mk"

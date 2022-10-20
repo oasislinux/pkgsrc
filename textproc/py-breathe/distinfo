@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.2 2022/01/31 11:39:40 adam Exp $
+$NetBSD: distinfo,v 1.5 2022/07/06 15:27:45 adam Exp $
 
-BLAKE2s (breathe-4.32.0.tar.gz) = 39ea8a0365475bd435147b5e4596dd26aa122da81516376ecca2cb4ab2e34c6d
-SHA512 (breathe-4.32.0.tar.gz) = a2a680fdadcf2bbceff193ef78332a65223e9f7ed2240728aa995f831fe51561b7b85e472117d8be4dfbfca6f6f1fd5859843d51f9ddce15463c6c24a636109a
-Size (breathe-4.32.0.tar.gz) = 79201 bytes
+BLAKE2s (breathe-4.34.0.tar.gz) = 072c86b58d718537df635dfa370eafcc18b026718235d8099f25655af5b718b6
+SHA512 (breathe-4.34.0.tar.gz) = 39a8e279956611b9082884f8697773da6adc90240affb697414f7fb4cb3f8c51eb74a0801284ffd304c9713790de0124a74d356b23b897b5577a9ba55b2eafac
+Size (breathe-4.34.0.tar.gz) = 83184 bytes

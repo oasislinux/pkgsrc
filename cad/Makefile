@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.102 2022/01/02 15:51:03 tnn Exp $
+# $NetBSD: Makefile,v 1.105 2022/06/17 11:40:56 mef Exp $
 #
 
 COMMENT=	Computer Aided Design tools
@@ -20,6 +20,8 @@ SUBDIR+=	fastcap
 SUBDIR+=	fasthenry
 SUBDIR+=	felt
 SUBDIR+=	freehdl
+SUBDIR+=	fstl
+SUBDIR+=	gcad3d
 SUBDIR+=	gdsreader
 SUBDIR+=	geda
 SUBDIR+=	gerbv
@@ -57,6 +59,7 @@ SUBDIR+=	py-MyHDL
 SUBDIR+=	py-PyRTL
 SUBDIR+=	py-gds
 SUBDIR+=	py-gdscad
+SUBDIR+=	py-gdstk
 SUBDIR+=	py-simpy
 SUBDIR+=	qcad
 SUBDIR+=	qcad-partlibrary

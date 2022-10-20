@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.44 2021/12/08 16:01:57 adam Exp $
+# $NetBSD: Makefile,v 1.46 2022/07/22 17:07:12 micha Exp $
 
 DISTNAME=	libgee-0.20.3
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	devel gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libgee/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.xz

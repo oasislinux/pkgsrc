@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.31 2022/01/04 20:54:57 wiz Exp $
+# $NetBSD: Makefile,v 1.35 2022/04/28 18:13:35 adam Exp $
 
-DISTNAME=	Jinja2-2.11.3
+DISTNAME=	Jinja2-3.1.2
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:tl}
-PKGREVISION=	1
 CATEGORIES=	textproc python
 MASTER_SITES=	${MASTER_SITE_PYPI:=J/Jinja2/}
 
@@ -12,19 +11,12 @@ COMMENT=	Small but fast and easy to use stand-alone template engine
 LICENSE=	modified-bsd
 
 DEPENDS+=	${PYPKGPREFIX}-babel>=0.8:../../devel/py-babel
-DEPENDS+=	${PYPKGPREFIX}-markupsafe>=0.23:../../textproc/py-markupsafe
+DEPENDS+=	${PYPKGPREFIX}-markupsafe>=2.0:../../textproc/py-markupsafe
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-runner-[0-9]*:../../devel/py-test-runner
 
 USE_LANGUAGES=	# none
 
-.include "../../lang/python/pyversion.mk"
-
-# async byte-compilation fails for Python < 3.6
-# see https://github.com/pallets/jinja/issues/643
-PLIST_VARS+=	async
-.if ${_PYTHON_VERSION} != 27
-PLIST.async=	yes
-.endif
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 PYSETUPTESTTARGET=	pytest
 

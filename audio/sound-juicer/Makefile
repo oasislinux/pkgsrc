@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.121 2021/12/08 16:03:20 adam Exp $
+# $NetBSD: Makefile,v 1.125 2022/08/11 05:08:04 gutteridge Exp $
 
 DISTNAME=	sound-juicer-3.24.0
-PKGREVISION=	12
+PKGREVISION=	14
 CATEGORIES=	audio gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/sound-juicer/3.24/}
 EXTRACT_SUFX=	.tar.xz
@@ -19,13 +19,11 @@ USE_TOOLS+=	pkg-config
 USE_TOOLS+=	msgfmt msgmerge xgettext itstool
 USE_TOOLS+=	gmake
 
-# XXX fails without GNU msgfmt
-_TOOLS_USE_PKGSRC.msgfmt=	yes
-
 .include "../../audio/libcanberra/buildlink3.mk"
 .include "../../audio/libdiscid/buildlink3.mk"
 .include "../../audio/libmusicbrainz5/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
 .include "../../devel/gobject-introspection/buildlink3.mk"
 .include "../../devel/glib2/schemas.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"

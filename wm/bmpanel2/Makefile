@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.43 2021/12/08 16:06:49 adam Exp $
+# $NetBSD: Makefile,v 1.46 2022/09/06 09:26:27 nia Exp $
 
 DISTNAME=	bmpanel2-2.1pre1
-PKGREVISION=	29
-CATEGORIES=	sysutils
+PKGREVISION=	32
+CATEGORIES=	wm sysutils
 MASTER_SITES=	http://bmpanel2.googlecode.com/files/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -10,15 +10,18 @@ HOMEPAGE=	https://github.com/nsf/bmpanel2
 COMMENT=	NETWM-compatible panel for X11
 LICENSE=	mit
 
-BUILD_DEPENDS+=	asciidoc-[0-9]*:../../textproc/asciidoc
+TOOL_DEPENDS+=	asciidoc-[0-9]*:../../textproc/asciidoc
 
 USE_CMAKE=	yes
 USE_LANGUAGES=	c c++
-USE_TOOLS+=	pkg-config gzip
+USE_TOOLS+=	pkg-config
 
-PY_PATCHPLIST=	yes
-REPLACE_PYTHON=	extra/py/bmpanel2.py
-PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 2.1pre1
+REPLACE_PYTHON=			extra/py/bmpanel2.py
+PYDISTUTILSPKG=			no
+
+EGG_NAME=	bmpanel2cfg-1.0
+
+INSTALLATION_DIRS+=	${PKGMANDIR}/man1
 
 SUBST_CLASSES+=		prefix
 SUBST_SED.prefix=	-e "s,/usr/local,${PREFIX},g"
@@ -29,7 +32,7 @@ SUBST_MESSAGE.prefix=	Fixing path to themes.
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
 .include "../../lang/python/application.mk"
-.include "../../lang/python/extension.mk"
+.include "../../lang/python/egg.mk"
 .include "../../graphics/cairo/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

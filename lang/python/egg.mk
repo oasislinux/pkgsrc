@@ -1,4 +1,4 @@
-# $NetBSD: egg.mk,v 1.36 2022/02/08 17:19:50 gutteridge Exp $
+# $NetBSD: egg.mk,v 1.39 2022/09/06 09:05:59 nia Exp $
 #
 # Common logic to handle Python Eggs
 #
@@ -13,8 +13,8 @@
 EGG_NAME?=	${DISTNAME:C/-([^0-9])/_\1/g}
 EGG_INFODIR?=	${EGG_NAME}-py${PYVERSSUFFIX}.egg-info
 
-PYDISTUTILSPKG=	yes
-PY_PATCHPLIST=	yes
+PYDISTUTILSPKG?=	yes
+PY_PATCHPLIST?=		yes
 
 # True eggs always have an egg-info directory. egg.mk can also
 # be used for distutils packages, in which case there will be no
@@ -54,10 +54,12 @@ SETUPTOOLS_PATH=../../devel/py-setuptools44
 SETUPTOOLS_PATH=../../devel/py-setuptools
 .  endif
 .  if "${USE_PKG_RESOURCES}" == "yes"
+# when packages use pkg_resources, setuptools is needed at runtime
 DEPENDS+=	${PYPKGPREFIX}-setuptools-[0-9]*:${SETUPTOOLS_PATH}
-.  else
-TOOL_DEPENDS+=	${PYPKGPREFIX}-setuptools-[0-9]*:${SETUPTOOLS_PATH}
 .  endif
+# in all cases (in particular, for cross-compilation), setuptools
+# also needs to be a tool dependency
+TOOL_DEPENDS+=	${PYPKGPREFIX}-setuptools-[0-9]*:${SETUPTOOLS_PATH}
 .endif
 
 INSTALLATION_DIRS+=	${PYSITELIB}

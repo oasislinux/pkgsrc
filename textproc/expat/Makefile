@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.49 2022/02/01 12:10:17 wiz Exp $
+# $NetBSD: Makefile,v 1.53 2022/09/21 10:52:51 wiz Exp $
 
-DISTNAME=	expat-2.4.4
+DISTNAME=	expat-2.4.9
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_GITHUB:=libexpat/}
 GITHUB_PROJECT=	libexpat

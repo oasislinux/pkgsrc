@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.3 2022/01/18 02:48:13 pho Exp $
+# $NetBSD: Makefile,v 1.6 2022/02/26 03:58:09 pho Exp $
 
-DISTNAME=	th-compat-0.1.2
+DISTNAME=	th-compat-0.1.3
 PKGREVISION=	2
 CATEGORIES=	devel
 

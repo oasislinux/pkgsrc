@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.3 2022/01/18 02:48:01 pho Exp $
+# $NetBSD: Makefile,v 1.7 2022/08/20 08:08:12 wiz Exp $
 
-DISTNAME=	aeson-pretty-0.8.8
-PKGREVISION=	2
+DISTNAME=	aeson-pretty-0.8.9
+PKGREVISION=	3
 CATEGORIES=	converters
 
 MAINTAINER=	pho@cielonegro.org

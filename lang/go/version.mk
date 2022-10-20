@@ -1,4 +1,4 @@
-# $NetBSD: version.mk,v 1.139 2022/01/09 19:54:46 bsiegert Exp $
+# $NetBSD: version.mk,v 1.163 2022/10/05 11:20:24 bsiegert Exp $
 
 #
 # If bsd.prefs.mk is included before go-package.mk in a package, then this
@@ -6,25 +6,17 @@
 #
 .include "go-vars.mk"
 
-GO117_VERSION=	1.17.6
-GO116_VERSION=	1.16.13
+GO119_VERSION=	1.19.2
+GO118_VERSION=	1.18.7
+GO117_VERSION=	1.17.13
+GO116_VERSION=	1.16.15
 GO110_VERSION=	1.10.8
 GO19_VERSION=	1.9.7
 GO14_VERSION=	1.4.3
 
 .include "../../mk/bsd.prefs.mk"
 
-.if ${OPSYS} == "NetBSD" && ${OPSYS_VERSION} < 070000
-# 1.9 is the last Go version to support NetBSD 6
-GO_VERSION_DEFAULT?=	19
-.elif ${OPSYS} == "Darwin" && ${OPSYS_VERSION} < 101000
-# go 1.11 removed support for osx 10.8 and 10.9
-# https://github.com/golang/go/issues/23122
-# darwin version 13.4 is osx 10.9.5
-GO_VERSION_DEFAULT?=	110
-.else
-GO_VERSION_DEFAULT?=	117
-.endif
+GO_VERSION_DEFAULT?=	119
 
 .if !empty(GO_VERSION_DEFAULT)
 GOVERSSUFFIX=		${GO_VERSION_DEFAULT}
@@ -44,6 +36,10 @@ GOCHAR=			8
 .elif ${MACHINE_ARCH} == "x86_64"
 GOARCH=			amd64
 GOCHAR=			6
+# go118 hardcodes GOARCH=arm64 even when running in an x86_64 chroot
+.  if ${OPSYS} == "Darwin"
+GOOPT+=			GOHOSTARCH=amd64
+.  endif
 .elif ${MACHINE_ARCH} == "earmv6hf" || ${MACHINE_ARCH} == "earmv7hf"
 GOARCH=			arm
 GOCHAR=			5

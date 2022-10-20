@@ -1,6 +1,5 @@
-$NetBSD: distinfo,v 1.6 2021/10/26 11:23:01 nia Exp $
+$NetBSD: distinfo,v 1.8 2022/09/26 11:13:38 kleink Exp $
 
-BLAKE2s (cssselect2-0.4.1.tar.gz) = 9baaf7d8d124e95116ef7040d1efd336585f5e3115952c37abf14ed6691569cd
-SHA512 (cssselect2-0.4.1.tar.gz) = feafeec3dbe3157ee452d94cd391a09cfcb48ca8bd1563c117c77c9ceb01102c4989611ede39e433ec25d3ddda98a94c4589ccb290b79c729683e673763b42ac
-Size (cssselect2-0.4.1.tar.gz) = 32756 bytes
-SHA1 (patch-setup.py) = 4a5a26801f3ebc2bfb1b87be7fcd76d9d31ab2fc
+BLAKE2s (cssselect2-0.7.0.tar.gz) = 256f1bba7d2ac850f1bf4ed9bc045b3fa82180969e4ecd4f0107b7905c8aa492
+SHA512 (cssselect2-0.7.0.tar.gz) = e3c975fe159d3bec53002bda31c72d9cb346f40529272d8d5bef6aa13142ce60f1e8aa20b039d93ff5ff3d2cd34119b8b2d406f889964eded69e770e4f04e949
+Size (cssselect2-0.7.0.tar.gz) = 35888 bytes

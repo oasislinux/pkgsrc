@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.24 2022/01/20 22:48:41 fox Exp $
+# $NetBSD: Makefile,v 1.31 2022/10/04 07:14:57 kim Exp $
 
-DISTNAME=	htop-3.1.2
+DISTNAME=	htop-3.2.1
+PKGREVISION=	2
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_GITHUB:=htop-dev/}
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
+MAINTAINER=	nia@NetBSD.org
 HOMEPAGE=	https://htop.dev/
 COMMENT=	Enhanced version of top utility
 LICENSE=	gnu-gpl-v2
@@ -12,14 +13,9 @@ LICENSE=	gnu-gpl-v2
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
 USE_TOOLS+=	autoreconf automake
-USE_NCURSES=	yes # uses ncurses mouse definitions
+USE_CURSES=	getmouse
 
-.include "../../mk/curses.buildlink3.mk"
-
-.if ${CURSES_TYPE} != "ncursesw"
-# See netbsd/README.md
-CONFIGURE_ARGS+=	--disable-unicode
-.endif
+.include "options.mk"
 
 pre-configure:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ./autogen.sh

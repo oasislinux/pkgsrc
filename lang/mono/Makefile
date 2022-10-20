@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.201 2022/02/08 13:39:17 gavan Exp $
+# $NetBSD: Makefile,v 1.206 2022/09/20 06:18:36 nia Exp $
 
 DISTNAME=	mono-6.12.0.122
-PKGREVISION=	4
+PKGREVISION=	7
 CATEGORIES=	lang
 MASTER_SITES=	https://download.mono-project.com/sources/mono/
 EXTRACT_SUFX=	.tar.xz
@@ -27,6 +27,9 @@ EXTRACT_USING=	bsdtar
 GNU_CONFIGURE=		yes
 GNU_CONFIGURE_STRICT=	no # has sub-configures
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
+
+gmake[8]: *** No rule to make target '../../build/deps/_xbuild_14__Microsoft.Build.Framework.dll.sources', needed by '../../build/deps/_xbuild_14__Microsoft.Build.Framework.dll.response'.  Stop.
+MAKE_JOBS_SAFE=		no
 
 # Requires a cwrappers change: http://mail-index.netbsd.org/tech-pkg/2019/08/16/msg021791.html
 USE_CWRAPPERS=		no
@@ -131,6 +134,9 @@ CONFIGURE_ARGS+=	--enable-dtrace=no
 CONFIGURE_ARGS+=	--with-sigaltstack=no
 CONFIGURE_ENV+=		ac_cv_func_getdomainname=no
 CONFIGURE_ENV+=		ac_cv_func_setdomainname=no
+CONFIGURE_ENV+=		ac_cv_func_epoll_ctl=no
+CONFIGURE_ENV+=		ac_cv_func_epoll_create1=no
+CONFIGURE_ENV+=		ac_cv_header_sys_epoll_h=no
 ULIMIT_CMD_datasize=	ulimit -d 524288
 ULIMIT_CMD_stacksize=	ulimit -s 10240
 .elif ${OPSYS} == "NetBSD"

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.8 2022/01/18 02:48:14 pho Exp $
+# $NetBSD: Makefile,v 1.11 2022/02/26 03:58:10 pho Exp $
 
-DISTNAME=	transformers-base-0.4.5.2
+DISTNAME=	transformers-base-0.4.6
 PKGREVISION=	2
 CATEGORIES=	devel
 

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.35 2021/12/08 16:05:07 adam Exp $
+# $NetBSD: Makefile,v 1.37 2022/03/12 08:01:49 nia Exp $
 
 DISTNAME=	viewnior-1.7
 PKGREVISION=	2
@@ -17,15 +17,10 @@ WRKSRC=		${WRKDIR}/Viewnior-${DISTNAME}
 USE_TOOLS+=	pkg-config msgfmt xgettext
 USE_LANGUAGES=	c c++
 
-.include "../../mk/bsd.prefs.mk"
-# msgfmt: unknown option -- desktop
-.if ${OPSYS} == "NetBSD"
-TOOLS_PLATFORM.msgfmt=
-.endif
-
 PYTHON_FOR_BUILD_ONLY=	tool
 
 .include "../../devel/meson/build.mk"
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
 .include "../../databases/shared-mime-info/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../graphics/exiv2/buildlink3.mk"

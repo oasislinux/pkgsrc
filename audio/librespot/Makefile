@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.17 2021/12/08 16:03:15 adam Exp $
+# $NetBSD: Makefile,v 1.24 2022/09/11 12:51:19 wiz Exp $
 
-DISTNAME=	librespot-0.3.1
+DISTNAME=	librespot-0.4.2
 PKGREVISION=	2
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_GITHUB:=librespot-org/}
@@ -22,7 +22,8 @@ CARGO_NO_DEFAULT_FEATURES=	yes
 .include "options.mk"
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/target/release/librespot ${DESTDIR}${PREFIX}/bin
+	${INSTALL_PROGRAM} ${WRKSRC}/target/release/librespot \
+		${DESTDIR}${PREFIX}/bin
 
 .include "../../lang/rust/cargo.mk"
 .include "../../mk/bsd.pkg.mk"

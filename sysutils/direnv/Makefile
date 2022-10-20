@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.12 2022/01/09 20:10:39 bsiegert Exp $
+# $NetBSD: Makefile,v 1.23 2022/10/05 11:33:07 bsiegert Exp $
 
-DISTNAME=	direnv-2.27.0
-PKGREVISION=	11
+DISTNAME=	direnv-2.32.1
+PKGREVISION=	1
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_GITHUB:=direnv/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
 
-MAINTAINER=	pkgsrc-users@pkgsrc.org
+MAINTAINER=	leot@NetBSD.org
 HOMEPAGE=	https://direnv.net/
 COMMENT=	Environment switcher for the shell
 LICENSE=	mit

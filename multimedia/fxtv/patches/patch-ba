@@ -1,4 +1,4 @@
-$NetBSD: patch-ba,v 1.4 2012/08/11 12:17:21 marino Exp $
+$NetBSD: patch-ba,v 1.6 2022/04/24 10:57:28 tnn Exp $
 
 Deal with mouse headers.
 Fix illegal C.

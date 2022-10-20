@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.30 2020/12/04 20:45:13 nia Exp $
+# $NetBSD: Makefile,v 1.32 2022/09/26 16:22:10 ryoon Exp $
 
 DISTNAME=	reposurgeon-3.41
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	devel scm
 MASTER_SITES=	http://www.catb.org/~esr/reposurgeon/
 EXTRACT_SUFX=	.tar.xz
@@ -13,6 +13,8 @@ LICENSE=	2-clause-bsd
 
 BUILD_DEPENDS+=	xmlto-[0-9]*:../../textproc/xmlto
 BUILD_DEPENDS+=	asciidoc-[0-9]*:../../textproc/asciidoc
+
+PYTHON_VERSIONS_ACCEPTED=	27
 
 USE_TOOLS+=	gmake
 USE_LANGUAGES=	# none

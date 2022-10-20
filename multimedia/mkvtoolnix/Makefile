@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.189 2022/02/06 16:49:49 adam Exp $
+# $NetBSD: Makefile,v 1.202 2022/10/10 07:40:17 adam Exp $
 
-DISTNAME=	mkvtoolnix-65.0.0
+DISTNAME=	mkvtoolnix-71.1.0
 CATEGORIES=	multimedia
 MASTER_SITES=	https://mkvtoolnix.download/sources/
 EXTRACT_SUFX=	.tar.xz
@@ -11,7 +11,6 @@ COMMENT=	Set of tools to create, alter and inspect Matroska files
 LICENSE=	gnu-gpl-v2
 
 BUILD_DEPENDS+=	docbook-xsl>=1.79.1nb5:../../textproc/docbook-xsl
-BUILD_DEPENDS+=	po4a-[0-9]*:../../textproc/po4a
 BUILD_DEPENDS+=	${RUBY_BASE}>=${RUBY_VERSION}:${RUBY_SRCDIR}
 
 # 'The following features of the C++17 standards are not supported by c++:
@@ -35,9 +34,16 @@ CONFIGURE_ARGS+=	--with-qmake=${QTDIR}/bin/qmake
 REPLACE_LOCALEDIR_PATTERNS=	build-config.in
 
 LDFLAGS.DragonFly=	-lboost_system
-LDFLAGS.SunOS+=		-lintl
 
 INSTALL_ENV+=	SHELL=${SH:Q}
+
+.include "../../mk/bsd.prefs.mk"
+
+pre-build:
+	cd ${WRKSRC} && ${RM} src/common/*/windows.cpp
+.if ${OPSYS} != "Darwin"
+	cd ${WRKSRC} && ${RM} src/common/*/macos.cpp
+.endif
 
 do-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${RAKE}
@@ -57,10 +63,10 @@ do-install:
 .include "../../devel/boost-libs/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/gmp/buildlink3.mk"
-BUILDLINK_API_DEPENDS.libebml+= libebml>=1.4.2
+BUILDLINK_API_DEPENDS.libebml+= libebml>=1.4.4
 .include "../../devel/libebml/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
-BUILDLINK_API_DEPENDS.libmatroska+= libmatroska>=1.6.3
+BUILDLINK_API_DEPENDS.libmatroska+= libmatroska>=1.7.1
 .include "../../multimedia/libmatroska/buildlink3.mk"
 .include "../../multimedia/libogg/buildlink3.mk"
 .include "../../sysutils/file/buildlink3.mk"

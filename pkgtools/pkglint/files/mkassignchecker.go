@@ -25,7 +25,7 @@ func (ck *MkAssignChecker) check() {
 // checkLeft checks everything to the left of the assignment operator.
 func (ck *MkAssignChecker) checkLeft() {
 	varname := ck.MkLine.Varname()
-	if hasPrefix(varname, "_") && !G.Infrastructure && G.Pkgsrc.vartypes.Canon(varname) == nil {
+	if !ck.mayBeDefined(varname) {
 		ck.MkLine.Warnf("Variable names starting with an underscore (%s) are reserved for internal pkgsrc use.", varname)
 	}
 
@@ -199,6 +199,10 @@ func (ck *MkAssignChecker) checkLeftUserSettable() bool {
 	}
 
 	switch {
+	case G.Infrastructure:
+		// No warnings, as the usage patterns between the packages
+		// and the pkgsrc infrastructure differ a lot.
+
 	case mkline.HasComment():
 		// Assume that the comment contains a rationale for disabling
 		// this particular check.
@@ -345,7 +349,8 @@ func (ck *MkAssignChecker) checkLeftRationale() {
 	}
 
 	mkline := ck.MkLine
-	vartype := G.Pkgsrc.VariableType(ck.MkLines, mkline.Varname())
+	varname := mkline.Varname()
+	vartype := G.Pkgsrc.VariableType(ck.MkLines, varname)
 	if vartype == nil || !vartype.NeedsRationale() {
 		return
 	}
@@ -354,7 +359,13 @@ func (ck *MkAssignChecker) checkLeftRationale() {
 		return
 	}
 
-	mkline.Warnf("Setting variable %s should have a rationale.", mkline.Varname())
+	if varname == "PYTHON_VERSIONS_INCOMPATIBLE" && mkline.Value() == "27" {
+		// No warning since it is rather common that a modern Python
+		// package supports all Python versions starting with 3.0.
+		return
+	}
+
+	mkline.Warnf("Setting variable %s should have a rationale.", varname)
 	mkline.Explain(
 		"Since this variable prevents the package from being built in some situations,",
 		"the reasons for this restriction should be documented.",
@@ -483,6 +494,11 @@ func (ck *MkAssignChecker) checkRight() {
 	mkLineChecker := NewMkLineChecker(ck.MkLines, ck.MkLine)
 	mkLineChecker.checkText(value)
 	mkLineChecker.checkVartype(varname, op, value, comment)
+	if mkline.IsEmpty() {
+		// The line type can change due to an Autofix, see for example
+		// VartypeCheck.WrkdirSubdirectory.
+		return
+	}
 
 	ck.checkMisc()
 
@@ -674,4 +690,28 @@ func (ck *MkAssignChecker) checkVaruseShell(vartype *Vartype, time VucTime) {
 			NewMkVarUseChecker(varuse, ck.MkLines, mkline).Check(&vuc)
 		}
 	}
+}
+
+func (ck *MkAssignChecker) mayBeDefined(varname string) bool {
+	if !hasPrefix(varname, "_") {
+		return true
+	}
+	if G.Infrastructure {
+		return true
+	}
+	if G.Pkgsrc.vartypes.Canon(varname) != nil {
+		return true
+	}
+
+	// Defining the group 'cmake' allows the variable names '_CMAKE_*',
+	// it's kind of a namespace declaration.
+	vargroups := ck.MkLines.allVars.FirstDefinition("_VARGROUPS")
+	if vargroups != nil {
+		prefix := "_" + strings.ToUpper(vargroups.Value()) + "_"
+		if hasPrefix(varname, prefix) {
+			return true
+		}
+	}
+
+	return false
 }

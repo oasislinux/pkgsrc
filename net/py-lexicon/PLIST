@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.38 2022/01/31 11:48:26 adam Exp $
+@comment $NetBSD: PLIST,v 1.43 2022/07/02 09:29:49 adam Exp $
 bin/lexicon-${PYVERSSUFFIX}
 ${PYSITELIB}/${EGG_INFODIR}/PKG-INFO
 ${PYSITELIB}/${EGG_INFODIR}/SOURCES.txt
@@ -168,12 +168,18 @@ ${PYSITELIB}/lexicon/providers/luadns.pyo
 ${PYSITELIB}/lexicon/providers/memset.py
 ${PYSITELIB}/lexicon/providers/memset.pyc
 ${PYSITELIB}/lexicon/providers/memset.pyo
+${PYSITELIB}/lexicon/providers/misaka.py
+${PYSITELIB}/lexicon/providers/misaka.pyc
+${PYSITELIB}/lexicon/providers/misaka.pyo
 ${PYSITELIB}/lexicon/providers/mythicbeasts.py
 ${PYSITELIB}/lexicon/providers/mythicbeasts.pyc
 ${PYSITELIB}/lexicon/providers/mythicbeasts.pyo
 ${PYSITELIB}/lexicon/providers/namecheap.py
 ${PYSITELIB}/lexicon/providers/namecheap.pyc
 ${PYSITELIB}/lexicon/providers/namecheap.pyo
+${PYSITELIB}/lexicon/providers/namecom.py
+${PYSITELIB}/lexicon/providers/namecom.pyc
+${PYSITELIB}/lexicon/providers/namecom.pyo
 ${PYSITELIB}/lexicon/providers/namesilo.py
 ${PYSITELIB}/lexicon/providers/namesilo.pyc
 ${PYSITELIB}/lexicon/providers/namesilo.pyo
@@ -207,6 +213,9 @@ ${PYSITELIB}/lexicon/providers/plesk.pyo
 ${PYSITELIB}/lexicon/providers/pointhq.py
 ${PYSITELIB}/lexicon/providers/pointhq.pyc
 ${PYSITELIB}/lexicon/providers/pointhq.pyo
+${PYSITELIB}/lexicon/providers/porkbun.py
+${PYSITELIB}/lexicon/providers/porkbun.pyc
+${PYSITELIB}/lexicon/providers/porkbun.pyo
 ${PYSITELIB}/lexicon/providers/powerdns.py
 ${PYSITELIB}/lexicon/providers/powerdns.pyc
 ${PYSITELIB}/lexicon/providers/powerdns.pyo
@@ -246,9 +255,15 @@ ${PYSITELIB}/lexicon/providers/vercel.pyo
 ${PYSITELIB}/lexicon/providers/vultr.py
 ${PYSITELIB}/lexicon/providers/vultr.pyc
 ${PYSITELIB}/lexicon/providers/vultr.pyo
+${PYSITELIB}/lexicon/providers/webgo.py
+${PYSITELIB}/lexicon/providers/webgo.pyc
+${PYSITELIB}/lexicon/providers/webgo.pyo
 ${PYSITELIB}/lexicon/providers/yandex.py
 ${PYSITELIB}/lexicon/providers/yandex.pyc
 ${PYSITELIB}/lexicon/providers/yandex.pyo
+${PYSITELIB}/lexicon/providers/yandexcloud.py
+${PYSITELIB}/lexicon/providers/yandexcloud.pyc
+${PYSITELIB}/lexicon/providers/yandexcloud.pyo
 ${PYSITELIB}/lexicon/providers/zeit.py
 ${PYSITELIB}/lexicon/providers/zeit.pyc
 ${PYSITELIB}/lexicon/providers/zeit.pyo

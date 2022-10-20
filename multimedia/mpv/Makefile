@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.132 2022/01/06 20:02:16 leot Exp $
+# $NetBSD: Makefile,v 1.142 2022/09/11 12:52:03 wiz Exp $
 
 DISTNAME=	mpv-0.34.1
+PKGREVISION=	10
 CATEGORIES=	multimedia
 MASTER_SITES=	${MASTER_SITE_GITHUB:=mpv-player/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
@@ -19,6 +20,7 @@ TOOL_DEPENDS+=	waf>=2.0.9:../../devel/waf
 
 WAF_REPLACE_EXECUTABLE=	yes
 WAF_CONFIGURE_ARGS+=	--bindir=${PREFIX}/bin
+WAF_CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
 WAF_CONFIGURE_ARGS+=	--enable-dvdnav
 WAF_CONFIGURE_ARGS+=	--enable-libmpv-shared
 
@@ -28,7 +30,10 @@ USE_TOOLS+=	perl pkg-config
 
 MAKE_DIRS=		${PKG_SYSCONFDIR}/mpv
 INSTALLATION_DIRS=	share/examples/mpv
-CONF_FILES+=		share/examples/mpv/encoding-profiles.conf ${PKG_SYSCONFDIR}/mpv/encoding-profiles.conf
+CONF_FILES+=		share/examples/mpv/encoding-profiles.conf \
+			${PKG_SYSCONFDIR}/mpv/encoding-profiles.conf
+CONF_FILES+=		share/examples/mpv/mpv.conf \
+			${PKG_SYSCONFDIR}/mpv/mpv.conf
 
 PKGCONFIG_OVERRIDE+=	libmpv/mpv.pc.in
 
@@ -59,9 +64,11 @@ BUILDLINK_PASSTHRU_DIRS+=	${XCODE_DIR}/Toolchains/XcodeDefault.xctoolchain/usr/l
 .endif
 
 post-install:
-	cd ${DESTDIR}${PREFIX} && ${MV} etc/mpv/encoding-profiles.conf share/examples/mpv
+	${MV} ${DESTDIR}${PREFIX}/share/doc/mpv/mpv.conf \
+	    ${DESTDIR}${PREFIX}/share/examples/mpv/mpv.conf
 
 .include "options.mk"
+.include "../../archivers/libarchive/buildlink3.mk"
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/waf/waf.mk"
 .include "../../devel/zlib/buildlink3.mk"
@@ -69,7 +76,7 @@ post-install:
 .include "../../lang/python/application.mk"
 .include "../../multimedia/libass/buildlink3.mk"
 .include "../../multimedia/libdvdnav/buildlink3.mk"
-.include "../../multimedia/ffmpeg4/buildlink3.mk"
+.include "../../multimedia/ffmpeg5/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/jpeg.buildlink3.mk"

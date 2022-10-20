@@ -1,6 +1,5 @@
-$NetBSD: distinfo,v 1.15 2021/10/26 10:14:42 nia Exp $
+$NetBSD: distinfo,v 1.17 2022/09/26 09:22:49 wiz Exp $
 
-BLAKE2s (glade-3.36.0.tar.xz) = d7be68798998e5b8a43d7c5966245b42357b749fe1ec4bc1d82c7bdd781c3218
-SHA512 (glade-3.36.0.tar.xz) = c984613ade26e3fe68a700a48cccadf5ac96eb716a6e90aad36f3de684faeb607d9aaf112d74a048cd33e222a02388ee6583ca915648486f0259cc805e16d243
-Size (glade-3.36.0.tar.xz) = 4466808 bytes
-SHA1 (patch-configure) = 3eb71f9cc8efbc162d69b6d8aee47b10506385ee
+BLAKE2s (glade-3.40.0.tar.xz) = 269af51435ce285529cddd083806bf969f1512109e1584a2732eafedd64f4e5d
+SHA512 (glade-3.40.0.tar.xz) = 6b018f882e9d155a4b2256c0b4c72743f971c8d730a53f16faa240d01e14051f5b6ce04e355dcc78e1679579fb091facaa06acdda6297c5b8efc642c42bb7b4e
+Size (glade-3.40.0.tar.xz) = 2654772 bytes

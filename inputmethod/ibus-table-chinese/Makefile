@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.14 2017/08/16 21:22:13 wiz Exp $
-#
+# $NetBSD: Makefile,v 1.16 2022/09/22 09:39:25 adam Exp $
 
-DISTNAME=	ibus-table-chinese-1.8.2
+DISTNAME=	ibus-table-chinese-1.8.3
 CATEGORIES=	inputmethod chinese
-MASTER_SITES=	-https://github.com/definite/ibus-table-chinese/archive/${PKGVERSION_NOREV}.tar.gz
+MASTER_SITES=	${MASTER_SITE_GITHUB:=definite/}
+GITHUB_TAG=	${PKGVERSION_NOREV}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/ibus/ibus/wiki
@@ -11,18 +11,18 @@ COMMENT=	Chinese tables for IBus-Table
 LICENSE=	gnu-gpl-v3
 
 USE_CMAKE=	yes
-USE_LANGUAGES=	c c++
+USE_LANGUAGES=	# none
 USE_TOOLS+=	pkg-config
 
 BUILD_DEPENDS+=	cmake-fedora>=2.0:../../devel/cmake-fedora
 
 # iconv: unexpected end of file; the last character is incomplete.
-MAKE_JOBS_SAFE=	noo
+MAKE_JOBS_SAFE=	no
 
 .include "../../mk/bsd.prefs.mk"
 
 # Illegal byte sequence in array30_ExtB.txt
-.if !empty(MACHINE_PLATFORM:MNetBSD-[0-5].*-*)
+.if ${OPSYS} == "NetBSD" && ${OPSYS_VERSION} < 050000
 BUILD_DEPENDS+=		libiconv-[0-9]*:../../converters/libiconv
 CMAKE_ARGS+=		-DICONV_CMD:PATH=${LOCALBASE}/bin/iconv
 .endif

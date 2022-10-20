@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.14 2021/12/08 16:03:27 adam Exp $
+# $NetBSD: Makefile,v 1.19 2022/08/11 05:08:06 gutteridge Exp $
 
-DISTNAME=	dino-0.2.2
-PKGREVISION=	1
+DISTNAME=	dino-0.3.0
+PKGREVISION=	4
 CATEGORIES=	chat
 MASTER_SITES=	${MASTER_SITE_GITHUB:=dino/}
 GITHUB_PROJECT=	dino
@@ -13,6 +13,7 @@ COMMENT=	Modern XMPP (Jabber) chat client
 LICENSE=	gnu-gpl-v3
 
 USE_TOOLS+=		pkg-config
+USE_LANGUAGES=		c c++
 USE_CMAKE=		yes
 USE_PKGLOCALEDIR=	yes
 
@@ -20,6 +21,7 @@ USE_PKGLOCALEDIR=	yes
 MAKE_JOBS_SAFE=		no
 
 .include "../../chat/libsignal-protocol-c/buildlink3.mk"
+.include "../../comms/srtp/buildlink3.mk"
 .include "../../converters/qrencode/buildlink3.mk"
 BUILDLINK_API_DEPENDS.sqlite3+=	sqlite3>=3.24
 .include "../../databases/sqlite3/buildlink3.mk"
@@ -28,9 +30,13 @@ BUILDLINK_API_DEPENDS.sqlite3+=	sqlite3>=3.24
 .include "../../graphics/gdk-pixbuf2/buildlink3.mk"
 BUILDLINK_DEPMETHOD.vala=	build
 .include "../../lang/vala/buildlink3.mk"
+.include "../../multimedia/gst-plugins1-base/buildlink3.mk"
+.include "../../net/libnice/buildlink3.mk"
 .include "../../net/libsoup/buildlink3.mk"
 .include "../../security/gpgme/buildlink3.mk"
+.include "../../security/gnutls/buildlink3.mk"
 .include "../../security/libgcrypt/buildlink3.mk"
+.include "../../textproc/gspell/buildlink3.mk"
 .include "../../textproc/icu/buildlink3.mk"
 .include "../../x11/gtk3/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"

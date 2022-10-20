@@ -1,11 +1,8 @@
-# $NetBSD: Makefile,v 1.111 2021/02/18 17:09:33 nia Exp $
+# $NetBSD: Makefile,v 1.113 2022/10/02 19:40:06 nros Exp $
 
-DISTNAME=		dhcpcd-9.4.0
-PKGNAME=		${DISTNAME:S/-rc/rc/}
+DISTNAME=		dhcpcd-9.4.1
 CATEGORIES=		net
-MASTER_SITES=		ftp://roy.marples.name/pub/dhcpcd/
-MASTER_SITES+=		https://www.aydogan.net/distfiles/roy/dhcpcd/
-MASTER_SITES+=		http://cflags.cc/roy/dhcpcd/
+MASTER_SITES=		https://roy.marples.name/downloads/dhcpcd/
 EXTRACT_SUFX=		.tar.xz
 
 MAINTAINER=		roy@NetBSD.org
@@ -31,12 +28,12 @@ DHCPCD_USER?=		dhcpcd
 DHCPCD_GROUP?=		dhcpcd
 DHCPCD_CHROOTDIR?=	${VARBASE}/dhcpcd
 
-BUILD_DEFS+=            DHCPCD_CHROOTDIR VARBASE
+BUILD_DEFS+=		DHCPCD_CHROOTDIR VARBASE
 
-PKG_USERS_VARS+=        DHCPCD_USER
-PKG_GROUPS_VARS+=       DHCPCD_GROUP
-PKG_GROUPS=             ${DHCPCD_GROUP}
-PKG_USERS=              ${DHCPCD_USER}:${DHCPCD_GROUP}
+PKG_USERS_VARS+=	DHCPCD_USER
+PKG_GROUPS_VARS+=	DHCPCD_GROUP
+PKG_GROUPS=		${DHCPCD_GROUP}
+PKG_USERS=		${DHCPCD_USER}:${DHCPCD_GROUP}
 
 MAKE_DIRS+=		${DHCPCD_CHROOTDIR}
 

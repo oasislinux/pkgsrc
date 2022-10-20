@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.64 2021/10/26 11:24:24 nia Exp $
+$NetBSD: distinfo,v 1.67 2022/04/30 13:36:02 wen Exp $
 
-BLAKE2s (DateTime-1.54.tar.gz) = 8ea9ed60a982a85504a685ead695ec6473d8ff85a3d2a5238bcfc45f9b068993
-SHA512 (DateTime-1.54.tar.gz) = b974bf2191d6d9ac5e674edf05da8bca1b506c953dc6280d16358f09c55601bf47c0158de5ee46f79ee8e56e8e358e0168a70480cf7a24270475914e5278b843
-Size (DateTime-1.54.tar.gz) = 314605 bytes
+BLAKE2s (DateTime-1.58.tar.gz) = 65355c67a46e0c1fe0a6d3331a80defbe1c17f75783c40b302ac03674f7a326c
+SHA512 (DateTime-1.58.tar.gz) = 2d337c06bb5125c4b81f5a1bff3c83366e53c86765333d76b7e80f39f209b1e1d3a3251395fb5f5778dc35ab356823a9e1d3f7a4f84ff919cc202b641487be31
+Size (DateTime-1.58.tar.gz) = 323759 bytes

@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.17 2020/10/27 23:05:01 fcambus Exp $
+# $NetBSD: Makefile,v 1.21 2022/06/27 15:29:15 fcambus Exp $
 
-DISTNAME=	libansilove-1.2.8
+DISTNAME=	libansilove-1.3.1
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_GITHUB:=ansilove/}
 GITHUB_RELEASE=	${PKGVERSION_NOREV}
 
-MAINTAINER=	fcambus@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.ansilove.org/
 COMMENT=	Library for converting ANSI, ASCII, and other formats to PNG
 LICENSE=	2-clause-bsd

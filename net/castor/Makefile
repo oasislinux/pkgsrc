@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.3 2022/01/28 08:24:56 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2022/08/11 05:09:08 gutteridge Exp $
 
-DISTNAME=	0.8.18
-PKGNAME=	castor-0.8.18
+DISTNAME=	0.9.0
+PKGNAME=	castor-0.9.0
 PKGREVISION=	1
 CATEGORIES=	net
 MASTER_SITES=	https://git.sr.ht/~julienxx/castor/archive/
@@ -29,7 +29,7 @@ do-install:
 		${DESTDIR}${PREFIX}/bin
 	${INSTALL_DATA} ${WRKSRC}/data/Castor.desktop \
 		${DESTDIR}${PREFIX}/share/applications
-	${INSTALL_DATA} ${WRKSRC}/data/castor_settings.toml.example \
+	${INSTALL_DATA} ${WRKSRC}/data/settings.toml \
 		${DESTDIR}${PREFIX}/share/examples/castor
 	${INSTALL_DATA} ${WRKSRC}/data/org.typed-hole.castor.svg \
 		${DESTDIR}${PREFIX}/share/icons/hicolor/scalable/apps

@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.25 2021/11/05 11:06:24 fcambus Exp $
+# $NetBSD: Makefile,v 1.30 2022/06/27 15:29:17 fcambus Exp $
 
-DISTNAME=	lowdown-0.10.0
+DISTNAME=	lowdown-1.0.0
 CATEGORIES=	textproc
 MASTER_SITES=	https://kristaps.bsd.lv/lowdown/snapshots/
 
-MAINTAINER=	fcambus@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://kristaps.bsd.lv/lowdown/
 COMMENT=	Simple Markdown translator
 LICENSE=	isc
@@ -20,6 +20,8 @@ SUBST_SED.install+=	-e 's,/usr/local,${PREFIX},' \
 SUBST_FILES.install+=	configure
 SUBST_STAGE.install=	pre-configure
 SUBST_MESSAGE.install=	Fixing installation path.
+
+INSTALL_TARGET=		install install_libs
 
 TEST_TARGET=	regress
 

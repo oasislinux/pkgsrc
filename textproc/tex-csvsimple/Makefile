@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.4 2020/01/18 23:35:33 rillig Exp $
+# $NetBSD: Makefile,v 1.6 2022/09/01 10:21:00 markd Exp $
 
 DISTNAME=	csvsimple
-PKGNAME=	tex-${DISTNAME}-1.21
-TEXLIVE_REV=	51010
+PKGNAME=	tex-${DISTNAME}-2.3.1
+TEXLIVE_REV=	63678
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://ctan.org/pkg/csvsimple
@@ -14,6 +14,5 @@ DEPENDS+=	tex-latex-[0-9]*:../../print/tex-latex
 DEPENDS+=	tex-pgf-[0-9]*:../../print/tex-pgf
 DEPENDS+=	tex-tools-[0-9]*:../../print/tex-tools
 
-TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

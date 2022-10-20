@@ -1,9 +1,11 @@
-# $NetBSD: Makefile,v 1.48 2021/11/07 12:09:12 wiz Exp $
+# $NetBSD: Makefile,v 1.50 2022/09/10 06:33:09 wiz Exp $
 
 DISTNAME=	exiv2-0.27.5-Source
 PKGNAME=	${DISTNAME:S/-Source//}
+PKGREVISION=	1
 CATEGORIES=	graphics
-MASTER_SITES=	https://www.exiv2.org/builds/
+MASTER_SITES=	${MASTER_SITE_GITHUB:=Exiv2/}
+GITHUB_RELEASE=	v${PKGVERSION_NOREV}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.exiv2.org/
@@ -20,6 +22,8 @@ GCC_REQD+=	3.3
 .include "../../mk/bsd.prefs.mk"
 
 CMAKE_ARGS+=	-DEXIV2_BUILD_SAMPLES:BOOL=OFF
+# turn on BMFF support -- will be default as of 1.00
+CMAKE_ARGS+=	-DEXIV2_ENABLE_BMFF:BOOL=ON
 .if ${OPSYS} == "Darwin"
 CMAKE_ARGS+=	-DIntl_INCLUDE_DIR=${BUILDLINK_PREFIX.gettext}/include
 .endif
@@ -29,8 +33,7 @@ LDFLAGS.SunOS+=	-lsocket -lnsl
 
 CXXFLAGS.SunOS+=	-fPIC
 
-USE_PKGLOCALEDIR=	yes
-PKGCONFIG_OVERRIDE=	config/exiv2.pc.in
+PKGCONFIG_OVERRIDE=	cmake/exiv2.pc.in
 
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"

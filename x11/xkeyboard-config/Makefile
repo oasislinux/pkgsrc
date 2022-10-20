@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.48 2022/01/25 11:16:56 nia Exp $
+# $NetBSD: Makefile,v 1.51 2022/10/17 07:45:28 wiz Exp $
 
-DISTNAME=		xkeyboard-config-2.34
+DISTNAME=		xkeyboard-config-2.37
 CATEGORIES=		x11
 MASTER_SITES=		${MASTER_SITE_XORG:=data/${PKGBASE}/}
-EXTRACT_SUFX=		.tar.bz2
+EXTRACT_SUFX=		.tar.xz
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		https://www.freedesktop.org/wiki/Software/XKeyboardConfig
@@ -13,21 +13,17 @@ BUILD_DEPENDS+=		xkbcomp-[0-9]*:../../x11/xkbcomp
 
 CONFLICTS+=		xkbdata-[0-9]*
 
-MAKE_JOBS_SAFE=		no
-
-GNU_CONFIGURE=		yes
-USE_LIBTOOL=		yes
-USE_TOOLS+=		gmake msgfmt perl pkg-config
+USE_TOOLS+=		msgfmt perl pkg-config
 PKGCONFIG_OVERRIDE+=	xkeyboard-config.pc.in
 PYTHON_FOR_BUILD_ONLY=	yes
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 BUILD_DEFS+=		VARBASE
 BUILD_DEFS+=		XKBCOMPDIR
 
-CONFIGURE_ARGS+=	--with-xkb-rules-symlink=xfree86,xorg
-CONFIGURE_ARGS+=	--with-xkb-base=${XKBBASE:Q}
-CONFIGURE_ARGS+=	--datadir=${PREFIX}/share
-CONFIGURE_ARGS+=	--without-xsltproc
+MESON_ARGS+=		-Dxorg-rules-symlinks=true
+
 ###
 REPLACE_SH=		rules/merge.sh
 ###
@@ -59,4 +55,5 @@ BUILDLINK_API_DEPENDS.libX11+=	libX11>=1.4.3
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/xorgproto/buildlink3.mk"
 .include "../../lang/python/tool.mk"
+.include "../../devel/meson/build.mk"
 .include "../../mk/bsd.pkg.mk"

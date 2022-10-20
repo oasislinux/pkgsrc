@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2022/01/04 20:54:13 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2022/04/26 18:32:08 adam Exp $
 
-DISTNAME=	jplephem-2.16
+DISTNAME=	jplephem-2.17
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	2
 CATEGORIES=	math python
 MASTER_SITES=	${MASTER_SITE_PYPI:=j/jplephem/}
 
@@ -15,7 +14,7 @@ DEPENDS+=	${PYPKGPREFIX}-numpy>=1.17.0:../../math/py-numpy
 
 USE_LANGUAGES=	# none
 
-PYTHON_VERSIONS_INCOMPATIBLE=	27
+PYTHON_VERSIONS_INCOMPATIBLE=	27 37 # py-numpy
 
 .include "../../math/py-numpy/buildlink3.mk"
 .include "../../lang/python/egg.mk"

@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.169 2022/01/21 14:32:49 ryoon Exp $
+# $NetBSD: Makefile,v 1.176 2022/09/10 00:14:19 gutteridge Exp $
 
 DISTNAME=	mlterm-3.9.2
 DIST_SUBDIR=	${PKGNAME_NOREV}	# for re-tagged 3.9.2
+PKGREVISION=	6
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_GITHUB:=arakiken/}
-GITHUB_PROJECT= ${PKGBASE}
+GITHUB_PROJECT=	${PKGBASE}
 GITHUB_TAG=	${PKGVERSION_NOREV}
 
 MAINTAINER=	tsutsui@NetBSD.org
@@ -22,7 +23,7 @@ USE_PKGLOCALEDIR=	yes
 
 PKG_SYSCONFSUBDIR=	mlterm
 EGDIR=			${PREFIX}/share/examples/mlterm
-.for f in aafont color font key main menu taafont termcap tfont vaafont vfont \
+.for f in aafont color font key main taafont termcap tfont vaafont vfont \
 	xim
 CONF_FILES+=		${EGDIR}/${f} ${PKG_SYSCONFDIR}/${f}
 .endfor
@@ -33,6 +34,16 @@ INSTALL_MAKE_FLAGS+=	sysconfdir=${PREFIX}/share/examples
 
 .include "../../mk/bsd.prefs.mk"
 .include "options.mk"
+
+# Work around the fact this package tests whether posix_openpt(3) works at
+# runtime. This fails in typical sandboxed build environments (including
+# TNF's used for official binary builds), which causes a fallback to use
+# "old-style" BSD ptys. (If a user was running a kernel with non-standard
+# settings that don't support the expectations here, they'd need to disable
+# this override.) See PR pkg/56936.
+.if ${OPSYS} == "NetBSD"
+CONFIGURE_ENV+=		bl_cv_pty=streams
+.endif
 
 SUBST_CLASSES+=		link
 SUBST_MESSAGE.link=	Fixing hardcoded paths and link options in Makefiles.
@@ -83,7 +94,6 @@ post-install:
 
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
-.include "../../x11/gtk3/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"

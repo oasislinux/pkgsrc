@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.53 2021/05/24 19:53:21 wiz Exp $
+# $NetBSD: Makefile,v 1.55 2022/06/28 11:35:03 wiz Exp $
 #
 
-PKGREVISION=	6
+PKGREVISION=	8
 CATEGORIES=	net sysutils
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -55,7 +55,7 @@ DEPENDS+=	{ssh{,6}-[0-9]*,openssh-[0-9]*}:../../security/openssh
 
 .if (!exists(/usr/bin/dig) && !exists(/usr/sbin/dig)) || \
     (!exists(/usr/bin/nslookup) && !exists(/usr/sbin/nslookup))
-DEPENDS+=	bind-[0-9]*:../../net/bind911
+DEPENDS+=	bind-[0-9]*:../../net/bind916
 .endif
 
 .if ${OPSYS} == "NetBSD"

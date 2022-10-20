@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2022/01/18 08:26:38 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2022/07/18 12:47:52 jperkin Exp $
 
 DISTNAME=	${RUBY_DISTNAME}
 PKGNAME=	${RUBY_PKGPREFIX}-base-${RUBY_VERSION}

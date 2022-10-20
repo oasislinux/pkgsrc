@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.15 2021/12/02 18:15:26 nia Exp $
+# $NetBSD: Makefile,v 1.17 2022/04/17 07:38:51 nia Exp $
 
 DISTNAME=	xf86-video-fbdev-0.5.0
 CATEGORIES=	x11
@@ -16,9 +16,11 @@ USE_TOOLS+=	pkg-config
 
 RELRO_SUPPORTED=	partial
 
+NOT_FOR_PLATFORM+=	NetBSD-*-*
+
 CONFIGURE_ENV.SunOS+=	DRIVER_MAN_SUFFIX=4
 
-X11_BUILTIN_NAME=	xf86-video-fbdev
+X11_DRV_NAME=	fbdev
 .include "../../meta-pkgs/modular-xorg/avoid-duplicate.mk"
 .include "../../x11/xorgproto/buildlink3.mk"
 .include "../../x11/modular-xorg-server/buildlink3.mk"

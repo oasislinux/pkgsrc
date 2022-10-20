@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.10 2017/07/30 22:32:20 wiz Exp $
+# $NetBSD: Makefile,v 1.12 2022/10/10 03:36:49 taca Exp $
 
 DISTNAME=	rubytter-1.5.1
 CATEGORIES=	net

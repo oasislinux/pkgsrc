@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.14 2021/12/08 16:02:32 adam Exp $
+# $NetBSD: Makefile,v 1.19 2022/10/06 02:09:42 markd Exp $
 
-PKGREVISION= 4
 .include "../../print/cups/Makefile.common"
 
 PKGNAME=	libcups-${CUPS_VERS}
+PKGREVISION=	2
 MASTER_SITES=	${MASTER_SITE_GITHUB:=OpenPrinting/}
 
 MAINTAINER=	sbd@NetBSD.org
@@ -32,10 +32,8 @@ CONFIGURE_ARGS+=	--with-docdir=${PREFIX}/share/doc/cups
 CONFIGURE_ARGS+=	--with-serverbindir=${PREFIX}/libexec/cups
 CONFIGURE_ARGS+=	--with-components=libcups
 CONFIGURE_ARGS+=	--enable-libpaper
-CONFIGURE_ARGS+=	--enable-ssl
-CONFIGURE_ARGS+=	--enable-gnutls
-CONFIGURE_ARGS+=	--disable-cdsassl
 CONFIGURE_ARGS+=	--with-exe-file-perm=0755
+CONFIGURE_ARGS+=	--with-tls=gnutls
 
 CONFIGURE_ENV+=		DSOFLAGS=${LDFLAGS:M*:Q}
 
@@ -46,6 +44,8 @@ BUILD_DEFS+=		VARBASE
 
 # Explicitly disable epoll on illumos, it is provided for Linux compat only.
 CONFIGURE_ENV.SunOS+=	ac_cv_func_epoll_create=no
+
+CFLAGS.SunOS+=		-D_POSIX_PTHREAD_SEMANTICS
 
 LIBS+=			${BUILDLINK_LDADD.iconv}
 
@@ -65,6 +65,10 @@ SUBST_SED.piefix=	-e 's|@PIEFLAGS@||g'
 SUBST_STAGE.piefix=	pre-configure
 .endif
 
+PKGCONFIG_OVERRIDE+=		cups.pc
+PKGCONFIG_OVERRIDE_STAGE=	post-configure
+
+AUTOCONF_REQD=		2.71
 pre-configure:
 	cd ${WRKSRC} && aclocal && autoconf
 

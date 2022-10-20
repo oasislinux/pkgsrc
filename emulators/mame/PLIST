@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.62 2022/01/31 11:27:50 wiz Exp $
+@comment $NetBSD: PLIST,v 1.70 2022/09/28 11:11:28 wiz Exp $
 bin/castool
 bin/chdman
 bin/floptool
@@ -25,7 +25,6 @@ man/man1/ldresample.1
 man/man1/ldverify.1
 man/man1/romcmp.1
 man/man6/mame.6
-man/man6/mess.6
 share/doc/mame/CONTRIBUTING.md
 share/doc/mame/README.md
 share/mame/artwork/LICENSE
@@ -56,6 +55,7 @@ share/mame/artwork/bgfx/chains/hq2x.png
 share/mame/artwork/bgfx/chains/hq3x.png
 share/mame/artwork/bgfx/chains/hq4x.png
 share/mame/artwork/dir.txt
+share/mame/artwork/lut-default.png
 share/mame/artwork/monochrome-chessboard.png
 share/mame/artwork/monochrome-matrix.png
 share/mame/artwork/scanlines.png
@@ -99,6 +99,7 @@ share/mame/hash/altos8600.xml
 share/mame/hash/amiga_a1000.xml
 share/mame/hash/amiga_a3000.xml
 share/mame/hash/amiga_apps.xml
+share/mame/hash/amiga_demos.xml
 share/mame/hash/amiga_flop.xml
 share/mame/hash/amiga_hardware.xml
 share/mame/hash/amiga_hdd.xml
@@ -215,6 +216,8 @@ share/mame/hash/database.xml
 share/mame/hash/dc.xml
 share/mame/hash/dgnalpha_flop.xml
 share/mame/hash/dgnbeta_flop.xml
+share/mame/hash/digiblast_cart.xml
+share/mame/hash/digilog320.xml
 share/mame/hash/dim68k.xml
 share/mame/hash/dmv.xml
 share/mame/hash/dps1.xml
@@ -256,6 +259,7 @@ share/mame/hash/evio.xml
 share/mame/hash/ews286_flop.xml
 share/mame/hash/excalibur64.xml
 share/mame/hash/exl100.xml
+share/mame/hash/famibox.xml
 share/mame/hash/famicom_cass.xml
 share/mame/hash/famicom_flop.xml
 share/mame/hash/fidel_msc.xml
@@ -264,6 +268,7 @@ share/mame/hash/fidel_scc.xml
 share/mame/hash/fm77av.xml
 share/mame/hash/fm7_cass.xml
 share/mame/hash/fm7_disk.xml
+share/mame/hash/fm8_cass.xml
 share/mame/hash/fmtowns_cd.xml
 share/mame/hash/fmtowns_flop_cracked.xml
 share/mame/hash/fmtowns_flop_misc.xml
@@ -359,7 +364,9 @@ share/mame/hash/kc_cass.xml
 share/mame/hash/kc_flop.xml
 share/mame/hash/kim1_cass.xml
 share/mame/hash/korvet_flop.xml
-share/mame/hash/lantutor.xml
+share/mame/hash/kpython2.xml
+share/mame/hash/lanteach.xml
+share/mame/hash/lantrans.xml
 share/mame/hash/laser2001_cart.xml
 share/mame/hash/laser2001_flop.xml
 share/mame/hash/leapfrog_didj_cart.xml
@@ -438,6 +445,7 @@ share/mame/hash/mt65_snap.xml
 share/mame/hash/mtx_cart.xml
 share/mame/hash/mtx_cass.xml
 share/mame/hash/mtx_flop.xml
+share/mame/hash/mtx_hdd.xml
 share/mame/hash/mtx_rom.xml
 share/mame/hash/myvision.xml
 share/mame/hash/mz2000_cass.xml
@@ -459,6 +467,7 @@ share/mame/hash/nes_ade.xml
 share/mame/hash/nes_datach.xml
 share/mame/hash/nes_kstudio.xml
 share/mame/hash/nes_ntbrom.xml
+share/mame/hash/nes_vt_cart.xml
 share/mame/hash/next.xml
 share/mame/hash/next_cdrom.xml
 share/mame/hash/next_hdd.xml
@@ -494,6 +503,7 @@ share/mame/hash/pc8001mk2_flop.xml
 share/mame/hash/pc8001mk2sr_flop.xml
 share/mame/hash/pc8201.xml
 share/mame/hash/pc8801_cass.xml
+share/mame/hash/pc8801_cdrom.xml
 share/mame/hash/pc8801_flop.xml
 share/mame/hash/pc88va.xml
 share/mame/hash/pc98.xml
@@ -523,6 +533,7 @@ share/mame/hash/picno.xml
 share/mame/hash/pico.xml
 share/mame/hash/pippin.xml
 share/mame/hash/pippin_flop.xml
+share/mame/hash/playmaker.xml
 share/mame/hash/plus4_cart.xml
 share/mame/hash/plus4_cass.xml
 share/mame/hash/plus4_flop.xml
@@ -560,6 +571,7 @@ share/mame/hash/r9751.xml
 share/mame/hash/radio86_cart.xml
 share/mame/hash/radio86_cass.xml
 share/mame/hash/rainbow.xml
+share/mame/hash/roland_tnsc1.xml
 share/mame/hash/rwtrntcs.xml
 share/mame/hash/rx78_cart.xml
 share/mame/hash/rx78_cass.xml
@@ -664,6 +676,7 @@ share/mame/hash/trs80_flop.xml
 share/mame/hash/trs80_quik.xml
 share/mame/hash/trs80m2.xml
 share/mame/hash/trsm100.xml
+share/mame/hash/tsconf_betadisc_flop.xml
 share/mame/hash/ttwist_brainquest_cart.xml
 share/mame/hash/turboextreme_cart.xml
 share/mame/hash/tutor.xml
@@ -695,6 +708,7 @@ share/mame/hash/vidbrain.xml
 share/mame/hash/videopac.xml
 share/mame/hash/vii.xml
 share/mame/hash/vip.xml
+share/mame/hash/vis.xml
 share/mame/hash/visicom.xml
 share/mame/hash/vixen.xml
 share/mame/hash/vsmile_cart.xml
@@ -718,6 +732,7 @@ share/mame/hash/x07_card.xml
 share/mame/hash/x07_cass.xml
 share/mame/hash/x1_cass.xml
 share/mame/hash/x1_flop.xml
+share/mame/hash/x37_flop.xml
 share/mame/hash/x68k_flop.xml
 share/mame/hash/xegs.xml
 share/mame/hash/xerox820.xml

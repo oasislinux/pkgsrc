@@ -1,12 +1,11 @@
-# $NetBSD: Makefile,v 1.17 2020/09/02 17:47:12 leot Exp $
-#
+# $NetBSD: Makefile,v 1.19 2022/10/09 12:56:39 leot Exp $
 
-DISTNAME=	dmenu-5.0
+DISTNAME=	dmenu-5.2
 CATEGORIES=	x11
-MASTER_SITES=	http://dl.suckless.org/tools/
+MASTER_SITES=	https://dl.suckless.org/tools/
 
 MAINTAINER=	leot@NetBSD.org
-HOMEPAGE=	http://tools.suckless.org/dmenu
+HOMEPAGE=	https://tools.suckless.org/dmenu
 COMMENT=	Dynamic menu for X
 LICENSE=	mit
 

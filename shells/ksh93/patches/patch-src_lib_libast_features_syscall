@@ -1,0 +1,29 @@
+$NetBSD: patch-src_lib_libast_features_syscall,v 1.2 2022/08/09 06:37:32 pin Exp $
+
+On NetBSD, use `SYS___getcwd' to get the getcwd(2) syscall.
+
+--- src/lib/libast/features/syscall.orig	2022-08-05 10:52:49.000000000 +0000
++++ src/lib/libast/features/syscall
+@@ -4,7 +4,11 @@ lib	sysgetcwd note{ syscall(SYS_getcwd,b
+ 	int main()
+ 	{
+ 		char	buf[256];
++	#ifdef __NetBSD__
++		return syscall(SYS___getcwd, buf, sizeof(buf)) < 0;
++	#else
+ 		return syscall(SYS_getcwd, buf, sizeof(buf)) < 0;
++	#endif
+ 	}
+ }end
+ 
+@@ -14,6 +18,10 @@ if	( _lib_sysgetcwd ) {
+ endif
+ 
+ if	( _lib_sysgetcwd ) {
++	#ifdef __NetBSD__
++	#define SYSGETCWD(a,b)		syscall(SYS___getcwd,a,b)
++	#else
+ 	#define SYSGETCWD(a,b)		syscall(SYS_getcwd,a,b)
++	#endif
+ }
+ endif

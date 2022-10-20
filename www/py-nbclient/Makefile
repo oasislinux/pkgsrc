@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.1 2022/02/05 11:26:35 adam Exp $
+# $NetBSD: Makefile,v 1.8 2022/07/01 17:58:34 adam Exp $
 
-DISTNAME=	nbclient-0.5.10
+DISTNAME=	nbclient-0.6.6
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	www python
 MASTER_SITES=	${MASTER_SITE_PYPI:=n/nbclient/}
@@ -13,12 +13,13 @@ LICENSE=	modified-bsd
 DEPENDS+=	${PYPKGPREFIX}-jupyter_client>=6.1.5:../../devel/py-jupyter_client
 DEPENDS+=	${PYPKGPREFIX}-nbformat>=5.0:../../www/py-nbformat
 DEPENDS+=	${PYPKGPREFIX}-nest-asyncio>0:../../devel/py-nest-asyncio
-DEPENDS+=	${PYPKGPREFIX}-traitlets>=4.2:../../devel/py-traitlets
+DEPENDS+=	${PYPKGPREFIX}-traitlets>=5.2.2:../../devel/py-traitlets
 TEST_DEPENDS+=	${PYPKGPREFIX}-ipykernel>0:../../devel/py-ipykernel
 TEST_DEPENDS+=	${PYPKGPREFIX}-ipython>0:../../devel/py-ipython
 TEST_DEPENDS+=	${PYPKGPREFIX}-ipywidgets>0:../../www/py-ipywidgets
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-[0-9]*:../../devel/py-test
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-cov-[0-9]*:../../devel/py-test-cov
+TEST_DEPENDS+=	${PYPKGPREFIX}-testpath-[0-9]*:../../devel/py-testpath
 TEST_DEPENDS+=	${PYPKGPREFIX}-xmltodict-[0-9]*:../../textproc/py-xmltodict
 
 USE_LANGUAGES=	# none

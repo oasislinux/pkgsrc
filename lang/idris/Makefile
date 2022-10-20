@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.7 2022/01/18 02:48:17 pho Exp $
+# $NetBSD: Makefile,v 1.14 2022/09/07 06:50:53 pho Exp $
 
-DISTNAME=	idris-1.3.3
+DISTNAME=	idris-1.3.4
 PKGNAME=	${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	6
 CATEGORIES=	lang
 
 MAINTAINER=	pho@cielonegro.org
@@ -26,16 +26,26 @@ SUBST_STAGE.runtime=	pre-configure
 SUBST_FILES.runtime=	src/IRTS/System.hs
 SUBST_VARS.runtime=	CC PREFIX COMPILER_RPATH_FLAG
 
-# When -O2 is in effect, GHC 8.8.1 uses whopping 1 TiB of virtual
-# memory (what?) to compile src/Idris/IBC.hs for some unknown reason,
-# possibly related to https://gitlab.haskell.org/ghc/ghc/issues/5642
-# or https://gitlab.haskell.org/ghc/ghc/issues/13535
+# When -O2 is in effect, GHC uses whopping 4 GiB of memory (what?) to
+# compile src/Idris/IBC.hs for some unknown reason, possibly related to
+# https://gitlab.haskell.org/ghc/ghc/issues/5642 or
+# https://gitlab.haskell.org/ghc/ghc/issues/13535
 HASKELL_OPTIMIZATION_LEVEL=	1
 
-# Parallelization is unsafe because of the high memory consumption
-# even with -O1. Setting it to -O0 may seem desirable, but that makes
-# the resulting compiler way too slow.
-MAKE_JOBS_SAFE=	NO
+# If idris is to be linked dynamically, it will depend on more than 110
+# shared objects and the dynamic linker will spend nearly a second to
+# resolve symbols on startup. This is unacceptable because idris tends to
+# be launched very frequently by build systems. This wastes storage, but
+# time is more expensive than disks.
+HASKELL_ENABLE_SHARED_LIBRARY=	no
+
+# It makes no sense to build the profiling library because this package
+# isn't meant to be used as a library.
+HASKELL_ENABLE_LIBRARY_PROFILING=	no
+
+# idris is built with optparse-applicative, and can generate shell
+# completion scripts automatically.
+.include "../../devel/hs-optparse-applicative/application.mk"
 
 .include "options.mk"
 
@@ -54,7 +64,6 @@ MAKE_JOBS_SAFE=	NO
 .include "../../math/hs-ieee754/buildlink3.mk"
 .include "../../textproc/hs-megaparsec/buildlink3.mk"
 .include "../../net/hs-network/buildlink3.mk"
-.include "../../devel/hs-optparse-applicative/buildlink3.mk"
 .include "../../devel/hs-parser-combinators/buildlink3.mk"
 .include "../../textproc/hs-regex-tdfa/buildlink3.mk"
 .include "../../devel/hs-safe/buildlink3.mk"

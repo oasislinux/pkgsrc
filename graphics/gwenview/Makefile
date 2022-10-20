@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.116 2021/12/08 16:04:57 adam Exp $
+# $NetBSD: Makefile,v 1.122 2022/09/29 00:53:10 markd Exp $
 
 DISTNAME=	gwenview-${KAPPSVER}
-PKGREVISION=	4
 CATEGORIES=	graphics
 
 HOMEPAGE=	https://kde.org/applications/graphics/org.kde.gwenview/
@@ -22,6 +21,7 @@ REPLACE_PERL=	kconf_update/gwenview-imageview-alphabackgroundmode-update.pl
 .include "../../devel/kparts/buildlink3.mk"
 .include "../../devel/purpose/buildlink3.mk"
 .include "../../graphics/exiv2/buildlink3.mk"
+.include "../../graphics/kimageannotator/buildlink3.mk"
 .include "../../graphics/libkdcraw/buildlink3.mk"
 .include "../../graphics/libkipi/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"

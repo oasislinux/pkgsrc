@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.1 2017/10/03 17:03:30 minskim Exp $
+# $NetBSD: Makefile,v 1.3 2022/08/28 04:06:24 taca Exp $
 
-DISTNAME=	windows_error-0.1.2
+DISTNAME=	windows_error-0.1.4
 CATEGORIES=	misc
 
 MAINTAINER=	minskim@NetBSD.org

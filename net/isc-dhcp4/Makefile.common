@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.42 2021/05/27 14:10:12 taca Exp $
+# $NetBSD: Makefile.common,v 1.45 2022/10/05 16:16:54 taca Exp $
 #
 # used by net/isc-dhcp4/Makefile
 # used by net/isc-dhcpd4/Makefile
@@ -17,7 +17,7 @@ LICENSE=		mpl-2.0
 
 CONFLICTS+=		isc-dhcp-base-3.*
 
-VERSION=		4.4.2-P1
+VERSION=		4.4.3-P1
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -59,6 +59,7 @@ CONFIGURE_ARGS.NetBSD+=	--with-randomdev=/dev/random
 .endif
 
 CPPFLAGS.SunOS+=	-D_XOPEN_SOURCE=600 -D__EXTENSIONS__
+LDFLAGS.SunOS+=		-lnsl
 
 SUBST_CLASSES+=		config
 SUBST_STAGE.config=	pre-configure
@@ -86,7 +87,7 @@ BIND_CONFIGURE_ARGS+=	--with-export-libdir=${WRKSRC}/bind/lib
 BIND_CONFIGURE_ARGS+=	--with-gssapi=no
 BIND_CONFIGURE_ARGS+=	--with-python=no
 
-BIND_WRKSRC=		${WRKSRC}/bind/bind-9.11.14
+BIND_WRKSRC=		${WRKSRC}/bind/bind-9.11.36
 
 post-configure:
 	${RUN}${_ULIMIT_CMD}					\

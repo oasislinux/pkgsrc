@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.51 2020/08/17 20:20:16 leot Exp $
+# $NetBSD: Makefile,v 1.53 2022/08/09 12:08:31 jperkin Exp $
 
 COMMENT=		Small, fast and light-weight window manager
 PKGREVISION=		3

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.78 2022/01/20 17:08:33 nros Exp $
+# $NetBSD: Makefile,v 1.82 2022/06/30 11:18:14 nia Exp $
 
-DISTNAME=	gobject-introspection-1.68.0
-PKGREVISION=	1
+DISTNAME=	gobject-introspection-1.70.0
+PKGREVISION=	2
 CATEGORIES=	devel gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gobject-introspection/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.xz
@@ -40,7 +40,9 @@ SUBST_SED.timet+=	-e 's,@TIMET_CTYPE@,glong,g'
 SUBST_CLASSES+=		libdirs
 SUBST_STAGE.libdirs=	pre-configure
 SUBST_FILES.libdirs=	giscanner/ccompiler.py
+SUBST_FILES.libdirs+=	girepository/gitypelib.c
 SUBST_VARS.libdirs=	_OPSYS_LIB_DIRS
+SUBST_VARS.libdirs+=	PREFIX
 
 MAKE_ENV+=	LD_LIBRARY_PATH=${WRKSRC}/output/girepository
 # For Darwin
@@ -48,6 +50,11 @@ MAKE_ENV+=	DYLD_LIBRARY_PATH=${WRKSRC}/output/girepository
 
 # Disable cache to keep fake homedir clean
 MAKE_ENV+=	GI_SCANNER_DISABLE_CACHE=yes
+
+# remove after patch-giscanner_doctemplates_*_meson.build are removed,
+# probably in 1.72.0
+post-install:
+	${FIND} ${DESTDIR}${PREFIX} -name \*.orig -exec rm {} \;
 
 BUILDLINK_API_DEPENDS.glib2+= glib2>=2.58.0
 .include "../../devel/glib2/buildlink3.mk"

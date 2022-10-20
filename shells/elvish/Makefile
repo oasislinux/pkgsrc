@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.8 2022/01/09 20:10:38 bsiegert Exp $
+# $NetBSD: Makefile,v 1.20 2022/10/05 11:33:06 bsiegert Exp $
 
-DISTNAME=	elvish-0.16.1
-PKGREVISION=	4
+DISTNAME=	elvish-0.18.0
+PKGREVISION=	7
 CATEGORIES=	shells
 MASTER_SITES=	${MASTER_SITE_GITHUB:=elves/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
@@ -16,10 +16,11 @@ PKG_SHELL=		bin/elvish
 GO_BUILD_PATTERN=	./...
 
 # needed for the tests
-USE_TOOLS+=		perl
+USE_TOOLS+=		perl gmake
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKDIR}/.gopath/bin/elvish ${DESTDIR}${PREFIX}/bin
+	${INSTALL_PROGRAM} ${WRKDIR}/.gopath/bin/elvish \
+		${DESTDIR}${PREFIX}/bin
 
 .include "go-modules.mk"
 

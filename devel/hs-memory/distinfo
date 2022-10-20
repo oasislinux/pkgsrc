@@ -1,8 +1,6 @@
-$NetBSD: distinfo,v 1.4 2021/10/26 10:14:58 nia Exp $
+$NetBSD: distinfo,v 1.6 2022/09/07 01:36:31 pho Exp $
 
-BLAKE2s (memory-0.15.0.tar.gz) = e666167f32f83b9b7a7f9a57986a231bad111739d9f42271872b66472b80186c
-SHA512 (memory-0.15.0.tar.gz) = 49aabf5fdaddae597df6d8f30a3e07c4d6d70fcc7b9146452a4ad4e81858786041676bc780e2b048fd683cc7c0d799d4579596c14fae940ea57954e9a7ee9129
-Size (memory-0.15.0.tar.gz) = 42299 bytes
-SHA1 (patch-Data_ByteArray_Bytes.hs) = 771298aac733f10d5ffeaa5243f3c6bfa49bcbfd
-SHA1 (patch-Data_ByteArray_ScrubbedBytes.hs) = 332856ebea1d7bf556a890945def7ef9dbe5d17b
-SHA1 (patch-Data_Memory_MemMap_Posix.hsc) = 97273516ad9731285d18315ab60884ad1c27642e
+BLAKE2s (memory-0.18.0.tar.gz) = 7e0ef4532be4ffa18a5b659a17b2cc9fddc5bfc4f3eb4a378d7acf6adf41507f
+SHA512 (memory-0.18.0.tar.gz) = 5f341dfab54d3f063ac34cc092240082f885f7ee5a23b3b3ed8b58a741ae238df289ccc7e40bbf52f2ce19c4f7bee186e7d9ed6e207e59de6758a7eea5a9fe85
+Size (memory-0.18.0.tar.gz) = 41957 bytes
+SHA1 (patch-Data_Memory_MemMap_Posix.hsc) = 214976ef75f69dd23cb360fe52893233f79ec73f

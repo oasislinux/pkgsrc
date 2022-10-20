@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.12 2021/12/08 16:02:48 adam Exp $
+# $NetBSD: Makefile,v 1.14 2022/04/24 15:43:39 tnn Exp $
 
 DISTNAME=	spdylay-1.4.0
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_GITHUB:=tatsuhiro-t/}
 EXTRACT_SUFX=	.tar.xz
@@ -33,7 +33,7 @@ LIBS.SunOS+=	-lsocket
 
 # bin/spdyd requires epoll or kqueue
 PLIST_VARS+=	spdyd
-.if ${OPSYS} != "SunOS"
+.if ${OPSYS} != "SunOS" || exists(/usr/include/sys/epoll.h)
 PLIST.spdyd=	yes
 .endif
 

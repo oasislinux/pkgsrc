@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.23 2021/12/02 18:15:26 nia Exp $
+# $NetBSD: Makefile,v 1.25 2022/07/11 19:51:05 wiz Exp $
 
-DISTNAME=	xf86-video-cirrus-1.5.3
-PKGREVISION=	2
+DISTNAME=	xf86-video-cirrus-1.6.0
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_XORG:=driver/}
-EXTRACT_SUFX=	.tar.bz2
+EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	joerg@NetBSD.org
 HOMEPAGE=	https://xorg.freedesktop.org/
@@ -18,7 +17,7 @@ RELRO_SUPPORTED=	partial
 
 CONFIGURE_ENV.SunOS+=	DRIVER_MAN_SUFFIX=4
 
-X11_BUILTIN_NAME=	xf86-video-cirrus
+X11_DRV_NAME=	cirrus
 .include "../../meta-pkgs/modular-xorg/avoid-duplicate.mk"
 .include "../../x11/modular-xorg-server/buildlink3.mk"
 .include "../../x11/xorgproto/buildlink3.mk"

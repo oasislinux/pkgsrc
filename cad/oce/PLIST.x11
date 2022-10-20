@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST.x11,v 1.2 2017/05/15 12:31:38 fhajny Exp $
+@comment $NetBSD: PLIST.x11,v 1.4 2022/10/04 10:21:19 wiz Exp $
 include/oce/AIS_AngleDimension.hxx
 include/oce/AIS_AttributeFilter.lxx
 include/oce/AIS_Axis.lxx
@@ -61,6 +61,8 @@ include/oce/BinTObjDrivers_ModelDriver.hxx
 include/oce/BinTObjDrivers_ObjectDriver.hxx
 include/oce/BinTObjDrivers_ReferenceDriver.hxx
 include/oce/BinTObjDrivers_XYZDriver.hxx
+${PLIST.Darwin}include/oce/Cocoa_LocalPool.hxx
+${PLIST.Darwin}include/oce/Cocoa_Window.hxx
 include/oce/DsgPrs_DatumPrs.hxx
 include/oce/Font_BRepFont.hxx
 include/oce/Font_FTFont.hxx
@@ -406,7 +408,7 @@ include/oce/XmlTObjDrivers_ModelDriver.hxx
 include/oce/XmlTObjDrivers_ObjectDriver.hxx
 include/oce/XmlTObjDrivers_ReferenceDriver.hxx
 include/oce/XmlTObjDrivers_XYZDriver.hxx
-include/oce/Xw_Window.hxx
+${PLIST.not_Darwin}include/oce/Xw_Window.hxx
 lib/libTKBin.so
 lib/libTKBin.so.11
 lib/libTKBin.so.11.0.0

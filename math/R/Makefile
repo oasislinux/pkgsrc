@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.229 2021/12/08 16:05:31 adam Exp $
+# $NetBSD: Makefile,v 1.235 2022/10/08 19:53:33 he Exp $
 
 #
 # If updating this package, please try to ensure PLIST.Darwin is kept in sync
 # to avoid unnecessarily breaking macOS users.
 #
-DISTNAME=	R-4.1.2
-PKGREVISION=	1
+DISTNAME=	R-4.2.0
+PKGREVISION=	2
 CATEGORIES=	math
 MASTER_SITES=	${MASTER_SITE_R_CRAN:=base/R-4/}
 
@@ -62,7 +62,7 @@ PLIST.x11=		yes
 # BLAS/LAPACK by default and only on request accelerate. Just
 # BLAS_ACCEPTED=	${_BLAS_TYPES} accelerate.framework
 # (here and in buildlink3.mk) and deleting the first conditional
-# branch might work, given that R knows what todo with 
+# branch might work, given that R knows what todo with
 # -framework Accelerate. Someone on Darwin really needs to test.
 .if exists(/System/Library/Frameworks/Accelerate.framework)
 CONFIGURE_ARGS+=	--with-blas="-framework Accelerate"
@@ -138,6 +138,11 @@ INSTALL_SCRIPT=		${INSTALL} ${COPY} -m ${BINMODE}
 #BUILD_DEPENDS+=		tex-mptopdf-[0-9]*:../../graphics/tex-mptopdf
 #BUILD_DEPENDS+=		tex-pdftex-def-[0-9]*:../../print/tex-pdftex
 
+SUBST_CLASSES+=		rpath
+SUBST_STAGE.rpath=	pre-configure
+SUBST_FILES.rpath=	configure.ac
+SUBST_VARS.rpath=	COMPILER_RPATH_FLAG
+
 SUBST_CLASSES+=		fixwrap
 SUBST_STAGE.fixwrap=	post-build
 SUBST_FILES.fixwrap=	libtool
@@ -152,7 +157,7 @@ CTF_FILES_SKIP+=	lib/R/library/mgcv/libs/mgcv.so
 CHECK_WRKREF_SKIP+=	lib/R/etc/Makeconf
 
 pre-configure:
-	${RUN} cd ${WRKSRC} && autoreconf -fvi || echo Ignore the warnings from autoreconf
+	${RUN} cd ${WRKSRC} && autoreconf -fvi || ${ECHO} Ignore the warnings from autoreconf
 
 # Fix library names.  Relies on build system using -headerpad_max_install_names.
 .if ${OPSYS} == "Darwin"
@@ -195,4 +200,5 @@ DEINSTALL_TEMPLATES+=	../../math/R/files/pkg-index.tmpl
 PRINT_PLIST_AWK+=	/^lib\/R\/doc\/html\/packages.html$$/ { next; }
 
 .include "../../mk/pthread.buildlink3.mk"
+.include "../../mk/atomic64.mk"
 .include "../../mk/bsd.pkg.mk"

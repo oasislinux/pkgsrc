@@ -1,4 +1,4 @@
-#	$NetBSD: bsd.pkg.use.mk,v 1.70 2021/08/28 08:07:39 nia Exp $
+#	$NetBSD: bsd.pkg.use.mk,v 1.72 2022/06/07 10:04:25 jperkin Exp $
 #
 # Turn USE_* macros into proper depedency logic.  Included near the top of
 # bsd.pkg.mk, after bsd.prefs.mk.
@@ -27,9 +27,11 @@ MAKE_ENV+=		NOCTF=yes
 .  endif
 .  if defined(HAVE_LLVM)
 MAKE_ENV+=		HAVE_LLVM=${HAVE_LLVM:Q}
+MAKE_ENV+=		NOCLANGERROR=1
 .  endif
 .  if defined(HAVE_GCC)
 MAKE_ENV+=		HAVE_GCC=${HAVE_GCC:Q}
+MAKE_ENV+=		NOGCCERROR=1
 .  endif
 .endif
 
@@ -106,4 +108,11 @@ TOOL_DEPENDS+=		libtool-base>=${_OPSYS_LIBTOOL_REQD:U${LIBTOOL_REQD}}:../../deve
 .endif
 CONFIGURE_ENV+=		LIBTOOL="${LIBTOOL} ${LIBTOOL_FLAGS}"
 MAKE_ENV+=		LIBTOOL="${LIBTOOL} ${LIBTOOL_FLAGS}"
+.endif
+
+# PKGSRC_USE_MKTOOLS.  Cyclic dependencies prevent us from using mktools
+# when building cwrappers, so use the shell tools in that instance.
+.if ${_PKGSRC_USE_MKTOOLS} == "yes" && empty(PKGPATH:Mpkgtools/cwrappers)
+TOOL_DEPENDS+=		mktools-[0-9]*:../../pkgtools/mktools
+PKG_MKSYMLINKS?=	${LOCALBASE}/libexec/mktools/mk-buildlink-symlinks
 .endif

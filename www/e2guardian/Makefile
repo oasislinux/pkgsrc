@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.12 2021/05/24 19:55:13 wiz Exp $
+# $NetBSD: Makefile,v 1.14 2022/08/09 12:08:32 jperkin Exp $
 
 DISTNAME=	e2guardian-5.1.1
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_GITHUB:=e2guardian/}
 GITHUB_PROJECT=	e2guardian
@@ -48,8 +48,6 @@ CONFIGURE_ARGS+=	--with-proxygroup=${E2G_GROUP}
 CONFIGURE_ARGS+=	--with-piddir=${VARBASE}/run
 CONFIGURE_ARGS+=	--with-logdir=${VARBASE}/log/${E2G_LOG}
 CONFIGURE_ARGS+=	--enable-ntlm
-
-LIBS.SunOS+=		-liconv
 
 WRKSRC=		${WRKDIR}/${DISTNAME}
 

@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.16 2021/12/01 13:01:16 nia Exp $
+# $NetBSD: Makefile,v 1.18 2022/10/18 17:47:18 wiz Exp $
 
-DISTNAME=	libxshmfence-1.3
-PKGREVISION=	3
+DISTNAME=	libxshmfence-1.3.1
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_XORG:=lib/}
-EXTRACT_SUFX=	.tar.bz2
+EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://xorg.freedesktop.org/
@@ -35,7 +34,7 @@ pre-configure:
 
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../devel/xorg-util-macros/buildlink3.mk"
-X11_BUILTIN_NAME?=		libxshmfence
+X11_LIB_NAME?=		libxshmfence
 .include "../../meta-pkgs/modular-xorg/avoid-duplicate.mk"
 .include "../../x11/xorgproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

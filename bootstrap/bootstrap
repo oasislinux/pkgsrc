@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# $NetBSD: bootstrap,v 1.307 2022/02/08 19:18:07 schmonz Exp $
+# $NetBSD: bootstrap,v 1.317 2022/10/04 11:47:45 jperkin Exp $
 #
 # Copyright (c) 2001-2011 Alistair Crooks <agc@NetBSD.org>
 # All rights reserved.
@@ -563,11 +563,6 @@ AIX)
 	need_fixed_strip=yes
 	machine_arch=`get_machine_arch_aix`
 	;;
-Bitrig)
-	root_group=wheel
-	machine_arch=`arch -s`
-	check_compiler=yes
-	;;
 CYGWIN_*)
 	is_root () {
 		if id -nG | grep -q 'Administrators'; then
@@ -587,14 +582,22 @@ CYGWIN_*)
 Darwin)
 	root_group=wheel
 	machine_arch=`get_machine_arch_darwin`
-	CC=${CC:-"cc -isystem /usr/include"}; export CC
 	check_compiler=yes
+
+	if [ -n "${MACOSX_DEPLOYMENT_TARGET}" ]; then
+		SDK_PATH=`/usr/bin/xcrun \
+			--sdk macosx${MACOSX_DEPLOYMENT_TARGET} \
+			--show-sdk-path 2>/dev/null || echo /nonexistent`
+		CFLAGS="-isysroot ${SDK_PATH} ${CFLAGS}"
+		export CFLAGS
+	fi
 
 	# Combine major.minor product version for simpler numerical tests.
 	macos_version=`sw_vers -productVersion | \
 	    awk -F. '{ printf("%02d%02d", $1, $2) }'`
 
-	# Newer native sed does not support multibyte correctly.
+	# Since 10.9, native sed exits when called on files with UTF-8
+	# or other apparently-binary content.
 	if [ $macos_version -ge 1008 ]; then
 		need_awk=yes
 		need_sed=yes
@@ -607,6 +610,13 @@ Darwin)
 	# non-system shell is unaffected, at least for now.
 	if [ $macos_version -ge 1011 ]; then
 		need_mksh=yes
+	fi
+
+	# Old compiler versions looked in /usr/local/include where software
+	# installed from MacPorts could affect builds.  PR#26143
+	if [ $macos_version -lt 1006 ]; then
+		CC=${CC:-"cc -isystem /usr/include"}
+		export CC
 	fi
 
 	unset macos_version
@@ -740,7 +750,7 @@ Minix)
 	root_group=wheel
 	machine_arch=`uname -p`
 	check_compiler=yes
-	;;	
+	;;
 MirBSD)
 	root_group=wheel
 	need_pax=yes
@@ -779,6 +789,7 @@ OSF1)
 	need_awk=yes
 	need_sed=yes
 	need_mksh=yes
+	shprog=/bin/ksh
 	machine_arch=`uname -p`
 	;;
 QNX)
@@ -1130,6 +1141,12 @@ echo "PKGMANDIR=		$pkgmandir" >> ${TARGET_MKCONF}
 echo "" >> ${TARGET_MKCONF}
 
 case $opsys in
+OpenBSD)
+	# Use PREFER_PKGSRC=yes to work around libressl compatibility problem
+	if [ -z "$prefer_pkgsrc" ] && [ "$prefer_native" != "yes" ]; then
+		prefer_pkgsrc="yes"
+	fi
+	;;
 Linux)
 	# Default to PREFER_PKGSRC=yes unless user specifies --prefer-native=yes
 	# Linux systems likely have software from other packages managers
@@ -1300,7 +1317,7 @@ extra_libarchive_depends() {
 
 echo_msg "Bootstrapping pkgtools"
 copy_src $pkgsrcdir/archivers/libarchive/files libarchive
-run_cmd "(cd $wrkdir/libarchive; env $BSTRAP_ENV \
+run_cmd "(cd $wrkdir/libarchive; env $BSTRAP_ENV CONFIG_SHELL=$shprog \
 $shprog ./configure $configure_quiet_flags --enable-static --disable-shared \
 --disable-bsdtar --disable-bsdcpio --disable-posix-regex-lib --disable-xattr \
 --disable-maintainer-mode --disable-acl --without-zlib --without-bz2lib \
@@ -1386,6 +1403,10 @@ fi
 if test -n "$LIBS"; then
 	echo "LIBS+=		$LIBS" >> ${TARGET_MKCONF}
 fi
+if test -n "$MACOSX_DEPLOYMENT_TARGET"; then
+	echo "MACOSX_DEPLOYMENT_TARGET=	$MACOSX_DEPLOYMENT_TARGET" >>${TARGET_MKCONF}
+	echo "MACOSX_DEPLOYMENT_TARGET=	$MACOSX_DEPLOYMENT_TARGET" >>${BOOTSTRAP_MKCONF}
+fi
 
 # opsys specific fiddling
 opsys_finish
@@ -1411,13 +1432,19 @@ build_package_nopreserve() {
 }
 
 #
-# cwrappers is special, we don't want to set it as a BOOTSTRAP_PKG but must
-# build it (if required) without -DPKG_PRESERVE set so that it can be deleted.
+# Special packages that we don't want marked with BOOTSTRAP_PKG, but must be
+# built (if required) without -DPKG_PRESERVE set so that they can be deleted.
 #
 use_cwrappers=`(cd $pkgsrcdir/devel/bmake && $bmake show-var VARNAME=_USE_CWRAPPERS)`
 case "$use_cwrappers" in
 yes)
 	build_package_nopreserve "pkgtools/cwrappers"
+	;;
+esac
+use_mktools=`(cd $pkgsrcdir/devel/bmake && $bmake show-var VARNAME=_PKGSRC_USE_MKTOOLS)`
+case "$use_mktools" in
+yes)
+	build_package_nopreserve "pkgtools/mktools"
 	;;
 esac
 

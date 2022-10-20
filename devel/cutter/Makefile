@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.75 2021/12/08 16:01:51 adam Exp $
+# $NetBSD: Makefile,v 1.77 2022/05/24 13:01:02 nia Exp $
 #
 
 DISTNAME=	cutter-1.2.4
-PKGREVISION=	32
+PKGREVISION=	33
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=cutter/}
 
@@ -30,7 +30,7 @@ TEST_TARGET=	check
 
 .include "../../mk/compiler.mk"
 # PR#lib/39986
-.if !empty(CC_VERSION:Mgcc*) && !empty(MACHINE_PLATFORM:MNetBSD-[0-5].*-*)
+.if ${OPSYS} == "NetBSD" && ${OPSYS_VERSION} < 060000 && !empty(CC_VERSION:Mgcc*)
 LDFLAGS.NetBSD+=	-lgcc_s
 .endif
 

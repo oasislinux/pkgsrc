@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.8 2022/01/25 01:26:19 wiz Exp $
+# $NetBSD: Makefile,v 1.11 2022/09/12 08:15:35 adam Exp $
 
-DISTNAME=	Bottleneck-1.3.2
+DISTNAME=	Bottleneck-1.3.5
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:tl}
-PKGREVISION=	2
 CATEGORIES=	math python
 MASTER_SITES=	${MASTER_SITE_PYPI:=B/Bottleneck/}
 
@@ -15,7 +14,7 @@ TEST_DEPENDS+=	${PYPKGPREFIX}-test-runner-[0-9]*:../../devel/py-test-runner
 
 PYSETUPTESTTARGET=	pytest
 
-PYTHON_VERSIONS_INCOMPATIBLE=	27
+PYTHON_VERSIONS_INCOMPATIBLE=	27 37 # numpy
 
 .include "../../math/py-numpy/buildlink3.mk"
 .include "../../lang/python/egg.mk"

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.234 2021/12/08 16:04:19 adam Exp $
+# $NetBSD: Makefile,v 1.244 2022/09/11 12:51:35 wiz Exp $
 
 DISTNAME=	wine-5.0.5
-PKGREVISION=	5
+PKGREVISION=	13
 CATEGORIES=	emulators
 MASTER_SITES=	https://dl.winehq.org/wine/source/${PKGVERSION_NOREV:R}/
 MASTER_SITES+=	http://mirrors.ibiblio.org/wine/source/${PKGVERSION_NOREV:R}/
@@ -19,6 +19,8 @@ GNU_CONFIGURE=	yes
 REPLACE_PERL+=	tools/winemaker/winemaker
 REPLACE_PERL+=	tools/winedump/function_grep.pl
 
+CHECK_PIE_SUPPORTED=	no
+
 ONLY_FOR_PLATFORM+=	*-*-i386 *-*-x86_64
 
 UNLIMIT_RESOURCES=	datasize
@@ -28,6 +30,8 @@ CONFIGURE_ARGS+=	--without-capi
 CONFIGURE_ARGS+=	--without-gphoto
 CONFIGURE_ARGS+=	--without-gssapi
 CONFIGURE_ARGS+=	--without-hal
+# LDAP causes build failures on NetBSD 9.99.x and newer.
+CONFIGURE_ARGS+=	--without-ldap
 CONFIGURE_ARGS+=	--without-krb5
 CONFIGURE_ARGS+=	--without-opencl
 CONFIGURE_ARGS+=	--without-udev
@@ -49,7 +53,7 @@ NOT_PAX_MPROTECT_SAFE+=	bin/wine
 .endif
 
 .if ${OPSYS} == "NetBSD"
-.  if !empty(OS_VERSION:M[0-8].*)
+.  if ${OPSYS_VERSION} < 090000
 # Disable new_dtags as NetBSD versions prior to 9.0 don't honor DT_RUNPATH
 CONFIGURE_ENV+=		ac_cv_cflags__Wl___enable_new_dtags=no
 .  endif

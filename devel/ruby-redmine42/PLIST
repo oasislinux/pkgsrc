@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.1 2021/06/02 16:23:48 taca Exp $
+@comment $NetBSD: PLIST,v 1.4 2022/10/09 15:31:46 taca Exp $
 bin/redmine42_generate_secret_token${RUBY_SUFFIX}.sh
 bin/redmine42_load_default_data${RUBY_SUFFIX}.sh
 bin/redmine42_migrate_db${RUBY_SUFFIX}.sh
@@ -1613,7 +1613,7 @@ share/${RUBY_NAME}-redmine42/public/javascripts/i18n/datepicker-uk.js
 share/${RUBY_NAME}-redmine42/public/javascripts/i18n/datepicker-vi.js
 share/${RUBY_NAME}-redmine42/public/javascripts/i18n/datepicker-zh-CN.js
 share/${RUBY_NAME}-redmine42/public/javascripts/i18n/datepicker-zh-TW.js
-share/${RUBY_NAME}-redmine42/public/javascripts/jquery-3.5.1-ui-1.12.1-ujs-5.2.4.5.js
+share/${RUBY_NAME}-redmine42/public/javascripts/jquery-3.6.1-ui-1.13.2-ujs-5.2.8.1.js
 share/${RUBY_NAME}-redmine42/public/javascripts/jquery-migrate-3.3.2.min.js
 share/${RUBY_NAME}-redmine42/public/javascripts/jstoolbar/jstoolbar.js
 share/${RUBY_NAME}-redmine42/public/javascripts/jstoolbar/lang/jstoolbar-ar.js
@@ -1685,7 +1685,7 @@ share/${RUBY_NAME}-redmine42/public/stylesheets/jquery/images/ui-icons_777620_25
 share/${RUBY_NAME}-redmine42/public/stylesheets/jquery/images/ui-icons_777777_256x240.png
 share/${RUBY_NAME}-redmine42/public/stylesheets/jquery/images/ui-icons_cc0000_256x240.png
 share/${RUBY_NAME}-redmine42/public/stylesheets/jquery/images/ui-icons_ffffff_256x240.png
-share/${RUBY_NAME}-redmine42/public/stylesheets/jquery/jquery-ui-1.12.1.css
+share/${RUBY_NAME}-redmine42/public/stylesheets/jquery/jquery-ui-1.13.2.css
 share/${RUBY_NAME}-redmine42/public/stylesheets/jstoolbar.css
 share/${RUBY_NAME}-redmine42/public/stylesheets/responsive.css
 share/${RUBY_NAME}-redmine42/public/stylesheets/rtl.css
@@ -1748,6 +1748,7 @@ share/${RUBY_NAME}-redmine42/test/fixtures/files/import_iso8859-1.csv
 share/${RUBY_NAME}-redmine42/test/fixtures/files/import_issues.csv
 share/${RUBY_NAME}-redmine42/test/fixtures/files/import_issues_auto_mapping.csv
 share/${RUBY_NAME}-redmine42/test/fixtures/files/import_issues_utf8_with_bom.csv
+share/${RUBY_NAME}-redmine42/test/fixtures/files/import_issues_with_relation_and_invalid_issues.csv
 share/${RUBY_NAME}-redmine42/test/fixtures/files/import_subtasks.csv
 share/${RUBY_NAME}-redmine42/test/fixtures/files/import_subtasks_with_relations.csv
 share/${RUBY_NAME}-redmine42/test/fixtures/files/import_subtasks_with_unique_id.csv

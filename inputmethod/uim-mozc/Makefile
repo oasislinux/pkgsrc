@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.53 2021/12/08 16:05:20 adam Exp $
+# $NetBSD: Makefile,v 1.56 2022/04/24 22:19:15 tnn Exp $
 
 PKGNAME=	uim-${DISTNAME}
-PKGREVISION=	6
+PKGREVISION=	8
 
 CONFLICTS+=	ibus-mozc<=1.13.1651.102
 
@@ -49,3 +49,4 @@ UIM_MODULES=	mozc
 
 .include "../../inputmethod/uim/buildlink3.mk"
 .include "../../inputmethod/mozc-server/Makefile.common"
+.include "../../mk/bsd.pkg.mk"

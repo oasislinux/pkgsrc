@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.128 2022/01/27 09:02:58 nros Exp $
+# $NetBSD: Makefile,v 1.134 2022/10/06 21:29:56 wiz Exp $
 
-DISTNAME=	dbus-1.12.20
-PKGREVISION=	2
+DISTNAME=	dbus-1.14.4
 CATEGORIES=	sysutils
-MASTER_SITES=	http://dbus.freedesktop.org/releases/dbus/
+MASTER_SITES=	https://dbus.freedesktop.org/releases/dbus/
+EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.freedesktop.org/Software/dbus
@@ -57,6 +57,8 @@ CONFIGURE_ARGS+=	--enable-static
 
 CONFIGURE_ARGS+=	--with-dbus-user=${DBUS_USER}
 CONFIGURE_ARGS+=	--with-test-socket-dir=${WRKDIR:Q}
+
+LDFLAGS.SunOS+=		-lsocket -lnsl
 
 SUBST_CLASSES+=		docbook
 SUBST_STAGE.docbook=	pre-configure

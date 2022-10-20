@@ -1,4 +1,4 @@
-# $NetBSD: mozilla-common.mk,v 1.10 2021/11/30 15:41:24 ryoon Exp $
+# $NetBSD: mozilla-common.mk,v 1.14 2022/09/08 20:27:32 ryoon Exp $
 #
 # common Makefile fragment for mozilla packages based on gecko 2.0.
 #
@@ -18,15 +18,15 @@ GCC_REQD+=		4.9
 PYTHON_VERSIONS_ACCEPTED=	27
 PYTHON_FOR_BUILD_ONLY=		tool
 TOOL_DEPENDS+=			${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
-.if !empty(PYTHON_VERSION_DEFAULT:M3[6789])
+# Include pyversion.mk after setting PYTHON_* but before testing the default.
+.include "../../lang/python/pyversion.mk"
+.if !empty(PYTHON_VERSION_DEFAULT:M3[6789]) || !empty(PYTHON_VERSION_DEFAULT:M310)
 TOOL_DEPENDS+=			python${PYTHON_VERSION_DEFAULT}-[0-9]*:../../lang/python${PYTHON_VERSION_DEFAULT}
 ALL_ENV+=			PYTHON3=${PREFIX}/bin/python${PYTHON_VERSION_DEFAULT:S/3/3./}
 .else
 TOOL_DEPENDS+=			python38-[0-9]*:../../lang/python38
 ALL_ENV+=			PYTHON3=${PREFIX}/bin/python3.8
 .endif
-
-.include "../../lang/python/pyversion.mk"
 
 .if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
 BUILD_DEPENDS+=		yasm>=1.1:../../devel/yasm
@@ -63,6 +63,9 @@ USE_TOOLS+=		bsdtar
 .if ${MACHINE_ARCH} == "i386"
 # This is required for SSE2 code under i386.
 CXXFLAGS+=		-mstackrealign
+# At least for NetBSD/i386 9.2, encoding_rs failed to build with simd_funcs
+# and packed_simd crates.
+CONFIGURE_ARGS+=	--disable-rust-simd
 .endif
 
 CHECK_PORTABILITY_SKIP+=	${MOZILLA_DIR}security/nss/tests/libpkix/libpkix.sh
@@ -89,6 +92,7 @@ CONFIGURE_ARGS+=	--with-system-icu
 CONFIGURE_ARGS+=	--with-system-nss
 CONFIGURE_ARGS+=	--with-system-nspr
 #CONFIGURE_ARGS+=	--with-system-jpeg
+CONFIGURE_ARGS+=	--with-system-webp
 CONFIGURE_ARGS+=	--with-system-zlib
 CONFIGURE_ARGS+=	--with-system-bz2
 #CONFIGURE_ARGS+=	--with-system-libevent=${BUILDLINK_PREFIX.libevent}
@@ -123,7 +127,7 @@ CONFIG_SUB_OVERRIDE+=		${MOZILLA_DIR}js/src/build/autoconf/config.sub
 CONFIG_SUB_OVERRIDE+=		${MOZILLA_DIR}nsprpub/build/autoconf/config.sub
 CONFIG_SUB_OVERRIDE+=		${MOZILLA_DIR}/js/ctypes/libffi/config.sub
 
-CONFIGURE_ENV+=		CPP=${CPP}
+CONFIGURE_ENV+=		CPP=${CPP:Q}
 ALL_ENV+=		SHELL=${CONFIG_SHELL:Q}
 
 # Build outside ${WRKSRC}
@@ -216,6 +220,7 @@ BUILDLINK_API_DEPENDS.nss+=	nss>=3.35
 .include "../../devel/nss/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 #.include "../../mk/jpeg.buildlink3.mk"
+.include "../../graphics/libwebp/buildlink3.mk"
 .include "../../graphics/MesaLib/buildlink3.mk"
 #BUILDLINK_API_DEPENDS.cairo+=	cairo>=1.10.2nb4
 #.include "../../graphics/cairo/buildlink3.mk"
@@ -232,5 +237,4 @@ RUST_REQ=	1.23.0
 .include "../../x11/libXt/buildlink3.mk"
 BUILDLINK_API_DEPENDS.pixman+= pixman>=0.25.2
 .include "../../x11/pixman/buildlink3.mk"
-.include "../../x11/gtk2/buildlink3.mk"
 .include "../../x11/gtk3/buildlink3.mk"

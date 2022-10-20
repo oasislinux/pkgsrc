@@ -1,4 +1,4 @@
-# $NetBSD: Linux.mk,v 1.87 2021/11/14 14:47:11 schmonz Exp $
+# $NetBSD: Linux.mk,v 1.91 2022/09/27 08:46:33 jperkin Exp $
 #
 # Variable definitions for the Linux operating system.
 
@@ -9,27 +9,38 @@ IMAKE_TOOLS=		gmake	# extra tools required when we use imake
 .endif
 IMAKEOPTS+=	-DBuildHtmlManPages=NO
 PKGLOCALEDIR?=	share
+
+TYPE?=		type			# Shell builtin
+
+.if exists(/etc/NIXOS)
+PS?=		/run/current-system/sw/bin/ps
+SU?=		/run/current-system/sw/bin/su
+USERADD?=	/run/current-system/sw/bin/useradd
+GROUPADD?=	/run/current-system/sw/bin/groupadd
+NOLOGIN?=	/run/current-system/sw/bin/nologin
+.endif
+
 PS?=		/bin/ps
-# XXX: default from defaults/mk.conf.  Verify/correct for this platform
-# and remove this comment.
 .if exists(/usr/bin/su)
 SU?=		/usr/bin/su
 .else
 SU?=		/bin/su
 .endif
-TYPE?=		type			# Shell builtin
+.if exists(/sbin/nologin)
+NOLOGIN?=	/sbin/nologin
+.elif exists(/usr/sbin/nologin)
+NOLOGIN?=	/usr/sbin/nologin
+.else
+NOLOGIN?=	/bin/false
+.endif
+USERADD?=	/usr/sbin/useradd
+GROUPADD?=	/usr/sbin/groupadd
 
 CPP_PRECOMP_FLAGS?=	# unset
 DEF_UMASK?=		022
 DEFAULT_SERIAL_DEVICE?=	/dev/null
 EXPORT_SYMBOLS_LDFLAGS?=	# Don't add symbols to the dynamic symbol table
-GROUPADD?=		/usr/sbin/groupadd
 MOTIF_TYPE_DEFAULT?=	motif	# default 2.0 compatible libs type
-.if exists(/etc/ssdlinux_version)
-NOLOGIN?=		/sbin/nologin
-.else
-NOLOGIN?=		/bin/false
-.endif
 PKG_TOOLS_BIN?=		${LOCALBASE}/sbin
 ROOT_CMD?=		${SU} - root -c
 .if exists(/etc/ssdlinux_version)
@@ -43,7 +54,6 @@ ULIMIT_CMD_datasize?=	ulimit -d `ulimit -H -d`
 ULIMIT_CMD_stacksize?=	ulimit -s `ulimit -H -s`
 ULIMIT_CMD_memorysize?=	ulimit -m `ulimit -H -m`
 ULIMIT_CMD_cputime?=	ulimit -t `ulimit -H -t`
-USERADD?=		/usr/sbin/useradd
 
 _OPSYS_EMULDIR.linux=	# empty
 _OPSYS_EMULDIR.linux32=	# empty
@@ -77,6 +87,14 @@ LIBABISUFFIX?=		/powerpc64le-linux-gnu
 _OPSYS_SYSTEM_RPATH=	/lib:/usr/lib:/lib${LIBABISUFFIX}:/usr/lib${LIBABISUFFIX}
 _OPSYS_LIB_DIRS?=	/lib /usr/lib /lib${LIBABISUFFIX} /usr/lib${LIBABISUFFIX}
 .  endif
+.elif exists(/etc/arch-release)
+_OPSYS_SYSTEM_RPATH=	/lib:/usr/lib
+_OPSYS_LIB_DIRS?=	/lib /usr/lib
+.elif exists(/etc/NIXOS)
+# NixOS has no fixed locations for system libraries.
+_OPSYS_INCLUDE_DIRS!=  echo "" | cpp -v 2>&1 | grep '^[[:space:]]*/.*include$$' | tr '\n' ' '
+
+_OPSYS_LIB_DIRS!=      cc -print-search-dirs | awk '/^libraries:/ { $$1=""; $$2=substr($$2, 2); print $$0; }' | tr ':' '\n' 
 .else
 _OPSYS_SYSTEM_RPATH=	/lib${LIBABISUFFIX}:/usr/lib${LIBABISUFFIX}
 _OPSYS_LIB_DIRS?=	/lib${LIBABISUFFIX} /usr/lib${LIBABISUFFIX}
@@ -100,11 +118,7 @@ _OPSYS_PREFER.sysexits?=	native
 _OPSYS_PREFER.dl?=		native
 _OPSYS_PREFER.pthread?=		native
 
-.if exists(/usr/include/netinet6) || exists(/usr/include/linux/in6.h)
 _OPSYS_HAS_INET6=	yes	# IPv6 is standard
-.else
-_OPSYS_HAS_INET6=	no	# IPv6 is not standard
-.endif
 _OPSYS_HAS_JAVA=	no	# Java is not standard
 _OPSYS_HAS_MANZ=	no	# no MANZ for gzipping of man pages
 _OPSYS_HAS_OSSAUDIO=	no	# libossaudio is unavailable
@@ -119,6 +133,7 @@ _STRIPFLAG_CC?=		${_INSTALL_UNSTRIPPED:D:U-s}	# cc(1) option to strip
 _STRIPFLAG_INSTALL?=	${_INSTALL_UNSTRIPPED:D:U-s}	# install(1) option to strip
 
 _OPSYS_SUPPORTS_CWRAPPERS=	yes
+_OPSYS_SUPPORTS_MKTOOLS=	yes
 
 _OPSYS_CAN_CHECK_SHLIBS=	yes # use readelf in check/bsd.check-vars.mk
 _OPSYS_CAN_CHECK_SSP=		no  # only supports libssp at this time
@@ -181,9 +196,16 @@ _GLIBC_VERSION_CMD=	if [ -x ${_glibc_path}/libc.so.6 ]; then \
 				ldd --version |	\
 				sed -ne's/^ldd.* \(.*\)$$/\1/p'; \
 			fi
-GLIBC_VERSION=		${_GLIBC_VERSION_CMD:sh}
 .  endif
 .endfor
+
+# In case we can't find glibc in any of the normal library paths
+# (i.e. we're on NixOS), try ldconfig. Ironically, NixOS does not
+# actually use ldconfig...
+_GLIBC_VERSION_CMD?=	ldconfig --version | \
+				sed -ne's/ldconfig (GNU libc) \(.*\)$$/\1/p'
+
+GLIBC_VERSION=		${_GLIBC_VERSION_CMD:sh}
 
 # If this is defined pass it to the make process. 
 .if defined(NOGCCERROR)

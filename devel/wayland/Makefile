@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2021/12/08 16:02:04 adam Exp $
+# $NetBSD: Makefile,v 1.16 2022/08/07 23:35:28 tnn Exp $
 
-DISTNAME=	wayland-1.18.0
-PKGREVISION=	4
+DISTNAME=	wayland-1.21.0
 CATEGORIES=	devel
-MASTER_SITES=	https://wayland.freedesktop.org/releases/
+MASTER_SITES=	https://gitlab.freedesktop.org/wayland/wayland/-/releases/${PKGVERSION_NOREV}/downloads/
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	nia@NetBSD.org
@@ -11,33 +10,30 @@ HOMEPAGE=	https://wayland.freedesktop.org/
 COMMENT=	Display server protocol - development libraries
 LICENSE=	mit
 
-GNU_CONFIGURE=	YES
-USE_LIBTOOL=	YES
-
-USE_TOOLS+=	autoconf automake autoreconf
-USE_TOOLS+=	gmake pkg-config
+USE_TOOLS+=	pkg-config
 
 USE_LANGUAGES=	c c++
 
-CONFIGURE_ARGS+=	--disable-documentation
+MESON_ARGS+=	-Ddocumentation=false
+MESON_ARGS+=	-Dtests=false
 
-# No support in the kernel yet, always fails.
-# Make sure wayland falls back to ftruncate.
-CONFIGURE_ENV.NetBSD+=	ac_cv_func_posix_fallocate=no
+CFLAGS.NetBSD+=	-D_NETBSD_SOURCE
 
-PKGCONFIG_OVERRIDE+=	cursor/wayland-cursor.pc.in
-PKGCONFIG_OVERRIDE+=	egl/wayland-egl-backend.pc.in
-PKGCONFIG_OVERRIDE+=	egl/wayland-egl.pc.in
-PKGCONFIG_OVERRIDE+=	src/wayland-client.pc.in
-PKGCONFIG_OVERRIDE+=	src/wayland-scanner.pc.in
-PKGCONFIG_OVERRIDE+=	src/wayland-server.pc.in
-
-pre-configure:
-	# https://lists.freedesktop.org/archives/wayland-devel/2019-February/040024.html
-	${CP} ${FILESDIR}/event-loop-kqueue.c ${WRKSRC}/src
-	cd ${WRKSRC} && autoreconf -fvi
+PKGCONFIG_OVERRIDE_STAGE=	pre-install
+PKGCONFIG_OVERRIDE+=		output/meson-private/wayland-client.pc
+PKGCONFIG_OVERRIDE+=		output/meson-private/wayland-cursor.pc
+PKGCONFIG_OVERRIDE+=		output/meson-private/wayland-egl-backend.pc
+PKGCONFIG_OVERRIDE+=		output/meson-private/wayland-egl.pc
+PKGCONFIG_OVERRIDE+=		output/meson-private/wayland-scanner.pc
+PKGCONFIG_OVERRIDE+=		output/meson-private/wayland-server.pc
 
 .include "platform.mk"
+.include "../../devel/meson/build.mk"
+.include "../../mk/bsd.fast.prefs.mk"
+.if ${OPSYS} != "Linux"
+.  include "../../devel/libepoll-shim/buildlink3.mk"
+CPPFLAGS+=	-I${BUILDLINK_PREFIX.libepoll-shim}/include/libepoll-shim
+.endif
 .include "../../devel/libffi/buildlink3.mk"
 .include "../../textproc/expat/buildlink3.mk"
 .include "../../textproc/libxslt/buildlink3.mk"

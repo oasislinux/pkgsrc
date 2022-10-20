@@ -1,8 +1,6 @@
-# $NetBSD: Makefile,v 1.46 2021/05/24 19:52:34 wiz Exp $
+# $NetBSD: Makefile,v 1.56 2022/08/02 17:30:34 abs Exp $
 
-DISTNAME=	cli-6.14.13
-PKGNAME=	${DISTNAME:S/cli/npm/}
-PKGREVISION=	1
+DISTNAME=	npm-8.15.1
 CATEGORIES=	lang
 MASTER_SITES=	${MASTER_SITE_GITHUB:=npm/}
 GITHUB_PROJECT=	cli
@@ -13,9 +11,9 @@ HOMEPAGE=	https://github.com/npm/cli
 COMMENT=	Package manager for JavaScript
 LICENSE=	artistic-2.0
 
-DEPENDS+=	nodejs-[0-9]*:../../lang/nodejs
-
 USE_TOOLS+=	bash gmake perl
+
+DEPENDS+=	nodejs-[0-9]*:../../lang/nodejs
 
 MAKE_JOBS_SAFE=	no	# building man-pages
 
@@ -33,11 +31,13 @@ SUBST_VARS.python=	PYTHONBIN
 
 SUBST_CLASSES+=			man-directory
 SUBST_STAGE.man-directory=	pre-configure
-SUBST_FILES.man-directory=	node_modules/bin-links/index.js
+SUBST_FILES.man-directory=	node_modules/bin-links/lib/man-target.js
 SUBST_MESSAGE.man-directory=	Changing installation to PREFIX/man
-SUBST_VARS.man-directory=	PKGMANDIR
+SUBST_VARS.man-directory=	DESTDIR PREFIX PKGMANDIR
 
 CHECK_INTERPRETER_SKIP+=	lib/node_modules/npm/*
+
+INSTALLATION_DIRS+=	lib/node_modules
 
 .include "../../mk/bsd.prefs.mk"
 

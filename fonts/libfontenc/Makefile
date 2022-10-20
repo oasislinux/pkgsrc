@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.14 2020/01/18 23:31:05 rillig Exp $
+# $NetBSD: Makefile,v 1.16 2022/08/31 19:19:25 wiz Exp $
 
-DISTNAME=		libfontenc-1.1.4
-CATEGORIES=		x11
+DISTNAME=		libfontenc-1.1.6
+CATEGORIES=		fonts x11
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
-EXTRACT_SUFX=		.tar.bz2
+EXTRACT_SUFX=		.tar.xz
 
 MAINTAINER=		joerg@NetBSD.org
 HOMEPAGE=		https://xorg.freedesktop.org/

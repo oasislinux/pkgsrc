@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.58 2022/01/31 12:03:33 wiz Exp $
+# $NetBSD: Makefile,v 1.67 2022/10/14 10:59:10 adam Exp $
 
-DISTNAME=	fluidsynth-2.2.5
+DISTNAME=	fluidsynth-2.3.0
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_GITHUB:=FluidSynth/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.fluidsynth.org/
+HOMEPAGE=	https://www.fluidsynth.org/
 COMMENT=	Software synthesizer based on SoundFont2
 LICENSE=	gnu-lgpl-v2
 

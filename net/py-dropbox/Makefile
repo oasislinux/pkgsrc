@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.14 2022/01/04 20:54:26 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2022/07/08 14:22:34 wiz Exp $
 
-DISTNAME=	dropbox-11.4.1
+DISTNAME=	dropbox-11.32.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	net python
 MASTER_SITES=	${MASTER_SITE_PYPI:=d/dropbox/}
 
@@ -11,13 +10,21 @@ HOMEPAGE=	https://www.dropbox.com/developers
 COMMENT=	Dropbox Python API
 LICENSE=	mit
 
-TOOL_DEPENDS+=	${PYPKGPREFIX}-test-runner>=5.2.0:../../devel/py-test-runner
-
 DEPENDS+=	${PYPKGPREFIX}-requests>=2.16.2:../../devel/py-requests
 DEPENDS+=	${PYPKGPREFIX}-six>=1.12.0:../../lang/py-six
 DEPENDS+=	${PYPKGPREFIX}-stone>=2.0:../../net/py-stone
+TOOL_DEPENDS+=	${PYPKGPREFIX}-test-runner-[0-9]*:../../devel/py-test-runner
+#TEST_DEPENDS+=	${PYPKGPREFIX}-coverage-[0-9]*:../../devel/py-coverage
+#TEST_DEPENDS+=	${PYPKGPREFIX}-test-mock-[0-9]*:../../devel/py-test-mock
+#TEST_DEPENDS+=	${PYPKGPREFIX}-mock-[0-9]*:../../devel/py-mock
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 USE_LANGUAGES=	# none
+
+# tests not included in pypi distfile
+#do-test:
+#	cd ${WRKSRC} && ${SETENV} ${TEST_ENV} pytest-${PYVERSSUFFIX}
 
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

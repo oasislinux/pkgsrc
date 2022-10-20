@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.17 2021/09/08 21:04:54 nia Exp $
+# $NetBSD: Makefile,v 1.19 2022/09/11 12:51:03 wiz Exp $
 
 MINOR_VER=	48
 DISTNAME=	espeak-1.${MINOR_VER}.04-source
 PKGNAME=	${DISTNAME:S/-source//}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=espeak/}
 EXTRACT_SUFX=	.zip

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.39 2022/01/25 19:40:46 wiz Exp $
+# $NetBSD: Makefile,v 1.46 2022/08/09 12:08:30 jperkin Exp $
 
 DISTNAME=	polkit-0.120
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	security
 MASTER_SITES=	http://www.freedesktop.org/software/polkit/releases/
 
@@ -28,9 +28,6 @@ USE_TOOLS+=		pkg-config gmake perl
 USE_TOOLS+=		intltool msgfmt msgmerge xgettext
 USE_TOOLS+=		autoconf autoreconf automake
 
-# XXX msgfmt: unknown option -- xml
-_TOOLS_USE_PKGSRC.msgfmt=	yes
-
 # configure: error: *** A compiler with support for C++17 language features is required.
 GCC_REQD+=	7
 
@@ -42,6 +39,7 @@ CONFIGURE_ARGS+=	--with-polkitd-user=${POLKITD_USER}
 CONFIGURE_ARGS+=	--disable-libsystemd-login
 CONFIGURE_ARGS+=	--disable-libelogind
 CONFIGURE_ARGS+=	--with-duktape
+CONFIGURE_ARGS+=	--enable-introspection
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -85,6 +83,9 @@ pre-configure:
 
 .include "../../lang/libduktape/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
 .include "../../devel/glib2/buildlink3.mk"
+BUILDLINK_DEPMETHOD.gobject-introspection+=	build
+.include "../../devel/gobject-introspection/buildlink3.mk"
 .include "../../textproc/expat/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

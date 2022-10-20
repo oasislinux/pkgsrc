@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.228 2021/12/24 16:08:52 wiz Exp $
+# $NetBSD: Makefile,v 1.235 2022/09/10 16:17:21 pin Exp $
 #
 
 COMMENT=	Clocks, calendars, daily planners and other time related applications
@@ -14,6 +14,7 @@ SUBDIR+=	asclock-gtk
 SUBDIR+=	asclock-xlib
 SUBDIR+=	bbdate
 SUBDIR+=	cal
+SUBDIR+=	calcurse
 SUBDIR+=	cardboard-schedule
 SUBDIR+=	catclock
 SUBDIR+=	dateutils
@@ -57,13 +58,16 @@ SUBDIR+=	leapsunpack
 SUBDIR+=	libical
 SUBDIR+=	lmclock
 SUBDIR+=	logtime
+SUBDIR+=	lua-chronos
 SUBDIR+=	lua-date
 SUBDIR+=	lua-tz
 SUBDIR+=	memo
 SUBDIR+=	ntpsec
 SUBDIR+=	ocaml-calendar
+SUBDIR+=	ocaml-mirage-clock
 SUBDIR+=	ocaml-mtime
 SUBDIR+=	ocaml-time_now
+SUBDIR+=	ocaml-timezone
 SUBDIR+=	oclock
 SUBDIR+=	p5-Business-Hours
 SUBDIR+=	p5-Calendar-Simple
@@ -177,6 +181,7 @@ SUBDIR+=	quest-tui
 SUBDIR+=	rclock
 SUBDIR+=	rem2ics
 SUBDIR+=	remind
+SUBDIR+=	rsclock
 SUBDIR+=	rsibreak
 SUBDIR+=	ruby-hitimes
 SUBDIR+=	ruby-iso8601
@@ -184,6 +189,7 @@ SUBDIR+=	ruby-timers
 SUBDIR+=	ruby-tzinfo
 SUBDIR+=	ruby-tzinfo-data
 SUBDIR+=	ruby-tzinfo1
+SUBDIR+=	rusti-cal
 SUBDIR+=	saytime
 SUBDIR+=	sunclock
 SUBDIR+=	swisswatch
@@ -251,7 +257,6 @@ SUBDIR+=	wmmoonclock
 SUBDIR+=	wmtime
 SUBDIR+=	wmzcalock
 SUBDIR+=	wxRemind
-SUBDIR+=	wyrd
 SUBDIR+=	xalarm
 SUBDIR+=	xbeats
 SUBDIR+=	xchrono

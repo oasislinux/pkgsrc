@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.19 2022/02/06 17:52:24 abs Exp $
+# $NetBSD: Makefile,v 1.22 2022/09/20 06:49:18 nia Exp $
 
 PKGNAME=	${DISTNAME:S/-/-server-/}
-PKGREVISION=	5
+PKGREVISION=	7
 COMMENT=	MariaDB 10.4, a free MySQL compatible database (server)
 
 CONFLICTS=	mysql-server-[0-9]*
@@ -19,6 +19,8 @@ PLIST_VARS+=		auth_pam mariabackup
 .if ${OPSYS} != "SunOS"
 PLIST.auth_pam=		yes
 PLIST.mariabackup=	yes
+.elif ${OS_VARIANT} != "Solaris"
+PLIST.auth_pam=		yes
 .endif
 
 MARIADB_USER?=		${MYSQL_USER:Umariadb}

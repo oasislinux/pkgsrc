@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.19 2021/12/08 16:07:08 adam Exp $
+# $NetBSD: Makefile,v 1.27 2022/09/11 12:52:12 wiz Exp $
 
-DISTNAME=	lxqt-panel-1.0.0
-PKGREVISION=	1
+DISTNAME=	lxqt-panel-1.1.0
+PKGREVISION=	5
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_GITHUB:=lxqt/}
 GITHUB_RELEASE=	${PKGVERSION_NOREV}
@@ -50,6 +50,10 @@ SUBST_SED.prefix+=	-e 's,/usr/share,${PREFIX}/share,g'
 
 CONF_FILES=	${MENU_CONF}/lxqt-applications.menu \
 		${PKG_SYSCONFDIR}/menus/lxqt-applications.menu
+CONF_FILES+=	${MENU_CONF}/lxqt-applications-compact.menu \
+		${PKG_SYSCONFDIR}/menus/lxqt-applications-compact.menu
+CONF_FILES+=	${MENU_CONF}/lxqt-applications-simple.menu \
+		${PKG_SYSCONFDIR}/menus/lxqt-applications-simple.menu
 CONF_FILES+=	${AUTOSTART_CONF}/lxqt-panel.desktop \
 		${PKG_SYSCONFDIR}/autostart/lxqt-panel.desktop
 CONF_FILES+=	${PANEL_CONF}/panel.conf \
@@ -58,7 +62,7 @@ CONF_FILES+=	${PANEL_CONF}/panel.conf \
 pre-configure:
 	${MKDIR} -p ${WRKSRC}/build
 
-TOOL_DEPENDS+=	lxqt-build-tools>=0.10.0:../../devel/lxqt-build-tools
+TOOL_DEPENDS+=	lxqt-build-tools>=0.11.0:../../devel/lxqt-build-tools
 TOOL_DEPENDS+=	qt5-qttools-[0-9]*:../../x11/qt5-qttools
 DEPENDS+=	lxmenu-data-[0-9]*:../../sysutils/lxmenu-data
 

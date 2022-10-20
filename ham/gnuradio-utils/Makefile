@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.38 2022/01/31 09:48:35 wiz Exp $
+# $NetBSD: Makefile,v 1.45 2022/10/09 07:56:11 adam Exp $
 
 PKGNAME=	gnuradio-utils-${VERSION}
 COMMENT=	Utilities in GNU Radio
@@ -21,6 +21,5 @@ CMAKE_ARGS+=	-DENABLE_GR_BLOCKTOOL=ON
 CMAKE_ARGS+=	-DENABLE_GR_MODTOOL=ON
 CMAKE_ARGS+=	-DENABLE_GR_UTILS=ON
 
-.include "../../devel/SDL/buildlink3.mk"
 .include "../../lang/python/versioned_dependencies.mk"
 .include "../../mk/bsd.pkg.mk"

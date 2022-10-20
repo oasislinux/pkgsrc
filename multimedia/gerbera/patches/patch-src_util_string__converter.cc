@@ -1,15 +1,17 @@
-$NetBSD: patch-src_util_string__converter.cc,v 1.1 2022/02/08 06:26:49 khorben Exp $
+$NetBSD: patch-src_util_string__converter.cc,v 1.3 2022/10/06 08:41:03 nros Exp $
 
-Fix invalid cast
+* fix build on systems that have const in second argument to iconv
 
---- src/util/string_converter.cc.orig	2021-09-30 19:23:27.000000000 +0000
+--- src/util/string_converter.cc.orig	2022-10-06 08:09:22.564707578 +0000
 +++ src/util/string_converter.cc
-@@ -129,7 +129,7 @@ std::string StringConverter::_convert(co
-     ret = iconv(cd, input_ptr, &input_bytes,
-         output_ptr, &output_bytes);
+@@ -122,8 +122,8 @@ std::string StringConverter::_convert(co
+     // log_debug(("iconv: BEFORE: input bytes left: {}  output bytes left: {}",
+     //        input_bytes, output_bytes));
+ #if defined(ICONV_CONST) || defined(SOLARIS)
+-    int ret = iconv(cd, inputPtr, &input_bytes,
+-        output_ptr, &output_bytes);
++    int ret = iconv(cd, inputPtr, &inputBytes,
++        outputPtr, &outputBytes);
  #else
--    ret = iconv(cd, const_cast<char**>(input_ptr), &input_bytes,
-+    ret = iconv(cd, const_cast<const char**>(input_ptr), &input_bytes,
-         output_ptr, &output_bytes);
- #endif
- 
+     int ret = iconv(cd, const_cast<char**>(inputPtr), &inputBytes,
+         outputPtr, &outputBytes);

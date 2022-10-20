@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.7 2021/12/08 16:05:30 adam Exp $
+# $NetBSD: Makefile,v 1.13 2022/09/27 20:58:25 wiz Exp $
 
 DISTNAME=	thunderbird-${TB_VER}.source
 PKGNAME=	thunderbird68-${TB_VER}
-PKGREVISION=	4
+PKGREVISION=	9
 TB_VER=		68.12.0
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_MOZILLA:=thunderbird/releases/${TB_VER}/source/}
@@ -73,7 +73,7 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/${OBJDIR}/dist/${MOZILLA_NAME}/chrome/icons/default/default48.png	\
 	  ${DESTDIR}${PREFIX}/share/pixmaps/${MOZILLA_NAME}.png
 
-.include "../../www/firefox68/mozilla-common.mk"
+.include "mozilla-common.mk"
 .include "options.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

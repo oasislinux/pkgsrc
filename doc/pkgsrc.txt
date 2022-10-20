@@ -144,7 +144,7 @@ I. The pkgsrc user's guide
         10.10. What does "Don't know how to make /usr/share/tmac/tmac.andoc"
             mean?
         10.11. What does "Could not find bsd.own.mk" mean?
-        10.12. Using 'sudo' with pkgsrc
+        10.12. Using 'sudo' or `priv` with pkgsrc
         10.13. How do I change the location of configuration files?
         10.14. Automated security checks
         10.15. Why do some packages ignore my CFLAGS?
@@ -323,15 +323,17 @@ II. The pkgsrc developer's guide
             21.3.1. Shared libraries - libtool
             21.3.2. Using libtool on GNU packages that already support libtool
             21.3.3. GNU Autoconf/Automake
+            21.3.4. Meson / ninja
 
         21.4. Programming languages
 
             21.4.1. C, C++, and Fortran
             21.4.2. Java
             21.4.3. Go
-            21.4.4. Packages containing Perl scripts
-            21.4.5. Packages containing shell scripts
-            21.4.6. Other programming languages
+            21.4.4. Rust
+            21.4.5. Packages containing Perl scripts
+            21.4.6. Packages containing shell scripts
+            21.4.7. Other programming languages
 
         21.5. The build phase
 
@@ -816,7 +818,7 @@ Table of Contents
     10.9. How to fetch all distfiles at once
     10.10. What does "Don't know how to make /usr/share/tmac/tmac.andoc" mean?
     10.11. What does "Could not find bsd.own.mk" mean?
-    10.12. Using 'sudo' with pkgsrc
+    10.12. Using 'sudo' or `priv` with pkgsrc
     10.13. How do I change the location of configuration files?
     10.14. Automated security checks
     10.15. Why do some packages ignore my CFLAGS?
@@ -1116,12 +1118,10 @@ first place where you should look is on the main pkgsrc CDN in the directory /
 pub/pkgsrc/packages.
 
 This directory contains binary packages for multiple platforms. First, select
-your operating system. (Ignore the directories with version numbers attached to
-it, they just exist for legacy reasons.) Then, select your hardware
-architecture, and in the third step, the OS version and the "version" of
-pkgsrc.
+your operating system. Then, select your hardware architecture, and in the
+third step, the OS version and the "version" of pkgsrc.
 
-In this directory, you often find a file called bootstrap.tar.gz which contains
+In this directory, you may find a file called bootstrap.tar.gz which contains
 the package management tools. If the file is missing, it is likely that your
 operating system already provides those tools. Download the file and extract it
 in the / directory. It will create the directories /usr/pkg (containing the
@@ -2309,7 +2309,7 @@ Table of Contents
 10.9. How to fetch all distfiles at once
 10.10. What does "Don't know how to make /usr/share/tmac/tmac.andoc" mean?
 10.11. What does "Could not find bsd.own.mk" mean?
-10.12. Using 'sudo' with pkgsrc
+10.12. Using 'sudo' or `priv` with pkgsrc
 10.13. How do I change the location of configuration files?
 10.14. Automated security checks
 10.15. Why do some packages ignore my CFLAGS?
@@ -2549,14 +2549,15 @@ machine. Please get and install it, by extracting it in /:
 comp.tgz is part of every NetBSD release. Get the one that corresponds to your
 release (determine via uname -r).
 
-10.12. Using 'sudo' with pkgsrc
+10.12. Using 'sudo' or `priv` with pkgsrc
 
 When installing packages as non-root user and using the just-in-time su(1)
 feature of pkgsrc, it can become annoying to type in the root password for each
 required package installed. To avoid this, the sudo package can be used, which
-does password caching over a limited time. To use it, install sudo (either as
-binary package or from security/sudo) and then put the following into your
-mk.conf, somewhere after the definition of the LOCALBASE variable:
+does password caching over a limited time. To use it, install sudo or priv
+(either as binary package, from security/priv, or security/sudo) and then put
+the following into your mk.conf, somewhere after the definition of the
+LOCALBASE variable:
 
 .if exists(${LOCALBASE}/bin/sudo)
 SU_CMD=        ${LOCALBASE}/bin/sudo /bin/sh -c
@@ -2847,15 +2848,17 @@ Table of Contents
         21.3.1. Shared libraries - libtool
         21.3.2. Using libtool on GNU packages that already support libtool
         21.3.3. GNU Autoconf/Automake
+        21.3.4. Meson / ninja
 
     21.4. Programming languages
 
         21.4.1. C, C++, and Fortran
         21.4.2. Java
         21.4.3. Go
-        21.4.4. Packages containing Perl scripts
-        21.4.5. Packages containing shell scripts
-        21.4.6. Other programming languages
+        21.4.4. Rust
+        21.4.5. Packages containing Perl scripts
+        21.4.6. Packages containing shell scripts
+        21.4.7. Other programming languages
 
     21.5. The build phase
 
@@ -3138,10 +3141,10 @@ NetBSD CVS tree. Use the pkgdiff command from the pkgtools/pkgdiff package to
 avoid these problems.
 
 For even more automation, we recommend using mkpatches from the same package to
-make a whole set of patches. You just have to backup files before you edit them
-to filename.orig, e.g. with cp -p filename filename.orig or, easier, by using 
-pkgvi again from the same package. If you upgrade a package this way, you can
-easily compare the new set of patches with the previously existing one with 
+make a whole set of patches. You just have to back up files before you edit
+them to filename.orig, e.g., with cp -p filename filename.orig or, easier, by
+using pkgvi again from the same package. If you upgrade a package this way, you
+can easily compare the new set of patches with the previously existing one with
 patchdiff. The files in patches are replaced by new files, so carefully check
 if you want to take all the changes.
 
@@ -3159,6 +3162,13 @@ path_to_file__with__underscores.c. Many packages still use the previous
 convention patch-[a-z][a-z], but new patches should be of the form containing
 the filename. mkpatches included in pkgtools/pkgdiff takes care of the name
 automatically.
+
+When updating pre-existing patch files, if a file uses the old patch-[a-z][a-z]
+convention, it's best not to change it to the new form, as that will just cause
+churn that makes it harder to track changes to patching over time. Similarly,
+if a patch now applies at different line offsets, but still applies cleanly
+as-is, there's no need to update it, as that also unnecessarily complicates the
+patch history.
 
 12.3.3. Sources where the patch files come from
 
@@ -3472,12 +3482,11 @@ When choosing which of these variables to use, follow the following rules:
     installed. When referring to a pkg's own installation path, use "${PREFIX}"
     .
 
-  * LOCALBASE is where all non-X11 pkgs are installed. If you need to construct
-    a -I or -L argument to the compiler to find includes and libraries
-    installed by another non-X11 pkg, use "${LOCALBASE}". The name LOCALBASE
-    stems from FreeBSD, which installed all packages in /usr/local. As pkgsrc
-    leaves /usr/local for the system administrator, this variable is a
-    misnomer.
+  * LOCALBASE is where all pkgs are installed. If you need to construct a -I or
+    -L argument to the compiler to find includes and libraries installed by
+    another pkg, use "${LOCALBASE}". The name LOCALBASE stems from FreeBSD,
+    which installed all packages in /usr/local. As pkgsrc leaves /usr/local for
+    the system administrator, this variable is a misnomer.
 
   * X11BASE is where the actual X11 distribution (from xsrc, etc.) is
     installed. When looking for standard X11 includes (not those installed by a
@@ -3513,7 +3522,14 @@ PKGDIR
 PKGPATH
 
     This is a pathname relative to PKGSRCDIR that points to the current
-    package.
+    package. It is defined after including bsd.prefs.mk and can be used in
+    makefile fragments that are used by several packages to distinguish between
+    these packages. Other variables that would serve the same purpose are
+    PKGBASE and PKGNAME, but these are only defined after including bsd.pkg.mk,
+    which is too late.
+
+    In mk.conf, the pkgsrc user can use PKGPATH to tweak variables like
+    MAKE_JOBS and CFLAGS.
 
 WRKDIR
 
@@ -3599,23 +3615,24 @@ MASTER_SITES=   -https://www.example.com/archive/v1.0.0.tar.gz
 There are some predefined values for MASTER_SITES, which can be used in
 packages. The names of the variables should speak for themselves.
 
-MASTER_SITE_APACHE          MASTER_SITE_BACKUP
-MASTER_SITE_CRATESIO        MASTER_SITE_CYGWIN
-MASTER_SITE_DEBIAN          MASTER_SITE_FREEBSD
-MASTER_SITE_FREEBSD_LOCAL   MASTER_SITE_GENTOO
-MASTER_SITE_GITHUB          MASTER_SITE_GNOME
-MASTER_SITE_GNU             MASTER_SITE_GNUSTEP
-MASTER_SITE_HASKELL_HACKAGE MASTER_SITE_IFARCHIVE
-MASTER_SITE_KDE             MASTER_SITE_MOZILLA
-MASTER_SITE_MOZILLA_ALL     MASTER_SITE_MYSQL
-MASTER_SITE_NETLIB          MASTER_SITE_OPENBSD
-MASTER_SITE_OPENOFFICE      MASTER_SITE_OSDN
-MASTER_SITE_PERL_CPAN       MASTER_SITE_PGSQL
-MASTER_SITE_PYPI            MASTER_SITE_RUBYGEMS
-MASTER_SITE_R_CRAN          MASTER_SITE_SOURCEFORGE
-MASTER_SITE_SUNSITE         MASTER_SITE_SUSE
-MASTER_SITE_TEX_CTAN        MASTER_SITE_XCONTRIB
-MASTER_SITE_XEMACS          MASTER_SITE_XORG
+MASTER_SITE_APACHE        MASTER_SITE_BACKUP
+MASTER_SITE_CRATESIO      MASTER_SITE_CYGWIN
+MASTER_SITE_DEBIAN        MASTER_SITE_FREEBSD
+MASTER_SITE_FREEBSD_LOCAL MASTER_SITE_GENTOO
+MASTER_SITE_GITHUB        MASTER_SITE_GITLAB
+MASTER_SITE_GNOME         MASTER_SITE_GNU
+MASTER_SITE_GNUSTEP       MASTER_SITE_HASKELL_HACKAGE
+MASTER_SITE_IFARCHIVE     MASTER_SITE_KDE
+MASTER_SITE_MOZILLA       MASTER_SITE_MOZILLA_ALL
+MASTER_SITE_MYSQL         MASTER_SITE_NETLIB
+MASTER_SITE_OPENBSD       MASTER_SITE_OPENOFFICE
+MASTER_SITE_OSDN          MASTER_SITE_PERL_CPAN
+MASTER_SITE_PGSQL         MASTER_SITE_PYPI
+MASTER_SITE_RUBYGEMS      MASTER_SITE_R_CRAN
+MASTER_SITE_SOURCEFORGE   MASTER_SITE_SUNSITE
+MASTER_SITE_SUSE          MASTER_SITE_TEX_CTAN
+MASTER_SITE_XCONTRIB      MASTER_SITE_XEMACS
+MASTER_SITE_XORG           
 
 Some explanations for the less self-explaining ones: MASTER_SITE_BACKUP
 contains backup sites for packages that are maintained in ftp://ftp.NetBSD.org/
@@ -4354,6 +4371,9 @@ should be set to "${PYPKGPREFIX}-${DISTNAME}", e.g.
 
 DISTNAME=   foopymodule-1.2.10
 PKGNAME=    ${PYPKGPREFIX}-${DISTNAME}
+
+For software in PyPi, the name should match what PyPi specifies for "pip
+install software".
 
 If it is an application, include "../../lang/python/application.mk". In order
 to correctly set the path to the Python interpreter, use the REPLACE_PYTHON
@@ -5916,8 +5936,8 @@ However, pkginstall provides a special mechanism to handle these files.
 In order to provide system startup scripts, the package has to:
 
  1. Store the script inside ${FILESDIR}, with the .sh suffix appended.
-    Considering the print/cups package as an example, it has a cupsd.sh in its
-    files directory.
+    Considering the print/cups-base package as an example, it has a cupsd.sh in
+    its files directory.
 
  2. Tell pkginstall to handle it, appending the name of the script, without its
     extension, to the RCD_SCRIPTS variable. Continuing the previous example:
@@ -6044,15 +6064,17 @@ Table of Contents
     21.3.1. Shared libraries - libtool
     21.3.2. Using libtool on GNU packages that already support libtool
     21.3.3. GNU Autoconf/Automake
+    21.3.4. Meson / ninja
 
 21.4. Programming languages
 
     21.4.1. C, C++, and Fortran
     21.4.2. Java
     21.4.3. Go
-    21.4.4. Packages containing Perl scripts
-    21.4.5. Packages containing shell scripts
-    21.4.6. Other programming languages
+    21.4.4. Rust
+    21.4.5. Packages containing Perl scripts
+    21.4.6. Packages containing shell scripts
+    21.4.7. Other programming languages
 
 21.5. The build phase
 
@@ -6373,9 +6395,9 @@ being present in source form during the build.)
 
 21.1.6. Handling conflicts with other packages
 
-Your package may conflict with other packages a user might already have
-installed on his system, e.g. if your package installs the same set of files as
-another package in the pkgsrc tree or has the same PKGNAME.
+Your package may conflict with other packages users might already have
+installed on their system, e.g., if your package installs the same set of files
+as another package in the pkgsrc tree.
 
 For example, x11/libXaw3d and x11/Xaw-Xpm install the same shared library, thus
 you set in pkgsrc/x11/libXaw3d/Makefile:
@@ -6983,33 +7005,20 @@ in some circumstances. Some of the more common errors are:
 21.3.3. GNU Autoconf/Automake
 
 If a package needs GNU autoconf or automake to be executed to regenerate the
-configure script and Makefile.in makefile templates, then they should be
-executed in a pre-configure target.
+configure script and Makefile.in makefile templates from configure.ac and
+Makefile.am, then they should be executed in a pre-configure target:
 
-For packages that need only autoconf:
-
-AUTOCONF_REQD=  2.50            # if default version is not good enough
-USE_TOOLS+=     autoconf        # use "autoconf213" for autoconf-2.13
+USE_TOOLS+=     autoconf automake autoreconf
+GNU_CONFIGURE=  yes
 ...
 
 pre-configure:
-        cd ${WRKSRC} && autoconf
-
+        set -e; cd ${WRKSRC} && autoreconf -fi
 ...
 
-and for packages that need automake and autoconf:
-
-AUTOMAKE_REQD=  1.7.1           # if default version is not good enough
-USE_TOOLS+=     automake        # use "automake14" for automake-1.4
-...
-
-pre-configure:
-        set -e; cd ${WRKSRC}; \
-        aclocal; autoheader; automake -a --foreign -i; autoconf
-
-...
-
-Packages which use GNU Automake will almost certainly require GNU Make.
+Packages which use GNU Automake will sometimes require GNU Make (gmake in
+USE_TOOLS), but not always. Note that autoreconf only needs to be executed if
+configure.ac or Makefiles are modified, or configure is not present.
 
 There are times when the configure process makes additional changes to the
 generated files, which then causes the build process to try to re-execute the
@@ -7017,14 +7026,30 @@ automake sequence. This is prevented by touching various files in the configure
 stage. If this causes problems with your package you can set AUTOMAKE_OVERRIDE=
 NO in the package Makefile.
 
+21.3.4. Meson / ninja
+
+Packages using Meson to configure need to include:
+
+.include "../../devel/meson/build.mk"
+
+In nearly all cases (any program with dependencies), pkg-config needs to be
+added to USE_TOOLS. If the package installs translation files for non-English
+languages, also add msgfmt and xgettext:
+
+USE_TOOLS+=     pkg-config msgfmt xgettext
+
+If any options need to be passed to Meson, use MESON_ARGS instead of
+CONFIGURE_ARGS:
+
+MESON_ARGS+=    -Dx11=false
+
 21.4. Programming languages
 
 21.4.1. C, C++, and Fortran
 
-Compilers for the C, C++, and Fortran languages comes with the NetBSD base
-system. By default, pkgsrc assumes that a package is written in C and will hide
-all other compilers (via the wrapper framework, see Chapter 18, Buildlink
-methodology).
+Compilers for the C and C++ languages comes with the NetBSD base system. By
+default, pkgsrc assumes that a package is written in C and will hide all other
+compilers (via the wrapper framework, see Chapter 18, Buildlink methodology).
 
 To declare which language's compiler a package needs, set the USE_LANGUAGES
 variable. Allowed values currently are:
@@ -7037,6 +7062,22 @@ variable. Allowed values currently are:
 (and any combination). The default is "c". Packages using GNU configure
 scripts, even if written in C++, usually need a C compiler for the configure
 phase.
+
+To express a general requirement on a specific C or C++ version, normally only
+GCC_REQD needs to be set. For example, GCC 7 includes support for C++17, so if
+the package uses C++17 it should specify:
+
+        GCC_REQD+=      7
+
+
+Language variants like c++11 for USE_LANGUAGES should only be specified if the
+package does not explicitly set -std=... when compiling (i.e. the package
+assumes the compiler defaults to C++11 or some other standard). This is usually
+a bug in the upstream build system.
+
+GCC version 5 includes support for C++14, while GCC 4.7 includes more-or-less
+complete support for C++11. For more information, consult GCC's own
+documentation on programming language support.
 
 21.4.2. Java
 
@@ -7065,20 +7106,23 @@ have the package include ../../lang/go/go-module.mk.
  1. Generate a list of those dependencies with make clean && make patch && make
     show-go-modules > go-modules.mk.
 
- 2. Prepend
-
-    .include
-          "go-modules.mk"
-
-    to any other
-
-    .include
-
-    s.
+ 2. Prepend .include "go-modules.mk" to any other .includes.
 
  3. Incorporate these modules in distinfo with make makesum.
 
-21.4.4. Packages containing Perl scripts
+21.4.4. Rust
+
+If a program is written in Rust and uses Cargo to build, have the package
+include ../../lang/rust/cargo.mk.
+
+ 1. Generate a list of those dependencies with make CARGO_ARGS="build
+    --release" build && make print-cargo-depends > cargo-depends.mk.
+
+ 2. Prepend .include "cargo-depends.mk" to any other .includes.
+
+ 3. Incorporate these modules in distinfo with make makesum.
+
+21.4.5. Packages containing Perl scripts
 
 If your package contains interpreted Perl scripts, add "perl" to the USE_TOOLS
 variable and set REPLACE_PERL to ensure that the proper interpreter path is
@@ -7094,17 +7138,16 @@ handling Perl modules.
 
 There is also the REPLACE_PERL6 variable for the language now known as Raku.
 
-21.4.5. Packages containing shell scripts
+21.4.6. Packages containing shell scripts
 
 REPLACE_SH, REPLACE_BASH, REPLACE_CSH, and REPLACE_KSH can be used to replace
-shell hash bangs in files. Please use the appropriate one, preferring
-REPLACE_SH in case this shell is sufficient. Each should contain a list of
-scripts, relative to WRKSRC, that you want adjusted. Every occurrence of the
-matching shell in a she-bang line will be replaced with the full path to the
-shell executable. When using REPLACE_BASH, don't forget to add bash to
-USE_TOOLS.
+shell she-bangs in files. Please use the appropriate one, preferring REPLACE_SH
+when this shell is sufficient. Each should contain a list of scripts, relative
+to WRKSRC, that you want adjusted. Every occurrence of the matching shell in a
+she-bang line will be replaced with the full path to the shell executable. When
+using REPLACE_BASH, don't forget to add bash to USE_TOOLS.
 
-21.4.6. Other programming languages
+21.4.7. Other programming languages
 
 There are further similar REPLACE variables available, e.g., REPLACE_AWK for
 packages containing awk scripts, and REPLACE_R for R. These two, like the
@@ -7147,6 +7190,22 @@ Use __sun instead.
 
 21.5.1.1. C preprocessor macros to identify the operating system
 
+To distinguish between specific NetBSD versions, you should use the following
+code.
+
+#ifdef __NetBSD__
+#include <sys/param.h>
+#if __NetBSD_Prereq__(9,99,17)
+/* use a newer feature */
+#else
+/* older code */
+#endif
+#endif
+
+#ifndef _WIN32
+/* Unix-like specific code */
+#endif
+
 To distinguish between 4.4 BSD-derived systems and the rest of the world, you
 should use the following code.
 
@@ -7157,8 +7216,7 @@ should use the following code.
 /* non-BSD-specific code goes here */
 #endif
 
-If this distinction is not fine enough, you can also test for the following
-macros.
+You can also test for the following macros:
 
 Cygwin      __CYGWIN__
 DragonFly   __DragonFly__
@@ -7166,7 +7224,7 @@ FreeBSD     __FreeBSD__
 Haiku       __HAIKU__
 Interix     __INTERIX
 IRIX        __sgi (TODO: get a definite source for this)
-Linux       linux, __linux, __linux__
+Linux       __linux
 Mac OS X    __APPLE__
 MirBSD      __MirBSD__ (__OpenBSD__ is also defined)
 Minix3      __minix
@@ -7177,8 +7235,11 @@ Solaris     sun, __sun
 21.5.1.2. C preprocessor macros to identify the hardware architecture
 
 i386        i386, __i386, __i386__
+x86-64      __amd64__, __x86_64__
+ARM         __arm__
 MIPS        __mips
 SPARC       sparc, __sparc
+PowerPC     __powerpc
 
 21.5.1.3. C preprocessor macros to identify the compiler
 
@@ -7294,10 +7355,10 @@ When building a hierarchy of packages, it may happen that one package is built
 and then pkgsrc is updated. This situation can provoke various hard to diagnose
 build errors. To clean up the situation:
 
-$ (cd ../../ && test -f mk/bsd.pkg.mk && rm -rf */*/work)
+$ (cd ../../ && cat mk/bsd.pkg.mk >/dev/null && rm -rf */*/work)
 
-(The test for bsd.pkg.mk just prevents running this command in the wrong
-directory.)
+(The only purpose of the bsd.pkg.mk is to prevent running this command in the
+wrong directory.)
 
 If you have set WRKOBJDIR in mk.conf, remove that directory as well.
 
@@ -7343,10 +7404,10 @@ and over.
 |openpty                  |-lutil  |Linux             |
 +-----------------------------------------------------+
 
-To fix these linker errors, it is often sufficient to say LIBS.OperatingSystem+
-= -lfoo to the package Makefile and then say bmake clean; bmake.
+To fix these linker errors, it is often sufficient to add LIBS.OperatingSystem+
+= -lfoo to the package Makefile and then run bmake clean; bmake.
 
-21.5.4.1. Special issue: The SunPro compiler
+21.5.4.1. The SunPro compiler and inline functions
 
 When you are using the SunPro compiler, there is another possibility. That
 compiler cannot handle the following code:
@@ -7368,15 +7429,22 @@ It generates the code for inline_func even if that function is never used. This
 code then refers to extern_func, which can usually not be resolved. To solve
 this problem you can try to tell the package to disable inlining of functions.
 
+21.5.4.2. Missing atomic functions
+
+When building for older machine architectures (e.g., i386, PowerPC), builds may
+fail because the package expects modern 64-bit atomic functions which the
+underlying hardware either doesn't support, or will only support with specific
+compiler flags. This is generally handled via inclusion of mk/atomic64.mk.
+
 21.5.5. Running out of memory
 
 Sometimes packages fail to build because the compiler runs into an operating
 system specific soft limit. With the UNLIMIT_RESOURCES variable pkgsrc can be
-told to unlimit the resources. Currently, the allowed values are any
-combination of "cputime", "datasize", "memorysize", and "stacksize". Setting
-this variable is similar to running the shell builtin ulimit command to raise
-the maximum data segment size or maximum stack size of a process, respectively,
-to their hard limits.
+told to unlimit the resources. The allowed values are any combination of "
+cputime", "datasize", "memorysize", "stacksize" and "virtualsize". Setting this
+variable is similar to running the shell builtin ulimit command to raise the
+maximum data segment size or maximum stack size of a process, respectively, to
+their hard limits.
 
 21.6. The install phase
 
@@ -7389,19 +7457,21 @@ like this:
 ${INSTALL_DATA_DIR} ${PREFIX}/dir1
 ${INSTALL_DATA_DIR} ${PREFIX}/dir2
 
-You can also just append "dir1 dir2" to the INSTALLATION_DIRS variable, which
-will automatically do the right thing.
+Instead of running the install commands directly, you can also append "dir1
+dir2" to the INSTALLATION_DIRS variable, which will automatically do the right
+thing.
 
 21.6.2. Where to install documentation
 
 In general, documentation should be installed into ${PREFIX}/share/doc/$
-{PKGBASE} or ${PREFIX}/share/doc/${PKGNAME} (the latter includes the version
-number of the package).
+{PKGBASE} or ${PREFIX}/share/doc/${PKGNAME_NOREV} (the latter includes the
+version number of the package).
 
 Many modern packages using GNU autoconf allow to set the directory where HTML
 documentation is installed with the "--with-html-dir" option. Sometimes using
 this flag is needed because otherwise the documentation ends up in ${PREFIX}/
-share/doc/html or other places.
+share/doc/html or other places. In pkgsrc, the HTML documentation should go
+into the package-specific directory, just like any other documentation.
 
 An exception to the above is that library API documentation generated with the
 textproc/gtk-doc tools, for use by special browsers (devhelp) should be left at
@@ -7480,10 +7550,6 @@ REPLACE.tcl.old=        .*/bin/tclsh
 REPLACE.tcl.new=        ${PREFIX}/bin/tclsh
 REPLACE_FILES.tcl=      # list of tcl scripts which need to be fixed,
 # relative to ${WRKSRC}, just as in REPLACE_PERL
-
-Note
-
-Before March 2006, these variables were called _REPLACE.* and _REPLACE_FILES.*.
 
 21.6.6. Packages installing Perl modules
 
@@ -7763,13 +7829,6 @@ helping our GNOME porting and packaging efforts. It provides instructions on
 how to manage the existing packages and some important information regarding
 their internals.
 
-We need your help!
-
-Should you have some spare cycles to devote to NetBSD, pkgsrc and GNOME and are
-willing to learn new exciting stuff, please jump straight to the pending work
-list! There is still a long way to go to get a fully-functional GNOME desktop
-under NetBSD and we need your help to achieve it!
-
 22.1. Meta packages
 
 pkgsrc includes three GNOME-related meta packages:
@@ -7809,14 +7868,14 @@ the minimum required tools:
   * Almost all GNOME applications use the GNU Autotools as their build system.
     As a general rule you will need to tell this to your package:
 
-    GNU_CONFIGURE=yes
-    USE_LIBTOOL=yes
-    USE_TOOLS+=gmake
+    GNU_CONFIGURE=  yes
+    USE_LIBTOOL=    yes
+    USE_TOOLS+=     gmake
 
   * If the package uses pkg-config to detect dependencies, add this tool to the
     list of required utilities:
 
-    USE_TOOLS+=pkg-config
+    USE_TOOLS+=     pkg-config
 
     Also use pkgtools/verifypc at the end of the build process to ensure that
     you did not miss to specify any dependency in your package and that the
@@ -7832,14 +7891,14 @@ the minimum required tools:
     you ought to report. For such packages you should disable gtk-doc (unless
     it is the default):
 
-    CONFIGURE_ARGS+=--disable-gtk-doc
+    CONFIGURE_ARGS+=        --disable-gtk-doc
 
     The default location of installed HTML files (share/gtk-doc/<package-name>)
     is correct and should not be changed unless the package insists on
     installing them somewhere else. Otherwise programs as devhelp will not be
     able to open them. You can do that with an entry similar to:
 
-    CONFIGURE_ARGS+=--with-html-dir=${PREFIX}/share/gtk-doc/...
+    CONFIGURE_ARGS+=        --with-html-dir=${PREFIX}/share/gtk-doc/...
 
 GNOME uses multiple shared directories and files under the installation prefix
 to maintain databases. In this context, shared means that those exact same
@@ -8000,27 +8059,23 @@ Creating binary packages for everything in pkgsrc (bulk builds).
 
 23.2. Submitting source packages (for non-NetBSD-developers)
 
-First, check that your package is complete, compiles and runs well; see
+Firstly, you can import new packages into pkgsrc-wip ("pkgsrc work-in-progress"
+); see the homepage at https://pkgsrc.org/wip/ for details.
+
+Next, check that your package is complete, compiles and runs well; see
 Chapter 14, Creating a new pkgsrc package from scratch and the rest of this
-document. Next, generate an uuencoded gzipped tar(1) archive that contains all
-files that make up the package. Finally, send this package to the pkgsrc bug
-tracking system, either with the send-pr(1) command, or if you don't have that,
-go to the web page https://www.NetBSD.org/support/send-pr.html, which contains
-some instructions and a link to a form where you can submit packages. The
-sysutils/gtk-send-pr package is also available as a substitute for either of
-the above two tools.
+document. Run the pkgtools/pkglint tool and fix any errors that appear.
+
+Finally, send a report to the pkgsrc bug tracking system, either with the
+send-pr(1) command, or if you don't have that, go to the web page https://
+www.NetBSD.org/support/send-pr.html, which contains some instructions and a
+link to a form where you can submit packages. The sysutils/gtk-send-pr package
+is also available as a substitute for either of the above two tools.
 
 In the form of the problem report, the category should be "pkg", the synopsis
 should include the package name and version number, and the description field
 should contain a short description of your package (contents of the COMMENT
-variable or DESCR file are OK). The uuencoded package data should go into the "
-fix" field.
-
-If you want to submit several packages, please send a separate PR for each one,
-it's easier for us to track things that way.
-
-Alternatively, you can also import new packages into pkgsrc-wip ("pkgsrc
-work-in-progress"); see the homepage at https://pkgsrc.org/wip/ for details.
+variable or DESCR file are OK).
 
 23.3. General notes when adding, updating, or removing packages
 
@@ -8217,57 +8272,63 @@ pkgsrc-users mailing list.
 24.1. What is the difference between MAKEFLAGS, .MAKEFLAGS and MAKE_FLAGS?
 24.2. What is the difference between MAKE, GMAKE and MAKE_PROGRAM?
 24.3. What is the difference between CC, PKG_CC and PKGSRC_COMPILER?
-24.4. What is the difference between BUILDLINK_LDFLAGS, BUILDLINK_LDADD and
-    BUILDLINK_LIBS?
-24.5. Why does make show-var VARNAME=BUILDLINK_PREFIX.foo say it's empty?
-24.6. What does ${MASTER_SITE_SOURCEFORGE:=package/} mean? I don't understand
+24.4. Why does make show-var VARNAME=BUILDLINK_PREFIX.foo say it's empty?
+24.5. What does ${MASTER_SITE_SOURCEFORGE:=package/} mean? I don't understand
     the := inside it.
-24.7. Which mailing lists are there for package developers?
-24.8. Where is the pkgsrc documentation?
-24.9. I have a little time to kill. What shall I do?
+24.6. Which mailing lists are there for package developers?
+24.7. Where is the pkgsrc documentation?
+24.8. I have a little time to kill. What shall I do?
 
 24.1. What is the difference between MAKEFLAGS, .MAKEFLAGS and MAKE_FLAGS?
 
       MAKEFLAGS are the flags passed to the pkgsrc-internal invocations of make
-      (1), while MAKE_FLAGS are the flags that are passed to the MAKE_PROGRAM
-      when building the package. [FIXME: What is .MAKEFLAGS for?]
+      (1).
+
+      MAKE_FLAGS are the flags that are passed to the MAKE_PROGRAM when
+      building the package.
+
+      .MAKEFLAGS is an internal variable of bmake and should not be used by
+      packages.
 
 24.2. What is the difference between MAKE, GMAKE and MAKE_PROGRAM?
 
       MAKE is the path to the make(1) program that is used in the pkgsrc
-      infrastructure. GMAKE is the path to GNU Make, but you need to say
-      USE_TOOLS+=gmake to use that. MAKE_PROGRAM is the path to the Make
-      program that is used for building the package.
+      infrastructure.
+
+      GMAKE is the path to GNU Make, but you need to say USE_TOOLS+=gmake to
+      use that.
+
+      MAKE_PROGRAM is the path to the Make program that is used for building
+      the package.
 
 24.3. What is the difference between CC, PKG_CC and PKGSRC_COMPILER?
 
       CC is the path to the real C compiler, which can be configured by the
-      pkgsrc user. PKG_CC is the path to the compiler wrapper. PKGSRC_COMPILER
-      is not a path to a compiler, but the type of compiler that should be
-      used. See mk/compiler.mk for more information about the latter variable.
+      pkgsrc user.
 
-24.4. What is the difference between BUILDLINK_LDFLAGS, BUILDLINK_LDADD and
-      BUILDLINK_LIBS?
+      PKG_CC is the path to the compiler wrapper.
 
-      [FIXME]
+      PKGSRC_COMPILER is not a path to a compiler, but the type of compiler
+      that should be used. See mk/compiler.mk for more information about the
+      latter variable.
 
-24.5. Why does make show-var VARNAME=BUILDLINK_PREFIX.foo say it's empty?
+24.4. Why does make show-var VARNAME=BUILDLINK_PREFIX.foo say it's empty?
 
       For optimization reasons, some variables are only available in the "
       wrapper" phase and later. To "simulate" the wrapper phase, append 
       PKG_PHASE=wrapper to the above command.
 
-24.6. What does ${MASTER_SITE_SOURCEFORGE:=package/} mean? I don't understand
+24.5. What does ${MASTER_SITE_SOURCEFORGE:=package/} mean? I don't understand
       the := inside it.
 
-      The := is not really an assignment operator, although it looks like it.
+      The := is not an assignment operator, even though it may look like one.
       Instead, it is a degenerate form of ${LIST:old_string=new_string}, which
       is documented in the make(1) man page and which is commonly used in the
       form ${SRCS:.c=.o}. In the case of MASTER_SITE_*, old_string is the empty
       string and new_string is package/. That's where the : and the = fall
       together.
 
-24.7. Which mailing lists are there for package developers?
+24.6. Which mailing lists are there for package developers?
 
       tech-pkg
 
@@ -8284,7 +8345,7 @@ pkgsrc-users mailing list.
           Please do not report your bugs here directly; use one of the other
           mailing lists.
 
-24.8. Where is the pkgsrc documentation?
+24.7. Where is the pkgsrc documentation?
 
       There are many places where you can find documentation about pkgsrc:
 
@@ -8318,7 +8379,7 @@ pkgsrc-users mailing list.
           others can find your questions later (see above). To be sure that the
           developer in charge reads the mail, you may CC him or her.
 
-24.9. I have a little time to kill. What shall I do?
+24.8. I have a little time to kill. What shall I do?
 
       This is not really an FAQ yet, but here's the answer anyway.
 
@@ -9024,6 +9085,28 @@ PIE. Currently, this means NetBSD on x86, ARM, SPARC64, m68k, and MIPS.
 
 PKGSRC_MKPIE was enabled by default after the pkgsrc-2021Q3 branch.
 
+B.1.1.4. PKGSRC_USE_RELRO
+
+This also makes the exploitation of some security vulnerabilities more
+difficult in some cases.
+
+Two different mitigation levels are available:
+
+  * partial (the default): the ELF sections are reordered so that internal data
+    sections precede the program's own data sections, and non-PLT GOT is
+    read-only;
+
+  * full: in addition to partial RELRO, every relocation is performed
+    immediately when starting the program, allowing the entire GOT to be
+    read-only. This can greatly slow down startup of large programs.
+
+This is currently supported by GCC. Many software distributions now enable this
+feature by default, at the "partial" level.
+
+More details can be found here:
+
+  * Hardening ELF binaries using Relocation Read-Only (RELRO)
+
 B.1.2. Not enabled by default
 
 B.1.2.1. PKGSRC_MKREPRO
@@ -9041,29 +9124,7 @@ More details can be found here:
 
 More work likely needs to be done before pkgsrc is fully reproducible.
 
-B.1.2.2. PKGSRC_USE_RELRO
-
-This also makes the exploitation of some security vulnerabilities more
-difficult in some cases.
-
-Two different mitigation levels are available:
-
-  * partial: the ELF sections are reordered so that internal data sections
-    precede the program's own data sections, and non-PLT GOT is read-only;
-
-  * full: in addition to partial RELRO, every relocation is performed
-    immediately when starting the program (with a slight performance impact),
-    allowing the entire GOT to be read-only.
-
-This is currently supported by GCC. Many software distributions now enable this
-feature by default, at the "partial" level. However, it cannot yet be enforced
-globally in pkgsrc through cwrappers.
-
-More details can be found here:
-
-  * Hardening ELF binaries using Relocation Read-Only (RELRO)
-
-B.1.2.3. PKGSRC_USE_STACK_CHECK
+B.1.2.2. PKGSRC_USE_STACK_CHECK
 
 This uses -fstack-check with GCC for another stack protection mitigation.
 
@@ -9526,34 +9587,33 @@ ABI                                  ACCEPTABLE_LICENSES
 ACROREAD_FONTPATH                    ADDITIONAL
 AFAIK                                AIX
 ALLOW_VULNERABLE_PACKAGES            ALL_ENV
-ALSA_PC                              ALTERNATIVES_SRC
-AMANDA_TMP                           AMANDA_USER
-AMANDA_VAR                           APACHE_GROUP
-APACHE_MODULE_NAME                   APACHE_MODULE_SRC
-APACHE_MODULE_SRCDIR                 APACHE_PKG_PREFIX
-APACHE_SUEXEC_CONFIGURE_ARGS         APACHE_SUEXEC_DOCROOT
-APACHE_USER                          APPEND_ABI
-APPEND_ELF                           ARLA_CACHE
-AUDIT_PACKAGES_FLAGS                 AUTOCONF_REQD
-AUTOMAKE_OVERRIDE                    AUTOMAKE_REQD
-AUTO_MKDIRS                          BDB185_DEFAULT
-BDBBASE                              BDB_ACCEPTED
-BDB_DEFAULT                          BDB_LIBS
-BDB_TYPE                             BINCIMAP_GROUP
-BINCIMAP_USER                        BIND_DIR
-BIND_GROUP                           BIND_USER
-BINOWN                               BINPKG_SITES
-BIN_INSTALL_FLAGS                    BISON_PKGDATADIR
-BLAS                                 BLAS_ACCEPTED
-BLAS_C_INTERFACE                     BLAS_INCLUDES
-BLAS_INDEX64                         BLAS_LIBS
-BLAS_TYPE                            BOOTSTRAP_DEPENDS
-BROKEN                               BROKEN_EXCEPT_ON_PLATFORM
-BROKEN_ON_PLATFORM                   BSDSRCDIR
-BSDXSRCDIR                           BSD_MAKE_ENV
-BUILDLINK_AUTO_DIRS                  BUILDLINK_AUTO_VARS
-BUILDLINK_CFLAGS                     BUILDLINK_CONTENTS_FILTER
-BUILDLINK_CPPFLAGS                   BUILDLINK_DEPMETHOD
+ALTERNATIVES_SRC                     AMANDA_TMP
+AMANDA_USER                          AMANDA_VAR
+APACHE_GROUP                         APACHE_MODULE_NAME
+APACHE_MODULE_SRC                    APACHE_MODULE_SRCDIR
+APACHE_PKG_PREFIX                    APACHE_SUEXEC_CONFIGURE_ARGS
+APACHE_SUEXEC_DOCROOT                APACHE_USER
+APPEND_ABI                           APPEND_ELF
+ARLA_CACHE                           AUDIT_PACKAGES_FLAGS
+AUTOCONF_REQD                        AUTOMAKE_OVERRIDE
+AUTOMAKE_REQD                        AUTO_MKDIRS
+BDB185_DEFAULT                       BDBBASE
+BDB_ACCEPTED                         BDB_DEFAULT
+BDB_LIBS                             BDB_TYPE
+BINCIMAP_GROUP                       BINCIMAP_USER
+BIND_DIR                             BIND_GROUP
+BIND_USER                            BINOWN
+BINPKG_SITES                         BIN_INSTALL_FLAGS
+BISON_PKGDATADIR                     BLAS
+BLAS_ACCEPTED                        BLAS_C_INTERFACE
+BLAS_INCLUDES                        BLAS_INDEX64
+BLAS_LIBS                            BLAS_TYPE
+BOOTSTRAP_DEPENDS                    BROKEN
+BROKEN_EXCEPT_ON_PLATFORM            BROKEN_ON_PLATFORM
+BSDSRCDIR                            BSDXSRCDIR
+BSD_MAKE_ENV                         BUILDLINK_AUTO_DIRS
+BUILDLINK_AUTO_VARS                  BUILDLINK_CFLAGS
+BUILDLINK_CONTENTS_FILTER            BUILDLINK_CPPFLAGS
 BUILDLINK_FILES                      BUILDLINK_FILES_CMD
 BUILDLINK_FNAME_TRANSFORM            BUILDLINK_LDFLAGS
 BUILDLINK_LIBS                       BUILDLINK_OPSYS_SUPPORT_PTHREAD
@@ -9576,7 +9636,7 @@ CBLAS_LIBS                           CCACHE_BASE
 CCACHE_DIR                           CCACHE_LOGFILE
 CC_VERSION                           CC_VERSION_STRING
 CDRECORD_CONF                        CDROM_PKG_URL_DIR
-CDROM_PKG_URL_HOST                   CHECKOUT_DATE
+CDROM_PKG_URL_HOST                   CHANGES
 CHECK_COMPILER                       CHECK_FAKEHOME
 CHECK_FILES                          CHECK_FILES_SKIP
 CHECK_FILES_STRICT                   CHECK_HEADERS
@@ -9599,29 +9659,22 @@ CLANGBASE                            CLEANDEPENDS
 CMAKE_DEPENDENCIES_REWRITE           CMAKE_INSTALL_NAME_DIR
 CMAKE_INSTALL_PREFIX                 CMAKE_MODULE_PATH_OVERRIDE
 CMAKE_PKGSRC_BUILD_FLAGS             CMAKE_PREFIX_PATH
-CMAKE_USE_GNU_INSTALL_DIRS           COMMON_LISP_DOCFILES
-COMMON_LISP_EXAMPLES                 COMMON_LISP_EXTRAFILES
-COMMON_LISP_PACKAGES                 COMMON_LISP_SYSTEM
-COMPILER_RPATH_FLAG                  COMPILER_USE_SYMLINKS
-CONFIGURE_ARGS                       CONFIGURE_DIRS
-CONFIGURE_ENV                        CONFIGURE_ENV_SHELL
-CONFIGURE_HAS_INFODIR                CONFIGURE_HAS_MANDIR
-CONFIGURE_SCRIPT                     CONFIG_SHELL
-CONFIG_SHELL_FLAGS                   CONF_FILES
-CONF_FILES_MODE                      CONF_FILES_PERMS
-CONSERVER_DEFAULTHOST                CONSERVER_DEFAULTPORT
-CP                                   CPP
-CPP_PRECOMP_FLAGS                    CREATE_WRKDIR_SYMLINK
-CROSSBASE                            CTFCONVERT
-CTF_FILES_SKIP                       CTF_SUPPORTED
-CTYPE                                CUPS_GROUP
-CUPS_SYSTEM_GROUPS                   CUPS_USER
-CURSES_DEFAULT                       CURSES_TYPE
-CVS_EXTRACTDIR                       CVS_MODULE
-CVS_PROJECT                          CVS_REPOSITORIES
-CVS_ROOT                             CVS_ROOT_GNU
-CVS_ROOT_NONGNU                      CVS_ROOT_SOURCEFORGE
-CVS_TAG                              CXX
+CMAKE_USE_GNU_INSTALL_DIRS           COMPILER_RPATH_FLAG
+COMPILER_USE_SYMLINKS                CONFIGURE_ARGS
+CONFIGURE_DIRS                       CONFIGURE_ENV
+CONFIGURE_ENV_SHELL                  CONFIGURE_HAS_INFODIR
+CONFIGURE_HAS_MANDIR                 CONFIGURE_SCRIPT
+CONFIG_SHELL                         CONFIG_SHELL_FLAGS
+CONF_FILES                           CONF_FILES_MODE
+CONF_FILES_PERMS                     CONSERVER_DEFAULTHOST
+CONSERVER_DEFAULTPORT                CP
+CPP                                  CPP_PRECOMP_FLAGS
+CREATE_WRKDIR_SYMLINK                CROSSBASE
+CTFCONVERT                           CTF_FILES_SKIP
+CTF_SUPPORTED                        CTYPE
+CUPS_GROUP                           CUPS_SYSTEM_GROUPS
+CUPS_USER                            CURSES_DEFAULT
+CURSES_TYPE                          CXX
 CYRUS_GROUP                          CYRUS_IDLE
 CYRUS_USER                           DAEMONTOOLS_GROUP
 DAEMONTOOLS_LOG_USER                 DARWIN_NO_SYSTEM_LIBS
@@ -9646,6 +9699,7 @@ DLOPEN_REQUIRE_PTHREADS              DL_AUTO_VARS
 DL_CFLAGS                            DL_LDFLAGS
 DL_LIBS                              DNS
 DOCOWN                               DOWNLOADED_DISTFILE
+DQCACHE_GROUP                        DQCACHE_USER
 DT_LAYOUT                            DYNAMIC_SITES_CMD
 DYNAMIC_SITES_SCRIPT                 ECHO
 ECHO_N                               ELK_GUI
@@ -9676,36 +9730,29 @@ FETCH_PROXY                          FETCH_RESUME_ARGS
 FETCH_TIMEOUT                        FETCH_USE_IPV4_ONLY
 FETCH_USING                          FILES_SUBST
 FILES_SUBST_SED                      FIX_SYSTEM_HEADERS
-FLUXBOX_USE_GNOME                    FLUXBOX_USE_KDE
-FLUXBOX_USE_XFT                      FLUXBOX_USE_XINERAMA
-FONTDIR                              FONTS_DIRS
-FONTS_VERBOSE                        FOO_HACKS_MK
-FOSSIL_EXTRACTDIR                    FOSSIL_REPO
-FOSSIL_REPOSITORIES                  FOSSIL_VERSION
-FOX_USE_XUNICODE                     FREEWNN_GROUP
-FREEWNN_USER                         FTP_PKG_URL_DIR
-FTP_PKG_URL_HOST                     GAMEDATAMODE
-GAMEDATA_PERMS                       GAMEDIRMODE
-GAMEDIR_PERMS                        GAMEGRP
-GAMEMODE                             GAMEOWN
-GAMES_GROUP                          GAMES_USER
-GCC                                  GCCBASE
-GCC_REQD                             GCC_VERSION_SUFFIX
-GEM_BUILD                            GEM_CLEANBUILD
-GEM_CLEANBUILD_EXTENSIONS            GEM_DOCDIR
-GEM_EXTSDIR                          GEM_HOME
-GEM_KEEPBUILD                        GEM_LIBDIR
-GEM_NAME                             GEM_PATH
-GEM_PLUGINSDIR                       GEM_SPECFILE
-GENERATE_PLIST                       GHC
-GHOSTSCRIPT_REQD                     GITHUB_PROJECT
-GITHUB_RELEASE                       GITHUB_SUBMODULES
-GITHUB_TAG                           GITHUB_TYPE
-GITLAB_PROJECT                       GITLAB_TAG
-GITLAB_TYPE                          GIT_BRANCH
-GIT_ENV                              GIT_EXTRACTDIR
-GIT_REPO                             GIT_REPOSITORIES
-GIT_REVISION                         GIT_TAG
+FONTS_DIRS                           FONTS_VERBOSE
+FOO_HACKS_MK                         FOX_USE_XUNICODE
+FREEWNN_GROUP                        FREEWNN_USER
+FTP_PKG_URL_DIR                      FTP_PKG_URL_HOST
+GAMEDATAMODE                         GAMEDATA_PERMS
+GAMEDIRMODE                          GAMEDIR_PERMS
+GAMEGRP                              GAMEMODE
+GAMEOWN                              GAMES_GROUP
+GAMES_USER                           GCC
+GCCBASE                              GCC_REQD
+GCC_VERSION_SUFFIX                   GEM_BUILD
+GEM_CLEANBUILD                       GEM_CLEANBUILD_EXTENSIONS
+GEM_DOCDIR                           GEM_EXTSDIR
+GEM_HOME                             GEM_KEEPBUILD
+GEM_LIBDIR                           GEM_NAME
+GEM_PATH                             GEM_PLUGINSDIR
+GEM_SPECFILE                         GENERATE_PLIST
+GHC                                  GHOSTSCRIPT_REQD
+GITHUB_PROJECT                       GITHUB_RELEASE
+GITHUB_SUBMODULES                    GITHUB_TAG
+GITHUB_TYPE                          GITLAB_PROJECT
+GITLAB_RELEASE                       GITLAB_SUBMODULES
+GITLAB_TAG                           GITLAB_TYPE
 GNU                                  GNU_CONFIGURE
 GNU_CONFIGURE_INFODIR                GNU_CONFIGURE_MANDIR
 GNU_CONFIGURE_QUIET                  GNU_CONFIGURE_STRICT
@@ -9715,37 +9762,34 @@ GO_EXTRA_MOD_DIRS                    GO_MODULE_FILES
 GO_SRCPATH                           GO_VERSION_DEFAULT
 GROUP_SPECIFIC_PKGS                  GRUB_NETWORK_CARDS
 GRUB_PRESET_COMMAND                  GRUB_SCAN_ARGS
-GZIP                                 HASKELL_COMPILER
+GZIP                                 HASKELL_ENABLE_DYNAMIC_EXECUTABLE
 HASKELL_ENABLE_HADDOCK_DOCUMENTATION HASKELL_ENABLE_LIBRARY_PROFILING
 HASKELL_ENABLE_SHARED_LIBRARY        HASKELL_OPTIMIZATION_LEVEL
 HAS_CONFIGURE                        HEADER_TEMPLATES
-HG_REPO                              HG_REPOSITORIES
-HG_TAG                               HOMEPAGE
-HOST_PKGTOOLS_ARGS                   HOST_SPECIFIC_PKGS
-HOWL_GROUP                           HOWL_USER
-ICCBASE                              ICECAST_CHROOTDIR
-ICON_THEMES                          IDOBASE
-IGNORE_CCACHE                        IGNORE_INFO_DIRS
-IGNORE_INTERACTIVE_FETCH             IMAKE
-IMAKEOPTS                            IMAKE_MAKE
-IMAKE_MANINSTALL                     IMAP_UW_CCLIENT_MBOX_FMT
-IMDICTDIR                            INCOMPAT_CURSES
-INFO_DIR                             INFO_FILES
-INFO_FILES_VERBOSE                   INFO_MSG
-INIT_SYSTEM                          INN_DATA_DIR
-INN_GROUP                            INN_USER
-INSTALLATION_DIRS                    INSTALLATION_DIRS_FROM_PLIST
-INSTALL_ENV                          INSTALL_SH_OVERRIDE
-INSTALL_SRC                          INSTALL_TEMPLATES
-INSTALL_UNSTRIPPED                   IRCD_HYBRID_IRC_GROUP
-IRCD_HYBRID_IRC_USER                 IRCD_HYBRID_MAXCONN
-IRCD_HYBRID_NICLEN                   IRCD_HYBRID_SYSLOG_EVENTS
-IRCD_HYBRID_SYSLOG_FACILITY          IRCD_HYBRID_TOPICLEN
-IRIX                                 IRRD_USE_PGP
-JABBERD_GROUP                        JABBERD_LOGDIR
-JABBERD_PIDDIR                       JABBERD_SPOOLDIR
-JABBERD_USER                         JAKARTA_HOME
-JAVA_APP_PATH                        JAVA_APP_TARGETS
+HOMEPAGE                             HOST_PKGTOOLS_ARGS
+HOST_SPECIFIC_PKGS                   HOWL_GROUP
+HOWL_USER                            ICCBASE
+ICECAST_CHROOTDIR                    ICON_THEMES
+IDOBASE                              IGNORE_CCACHE
+IGNORE_INFO_DIRS                     IGNORE_INTERACTIVE_FETCH
+IMAKE                                IMAKEOPTS
+IMAKE_MAKE                           IMAKE_MANINSTALL
+IMAP_UW_CCLIENT_MBOX_FMT             IMDICTDIR
+INCOMPAT_CURSES                      INFO_DIR
+INFO_FILES                           INFO_FILES_VERBOSE
+INFO_MSG                             INIT_SYSTEM
+INN_DATA_DIR                         INN_GROUP
+INN_USER                             INSTALLATION_DIRS
+INSTALLATION_DIRS_FROM_PLIST         INSTALL_ENV
+INSTALL_SH_OVERRIDE                  INSTALL_SRC
+INSTALL_TEMPLATES                    INSTALL_UNSTRIPPED
+IRCD_HYBRID_IRC_GROUP                IRCD_HYBRID_IRC_USER
+IRCD_HYBRID_MAXCONN                  IRCD_HYBRID_NICLEN
+IRCD_HYBRID_SYSLOG_EVENTS            IRCD_HYBRID_SYSLOG_FACILITY
+IRCD_HYBRID_TOPICLEN                 IRIX
+IRRD_USE_PGP                         JABBERD_GROUP
+JABBERD_LOGDIR                       JABBERD_PIDDIR
+JABBERD_SPOOLDIR                     JABBERD_USER
 JAVA_BINPREFIX                       JAVA_CLASSPATH
 JAVA_HOME                            JAVA_LD_LIBRARY_PATH
 JAVA_NAME                            JAVA_UNLIMIT
@@ -9764,37 +9808,43 @@ LIBRSVG_TYPE                         LIBTOOL
 LIBTOOLIZE_PLIST                     LIBTOOL_M4_OVERRIDE
 LIBUSB_TYPE                          LICENSE
 LINKER_RPATH_FLAG                    LINK_RPATH_FLAG
-LINUX_BASE_NODEPS                    LINUX_BASE_PREFERRED
-LINUX_BASE_REQUIRED                  LINUX_LOCALES
-LOCALBASE                            LOCALBASE_LOCKTYPE
-LOCALPATCHES                         LOVE_DATA
-LOVE_GAME                            LOVE_VERSION
-LP32PLATFORMS                        LP64PLATFORMS
+LINUX_LOCALES                        LOCALBASE
+LOCALBASE_LOCKTYPE                   LOCALPATCHES
+LOVE_DATA                            LOVE_GAME
+LOVE_VERSION                         LP32PLATFORMS
+LP64PLATFORMS                        LUA_BUSTED_ARGS
+LUA_CDIR                             LUA_COMPILER
+LUA_DOCDIR                           LUA_EXAMPLESDIR
+LUA_INCDIR                           LUA_INTERPRETER
+LUA_LDIR                             LUA_LINKER_MAGIC
+LUA_PKGPREFIX                        LUA_SELF_CONFLICT
+LUA_USE_BUSTED                       LUA_VERSIONS_ACCEPTED
+LUA_VERSIONS_INCOMPATIBLE            LUA_VERSION_DEFAULT
+LUA_VERSION_REQD                     Lua
 MACHINE_PLATFORM                     MAILAGENT_DOMAIN
 MAILAGENT_EMAIL                      MAILAGENT_FQDN
 MAILAGENT_ORGANIZATION               MAJORDOMO_HOMEDIR
-MAJOR_OS_VERSION                     MAKEINFO_ARGS
-MAKE_DIRS                            MAKE_DIRS_PERMS
-MAKE_ENV                             MAKE_FILE
-MAKE_FLAGS                           MAKE_JOBS
-MAKE_JOBS_SAFE                       MAKE_PROGRAM
-MANCOMPRESSED_IF_MANZ                MANINSTALL
-MANZ                                 MASTER_SITES
-MASTER_SITE_BACKUP                   MASTER_SITE_LOCAL
-MASTER_SITE_MOZILLA                  MASTER_SITE_OVERRIDE
-MASTER_SITE_PERL_CPAN                MASTER_SORT
-MASTER_SORT_RANDOM                   MASTER_SORT_REGEX
-MECAB_CHARSET                        MEDIATOMB_GROUP
-MEDIATOMB_USER                       MIPSPROBASE
-MIREDO_GROUP                         MIREDO_USER
-MISSING_FEATURES                     MKDIR
-MKPIE_SUPPORTED                      MLDONKEY_GROUP
-MLDONKEY_HOME                        MLDONKEY_USER
-MONOTONE_GROUP                       MONOTONE_USER
-MOTIFBASE                            MOTIF_TYPE
-MOTIF_TYPE_DEFAULT                   MPI_TYPE
-MSGFMT_STRIP_MSGCTXT                 MSGFMT_STRIP_MSGID_PLURAL
-MTOOLS_ENABLE_FLOPPYD                MUST
+MAKEINFO_ARGS                        MAKE_DIRS
+MAKE_DIRS_PERMS                      MAKE_ENV
+MAKE_FILE                            MAKE_FLAGS
+MAKE_JOBS                            MAKE_JOBS_SAFE
+MAKE_PROGRAM                         MANCOMPRESSED_IF_MANZ
+MANINSTALL                           MANZ
+MASTER_SITES                         MASTER_SITE_BACKUP
+MASTER_SITE_LOCAL                    MASTER_SITE_MOZILLA
+MASTER_SITE_OVERRIDE                 MASTER_SITE_PERL_CPAN
+MASTER_SORT                          MASTER_SORT_RANDOM
+MASTER_SORT_REGEX                    MECAB_CHARSET
+MEDIATOMB_GROUP                      MEDIATOMB_USER
+MIPSPROBASE                          MIREDO_GROUP
+MIREDO_USER                          MISSING_FEATURES
+MKDIR                                MKPIE_SUPPORTED
+MLDONKEY_GROUP                       MLDONKEY_HOME
+MLDONKEY_USER                        MONOTONE_GROUP
+MONOTONE_USER                        MOTIFBASE
+MOTIF_TYPE                           MOTIF_TYPE_DEFAULT
+MPI_TYPE                             MSGFMT_STRIP_MSGCTXT
+MSGFMT_STRIP_MSGID_PLURAL            MTOOLS_ENABLE_FLOPPYD
 MV                                   MYSQL_CHARSET
 MYSQL_DATADIR                        MYSQL_EXTRA_CHARSET
 MYSQL_GROUP                          MYSQL_USER
@@ -9807,6 +9857,8 @@ NATIVE_EXEC_FMT                      NATIVE_MACHINE_PLATFORM
 NATIVE_OBJECT_FMT                    NBPAX_PROGRAM_PREFIX
 NETBSD_LOGIN_NAME                    NMH_EDITOR
 NMH_MTA                              NMH_PAGER
+NODE_VERSIONS_ACCEPTED               NODE_VERSIONS_INCOMPATIBLE
+NODE_VERSION_DEFAULT                 NODE_VERSION_REQD
 NOLOGIN                              NOTE
 NOT_FOR_PLATFORM                     NOT_PAX_ASLR_SAFE
 NOT_PAX_MPROTECT_SAFE                NO_BUILD
@@ -9818,9 +9870,8 @@ OBJHOSTNAME                          OBJMACHINE
 OCAML_FINDLIB_DIRS                   OCAML_FINDLIB_REGISTER
 OCAML_FINDLIB_REGISTER_VERBOSE       OCAML_SITELIBDIR
 OCAML_TOPKG_DOCDIR                   OCAML_USE_DUNE
-OCAML_USE_FINDLIB                    OCAML_USE_JBUILDER
-OCAML_USE_OASIS                      OCAML_USE_OASIS_DYNRUN
-OCAML_USE_OPAM                       OCAML_USE_OPT_COMPILER
+OCAML_USE_FINDLIB                    OCAML_USE_OASIS
+OCAML_USE_OASIS_DYNRUN               OCAML_USE_OPAM
 OCAML_USE_TOPKG                      OMF
 ONLY_FOR_COMPILER                    ONLY_FOR_PLATFORM
 OPENSSH_CHROOT                       OPENSSH_GROUP
@@ -9828,59 +9879,56 @@ OPENSSH_USER                         OPSYS
 OPSYS_EMULDIR                        OPSYS_VERSION
 OS                                   OSS_TYPE
 OSX                                  OSX_TOLERATE_SDK_SKEW
-OS_HAVE_ALSA                         OS_HAVE_RCD
 OS_VARIANT                           OS_VERSION
 OTF_FONTS_DIR                        OVERRIDE_DIRDEPTH
 OVERRIDE_GEMSPEC                     OVERRIDE_GNU_CONFIG_SCRIPTS
-OVERRIDE_ROCKSPEC                    OWN_DIRS
-OWN_DIRS_PERMS                       P4GROUP
-P4PORT                               P4ROOT
-P4USER                               PACKAGES
-PALMOS_DEFAULT_SDK                   PAMBASE
-PAM_DEFAULT                          PAPERSIZE
-PASSIVE_FETCH                        PATCHDIR
-PATCHFILES                           PATCH_ARGS
-PATCH_DEBUG                          PATCH_DIST_ARGS
-PATCH_DIST_CAT                       PATCH_DIST_STRIP
-PATCH_FUZZ_FACTOR                    PATCH_STRIP
-PATH                                 PCCBASE
-PEAR                                 PEAR_CHANNEL
-PEAR_CHANNEL_ALIAS                   PEAR_CHANNEL_VERSION
-PEAR_CMD                             PEAR_LIB
-PEAR_PACKAGE_XML                     PERL5
-PERL5_CONFIGURE                      PERL5_CONFIGURE_DIRS
-PERL5_LDFLAGS                        PERL5_LICENSE
-PERL5_MODULE_TYPE                    PERL5_PACKLIST
-PERL5_PACKLIST_DIR                   PERL5_PERLBASE
-PERL5_SITEBASE                       PERL5_USE_PACKLIST
-PERL5_VENDORBASE                     PFCTL
-PFVAR_H                              PF_VERSION
-PGGROUP                              PGHOME
-PGPKGSRCDIR                          PGSQL_TYPE
-PGSQL_VERSION                        PGSQL_VERSIONS_ACCEPTED
-PGSQL_VERSION_DEFAULT                PGUSER
-PG_LIB_EXT                           PHP
-PHPCOMMON_MK                         PHPPKGSRCDIR
-PHP_BASE_VERS                        PHP_CHECK_INSTALLED
-PHP_EXTENSION_DIR                    PHP_INITIAL_TEENY
-PHP_PKG_PREFIX                       PHP_VERSION
-PHP_VERSIONS_ACCEPTED                PHP_VERSIONS_INCOMPATIBLE
-PHP_VERSION_DEFAULT                  PHP_VERSION_REQD
-PILRC_USE_GTK                        PKGCONFIG_BASE
-PKGCONFIG_FILE                       PKGCONFIG_OVERRIDE
-PKGCONFIG_OVERRIDE_STAGE             PKGDIR
-PKGGNUDIR                            PKGINFODIR
-PKGLOCALEDIR                         PKGMANDIR
-PKGNAME                              PKGNAME_REQD
-PKGPATH                              PKGREVISION
-PKGSRC_BLAS_TYPES                    PKGSRC_CHANGES
-PKGSRC_COMPILER                      PKGSRC_KEEP_BIN_PKGS
-PKGSRC_LOCKTYPE                      PKGSRC_MAKE_ENV
-PKGSRC_MESSAGE_RECIPIENTS            PKGSRC_MKPIE
-PKGSRC_MKREPRO                       PKGSRC_OVERRIDE_MKPIE
-PKGSRC_RUN_TEST                      PKGSRC_SETENV
-PKGSRC_SLEEPSECS                     PKGSRC_TODO
-PKGSRC_USE_CTF                       PKGSRC_USE_FORTIFY
+OWN_DIRS                             OWN_DIRS_PERMS
+P4GROUP                              P4PORT
+P4ROOT                               P4USER
+PACKAGES                             PALMOS_DEFAULT_SDK
+PAMBASE                              PAM_DEFAULT
+PAPERSIZE                            PASSIVE_FETCH
+PATCHDIR                             PATCHFILES
+PATCH_ARGS                           PATCH_DEBUG
+PATCH_DIST_ARGS                      PATCH_DIST_CAT
+PATCH_DIST_STRIP                     PATCH_FUZZ_FACTOR
+PATCH_STRIP                          PATH
+PCCBASE                              PEAR_CMD
+PEAR_LIB                             PEAR_PACKAGE_XML
+PERL5                                PERL5_CONFIGURE
+PERL5_CONFIGURE_DIRS                 PERL5_LDFLAGS
+PERL5_LICENSE                        PERL5_MODULE_TYPE
+PERL5_PACKLIST                       PERL5_PACKLIST_DIR
+PERL5_PERLBASE                       PERL5_SITEBASE
+PERL5_USE_PACKLIST                   PERL5_VENDORBASE
+PFCTL                                PFVAR_H
+PF_VERSION                           PGGROUP
+PGHOME                               PGPKGSRCDIR
+PGSQL_TYPE                           PGSQL_VERSION
+PGSQL_VERSIONS_ACCEPTED              PGSQL_VERSION_DEFAULT
+PGUSER                               PG_LIB_EXT
+PHP                                  PHPCOMMON_MK
+PHPPKGSRCDIR                         PHP_BASE_VERS
+PHP_CHECK_INSTALLED                  PHP_EXTENSION_DIR
+PHP_INITIAL_TEENY                    PHP_PKG_PREFIX
+PHP_VERSION                          PHP_VERSIONS_ACCEPTED
+PHP_VERSIONS_INCOMPATIBLE            PHP_VERSION_DEFAULT
+PHP_VERSION_REQD                     PILRC_USE_GTK
+PKGCONFIG_BASE                       PKGCONFIG_FILE
+PKGCONFIG_OVERRIDE                   PKGCONFIG_OVERRIDE_STAGE
+PKGDIR                               PKGGNUDIR
+PKGINFODIR                           PKGLOCALEDIR
+PKGMANDIR                            PKGNAME
+PKGNAME_REQD                         PKGPATH
+PKGREVISION                          PKGSRC_BLAS_TYPES
+PKGSRC_CHANGES                       PKGSRC_COMPILER
+PKGSRC_KEEP_BIN_PKGS                 PKGSRC_LOCKTYPE
+PKGSRC_MAKE_ENV                      PKGSRC_MESSAGE_RECIPIENTS
+PKGSRC_MKPIE                         PKGSRC_MKREPRO
+PKGSRC_OVERRIDE_MKPIE                PKGSRC_RUN_TEST
+PKGSRC_SETENV                        PKGSRC_SLEEPSECS
+PKGSRC_TODO                          PKGSRC_USE_CTF
+PKGSRC_USE_FORTIFY                   PKGSRC_USE_MKTOOLS
 PKGSRC_USE_RELRO                     PKGSRC_USE_SSP
 PKGSRC_USE_STACK_CHECK               PKGTASKS_DATAFILE
 PKGTOOLS_ARGS                        PKGTOOLS_ENV
@@ -9899,70 +9947,73 @@ PKG_GROUPS_VARS                      PKG_HOME
 PKG_INIT_SCRIPTS                     PKG_JAVA_HOME
 PKG_JVM                              PKG_JVMS_ACCEPTED
 PKG_JVM_DEFAULT                      PKG_LEGACY_OPTIONS
-PKG_LIBTOOL                          PKG_OPTIONS
-PKG_OPTIONS_DEPRECATED_WARNINGS      PKG_OPTIONS_LEGACY_OPTS
-PKG_OPTIONS_LEGACY_VARS              PKG_OPTIONS_NONEMPTY_SETS
-PKG_OPTIONS_OPTIONAL_GROUPS          PKG_OPTIONS_REQUIRED_GROUPS
-PKG_OPTIONS_VAR                      PKG_PHP
-PKG_PHP_MAJOR_VERS                   PKG_PHP_VERSION
-PKG_RCD_SCRIPTS                      PKG_REFCOUNT_DBDIR
-PKG_REGISTER_SHELLS                  PKG_RESUME_TRANSFERS
-PKG_SHELL                            PKG_SUGGESTED_OPTIONS
-PKG_SUPPORTED_OPTIONS                PKG_SYSCONFBASE
-PKG_SYSCONFBASEDIR                   PKG_SYSCONFDIR
-PKG_SYSCONFDIR_PERMS                 PKG_SYSCONFSUBDIR
-PKG_SYSCONFVAR                       PKG_TOOLS_BIN
-PKG_UID                              PKG_UPDATE_FONTS_DB
-PKG_USERS                            PKG_USERS_VARS
-PKG_VERBOSE                          PLEASE
-PLIST                                PLIST_AWK
-PLIST_AWK_ENV                        PLIST_SRC
-PLIST_SUBST                          PLIST_TYPE
-PLIST_VARS                           POPTOP_USE_MPPE
-POSSIBLE_GFORTRAN_VERSION            POST_FETCH_HOOK
-PREFER                               PREFER_NATIVE
-PREFER_NATIVE_PTHREADS               PREFER_PKGSRC
-PREFIX                               PREPEND_PATH
-PRE_ROOT_CMD                         PRIVILEGED_STAGES
-PS                                   PTHREAD_AUTO_VARS
-PTHREAD_CFLAGS                       PTHREAD_LDFLAGS
-PTHREAD_LIBS                         PTHREAD_OPTS
-PTHREAD_TYPE                         PVM_SSH
-PYPKGPREFIX                          PYTHON_FOR_BUILD_ONLY
-PYTHON_SELF_CONFLICT                 PYTHON_VERSIONED_DEPENDENCIES
-PYTHON_VERSIONS_ACCEPTED             PYTHON_VERSIONS_INCOMPATIBLE
-PYTHON_VERSION_DEFAULT               PYTHON_VERSION_REQD
-PYVERSSUFFIX                         QMAILDIR
-QMAIL_ALIAS_USER                     QMAIL_DAEMON_USER
-QMAIL_LOG_USER                       QMAIL_NOFILES_GROUP
-QMAIL_PASSWD_USER                    QMAIL_QMAIL_GROUP
-QMAIL_QUEUE_DIR                      QMAIL_QUEUE_EXTRA
-QMAIL_QUEUE_USER                     QMAIL_REMOTE_USER
-QMAIL_ROOT_USER                      QMAIL_SEND_USER
+PKG_LIBTOOL                          PKG_MKSYMLINKS
+PKG_OPTIONS                          PKG_OPTIONS_DEPRECATED_WARNINGS
+PKG_OPTIONS_LEGACY_OPTS              PKG_OPTIONS_LEGACY_VARS
+PKG_OPTIONS_NONEMPTY_SETS            PKG_OPTIONS_OPTIONAL_GROUPS
+PKG_OPTIONS_REQUIRED_GROUPS          PKG_OPTIONS_VAR
+PKG_PHP                              PKG_PHP_MAJOR_VERS
+PKG_PHP_VERSION                      PKG_RCD_SCRIPTS
+PKG_REFCOUNT_DBDIR                   PKG_REGISTER_SHELLS
+PKG_RESUME_TRANSFERS                 PKG_SHELL
+PKG_SUGGESTED_OPTIONS                PKG_SUPPORTED_OPTIONS
+PKG_SYSCONFBASE                      PKG_SYSCONFBASEDIR
+PKG_SYSCONFDIR                       PKG_SYSCONFDIR_PERMS
+PKG_SYSCONFSUBDIR                    PKG_SYSCONFVAR
+PKG_TOOLS_BIN                        PKG_UID
+PKG_UPDATE_FONTS_DB                  PKG_USERS
+PKG_USERS_VARS                       PKG_VERBOSE
+PLEASE                               PLIST
+PLIST_AWK                            PLIST_AWK_ENV
+PLIST_SRC                            PLIST_SUBST
+PLIST_TYPE                           PLIST_VARS
+POPTOP_USE_MPPE                      POSSIBLE_GFORTRAN_VERSION
+POST_FETCH_HOOK                      PREFER
+PREFER_NATIVE                        PREFER_NATIVE_PTHREADS
+PREFER_PKGSRC                        PREFIX
+PREPEND_PATH                         PRE_ROOT_CMD
+PRIVILEGED_STAGES                    PS
+PTHREAD_AUTO_VARS                    PTHREAD_CFLAGS
+PTHREAD_LDFLAGS                      PTHREAD_LIBS
+PTHREAD_OPTS                         PTHREAD_TYPE
+PVM_SSH                              PYPKGPREFIX
+PYTHON_FOR_BUILD_ONLY                PYTHON_SELF_CONFLICT
+PYTHON_VERSIONED_DEPENDENCIES        PYTHON_VERSIONS_ACCEPTED
+PYTHON_VERSIONS_INCOMPATIBLE         PYTHON_VERSION_DEFAULT
+PYTHON_VERSION_REQD                  PYVERSSUFFIX
+QMAILDIR                             QMAIL_ALIAS_USER
+QMAIL_DAEMON_USER                    QMAIL_LOG_USER
+QMAIL_NOFILES_GROUP                  QMAIL_PASSWD_USER
+QMAIL_QMAIL_GROUP                    QMAIL_QUEUE_DIR
+QMAIL_QUEUE_EXTRA                    QMAIL_QUEUE_USER
+QMAIL_REMOTE_USER                    QMAIL_ROOT_USER
+QMAIL_SEND_USER                      QORE_LATEST_MODULE_API
+QORE_MODULE_API                      QORE_MODULE_DIR
+QORE_USER_MODULE_DIR                 QORE_VERSION
 QPOPPER_FAC                          QPOPPER_SPOOL_DIR
 QPOPPER_USER                         RAKE_NAME
-RASMOL_DEPTH                         RCD_DIR
-RCD_ORDER                            RCD_SCRIPTS
+RASMOL_DEPTH                         RCD_SCRIPTS
 RCD_SCRIPTS_DIR                      RCD_SCRIPTS_EXAMPLEDIR
 RCD_SCRIPTS_MODE                     RCD_SCRIPTS_SHELL
-RCD_SCRIPT_SRC                       RCD_SUBR
-RDOC                                 READLINE_DEFAULT
-READLINE_TYPE                        REAL_ROOT_GROUP
-REAL_ROOT_USER                       RECURSIVE_MAKE
-RELAY_CTRL_DIR                       RELRO_SUPPORTED
-REPLACE_AWK                          REPLACE_BASH
-REPLACE_CSH                          REPLACE_KSH
+RCD_SCRIPT_SRC                       RDOC
+READLINE_DEFAULT                     READLINE_TYPE
+REAL_ROOT_GROUP                      REAL_ROOT_USER
+RECURSIVE_MAKE                       RELAY_CTRL_DIR
+RELRO_SUPPORTED                      REPLACE_AWK
+REPLACE_BASH                         REPLACE_CSH
+REPLACE_KSH                          REPLACE_LUA
+REPLACE_NODEJS                       REPLACE_OCTAVE
 REPLACE_PERL                         REPLACE_PERL6
 REPLACE_PHP                          REPLACE_PYTHON
-REPLACE_R                            REPLACE_RUBY
-REPLACE_RUBY_DIRS                    REPLACE_RUBY_PAT
-REPLACE_SH                           REPLACE_TEXLUA
+REPLACE_QORE                         REPLACE_R
+REPLACE_RUBY                         REPLACE_RUBY_DIRS
+REPLACE_RUBY_PAT                     REPLACE_SH
+REPLACE_TEXLUA                       REPLACE_WISH
 REQD_DIRS                            REQD_DIRS_PERMS
 REQD_FILES                           REQD_FILES_MODE
 REQD_FILES_PERMS                     RESOLV_AUTO_VARS
 RESOLV_LDFLAGS                       RESOLV_LIBS
-RM                                   ROCKSPEC_NAME
-ROCKSPEC_SPECFILE                    ROOT_CMD
+RM                                   ROOT_CMD
 ROOT_GROUP                           ROOT_USER
 RPCGEN                               RPM
 RPM2PKG_PLIST                        RPM2PKG_PREFIX
@@ -10004,15 +10055,15 @@ RUBY_VER                             RUBY_VERSION
 RUBY_VERSIONS_ACCEPTED               RUBY_VERSIONS_INCOMPATIBLE
 RUBY_VERSION_DEFAULT                 RUBY_VERSION_REQD
 RUBY_VER_DIR                         RUN
-RUN_LDCONFIG                         SAWFISH_THEMES
+RUN_LDCONFIG                         RUST_TYPE
 SCO                                  SCREWS_GROUP
 SCREWS_USER                          SCRIPTS_ENV
 SCROLLKEEPER_DATADIR                 SCROLLKEEPER_REBUILDDB
 SCROLLKEEPER_UPDATEDB                SDIST_PAWD
-SERIAL_DEVICES                       SETGIDGAME
-SETGID_GAMES_PERMS                   SETUID_ROOT_PERMS
-SH                                   SHLIB
-SHORTNAME                            SIGN_PACKAGES
+SDL12_TYPE                           SERIAL_DEVICES
+SETGIDGAME                           SETGID_GAMES_PERMS
+SETUID_ROOT_PERMS                    SH
+SHLIB                                SIGN_PACKAGES
 SILC_CLIENT_WITH_PERL                SITE_SPECIFIC_PKGS
 SKIP_DEPENDS                         SMF_INSTANCES
 SMF_MANIFEST                         SMF_METHODS
@@ -10033,29 +10084,28 @@ SUBST_NOOP_OK                        SUBST_SED
 SUBST_SHOW_DIFF                      SUBST_SKIP_TEXT_CHECK
 SUBST_STAGE                          SUBST_VARS
 SUNWSPROBASE                         SUSE_PREFER
-SU_CMD                               SVN_EXTRACTDIR
-SVN_REPO                             SVN_REPOSITORIES
-SVN_REVISION                         SYSCONFBASE
-TBL                                  TERMCAP_TYPE
-TERMINFO_DEFAULT                     TERMINFO_TYPE
-TEST                                 TEST_DEPENDS
-TEST_DIRS                            TEST_ENV
-TEST_ENV_SHELL                       TEST_MAKE_CMD
-TEST_MAKE_FLAGS                      TEST_TARGET
-TEXLIVE_IGNORE_PATTERNS              TEXLIVE_REV
-TEXLIVE_UNVERSIONED                  TEXMFSITE
-TEX_FORMATS                          TEX_HYPHEN_DAT
-TEX_HYPHEN_DEF                       TEX_TEXMF_DIRS
-THTTPD_LOG_FACILITY                  TINYDYN_USER
-TLSWRAPPER_CHROOT                    TO
-TOOLS_ALIASES                        TOOLS_ALWAYS_WRAP
-TOOLS_ARGS                           TOOLS_BROKEN
-TOOLS_CMD                            TOOLS_CMDLINE_SED
-TOOLS_CREATE                         TOOLS_DIR
+SU_CMD                               SYSCONFBASE
+TARGET_ARCH                          TBL
+TERMCAP_TYPE                         TERMINFO_DEFAULT
+TERMINFO_TYPE                        TEST
+TEST_DEPENDS                         TEST_DIRS
+TEST_ENV                             TEST_ENV_SHELL
+TEST_MAKE_CMD                        TEST_MAKE_FLAGS
+TEST_TARGET                          TEXLIVE_IGNORE_PATTERNS
+TEXLIVE_REV                          TEXLIVE_UNVERSIONED
+TEXMFSITE                            TEX_FORMATS
+TEX_HYPHEN_DAT                       TEX_HYPHEN_DEF
+TEX_TEXMF_DIRS                       THTTPD_LOG_FACILITY
+TINYDYN_USER                         TLSWRAPPER_CHROOT
+TO                                   TOOLS_ALIASES
+TOOLS_ALWAYS_WRAP                    TOOLS_ARGS
+TOOLS_BROKEN                         TOOLS_CMD
+TOOLS_CMDLINE_SED                    TOOLS_CREATE
+TOOLS_CROSS_DESTDIR                  TOOLS_DIR
 TOOLS_FAIL                           TOOLS_GNU_MISSING
 TOOLS_LDCONFIG                       TOOLS_NOOP
 TOOLS_PATH                           TOOLS_SCRIPT
-TOOL_DEPENDS                         TTF_FONTDIR
+TOOLS_USE_CROSS_COMPILE              TOOL_DEPENDS
 TTF_FONTS_DIR                        TYPE
 UAC_REQD_EXECS                       UCSPI_SSL_GROUP
 UCSPI_SSL_USER                       UNLIMIT_RESOURCES
@@ -10094,11 +10144,11 @@ X11_TYPE                             X509_CERTIFICATE
 X509_KEY                             XAW_TYPE
 XLOCK_DEFAULT_MODE                   XMKMF
 XMKMF_FLAGS                          XXX
-XXXX                                 YES
-ZSH_STATIC                           __stdc__
-_vargroups                           accept
-acquire-localbase-lock               acquire-lock
-add                                  administrator
+YES                                  ZSH_STATIC
+__stdc__                             _vargroups
+accept                               acquire-localbase-lock
+acquire-lock                         add
+added                                administrator
 alloca                               alternatives
 aslr                                 asprintf
 atlas                                autoconf
@@ -10129,32 +10179,31 @@ configure-env                        configure-help
 configure_args                       connect
 cos                                  cputime
 create-usergroup                     csh
-ctf                                  cvs
-debug                                declaration
-declare                              defined
-depend                               dependencies
-depends                              depends-checksum
-depends-fetch                        deps
-describe                             destdir
-disable                              distclean
-distinfo                             dl
-dlopen                               do-buildlink
-do-clean                             do-configure
-do-configure-post-hook               do-extract
-do-fetch                             do-install
-emul                                 emul-distinfo
-emul-fetch                           emulation
-emulator                             enable
-endian                               endif
-enomem                               err
-errx                                 etc
-exp                                  extract-rpm
-fabs                                 feature
-features                             fetch
-fetch-list                           follows
-forbids                              form
-format                               fortify
-fortify_source                       fossil
+ctf                                  debug
+declaration                          declare
+defined                              depend
+dependencies                         depends
+depends-checksum                     depends-fetch
+deps                                 describe
+destdir                              disable
+distclean                            distinfo
+dl                                   dlopen
+do-buildlink                         do-clean
+do-configure                         do-configure-post-hook
+do-extract                           do-fetch
+do-install                           emul
+emul-distinfo                        emul-fetch
+emulation                            emulator
+enable                               endian
+enomem                               ensurepip
+err                                  errx
+etc                                  exp
+extract-rpm                          fabs
+feature                              features
+fetch                                fetch-list
+follows                              forbids
+form                                 format
+fortify                              fortify_source
 friend                               fts
 fts_close                            fts_open
 fts_read                             fts_set
@@ -10163,36 +10212,38 @@ gethostbyname                        gethostbyname2
 getopt_long                          getprogname
 getservbyname                        getservbyport
 getservent                           gettext
-git                                  github
-gitlab                               glob
-gnu                                  gnu_configure_strict
-go                                   go-deps
-golang                               guess-license
-hashbang                             heimdal
-help                                 hg
+github                               gitlab
+glob                                 gnu
+gnu_configure_strict                 go
+go-deps                              golang
+guess-license                        hashbang
+heimdal                              help
 imake                                increment
-inet_aton                            interp
-interpreter                          intl
-ip4                                  ip6
-ipv4                                 ipv6
-iso                                  kerberos
-krb                                  krb5
-ksh                                  lapack
-latex                                libintl_bindtextdomain
-libintl_gettext                      libintl_textdomain
-libnbcompat                          libs
-libtool                              licence
-license                              lintl
-little-endian                        lock
-locking                              lvalue
+indirect                             inet_aton
+interp                               interpreter
+intl                                 ip4
+ip6                                  ipv4
+ipv6                                 iso
+kerberos                             krb
+krb5                                 ksh
+lapack                               latex
+libintl_bindtextdomain               libintl_gettext
+libintl_textdomain                   libnbcompat
+libs                                 libtool
+licence                              license
+lintl                                little-endian
+lock                                 locking
+lua                                  lvalue
 make                                 makesum
-memory                               mercurial
-meta                                 meta-package
-meta_package                         mit-krb5
-mk.conf                              mkl
-mount                                mprotect
-mremap                               nb
-nbcompat                             netlib
+memory                               meta
+meta-package                         meta_package
+mit-krb5                             mk.conf
+mkl                                  mount
+move                                 moved
+mprotect                             mremap
+nb                                   nbcompat
+netlib                               node
+node.js                              nodejs
 obstack                              obstack_ptr_grow
 occurs                               only
 openblas                             options
@@ -10214,10 +10265,12 @@ pre-fetch                            print-go-deps
 print-plist                          print-summary-data
 privileged-install-hook              pypi
 python                               r
-readme-all                           recv
-recvfrom                             regcomp
-release-localbase-lock               release-lock
-relro                                rename
+readme-all                           recursive
+recv                                 recvfrom
+regcomp                              release-localbase-lock
+release-lock                         relro
+remove                               removed
+rename                               renamed
 reorder                              replace
 replace_interpreter                  reproducible
 resolv                               root
@@ -10228,28 +10281,30 @@ setprogname                          setuid
 sh                                   shebang
 show                                 show-all
 show-build-defs                      show-depends
-show-deps                            show-distfiles
-show-downlevel                       show-subdir-var
-show-tools                           show-var
-show-vars                            snprintf
-socket                               ssp
-st_mode                              stage-install
-strcasestr                           strict
-strip                                strndup
-strnlen                              strsep
-subst                                substitutions
-subversion                           sun
+show-depends-dirs                    show-depends-pkgpaths
+show-depends-recursive               show-deps
+show-distfiles                       show-downlevel
+show-subdir-var                      show-tools
+show-var                             show-vars
+snprintf                             socket
+ssp                                  st_mode
+stage-install                        strcasestr
+strict                               strip
+strndup                              strnlen
+strsep                               subst
+substitutions                        sun
 sunpro                               sunwspro
-svn                                  symlink
-test                                 test-env
-tex                                  texlive
-tmp                                  tool
+symlink                              test
+test-env                             tex
+texlive                              tmp
+todo                                 tool
 tools                                tools-libtool-m4-override
-type                                 ulimit
-undefined                            undo-replace
-unlimit                              unprivileged
-unprivileged-install-hook            unstripped
-update                               upload
+transitive                           type
+ulimit                               undefined
+undo-replace                         unlimit
+unprivileged                         unprivileged-install-hook
+unstripped                           update
+updated                              upload
 upload-distfiles                     use_tools
 user                                 utimes
 vasprintf                            verbose

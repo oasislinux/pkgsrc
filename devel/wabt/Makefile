@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.7 2022/02/07 09:27:32 fcambus Exp $
+# $NetBSD: Makefile,v 1.14 2022/10/05 08:32:33 fcambus Exp $
 
-DISTNAME=	wabt-1.0.26
+DISTNAME=	wabt-1.0.30
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GITHUB:=WebAssembly/}
 
@@ -13,7 +13,7 @@ CONFIGURE_DIRS=	${WRKDIR}/build
 CMAKE_ARG_PATH=	${WRKSRC}
 
 USE_CMAKE=	yes
-USE_LANGUAGES=	c c++
+USE_LANGUAGES=	c gnu++17
 
 CMAKE_ARGS+=	-DBUILD_TESTS=OFF -DBUILD_LIBWASM=OFF
 

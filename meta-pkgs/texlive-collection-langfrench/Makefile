@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.14 2021/02/14 22:20:17 markd Exp $
+# $NetBSD: Makefile,v 1.17 2022/05/01 20:43:35 markd Exp $
 
 DISTNAME=	collection-langfrench
-PKGNAME=	texlive-${DISTNAME}-2020pre1
+PKGNAME=	texlive-${DISTNAME}-2022pre1
 CATEGORIES=	meta-pkgs
 MASTER_SITES=	# empty
-TEXLIVE_REV=	57491
+TEXLIVE_REV=	63147
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.tug.org/texlive/
@@ -26,7 +26,7 @@ DEPENDS+=	tex-babel-french-[0-9]*:../../print/tex-babel-french
 # depend droit-fr
 # depend e-french
 # epslatex-fr is documentation only
-# depend expose-expl3-dunkerque-2019
+# expose-expl3-dunkerque-2019 is documentation only
 # depend facture
 # formation-latex-ul is documentation only
 # depend frenchmath
@@ -38,10 +38,13 @@ DEPENDS+=	tex-hyphen-french-[0-9]*:../../print/tex-hyphen-french
 # depend impnattypo
 # l2tabu-french is documentation only
 # latex2e-help-texinfo-fr is documentation only
+# depend letgut
 # lshort-french is documentation only
 # depend mafr
 # depend matapli
 # depend profcollege
+# depend proflabo
+# depend proflycee
 # depend tabvar
 # depend tdsfrmath
 # texlive-fr is documentation only
@@ -50,6 +53,7 @@ DEPENDS+=	tex-hyphen-french-[0-9]*:../../print/tex-hyphen-french
 # translation-natbib-fr is documentation only
 # translation-tabbing-fr is documentation only
 # depend variations
+# visualfaq-fr is documentation only
 # visualtikz is documentation only
 
 META_PACKAGE=	yes

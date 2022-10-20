@@ -1,11 +1,11 @@
-# $NetBSD: buildlink3.mk,v 1.13 2021/09/08 21:04:58 nia Exp $
+# $NetBSD: buildlink3.mk,v 1.17 2022/09/11 12:51:05 wiz Exp $
 
 BUILDLINK_TREE+=	SDL2
 
 .if !defined(SDL2_BUILDLINK3_MK)
 SDL2_BUILDLINK3_MK:=
 
-BUILDLINK_ABI_DEPENDS.SDL2+=	SDL2>=2.0.16nb1
+BUILDLINK_ABI_DEPENDS.SDL2+=	SDL2>=2.24.0nb2
 BUILDLINK_API_DEPENDS.SDL2+=	SDL2>=2.0
 BUILDLINK_PKGSRCDIR.SDL2?=	../../devel/SDL2
 BUILDLINK_INCDIRS.SDL2+=	include/SDL2
@@ -19,6 +19,10 @@ pkgbase := SDL2
 
 .if ${PKG_BUILD_OPTIONS.SDL2:Mjack}
 .include "../../audio/jack/buildlink3.mk"
+.endif
+
+.if ${PKG_BUILD_OPTIONS.SDL2:Mpulseaudio}
+.include "../../audio/pulseaudio/buildlink3.mk"
 .endif
 
 .if ${PKG_BUILD_OPTIONS.SDL2:Mnas}

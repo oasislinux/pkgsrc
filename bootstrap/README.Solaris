@@ -1,8 +1,32 @@
-$NetBSD: README.Solaris,v 1.16 2021/11/23 09:10:03 schmonz Exp $
+$NetBSD: README.Solaris,v 1.29 2022/08/01 14:49:09 jperkin Exp $
 
-You will need a working C compiler. Any version of gcc >2.8 should
-work, 2.95.x and 3.x have been tested. SunPro 5 and 8 have been
-tested, but versions in between should work, too.
+This README describes pkgsrc on a variety of Solaris-derived operating
+systems.  It corresponds to pkgsrc/platform/SunOS.mk.  The relevant
+operating systems are:
+  - illumos (open source fork, OpenIndiana, OmniOS, SmartOS, and others)
+  - Solaris (from Sun/Oracle, also Sun Solaris, Oracle Solaris)
+  - OpenSolaris (from Sun; superseded long ago by illumos)
+
+As of 2022, the primary platforms of interest where pkgsrc is known to
+work well are illumos distributions, Solaris 10, and Solaris 11.
+pkgsrc is not currently known to work on SunOS 4 or OpenSolaris.
+
+As of 2022-04-09, it isn't possible to use GNU ld.  This is relevant
+on Tribblix: when bootstrapping, ensure /usr/gnu/bin is last in your
+$PATH.
+
+Prerequisites
+-------------
+
+You will need a working C compiler.  The two known options are gcc and
+Sun/Solaris Studio.  gcc can come from the OS vendor, or other places.
+On some systems, it may only be possible to use the vendor gcc, or
+there might be no vendor gcc available by default.  In general, there's
+better support for gcc in third-party software, and much better support
+for gcc on illumos.
+
+As with pkgsrc on other platforms, one should use the same compiler
+family and ideally the same compiler version for building all packages.
 
 The following packages are the minimum required on Solaris 8 to
 bootstrap and build packages.
@@ -17,12 +41,20 @@ bootstrap and build packages.
 Realistically you will need more, such as SUNWlibm, and SUNWlibC for
 C++ packages if you are using SunPro.
 
-Please note the use of GNU binutils on Solaris is not supported.
+Solaris Zones:
 
-pkgsrc in Solaris Zones
------------------------
+To bootstrap pkgsrc on a Solaris 11 Zone, these packages are going to be
+required, regardless of the compiler used:  
 
-If you are trying to bootstrap pkgsrc in a Solaris Zone then you will
+	- pkg:/system/header 
+	- pkg:/system/linker
+	- pkg:/system/library/math
+	- pkg:/library/glib2
+	- pkg:/library/zlib
+	- pkg:/developer/library/lint
+	- pkg:/developer/object-file
+
+If you are trying to bootstrap pkgsrc in a Solaris [8-10] Zone then you will
 need to install the following packages (assuming you will bootstrap using
 Sun's gcc package):
 
@@ -38,15 +70,40 @@ Sun's gcc package):
 	- SUNWloc
 	- SUNWsndm
 
-Tested on OpenSolaris 5.11 snv_105 and pkgsrc bootstrap as at Jan 2009.
+On illumos you can configure a ipkg or sparse branded zone to host your
+pkgsrc tree. Since the software database is generally managed
+independently from the host, the same essential development tools,
+required to deploy pkgsrc on the host distribution, need to be installed
+within the zone.
+
+OmniOS also provides pkgsrc branded zones. A pkgsrc zone is a sparse
+zone which is pre-configured to use the SmartOS binary package repository.
+Refer to https://omnios.org/setup/zones
+
+General
+------
+
+Solaris and illumos come by default with a mixed {32,64}-bit
+userland.  This can include the compiler, which may have shipped as a
+32-bit ELF.  In this case, the compiler by default will create 32-bit
+executables and shared libraries, unless told otherwise.
+
+To build 64-bit binaries, pass '--abi=64' to bootstrap, and also see
+the crle(1) man page to configure the runtime linking environment.
+64-bit runtime libraries can be usually found at /usr/lib/amd64.
+NB: passing '-m64' to the compiler is not needed when using --abi=64.
+
+It is unclear whether --abi=64 is still a requirement on some modern
+illumos distributions, which provide a 64bit compiler. Joyent doesn't
+mention it in their pkgsrc bootstrap guide for SmartOS.
+
+Generally, illumos-based distributions come with gcc, and gcc is the
+standard approach.  As of 2022, there are no recent reports of using
+Sun/Oracle toolchains on illumos.
+
 
 If you are using gcc
 --------------------
-It makes life much simpler if you only use the same gcc consistently
-for building all packages.
-
-See http://www.NetBSD.org/docs/software/packages.html for
-binary kits and initial packages, including gcc.
 
 If the gcc installation is not in your $PATH you will need to pass
 additional flags to bootstrap, for example:
@@ -59,22 +116,58 @@ It is recommended that an external gcc be used only for bootstrapping,
 and that you set USE_PKGSRC_GCC=yes in mk.conf so that the appropriate
 pkgsrc gcc is installed and used.
 
-Binary packages of gcc can be found through
-http://www.sunfreeware.com/
+Binary SVR4 packages of gcc can be found through:
+https://www.opencsw.org/get-it/packages/
+The CSW repo is most useful on Solaris 10, OpenSolaris and SXCE. 
 
-If you are using Sun WorkShop
------------------------------
-You will need at least the following packages installed to build C and
-C++ packages.
+On Solaris 11 it is preferrable to install the IPS package for the
+preferred GCC version, available in the official repository. 
 
-WorkShop 5.0:
+See https://wiki.netbsd.org/pkgsrc/solarish/ for information about
+installing gcc on various illumos distributions.  One can use a
+distribution-provided gcc, or a gcc that has been built from sources.
+
+Alternatively, see https://pkgsrc.smartos.org/install-on-illumos/ for
+binary kits and initial packages (including gcc) that run on illumos
+variants.
+
+
+If you are using Solaris Studio
+---------------------------
+
+This section describes the use of Sun-provided compilers, variously
+termed WorkShop and Studio.
+
+You must ensure that the compiler tools and your $prefix are in your
+PATH.  This includes /usr/ccs/{bin,lib} and e.g. /usr/pkg/{bin,sbin}.
+
+Usually, passing 'env CC=cc PKGSRC_COMPILER=sunpro' should be enough to
+use Solaris Studio. Additional compiler settings will be generated
+automatically by the boostrap process and written to $PREFIX/etc/mk.conf   
+
+In the past, however, the following mk.conf variables have been
+recommended:
+
+	CC= 	cc
+	CXX=	CC
+	CPP=	cc -E
+	CXXCPP=	CC -E
+
+NB: The make variable CC holds the command for the C compiler, and the
+command for the C++ compiler is CC.
+
+The following indented sections provide a list of Solaris packages
+that must be installed in order for pkgsrc to build C and C++
+packages.
+
+    WorkShop 5.0:
 
 	SPROcc		Sun WorkShop Compiler C 5.0
 	SPROcpl		Sun WorkShop Compiler C++ 5.0
 	SPROild		Sun WorkShop Incremental Linker
 	SPROlang	Sun WorkShop Compilers common components
 
-Sun ONE Studio 8:
+    Sun ONE Studio 8:
 
 	SPROcc		Sun ONE Studio 8 Compiler C
 	SPROcpl		Sun ONE Studio 8 Compiler C++
@@ -86,36 +179,54 @@ Sun ONE Studio 8:
 	SPROtlbn7	Sun ONE Studio 8 Tools.h++ 7.1 Class Library for C++
 	SPROutool	Sun ONE Studio 8 Common Tools
 
-The corresponding 64-bit packages are also required to build 64-bit
-binaries and libraries.
+	The corresponding 64-bit packages are also required to build
+	64-bit binaries and libraries.
 
-To build 64-bit binaries, pass '--abi=64' to bootstrap, and also see the
-crle(1) man page to configure the runtime linking environment.
+    Oracle Studio 12 (IPS):
 
-pkgsrc defaults to finding the Sun compiler in /opt/SUNWspro.  If you use a
-different prefix, pass SUNWSPROBASE in the environment to bootstrap.  If 'cc'
-is not in your path, pass CC as well.  So, to build 64-bit Sun compiler
-bootstrap with a non-standard install:
+	pkg:/developer/developerstudio-12[3-6]	Oracle Developer Studio 12.[3-6]
+	pkg:/system/library/studio-runtime	Runtime Support For Solaris Studio
+	pkg:/consolidation/sunpro/sunpro-incorporation	sunpro consolidation incorporation	
+	pkg:/group/feature/developer-studio-utilities	Tools and runtime support libraries for use with Oracle Solaris Studio
+ 
+	This will install the whole toolchain, along with the
+	observability tools and the studio IDE.
+
+	If you want to select individual packages, make sure to have
+	runtime libraries installed. For instance, on Studio 12.6, you
+	can do that with:
+
+	pkg install --accept developerstudio-126/library/c++-libs \
+	    developerstudio-126/library/c-libs \
+	    developerstudio-126/library/f90-libs \
+	    developerstudio-126/library/math-libs \
+	    developerstudio-126/library/perflib \
+	    developerstudio-126/library/studio-gccrt
+
+        To build with Studio 12 on Solaris 11:
+
+	env CC=/opt/developerstudio12.*/bin/cc \
+	    SUNWSPROBASE=/opt/developerstudio12.* \
+	    PKGSRC_COMPILER=sunpro \
+	    ./bootstrap --abi=64
+
+	pkgsrc defaults to finding the Sun compiler in /opt/SUNWspro.
+	If you use a different prefix, pass SUNWSPROBASE in the
+	environment to bootstrap.  If 'cc' is not in your path, pass
+	CC as well.  So, to build 64-bit Sun compiler bootstrap with a
+	non-standard install:
 
 	env CC=/opt/studio12/SUNWspro/bin/cc \
 	    SUNWSPROBASE=/opt/studio12/SUNWspro \
 	    ./bootstrap --abi=64
 
-When bootstrap is finished your default mk.conf will contain ABI and
-SUNWSPROBASE so you will not need to set these variables again.
-
-Whichever compiler you use, please ensure the compiler tools and
-your $prefix are in your PATH. This includes /usr/ccs/{bin,lib}
-and eg. /usr/pkg/{bin,sbin}.
-
-You should set the following variables in your mk.conf file:
-	CC= 	cc
-	CXX=	CC
-	CPP=	cc -E
-	CXXCPP=	CC -E
+	When bootstrap is finished your default mk.conf will contain
+	ABI and SUNWSPROBASE so you will not need to set these
+	variables again.
 
 Common problems
 ---------------
+
 Sometimes, when using libtool, /bin/ksh crashes with a segmentation fault. The
 workaround is to use another shell for the configure scripts, for example by
 installing shells/bash and adding the following lines to your mk.conf:
@@ -124,5 +235,3 @@ installing shells/bash and adding the following lines to your mk.conf:
 	WRAPPER_SHELL=  ${LOCALBASE}/bin/bash
 
 Then, rebuild the devel/libtool-base package.
-
-bootstrap-pkgsrc has been tested on Solaris 2.6 -> 11.

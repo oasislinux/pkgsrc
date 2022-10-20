@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.9 2022/01/04 20:54:07 wiz Exp $
+# $NetBSD: Makefile,v 1.12 2022/09/19 08:34:36 adam Exp $
 
-DISTNAME=	Wand-0.6.7
+DISTNAME=	Wand-0.6.10
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:tl}
-PKGREVISION=	1
 CATEGORIES=	graphics python
 MASTER_SITES=	${MASTER_SITE_PYPI:=W/Wand/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://docs.wand-py.org/
+HOMEPAGE=	https://docs.wand-py.org/
 COMMENT=	Ctypes-based simple ImageMagick binding for Python
 LICENSE=	mit
 

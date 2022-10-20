@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.41 2021/12/16 01:04:38 gutteridge Exp $
+# $NetBSD: Makefile,v 1.45 2022/08/11 05:09:36 gutteridge Exp $
 
 VERSION=	2.7.1
 DISTNAME=	xfce4-whiskermenu-plugin-${VERSION}
+PKGREVISION=	2
 CATEGORIES=	x11
 MASTER_SITES=	https://archive.xfce.org/src/panel-plugins/xfce4-whiskermenu-plugin/${VERSION:R}/
 EXTRACT_SUFX=	.tar.bz2
@@ -15,9 +16,7 @@ USE_CMAKE=	yes
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	gmake pkg-config msgfmt perl intltool
 
-# Fails without GNU msgfmt, requires --desktop
-_TOOLS_USE_PKGSRC.msgfmt=	yes
-
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
 .include "../../x11/xfce4-garcon/buildlink3.mk"
 .include "../../x11/xfce4-panel/buildlink3.mk"
 .include "../../x11/xfce4-exo/buildlink3.mk"

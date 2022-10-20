@@ -1,8 +1,8 @@
-$NetBSD: distinfo,v 1.68 2021/10/26 11:34:21 nia Exp $
+$NetBSD: distinfo,v 1.72 2022/09/13 17:18:04 adam Exp $
 
-BLAKE2s (qtbase-everywhere-src-5.15.2.tar.xz) = fc2ea819288a32b47a79adb0ca33d7d547126683e1a4083b972ff07fd9436fa0
-SHA512 (qtbase-everywhere-src-5.15.2.tar.xz) = a549bfaf867d746ff744ab224eb65ac1bdcdac7e8457dfa379941b2b225a90442fcfc1e1175b9afb1f169468f8130b7ab917c67be67156520a4bfb5c92d304f9
-Size (qtbase-everywhere-src-5.15.2.tar.xz) = 50179672 bytes
+BLAKE2s (qtbase-everywhere-opensource-src-5.15.6.tar.xz) = e58034b488c14ca460fa50b48017c9705506a4ada7e0019f2abd41e40a44faf5
+SHA512 (qtbase-everywhere-opensource-src-5.15.6.tar.xz) = 4fc6973b9250cd78c4797ed9bb58bec949243cc5e8c3a546b5fbe8c6e6480d5e0745d273fac812f9f5f1fcd675cd8b867d47f57563bf6d23118b58032550103f
+Size (qtbase-everywhere-opensource-src-5.15.6.tar.xz) = 50240276 bytes
 SHA1 (patch-configure) = f5019131cc4e6cd4e35242cc7b598fbf8f5f766b
 SHA1 (patch-mkspecs_common_gcc-base.conf) = 7b461079adff516ac3957d0cdb127dee67dab7ce
 SHA1 (patch-mkspecs_features_qt__module.prf) = a04c4b1fe80250b6b3591f5486ac0fd3b5056c26
@@ -13,14 +13,11 @@ SHA1 (patch-qmake_generators_unix_unixmake2.cpp) = 6ea4efd2ce88d7cf3c73e1dc2cdf9
 SHA1 (patch-src_3rdparty_double-conversion_include_double-conversion_utils.h) = 88cd4ab81fd480c5dd28cc0a4ac0560c9565a0bc
 SHA1 (patch-src_corelib_codecs_qiconvcodec.cpp) = e050b334cecc56259bd1755cd2de8c5bbf1409c0
 SHA1 (patch-src_corelib_configure.json) = 7a83a356330e602cbc65256dd345a107004a67cb
-SHA1 (patch-src_corelib_global_qendian.h) = bd8385a250ed59904de742251a99426924861e5a
-SHA1 (patch-src_corelib_global_qfloat16.h) = a5ac74fee2f08074a59003074570acb294423eaa
 SHA1 (patch-src_corelib_global_qrandom.cpp) = d910579df42d5b01583b88fa19f514b230596ca7
 SHA1 (patch-src_corelib_io_io.pri) = b2c1057e20c3150162695947bab958a2644df7dc
 SHA1 (patch-src_corelib_io_qstandardpaths_unix.cpp) = b12a41da19b25e34e12fdf80714a37e8c46278f9
 SHA1 (patch-src_corelib_io_qstorageinfo_unix.cpp) = 9919194e9f6b47f1f311b8f8223a6a7519152073
 SHA1 (patch-src_corelib_kernel_qcore__mac__p.h) = 721f17123eaac392cee68d0d90b77d023ba4e73f
-SHA1 (patch-src_corelib_text_qbytearraymatcher.h) = 809a02c98cc6360d74fdcf42edddd0c32a5e8684
 SHA1 (patch-src_corelib_thread_qmutex__p.h) = 093089b8a37baa3071257c99bbde5f6295bd2eec
 SHA1 (patch-src_corelib_thread_qwaitcondition__unix.cpp) = 9dffdbfc81bc7d3259020cd32b4039b7be6ee2bd
 SHA1 (patch-src_corelib_tools_qsharedpointer__impl.h) = 91755dcdd0e13bfc047167db918b9a4d7a172165

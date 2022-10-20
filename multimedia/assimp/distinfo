@@ -1,8 +1,6 @@
-$NetBSD: distinfo,v 1.7 2021/10/26 11:00:58 nia Exp $
+$NetBSD: distinfo,v 1.9 2022/08/10 01:00:08 charlotte Exp $
 
-BLAKE2s (assimp-5.0.1.tar.gz) = 1ae0836cd6f38ad6aeed2e893abdac4c3f57b82e8bda7b72e960c48118317288
-SHA512 (assimp-5.0.1.tar.gz) = 51b704ffea778638b9e228578650f62691c56ee1a90337f8bbbee37e807455466d818234be24852334e5806260e5690932c9bd8e00f055c5c26782e0636538f0
-Size (assimp-5.0.1.tar.gz) = 46607553 bytes
-SHA1 (patch-assimp.pc.in) = 4c8bc0922ba046dfe37a007f5631254cf256101e
-SHA1 (patch-contrib_irrXML_CMakeLists.txt) = 0c2dd457cfacf7be1b9c64068848b3e3bb476afa
-SHA1 (patch-contrib_zip_src_zip.h) = 824462e986010e705b3089f3055eecd23093cf7c
+BLAKE2s (assimp-5.2.4.tar.gz) = 53fbd93476ace29045fde352551418a89c54511aaa2caa42c5c3668c0bfca0ed
+SHA512 (assimp-5.2.4.tar.gz) = ee988b1806b46c78f97bb5b25237a3f56a7028ed37898fb9b243e379e29e8bfd29e4dffc616566941ed9bdcf502bd30568904ad2ef2ef7d0f63b40daefdc66bf
+Size (assimp-5.2.4.tar.gz) = 49613683 bytes
+SHA1 (patch-contrib_zip_src_zip.h) = 1eac9382ac0536d4ede0b9c4f9e72c7ef1dfbf63

@@ -1,0 +1,5 @@
+$NetBSD: README.UnixWare,v 1.2 2022/06/10 13:27:24 gdt Exp $
+
+See https://en.wikipedia.org/wiki/UnixWare
+
+As of 2022-04, "SCO UnixWare 7 Definitive 2018" works.

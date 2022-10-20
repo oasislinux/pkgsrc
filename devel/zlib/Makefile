@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.56 2020/01/26 17:31:05 rillig Exp $
+# $NetBSD: Makefile,v 1.60 2022/10/14 07:43:57 wiz Exp $
 
-DISTNAME=	zlib-1.2.11
+DISTNAME=	zlib-1.2.13
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=libpng/}
 MASTER_SITES+=	http://zlib.net/
@@ -19,7 +19,7 @@ CFLAGS+=		${CPPFLAGS}
 LDFLAGS.Cygwin=		-no-undefined
 
 .include "../../mk/bsd.prefs.mk"
-.if !empty(MACHINE_ARCH:Mi386)
+.if ${MACHINE_ARCH} == i386
 # use NO_DIVIDE for adler32 if processor does not do division in hardware
 # which avoids needing emulation provided by libgcc_s
 CPPFLAGS.SunOS+=	-DNO_DIVIDE

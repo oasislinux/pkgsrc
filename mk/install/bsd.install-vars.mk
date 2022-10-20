@@ -1,4 +1,4 @@
-# $NetBSD: bsd.install-vars.mk,v 1.10 2020/07/08 12:37:13 jperkin Exp $
+# $NetBSD: bsd.install-vars.mk,v 1.12 2022/10/12 10:47:00 jperkin Exp $
 #
 # This Makefile fragment is included separately by bsd.pkg.mk and
 # defines some variables which must be defined earlier than where
@@ -36,9 +36,9 @@
 #
 .if !defined(_MANCOMPRESSED)
 .  if defined(MANCOMPRESSED) && !empty(MANCOMPRESSED:M[yY][eE][sS])
-_MANCOMPRESSED=		yes
+_MANCOMPRESSED=	yes
 .  else
-_MANCOMPRESSED=		no
+_MANCOMPRESSED=	no
 .  endif
 .  if defined(MANCOMPRESSED_IF_MANZ) && defined(PKGMAKECONF)
 _MANCOMPRESSED!=							\
@@ -63,11 +63,11 @@ TOOLS_CREATE+=		ctfconvert
 TOOLS_PATH.ctfconvert=	${TOOLS_PLATFORM.ctfconvert}
 TOOLS_ARGS.ctfconvert?=	-i
 CTFCONVERT?=		ctfconvert
-CTF_FILES_SKIP?=	share/* ${PKGMANDIR}/*
+CTF_FILES_SKIP?=	include/* info/* share/* ${PKGMANDIR}/*
 .endif
 
 STRIP_DEBUG?=		no
-STRIP_FILES_SKIP?=	share/* ${PKGMANDIR}/*
+STRIP_FILES_SKIP?=	include/* info/* share/* ${PKGMANDIR}/*
 
 .if !empty(_MANCOMPRESSED:M[yY][eE][sS]) && empty(_MANZ:M[yY][eE][sS])
 USE_TOOLS+=	gunzip

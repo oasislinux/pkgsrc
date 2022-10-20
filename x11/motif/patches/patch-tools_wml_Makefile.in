@@ -1,0 +1,61 @@
+$NetBSD: patch-tools_wml_Makefile.in,v 1.2 2022/04/16 10:39:51 riastradh Exp $
+
+Build wml, wmldbcreate, and wmluitok as tools to run at build-time.
+
+--- tools/wml/Makefile.in.orig	2017-12-05 12:49:59.000000000 +0000
++++ tools/wml/Makefile.in
+@@ -114,7 +114,7 @@ AM_V_AR = $(am__v_AR_@AM_V@)
+ am__v_AR_ = $(am__v_AR_@AM_DEFAULT_V@)
+ am__v_AR_0 = @echo "  AR      " $@;
+ am__v_AR_1 = 
+-libwml_a_AR = $(AR) $(ARFLAGS)
++libwml_a_AR = $(AR_FOR_BUILD) $(ARFLAGS)
+ libwml_a_LIBADD =
+ am_libwml_a_OBJECTS = wmlparse.$(OBJEXT) wml.$(OBJEXT) \
+ 	wmloutkey.$(OBJEXT) wmlouth.$(OBJEXT) wmloutmm.$(OBJEXT) \
+@@ -471,7 +471,7 @@ wmlparse.h: wmlparse.c
+ libwml.a: $(libwml_a_OBJECTS) $(libwml_a_DEPENDENCIES) $(EXTRA_libwml_a_DEPENDENCIES) 
+ 	$(AM_V_at)-rm -f libwml.a
+ 	$(AM_V_AR)$(libwml_a_AR) libwml.a $(libwml_a_OBJECTS) $(libwml_a_LIBADD)
+-	$(AM_V_at)$(RANLIB) libwml.a
++	$(AM_V_at)$(RANLIB_FOR_BUILD) libwml.a
+ 
+ clean-noinstPROGRAMS:
+ 	@list='$(noinst_PROGRAMS)'; test -n "$$list" || exit 0; \
+@@ -484,15 +484,15 @@ clean-noinstPROGRAMS:
+ 
+ wml$(EXEEXT): $(wml_OBJECTS) $(wml_DEPENDENCIES) $(EXTRA_wml_DEPENDENCIES) 
+ 	@rm -f wml$(EXEEXT)
+-	$(AM_V_CCLD)$(LINK) $(wml_OBJECTS) $(wml_LDADD) $(LIBS)
++	$(AM_V_CCLD)$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(LDFLAGS_FOR_BUILD) -o $@ $(wml_OBJECTS) $(LIBS_FOR_BUILD) $(wml_LDADD)
+ 
+ wmldbcreate$(EXEEXT): $(wmldbcreate_OBJECTS) $(wmldbcreate_DEPENDENCIES) $(EXTRA_wmldbcreate_DEPENDENCIES) 
+ 	@rm -f wmldbcreate$(EXEEXT)
+-	$(AM_V_CCLD)$(LINK) $(wmldbcreate_OBJECTS) $(wmldbcreate_LDADD) $(LIBS)
++	$(AM_V_CCLD)$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(LDFLAGS_FOR_BUILD) -o $@ $(wmldbcreate_OBJECTS) $(LIBS_FOR_BUILD)
+ 
+ wmluiltok$(EXEEXT): $(wmluiltok_OBJECTS) $(wmluiltok_DEPENDENCIES) $(EXTRA_wmluiltok_DEPENDENCIES) 
+ 	@rm -f wmluiltok$(EXEEXT)
+-	$(AM_V_CCLD)$(LINK) $(wmluiltok_OBJECTS) $(wmluiltok_LDADD) $(LIBS)
++	$(AM_V_CCLD)$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(LDFLAGS_FOR_BUILD) -o $@ $(wmluiltok_OBJECTS) $(LIBS_FOR_BUILD) $(wmluiltok_LDADD)
+ 
+ mostlyclean-compile:
+ 	-rm -f *.$(OBJEXT)
+@@ -513,7 +513,7 @@ distclean-compile:
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wmlutils.Po@am__quote@
+ 
+ .c.o:
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(CPPFLAGS_FOR_BUILD) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@@ -534,7 +534,7 @@ distclean-compile:
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
+ 
+ wmldbcreate.o: $(srcdir)/wmldbcreate.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT wmldbcreate.o -MD -MP -MF $(DEPDIR)/wmldbcreate.Tpo -c -o wmldbcreate.o `test -f '$(srcdir)/wmldbcreate.c' || echo '$(srcdir)/'`$(srcdir)/wmldbcreate.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(CPPFLAGS_FOR_BUILD) $(INCLUDES) -MT wmldbcreate.o -MD -MP -MF $(DEPDIR)/wmldbcreate.Tpo -c -o wmldbcreate.o `test -f '$(srcdir)/wmldbcreate.c' || echo '$(srcdir)/'`$(srcdir)/wmldbcreate.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/wmldbcreate.Tpo $(DEPDIR)/wmldbcreate.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(srcdir)/wmldbcreate.c' object='wmldbcreate.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@

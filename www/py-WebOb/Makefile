@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.12 2022/01/04 20:55:15 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2022/08/24 09:53:33 wiz Exp $
 
 DISTNAME=	WebOb-1.8.7
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
@@ -17,6 +17,8 @@ TEST_DEPENDS+=	${PYPKGPREFIX}-test-runner-[0-9]*:../../devel/py-test-runner
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-xdist-[0-9]*:../../devel/py-test-xdist
 
 USE_LANGUAGES=	# none
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 PYSETUPTESTTARGET=	pytest
 

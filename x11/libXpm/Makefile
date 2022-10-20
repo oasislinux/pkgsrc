@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.22 2021/12/05 18:15:47 nia Exp $
+# $NetBSD: Makefile,v 1.24 2022/08/11 13:37:24 jperkin Exp $
 
 DISTNAME=		libXpm-3.5.13
 CATEGORIES=		graphics x11
@@ -22,6 +22,7 @@ CONFIGURE_ENV+=		APP_MAN_SUFFIX=1
 # pass down INTLLIBS in the build environment for use by the [cs]xpm
 # Makefiles.
 #
+USE_EXPLICIT_LIBDEPS=	no
 CONFIGURE_ENV+=		ac_cv_search_gettext=no
 MAKE_ENV+=		INTLLIBS=${BUILDLINK_LDADD.gettext:Q}
 
@@ -40,7 +41,7 @@ CONFIGURE_ARGS+=	XPM_CFLAGS=${XPM_CFLAGS:Q} \
 			SXPM_LIBS=${SXPM_LIBS:Q}
 .endif
 
-X11_BUILTIN_NAME?=		libXpm
+X11_LIB_NAME?=		libXpm
 .include "../../meta-pkgs/modular-xorg/avoid-duplicate.mk"
 .include "../../meta-pkgs/modular-xorg/hacks.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"

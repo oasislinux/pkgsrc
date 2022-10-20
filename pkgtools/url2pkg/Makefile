@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.124 2022/02/06 18:42:26 rillig Exp $
+# $NetBSD: Makefile,v 1.129 2022/08/25 19:51:59 rillig Exp $
 
-PKGNAME=	url2pkg-21.4.2
+PKGNAME=	url2pkg-22.2.1
 CATEGORIES=	pkgtools
 
 MAINTAINER=	rillig@NetBSD.org
@@ -12,19 +12,17 @@ WRKSRC=		${WRKDIR}
 NO_CHECKSUM=	yes
 NO_BUILD=	yes
 USE_LANGUAGES=	# none
-USE_TOOLS+=	perl:run
+USE_TOOLS+=	perl:run pax
 AUTO_MKDIRS=	yes
 
 PYTHON_VERSIONED_DEPENDENCIES=	test:test
 
 do-extract:
-	${RUN} cd ${FILESDIR} && cp *.* ${WRKSRC}/
+	${RUN} cd ${FILESDIR} && pax -rw *.* python/*.py python/*/*.py python/*/*/*.py ${WRKSRC}/
 
 do-test:
 	${RUN} cd ${WRKSRC} && env PKGSRCDIR=${PKGSRCDIR} MAKE=${MAKE:Q} \
 		${PREFIX}/bin/pytest-${PYVERSSUFFIX} ${PY_TEST_FLAGS:U}
-
-.include "../../mk/bsd.prefs.mk"
 
 SUBST_CLASSES+=		up
 SUBST_STAGE.up=		do-configure
@@ -38,10 +36,10 @@ do-install:
 	${INSTALL_MAN} ${FILESDIR}/url2pkg.8 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man8
 	${INSTALL_DATA} ${WRKSRC}/Build.pm ${DESTDIR}${PREFIX}/lib/url2pkg/Module/
 	${INSTALL_DATA} ${WRKSRC}/MakeMaker.pm ${DESTDIR}${PREFIX}/lib/url2pkg/ExtUtils/
-	${INSTALL_DATA} ${WRKSRC}/setuptools.py ${DESTDIR}${PREFIX}/lib/url2pkg/
-	${INSTALL_DATA} /dev/null ${DESTDIR}${PREFIX}/lib/url2pkg/distutils/__init__.py
-	${INSTALL_DATA} ${WRKSRC}/setuptools.py ${DESTDIR}${PREFIX}/lib/url2pkg/distutils/core.py
-	${INSTALL_DATA} ${WRKSRC}/setuptools.py ${DESTDIR}${PREFIX}/lib/url2pkg/distutils/extension.py
+	${RUN} cd ${WRKSRC};						\
+	for f in $$(find python -name '*.py' -print); do		\
+		${INSTALL_DATA} "$$f" ${DESTDIR}${PREFIX}/lib/url2pkg/"$$f"; \
+	done
 
 .include "../../lang/python/application.mk"
 .include "../../lang/python/versioned_dependencies.mk"

@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.18 2021/03/08 08:12:47 jaapb Exp $
+# $NetBSD: Makefile,v 1.21 2022/06/03 13:17:35 jaapb Exp $
 
-GITHUB_PROJECT=	pgocaml
-#GITHUB_TAG=	v${PKGVERSION_NOREV}
-DISTNAME=	${GITHUB_PROJECT}-4.2.2
+DISTNAME=	${GITHUB_PROJECT}-4.3.0
 PKGREVISION=	1
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_GITHUB:=darioteixeira/}
+GITHUB_PROJECT=	pgocaml
 
 MAINTAINER=	jaapb@NetBSD.org
 HOMEPAGE=	http://pgocaml.forge.ocamlcore.org/
@@ -20,7 +19,7 @@ OCAML_USE_DUNE=		yes
 DUNE_BUILD_PACKAGES=	pgocaml pgocaml_ppx
 OPAM_INSTALL_FILES=	${DUNE_BUILD_PACKAGES}
 
-.include "../../mk/ocaml.mk"
+.include "../../lang/ocaml/ocaml.mk"
 .include "../../devel/ocamlbuild/buildlink3.mk"
 .include "../../devel/ocaml-hex/buildlink3.mk"
 .include "../../devel/ocaml-migrate-parsetree/buildlink3.mk"
@@ -29,9 +28,8 @@ OPAM_INSTALL_FILES=	${DUNE_BUILD_PACKAGES}
 .include "../../devel/ocaml-ppx_sexp_conv/buildlink3.mk"
 BUILDLINK_DEPMETHOD.ocaml-ppx_tools=	build
 .include "../../devel/ocaml-ppx_tools/buildlink3.mk"
-.include "../../devel/ocaml-ppx_tools_versioned/buildlink3.mk"
+.include "../../devel/ocaml-ppxlib/buildlink3.mk"
 .include "../../devel/ocaml-re/buildlink3.mk"
-BUILDLINK_DEPMETHOD.ocaml-rresult=	build
 .include "../../devel/ocaml-rresult/buildlink3.mk"
 .include "../../devel/ocaml-sexplib/buildlink3.mk"
 .include "../../textproc/ocaml-csv/buildlink3.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.6 2021/12/08 16:02:23 adam Exp $
+# $NetBSD: Makefile,v 1.8 2022/08/11 05:09:05 gutteridge Exp $
 
 PKGNAME=	${DISTNAME:S/plugins/plugins1/:S/-good/-gtk/}
 PKGREVISION=	1

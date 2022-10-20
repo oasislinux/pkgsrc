@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.59 2022/01/09 20:10:31 bsiegert Exp $
+# $NetBSD: Makefile,v 1.71 2022/10/05 11:32:57 bsiegert Exp $
 
 DISTNAME=		tools-0.1.0
 PKGNAME=		go-${DISTNAME}
-PKGREVISION=		8
+PKGREVISION=		18
 CATEGORIES=		devel
 MASTER_SITES=		${MASTER_SITE_GITHUB:=golang/}
 GITHUB_PROJECT=		tools
@@ -76,4 +76,14 @@ pre-patch:
 .include "go-modules.mk"
 
 .include "../../lang/go/go-module.mk"
+
+# XXX: breaks PIE if included before go-module.mk
+
+.include "../../mk/bsd.fast.prefs.mk"
+
+PLIST_VARS+=		splitdwarf
+.if ${OPSYS} != "SunOS"
+PLIST.splitdwarf=	yes
+.endif
+
 .include "../../mk/bsd.pkg.mk"

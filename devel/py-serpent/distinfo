@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.10 2021/10/26 10:19:04 nia Exp $
+$NetBSD: distinfo,v 1.12 2022/08/10 07:17:23 adam Exp $
 
-BLAKE2s (serpent-1.28.tar.gz) = 8ae82eea938625d9260b500dd7c160364dde3359d6a1c98d2c0f49dd752c1394
-SHA512 (serpent-1.28.tar.gz) = 776bc497c7cd815c4ef44107bdf53b62bb92229beba0be7efceb9fba57dc7c677bf09832db335485df3e466acdffe6ebf4b3636ae9b49e60075379a7419a29ad
-Size (serpent-1.28.tar.gz) = 26912 bytes
+BLAKE2s (serpent-1.41.tar.gz) = 08b150f95707e19b73d05e938f3372afdfb4d7be0d7570fb3e920cb3e2d6cc37
+SHA512 (serpent-1.41.tar.gz) = cab6f9e36d2f777e58cd5f3d1dd6e11626e0f222ecb2adb8e5997338c76ed357c461dadd00010cfd43ffc6a0b1addd7de06d86b7a82ca796719e4bde2d9f4813
+Size (serpent-1.41.tar.gz) = 88927 bytes

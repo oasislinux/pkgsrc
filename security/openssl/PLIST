@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.9 2021/08/25 11:25:25 jperkin Exp $
+@comment $NetBSD: PLIST,v 1.12 2022/06/21 18:48:39 jperkin Exp $
 bin/c_rehash
 bin/openssl
 include/openssl/aes.h
@@ -595,6 +595,7 @@ man/man3/BN_mod_mul.3
 man/man3/BN_mod_mul_montgomery.3
 man/man3/BN_mod_mul_reciprocal.3
 man/man3/BN_mod_sqr.3
+man/man3/BN_mod_sqrt.3
 man/man3/BN_mod_sub.3
 man/man3/BN_mod_word.3
 man/man3/BN_mpi2bn.3
@@ -2575,9 +2576,11 @@ man/man3/SSL_CTX_flush_sessions.3
 man/man3/SSL_CTX_free.3
 man/man3/SSL_CTX_generate_session_ticket_fn.3
 man/man3/SSL_CTX_get0_CA_list.3
+man/man3/SSL_CTX_get0_chain_cert_store.3
 man/man3/SSL_CTX_get0_chain_certs.3
 man/man3/SSL_CTX_get0_param.3
 man/man3/SSL_CTX_get0_security_ex_data.3
+man/man3/SSL_CTX_get0_verify_cert_store.3
 man/man3/SSL_CTX_get_cert_store.3
 man/man3/SSL_CTX_get_ciphers.3
 man/man3/SSL_CTX_get_client_CA_list.3
@@ -2833,6 +2836,7 @@ man/man3/SSL_free.3
 man/man3/SSL_free_buffers.3
 man/man3/SSL_get0_CA_list.3
 man/man3/SSL_get0_alpn_selected.3
+man/man3/SSL_get0_chain_cert_store.3
 man/man3/SSL_get0_chain_certs.3
 man/man3/SSL_get0_dane_authority.3
 man/man3/SSL_get0_dane_tlsa.3
@@ -2844,6 +2848,7 @@ man/man3/SSL_get0_peername.3
 man/man3/SSL_get0_security_ex_data.3
 man/man3/SSL_get0_session.3
 man/man3/SSL_get0_verified_chain.3
+man/man3/SSL_get0_verify_cert_store.3
 man/man3/SSL_get1_curves.3
 man/man3/SSL_get1_groups.3
 man/man3/SSL_get1_session.3
@@ -3415,6 +3420,7 @@ man/man3/X509_STORE_CTX_init.3
 man/man3/X509_STORE_CTX_lookup_certs_fn.3
 man/man3/X509_STORE_CTX_lookup_crls_fn.3
 man/man3/X509_STORE_CTX_new.3
+man/man3/X509_STORE_CTX_purpose_inherit.3
 man/man3/X509_STORE_CTX_set0_crls.3
 man/man3/X509_STORE_CTX_set0_param.3
 man/man3/X509_STORE_CTX_set0_trusted_stack.3
@@ -3426,6 +3432,8 @@ man/man3/X509_STORE_CTX_set_default.3
 man/man3/X509_STORE_CTX_set_error.3
 man/man3/X509_STORE_CTX_set_error_depth.3
 man/man3/X509_STORE_CTX_set_ex_data.3
+man/man3/X509_STORE_CTX_set_purpose.3
+man/man3/X509_STORE_CTX_set_trust.3
 man/man3/X509_STORE_CTX_set_verify.3
 man/man3/X509_STORE_CTX_set_verify_cb.3
 man/man3/X509_STORE_CTX_verify_cb.3
@@ -3780,6 +3788,8 @@ man/man3/d2i_X509_REQ_fp.3
 man/man3/d2i_X509_REVOKED.3
 man/man3/d2i_X509_SIG.3
 man/man3/d2i_X509_VAL.3
+man/man3/d2i_X509_bio.3
+man/man3/d2i_X509_fp.3
 man/man3/i2d_ACCESS_DESCRIPTION.3
 man/man3/i2d_ADMISSIONS.3
 man/man3/i2d_ADMISSION_SYNTAX.3
@@ -3974,6 +3984,8 @@ man/man3/i2d_X509_REQ_fp.3
 man/man3/i2d_X509_REVOKED.3
 man/man3/i2d_X509_SIG.3
 man/man3/i2d_X509_VAL.3
+man/man3/i2d_X509_bio.3
+man/man3/i2d_X509_fp.3
 man/man3/i2d_re_X509_CRL_tbs.3
 man/man3/i2d_re_X509_REQ_tbs.3
 man/man3/i2d_re_X509_tbs.3
@@ -4045,5 +4057,3 @@ share/examples/openssl/misc/tsget
 share/examples/openssl/misc/tsget.pl
 share/examples/openssl/openssl.cnf
 share/examples/openssl/openssl.cnf.dist
-@pkgdir share/examples/openssl/private
-@pkgdir share/examples/openssl/certs

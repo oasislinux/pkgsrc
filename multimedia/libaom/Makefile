@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.21 2021/11/13 11:27:34 nia Exp $
+# $NetBSD: Makefile,v 1.25 2022/09/29 15:48:16 ryoon Exp $
 
-DISTNAME=	libaom-3.2.0
+DISTNAME=	libaom-3.5.0
 CATEGORIES=	multimedia
 MASTER_SITES=	https://storage.googleapis.com/aom-releases/
 
@@ -9,9 +9,6 @@ HOMEPAGE=	https://aomedia.googlesource.com/aom/
 COMMENT=	Library for using AV1, video coding format
 LICENSE=	2-clause-bsd
 
-MAKE_JOBS_SAFE=	no
-
-WRKSRC=		${WRKDIR}
 USE_CMAKE=	yes
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	perl

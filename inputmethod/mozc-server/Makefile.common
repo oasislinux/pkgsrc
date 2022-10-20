@@ -1,11 +1,11 @@
-# $NetBSD: Makefile.common,v 1.34 2021/02/27 04:19:46 ryoon Exp $
+# $NetBSD: Makefile.common,v 1.36 2022/04/24 22:19:15 tnn Exp $
+
 # used by inputmethod/ibus-mozc/Makefile
 # used by inputmethod/mozc-elisp/Makefile
 # used by inputmethod/mozc-server/Makefile
 # used by inputmethod/mozc-tool/Makefile
 # used by inputmethod/mozc-renderer/Makefile
 # used by inputmethod/uim-mozc/Makefile
-#
 
 DISTNAME=	mozc-2.26.4282.100
 CATEGORIES=	inputmethod
@@ -34,9 +34,10 @@ BUILD_DEPENDS+=	${PYPKGPREFIX}-gyp>=0.1pre20200512.caa60026e223fc501e8b337fd5086
 BUILD_DEPENDS+=	${PYPKGPREFIX}-six-[0-9]*:../../lang/py-six
 
 USE_LANGUAGES=	c c++
-
 USE_TOOLS+=	gmake ninja pkg-config
 GCC_REQD+=	4.7	# for c++11
+
+CHECK_PORTABILITY_SKIP+=	third_party/protobuf/src/google/protobuf/compiler/zip_output_unittest.sh
 
 OPENSSL_CFLAGS=		-I${BUILDLINK_PREFIX.openssl}/include
 OPENSSL_INC=		-I${BUILDLINK_PREFIX.openssl}/include
@@ -91,4 +92,3 @@ do-configure:
 
 .include "../../lang/python/tool.mk"
 .include "../../mk/atomic64.mk"
-.include "../../mk/bsd.pkg.mk"

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.4 2022/01/04 20:55:31 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2022/06/28 11:37:49 wiz Exp $
 
 DISTNAME=	klein-20.6.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	www python
 MASTER_SITES=	${MASTER_SITE_PYPI:=k/klein/}
 
@@ -19,6 +19,8 @@ DEPENDS+=	${PYPKGPREFIX}-tubes-[0-9]*:../../devel/py-tubes
 DEPENDS+=	${PYPKGPREFIX}-twisted-[0-9]*:../../net/py-twisted
 DEPENDS+=	${PYPKGPREFIX}-werkzeug-[0-9]*:../../www/py-werkzeug
 DEPENDS+=	${PYPKGPREFIX}-ZopeInterface-[0-9]*:../../devel/py-ZopeInterface
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 USE_LANGUAGES=	# none
 

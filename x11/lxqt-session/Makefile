@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.16 2022/01/03 12:16:36 pin Exp $
+# $NetBSD: Makefile,v 1.20 2022/06/28 11:37:56 wiz Exp $
 
-DISTNAME=	lxqt-session-1.0.1
+DISTNAME=	lxqt-session-1.1.1
+PKGREVISION=	1
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_GITHUB:=lxqt/}
 GITHUB_RELEASE=	${PKGVERSION_NOREV}
@@ -41,8 +42,9 @@ SUBST_SED.prefix=	-e 's,/usr/bin,${PREFIX}/bin,g'
 pre-configure:
 	${MKDIR} -p ${WRKSRC}/build
 
-TOOL_DEPENDS+=	lxqt-build-tools>=0.10.0:../../devel/lxqt-build-tools
+TOOL_DEPENDS+=	lxqt-build-tools>=0.11.0:../../devel/lxqt-build-tools
 TOOL_DEPENDS+=	qt5-qttools-[0-9]*:../../x11/qt5-qttools
+DEPENDS+=	qtxdg-tools>=3.9.1:../../x11/qtxdg-tools
 DEPENDS+=	xdg-user-dirs-[0-9]*:../../x11/xdg-user-dirs
 
 .include "../../x11/qt5-qtbase/buildlink3.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.137 2021/12/17 08:07:06 jnemeth Exp $
+# $NetBSD: Makefile,v 1.142 2022/06/30 11:18:07 nia Exp $
 #
 # NOTE: when updating this package, there are two places that sound
 #       tarballs need to be checked; look in ${WRKSRC}/sounds/Makefile
@@ -7,6 +7,7 @@
 
 DISTNAME=	asterisk-18.9.0
 #PKGREVISION=	24
+PKGREVISION=	3
 CATEGORIES=	comms net audio
 MASTER_SITES=	http://downloads.asterisk.org/pub/telephony/asterisk/
 MASTER_SITES+=	http://downloads.asterisk.org/pub/telephony/asterisk/old-releases/
@@ -50,8 +51,7 @@ CONFIGURE_ARGS+=	--without-gtk2
 # XXX remove when lang/lua gets builtin.mk
 CONFIGURE_ARGS+=	--without-lua
 
-.if (${OPSYS} == "NetBSD" && \
-    (empty(OS_VERSION:M6.99.[4-9]?) && empty(OS_VERSION:M[7-9].*)))
+.if ${OPSYS} == "NetBSD" && ${OPSYS_VERSION} < 069900
 CONFIGURE_ARGS+=	--without-srtp
 .else
 CONFIGURE_ARGS+=	--with-srtp
@@ -146,10 +146,11 @@ PLIST.timerfd=	yes
 
 PLIST_VARS+=	unbound
 # unbound 1.5 or later is required.`
-.if exists(/usr/include/unbound.h) && !empty(OS_VERSION:M8.*)
-CONFIGURE_ARGS+=	--without-unbound
-.else
+.if ${OPSYS} == "NetBSD" && ${OPSYS_VERSION} > 090000 && \
+    exists(/usr/include/unbound.h)
 PLIST.unbound=	yes
+.else
+CONFIGURE_ARGS+=	--without-unbound
 .endif
 
 .include "options.mk"

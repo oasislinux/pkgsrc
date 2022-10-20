@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.40 2021/10/26 11:01:09 nia Exp $
+$NetBSD: distinfo,v 1.42 2022/10/10 07:39:30 adam Exp $
 
-BLAKE2s (libmatroska-1.6.3.tar.xz) = 6c20519951e9b3612117286e6593afff119f74d05fe45911addd641740a3eae4
-SHA512 (libmatroska-1.6.3.tar.xz) = 271557c4f8836411782991c069a16cd49d7f9b6f209d1f96f6694f0e8bdfdcda3bbf76512c328555252a8c3e45c5adfcfab1e738304bb2ea85786a6f45af3f41
-Size (libmatroska-1.6.3.tar.xz) = 65612 bytes
+BLAKE2s (libmatroska-1.7.1.tar.xz) = cec98e47125be2ade9d4e66c23f739ffdc004a1886a709e21c6d9af349b8c153
+SHA512 (libmatroska-1.7.1.tar.xz) = a6f38d388f6c9bfe399b9263ba4ef0965cfb4e27b39ac04453d5c9a9db8eac719a04c87b58d88b612902297e17aa7437382a66332f3f5b3d41744a13351751fd
+Size (libmatroska-1.7.1.tar.xz) = 61416 bytes

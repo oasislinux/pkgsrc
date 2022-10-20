@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1 2020/07/08 16:00:22 nia Exp $
+# $NetBSD: Makefile,v 1.3 2022/02/19 21:03:13 nia Exp $
 
 DISTNAME=	dkjson-2.5
 PKGNAME=	${LUA_PKGPREFIX}-${DISTNAME}

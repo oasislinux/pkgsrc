@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.2 2022/05/23 21:46:56 nikita Exp $
+
+BLAKE2s (meera-aebe3708-aebe3708.tar.gz) = 0a17ba90e2c277e7f4fa1d337689e40364dc70053e950c19576a371344add53d
+SHA512 (meera-aebe3708-aebe3708.tar.gz) = 3d702378be6d800f8c231fb56bccde84fc147d80ad9ee1c6df08c37e9d8bf730a79040f58a1dd0ca8f9614f5ad2bea6971e780d9def82bea1846320c5419120e
+Size (meera-aebe3708-aebe3708.tar.gz) = 791173 bytes

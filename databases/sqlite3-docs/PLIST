@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.107 2022/01/07 21:06:28 adam Exp $
+@comment $NetBSD: PLIST,v 1.118 2022/10/03 12:27:52 adam Exp $
 share/doc/sqlite3/34to35.html
 share/doc/sqlite3/35to36.html
 share/doc/sqlite3/about.html
@@ -102,6 +102,7 @@ share/doc/sqlite3/c3ref/db_config.html
 share/doc/sqlite3/c3ref/db_filename.html
 share/doc/sqlite3/c3ref/db_handle.html
 share/doc/sqlite3/c3ref/db_mutex.html
+share/doc/sqlite3/c3ref/db_name.html
 share/doc/sqlite3/c3ref/db_readonly.html
 share/doc/sqlite3/c3ref/db_release_memory.html
 share/doc/sqlite3/c3ref/db_status.html
@@ -213,8 +214,12 @@ share/doc/sqlite3/c3ref/vtab.html
 share/doc/sqlite3/c3ref/vtab_collation.html
 share/doc/sqlite3/c3ref/vtab_config.html
 share/doc/sqlite3/c3ref/vtab_cursor.html
+share/doc/sqlite3/c3ref/vtab_distinct.html
+share/doc/sqlite3/c3ref/vtab_in.html
+share/doc/sqlite3/c3ref/vtab_in_first.html
 share/doc/sqlite3/c3ref/vtab_nochange.html
 share/doc/sqlite3/c3ref/vtab_on_conflict.html
+share/doc/sqlite3/c3ref/vtab_rhs_value.html
 share/doc/sqlite3/c3ref/wal_autocheckpoint.html
 share/doc/sqlite3/c3ref/wal_checkpoint.html
 share/doc/sqlite3/c3ref/wal_checkpoint_v2.html
@@ -270,7 +275,6 @@ share/doc/sqlite3/favicon.ico
 share/doc/sqlite3/features.html
 share/doc/sqlite3/fileformat.html
 share/doc/sqlite3/fileformat2.html
-share/doc/sqlite3/fileio.html
 share/doc/sqlite3/flextypegood.html
 share/doc/sqlite3/floatingpoint.html
 share/doc/sqlite3/footprint.html
@@ -383,7 +387,6 @@ share/doc/sqlite3/images/foreignlogos/dropbox.gif
 share/doc/sqlite3/images/foreignlogos/expensify.png
 share/doc/sqlite3/images/foreignlogos/fb.gif
 share/doc/sqlite3/images/foreignlogos/firefox.gif
-share/doc/sqlite3/images/foreignlogos/flame.gif
 share/doc/sqlite3/images/foreignlogos/ge.gif
 share/doc/sqlite3/images/foreignlogos/google.gif
 share/doc/sqlite3/images/foreignlogos/intuit.gif
@@ -637,6 +640,17 @@ share/doc/sqlite3/releaselog/3_36_0.html
 share/doc/sqlite3/releaselog/3_37_0.html
 share/doc/sqlite3/releaselog/3_37_1.html
 share/doc/sqlite3/releaselog/3_37_2.html
+share/doc/sqlite3/releaselog/3_38_0.html
+share/doc/sqlite3/releaselog/3_38_1.html
+share/doc/sqlite3/releaselog/3_38_2.html
+share/doc/sqlite3/releaselog/3_38_3.html
+share/doc/sqlite3/releaselog/3_38_4.html
+share/doc/sqlite3/releaselog/3_38_5.html
+share/doc/sqlite3/releaselog/3_39_0.html
+share/doc/sqlite3/releaselog/3_39_1.html
+share/doc/sqlite3/releaselog/3_39_2.html
+share/doc/sqlite3/releaselog/3_39_3.html
+share/doc/sqlite3/releaselog/3_39_4.html
 share/doc/sqlite3/releaselog/3_3_0.html
 share/doc/sqlite3/releaselog/3_3_1.html
 share/doc/sqlite3/releaselog/3_3_10.html
@@ -832,7 +846,6 @@ share/doc/sqlite3/sqlanalyze.html
 share/doc/sqlite3/sqlar.html
 share/doc/sqlite3/sqldiff.html
 share/doc/sqlite3/sqlite.css
-share/doc/sqlite3/sqlite.css~
 share/doc/sqlite3/sqlite.html
 share/doc/sqlite3/stmt.html
 share/doc/sqlite3/stricttables.html

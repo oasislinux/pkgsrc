@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.113 2021/09/20 21:09:47 wiz Exp $
+# $NetBSD: Makefile,v 1.119 2022/09/26 15:58:45 wiz Exp $
 #
 
 COMMENT=	Software for geographical-related uses
@@ -68,6 +68,7 @@ SUBDIR+=	opencpn
 SUBDIR+=	opencpn-plugin-debugger
 SUBDIR+=	opencpn-plugin-draw
 SUBDIR+=	opencpn-plugin-gshhs
+SUBDIR+=	opencpn-plugin-plots
 SUBDIR+=	opencpn-plugin-statusbar
 SUBDIR+=	opencpn-plugin-watchdog
 SUBDIR+=	opencpn-plugin-weather_routing
@@ -88,22 +89,20 @@ SUBDIR+=	proj
 SUBDIR+=	proj-doc
 SUBDIR+=	py-country
 SUBDIR+=	py-gdal
+SUBDIR+=	py-geoip2
 SUBDIR+=	py-geojson
 SUBDIR+=	py-googlemaps
+SUBDIR+=	py-maxminddb
 SUBDIR+=	py-obspy
 SUBDIR+=	py-proj
 SUBDIR+=	py-trytond-country
 SUBDIR+=	py-trytond-google-maps
 SUBDIR+=	qgis
-SUBDIR+=	qlandkartegt
-SUBDIR+=	qlandkartegt-garmindev
-SUBDIR+=	qlandkartem
 SUBDIR+=	shapelib
 SUBDIR+=	spatialindex
 SUBDIR+=	tex-pst-geo
 SUBDIR+=	tex-pst-geo-doc
 SUBDIR+=	viking
-SUBDIR+=	vis5d+
 SUBDIR+=	xrmap
 SUBDIR+=	xrmap-anthems
 SUBDIR+=	xrmap-base

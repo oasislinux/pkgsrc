@@ -1,9 +1,10 @@
-# $NetBSD: options.mk,v 1.10 2020/11/18 22:38:21 riastradh Exp $
+# $NetBSD: options.mk,v 1.12 2022/05/05 08:21:33 nia Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.tor-browser
 
 PKG_SUPPORTED_OPTIONS+=	debug debug-info mozilla-jemalloc webrtc
 PKG_SUPPORTED_OPTIONS+=	alsa pulseaudio dbus
+PLIST_VARS+=		debug
 
 .if ${OPSYS} == "Linux"
 PKG_SUGGESTED_OPTIONS+=	pulseaudio mozilla-jemalloc dbus webrtc
@@ -11,7 +12,7 @@ PKG_SUGGESTED_OPTIONS+=	pulseaudio mozilla-jemalloc dbus webrtc
 PKG_SUGGESTED_OPTIONS+=	dbus
 .endif
 
-.if ${OPSYS} == "NetBSD" && empty(OS_VERSION:M[0-8].*)
+.if ${OPSYS} == "NetBSD" && ${OPSYS_VERSION} >= 090000
 PKG_SUGGESTED_OPTIONS+=	webrtc
 .endif
 
@@ -36,6 +37,7 @@ CONFIGURE_ARGS+=	--enable-debug="-g -Og"
 CONFIGURE_ARGS+=	--disable-optimize
 CONFIGURE_ARGS+=	--enable-debug-js-modules
 CONFIGURE_ARGS+=	--disable-install-strip
+PLIST.debug=		yes
 .else
 .  if !empty(PKG_OPTIONS:Mdebug-info)
 CONFIGURE_ARGS+=	--enable-debug-symbols

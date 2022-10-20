@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1 2020/10/24 22:39:48 wiz Exp $
+# $NetBSD: Makefile,v 1.3 2022/09/24 11:07:34 wiz Exp $
 
 COLLECTD_PACKAGE=	varnish
 

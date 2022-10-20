@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.17 2021/03/07 14:47:07 taca Exp $
+# $NetBSD: Makefile,v 1.19 2022/09/03 15:06:07 tsutsui Exp $
 
-DISTNAME=		cairo-1.17.5
+DISTNAME=		cairo-1.17.8
 CATEGORIES=		graphics
 
 MAINTAINER=		tsutsui@NetBSD.org

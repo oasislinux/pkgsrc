@@ -1,12 +1,14 @@
-# $NetBSD: Makefile,v 1.12 2022/01/18 02:48:33 pho Exp $
+# $NetBSD: Makefile,v 1.15 2022/02/26 03:58:36 pho Exp $
 
-DISTNAME=	X11-xft-0.3.1
-PKGREVISION=	7
+DISTNAME=	X11-xft-0.3.4
+PKGREVISION=	2
 CATEGORIES=	x11 graphics
 
 MAINTAINER=	esg@sdf.lonestar.org
 COMMENT=	Bindings to the Xft library, and some Xrender parts
 LICENSE=	gnu-gpl-v2
+
+USE_TOOLS+=	pkg-config
 
 .include "../../devel/hs-utf8-string/buildlink3.mk"
 .include "../../x11/hs-X11/buildlink3.mk"

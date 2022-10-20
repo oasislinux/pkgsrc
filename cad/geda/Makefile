@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.129 2021/12/08 16:03:24 adam Exp $
+# $NetBSD: Makefile,v 1.133 2022/09/18 12:48:26 nia Exp $
 
 DISTNAME=	geda-gaf-1.8.2
 PKGNAME=	${DISTNAME:S/-gaf-/-/}
-PKGREVISION=	30
+PKGREVISION=	33
 CATEGORIES=	cad
 MASTER_SITES=	http://ftp.geda-project.org/geda-gaf/stable/v1.8/1.8.2/
 
@@ -75,6 +75,7 @@ INFO_FILES=	yes
 .include "../../graphics/gd/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../lang/guile20/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

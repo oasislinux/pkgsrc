@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.10 2021/12/08 16:06:15 adam Exp $
+# $NetBSD: Makefile,v 1.14 2022/06/28 11:35:31 wiz Exp $
 
-DISTNAME=	sile-0.10.15
-PKGREVISION=	3
+DISTNAME=	sile-0.12.2
+PKGREVISION=	2
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_GITHUB:=sile-typesetter/}
 GITHUB_PROJECT=	sile
@@ -41,9 +41,10 @@ TEST_TARGET=	test
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
-USE_TOOLS+=	pkg-config gmake
+USE_TOOLS+=	bash pkg-config gmake
 
-CONFIGURE_ARGS+=	LUA=${LUA_INTERPRETER}
+CONFIG_SHELL=		${BASH}
+CONFIGURE_ARGS+=	LUA=${LUA_INTERPRETER} GIT=${FALSE}
 CONFIGURE_ARGS+=	--with-system-luarocks
 
 .include "../../fonts/fontconfig/buildlink3.mk"

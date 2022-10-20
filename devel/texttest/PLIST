@@ -1,13 +1,11 @@
-@comment $NetBSD: PLIST,v 1.5 2022/01/28 12:04:17 wiz Exp $
-bin/filter_fpdiff.py
-bin/filter_rundependent.py
+@comment $NetBSD: PLIST,v 1.7 2022/09/28 18:10:41 schmonz Exp $
 bin/interpretcore
 bin/texttest
-${PYSITELIB}/${EGG_INFODIR}/PKG-INFO
-${PYSITELIB}/${EGG_INFODIR}/SOURCES.txt
-${PYSITELIB}/${EGG_INFODIR}/dependency_links.txt
-${PYSITELIB}/${EGG_INFODIR}/requires.txt
-${PYSITELIB}/${EGG_INFODIR}/top_level.txt
+${PYSITELIB}/TextTest-${PKGVERSION}-py${PYVERSSUFFIX}.egg-info/PKG-INFO
+${PYSITELIB}/TextTest-${PKGVERSION}-py${PYVERSSUFFIX}.egg-info/SOURCES.txt
+${PYSITELIB}/TextTest-${PKGVERSION}-py${PYVERSSUFFIX}.egg-info/dependency_links.txt
+${PYSITELIB}/TextTest-${PKGVERSION}-py${PYVERSSUFFIX}.egg-info/requires.txt
+${PYSITELIB}/TextTest-${PKGVERSION}-py${PYVERSSUFFIX}.egg-info/top_level.txt
 ${PYSITELIB}/texttestlib/__init__.py
 ${PYSITELIB}/texttestlib/__init__.pyc
 ${PYSITELIB}/texttestlib/__init__.pyo
@@ -65,6 +63,9 @@ ${PYSITELIB}/texttestlib/default/comparetest.pyo
 ${PYSITELIB}/texttestlib/default/console.py
 ${PYSITELIB}/texttestlib/default/console.pyc
 ${PYSITELIB}/texttestlib/default/console.pyo
+${PYSITELIB}/texttestlib/default/database_data.py
+${PYSITELIB}/texttestlib/default/database_data.pyc
+${PYSITELIB}/texttestlib/default/database_data.pyo
 ${PYSITELIB}/texttestlib/default/fpdiff.py
 ${PYSITELIB}/texttestlib/default/fpdiff.pyc
 ${PYSITELIB}/texttestlib/default/fpdiff.pyo
@@ -155,6 +156,9 @@ ${PYSITELIB}/texttestlib/default/gtkgui/version_control/vcs_independent.pyo
 ${PYSITELIB}/texttestlib/default/knownbugs/__init__.py
 ${PYSITELIB}/texttestlib/default/knownbugs/__init__.pyc
 ${PYSITELIB}/texttestlib/default/knownbugs/__init__.pyo
+${PYSITELIB}/texttestlib/default/knownbugs/azdevops.py
+${PYSITELIB}/texttestlib/default/knownbugs/azdevops.pyc
+${PYSITELIB}/texttestlib/default/knownbugs/azdevops.pyo
 ${PYSITELIB}/texttestlib/default/knownbugs/bugzilla.py
 ${PYSITELIB}/texttestlib/default/knownbugs/bugzilla.pyc
 ${PYSITELIB}/texttestlib/default/knownbugs/bugzilla.pyo
@@ -266,7 +270,6 @@ ${PYSITELIB}/texttestlib/images/throbber_inactive.png
 ${PYSITELIB}/texttestlib/jobprocess.py
 ${PYSITELIB}/texttestlib/jobprocess.pyc
 ${PYSITELIB}/texttestlib/jobprocess.pyo
-${PYSITELIB}/texttestlib/libexec/interpretcore
 ${PYSITELIB}/texttestlib/libexec/sitecustomize.py
 ${PYSITELIB}/texttestlib/libexec/sitecustomize.pyc
 ${PYSITELIB}/texttestlib/libexec/sitecustomize.pyo

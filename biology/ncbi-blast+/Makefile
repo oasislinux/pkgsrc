@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.26 2021/12/08 16:03:24 adam Exp $
+# $NetBSD: Makefile,v 1.31 2022/06/30 11:18:04 nia Exp $
 
-DISTNAME=	ncbi-blast-2.11.0+-src
+DISTNAME=	ncbi-blast-2.13.0+-src
 PKGNAME=	${DISTNAME:S/+-src//:S/blast/blast+/}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	biology
 MASTER_SITES=	https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ \
 		https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${PKGVERSION_NOREV}/
@@ -30,6 +30,7 @@ REPLACE_BASH+=		src/app/blast/get_species_taxids.sh
 REPLACE_PERL=		src/app/blast/legacy_blast.pl src/app/blast/update_blastdb.pl
 REPLACE_PYTHON=		src/app/winmasker/windowmasker_2.2.22_adapter.py
 REPLACE_PYTHON+=	src/app/blast/cleanup-blastdb-volumes.py
+MKPIE_SUPPORTED=	no	# Temporary fix
 
 # The test for amq can hang, but amq is not needed so just avoid the test
 # configure chooses /usr/local/bin/ar with no flags
@@ -45,6 +46,10 @@ WRKSRC=			${WRKDIR}/${DISTNAME}/c++
 # statfs is deprecated on NetBSD, but still exists in libc
 # configure checks only for undefined reference, not for usability
 CONFIGURE_ENV+=		ac_cv_func_statfs=no
+.endif
+
+.if ${OPSYS} == Darwin
+CONFIGURE_ARGS+=	--without-openmp
 .endif
 
 # c++/src/objtools/edit/seq_entry_edit.cpp: In member function 'void ncbi::objects::edit::{anonymous}::CSeqdescSortMap::Init()':

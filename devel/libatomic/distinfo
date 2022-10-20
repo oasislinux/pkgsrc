@@ -1,6 +1,8 @@
-$NetBSD: distinfo,v 1.7 2021/11/08 13:00:33 wiz Exp $
+$NetBSD: distinfo,v 1.9 2022/08/22 11:16:35 wiz Exp $
 
-BLAKE2s (gcc-11.2.0.tar.xz) = 528c6e78fd9ace664e49c25ffbccc8f3a7b45aa70e50ea9744b36f5719f4f11e
-SHA512 (gcc-11.2.0.tar.xz) = d53a0a966230895c54f01aea38696f818817b505f1e2bfa65e508753fcd01b2aedb4a61434f41f3a2ddbbd9f41384b96153c684ded3f0fa97c82758d9de5c7cf
-Size (gcc-11.2.0.tar.xz) = 80888824 bytes
+BLAKE2s (gcc-12.2.0.tar.xz) = aca782fc46f75c32dc223ba8715cb46001658574431235822ce4e68361c58305
+SHA512 (gcc-12.2.0.tar.xz) = e9e857bd81bf7a370307d6848c81b2f5403db8c7b5207f54bce3f3faac3bde63445684092c2bc1a2427cddb6f7746496d9fbbef05fbbd77f2810b2998f1f9173
+Size (gcc-12.2.0.tar.xz) = 84645292 bytes
+SHA1 (patch-gcc_config_nvptx_gen-opt.sh) = 194d39d95354dd83d2182bbca0ad77b94902faac
+SHA1 (patch-gcc_configure) = 5519993521040b70d3e7c33d4f7a5d2a15436410
 SHA1 (patch-libatomic_configure) = 9ca952bc6e48dc37dd79d3fb050194de460f0898

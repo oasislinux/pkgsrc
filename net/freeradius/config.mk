@@ -1,6 +1,11 @@
-# $NetBSD: config.mk,v 1.2 2021/11/12 12:27:38 adam Exp $
+# $NetBSD: config.mk,v 1.5 2022/07/20 01:19:55 gutteridge Exp $
 
-# cd ${WRKSRC}/raddb; find . -type f | sort | sed 's,^./,EGFILES+=\t,'
+# cd ${DESTDIR}${EGDIR}/raddb; find . -type f | sort | sed 's,^./,EGFILES+=\t,'
+#
+# Separately, any symlinks intended to be placed in the mods-enabled or
+# sites-enabled directories must be added to the respective variables in the
+# INSTALL and DEINSTALL scripts.
+EGFILES+=	README.rst
 EGFILES+=	certs/Makefile
 EGFILES+=	certs/README.md
 EGFILES+=	certs/bootstrap
@@ -240,7 +245,7 @@ EGFILES+=	sites-available/vmps
 EGFILES+=	templates.conf
 EGFILES+=	trigger.conf
 
-# cd ${WRKSRC}/raddb; find . -type d | sort | sed 's,^./,EGDIRS+=\t,'
+# cd ${DESTDIR}${EGDIR}/raddb; find . -type d | sort | sed 's,^./,EGDIRS+=\t,'
 EGDIRS+=	certs
 EGDIRS+=	mods-available
 EGDIRS+=	mods-config
@@ -292,5 +297,7 @@ EGDIRS+=	mods-config/sql/moonshot-targeted-ids/mysql
 EGDIRS+=	mods-config/sql/moonshot-targeted-ids/postgresql
 EGDIRS+=	mods-config/sql/moonshot-targeted-ids/sqlite
 EGDIRS+=	mods-config/unbound
+EGDIRS+=	mods-enabled
 EGDIRS+=	policy.d
 EGDIRS+=	sites-available
+EGDIRS+=	sites-enabled

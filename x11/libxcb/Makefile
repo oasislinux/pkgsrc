@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.36 2021/12/01 13:01:15 nia Exp $
+# $NetBSD: Makefile,v 1.39 2022/06/17 16:43:34 wiz Exp $
 
-DISTNAME=	libxcb-1.14
+DISTNAME=	libxcb-1.15
+PKGREVISION=	1
 CATEGORIES=	x11
 MASTER_SITES=	https://xorg.freedesktop.org/archive/individual/lib/
 EXTRACT_SUFX=	.tar.xz
@@ -11,7 +12,7 @@ COMMENT=	X protocol C-language Binding
 LICENSE=	mit # with no-advertising clause
 
 TOOL_DEPENDS+=	libxslt>=1.1.0:../../textproc/libxslt
-TOOL_DEPENDS+=	${PYPKGPREFIX}-xcbgen>=1.14:../../x11/py-xcbgen
+TOOL_DEPENDS+=	${PYPKGPREFIX}-xcbgen>=1.15.1:../../x11/py-xcbgen
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
@@ -87,7 +88,7 @@ post-extract:
 ###	so it's not needed (nor should it ever be, really).
 ###
 #.include "../../devel/gperf/buildlink3.mk"
-X11_BUILTIN_NAME?=		libxcb
+X11_LIB_NAME?=		libxcb
 .include "../../meta-pkgs/modular-xorg/avoid-duplicate.mk"
 PYTHON_FOR_BUILD_ONLY=	tool
 .include "../../lang/python/application.mk"

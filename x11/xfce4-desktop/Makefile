@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.93 2021/12/08 16:07:15 adam Exp $
+# $NetBSD: Makefile,v 1.95 2022/08/25 22:53:38 gutteridge Exp $
 
-PKGREVISION= 1
 .include "../../meta-pkgs/xfce4/Makefile.common"
 
-VERSION=	4.16.0
+VERSION=	4.16.1
 DISTNAME=	xfdesktop-${VERSION}
 PKGNAME=	xfce4-desktop-${VERSION}
 CATEGORIES=	x11

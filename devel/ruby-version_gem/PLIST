@@ -1,0 +1,15 @@
+@comment $NetBSD: PLIST,v 1.2 2022/10/09 07:36:18 taca Exp $
+${GEM_HOME}/cache/${GEM_NAME}.gem
+${GEM_LIBDIR}/CHANGELOG.md
+${GEM_LIBDIR}/CODE_OF_CONDUCT.md
+${GEM_LIBDIR}/CONTRIBUTING.md
+${GEM_LIBDIR}/LICENSE.txt
+${GEM_LIBDIR}/README.md
+${GEM_LIBDIR}/SECURITY.md
+${GEM_LIBDIR}/lib/version_gem.rb
+${GEM_LIBDIR}/lib/version_gem/api.rb
+${GEM_LIBDIR}/lib/version_gem/basic.rb
+${GEM_LIBDIR}/lib/version_gem/error.rb
+${GEM_LIBDIR}/lib/version_gem/rspec.rb
+${GEM_LIBDIR}/lib/version_gem/version.rb
+${GEM_HOME}/specifications/${GEM_NAME}.gemspec

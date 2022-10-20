@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2022/01/18 02:48:24 pho Exp $
+# $NetBSD: Makefile,v 1.9 2022/08/20 08:08:21 wiz Exp $
 
-DISTNAME=	cassava-megaparsec-2.0.2
-PKGREVISION=	2
+DISTNAME=	cassava-megaparsec-2.0.4
+PKGREVISION=	3
 CATEGORIES=	textproc
 
 MAINTAINER=	pkgsrc-users@NetBSD.org

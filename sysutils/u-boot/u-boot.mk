@@ -1,4 +1,4 @@
-# $NetBSD: u-boot.mk,v 1.34 2021/08/12 07:33:49 wiz Exp $
+# $NetBSD: u-boot.mk,v 1.36 2022/07/29 13:47:36 thorpej Exp $
 
 .include "../../sysutils/u-boot/u-boot-version.mk"
 
@@ -34,6 +34,12 @@ USE_TOOLS+=		bison flex gmake gsed pkg-config gawk
 PYTHON_FOR_BUILD_ONLY=	yes
 .include "../../lang/python/tool.mk"
 
+# XXX May need to cast a wider net, but at least 2022.04 requires
+# this when building for sunxi.
+.if !empty(UBOOT_VERSION:M202[2-9].*)
+TOOL_DEPENDS+=	${PYPKGPREFIX}-setuptools-[0-9]*:../../devel/py-setuptools
+.endif
+
 .if ${PYPKGPREFIX} == "py27"
 ALL_ENV+=		PYTHON2=${PYTHONBIN} PYTHONCONFIG=${PYTHONCONFIG}
 .else
@@ -58,7 +64,7 @@ post-patch:
 do-configure:
 .if !empty(UBOOT_SWIG_VERSION:M3)
 	${MKDIR} -p ${BUILDLINK_DIR}/bin
-	${RM} -f ${BUILDLINK_DIR}/bin/swig3.0
+	${RM} -f ${BUILDLINK_DIR}/bin/swig
 	${LN} -s ${PREFIX}/bin/swig3.0 ${BUILDLINK_DIR}/bin/swig
 .endif
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE_PROGRAM} ${UBOOT_CONFIG}

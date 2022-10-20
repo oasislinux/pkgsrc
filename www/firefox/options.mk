@@ -1,28 +1,30 @@
-# $NetBSD: options.mk,v 1.64 2021/09/16 21:12:48 nia Exp $
+# $NetBSD: options.mk,v 1.72 2022/10/08 21:18:55 ryoon Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.firefox
 
 PKG_SUPPORTED_OPTIONS=	official-mozilla-branding
 PKG_SUPPORTED_OPTIONS+=	debug debug-info mozilla-jemalloc webrtc
-PKG_SUPPORTED_OPTIONS+=	alsa pulseaudio sndio dbus
+PKG_SUPPORTED_OPTIONS+=	dbus
+PKG_SUPPORTED_OPTIONS+=	alsa pulseaudio sndio sunaudio jack
 
 .if ${OPSYS} == "Linux"
-PKG_SUGGESTED_OPTIONS+=	pulseaudio mozilla-jemalloc dbus webrtc
-.else
 PKG_SUGGESTED_OPTIONS+=	dbus
+PKG_SUGGESTED_OPTIONS+=	pulseaudio mozilla-jemalloc webrtc
 .endif
 
-.if ${OPSYS} == "NetBSD" && empty(OS_VERSION:M[0-8].*)
+.if ${OPSYS} == "NetBSD" || ${OPSYS} == "SunOS"
+PKG_SUGGESTED_OPTIONS+=	sunaudio
+.endif
+
+.if ${OPSYS} == "NetBSD" && ${OPSYS_VERSION} >= 090000
 PKG_SUGGESTED_OPTIONS+=	webrtc
 .endif
 
 .include "../../mk/bsd.options.mk"
 
 .if !empty(PKG_OPTIONS:Malsa)
-CONFIGURE_ARGS+=	--enable-alsa
+AUDIO_BACKENDS+=	alsa
 .include "../../audio/alsa-lib/buildlink3.mk"
-.else
-CONFIGURE_ARGS+=	--disable-alsa
 .endif
 
 .if !empty(PKG_OPTIONS:Mmozilla-jemalloc)
@@ -51,10 +53,8 @@ CONFIGURE_ARGS+=	--disable-debug
 .endif
 
 .if !empty(PKG_OPTIONS:Mpulseaudio)
+AUDIO_BACKENDS+=	pulseaudio
 .include "../../audio/pulseaudio/buildlink3.mk"
-CONFIGURE_ARGS+=	--enable-pulseaudio
-.else
-CONFIGURE_ARGS+=	--disable-pulseaudio
 .endif
 
 .if !empty(PKG_OPTIONS:Msndio)
@@ -69,6 +69,9 @@ CONFIGURE_ARGS+=	--disable-sndio
 CONFIGURE_ARGS+=	--enable-dbus
 .else
 CONFIGURE_ARGS+=	--disable-dbus
+.  if ${OPSYS} == "Linux"
+CONFIGURE_ARGS+=	--disable-necko-wifi
+.  endif
 .endif
 
 .if !empty(PKG_OPTIONS:Mofficial-mozilla-branding)
@@ -81,9 +84,20 @@ NO_BIN_ON_FTP=		${RESTRICTED}
 CONFIGURE_ARGS+=	--with-branding=browser/branding/unofficial
 .endif
 
+.if !empty(PKG_OPTIONS:Msunaudio)
+AUDIO_BACKENDS+=	sunaudio
+.endif
+
+.if !empty(PKG_OPTIONS:Mjack)
+AUDIO_BACKENDS+=	jack
+.include "../../audio/jack/buildlink3.mk"
+.endif
+
 .if !empty(PKG_OPTIONS:Mwebrtc)
 .include "../../graphics/libv4l/buildlink3.mk"
 CONFIGURE_ARGS+=	--enable-webrtc
 .else
 CONFIGURE_ARGS+=	--disable-webrtc
 .endif
+
+CONFIGURE_ARGS+=	--audio-backends=${AUDIO_BACKENDS:ts,}

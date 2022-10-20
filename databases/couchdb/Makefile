@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.76 2021/12/08 16:03:37 adam Exp $
+# $NetBSD: Makefile,v 1.79 2022/05/05 13:42:57 nia Exp $
 
 DISTNAME=		apache-couchdb-2.3.1
 PKGNAME=		${DISTNAME:S/apache-//}
-PKGREVISION=		14
+PKGREVISION=		15
 CATEGORIES=		databases
 MASTER_SITES=		${MASTER_SITE_APACHE:=couchdb/source/${PKGVERSION_NOREV}/}
 
@@ -80,9 +80,14 @@ INSTALLATION_DIRS+=	couchdb/share/server couchdb/share/www/docs
 INSTALLATION_DIRS+=	${PKGMANDIR}/man1
 INSTALLATION_DIRS+=	share/examples/couchdb
 
-CTF_FILES_SKIP+=	couchdb/erts*/bin/*
-CTF_FILES_SKIP+=	couchdb/lib/*/priv/bin/*
-CTF_FILES_SKIP+=	couchdb/lib/*/priv/lib/*.so
+COUCHDB_BIN_FILES+=	couchdb/erts*/bin/*
+COUCHDB_BIN_FILES+=	couchdb/lib/*/priv/bin/*
+COUCHDB_BIN_FILES+=	couchdb/lib/*/priv/lib/*.so
+
+CHECK_PIE_SKIP+=	${COUCHDB_BIN_FILES}
+CHECK_RELRO_SKIP+=	${COUCHDB_BIN_FILES}
+CHECK_SHLIBS_SKIP+=	${COUCHDB_BIN_FILES}
+CTF_FILES_SKIP+=	${COUCHDB_BIN_FILES}
 
 RCD_SCRIPTS+=		couchdb
 

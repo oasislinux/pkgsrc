@@ -1,4 +1,4 @@
-# $NetBSD: rubyversion.mk,v 1.242 2022/01/16 13:56:43 taca Exp $
+# $NetBSD: rubyversion.mk,v 1.255 2022/10/11 14:36:06 taca Exp $
 #
 
 # This file determines which Ruby version is used as a dependency for
@@ -8,13 +8,13 @@
 # === User-settable variables ===
 #
 # RUBY_VERSION_DEFAULT
-#	The preferered Ruby version to use.
+#	The preferred Ruby version to use.
 #
-#		Possible values: 26 27 30 31
-#		Default: 27
+#		Possible values: 27 30 31
+#		Default: 31
 #
 # RUBY_BUILD_DOCUMENT
-#	Build documentation of this package and so that install formated
+#	Build documentation of this package so that installs formatted
 #	documentation.  It is also used in each package.
 #
 #		Possible values: Yes No
@@ -34,19 +34,19 @@
 # RUBY_VERSIONS_ACCEPTED
 #	The Ruby versions that are acceptable for the package.
 #
-#		Possible values: 26 27 30 31
-#		Default: 27 30 31 26
+#		Possible values: 27 30 31
+#		Default: 31 30 27
 #
 # RUBY_VERSIONS_INCOMPATIBLE
 #	The Ruby versions that are incompatible for the package.
 #
-#		Possible values: 26 27 30 31
+#		Possible values: 27 30 31
 #		Default: empty
 #
 # RUBY_NOVERSION
 #	If "Yes", the package dosen't depend on any version of Ruby, such
-#	as editing mode for emacs.  In this case, package's name would begin
-#	with "ruby-".  Otherwise, the package's name is begin with
+#	as an editing mode for Emacs.  In this case, package's name would begin
+#	with "ruby-".  Otherwise, the package's name begins with
 #	${RUBY_PKGPREFIX}.
 #
 #		Possible values: Yes No
@@ -59,7 +59,7 @@
 #
 # RUBY_ENCODING_ARG
 #
-#	Optional encoding argument for shbang line.
+#	Optional encoding argument for shebang line.
 #
 #	Default: (empty)
 #
@@ -68,16 +68,16 @@
 # RUBY_VER
 #	Really selected version of ruby.
 #
-#		Possible values: 26 27 30 31
+#		Possible values: 27 30 31
 #
 #	Use this variable in pkgsrc's Makefile
 #
 # RUBY_PKGPREFIX
-#	Prefix part for ruby based packages.  It is recommended that to
-#	use RUBY_PKGPREFIX with ruby related packages since you can supply
-#	different binary packages as each version of Ruby.
+#	Prefix part for Ruby-based packages.  It is recommended to
+#	use RUBY_PKGPREFIX with Ruby-related packages since you can supply
+#	different binary packages for each version of Ruby.
 #
-#		Possible values: ruby26 ruby27 ruby30 ruby31
+#		Possible values: ruby27 ruby30 ruby31
 #
 # RUBY_ABI_VERSION
 #	Ruby's ABI version.
@@ -106,7 +106,7 @@
 # RUBY_SUFFIX
 #	Extra string for each ruby commands; ruby, irb and so on.
 #
-#		Possible values: 26 27 30 31
+#		Possible values: 27 30 31
 #
 # RUBY_VERSION
 #	Version of Ruby's version.
@@ -213,24 +213,22 @@ RUBY_VERSION_REQD?=	${PKGNAME_REQD:C/ruby([0-9][0-9])-.*/\1/}
 .endif
 
 # current supported Ruby's version
-RUBY26_VERSION=		2.6.9
-RUBY27_VERSION=		2.7.5
-RUBY30_VERSION=		3.0.3
-RUBY31_VERSION=		3.1.0
+RUBY27_VERSION=		2.7.6
+RUBY30_VERSION=		3.0.4
+RUBY31_VERSION=		3.1.2
 
 # current API compatible version; used for version of shared library
-RUBY26_API_VERSION=	2.6.0
 RUBY27_API_VERSION=	2.7.0
 RUBY30_API_VERSION=	3.0.0
 RUBY31_API_VERSION=	3.1.0
 
 #
-RUBY_VERSION_DEFAULT?=	27
+RUBY_VERSION_DEFAULT?=	31
 
 # supported Ruby's version
-RUBY_VERSIONS_SUPPORTED=	26 27 30 31
+RUBY_VERSIONS_SUPPORTED=	27 30 31
 
-RUBY_VERSIONS_ACCEPTED?=	27 30 31 26
+RUBY_VERSIONS_ACCEPTED?=	31 30 27
 RUBY_VERSIONS_INCOMPATIBLE?=
 
 .if empty(RUBY_VERSIONS_SUPPORTED:M${RUBY_VERSION_DEFAULT})
@@ -269,59 +267,7 @@ RUBY_VER:=	${RUBY_VER_MAP.${RUBY_VER}:U${RUBY_VER}}
 
 RUBY_SUFFIX?=	${_RUBY_VER_MAJOR}${_RUBY_VER_MINOR}${_RUBY_VER_TEENY}
 
-.if ${RUBY_VER} == "26"
-RUBY_VERSION=		${RUBY26_VERSION}
-RUBY_ABI_VERSION=	${RUBY_VERSION}
-RUBY_SUFFIX=		${_RUBY_VER_MAJOR}${_RUBY_VER_MINOR}
-
-# bundled gems
-RUBY_RUBYGEMS_VER=		3.0.3.1
-RUBY_BIGDECIMAL_VER=		1.4.1
-RUBY_BUNDLER_VER=		1.17.2
-RUBY_CMATH_VER=			1.0.0
-RUBY_CSV_VER=			3.0.9
-RUBY_DATE_VER=			2.0.2
-RUBY_DBM_VER=			1.0.0
-RUBY_DID_YOU_MEAN_VER=		1.3.0
-RUBY_E2MMAP_VER=		0.1.0
-RUBY_ETC_VER=			1.0.1
-RUBY_FCNTL_VER=			1.0.0
-RUBY_FIDDLE_VER=		1.0.0
-RUBY_FILEUTILS_VER=		1.1.0
-RUBY_FORWARDABLE_VER=		1.2.0
-RUBY_IO_CONSOLE_VER=		0.4.7
-RUBY_IPADDR_VER=		1.2.2
-RUBY_IRB_VER=			1.0.0
-RUBY_JSON_VER=			2.1.0
-RUBY_LOGGER_VER=		1.3.0
-RUBY_MATRIX_VER=		0.1.0
-RUBY_MINITEST_VER=		5.11.3
-RUBY_MUTEX_M_VER=		0.1.0
-RUBY_NET_TELNET_VER=		0.2.0
-RUBY_OPENSSL_VER=		2.1.2
-RUBY_OSTRUCT_VER=		0.1.0
-RUBY_POWER_ASSERT_VER=		1.1.3
-RUBY_PRIME_VER=			0.1.0
-RUBY_PSYCH_VER=			3.1.0
-RUBY_RAKE_VER=			12.3.3
-RUBY_RDOC_VER=			6.1.2.1
-RUBY_REXML_VER=			3.1.9.1
-RUBY_RSS_VER=			0.2.7
-RUBY_SCANF_VER=			1.0.0
-RUBY_SDBM_VER=			1.0.0
-RUBY_SHELL_VER=			0.7
-RUBY_STRINGIO_VER=		0.0.2
-RUBY_STRSCAN_VER=		1.0.0
-RUBY_SYNC_VER=			0.5.0
-RUBY_TEST_UNIT_VER=		3.2.9
-RUBY_THWAIT_VER=		0.1.0
-RUBY_TRACER_VER=		0.1.0
-RUBY_SYNC_VER=			0.5.0
-RUBY_WEBRICK_VER=		1.4.4
-RUBY_XMLRPC_VER=		0.3.0
-RUBY_ZLIB_VER=			1.0.0
-
-.elif ${RUBY_VER} == "27"
+.if ${RUBY_VER} == 27
 RUBY_VERSION=		${RUBY27_VERSION}
 RUBY_ABI_VERSION=	${RUBY_VERSION}
 RUBY_SUFFIX=		${_RUBY_VER_MAJOR}${_RUBY_VER_MINOR}
@@ -383,7 +329,7 @@ RUBY_YAML_VER=			0.1.0
 RUBY_ZLIB_VER=			1.1.0
 
 
-.elif ${RUBY_VER} == "30"
+.elif ${RUBY_VER} == 30
 RUBY_VERSION=		${RUBY30_VERSION}
 RUBY_ABI_VERSION=	${RUBY_VERSION}
 RUBY_SUFFIX=		${_RUBY_VER_MAJOR}${_RUBY_VER_MINOR}
@@ -394,7 +340,7 @@ RUBY_ABBREV_VER=		0.1.0
 RUBY_BASE64_VER=		0.1.0
 RUBY_BENCHMARK_VER=		0.1.1
 RUBY_BIGDECIMAL_VER=		3.0.0
-RUBY_BUNDLER_VER=		2.2.32
+RUBY_BUNDLER_VER=		2.2.33
 RUBY_CGI_VER=			0.2.1
 RUBY_CSV_VER=			3.1.9
 RUBY_DATE_VER=			3.1.3
@@ -475,7 +421,7 @@ RUBY_WEAKREF_VER=		0.1.1
 RUBY_YAML_VER=			0.1.1
 RUBY_ZLIB_VER=			2.0.0
 
-.elif ${RUBY_VER} == "31"
+.elif ${RUBY_VER} == 31
 RUBY_VERSION=		${RUBY31_VERSION}
 RUBY_ABI_VERSION=	${RUBY_VERSION}
 RUBY_SUFFIX=		${_RUBY_VER_MAJOR}${_RUBY_VER_MINOR}
@@ -486,7 +432,7 @@ RUBY_ABBREV_VER=		0.1.0
 RUBY_BASE64_VER=		0.1.1
 RUBY_BENCHMARK_VER=		0.2.0
 RUBY_BIGDECIMAL_VER=		3.1.1
-RUBY_BUNDLER_VER=		2.3.3
+RUBY_BUNDLER_VER=		2.3.7
 RUBY_CGI_VER=			0.3.1
 RUBY_CSV_VER=			3.2.2
 RUBY_DATE_VER=			3.2.2
@@ -505,10 +451,10 @@ RUBY_FILEUTILS_VER=		1.6.0
 RUBY_FIND_VER=			0.1.1
 RUBY_FORWARDABLE_VER=		1.3.2
 RUBY_GETOPTLONG_VER=		0.1.1
-RUBY_IO_CONSOLE_VER=		0.5.10
+RUBY_IO_CONSOLE_VER=		0.5.11
 RUBY_IO_NONBLOCK_VER=		0.1.0
 RUBY_IO_WAIT_VER=		0.2.1
-RUBY_IPADDR_VER=		1.2.3
+RUBY_IPADDR_VER=		1.2.4
 RUBY_IRB_VER=			1.4.1
 RUBY_JSON_VER=			2.6.1
 RUBY_LOGGER_VER=		1.5.0
@@ -517,7 +463,7 @@ RUBY_MINITEST_VER=		5.15.0
 RUBY_MUTEX_M_VER=		0.1.1
 RUBY_NET_FTP_VER=		0.1.3
 RUBY_NET_HTTP_VER=		0.2.0
-RUBY_NET_IMAP_VER=		0.2.2
+RUBY_NET_IMAP_VER=		0.2.3
 RUBY_NET_POP_VER=		0.1.1
 RUBY_NET_PROTOCOL_VER=		0.1.2
 RUBY_NET_SMTP_VER=		0.3.1
@@ -537,7 +483,7 @@ RUBY_PSTORE_VER=		0.1.1
 RUBY_PSYCH_VER=			4.0.3
 RUBY_RACC_VER=			1.6.0
 RUBY_RAKE_VER=			13.0.6
-RUBY_RBS_VER=			2.0.0
+RUBY_RBS_VER=			2.1.0
 RUBY_RDOC_VER=			6.4.0
 RUBY_READLINE_VER=		0.0.3
 RUBY_RELINE_VER=		0.3.0
@@ -561,7 +507,7 @@ RUBY_TIMEOUT_VER=		0.2.0
 RUBY_TMPDIR_VER=		0.1.2
 RUBY_TRACER_VER=		0.1.1
 RUBY_TSORT_VER=			0.1.0
-RUBY_TYPEPROF_VER=		0.21.1
+RUBY_TYPEPROF_VER=		0.21.2
 RUBY_UN_VER=			0.2.0
 RUBY_URI_VER=			0.11.0
 RUBY_WEAKREF_VER=		0.1.1
@@ -583,8 +529,8 @@ MULTI+=	RUBY_VER=${RUBY_VERS:U${RUBY_VERSION_DEFAULT}}
 # RUBY_NOVERSION should be set to "Yes" if the package dosen't depend on
 #	any specific version of ruby command.  In this case, package's
 #	name begin with "ruby-".
-#	If RUBY_NOVERSION is "No" (default), the package's name is begin
-#	with ${RUBY_NAME}; "ruby26", "ruby27" and so on.
+#	If RUBY_NOVERSION is "No" (default), the package's name begins
+#	with ${RUBY_NAME}; "ruby27", "ruby30" and so on.
 #
 #	It also affects to RUBY_DOC, RUBY_EG...
 #
@@ -618,7 +564,20 @@ RUBY?=			${PREFIX}/bin/${RUBY_NAME}
 RAKE?=			${PREFIX}/bin/${RAKE_NAME}
 RDOC?=			${PREFIX}/bin/rdoc${RUBY_SUFFIX}
 
+# ruby31 helpfully changed the config triple...
+.if !empty(MACHINE_PLATFORM:MDarwin-*-aarch64) && ${RUBY_VER} >= 31
+RUBY_ARCH?=	arm64-${LOWER_OPSYS}${APPEND_ELF}${LOWER_OPSYS_VERSUFFIX}${APPEND_ABI}
+RUBY_EXTARCH?=	arm64-${LOWER_OPSYS}${APPEND_ELF}-${LOWER_OPSYS_VERSUFFIX}
+.endif
+
 RUBY_ARCH?=	${MACHINE_GNU_ARCH}-${LOWER_OPSYS}${APPEND_ELF}${LOWER_OPSYS_VERSUFFIX}${APPEND_ABI}
+
+# NetBSD does not append an OS version, so we have to do this OPSYS-specific.
+.if ${OPSYS} == "NetBSD" || ${OPSYS} == "Linux"
+RUBY_EXTARCH?=	${MACHINE_GNU_ARCH}-${LOWER_OPSYS}${APPEND_ELF}${LOWER_OPSYS_VERSUFFIX}
+.else
+RUBY_EXTARCH?=	${MACHINE_GNU_ARCH}-${LOWER_OPSYS}${APPEND_ELF}-${LOWER_OPSYS_VERSUFFIX}${APPEND_ABI}
+.endif
 
 RUBY_MAJOR_MINOR=	${_RUBY_VER_MAJOR}.${_RUBY_VER_MINOR}
 
@@ -709,7 +668,7 @@ RUBY_EG?=		share/examples/${RUBY_NAME}
 
 RUBY_GEM_BASE?=		${RUBY_LIB_BASE}/gems
 GEM_HOME?=		${RUBY_GEM_BASE}/${RUBY_VER_DIR}
-GEM_EXTSBASE=		${GEM_HOME}/extensions/${RUBY_GEM_ARCH}/${RUBY_VER_DIR}
+GEM_EXTSBASE=		${GEM_HOME}/extensions/${RUBY_EXTARCH}/${RUBY_VER_DIR}
 GEM_PLUGINSDIR=		${GEM_HOME}/plugins
 GEM_PATH?=		${PREFIX}/${GEM_HOME}
 RUBYGEM=		${LOCALBASE}/bin/${RUBYGEM_NAME}

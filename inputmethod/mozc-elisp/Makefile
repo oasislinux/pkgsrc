@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.61 2021/12/08 16:05:16 adam Exp $
+# $NetBSD: Makefile,v 1.65 2022/05/14 22:25:38 dholland Exp $
 
 PKGNAME=	${EMACS_PKGNAME_PREFIX}${DISTNAME:S/mozc-/mozc-elisp-/}
-PKGREVISION=	7
+PKGREVISION=	10
 CATEGORIES=	inputmethod editors
 
 EMACS_MODULES=	base leim
@@ -30,3 +30,4 @@ do-install:
 		${DESTDIR}${EMACS_LISPPREFIX}
 
 .include "../../inputmethod/mozc-server/Makefile.common"
+.include "../../mk/bsd.pkg.mk"

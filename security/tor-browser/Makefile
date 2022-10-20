@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.102 2022/01/26 12:00:18 wiz Exp $
+# $NetBSD: Makefile,v 1.111 2022/09/27 20:58:27 wiz Exp $
 #
 # How to update this package:
 #
@@ -17,7 +17,7 @@
 
 DISTNAME=	src-firefox-tor-browser-78.15.0esr-10.5-1-build3
 PKGNAME=	tor-browser-10.5.10
-PKGREVISION=	1
+PKGREVISION=	8
 CATEGORIES=	security www
 MASTER_SITES=	https://dist.torproject.org/torbrowser/${PKGVERSION_NOREV}/
 EXTRACT_SUFX=	.tar.xz
@@ -25,7 +25,7 @@ DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
 DISTFILES+=	tor-browser-linux64-${PKGVERSION_NOREV}_en-US${EXTRACT_SUFX}
 #DISTFILES+=	src-tor-launcher-0.2.30${EXTRACT_SUFX}
 
-MAINTAINER=	wiz@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.torproject.org/projects/torbrowser.html.en
 COMMENT=	Tor Browser based on Firefox
 LICENSE=	mpl-1.1
@@ -81,7 +81,7 @@ SUBST_FILES.fonts+=	tor-browser_en-US/Browser/TorBrowser/Data/fontconfig/fonts.c
 SUBST_SED.fonts+=	-e 's,<dir>fonts</dir>,<dir>${PREFIX}/lib/tor-browser/browser/fonts</dir>,'
 SUBST_MESSAGE.fonts=	Fixing path to bundled fonts directory.
 
-.include "../../www/firefox78/mozilla-common.mk"
+.include "../../mail/thunderbird/mozilla-common.mk"
 .include "options.mk"
 
 CHECK_INTERPRETER_SKIP+=	lib/firefox-sdk/sdk/bin/header.py

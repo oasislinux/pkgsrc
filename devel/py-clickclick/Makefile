@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2022/02/01 10:21:16 wiz Exp $
+# $NetBSD: Makefile,v 1.10 2022/02/26 13:44:07 wiz Exp $
 
 DISTNAME=	clickclick-20.10.2
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_PYPI:=c/clickclick/}
 
@@ -20,7 +21,7 @@ BUILD_DEPENDS+=	${PYPKGPREFIX}-six-[0-9]*:../../lang/py-six
 
 USE_LANGUAGES=		# none
 
-PYTHON_VERSIONS_INCOMPATIBLE=	27
+PYTHON_VERSIONS_INCOMPATIBLE=	27 37
 
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.32 2021/12/06 12:48:15 schmonz Exp $
+# $NetBSD: Makefile,v 1.35 2022/10/02 23:51:05 schmonz Exp $
 
-DISTNAME=		App-Sqitch-v1.2.1
+DISTNAME=		App-Sqitch-v1.3.1
 PKGNAME=		p5-${DISTNAME:S/-v/-/}
 CATEGORIES=		databases perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=App/}
@@ -39,16 +39,18 @@ DEPENDS+=		p5-Try-Tiny-[0-9]*:../../devel/p5-Try-Tiny
 DEPENDS+=		p5-Type-Tiny-[0-9]*:../../devel/p5-Type-Tiny
 DEPENDS+=		p5-Type-Tiny-XS>=0.010:../../devel/p5-Type-Tiny-XS
 DEPENDS+=		p5-URI-[0-9]*:../../www/p5-URI
-DEPENDS+=		p5-URI-db>=0.19:../../www/p5-URI-db
+DEPENDS+=		p5-URI-db>=0.20:../../www/p5-URI-db
 DEPENDS+=		p5-namespace-autoclean>=0.16:../../devel/p5-namespace-autoclean
 
 # XXX TEST_TARGET
+# p5-DBD-Mem not yet in pkgsrc
 BUILD_DEPENDS+=		p5-Capture-Tiny>=0.12:../../devel/p5-Capture-Tiny
 BUILD_DEPENDS+=		p5-DBD-SQLite-[0-9]*:../../databases/p5-DBD-SQLite
 BUILD_DEPENDS+=		p5-Module-Runtime-[0-9]*:../../devel/p5-Module-Runtime
 BUILD_DEPENDS+=		p5-Test-Deep-[0-9]*:../../devel/p5-Test-Deep
 BUILD_DEPENDS+=		p5-Test-Dir-[0-9]*:../../devel/p5-Test-Dir
 BUILD_DEPENDS+=		p5-Test-Exception-[0-9]*:../../devel/p5-Test-Exception
+BUILD_DEPENDS+=		p5-Test-Exit-[0-9]*:../../devel/p5-Test-Exit
 BUILD_DEPENDS+=		p5-Test-File-[0-9]*:../../devel/p5-Test-File
 BUILD_DEPENDS+=		p5-Test-File-Contents>=0.20:../../devel/p5-Test-File-Contents
 BUILD_DEPENDS+=		p5-Test-MockModule>=0.17:../../devel/p5-Test-MockModule

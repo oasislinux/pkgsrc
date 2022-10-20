@@ -1,16 +1,8 @@
-# $NetBSD: ocaml.mk,v 1.29 2021/10/03 07:06:42 nia Exp $
+# $NetBSD: ocaml.mk,v 1.35 2022/05/25 17:18:13 wiz Exp $
 #
 # This Makefile fragment handles the common variables used by OCaml packages.
+# It should be included by every package that uses OCaml.
 #
-# Build def variables:
-# OCAML_USE_OPT_COMPILER 
-# if set to yes, will enable optimised (native code) compilation
-# default value: depends on architecture
-#
-# PLIST variable:
-# PLIST.ocaml-opt for files only installed when using the optimised compiler
-# Set based on OCAML_USE_OPT_COMPILER
-# 
 # Package-settable variables:
 # OCAML_USE_FINDLIB
 # package uses findlib infrastructure
@@ -26,8 +18,6 @@
 # package uses OPAM installer [implies OCAML_USE_FINDLIB]
 # OCAML_USE_TOPKG
 # package uses topkg [implies OCAML_USE_FINDLIB]
-# OCAML_USE_JBUILDER
-# package uses jbuilder [implies OCAML_USE_OPAM]
 # OCAML_USE_DUNE
 # package uses dune [implies OCAML_USE_OPAM]
 # OCAML_TOPKG_DOCDIR
@@ -45,10 +35,9 @@ OCAML_MK= # defined
 MKPIE_SUPPORTED=	no
 
 .include "../../mk/bsd.fast.prefs.mk"
+.include "../../lang/ocaml/native.mk"
 
-BUILD_DEFS+=	OCAML_USE_OPT_COMPILER
 
-_VARGROUPS+=	ocaml
 _PKG_VARS.ocaml=	\
 	OCAML_USE_FINDLIB \
 	OCAML_FINDLIB_DIRS \
@@ -63,10 +52,6 @@ _PKG_VARS.ocaml=	\
 	OCAML_TOPKG_FLAGS \
 	OCAML_TOPKG_TARGETS \
 	OCAML_TOPKG_OPTIONAL_TARGETS \
-	OCAML_USE_JBUILDER \
-	JBUILDER_BUILD_FLAGS \
-	JBUILDER_BUILD_PACKAGES \
-	JBUILDER_BUILD_TARGETS \
 	OCAML_USE_DUNE \
 	DUNE_BUILD_FLAGS \
 	DUNE_BUILD_PACKAGES \
@@ -74,8 +59,6 @@ _PKG_VARS.ocaml=	\
 	OCAML_BUILD_ARGS \
 	OPAM_INSTALL_DIR \
 	OPAM_INSTALL_FILES
-_DEF_VARS.ocaml=	\
-	OCAML_USE_OPT_COMPILER
 _SYS_VARS.ocaml=	\
 	OCAML_SITELIBDIR
 
@@ -91,9 +74,6 @@ OCAML_USE_OASIS_DYNRUN?=	no
 # Default value of OCAML_USE_TOPKG
 OCAML_USE_TOPKG?=	no
 
-# Default value of OCAML_USE_JBUILDER
-OCAML_USE_JBUILDER?=	no
-
 # Default value of OCAML_USE_DUNE
 OCAML_USE_DUNE?=	no
 
@@ -105,24 +85,12 @@ OCAML_TOPKG_OPTIONAL_TARGETS?=	# empty
 OCAML_TOPKG_NATIVE_TARGETS?=	# empty
 
 OPAM_INSTALL_FILES?=	${OCAML_TOPKG_NAME}
-JBUILDER_BUILD_FLAGS?=	# empty
-JBUILDER_BUILD_TARGETS?=	@install
-JBUILDER_BUILD_PACKAGES?=	# empty
 DUNE_BUILD_FLAGS?=	# empty
 DUNE_BUILD_TARGETS?=	@install
 DUNE_BUILD_PACKAGES?=	# empty
 
 # Default value of OASIS_BUILD_ARGS
 OASIS_BUILD_ARGS?=	# empty
-
-# Default value of OCAML_USE_OPT_COMPILER
-.if (${MACHINE_ARCH} == "i386") || (${MACHINE_ARCH} == "powerpc") || \
-    !empty(MACHINE_ARCH:M*arm*) || (${MACHINE_ARCH} == "aarch64") || \
-    (${MACHINE_ARCH} == "x86_64")
-OCAML_USE_OPT_COMPILER?=	yes
-.else
-OCAML_USE_OPT_COMPILER?=	no
-.endif
 
 #
 # Configure stuff for OASIS_DYNRUN
@@ -148,11 +116,8 @@ CONFIGURE_ARGS+=	--override is_native false
 .endif
 .endif
 
-# Configure stuff for JBUILDER/DUNE
-.if ${OCAML_USE_JBUILDER} == "yes"
-.include "../../devel/ocaml-jbuilder/buildlink3.mk"
-OCAML_USE_OPAM?=	yes
-.elif ${OCAML_USE_DUNE} == "yes"
+# Configure stuff for DUNE
+.if ${OCAML_USE_DUNE} == "yes"
 .include "../../devel/ocaml-dune/buildlink3.mk"
 OCAML_USE_OPAM?=	yes
 OPAM_INSTALL_DIR?=	_build/default
@@ -181,6 +146,8 @@ OCAML_SITELIBDIR=	lib/ocaml/site-lib
 MAKE_ENV+=	OCAML_SITELIBDIR="${OCAML_SITELIBDIR}"
 PLIST_SUBST+=	OCAML_SITELIB="${OCAML_SITELIBDIR}"
 
+PRINT_PLIST_AWK+=	{ gsub(/^.+\.cmx/, "$${PLIST.ocaml-opt}&") }
+PRINT_PLIST_AWK+=	{ gsub(/^.+\.a$$/, "$${PLIST.ocaml-opt}&") }
 PRINT_PLIST_AWK+=	{ gsub(/${OCAML_SITELIBDIR:S|/|\\/|g}/, \
 			"$${OCAML_SITELIB}"); \
 			print; next; }
@@ -195,18 +162,6 @@ OCAML_FINDLIB_REGISTER?=	yes
 #
 # Compiler stuff
 #
-
-# Things that get installed with the opt compiler
-PLIST_VARS+=	ocaml-opt
-
-.if ${OCAML_USE_OPT_COMPILER} == "yes"
-# The opt compiler needs the C compiler suite
-USE_LANGUAGES+=	c
-PLIST.ocaml-opt=	yes
-.else
-# If we're bytecode compiling, don't strip executables
-INSTALL_UNSTRIPPED=	yes
-.endif
 
 #
 # OASIS targets
@@ -253,7 +208,7 @@ do-build:
 #
 # opam targets
 #
-.if ${OCAML_USE_OPAM} == "yes" 
+.if ${OCAML_USE_OPAM} == "yes"
 
 do-install:
 	${RUN} for i in ${OPAM_INSTALL_FILES}; do \
@@ -263,6 +218,7 @@ do-install:
 		-destdir ${DESTDIR} \
 		-prefix ${PREFIX} \
 		-libdir ${PREFIX}/${OCAML_SITELIBDIR} \
+		-mandir ${PREFIX}/${PKGMANDIR} \
 		-docdir ${OCAML_TOPKG_DOCDIR}/$$i \
 		-stublibsdir ${PREFIX}/${OCAML_SITELIBDIR}/stublibs \
 		-bindir ${PREFIX}/bin \
@@ -270,25 +226,6 @@ do-install:
 	done
 
 .endif # opam
-
-#
-# jbuilder targets
-#
-.if ${OCAML_USE_JBUILDER} == "yes"
-
-do-build:
-.if !empty(JBUILDER_BUILD_PACKAGES)
-	${RUN} ${_ULIMIT_CMD} \
-		cd ${WRKSRC} && jbuilder build -j ${MAKE_JOBS:U1} \
-		${JBUILDER_BUILD_FLAGS} -p ${JBUILDER_BUILD_PACKAGES:ts,} \
-		${JBUILDER_BUILD_TARGETS}
-.else
-	${RUN} ${_ULIMIT_CMD} \
-		cd ${WRKSRC} && jbuilder build -j ${MAKE_JOBS:U1} \
-		${JBUILDER_BUILD_FLAGS} ${JBUILDER_BUILD_TARGETS}
-.endif
-
-.endif # jbuilder
 
 #
 # dune targets

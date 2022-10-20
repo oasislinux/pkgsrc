@@ -1,14 +1,13 @@
-# $NetBSD: Makefile,v 1.8 2022/02/08 20:45:00 adam Exp $
+# $NetBSD: Makefile,v 1.17 2022/10/12 19:16:43 adam Exp $
 
-DISTNAME=	rust-analyzer-2022-02-07
+DISTNAME=	rust-analyzer-2022-10-10
 PKGNAME=	${DISTNAME:C/-2([0-9]*)-([0-9]*)-([0-9]*)/-0.0.2\1.\2.\3/}
 CATEGORIES=	lang
-MASTER_SITES=	${MASTER_SITE_GITHUB:=rust-analyzer/}
-GITHUB_PROJECT=	rust-analyzer
+MASTER_SITES=	${MASTER_SITE_GITHUB:=rust-lang/}
 GITHUB_TAG=	${DISTNAME:S/rust-analyzer-//}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	https://github.com/rust-analyzer/rust-analyzer/
+HOMEPAGE=	https://github.com/rust-lang/rust-analyzer
 COMMENT=	Rust compiler front-end for IDEs
 LICENSE=	apache-2.0
 

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.101 2021/07/25 15:06:25 js Exp $
+# $NetBSD: Makefile,v 1.104 2022/10/17 13:25:31 js Exp $
 #
 
 COMMENT=	Cross-platform development utilities
@@ -37,6 +37,7 @@ SUBDIR+=	gcc-mips-current
 SUBDIR+=	h8300-elf-binutils
 SUBDIR+=	h8300-elf-gcc
 SUBDIR+=	icdprog
+SUBDIR+=	lwtools
 SUBDIR+=	mingw
 SUBDIR+=	mingw-binutils
 SUBDIR+=	mingw-gcc
@@ -69,13 +70,18 @@ SUBDIR+=	pdp11-aout-gcc
 SUBDIR+=	powerpc-none-elf-binutils
 SUBDIR+=	powerpc-none-elf-gcc
 SUBDIR+=	ppc-morphos-binutils
-SUBDIR+=	ppc-morphos-gcc-10
 SUBDIR+=	ppc-morphos-gcc-9
+SUBDIR+=	ppc-morphos-gcc-10
+SUBDIR+=	ppc-morphos-gcc-11
 SUBDIR+=	ppc-morphos-sdk
 SUBDIR+=	stlink
 SUBDIR+=	uisp
 SUBDIR+=	xtensa-esp32-elf-binutils
 SUBDIR+=	xtensa-esp32-elf-gcc
+SUBDIR+=	xtensa-esp32s2-elf-binutils
+SUBDIR+=	xtensa-esp32s2-elf-gcc
+SUBDIR+=	xtensa-esp32s3-elf-binutils
+SUBDIR+=	xtensa-esp32s3-elf-gcc
 SUBDIR+=	xtensa-lx106-elf-binutils
 SUBDIR+=	xtensa-lx106-elf-gcc
 

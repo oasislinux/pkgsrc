@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.65 2021/12/08 16:01:51 adam Exp $
+# $NetBSD: Makefile,v 1.68 2022/07/22 17:07:11 micha Exp $
 
-DISTNAME=	dconf-0.36.0
-PKGREVISION=	7
+DISTNAME=	dconf-0.40.0
+PKGREVISION=	2
 CATEGORIES=	devel gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/dconf/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.xz

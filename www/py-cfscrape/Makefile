@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.15 2022/01/04 20:55:17 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2022/07/13 11:41:06 jperkin Exp $
 
-DISTNAME=	cfscrape-2.0.8
+DISTNAME=	cfscrape-2.1.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	www net python
 MASTER_SITES=	${MASTER_SITE_PYPI:=c/cfscrape/}
 
@@ -11,8 +10,10 @@ HOMEPAGE=	https://github.com/Anorov/cloudflare-scrape
 COMMENT=	Python module for dealing with Cloudfare protection
 LICENSE=	mit
 
-DEPENDS+=	nodejs-[0-9]*:../../lang/nodejs
 DEPENDS+=	${PYPKGPREFIX}-requests>=2.6.1:../../devel/py-requests
+DEPENDS+=	nodejs-[0-9]*:../../lang/nodejs
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 USE_LANGUAGES=	# none
 

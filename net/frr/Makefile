@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.9 2021/09/08 11:12:37 kardel Exp $
+# $NetBSD: Makefile,v 1.12 2022/06/30 11:18:41 nia Exp $
 
 GITHUB_PROJECT=	frr
-VERSION=	8.0.1
+VERSION=	8.2.2
 GITHUB_TAG=	frr-${VERSION}
 DISTNAME=	frr-${VERSION}
+PKGREVISION=	2
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_GITHUB:=FRRouting/}
 
@@ -53,7 +54,7 @@ RCD_SCRIPT_SRC.${f}=	${WRKSRC}/pkgsrc/${f}.sh
 USE_TOOLS+=	bash:run
 REPLACE_BASH=	tools/frr.in tools/*.sh.in
 
-REPLACE_PYTHON=	tools/generate_support_bundle.py tools/frr-reload.py
+REPLACE_PYTHON=	tools/generate_support_bundle.py tools/frr-reload.py tools/frr_babeltrace.py
 
 MESSAGE_SUBST+=		FRR_USER=${FRR_USER}
 MESSAGE_SUBST+=		FRR_VTY_GROUP=${FRR_VTY_GROUP}
@@ -90,7 +91,7 @@ CONFIGURE_ARGS+=	--enable-fpm
 CONFIGURE_ARGS+=	--with-pkg-git-version
 CONFIGURE_ARGS+=	--with-pkg-extra-version=/${DISTNAME}
 # CONFIGURE_ARGS+=	--enable-address-sanitizer
-
+CONFIGURE_ARGS+=	--enable-dev-build
 pre-configure:
 	cd ${WRKSRC} && ${SH} bootstrap.sh
 

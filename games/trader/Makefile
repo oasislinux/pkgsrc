@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.1 2021/05/04 08:19:42 fcambus Exp $
+# $NetBSD: Makefile,v 1.3 2022/09/27 20:32:56 fcambus Exp $
 
-DISTNAME=	trader-7.16
+DISTNAME=	trader-7.18
 CATEGORIES=	games
 MASTER_SITES=	https://ftp.zap.org.au/pub/trader/unix/
 
-MAINTAINER=	fcambus@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.zap.org.au/projects/trader/
 COMMENT=	Simple text-based game of interstellar trading
 LICENSE=	gnu-gpl-v3

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.15 2021/12/01 13:01:13 nia Exp $
+# $NetBSD: Makefile,v 1.17 2022/04/20 20:45:39 wiz Exp $
 
-DISTNAME=		libXfixes-5.0.3
-PKGREVISION=		1
+DISTNAME=		libXfixes-6.0.0
 CATEGORIES=		x11 devel
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
 EXTRACT_SUFX=		.tar.bz2
@@ -19,7 +18,7 @@ USE_TOOLS+=		pkg-config
 CONFIGURE_ENV+=		LIB_MAN_SUFFIX=3
 PKGCONFIG_OVERRIDE+=	xfixes.pc.in
 
-X11_BUILTIN_NAME?=		libXfixes
+X11_LIB_NAME?=		libXfixes
 .include "../../meta-pkgs/modular-xorg/avoid-duplicate.mk"
 .include "../../x11/xorgproto/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libX11+=		libX11>=1.6

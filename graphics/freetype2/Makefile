@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.122 2022/01/04 13:16:17 ryoon Exp $
+# $NetBSD: Makefile,v 1.126 2022/09/26 20:28:58 ryoon Exp $
 
-DISTNAME=	freetype-2.11.1
+DISTNAME=	freetype-2.12.1
 PKGNAME=	${DISTNAME:S/-/2-/}
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=freetype/}
@@ -55,8 +55,5 @@ post-configure:
 .endif
 
 .include "../../archivers/bzip2/buildlink3.mk"
-# Avoid creating a fake zlib.pc, because if it does
-# we will add a Requires for it to our .pc file
-CHECK_BUILTIN.zlib:=yes
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

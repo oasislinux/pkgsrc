@@ -1,7 +1,7 @@
-$NetBSD: distinfo,v 1.50 2022/01/11 13:02:37 nia Exp $
+$NetBSD: distinfo,v 1.53 2022/08/24 13:09:34 ryoon Exp $
 
-BLAKE2s (SDL2-2.0.20.tar.gz) = 80e06048a920cfb5b04c0a6384d013425d688bb6038ea570a9b380d870c982ef
-SHA512 (SDL2-2.0.20.tar.gz) = 4889949eaa674948bdb0a01bb2a842a0943b15b08ff27ec0079b0fd4f79d071ffb32488a5a51c12ad7c74ed5fe73b608cdf6336a44c95dae8a0fb3f47d0f01de
-Size (SDL2-2.0.20.tar.gz) = 7207221 bytes
-SHA1 (patch-src_video_wayland_SDL__waylandmessagebox.c) = 676972b1b489d8c6138866ace28867a77efb7e56
-SHA1 (patch-src_video_wayland_SDL__waylandsym.h) = edb246ed5db2e6bdbc5681a631b08423647fb2d7
+BLAKE2s (SDL2-2.24.0.tar.gz) = 87aa504e5485612a5c5adedd1115ced216710258ec62122cd5f3c7539f50724d
+SHA512 (SDL2-2.24.0.tar.gz) = 5735bfc7b22f1780f80cc89f62a14ca809fe1280298d172f92dde74400db1f5378f8d3eae8834e886d3ca4f5ae6f1074d66c5c956613cf9e0cce961738514212
+Size (SDL2-2.24.0.tar.gz) = 7520541 bytes
+SHA1 (patch-configure) = 0eb358082bf3b61ee53c9887a6616b5f008ba8cc
+SHA1 (patch-configure.ac) = 8681cc974c43353713c59dff85ae912910c88ae5

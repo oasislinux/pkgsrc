@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.36 2022/01/19 14:04:45 pin Exp $
+# $NetBSD: Makefile,v 1.47 2022/10/16 07:27:22 pin Exp $
 
-DISTNAME=	ncspot-0.9.5
+DISTNAME=	ncspot-0.11.2
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_GITHUB:=hrkfdn/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
@@ -27,7 +27,8 @@ CARGO_NO_DEFAULT_FEATURES=	YES
 .include "options.mk"
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/target/release/ncspot ${DESTDIR}${PREFIX}/bin
+	${INSTALL_PROGRAM} ${WRKSRC}/target/release/ncspot \
+		${DESTDIR}${PREFIX}/bin
 
 .include "../../lang/python/tool.mk"
 .include "../../lang/rust/cargo.mk"

@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.651 2022/01/12 21:26:58 wiz Exp $
+# $NetBSD: Makefile,v 1.660 2022/10/02 13:41:54 nros Exp $
 #
 
 COMMENT=	Audio tools, players, and libraries
 
 SUBDIR+=	SDL2_mixer
+SUBDIR+=	SDL2_sound
 SUBDIR+=	SDL_mixer
 SUBDIR+=	SDL_sound
 SUBDIR+=	abcde
@@ -38,7 +39,6 @@ SUBDIR+=	blop
 SUBDIR+=	bml
 SUBDIR+=	bmp
 SUBDIR+=	bmp-crossfade
-SUBDIR+=	bmp-flac
 SUBDIR+=	bmp-mac
 SUBDIR+=	bmp-musepack
 SUBDIR+=	bmp-pulse
@@ -67,6 +67,7 @@ SUBDIR+=	cutmp3
 SUBDIR+=	cutoggvorbis
 SUBDIR+=	dap
 SUBDIR+=	darkice
+SUBDIR+=	davis
 SUBDIR+=	deforaos-mixer
 SUBDIR+=	din
 SUBDIR+=	disc-cover
@@ -191,6 +192,7 @@ SUBDIR+=	gst-plugins1-mpg123
 SUBDIR+=	gst-plugins1-musepack
 SUBDIR+=	gst-plugins1-opus
 SUBDIR+=	gst-plugins1-oss
+SUBDIR+=	gst-plugins1-osxaudio
 SUBDIR+=	gst-plugins1-pulse
 SUBDIR+=	gst-plugins1-sid
 SUBDIR+=	gst-plugins1-sndfile
@@ -315,7 +317,6 @@ SUBDIR+=	mixxx
 SUBDIR+=	mkcdtoc
 SUBDIR+=	moc
 SUBDIR+=	moodbar
-SUBDIR+=	moss
 SUBDIR+=	mp32ogg
 SUBDIR+=	mp3_check
 SUBDIR+=	mp3asm
@@ -417,11 +418,8 @@ SUBDIR+=	py-mpd
 SUBDIR+=	py-mpd2
 SUBDIR+=	py-music21
 SUBDIR+=	py-musicbrainz-ngs
-SUBDIR+=	py-musique
 SUBDIR+=	py-mutagen
-SUBDIR+=	py-ogg
 SUBDIR+=	py-soundfile
-SUBDIR+=	py-vorbis
 SUBDIR+=	qjackctl
 SUBDIR+=	qmmp
 SUBDIR+=	qsynth
@@ -438,11 +436,13 @@ SUBDIR+=	ruby-mp3info
 SUBDIR+=	ruby-taglib
 SUBDIR+=	schismtracker
 SUBDIR+=	sfxr
+SUBDIR+=	shairport-sync
 SUBDIR+=	shine
 SUBDIR+=	shntool
 SUBDIR+=	shorten
 SUBDIR+=	sidplay
 SUBDIR+=	sidplay2
+SUBDIR+=	snapcast
 SUBDIR+=	snd
 SUBDIR+=	sndfile-tools
 SUBDIR+=	solfege
@@ -514,7 +514,6 @@ SUBDIR+=	xmmix
 SUBDIR+=	xmms
 SUBDIR+=	xmms-cdread
 SUBDIR+=	xmms-crossfade
-SUBDIR+=	xmms-flac
 SUBDIR+=	xmms-mac
 SUBDIR+=	xmms-mad
 SUBDIR+=	xmms-meta-input
@@ -529,6 +528,7 @@ SUBDIR+=	xmradio
 SUBDIR+=	xwave
 SUBDIR+=	ykchorus
 SUBDIR+=	ympd
+SUBDIR+=	zam-plugins
 SUBDIR+=	zynaddsubfx
 
 .include "../mk/misc/category.mk"

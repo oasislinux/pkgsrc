@@ -1,14 +1,12 @@
-# $NetBSD: Makefile,v 1.42 2021/12/08 16:04:22 adam Exp $
-#
+# $NetBSD: Makefile,v 1.45 2022/06/28 11:33:53 wiz Exp $
 
-VERSION=	5.3
-DISTNAME=	fntsample-${VERSION}
-PKGREVISION=	6
+DISTNAME=	fntsample-5.4
+PKGREVISION=	2
 CATEGORIES=	fonts
 MASTER_SITES=	${MASTER_SITE_GITHUB:=eugmes/}
-GITHUB_TAG=	release/${VERSION}
+GITHUB_TAG=	release/${PKGVERSION_NOREV}
 
-BLOCKS_TXT=		Blocks-20190308.txt
+BLOCKS_TXT=		Blocks-20220122.txt
 DISTFILES=		${DEFAULT_DISTFILES} ${BLOCKS_TXT}
 SITES.${BLOCKS_TXT}=	-http://unicode.org/Public/UNIDATA/Blocks.txt
 
@@ -22,7 +20,7 @@ USE_CMAKE=	yes
 
 WRKSRC=		${WRKDIR}/${DISTNAME:S/-/-release-/}
 
-REPLACE_PERL=	pdfoutline.pl
+REPLACE_PERL=	scripts/pdfoutline.pl scripts/pdf-extract-outline.pl
 
 CMAKE_ARGS+=	-DUNICODE_BLOCKS=${WRKDIR}/${BLOCKS_TXT}
 

@@ -1,4 +1,4 @@
-# $NetBSD: cmake.mk,v 1.22 2021/10/20 23:42:13 gdt Exp $
+# $NetBSD: cmake.mk,v 1.24 2022/08/12 08:26:01 adam Exp $
 #
 # This file handles packages that use CMake as their primary build
 # system. For more information about CMake, see http://www.cmake.org/.
@@ -42,6 +42,10 @@
 #       Destination directory to install shlibs, used by
 #       install_name_tool(1) on macOS. The default is ${PREFIX}/lib.
 #
+
+.if !empty(USE_LANGUAGES) && ${INSTALL_UNSTRIPPED:Uno:tl} != yes
+INSTALL_TARGET?=	install/strip
+.endif
 
 CMAKE_USE_GNU_INSTALL_DIRS?=	yes
 

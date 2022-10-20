@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.36 2021/05/24 19:55:04 wiz Exp $
+# $NetBSD: Makefile,v 1.38 2022/06/28 11:36:55 wiz Exp $
 
-DISTNAME=	DateTime-Format-Natural-1.12
+DISTNAME=	DateTime-Format-Natural-1.13
 PKGNAME=	p5-${DISTNAME}
 PKGREVISION=	1
 CATEGORIES=	time perl5

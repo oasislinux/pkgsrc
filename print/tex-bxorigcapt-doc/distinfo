@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.3 2021/10/26 11:12:45 nia Exp $
+$NetBSD: distinfo,v 1.5 2022/04/19 04:29:08 markd Exp $
 
-BLAKE2s (bxorigcapt.doc.r48606.tar.xz) = 2cac2608d1745ddf54f3a0687fbf11b9203058506a1097ff387d208c66937433
-SHA512 (bxorigcapt.doc.r48606.tar.xz) = 0ec8b913862e51f89f661de3f628bb51a306d09d04adce4ff46183d8bb24c351f73c877b08b699f704661ae2c31131b7a959ad863a3a6613235318f8825136a2
-Size (bxorigcapt.doc.r48606.tar.xz) = 2112 bytes
+BLAKE2s (bxorigcapt.doc.r63058.tar.xz) = 24407b38c13b6f8a9b9c73fcd2bcd0a5caa423130dd0929a95ef1594634bc6c6
+SHA512 (bxorigcapt.doc.r63058.tar.xz) = 29363fce42bf583f2de272fd70d4d13d20da8dd08e7dc3deb2ef715fd3d2d3a60da9e86f64293cdb935f2d4ef784991d745c5ccd0455bcd915b0081fb96cfa3d
+Size (bxorigcapt.doc.r63058.tar.xz) = 254528 bytes

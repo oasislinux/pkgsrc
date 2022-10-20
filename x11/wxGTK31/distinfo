@@ -1,7 +1,8 @@
-$NetBSD: distinfo,v 1.3 2021/10/26 11:34:32 nia Exp $
+$NetBSD: distinfo,v 1.5 2022/06/07 18:48:34 adam Exp $
 
-BLAKE2s (wxWidgets-3.1.4.tar.bz2) = 5940ae166dbd917a950d332524ff505047482ea9345074b8a73c6ab2dcdd4bab
-SHA512 (wxWidgets-3.1.4.tar.bz2) = aabb257fa222eb819f1e16086977b0ecfd3eb3406d695e0e642ffdb8b4dc586a9721404916be4756a2d92a1a8dc41b661b54717a64e03850a8a92d32d45ece14
-Size (wxWidgets-3.1.4.tar.bz2) = 21581661 bytes
-SHA1 (patch-configure) = 0c287f8d0f24c62bbb0efae300043dd83a156fce
-SHA1 (patch-configure.in) = 9f01c9d0478ffbd399f5765de9cc1d4115085201
+BLAKE2s (wxWidgets-3.1.7.tar.bz2) = 02b93b7ffa856eb6bd5a57a81aff268085556f44445d6de4c5c9e9d8c72591a1
+SHA512 (wxWidgets-3.1.7.tar.bz2) = 1e81ac2ac9f762fb2820521b858ee5e8431003fa5a2ca5dab6b13fa60937aef2396cd9ddb6cb003d13c97183cb938185090adbe2fa76bed75cf4e4ade396fd6c
+Size (wxWidgets-3.1.7.tar.bz2) = 25380640 bytes
+SHA1 (patch-configure) = f8afa1926f3dc302272d83d026ae1dd15b586eae
+SHA1 (patch-configure.in) = 5c099baf9e14896514110467e40792dbc91338b6
+SHA1 (patch-src_unix_uilocale.cpp) = 48668890bcc90f77fdbb62ad50a15fc387275f6a

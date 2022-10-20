@@ -1,0 +1,31 @@
+$NetBSD: patch-configure,v 1.1 2022/03/27 15:08:48 nia Exp $
+
+Honor CFLAGS/LDFLAGS from environment.
+
+--- configure.orig	2004-12-29 19:14:28.000000000 +0000
++++ configure
+@@ -6772,7 +6772,6 @@ fi
+ OS_FLAGS=
+ OPT=
+ LDLIBS=
+-LDFLAGS=
+ case $host_os in
+   aix*)
+     if test -z "$GCC"; then
+@@ -6822,6 +6821,7 @@ case $host_os in
+     if test -n "$GCC"; then
+       OPT="-O2";
+     fi;;
++  netbsd*) ;;
+   next*)
+     OPT="-O2";;
+ 
+@@ -6945,7 +6945,7 @@ else
+ fi
+ 
+ 
+-CFLAGS="-DUNIX \$(OPT) $OS_FLAGS $PROTOFLAG \$(OPTIONS)"
++CFLAGS="$CFLAGS -DUNIX \$(OPT) $OS_FLAGS $PROTOFLAG \$(OPTIONS)"
+ echo "$as_me:$LINENO: result: Compile command is $CC $CFLAGS" >&5
+ echo "${ECHO_T}Compile command is $CC $CFLAGS" >&6
+ echo "$as_me:$LINENO: result: \$(OPT) is $OPT" >&5

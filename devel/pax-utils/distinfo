@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.1 2022/01/11 15:21:04 fcambus Exp $
+$NetBSD: distinfo,v 1.3 2022/07/31 17:10:15 fcambus Exp $
 
-BLAKE2s (pax-utils-1.3.3.tar.gz) = ae54acd4ee2bfcd13bca61fae006338106e120aeb8bcac1eb4a0ceddf395c105
-SHA512 (pax-utils-1.3.3.tar.gz) = 219d9492b0ba17cbaea36b445947e1dbf60ca6ddcf52e289e0baac54a34fd55a6736d9856d47dbf2fe465062b3d98254356e84aed150f6b96987581016be334e
-Size (pax-utils-1.3.3.tar.gz) = 152086 bytes
+BLAKE2s (pax-utils-1.3.5.tar.gz) = f6789d240a50baa335db576c9b95ddfb26988fb447cd34b7eeb5a90b17b63635
+SHA512 (pax-utils-1.3.5.tar.gz) = 33727125e363ad953261418d2cc831742a30a90ef721a14962c9fabf36752101db9cf8c2e7767bfc80922bd7160d8c54992d97cc1719cfbf85ffc1413e867f1b
+Size (pax-utils-1.3.5.tar.gz) = 147062 bytes
 SHA1 (patch-porting.h) = 4967398b589a09f5e0a55dc09d690eebae1a926b

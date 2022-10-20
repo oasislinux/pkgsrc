@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.10 2017/07/30 22:32:21 wiz Exp $
+# $NetBSD: Makefile,v 1.12 2022/10/10 03:36:50 taca Exp $
 
 DISTNAME=	twitter_oauth-0.4.94
 CATEGORIES=	security

@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.22 2021/10/26 11:34:23 nia Exp $
+$NetBSD: distinfo,v 1.26 2022/09/13 17:18:06 adam Exp $
 
-BLAKE2s (qtserialport-everywhere-src-5.15.2.tar.xz) = 7481a8649b9a59be594f6d3bc993db882fd53db064fc397d9f78dba188212f21
-SHA512 (qtserialport-everywhere-src-5.15.2.tar.xz) = 353cc5f708367d646bd312f7d675b417bad4df44356f1dfc8b6ce846a86fd6d5955ec4d26f943e50f4a7b94cc6389fe658959e90bbb5ab3cdaefed0efe6ae72b
-Size (qtserialport-everywhere-src-5.15.2.tar.xz) = 321496 bytes
+BLAKE2s (qtserialport-everywhere-opensource-src-5.15.6.tar.xz) = e0242c987a29bcd4bddd0f83448abe4490369ad8f86d8d98c06524fb95249d93
+SHA512 (qtserialport-everywhere-opensource-src-5.15.6.tar.xz) = 8161b4aba2c7410b878482035b5bc141083953dcaf466361ff3d30b6e397ab78e84f698dcbc14f4218e2c175efcb8c9ee494f75d6099a1215b5be6a378c8a322
+Size (qtserialport-everywhere-opensource-src-5.15.6.tar.xz) = 323288 bytes

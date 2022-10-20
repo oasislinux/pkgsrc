@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.9 2021/06/03 06:41:48 markd Exp $
+# $NetBSD: Makefile,v 1.12 2022/05/22 21:08:07 markd Exp $
 
 DISTNAME=	doclicense
-PKGNAME=	tex-${DISTNAME}-2.3.0
-TEXLIVE_REV=	58350
+PKGNAME=	tex-${DISTNAME}-3.2.0
+TEXLIVE_REV=	63340
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://ctan.org/pkg/doclicense
 COMMENT=	Support for putting documents under a license
-LICENSE=	lppl-1.3c
+LICENSE=	cc0-1.0-universal AND lppl-1.3c
 
 DEPENDS+=	tex-enumitem-[0-9]*:../../print/tex-enumitem
 DEPENDS+=	tex-etoolbox-[0-9]*:../../devel/tex-etoolbox

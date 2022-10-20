@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.2 2022/08/29 10:41:02 wiz Exp $
+
+BLAKE2s (cborg-json-0.2.4.0.tar.gz) = e69c5709ca5c49938375ed99388651176deb1c51ecf9e36ee51cd23cd4886baf
+SHA512 (cborg-json-0.2.4.0.tar.gz) = ba69633dae13eb3242652755f8899d9ec7483aef1fa5c6ecae465df888392351b8815a13d67a61e16f0a24dd784502e67c369b2c18ba63c2901e87e670d030f2
+Size (cborg-json-0.2.4.0.tar.gz) = 4218 bytes
+SHA1 (patch-cborg-json.cabal) = 8d2bb6a7b78e55c57285d291fb76803b46957b6c

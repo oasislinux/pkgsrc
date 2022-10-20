@@ -1,4 +1,4 @@
-# $NetBSD: mozilla-common.mk,v 1.224 2022/01/18 18:48:28 tnn Exp $
+# $NetBSD: mozilla-common.mk,v 1.241 2022/10/12 01:02:39 gutteridge Exp $
 #
 # common Makefile fragment for mozilla packages based on gecko 2.0.
 #
@@ -20,7 +20,7 @@ USE_LANGUAGES+=		c c++
 # ERROR: Only GCC 7.1 or newer is supported (found version 5.5.0).
 GCC_REQD+=		7
 
-TOOL_DEPENDS+=		cbindgen>=0.19.0:../../devel/cbindgen
+TOOL_DEPENDS+=		cbindgen>=0.24.3:../../devel/cbindgen
 
 .if defined(FIREFOX_MAINTAINER) && !defined(MAINTAINER_INTERNAL)
 TOOL_DEPENDS+=		nodejs-[0-9]*:../../lang/nodejs
@@ -35,6 +35,7 @@ TOOL_DEPENDS+=		${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 .if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
 TOOL_DEPENDS+=		nasm>=2.14:../../devel/nasm
 TOOL_DEPENDS+=		yasm>=1.1:../../devel/yasm
+CFLAGS+=		-msse2
 .endif
 
 # This is to work around build failures where an upstream configuration script
@@ -51,7 +52,7 @@ CONFIGURE_ARGS+=	--host=${MACHINE_GNU_PLATFORM}
 CONFIGURE_ENV+=		BINDGEN_CFLAGS="-isystem${PREFIX}/include/nspr \
 			-isystem${X11BASE}/include/pixman-1"
 
-test:
+do-test:
 	cd ${WRKSRC}/${OBJDIR}/dist/bin &&	\
 	     ./run-mozilla.sh ${WRKSRC}/mach check-spidermonkey
 
@@ -88,15 +89,16 @@ CONFIGURE_ARGS+=	--with-system-nss
 CONFIGURE_ARGS+=	--with-system-nspr
 #CONFIGURE_ARGS+=	--with-system-jpeg
 CONFIGURE_ARGS+=	--with-system-zlib
-CONFIGURE_ARGS+=	--with-system-libevent=${BUILDLINK_PREFIX.libevent}
+CONFIGURE_ARGS+=	--with-system-libevent
 CONFIGURE_ARGS+=	--disable-crashreporter
-CONFIGURE_ARGS+=	--disable-necko-wifi
 CONFIGURE_ARGS+=	--enable-chrome-format=omni
 CONFIGURE_ARGS+=	--with-system-webp
 
 #CONFIGURE_ARGS+=	--enable-readline
 CONFIGURE_ARGS+=	--disable-icf
 CONFIGURE_ARGS+=	--disable-updater
+
+CONFIGURE_ARGS+=	--enable-new-pass-manager
 
 .include "../../mk/compiler.mk"
 
@@ -112,6 +114,8 @@ CONFIGURE_ARGS+=	--with-libclang-path=${PREFIX}/lib
 BUILD_DEPENDS+=		lld-[0-9]*:../../devel/lld
 .include "../../lang/wasi-libc/buildlink3.mk"
 .include "../../lang/wasi-libcxx/buildlink3.mk"
+# NB the exact versions of the clang and wasi-compiler-rt dependencies must
+# be kept in sync, or build failures will occur due to path mismatches.
 .include "../../lang/wasi-compiler-rt/buildlink3.mk"
 CONFIGURE_ARGS+=	--with-wasi-sysroot=${PREFIX}/wasi
 CONFIGURE_ENV+=		WASM_CC=${PREFIX}/bin/clang
@@ -141,7 +145,8 @@ SUBST_SED.fix-libpci-soname+=		-e 's,"libpci.so, "lib${PCIUTILS_LIBNAME}.so,'
 
 # Workaround for link of libxul.so as of 96.0.
 # There are too many -ldl under third_paty/libwebrtc.
-BUILDLINK_TRANSFORM.NetBSD+=	rm:-ldl
+.include "../../mk/dlopen.buildlink3.mk"
+BUILDLINK_TRANSFORM+=	opt:-ldl:${BUILDLINK_LDADD.dl:Q}
 
 CONFIG_GUESS_OVERRIDE+=		${MOZILLA_DIR}build/autoconf/config.guess
 CONFIG_GUESS_OVERRIDE+=		${MOZILLA_DIR}js/src/build/autoconf/config.guess
@@ -168,7 +173,7 @@ CONFIGURE_SCRIPT=	${WRKSRC}/configure
 PLIST_VARS+=	ffvpx
 
 .if ${MACHINE_ARCH} == "aarch64" || \
-    !empty(MACHINE_ARCH:M*arm*) || \
+    ${MACHINE_ARCH:M*arm*} || \
     ${MACHINE_ARCH} == "i386" || \
     ${MACHINE_ARCH} == "x86_64"
 PLIST.ffvpx=	yes	# see media/ffvpx/ffvpxcommon.mozbuild
@@ -197,10 +202,10 @@ CONFIGURE_ENV.NetBSD+=	ac_cv_clock_monotonic=
 BUILDLINK_API_DEPENDS.libevent+=	libevent>=1.1
 .include "../../devel/libevent/buildlink3.mk"
 .include "../../devel/libffi/buildlink3.mk"
-BUILDLINK_API_DEPENDS.nspr+=	nspr>=4.32
+BUILDLINK_API_DEPENDS.nspr+=	nspr>=4.34
 .include "../../devel/nspr/buildlink3.mk"
 .include "../../textproc/icu/buildlink3.mk"
-BUILDLINK_API_DEPENDS.nss+=	nss>=3.73
+BUILDLINK_API_DEPENDS.nss+=	nss>=3.82
 .include "../../devel/nss/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 #.include "../../mk/jpeg.buildlink3.mk"
@@ -211,7 +216,7 @@ BUILDLINK_API_DEPENDS.libwebp+=	libwebp>=1.0.2
 .include "../../graphics/libwebp/buildlink3.mk"
 BUILDLINK_DEPMETHOD.clang=	build
 .include "../../lang/clang/buildlink3.mk"
-RUST_REQ=	1.53.0
+RUST_REQ=	1.61.0
 .include "../../lang/rust/rust.mk"
 # webrtc option requires internal libvpx
 #BUILDLINK_API_DEPENDS.libvpx+=	libvpx>=1.3.0
@@ -219,12 +224,11 @@ RUST_REQ=	1.53.0
 .include "../../net/libIDL/buildlink3.mk"
 # textproc/hunspell 1.3 is too old
 #.include "../../textproc/hunspell/buildlink3.mk"
-.include "../../multimedia/ffmpeg4/buildlink3.mk"
+.include "../../multimedia/ffmpeg5/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"
 .include "../../x11/libXtst/buildlink3.mk"
 BUILDLINK_API_DEPENDS.pixman+= pixman>=0.25.2
 .include "../../x11/pixman/buildlink3.mk"
-.include "../../x11/gtk2/buildlink3.mk"
 .include "../../x11/gtk3/buildlink3.mk"
 PLIST_VARS+=		wayland
 .if ${PKG_BUILD_OPTIONS.gtk3:Mwayland}

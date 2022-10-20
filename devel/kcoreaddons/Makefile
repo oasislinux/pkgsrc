@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.52 2021/12/08 16:01:53 adam Exp $
+# $NetBSD: Makefile,v 1.59 2022/09/29 00:36:31 markd Exp $
 
 DISTNAME=	kcoreaddons-${KF5VER}
-PKGREVISION=	4
 CATEGORIES=	devel
 
 HOMEPAGE=	https://community.kde.org/Frameworks
@@ -9,6 +8,9 @@ COMMENT=	Addons to QtCore
 LICENSE=	gnu-lgpl-v2 AND gnu-lgpl-v2.1 AND modified-bsd
 
 .include "../../meta-pkgs/kde/kf5.mk"
+
+CMAKE_ARGS.SunOS+=	-DENABLE_INOTIFY=OFF
+LDFLAGS.SunOS+=		-lsocket
 
 .if ${OPSYS} != "SunOS"
 .include "../../devel/libinotify/buildlink3.mk"

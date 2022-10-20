@@ -1,14 +1,13 @@
-# $NetBSD: Makefile,v 1.67 2021/12/08 16:02:56 adam Exp $
+# $NetBSD: Makefile,v 1.72 2022/10/06 10:50:52 gdt Exp $
 
 GITHUB_PROJECT=	lablgtk
-DISTNAME=	${GITHUB_PROJECT}-2.18.10
+DISTNAME=	${GITHUB_PROJECT}-2.18.13
 PKGNAME=	ocaml-${DISTNAME}
-PKGREVISION=	10
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_GITHUB:=garrigue/}
 
 MAINTAINER=	jaapb@NetBSD.org
-HOMEPAGE=	https://lablgtk.forge.ocamlcore.org/
+HOMEPAGE=	https://github.com/garrigue/lablgtk
 COMMENT=	GTK+ 2.x bindings for Objective Caml
 # for installed files; more restrictions on applications/
 LICENSE=	gnu-lgpl-v2
@@ -44,7 +43,7 @@ PLIST_VARS+=	stubs
 PLIST.stubs=	yes
 .endif
 
-.include "../../mk/ocaml.mk"
+.include "../../lang/ocaml/ocaml.mk"
 
 .include "options.mk"
 

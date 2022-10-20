@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.66 2021/07/19 15:27:00 pin Exp $
+# $NetBSD: Makefile,v 1.68 2022/07/04 08:30:25 pin Exp $
 #
 
 COMMENT=	Shells
@@ -15,10 +15,12 @@ SUBDIR+=	eltclsh
 SUBDIR+=	elvish
 SUBDIR+=	es
 SUBDIR+=	esh
+SUBDIR+=	etsh
 SUBDIR+=	fish
 SUBDIR+=	git-sh
 SUBDIR+=	guile-gash
 SUBDIR+=	heirloom-sh
+SUBDIR+=	ksh93
 SUBDIR+=	lshell
 SUBDIR+=	mksh
 SUBDIR+=	nologinmsg

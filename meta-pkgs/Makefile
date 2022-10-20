@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.118 2022/01/22 19:15:41 bsiegert Exp $
+# $NetBSD: Makefile,v 1.120 2022/09/18 09:39:01 bsiegert Exp $
 #
 
 COMMENT=	Collections of other packages
@@ -9,11 +9,11 @@ SUBDIR+=	bulk-large
 SUBDIR+=	bulk-medium
 SUBDIR+=	bulk-small
 SUBDIR+=	bulk-test-boost
+SUBDIR+=	bulk-test-go
 SUBDIR+=	bulk-test-llvm
 SUBDIR+=	compiz-fusion
 SUBDIR+=	courier
 SUBDIR+=	deforaos-desktop
-SUBDIR+=	fxtv-capture
 SUBDIR+=	gimp-docs
 SUBDIR+=	gnome
 SUBDIR+=	gnuradio

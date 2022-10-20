@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.34 2021/12/08 16:04:13 adam Exp $
+# $NetBSD: Makefile,v 1.42 2022/09/11 12:51:30 wiz Exp $
 
-DISTNAME=	xournalpp-1.1.0
-PKGREVISION=	4
+DISTNAME=	xournalpp-1.1.1
+PKGREVISION=	6
 CATEGORIES=	editors
 MASTER_SITES=	${MASTER_SITE_GITHUB:=xournalpp/}
-GITHUB_PROJECT=	xournalpp
+GITHUB_TAG=	v${PKGVERSION_NOREV}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/xournalpp/xournalpp
@@ -21,6 +21,15 @@ BUILD_TARGET=	translations xournalpp
 # C++17, std::filesystem
 GCC_REQD+=	8
 
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "NetBSD" && ${OPSYS_VERSION} < 099915
+USE_PKGSRC_GCC=		yes
+USE_PKGSRC_GCC_RUNTIME=	yes
+.endif
+
+.include "../../archivers/libarchive/buildlink3.mk"
+
 BUILD_DEPENDS+=	help2man-[0-9]*:../../converters/help2man
 DEPENDS+=	tex-amsfonts-[0-9]*:../../fonts/tex-amsfonts
 DEPENDS+=	tex-amsmath-[0-9]*:../../print/tex-amsmath
@@ -28,9 +37,15 @@ DEPENDS+=	tex-latex-[0-9]*:../../print/tex-latex
 DEPENDS+=	tex-latex-bin-[0-9]*:../../print/tex-latex-bin
 DEPENDS+=	tex-standalone-[0-9]*:../../print/tex-standalone
 
+INSTALLATION_DIRS+=	${PKGMANDIR}/man1
+
+post-install:
+	${MV} ${DESTDIR}${PREFIX}/share/man/man1/* ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1 || ${TRUE}
+
 .include "../../archivers/libzip/buildlink3.mk"
 .include "../../audio/libsndfile/buildlink3.mk"
 .include "../../audio/portaudio/buildlink3.mk"
+.include "../../graphics/adwaita-icon-theme/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../graphics/librsvg/buildlink3.mk"
 .include "../../lang/lua53/buildlink3.mk"

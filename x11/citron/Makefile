@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.10 2022/01/19 10:54:50 pin Exp $
+# $NetBSD: Makefile,v 1.13 2022/08/17 11:28:46 tnn Exp $
 
-DISTNAME=	v0.14.0
-PKGNAME=	citron-${DISTNAME:S,^v,,}
+DISTNAME=	citron-v0.15.0
+PKGNAME=	${DISTNAME:S,-v,-,}
 CATEGORIES=	x11
-MASTER_SITES=	https://git.sr.ht/~grtcdr/citron/archive/
+MASTER_SITES=	-https://git.sr.ht/~grtcdr/citron/archive/v${PKGVERSION_NOREV}.tar.gz
 
 MAINTAINER=	pin@NetBSD.org
 HOMEPAGE=	https://git.sr.ht/~grtcdr/citron/
@@ -11,8 +11,6 @@ COMMENT=	System data via on-demand notifications
 LICENSE=	mit
 
 .include "cargo-depends.mk"
-
-WRKSRC=		${WRKDIR}/citron-${DISTNAME}
 
 USE_TOOLS+=	pkg-config
 

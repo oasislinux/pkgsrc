@@ -1,8 +1,8 @@
-$NetBSD: distinfo,v 1.69 2022/01/31 11:24:04 adam Exp $
+$NetBSD: distinfo,v 1.72 2022/08/01 07:58:05 adam Exp $
 
-BLAKE2s (Cython-0.29.27.tar.gz) = 6983dcfd46bbdca285054c8c0e869be53c800408e04a21418084f9219db1eaa0
-SHA512 (Cython-0.29.27.tar.gz) = ac0e57ee89c4f3c7113799336ab102e8dfe3799c752f46912b6aa9487f1fc294a677c8ad9c7c3ad1d1baa6c0b0d3f6fd0aefbde73c5d3d95cde982dfc0e31dcb
-Size (Cython-0.29.27.tar.gz) = 2081166 bytes
+BLAKE2s (Cython-0.29.32.tar.gz) = 54687befc03a4c60b5563c24d648aad15d56dff1993a68a7fc9371a2e21cc38a
+SHA512 (Cython-0.29.32.tar.gz) = 2c21e4f130e33ab79a8c2c71e4e14a443c59f35b2ca8ae675ca4c7ccff9e9d940e6724e1fd79b4b23dd94c769c1a94734802200dd6320d0ec4ac5748472a9b03
+Size (Cython-0.29.32.tar.gz) = 2088773 bytes
 SHA1 (patch-Cython_Distutils_old__build__ext.py) = 2bc705192923cc2f40f7c173625b056caa08f666
 SHA1 (patch-Demos_embed_Makefile) = 67c4f662a8d79d39cbf8808d2e87d91a26ef28b9
 SHA1 (patch-runtests.py) = 18e970afd950efa2ec5631c0d747ffaee68be2a1

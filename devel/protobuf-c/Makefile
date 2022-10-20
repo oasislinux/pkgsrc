@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.9 2021/11/11 12:02:46 kim Exp $
+# $NetBSD: Makefile,v 1.14 2022/08/18 19:24:09 wiz Exp $
 
-DISTNAME=	protobuf-c-1.3.3
-PKGREVISION=	2
+DISTNAME=	protobuf-c-1.4.1
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GITHUB:=protobuf-c/}
 GITHUB_RELEASE=	v${PKGVERSION_NOREV}
@@ -18,5 +17,9 @@ GNU_CONFIGURE=		yes
 PKGCONFIG_OVERRIDE+=	protobuf-c/libprotobuf-c.pc.in
 TEST_TARGET=		check
 
+pre-configure:
+	${LN} -s ${BUILDLINK_DIR}/include/google ${WRKSRC}/google
+
 .include "../../devel/protobuf/buildlink3.mk"
+.include "../../mk/atomic64.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.29 2021/09/15 11:34:25 nia Exp $
+# $NetBSD: Makefile,v 1.31 2022/09/11 12:51:04 wiz Exp $
 
 DISTNAME=	libsamplerate-0.2.2
+PKGREVISION=	2
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_GITHUB:=libsndfile/}
 GITHUB_RELEASE=	${PKGVERSION_NOREV}

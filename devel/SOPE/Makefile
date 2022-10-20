@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.55 2021/12/08 16:03:52 adam Exp $
+# $NetBSD: Makefile,v 1.57 2022/04/18 19:10:46 adam Exp $
 #
 
 DISTNAME=	SOPE-2.3.23
-PKGREVISION=	12
+PKGREVISION=	13
 CATEGORIES=	devel
 MASTER_SITES=	http://www.sogo.nu/files/downloads/SOGo/Sources/
 
@@ -18,6 +18,9 @@ WRKSRC=		${WRKDIR}/SOPE
 HAS_CONFIGURE=	yes
 
 CONFIGURE_ARGS=	--with-gnustep --enable-debug --disable-strip
+
+# ld: -r and -pie may not be used together
+MKPIE_SUPPORTED=	no
 
 pre-configure:
 	${TEST} -e ${BUILDLINK_DIR}/lib/libmysqlclient.so || \

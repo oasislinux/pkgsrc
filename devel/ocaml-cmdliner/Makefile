@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.21 2021/11/01 19:50:50 wiz Exp $
+# $NetBSD: Makefile,v 1.23 2022/05/24 18:59:23 jaapb Exp $
 
-DISTNAME=	cmdliner-1.0.4
+DISTNAME=	cmdliner-1.1.1
 PKGNAME=	ocaml-${DISTNAME}
 CATEGORIES=	devel
 MASTER_SITES=	http://erratique.ch/software/cmdliner/releases/
@@ -18,7 +18,7 @@ MAKE_FLAGS+=	PREFIX=${PREFIX} LIBDIR=${DESTDIR}${PREFIX}/${OCAML_SITELIBDIR}/cmd
 
 INSTALL_TARGET=	install install-doc
 
-.include "../../mk/ocaml.mk"
+.include "../../lang/ocaml/ocaml.mk"
 
 .include "../../devel/ocamlbuild/buildlink3.mk"
 .include "../../devel/ocaml-result/buildlink3.mk"

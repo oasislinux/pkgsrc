@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.9 2021/12/31 02:26:17 jun Exp $
+# $NetBSD: Makefile,v 1.19 2022/08/27 21:14:31 jun Exp $
 
-DISTNAME=	nono-0.2.5
+DISTNAME=	nono-0.4.3
+#PKGREVISION=	1
 CATEGORIES=	emulators
 MASTER_SITES=	http://www.pastel-flower.jp/~isaki/nono/archive/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.pastel-flower.jp/~isaki/nono/
-COMMENT=	OMRON LUNA-I emulator
-LICENSE=	nono-license
+COMMENT=	OMRON LUNA-I/LUNA-88K (and SHARP X68030) emulator
+LICENSE=	nono-license AND fsharp-license	# nono uses X68030 IPLROM image
 
 # Honor pkgsrc settings. Don't use -Werror.
 MAKE_FLAGS+=	CFLAGS=${CFLAGS:Q}

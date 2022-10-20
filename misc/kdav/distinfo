@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.6 2021/10/26 10:59:08 nia Exp $
+$NetBSD: distinfo,v 1.8 2022/09/29 01:03:16 markd Exp $
 
-BLAKE2s (kdav-5.80.0.tar.xz) = fbbc1e96f426b9a7f135efb32eeeec8de3c6e31fcf428fa4baaf9dedd2e31b59
-SHA512 (kdav-5.80.0.tar.xz) = 9f572d40b8a71e588c6a9773ca5615250e6517477c33594ca8ccc78a177d2fca8eaca6224dfcdc2f972d0205b50093d238d3c6f55ea39a7d823bf797d21a8e80
-Size (kdav-5.80.0.tar.xz) = 59824 bytes
+BLAKE2s (kdav-5.98.0.tar.xz) = 8d877c9fe8acc9c12ba44638db099d1aa5682b4e8d3da6410d6e07af672edfda
+SHA512 (kdav-5.98.0.tar.xz) = cea1666648f300edfc3dad1195bdd5ab16d82b24e8edb56b78cd8faf59097466e6f33620659abd5047d7890a15b397902d09160eae729096db3a18fee03dcf89
+Size (kdav-5.98.0.tar.xz) = 65636 bytes

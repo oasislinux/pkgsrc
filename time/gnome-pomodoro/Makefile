@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.6 2021/12/08 16:06:48 adam Exp $
+# $NetBSD: Makefile,v 1.10 2022/08/11 05:09:20 gutteridge Exp $
 
 DISTNAME=	gnome-pomodoro-0.17.0
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	time
 MASTER_SITES=	${MASTER_SITE_GITHUB:=codito/}
 GITHUB_PROJECT=	gnome-pomodoro
@@ -14,9 +14,6 @@ LICENSE=	gnu-gpl-v3
 
 TOOL_DEPENDS+=		autoconf-archive-[0-9]*:../../devel/autoconf-archive
 BUILD_DEPENDS+=		vala-[0-9]*:../../lang/vala
-
-# Requires --desktop in msgfmt.
-_TOOLS_USE_PKGSRC.msgfmt=	yes
 
 # Broken generated code uses g_return_if_fail when g_return_val_if_fail
 # is necessary
@@ -34,6 +31,7 @@ CONFIGURE_SCRIPT=	autogen.sh
 .include "../../databases/gom/buildlink3.mk"
 .include "../../databases/sqlite3/buildlink3.mk"
 .include "../../devel/appstream-glib/buildlink3.mk"
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
 .include "../../devel/glib2/schemas.mk"
 .include "../../devel/gobject-introspection/buildlink3.mk"
 .include "../../devel/libpeas/buildlink3.mk"

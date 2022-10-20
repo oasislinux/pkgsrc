@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.72 2021/01/30 14:10:12 mef Exp $
+# $NetBSD: Makefile.common,v 1.75 2022/10/06 21:33:55 wiz Exp $
 #
 # used by www/w3m/Makefile
 # used by www/w3m-img/Makefile
@@ -21,11 +21,11 @@ USE_TOOLS+=		gmake	# Needed for some combinations of options...
 USE_TOOLS+=		msgfmt
 USE_PKGLOCALEDIR=	yes
 
-W3M_VERS=	0.5.3+git20210102
+W3M_VERS=	0.5.3+git20220429
 W3M_PKGVERS=	${W3M_VERS:S/+git/.0./}
 
 # For w3mman, xface2xpm, cgi scripts.
-USE_TOOLS+=	perl:run pax
+USE_TOOLS+=	perl:run pax pkg-config
 
 DOCDIR=		share/doc/w3m
 
@@ -34,6 +34,9 @@ _W3M_USE_IMAGE?=	NO
 .include "options.mk"
 
 .include "../../mk/bsd.prefs.mk"
+
+# not supported by gcc 5
+BUILDLINK_TRANSFORM+=	rm:-Wnull-dereference
 
 # Configurable by environment variables at run-time.
 CONFIGURE_ARGS+=	--with-charset=US-ASCII

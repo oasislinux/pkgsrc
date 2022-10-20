@@ -1,12 +1,11 @@
-# $NetBSD: Makefile,v 1.26 2021/03/08 08:12:46 jaapb Exp $
+# $NetBSD: Makefile,v 1.28 2022/05/24 18:59:20 jaapb Exp $
 #
 
-VERSION=	1.07
+VERSION=	1.11
 GITHUB_PROJECT=	camlzip
 GITHUB_TAG=	rel${VERSION:S/.//}
 DISTNAME=	${GITHUB_PROJECT}-${VERSION}
 PKGNAME=	ocaml-zip-${VERSION}
-PKGREVISION=	6
 CATEGORIES=	archivers
 MASTER_SITES=	${MASTER_SITE_GITHUB:=xavierleroy/}
 LICENSE=	gnu-lgpl-v2.1
@@ -20,7 +19,7 @@ INSTALL_TARGET=		install-findlib
 USE_TOOLS+=		gmake
 OCAML_USE_FINDLIB=	yes
 
-.include "../../mk/ocaml.mk"
+.include "../../lang/ocaml/ocaml.mk"
 
 .if ${OCAML_USE_OPT_COMPILER} == "yes"
 BUILD_TARGET+=	allopt

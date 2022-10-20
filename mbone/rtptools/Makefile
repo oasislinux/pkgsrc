@@ -1,21 +1,25 @@
-# $NetBSD: Makefile,v 1.12 2019/10/12 20:14:08 rillig Exp $
+# $NetBSD: Makefile,v 1.14 2022/04/24 12:02:13 tnn Exp $
 #
 
-DISTNAME=		rtptools-1.21
-PKGREVISION=		1
+DISTNAME=		rtptools-1.22
 CATEGORIES=		mbone
-MASTER_SITES=		http://www.cs.columbia.edu/IRT/software/rtptools/download/
+MASTER_SITES=		${MASTER_SITE_GITHUB:=irtlab/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.cs.columbia.edu/IRT/software/rtptools/
+HOMEPAGE=		https://github.com/irtlab/rtptools
 COMMENT=		Tools for processing RTP data
-# LICENSE=		# See COPYRIGHT file, avoid direct commercial advantate
+LICENSE=		modified-bsd
 
 GNU_CONFIGURE=		yes
+USE_TOOLS+=		autoconf automake mandoc
 CPPFLAGS+=		-Dunix
+BUILD_TARGET=		all html
 
 HTMLDIR=	${PREFIX}/share/doc/rtptools
 EGDIR=		${PREFIX}/share/examples/rtptools
+
+pre-configure:
+	cd ${WRKSRC} && autoreconf -i
 
 post-install:
 	${INSTALL_DATA_DIR} ${DESTDIR}${HTMLDIR}

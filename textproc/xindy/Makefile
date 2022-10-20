@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.11 2022/01/21 17:34:34 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2022/06/28 11:36:50 wiz Exp $
 
 .include "../../print/texlive/Makefile.common"
 
 PKGNAME=	xindy-2.5.1
-PKGREVISION=	7
+PKGREVISION=	9
 CATEGORIES=	print
 
 MAINTAINER=	pkgsrc-users@NetBSD.org

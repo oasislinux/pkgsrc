@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.5 2020/12/04 20:45:10 nia Exp $
+# $NetBSD: Makefile,v 1.7 2022/06/30 11:18:15 nia Exp $
 #
 # TODO Import intellij-fsnotifier with inotify support from FreeBSD.
 
 VERSION=	2018.3.5
 DISTNAME=	ideaIU-${VERSION:S/.0.0//}-no-jdk
 PKGNAME=	intellij-ue-bin-${VERSION}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	devel
 MASTER_SITES=	http://download.jetbrains.com/idea/
 
@@ -22,7 +22,7 @@ USE_TOOLS+=	pax sed
 
 REPLACE_PYTHON=	bin/printenv.py \
 		bin/restart.py  \
-		
+
 REPLACE_BASH=	plugins/Kotlin/kotlinc/bin/kotlin	\
 		plugins/Kotlin/kotlinc/bin/kotlin-dce-js\
 		plugins/Kotlin/kotlinc/bin/kotlinc	\

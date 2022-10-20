@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.46 2021/12/08 16:06:28 adam Exp $
+# $NetBSD: Makefile,v 1.48 2022/08/19 22:05:10 abs Exp $
 
 DISTNAME=	desktop-file-utils-0.26
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	sysutils gnome
 MASTER_SITES=	http://freedesktop.org/software/desktop-file-utils/releases/
 EXTRACT_SUFX=	.tar.xz
@@ -15,8 +15,6 @@ LICENSE=	gnu-gpl-v2
 GCC_REQD+=	4.7
 
 USE_TOOLS+=		pkg-config
-
-LDFLAGS.SunOS+=		-lintl
 
 FILES_SUBST+=		APPLICATIONS_PATH="${PREFIX}/share/applications"
 FILES_SUBST+=		UPDATE_DESKTOPDB="${PREFIX}/bin/update-desktop-database"

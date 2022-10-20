@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.9 2021/11/12 16:18:46 nia Exp $
+# $NetBSD: Makefile,v 1.12 2022/06/05 14:18:39 adam Exp $
 
-DISTNAME=	bulk-test-boost-20211112
+DISTNAME=	bulk-test-boost-20220524
 CATEGORIES=	meta-pkgs
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -22,7 +22,7 @@ NO_BIN_ON_FTP=		${RESTRICTED}
 BUILD_DEPENDS+=		abiword-[0-9]*:../../editors/abiword
 BUILD_DEPENDS+=		bitcoin-[0-9]*:../../finance/bitcoin
 BUILD_DEPENDS+=		blender-[0-9]*:../../graphics/blender
-BUILD_DEPENDS+=		botan>=2.11:../../security/botan-devel
+BUILD_DEPENDS+=		botan>=2.11:../../security/botan2
 BUILD_DEPENDS+=		dnsdist-[0-9]*:../../net/dnsdist
 BUILD_DEPENDS+=		emulationstation-[0-9]*:../../emulators/emulationstation
 BUILD_DEPENDS+=		gnucash-[0-9]*:../../finance/gnucash
@@ -41,7 +41,6 @@ BUILD_DEPENDS+=		mongodb-[0-9]*:../../databases/mongodb
 BUILD_DEPENDS+=		mumble-[0-9]*:../../chat/mumble
 BUILD_DEPENDS+=		musicpd-[0-9]*:../../audio/musicpd
 BUILD_DEPENDS+=		mysql-server>=5.7<8.0:../../databases/mysql57-server
-BUILD_DEPENDS+=		ncmpc-[0-9]*:../../audio/ncmpc
 BUILD_DEPENDS+=		ncmpcpp-[0-9]*:../../audio/ncmpcpp
 BUILD_DEPENDS+=		osm2pgsql-[0-9]*:../../geography/osm2pgsql
 BUILD_DEPENDS+=		openscad-[0-9]*:../../cad/openscad
@@ -49,6 +48,7 @@ BUILD_DEPENDS+=		poppler-glib-[0-9]*:../../print/poppler-glib
 BUILD_DEPENDS+=		powerdns-[0-9]*:../../net/powerdns
 BUILD_DEPENDS+=		powerdns-recursor-[0-9]*:../../net/powerdns-recursor
 BUILD_DEPENDS+=		qbittorrent-[0-9]*:../../net/qbittorrent
+BUILD_DEPENDS+=		quassel-[0-9]*:../../chat/quassel
 BUILD_DEPENDS+=		scribus>=1.5:../../print/scribus-qt5
 BUILD_DEPENDS+=		source-highlight-[0-9]*:../../textproc/source-highlight
 BUILD_DEPENDS+=		strawberry-[0-9]*:../../audio/strawberry

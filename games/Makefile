@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.512 2022/01/17 13:23:17 nia Exp $
+# $NetBSD: Makefile,v 1.515 2022/06/07 10:18:00 pin Exp $
 #
 
 COMMENT=	Games
@@ -164,8 +164,6 @@ SUBDIR+=	gbrainy
 SUBDIR+=	gcompris
 SUBDIR+=	gemdropx
 SUBDIR+=	gemrb
-SUBDIR+=	genecys-client
-SUBDIR+=	genecys-data
 SUBDIR+=	ggz-client-libs
 SUBDIR+=	glaxium
 SUBDIR+=	glickomania
@@ -396,7 +394,9 @@ SUBDIR+=	tanked
 SUBDIR+=	tcl-theo
 SUBDIR+=	teeworlds
 SUBDIR+=	teg
+SUBDIR+=	termatrix
 SUBDIR+=	tetrinetx
+SUBDIR+=	tetris-cli
 SUBDIR+=	thew
 SUBDIR+=	tileworld
 SUBDIR+=	toppler

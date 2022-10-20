@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.144 2021/12/08 16:03:55 adam Exp $
+# $NetBSD: Makefile,v 1.147 2022/08/11 05:08:08 gutteridge Exp $
 
 DISTNAME=	devhelp-3.34.0
-PKGREVISION=	9
+PKGREVISION=	11
 CATEGORIES=	devel gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/devhelp/3.34/}
 EXTRACT_SUFX=	.tar.xz
@@ -19,14 +19,12 @@ MAKE_ENV+=	LD_LIBRARY_PATH=${WRKSRC}/output/devhelp
 
 PYTHON_FOR_BUILD_ONLY=	tool
 
-# XXX msgfmt: unknown option -- xml
-_TOOLS_USE_PKGSRC.msgfmt=	yes
-
 PKGCONFIG_OVERRIDE_STAGE=	pre-install
 PKGCONFIG_OVERRIDE+=		output/meson-private/libdevhelp-3.0.pc
 
 .include "../../devel/meson/build.mk"
 .include "../../devel/amtk/buildlink3.mk"
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
 .include "../../devel/gobject-introspection/buildlink3.mk"
 .include "../../devel/glib2/schemas.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"

@@ -1,0 +1,19 @@
+$NetBSD: patch-support-Makefile,v 1.1 2022/06/03 08:51:22 wiz Exp $
+
+Install into DESTDIR.
+
+--- support/Makefile.orig	2022-03-30 02:19:07.000000000 +0000
++++ support/Makefile
+@@ -45,9 +45,10 @@ PUBX= $(PUBMLI:.mli=.cmx) camltkwrap.cmx
+ 
+ ifeq ($(USE_FINDLIB),yes)
+ install:
+-	ocamlfind install labltk META $(PUB) lib$(LIBNAME).$(A) \
+-	  -optional dll$(LIBNAME)$(EXT_DLL)
++	ocamlfind install labltk META $(PUB) lib$(LIBNAME).$(A)
+ 	$(RANLIB) lib$(LIBNAME).$(A)
++	$(BSD_INSTALL_LIB_DIR) $(DESTDIR)$(STUBLIBDIR)
++	$(BSD_INSTALL_LIB) dll$(LIBNAME)$(EXT_DLL) $(DESTDIR)$(STUBLIBDIR)
+ 
+ installopt:
+ 	ocamlfind install labltk -add $(PUBX) \

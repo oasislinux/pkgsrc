@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.61 2021/10/12 09:10:05 adam Exp $
+# $NetBSD: Makefile,v 1.64 2022/07/15 07:19:59 adam Exp $
 
 PKGNAME=	${DISTNAME:S/-/-server-/}
 COMMENT=	Lightweight Directory Access Protocol server suite

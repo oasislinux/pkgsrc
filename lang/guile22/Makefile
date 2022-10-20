@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.25 2021/12/08 16:02:16 adam Exp $
+# $NetBSD: Makefile,v 1.27 2022/03/09 00:37:46 gdt Exp $
 
 DISTNAME=	guile-2.2.7
 PKGNAME=	${DISTNAME:S/guile/guile22/}
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	lang
 MASTER_SITES=	${MASTER_SITE_GNU:=guile/}
 
@@ -11,7 +11,7 @@ HOMEPAGE=	https://www.gnu.org/software/guile/
 COMMENT=	Official extension language for the GNU operating system
 LICENSE=	gnu-lgpl-v3
 
-# Currently, 2.0 is primary.
+# Currently, all versions are namespaced.
 GUILE_SUBDIR=	guile/2.2
 #GUILE_SUBDIR=	# empty
 

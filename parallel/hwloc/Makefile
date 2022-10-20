@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.30 2021/12/08 16:02:30 adam Exp $
+# $NetBSD: Makefile,v 1.32 2022/08/22 08:31:01 markd Exp $
 
 DISTNAME=	hwloc-1.11.13
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	parallel
 MASTER_SITES=	http://www.open-mpi.org/software/hwloc/v${PKGVERSION_NOREV:R}/downloads/
 EXTRACT_SUFX=	.tar.bz2
@@ -15,6 +15,7 @@ USE_LIBTOOL=		yes
 USE_TOOLS+=		gmake pkg-config
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--enable-picky
+CONFIGURE_ARGS+=	--disable-opencl
 TEST_TARGET=		check
 
 .include "../../mk/bsd.prefs.mk"

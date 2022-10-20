@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.8 2021/10/26 10:47:14 nia Exp $
+$NetBSD: distinfo,v 1.10 2022/09/01 05:07:23 markd Exp $
 
-BLAKE2s (tex-repere-51363/repere.doc.tar.xz) = 08c5de0088b3aef349e8a4c656b1d10c1e1d8fdabdd77c32384ca91a340c8ee7
-SHA512 (tex-repere-51363/repere.doc.tar.xz) = 8a68f168573fa33ea635578aeeeb51060c3eae9f09ddd7dae1d49aca6de2a8eab7c857336eee1c17e2d4e1a7bb5f2440cd1901bf9aa61961966f727827cab38f
-Size (tex-repere-51363/repere.doc.tar.xz) = 342484 bytes
+BLAKE2s (repere.doc.r63836.tar.xz) = 0ca762c62e4c98c041688f33b9dc789d63afc85b27abfeeb73e2f3c5455f20b5
+SHA512 (repere.doc.r63836.tar.xz) = d0613f11cb4f29121b5c6b03b69d35319f37657f1233be3a123c4b717f547a20335d0f8ae3ede3da65eaee50ebf9401cd9e747073f8eebaf3773723d0f85dcd6
+Size (repere.doc.r63836.tar.xz) = 1392744 bytes

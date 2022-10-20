@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.42 2021/12/08 16:04:42 adam Exp $
+# $NetBSD: Makefile,v 1.44 2022/08/09 12:08:36 jperkin Exp $
 
 DISTNAME=		ufoai-2.2.1
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=ufoai/}

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.90 2021/12/08 16:05:32 adam Exp $
+# $NetBSD: Makefile,v 1.100 2022/09/29 00:57:54 markd Exp $
 
 DISTNAME=	cantor-${KAPPSVER}
-PKGREVISION=	12
 CATEGORIES=	math
 
 HOMEPAGE=	https://kde.org/applications/education/cantor/
@@ -40,6 +39,8 @@ SUBST_SED.fix-moc=	-e 's;"${PREFIX}/include",;;g'
 .include "../../print/libspectre/buildlink3.mk"
 .include "../../print/poppler-qt5/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../textproc/discount/buildlink3.mk"
+# Requires bundled copy with custom mkd_latextext()
+#.include "../../textproc/discount/buildlink3.mk"
+.include "../../x11/qt5-qtwebengine/buildlink3.mk"
 .include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

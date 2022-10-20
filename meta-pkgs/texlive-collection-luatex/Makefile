@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.16 2021/06/07 00:41:49 markd Exp $
+# $NetBSD: Makefile,v 1.22 2022/09/01 06:17:02 markd Exp $
 
 DISTNAME=	collection-luatex
-PKGNAME=	texlive-${DISTNAME}-2021pre1
+PKGNAME=	texlive-${DISTNAME}-2022pre2
 CATEGORIES=	meta-pkgs
 MASTER_SITES=	# empty
-TEXLIVE_REV=	59184
+TEXLIVE_REV=	64203
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.tug.org/texlive/
@@ -30,11 +30,17 @@ DEPENDS+=	tex-ctablestack-[0-9]*:../../print/tex-ctablestack
 # depend innerscript
 # depend interpreter
 # depend kanaparser
+# depend ligtype
+# depend linebreaker
+# depend lt3luabridge
 # depend lua-typo
 # depend lua-uca
-# depend lua-ul
-# depend lua-uni-algos
+DEPENDS+=	tex-lua-ul-[0-9]*:../../print/tex-lua-ul
+DEPENDS+=	tex-lua-uni-algos-[0-9]*:../../print/tex-lua-uni-algos
 # depend lua-visual-debug
+# depend lua-widow-control
+# depend luaaddplot
+# depend luacensor
 DEPENDS+=	tex-luacode-[0-9]*:../../print/tex-luacode
 DEPENDS+=	tex-luacolor-[0-9]*:../../print/tex-luacolor
 # depend luahyphenrules
@@ -47,10 +53,12 @@ DEPENDS+=	tex-luacolor-[0-9]*:../../print/tex-luacolor
 DEPENDS+=	tex-lualatex-math-[0-9]*:../../math/tex-lualatex-math
 # depend lualatex-truncate
 DEPENDS+=	tex-lualibs-[0-9]*:../../devel/tex-lualibs
+# depend luamathalign
 # depend luamplib
 DEPENDS+=	tex-luaotfload-[0-9]*:../../fonts/tex-luaotfload
 # depend luapackageloader
 # depend luaprogtable
+# depend luaquotes
 # depend luarandom
 DEPENDS+=	tex-luatex85-[0-9]*:../../print/tex-luatex85
 DEPENDS+=	tex-luatexbase-[0-9]*:../../devel/tex-luatexbase
@@ -58,18 +66,32 @@ DEPENDS+=	tex-luatexbase-[0-9]*:../../devel/tex-luatexbase
 # depend luatextra
 # depend luavlna
 # depend luaxml
+# depend lutabulartools
+# depend minim
+# depend minim-math
+# depend minim-mp
+# depend minim-pdf
+# depend minim-xmp
 # depend newpax
 # depend nodetree
 # depend odsfile
 # depend optex
 # depend pdfarticle
 # depend pdfextra
+# depend penlight
 # depend placeat
 # depend plantuml
+# depend pyluatex
 # depend selnolig
+# depend showhyphenation
+# depend showkerning
+# depend spacekern
 # depend spelling
 # depend stricttex
+# depend truthtable
 # depend typewriter
+# depend uninormalize
+# depend yamlvars
 
 META_PACKAGE=	yes
 

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.7 2022/01/18 02:48:10 pho Exp $
+# $NetBSD: Makefile,v 1.10 2022/02/26 03:58:02 pho Exp $
 
-DISTNAME=	monad-control-1.0.2.3
+DISTNAME=	monad-control-1.0.3.1
 PKGREVISION=	2
 CATEGORIES=	devel
 

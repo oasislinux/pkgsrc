@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.31 2021/12/10 09:14:53 adam Exp $
+$NetBSD: distinfo,v 1.39 2022/10/07 07:27:15 adam Exp $
 
-BLAKE2s (certbot-dns-linode-1.22.0.tar.gz) = 6249ec704a9c1336843e131843c299a4f100a1c5cbc8e496f8619cfb5b040c8b
-SHA512 (certbot-dns-linode-1.22.0.tar.gz) = 8bbc921ac1e274f6ec609ec2b813a7cfbcece20f45311dbb2aa3aafaa2b56aec4f913544a94c2b1114d133f6457d299d16780cf333b952d24473c6222d081ef2
-Size (certbot-dns-linode-1.22.0.tar.gz) = 12986 bytes
+BLAKE2s (certbot-dns-linode-1.31.0.tar.gz) = c42c55dc286d0edb1e24ecc481f305cf14752ba3108cffa5fac82ab344910a05
+SHA512 (certbot-dns-linode-1.31.0.tar.gz) = efb7a77faabfa543853f5f65d25f37c9834429bd3baefbd633a9911ee7aaebf609f7acd88888e1fed02fab4ab3ba52e5b6c0c04d240ccb02acd4b3d3836e1ed2
+Size (certbot-dns-linode-1.31.0.tar.gz) = 13114 bytes

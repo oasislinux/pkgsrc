@@ -1,6 +1,10 @@
-# $NetBSD: Makefile,v 1.6 2022/01/31 12:01:32 wiz Exp $
+# $NetBSD: Makefile,v 1.21 2022/10/05 11:33:09 bsiegert Exp $
+#
+# Changelog:
+# https://github.com/danielgtaylor/restish/releases/
 
-DISTNAME=	restish-0.9.4
+DISTNAME=	restish-0.14.0
+PKGREVISION=	7
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_GITHUB:=danielgtaylor/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
@@ -9,8 +13,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://rest.sh/
 COMMENT=	CLI for interacting with REST-ish HTTP APIs
 LICENSE=	mit
-
-USE_LANGUAGES=	# none
 
 GO_BUILD_PATTERN=	.
 

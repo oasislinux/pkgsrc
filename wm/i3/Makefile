@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.48 2021/12/08 16:06:50 adam Exp $
+# $NetBSD: Makefile,v 1.51 2022/09/26 18:10:59 wiz Exp $
 
-DISTNAME=	i3-4.20.1
-PKGREVISION=	1
+DISTNAME=	i3-4.21
 CATEGORIES=	wm
 MASTER_SITES=	https://i3wm.org/downloads/
 EXTRACT_SUFX=	.tar.xz
@@ -15,7 +14,7 @@ GNU_CONFIGURE=	yes
 USE_TOOLS+=	bash pkg-config perl:run
 USE_LANGUAGES=	c99
 
-LDFLAGS.SunOS+=	-lgen -liconv -lsocket
+LDFLAGS.SunOS+=	-lgen -lsocket
 
 EGDIR=		${PREFIX}/share/examples/i3
 OWN_DIRS+=	${PKG_SYSCONFDIR}/i3
@@ -33,7 +32,7 @@ post-install:
 .include "../../devel/meson/build.mk"
 .include "../../devel/libev/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
-.include "../../devel/pcre/buildlink3.mk"
+.include "../../devel/pcre2/buildlink3.mk"
 .include "../../devel/yajl/buildlink3.mk"
 .include "../../graphics/cairo/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"

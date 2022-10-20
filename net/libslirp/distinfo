@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.3 2021/10/26 11:05:56 nia Exp $
+$NetBSD: distinfo,v 1.5 2022/04/27 09:42:52 nia Exp $
 
-BLAKE2s (libslirp-4.3.1.tar.xz) = 0b533c5f672c53f4450a0b6d56bf1dae62f7da680373774128afbbab466c6470
-SHA512 (libslirp-4.3.1.tar.xz) = b34793d67dbe15302a16562ce6e63063eec04f8ca1a6fdb5c10891de9fbcc59877c30d4883cd8c5d911147981401b93dacae538a5b85253bde5e44edea6c228c
-Size (libslirp-4.3.1.tar.xz) = 99056 bytes
+BLAKE2s (libslirp-4.7.0.tar.xz) = ef73fb0de29a83b0c5f5e3d02f7bcd5257e1787ce5217afd34065856a92df973
+SHA512 (libslirp-4.7.0.tar.xz) = 00b943ec758d7c2d3213a239b1cb7376d2d06d851afd9d5a808c787a76dfdd442570253ca509085c6c3ef528472aec9216587dbfc3348d7eb325b92b8f8b1ac3
+Size (libslirp-4.7.0.tar.xz) = 110840 bytes

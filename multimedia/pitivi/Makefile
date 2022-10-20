@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.66 2022/01/03 07:26:01 wiz Exp $
+# $NetBSD: Makefile,v 1.70 2022/08/11 05:09:07 gutteridge Exp $
 
 DISTNAME=	pitivi-0.999
-PKGREVISION=	7
+PKGREVISION=	10
 CATEGORIES=	multimedia
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/pitivi/0.999/}
 EXTRACT_SUFX=	.tar.xz
@@ -32,7 +32,7 @@ SUBST_VARS.py+=		PYVERSSUFFIX
 REPLACE_PYTHON+=	bin/pitivi.in
 
 # Python 3 only
-PYTHON_VERSIONS_INCOMPATIBLE=	27
+PYTHON_VERSIONS_INCOMPATIBLE=	27 37 # matplotlib
 PY_PATCHPLIST=			yes
 # Workaround for Python 3.8
 LDFLAGS+=			-lpython${PYVERSSUFFIX}
@@ -49,7 +49,5 @@ LDFLAGS+=			-lpython${PYVERSSUFFIX}
 .include "../../multimedia/gst-plugins1-editing-services/buildlink3.mk"
 .include "../../multimedia/gst-plugins1-good/buildlink3.mk"
 .include "../../multimedia/gst-plugins1-gtk/buildlink3.mk"
-# HACK: avoid conflict with gst-plugins1-bad...
-#.include "../../multimedia/gst-plugins1-transcoder/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

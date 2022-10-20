@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.6 2022/01/05 21:44:53 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2022/07/25 11:12:26 wiz Exp $
 
-DISTNAME=	libnumbertext-1.0.8
+DISTNAME=	libnumbertext-1.0.10
 CATEGORIES=	math
 MASTER_SITES=	${MASTER_SITE_GITHUB:=Numbertext/}
 GITHUB_RELEASE=	${PKGVERSION_NOREV}
@@ -13,7 +13,6 @@ LICENSE=	modified-bsd
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
-USE_TOOLS+=	pkg-config
 USE_LANGUAGES=	c c++11
 
 GCC_REQD+=	5

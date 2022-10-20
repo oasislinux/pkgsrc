@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.69 2021/12/08 16:04:50 adam Exp $
-#
+# $NetBSD: Makefile,v 1.76 2022/09/11 12:51:51 wiz Exp $
 
 DISTNAME=	denemo-0.9.2
-PKGREVISION=	37
+PKGREVISION=	43
 CATEGORIES=	graphics print
 MASTER_SITES=	${MASTER_SITE_GNU:=denemo/}
 
@@ -10,6 +9,8 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.denemo.org/
 COMMENT=	GUI musical score editor written in C/GTK+
 LICENSE=	gnu-gpl-v3
+
+BROKEN+=	"Incompatible with latest fluidsynth, needs update"
 
 DEPENDS+=	lilypond-[0-9]*:../../print/lilypond
 
@@ -36,7 +37,7 @@ post-install:
 .include "../../audio/portaudio/buildlink3.mk"
 .include "../../graphics/librsvg/buildlink3.mk"
 # Depends on lilypond which is still guile 1.8.
-.include "../../lang/guile/buildlink3.mk"
+.include "../../lang/guile18/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"

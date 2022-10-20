@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.26 2021/12/19 09:47:59 maya Exp $
+# $NetBSD: Makefile,v 1.32 2022/08/17 17:40:04 wiz Exp $
 #
 VERSION=	4.13.4
 
 DIST_SUBDIR=		xen413
 DISTNAME=		xen-${VERSION}
 PKGNAME=		xentools413-${VERSION}
-PKGREVISION=		2
+PKGREVISION=		6
 CATEGORIES=		sysutils
 MASTER_SITES=		https://downloads.xenproject.org/release/xen/${VERSION}/
 
@@ -33,6 +33,9 @@ BUILD_DEPENDS+=	acpica-utils-[0-9]*:../../sysutils/acpica-utils
 .endif
 DEPENDS+=	${PYPKGPREFIX}-curses>=0:../../devel/py-curses
 
+TOOL_DEPENDS+=  ${PYPKGPREFIX}-setuptools-[0-9]*:../../devel/py-setuptools
+PYTHON_VERSIONS_INCOMPATIBLE=	27
+
 PKG_SYSCONFSUBDIR=	xen
 
 ONLY_FOR_PLATFORM=	NetBSD-9.99.6[4-9]-x86_64 NetBSD-9.99.[7-9]*-x86_64
@@ -41,7 +44,7 @@ ONLY_FOR_PLATFORM+=	NetBSD-9.[1-9]_*-x86_64
 ONLY_FOR_PLATFORM+=	NetBSD-9.0_STABLE-x86_64
 
 SSP_SUPPORTED=		no
-MKPIE_SUPPORTED= 	no
+MKPIE_SUPPORTED=	no
 
 CONFLICTS+=		libxen-[0-9]*
 CONFLICTS+=		xenstoretools-[0-9]*
@@ -172,14 +175,17 @@ pre-build:
 
 INSTALLATION_DIRS=	${EGDIR} ${PKGMANDIR}/man1 ${PKGMANDIR}/man5
 INSTALLATION_DIRS+=	${PKGMANDIR}/man8 share/doc/xen
+INSTALLATION_DIRS+=	${PYSITELIB}
 
 BUILD_DEFS+=		VARBASE
 
 do-build:
 	cd ${WRKSRC} && ${BUILD_MAKE_CMD} build-tools
+	cd ${WRKSRC} && ${BUILD_MAKE_CMD} build-docs
 
 do-install:
 	cd ${WRKSRC} && ${BUILD_MAKE_CMD} DESTDIR=${DESTDIR} install-tools
+	cd ${WRKSRC} && ${BUILD_MAKE_CMD} DESTDIR=${DESTDIR} install-docs
 
 post-install:
 	${INSTALL_MAN} ${WRKDIR}/xenstore-chmod.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
@@ -208,8 +214,7 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/docs/misc/$f ${DESTDIR}${PREFIX}/share/doc/xen
 .endfor
 
-.if (${OPSYS} == "NetBSD" && \
-    (empty(OS_VERSION:M6.99.[3-9]?) && empty(OS_VERSION:M[7-9].*)))
+.if ${OPSYS} == "NetBSD" && ${OPSYS_VERSION} < 069900
 CPPFLAGS+=	-Dshm_open=open -Dshm_unlink=unlink
 .endif
 
@@ -237,6 +242,7 @@ MAKE_ENV+=	EXTRA_HOSTCFLAGS=${EXTRA_HOSTCFLAGS:Q} EXTRA_CFLAGS=${EXTRA_CFLAGS:M*
 #.include "../../devel/SDL/buildlink3.mk"
 .include "../../lang/ocaml/buildlink3.mk"
 .include "../../devel/ocaml-findlib/buildlink3.mk"
+BUILDLINK_API_DEPENDS.pciutils+=	pciutils>=3.8
 .include "../../sysutils/pciutils/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/yajl/buildlink3.mk"

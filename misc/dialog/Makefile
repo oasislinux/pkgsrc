@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.89 2022/01/22 21:12:05 fcambus Exp $
+# $NetBSD: Makefile,v 1.92 2022/05/27 10:09:13 fcambus Exp $
 
-DISTNAME=	dialog-1.3-20220117
+DISTNAME=	dialog-1.3-20220526
 PKGNAME=	${DISTNAME:C/-2/.2/}
 CATEGORIES=	misc
 MASTER_SITES=	ftp://ftp.invisible-island.net/dialog/
@@ -26,8 +26,7 @@ SUBST_SED.rpath=	-e 's;-L\(.\);${_COMPILER_RPATH_FLAG}\1\{exec_prefix\}/lib -L\1
 SUBST_STAGE.rpath=	pre-configure
 
 .include "../../mk/bsd.prefs.mk"
-# curses from NetBSD 5 and earlier will coredump when displaying shadows
-.if !empty(MACHINE_PLATFORM:MNetBSD-[0-5].*)
+.if ${OPSYS} == "NetBSD" && ${OPSYS_VERSION} < 060000
 CONFIGURE_ARGS+=	--disable-widec
 .endif
 

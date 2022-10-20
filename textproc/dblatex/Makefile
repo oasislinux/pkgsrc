@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.41 2022/01/04 20:54:51 wiz Exp $
+# $NetBSD: Makefile,v 1.43 2022/06/30 11:18:53 nia Exp $
 
 DISTNAME=	dblatex-0.3.10
-PKGREVISION=	6
+PKGREVISION=	8
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=dblatex/}
 EXTRACT_SUFX=	.tar.bz2
@@ -29,6 +29,7 @@ DEPENDS+=	tex-jknapltx-[0-9]*:../../print/tex-jknapltx
 DEPENDS+=	tex-listings-[0-9]*:../../print/tex-listings
 DEPENDS+=	tex-multirow-[0-9]*:../../print/tex-multirow
 DEPENDS+=	tex-overpic-[0-9]*:../../print/tex-overpic
+DEPENDS+=	tex-pdflscape-[0-9]*:../../print/tex-pdflscape
 DEPENDS+=	tex-pdfpages-[0-9]*:../../print/tex-pdfpages
 DEPENDS+=	tex-rotating-[0-9]*:../../print/tex-rotating
 DEPENDS+=	tex-stmaryrd-[0-9]*:../../fonts/tex-stmaryrd

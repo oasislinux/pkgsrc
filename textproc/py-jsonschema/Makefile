@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.20 2022/01/25 09:05:11 wiz Exp $
+# $NetBSD: Makefile,v 1.29 2022/09/14 11:04:57 adam Exp $
 
-DISTNAME=	jsonschema-3.2.0
+DISTNAME=	jsonschema-4.16.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	2
 CATEGORIES=	textproc python
 MASTER_SITES=	${MASTER_SITE_PYPI:=j/jsonschema/}
 
@@ -11,29 +10,37 @@ HOMEPAGE=	https://github.com/Julian/jsonschema
 COMMENT=	Implementation of JSON Schema for Python
 LICENSE=	modified-bsd
 
+BUILD_DEPENDS+=	${PYPKGPREFIX}-hatchling-[0-9]*:../../devel/py-hatchling
+BUILD_DEPENDS+=	${PYPKGPREFIX}-hatch-fancy-pypi-readme-[0-9]*:../../devel/py-hatch-fancy-pypi-readme
+BUILD_DEPENDS+=	${PYPKGPREFIX}-hatch-vcs-[0-9]*:../../devel/py-hatch-vcs
+BUILD_DEPENDS+=	${PYPKGPREFIX}-setuptools_scm-[0-9]*:../../devel/py-setuptools_scm
 DEPENDS+=	${PYPKGPREFIX}-attrs>=17.4.0:../../devel/py-attrs
-DEPENDS+=	${PYPKGPREFIX}-pyrsistent>=0.14.0:../../devel/py-pyrsistent
-DEPENDS+=	${PYPKGPREFIX}-six>=1.11.0:../../lang/py-six
+DEPENDS+=	${PYPKGPREFIX}-pyrsistent>=0.17.3:../../devel/py-pyrsistent
 TEST_DEPENDS+=	${PYPKGPREFIX}-twisted-[0-9]*:../../net/py-twisted
 
+USE_LANGUAGES=	# none
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
+
 .include "../../lang/python/pyversion.mk"
-.if ${_PYTHON_VERSION} == 27
-DEPENDS+=	${PYPKGPREFIX}-functools32-[0-9]*:../../devel/py-functools32
-.elif ${_PYTHON_VERSION} < 38
-PYTHON_VERSIONED_DEPENDENCIES+=	importlib-metadata
+.if ${_PYTHON_VERSION} < 38
+DEPENDS+=	${PYPKGPREFIX}-importlib-metadata-[0-9]*:../../devel/py-importlib-metadata
+DEPENDS+=	${PYPKGPREFIX}-typing-extensions-[0-9]*:../../devel/py-typing-extensions
 .endif
-
-USE_PKG_RESOURCES=	yes
-
-PYTHON_VERSIONED_DEPENDENCIES+=	setuptools_scm:build
+.if ${_PYTHON_VERSION} < 39
+DEPENDS+=	${PYPKGPREFIX}-importlib-resources>=1.4.0:../../devel/py-importlib-resources
+DEPENDS+=	${PYPKGPREFIX}-pkgutil_resolve_name>=1.3.10:../../devel/py-pkgutil_resolve_name
+.endif
 
 post-install:
 	cd ${DESTDIR}${PREFIX}/bin && \
 	${MV} jsonschema jsonschema-${PYVERSSUFFIX} || ${TRUE}
 
-do-test:
-	cd ${WRKSRC}/jsonschema && ${PYTHONBIN} -m unittest discover -v
+TEST_ENV+=	JSON_SCHEMA_TEST_SUITE=${WRKSRC}/json
 
-.include "../../lang/python/egg.mk"
-.include "../../lang/python/versioned_dependencies.mk"
+# after 'make install'
+do-test:
+	cd ${WRKSRC}/jsonschema && ${SETENV} ${TEST_ENV} ${PYTHONBIN} -m unittest discover -v
+
+.include "../../lang/python/wheel.mk"
 .include "../../mk/bsd.pkg.mk"

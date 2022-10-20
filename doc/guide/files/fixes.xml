@@ -1,4 +1,4 @@
-<!-- $NetBSD: fixes.xml,v 1.168 2022/01/24 23:18:33 gutteridge Exp $ -->
+<!-- $NetBSD: fixes.xml,v 1.182 2022/08/08 01:54:32 gutteridge Exp $ -->
 
 <chapter id="fixes"> <?dbhtml filename="fixes.html"?>
 <title>Making your package work</title>
@@ -470,10 +470,10 @@ BUILDLINK_API_DEPENDS.jpeg+=    jpeg>=9.0
   <sect2 id="conflicts">
     <title>Handling conflicts with other packages</title>
 
-    <para>Your package may conflict with other packages a user might
-    already have installed on his system, e.g. if your package
+    <para>Your package may conflict with other packages users might
+    already have installed on their system, e.g., if your package
     installs the same set of files as another package in the pkgsrc
-    tree or has the same <varname>PKGNAME</varname>.</para>
+    tree.</para>
 
     <para>For example, <filename role="pkg">x11/libXaw3d</filename>
     and <filename role="pkg">x11/Xaw-Xpm</filename>
@@ -1349,39 +1349,30 @@ ${LIBTOOL} --mode=install ${BSD_INSTALL_LIB} ${SOMELIB:.a=.la} ${PREFIX}/lib
     <title>GNU Autoconf/Automake</title>
 
     <para>If a package needs GNU autoconf or automake to be executed
-    to regenerate the configure script and Makefile.in makefile
-    templates, then they should be executed in a pre-configure
-    target.</para>
-
-    <para>For packages that need only autoconf:</para>
+    to regenerate the
+    <filename>configure</filename>
+    script and <filename>Makefile.in</filename> makefile
+    templates from <filename>configure.ac</filename> and
+    <filename>Makefile.am</filename>,
+    then they should be executed in a pre-configure target:</para>
 
 <programlisting>
-AUTOCONF_REQD=  2.50            # if default version is not good enough
-USE_TOOLS+=     autoconf        # use "autoconf213" for autoconf-2.13
+USE_TOOLS+=	autoconf automake autoreconf
+GNU_CONFIGURE=	yes
 ...
 
 pre-configure:
-        cd ${WRKSRC} &amp;&amp; autoconf
-
+        set -e; cd ${WRKSRC} && autoreconf -fi
 ...
 </programlisting>
 
-    <para>and for packages that need automake and autoconf:</para>
-
-<programlisting>
-AUTOMAKE_REQD=  1.7.1           # if default version is not good enough
-USE_TOOLS+=     automake        # use "automake14" for automake-1.4
-...
-
-pre-configure:
-        set -e; cd ${WRKSRC}; \
-        aclocal; autoheader; automake -a --foreign -i; autoconf
-
-...
-</programlisting>
-
-    <para>Packages which use GNU Automake will almost certainly
-    require GNU Make.</para>
+    <para>Packages which use GNU Automake will sometimes
+    require GNU Make (<literal>gmake</literal> in
+    <varname>USE_TOOLS</varname>),
+    but not always.  Note that autoreconf
+    only needs to be executed if <filename>configure.ac</filename>
+    or Makefiles are modified, or <filename>configure</filename>
+    is not present.</para>
 
     <para>There are times when the configure process makes
     additional changes to the generated files, which then causes
@@ -1391,6 +1382,35 @@ pre-configure:
     <varname>AUTOMAKE_OVERRIDE=NO</varname> in the package
     Makefile.</para>
   </sect2>
+
+  <sect2 id="meson">
+    <title>Meson / ninja</title>
+
+    <para>Packages using Meson to configure need to include:
+
+<programlisting>
+.include "../../devel/meson/build.mk"
+</programlisting></para>
+
+    <para>In nearly all cases (any program with dependencies),
+    pkg-config needs to be added to
+    <varname>USE_TOOLS</varname>.  If the package installs
+    translation files for non-English languages, also
+    add msgfmt and xgettext:
+
+<programlisting>
+USE_TOOLS+=	pkg-config msgfmt xgettext
+</programlisting></para>
+
+    <para>If any options need to be passed to Meson, use
+    <varname>MESON_ARGS</varname> instead of
+    <varname>CONFIGURE_ARGS</varname>:
+
+<programlisting>
+MESON_ARGS+=	-Dx11=false
+</programlisting></para>
+  </sect2>
+
 </sect1>
 
 <sect1 id="programming-languages">
@@ -1399,7 +1419,7 @@ pre-configure:
   <sect2 id="basic-programming-languages">
     <title>C, C++, and Fortran</title>
 
-    <para>Compilers for the C, C++, and Fortran languages comes with
+    <para>Compilers for the C and C++ languages comes with
     the NetBSD base system.  By default, pkgsrc assumes that a package
     is written in C and will hide all other compilers (via the wrapper
     framework, see <xref linkend="buildlink" />).</para>
@@ -1416,6 +1436,26 @@ pre-configure:
     <quote>c</quote>.  Packages using GNU configure scripts, even if
     written in C++, usually need a C compiler for the configure
     phase.</para>
+
+    <para>To express a general requirement on a specific C or C++
+    version, normally only <varname>GCC_REQD</varname> needs to be set.
+    For example, GCC 7 includes support for C++17, so if the package uses
+    C++17 it should specify:
+
+    <programlisting>
+	GCC_REQD+=	7
+    </programlisting></para>
+
+    <para>Language variants like <literal>c++11</literal> for
+    <varname>USE_LANGUAGES</varname> should only be specified
+    if the package does not explicitly set <literal>-std=...</literal>
+    when compiling (i.e. the package assumes the compiler defaults to
+    C++11 or some other standard).  This is usually a bug in the
+    upstream build system.</para>
+
+    <para>GCC version 5 includes support for C++14, while GCC 4.7 includes
+    more-or-less complete support for C++11.  For more information, consult
+    <ulink url="https://gcc.gnu.org/projects/cxx-status.html">GCC's own documentation on programming language support.</ulink></para>
   </sect2>
 
   <sect2 id="java-programming-language">
@@ -1466,9 +1506,31 @@ pre-configure:
       <command>make clean && make patch && make show-go-modules >
       go-modules.mk</command>.</para></listitem>
 
-      <listitem><para>Prepend <programlisting>.include
-      "go-modules.mk"</programlisting> to any other
-      <programlisting>.include</programlisting>s.</para></listitem>
+      <listitem><para>Prepend
+      <literal>.include "go-modules.mk"</literal> to any other
+      <literal>.include</literal>s.</para></listitem>
+
+      <listitem><para>Incorporate these modules in
+      <filename>distinfo</filename> with <command>make
+      makesum</command>.</para></listitem>
+    </orderedlist>
+  </sect2>
+
+  <sect2 id="rust-programming-language">
+    <title>Rust</title>
+
+    <para>If a program is written in Rust and uses Cargo to build,
+    have the package include
+    <filename>../../lang/rust/cargo.mk</filename>.</para>
+
+    <orderedlist>
+      <listitem><para>Generate a list of those dependencies with
+      <command>make CARGO_ARGS="build --release" build &&
+      make print-cargo-depends > cargo-depends.mk</command>.</para></listitem>
+
+      <listitem><para>Prepend
+      <literal>.include "cargo-depends.mk"</literal> to any other
+      <literal>.include</literal>s.</para></listitem>
 
       <listitem><para>Incorporate these modules in
       <filename>distinfo</filename> with <command>make
@@ -1505,8 +1567,8 @@ pre-configure:
     <para><varname>REPLACE_SH</varname>,
     <varname>REPLACE_BASH</varname>, <varname>REPLACE_CSH</varname>,
     and <varname>REPLACE_KSH</varname> can be used to replace shell
-    hash bangs in files. Please use the appropriate one, preferring
-    <varname>REPLACE_SH</varname> in case this shell is sufficient.
+    she-bangs in files. Please use the appropriate one, preferring
+    <varname>REPLACE_SH</varname> when this shell is sufficient.
     Each should contain a list of scripts, relative to
     <varname>WRKSRC</varname>, that you want adjusted. Every
     occurrence of the matching shell in a she-bang line will be
@@ -1575,6 +1637,24 @@ pre-configure:
 <sect3 id="fixes.build.cpp.os">
 <title>C preprocessor macros to identify the operating system</title>
 
+        <para>To distinguish between specific NetBSD versions,
+        you should use the following code.</para>
+
+<programlisting>
+#ifdef __NetBSD__
+#include &lt;sys/param.h&gt;
+#if __NetBSD_Prereq__(9,99,17)
+/* use a newer feature */
+#else
+/* older code */
+#endif
+#endif
+
+#ifndef _WIN32
+/* Unix-like specific code */
+#endif
+</programlisting>
+
         <para>To distinguish between 4.4 BSD-derived systems and the
         rest of the world, you should use the following code.</para>
 
@@ -1587,8 +1667,7 @@ pre-configure:
 #endif
 </programlisting>
 
-        <para>If this distinction is not fine enough, you can also test
-	for the following macros.</para>
+        <para>You can also test for the following macros:</para>
 
 <programlisting>
 Cygwin      __CYGWIN__
@@ -1597,7 +1676,7 @@ FreeBSD     __FreeBSD__
 Haiku       __HAIKU__
 Interix     __INTERIX
 IRIX        __sgi (TODO: get a definite source for this)
-Linux       linux, __linux, __linux__
+Linux       __linux
 Mac OS X    __APPLE__
 MirBSD      __MirBSD__ (__OpenBSD__ is also defined)
 Minix3      __minix
@@ -1612,8 +1691,11 @@ Solaris     sun, __sun
 
 <programlisting>
 i386        i386, __i386, __i386__
+x86-64      __amd64__, __x86_64__
+ARM         __arm__
 MIPS        __mips
 SPARC       sparc, __sparc
+PowerPC     __powerpc
 </programlisting>
 
 </sect3>
@@ -1783,11 +1865,11 @@ package is built and then pkgsrc is updated. This situation can provoke
 various hard to diagnose build errors. To clean up the situation:</para>
 
 <programlisting>
-&uprompt; (cd ../../ && test -f mk/bsd.pkg.mk && rm -rf */*/work)
+&uprompt; (cd ../../ && cat mk/bsd.pkg.mk >/dev/null && rm -rf */*/work)
 </programlisting>
 
-<para>(The test for <filename>bsd.pkg.mk</filename> just prevents running
-this command in the wrong directory.)</para>
+<para>(The only purpose of the <filename>bsd.pkg.mk</filename> is to
+prevent running this command in the wrong directory.)</para>
 
 <para>If you have set <varname>WRKOBJDIR</varname> in &mk.conf;, remove
 that directory as well.</para>
@@ -1841,14 +1923,14 @@ far and what any error messages were.</para>
       </tgroup>
     </informaltable>
 
-    <para>To fix these linker errors, it is often sufficient to say
+    <para>To fix these linker errors, it is often sufficient to add
     <literal>LIBS.<replaceable>OperatingSystem</replaceable>+=
     -l<replaceable>foo</replaceable></literal> to the package
-    <filename>Makefile</filename> and then say <command>bmake clean;
+    <filename>Makefile</filename> and then run <command>bmake clean;
     bmake</command>.</para>
 
 <sect3 id="undefined-reference-sunpro">
-<title>Special issue: The SunPro compiler</title>
+<title>The SunPro compiler and inline functions</title>
 
 <para>When you are using the SunPro compiler, there is another
 possibility. That compiler cannot handle the following code:</para>
@@ -1876,7 +1958,17 @@ of functions.</para>
 
 </sect3>
 
-  </sect2>
+<sect3 id="undefined-reference-atomic">
+  <title>Missing atomic functions</title>
+  
+  <para>When building for older machine architectures (e.g., i386, PowerPC),
+  builds may fail because the package expects modern 64-bit atomic functions
+  which the underlying hardware either doesn't support, or will only support
+  with specific compiler flags. This is generally handled via inclusion of
+  mk/atomic64.mk.</para>
+</sect3>
+
+</sect2>
 
   <sect2 id="out-of-memory">
     <title>Running out of memory</title>
@@ -1884,9 +1976,12 @@ of functions.</para>
     <para>Sometimes packages fail to build because the compiler runs
     into an operating system specific soft limit.  With the
     <varname>UNLIMIT_RESOURCES</varname> variable pkgsrc can be told
-    to unlimit the resources.  Currently, the allowed values are any combination of
-    <quote>cputime</quote>, <quote>datasize</quote>,
-    <quote>memorysize</quote>, and <quote>stacksize</quote>.
+    to unlimit the resources.  The allowed values are any combination of
+    <quote>cputime</quote>,
+    <quote>datasize</quote>,
+    <quote>memorysize</quote>,
+    <quote>stacksize</quote> and
+    <quote>virtualsize</quote>.
     Setting this variable is similar to running the shell builtin
     <command>ulimit</command> command to raise the maximum data
     segment size or maximum stack size of a process, respectively, to
@@ -1910,10 +2005,10 @@ ${INSTALL_DATA_DIR} ${PREFIX}/dir1
 ${INSTALL_DATA_DIR} ${PREFIX}/dir2
 </programlisting>
 
-    <para>You can also just append <quote><literal>dir1
-    dir2</literal></quote> to the
-    <varname>INSTALLATION_DIRS</varname> variable, which will
-    automatically do the right thing.</para>
+    <para>Instead of running the <command>install</command> commands
+    directly, you can also append <quote><literal>dir1
+    dir2</literal></quote> to the <varname>INSTALLATION_DIRS</varname>
+    variable, which will automatically do the right thing.</para>
 
   </sect2>
   <sect2 id="where-to-install-documentation">
@@ -1921,15 +2016,16 @@ ${INSTALL_DATA_DIR} ${PREFIX}/dir2
 
     <para>In general, documentation should be installed into
     <filename>${PREFIX}/share/doc/${PKGBASE}</filename> or
-    <filename>${PREFIX}/share/doc/${PKGNAME}</filename> (the latter
+    <filename>${PREFIX}/share/doc/${PKGNAME_NOREV}</filename> (the latter
     includes the version number of the package).</para>
 
     <para>Many modern packages using GNU autoconf allow to set the
     directory where HTML documentation is installed with the
-    <quote>--with-html-dir</quote> option. Sometimes using this flag
-    is needed because otherwise the documentation ends up in
-    <filename>${PREFIX}/share/doc/html</filename> or other
-    places.</para>
+    <quote>--with-html-dir</quote> option. Sometimes using this flag is
+    needed because otherwise the documentation ends up in
+    <filename>${PREFIX}/share/doc/html</filename> or other places. In
+    pkgsrc, the HTML documentation should go into the package-specific
+    directory, just like any other documentation.</para>
 
     <para>An exception to the above is that library API documentation
     generated with the <filename
@@ -2052,10 +2148,6 @@ REPLACE.tcl.new=        ${PREFIX}/bin/tclsh
 REPLACE_FILES.tcl=      # list of tcl scripts which need to be fixed,
 # relative to ${WRKSRC}, just as in REPLACE_PERL
 </programlisting>
-
-    <note><para>Before March 2006, these variables were called
-    <varname>_REPLACE.*</varname> and
-    <varname>_REPLACE_FILES.*</varname>.</para></note>
 
   </sect2>
 

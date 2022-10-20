@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.44 2022/01/04 20:45:29 hauke Exp $
+# $NetBSD: Makefile,v 1.49 2022/06/30 11:18:42 nia Exp $
 
-DISTNAME=	netatalk-3.1.12
+DISTNAME=	netatalk-3.1.13
 PKGNAME=	${DISTNAME:C/-/3-/}
-PKGREVISION=	20
+PKGREVISION=	2
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=netatalk/}
 EXTRACT_SUFX=	.tar.bz2
@@ -13,7 +13,7 @@ COMMENT=	Netatalk AFP file services
 LICENSE=	gnu-gpl-v2
 
 USE_LIBTOOL=		yes
-USE_TOOLS+=		gmake perl:run
+USE_TOOLS+=		gmake pkg-config perl:run
 GNU_CONFIGURE=		yes
 PKG_CONFIG=		yes
 
@@ -63,12 +63,13 @@ REPLACE_PYTHON+=	libevent/event_rpcgen.py
 PLIST_VARS+=		ea
 .if ${OPSYS} == "FreeBSD" || ${OPSYS} == "DragonFly" \
 	|| ${OPSYS} == "SunOS" || ${OPSYS} == "Linux" \
-	|| (${OPSYS} == "NetBSD" && empty(OS_VERSION:M[0-6].[0-8].*))
+	|| (${OPSYS} == "NetBSD" && ${OPSYS_VERSION} >= 070000)
 PLIST.ea=		yes
 .endif
 
 CONFIGURE_ARGS.NetBSD+=	--without-dtrace
 
+CHECK_RELRO_SKIP+=	libexec/netatalk/uams/*.a
 CHECK_SSP_SKIP+=	libexec/netatalk/uams/*.a
 
 .include "options.mk"

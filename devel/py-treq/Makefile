@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2022/02/05 14:26:37 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2022/06/28 11:33:42 wiz Exp $
 
-DISTNAME=	treq-22.1.0
+DISTNAME=	treq-22.2.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel www python
 MASTER_SITES=	${MASTER_SITE_PYPI:=t/treq/}
 
@@ -11,10 +12,12 @@ COMMENT=	HTTP library for Twisted
 LICENSE=	mit
 
 DEPENDS+=	${PYPKGPREFIX}-attrs-[0-9]*:../../devel/py-attrs
+DEPENDS+=	${PYPKGPREFIX}-hyperlink>=21.0.0:../../www/py-hyperlink
 DEPENDS+=	${PYPKGPREFIX}-incremental-[0-9]*:../../devel/py-incremental
-DEPENDS+=	${PYPKGPREFIX}-six-[0-9]*:../../lang/py-six
 DEPENDS+=	${PYPKGPREFIX}-requests>=2.1.0:../../devel/py-requests
-DEPENDS+=	${PYPKGPREFIX}-twisted>=16.4.0:../../net/py-twisted
+DEPENDS+=	${PYPKGPREFIX}-twisted>=18.7.0:../../net/py-twisted
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 USE_LANGUAGES=	# none
 

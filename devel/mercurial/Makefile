@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.106 2019/05/21 20:55:02 wiz Exp $
+# $NetBSD: Makefile,v 1.108 2022/07/17 18:31:06 wiz Exp $
 
 .include "../../devel/py-mercurial/version.mk"
 

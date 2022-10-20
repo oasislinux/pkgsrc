@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.53 2021/12/21 17:17:20 nros Exp $
+$NetBSD: distinfo,v 1.55 2022/09/17 19:16:53 nros Exp $
 
-BLAKE2s (tortoisehg-6.0.tar.gz) = f456111c7ba258d46d31a525845cab3897026bea75986ed13e320d4f89bdb737
-SHA512 (tortoisehg-6.0.tar.gz) = f146b2ee80ac1257472beaebbcb24fd65984e447f5a06de1fe0a9fe43142ca74320e68f1bd1ab4e3921d0d7e492bcf082072bd34e1145c39ba05a73ec9a33a25
-Size (tortoisehg-6.0.tar.gz) = 8918041 bytes
+BLAKE2s (tortoisehg-6.2.2.tar.gz) = fa3dde22a5d99520fb1f2481d1d7018750f8e8f0c4a75b33c961f8a7b34661ec
+SHA512 (tortoisehg-6.2.2.tar.gz) = f8f39797af8859b0c9413cbb525a9047ebb2dd894db6ec6c12341b990b1d003945d1da6eac23d8a65609e635189dbc808bf9cbf4f3ab235dbb04f393ed4a5667
+Size (tortoisehg-6.2.2.tar.gz) = 8928012 bytes

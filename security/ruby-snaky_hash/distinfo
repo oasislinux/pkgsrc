@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.2 2022/10/09 08:26:15 taca Exp $
+
+BLAKE2s (snaky_hash-2.0.1.gem) = fa3cc7cb093b999e573e61713ab12030815f7b9f1b7f1c8f8e5f6020ad7699a9
+SHA512 (snaky_hash-2.0.1.gem) = c9e00353b09dad85382f76e6c8e642e43e8a9ade2c204781906e243c532740ce291d0849edb0343c7a0be3ba1f8ca60ce790f26f99c47973b55d32dd70597245
+Size (snaky_hash-2.0.1.gem) = 15872 bytes

@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.130 2022/01/19 22:09:00 nia Exp $
+# $NetBSD: Makefile,v 1.139 2022/10/17 09:08:17 adam Exp $
 
-DISTNAME=	gnupg-2.2.33
+DISTNAME=	gnupg-2.2.40
 PKGNAME=	${DISTNAME:S/gnupg-/gnupg2-/}
-PKGREVISION=	1
 CATEGORIES=	security
 MASTER_SITES=	ftp://ftp.gnupg.org/gcrypt/gnupg/
 MASTER_SITES+=	http://mirrors.dotsrc.org/gcrypt/gnupg/
@@ -37,7 +36,7 @@ TEST_TARGET=		check
 LDFLAGS.NetBSD+=	-lintl
 LDFLAGS.Darwin+=	-lintl -lresolv
 LDFLAGS.FreeBSD+=	-lintl
-LDFLAGS.SunOS+=		-lintl -lsocket -lrt
+LDFLAGS.SunOS+=		-lsocket -lrt
 LDFLAGS.Linux+=		-lrt
 
 .include "options.mk"

@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.7 2021/06/08 15:52:59 nia Exp $
+# $NetBSD: Makefile,v 1.10 2022/09/11 12:51:04 wiz Exp $
 
 DISTNAME=	rubberband-1.9.2
+PKGREVISION=	2
 CATEGORIES=	audio
 MASTER_SITES=	https://breakfastquay.com/files/releases/
 EXTRACT_SUFX=	.tar.bz2
@@ -15,6 +16,9 @@ USE_LANGUAGES=	c c++
 
 MESON_ARGS+=	-Dfft=fftw
 MESON_ARGS+=	-Dresampler=libsamplerate
+
+BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,--version-script=${WRKSRC}/vamp/vamp-plugin.map
+BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,--version-script=${WRKSRC}/ladspa/ladspa-plugin.map
 
 PYTHON_FOR_BUILD_ONLY=	tool
 

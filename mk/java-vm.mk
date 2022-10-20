@@ -1,8 +1,7 @@
-# $NetBSD: java-vm.mk,v 1.125 2021/06/22 12:02:23 nia Exp $
+# $NetBSD: java-vm.mk,v 1.130 2022/05/26 21:29:37 tnn Exp $
 #
-# This Makefile fragment handles Java dependencies and make variables,
-# and is meant to be included by packages that require Java either at
-# build-time or at run-time.
+# This Makefile fragment provides a Java VM, either at build-time or at
+# run-time, depending on the package's needs.
 #
 # User-settable variables:
 #
@@ -13,6 +12,7 @@
 #		sun-jdk7 oracle-jdk8
 #		adoptopenjdk11-bin
 #		openjdk-bin openjdk11
+#		openjdk17
 #	Default value: (platform-dependent)
 #
 # Package-settable variables:
@@ -29,9 +29,9 @@
 # USE_JAVA2
 #	When the package needs a Java 2 implementation, this variable
 #	should be set to "yes". It can also be set to "1.4", "1.5", "6".
-#	"7", "8" and "9" require an even more recent implementation.
+#	"7", "8", "9" and "17" require an even more recent implementation.
 #
-#	Possible values: yes no 1.4 1.5 6 7 8 9
+#	Possible values: yes no 1.4 1.5 6 7 8 9 17
 #	Default value: no
 #
 # PKG_JVMS_ACCEPTED
@@ -49,6 +49,7 @@
 #
 # PKG_JVM
 #	The name of the selected Java implementation.
+#	See PKG_JVMS_ACCEPTED for the possible values.
 #
 # PKG_JAVA_HOME
 #	The directory where the JVM is installed.
@@ -74,10 +75,11 @@ PKG_JVMS_ACCEPTED?=	${_PKG_JVMS}
 # This is a list of all of the JDKs that may be used.
 #
 # adoptopenjdk11-bin and openjdk-bin do not provide native NetBSD binaries
+_PKG_JVMS.17=		openjdk17
 .if ${OPSYS} == "NetBSD"
-_PKG_JVMS.9=		openjdk11 adoptopenjdk11-bin openjdk-bin
+_PKG_JVMS.9=		${_PKG_JVMS.17} openjdk11 adoptopenjdk11-bin openjdk-bin
 .else
-_PKG_JVMS.9=		adoptopenjdk11-bin openjdk-bin openjdk11
+_PKG_JVMS.9=		${_PKG_JVMS.17} adoptopenjdk11-bin openjdk-bin openjdk11
 .endif
 _PKG_JVMS.8=		${_PKG_JVMS.9} openjdk8 oracle-jdk8
 _PKG_JVMS.7=		${_PKG_JVMS.8} sun-jdk7
@@ -103,18 +105,21 @@ _PKG_JVM_DEFAULT:=	${PKG_JVM}
 _PKG_JVM_DEFAULT=	${PKG_JVM_DEFAULT}
 .endif
 .if !defined(_PKG_JVM_DEFAULT)
-.  if   !empty(MACHINE_PLATFORM:MNetBSD-[56].*-i386) || \
-        !empty(MACHINE_PLATFORM:MNetBSD-[56].*-x86_64) || \
-        (!empty(MACHINE_PLATFORM:MNetBSD-9.*-aarch64) && \
-          empty(MACHINE_PLATFORM:MNetBSD-9.99.*-aarch64))
+.  if	!empty(MACHINE_PLATFORM:MNetBSD-7.*-i386) || \
+	!empty(MACHINE_PLATFORM:MNetBSD-7.*-x86_64) || \
+	!empty(MACHINE_PLATFORM:MNetBSD-*-sparc64) || \
+	((!empty(MACHINE_PLATFORM:MNetBSD-*-aarch64) || \
+	  !empty(MACHINE_PLATFORM:MNetBSD-*-earmv[67]hf)) && \
+	  ${OPSYS_VERSION} < 099983)
 _PKG_JVM_DEFAULT?=	openjdk8
+.  elif !empty(MACHINE_PLATFORM:MNetBSD-8.*-i386) || \
+	!empty(MACHINE_PLATFORM:MNetBSD-8.*-x86_64)
+_PKG_JVM_DEFAULT?=	openjdk11
 .  elif !empty(MACHINE_PLATFORM:MNetBSD-*-i386) || \
 	!empty(MACHINE_PLATFORM:MNetBSD-*-x86_64) || \
+	!empty(MACHINE_PLATFORM:MNetBSD-*-earmv[67]hf) || \
 	!empty(MACHINE_PLATFORM:MNetBSD-*-aarch64)
-_PKG_JVM_DEFAULT?=	openjdk11
-.  elif !empty(MACHINE_PLATFORM:MNetBSD-*-sparc64) || \
-	!empty(MACHINE_PLATFORM:MNetBSD-*-earmv[67]hf)
-_PKG_JVM_DEFAULT?=	openjdk8
+_PKG_JVM_DEFAULT?=	openjdk17
 .  elif !empty(MACHINE_PLATFORM:MLinux-*-i[3456]86) || \
         !empty(MACHINE_PLATFORM:MLinux-*-x86_64) || \
         !empty(MACHINE_PLATFORM:MDarwin-1[2-9]*-x86_64)
@@ -136,18 +141,6 @@ _PKG_JVM_DEFAULT?=	kaffe
 _ONLY_FOR_PLATFORMS.kaffe= \
 	*-*-alpha *-*-arm *-*-arm32 *-*-i386 *-*-m68k \
 	*-*-mipsel* *-*-sparc *-*-powerpc
-_ONLY_FOR_PLATFORMS.openjdk8= \
-	DragonFly-*-* \
-	Linux-*-i[3-6]86 \
-	Linux-*-x86_64 \
-	NetBSD-*-aarch64 \
-	NetBSD-[5-9]*-i386 \
-	NetBSD-[5-9]*-x86_64 \
-	NetBSD-[7-9]*-sparc64 \
-	NetBSD-[7-9]*-earmv[67]hf \
-	SunOS-*-i386 \
-	SunOS-*-x86_64 \
-	FreeBSD-10.*-x86_64
 _ONLY_FOR_PLATFORMS.sun-jdk7= \
 	Darwin-9.*-i386 Darwin-9.*-x86_64 \
 	Darwin-[1-9][0-9].*-i386 Darwin-[1-9][0-9].*-x86_64 \
@@ -171,10 +164,24 @@ _ONLY_FOR_PLATFORMS.adoptopenjdk11-bin= \
 _ONLY_FOR_PLATFORMS.openjdk-bin= \
 	Linux-*-x86_64 \
 	NetBSD-[6-9]*-x86_64
+_ONLY_FOR_PLATFORMS.openjdk8= \
+	DragonFly-*-* \
+	Linux-*-x86_64			Linux-*-i[3-6]86		\
+	NetBSD-[7-9].*-x86_64		NetBSD-[7-9].*-i386		\
+	NetBSD-[7-9].*-sparc64		\
+	NetBSD-[8-9].*-aarch64		NetBSD-[8-9].*-earmv[67]hf	\
+	SunOS-*-x86_64			SunOS-*-i386			\
+	FreeBSD-10.*-x86_64
 _ONLY_FOR_PLATFORMS.openjdk11= \
-	NetBSD-[7-9]*-x86_64 \
-	NetBSD-[7-9]*-i386 \
-	NetBSD-*-aarch64
+	NetBSD-[8-9].*-x86_64		NetBSD-[8-9].*-i386		\
+	NetBSD-1[0-9].*-x86_64		NetBSD-1[0-9].*i386		\
+	NetBSD-9.99.*-aarch64		NetBSD-9.99.*-earmv[67]hf	\
+	NetBSD-1[0-9].*-aarch64		NetBSD-1[0-9].*-earmv[67]hf
+_ONLY_FOR_PLATFORMS.openjdk17= \
+	NetBSD-9.*-x86_64		NetBSD-9.*-i386			\
+	NetBSD-1[0-9].*-x86_64		NetBSD-1[0-9].*-i386		\
+	NetBSD-9.99.*-aarch64		NetBSD-9.99.*-earmv[67]hf	\
+	NetBSD-1[0-9].*-aarch64		NetBSD-1[0-9].*-earmv[67]hf
 
 # Set ONLY_FOR_PLATFORM based on accepted JVMs
 .for _jvm_ in ${PKG_JVMS_ACCEPTED}
@@ -197,6 +204,7 @@ _JAVA_PKGBASE.oracle-jdk8=	oracle-jre8
 _JAVA_PKGBASE.adoptopenjdk11-bin=	adoptopenjdk11-bin
 _JAVA_PKGBASE.openjdk-bin=	openjdk-bin
 _JAVA_PKGBASE.openjdk11=	openjdk11
+_JAVA_PKGBASE.openjdk17=	openjdk17
 
 # The following is copied from the respective JVM Makefiles.
 _JAVA_NAME.kaffe=		kaffe
@@ -206,6 +214,7 @@ _JAVA_NAME.oracle-jdk8=		oracle8
 _JAVA_NAME.adoptopenjdk11-bin=		adoptopenjdk11-bin
 _JAVA_NAME.openjdk-bin=		openjdk-bin
 _JAVA_NAME.openjdk11=		openjdk11
+_JAVA_NAME.openjdk17=		openjdk17
 
 # Mark the acceptable JVMs and check which JVM packages are installed.
 .for _jvm_ in ${_PKG_JVMS_ACCEPTED}
@@ -262,6 +271,7 @@ BUILDLINK_API_DEPENDS.oracle-jre8?=	oracle-jre8-[0-9]*
 BUILDLINK_API_DEPENDS.adoptopenjdk11-bin?=	adoptopenjdk11-bin-[0-9]*
 BUILDLINK_API_DEPENDS.openjdk-bin?=	openjdk-bin-[0-9]*
 BUILDLINK_API_DEPENDS.openjdk11?=	openjdk11-[0-9]*
+BUILDLINK_API_DEPENDS.openjdk17?=	openjdk17-[0-9]*
 
 _JRE.kaffe=		kaffe
 _JRE.openjdk8=		openjdk8
@@ -270,6 +280,7 @@ _JRE.oracle-jdk8=	oracle-jre8
 _JRE.adoptopenjdk11-bin=	adoptopenjdk11-bin
 _JRE.openjdk-bin=	openjdk-bin
 _JRE.openjdk11=		openjdk11
+_JRE.openjdk17=		openjdk17
 
 _JAVA_BASE_CLASSES=	classes.zip
 
@@ -304,6 +315,11 @@ UNLIMIT_RESOURCES+=	datasize virtualsize
 _JDK_PKGSRCDIR=		../../lang/openjdk11
 _JRE_PKGSRCDIR=		../../lang/openjdk11
 _JAVA_HOME=		${LOCALBASE}/java/openjdk11
+UNLIMIT_RESOURCES+=	datasize virtualsize
+.elif ${_PKG_JVM} == "openjdk17"
+_JDK_PKGSRCDIR=		../../lang/openjdk17
+_JRE_PKGSRCDIR=		../../lang/openjdk17
+_JAVA_HOME=		${LOCALBASE}/java/openjdk17
 UNLIMIT_RESOURCES+=	datasize virtualsize
 .endif
 

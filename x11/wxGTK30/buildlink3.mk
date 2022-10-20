@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.25 2021/12/08 16:03:03 adam Exp $
+# $NetBSD: buildlink3.mk,v 1.28 2022/08/11 05:09:33 gutteridge Exp $
 
 BUILDLINK_TREE+=	wxGTK30
 
@@ -6,7 +6,7 @@ BUILDLINK_TREE+=	wxGTK30
 WXGTK30_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.wxGTK30+=	wxGTK30>=3.0.1
-BUILDLINK_ABI_DEPENDS.wxGTK30+=	wxGTK30>=3.0.5.1nb4
+BUILDLINK_ABI_DEPENDS.wxGTK30+=	wxGTK30>=3.0.5.1nb8
 BUILDLINK_PKGSRCDIR.wxGTK30?=	../../x11/wxGTK30
 
 BUILDLINK_INCDIRS.wxGTK30+=	include/wx-3.0
@@ -29,7 +29,7 @@ pkgbase := wxGTK30
 .if ${OPSYS} != "Darwin"
 .include "../../graphics/MesaLib/buildlink3.mk"
 .include "../../graphics/glu/buildlink3.mk"
-.  if !empty(PKG_BUILD_OPTIONS.wxGTK30:Mgtk2)
+.  if ${PKG_BUILD_OPTIONS.wxGTK30:Mgtk2}
 .include "../../x11/gtk2/buildlink3.mk"
 .  else
 .include "../../x11/gtk3/buildlink3.mk"

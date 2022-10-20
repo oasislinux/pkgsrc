@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.6 2021/12/08 16:04:37 adam Exp $
+# $NetBSD: Makefile,v 1.10 2022/09/11 12:51:45 wiz Exp $
 
 DISTNAME=	lugaru-${VERSION}
 VERSION=	1.2
-PKGREVISION=	4
+PKGREVISION=	7
 CATEGORIES=	games
 MASTER_SITES=	https://bitbucket.org/osslugaru/lugaru/downloads/
 EXTRACT_SUFX=	.tar.xz
 
-MAINTAINER=	cfkoch@edgebsd.org
+MAINTAINER=	charlotte@NetBSD.org
 COMMENT=	Cross-platform third-person action game from Wolfire
 HOMEPAGE=	https://osslugaru.gitlab.io/
 LICENSE=	gnu-gpl-v2 AND cc-by-sa-v3.0 AND cc-by-sa-v4.0

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.14 2020/04/24 09:24:34 nia Exp $
+# $NetBSD: Makefile.common,v 1.16 2022/09/30 07:31:00 nros Exp $
 
 IM_MAJOR_VER=		6.9.11
 IM_MINOR_VER=		7
@@ -14,7 +14,7 @@ DISTNAME=	ImageMagick-${DISTSUFFIX}
 DISTVERSION=	${DISTSUFFIX:S/-/./}
 
 CATEGORIES=	graphics
-MASTER_SITES=	https://www.imagemagick.org/download/releases/
+MASTER_SITES=	https://imagemagick.org/archive/releases/
 EXTRACT_SUFX=	.tar.xz
 
 HOMEPAGE=	http://www.imagemagick.org/
@@ -27,7 +27,6 @@ GNU_CONFIGURE=		yes
 # For things for which we do not specify an explicit dependency above, disable
 # so that we don't cause implicit "hidden" dependencies.
 CONFIGURE_ARGS+=	--without-dps
-CONFIGURE_ARGS+=	--without-fpx
 CONFIGURE_ARGS+=	--without-gvc
 CONFIGURE_ARGS+=	--without-jbig
 CONFIGURE_ARGS+=	--without-lqr

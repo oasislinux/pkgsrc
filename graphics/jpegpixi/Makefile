@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.17 2017/08/16 20:45:39 wiz Exp $
+# $NetBSD: Makefile,v 1.19 2022/09/20 07:00:55 nia Exp $
 
 DISTNAME=		jpegpixi-1.1.1
 PKGREVISION=		3
@@ -11,9 +11,6 @@ MAINTAINER=		gdt@NetBSD.org
 COMMENT=		Low-loss JPEG interpolator to remove bad pixels
 
 GNU_CONFIGURE=		yes
-USE_PKGLOCALEDIR=	yes
-
-LIBS.SunOS+=		-lintl
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../mk/jpeg.buildlink3.mk"

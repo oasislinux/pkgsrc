@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.19 2021/06/07 00:49:24 markd Exp $
+# $NetBSD: Makefile,v 1.22 2022/08/22 11:32:08 markd Exp $
 
 DISTNAME=	collection-plaingeneric
-PKGNAME=	texlive-${DISTNAME}-2021pre1
+PKGNAME=	texlive-${DISTNAME}-2022pre1
 CATEGORIES=	meta-pkgs
 MASTER_SITES=	# empty
-TEXLIVE_REV=	58874
+TEXLIVE_REV=	64113
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.tug.org/texlive/
@@ -34,6 +34,7 @@ DEPENDS+=	tex-eijkhout-[0-9]*:../../print/tex-eijkhout
 # depend epigram
 DEPENDS+=	tex-epsf>=2.7.4:../../print/tex-epsf
 DEPENDS+=	tex-epsf-dvipdfmx-[0-9]*:../../print/tex-epsf-dvipdfmx
+# depend expex-acro
 # depend expkv
 # depend expkv-cs
 # depend expkv-def
@@ -54,6 +55,7 @@ DEPENDS+=	tex-graphics-pln-[0-9]*:../../graphics/tex-graphics-pln
 # depend gtl
 # depend hlist
 DEPENDS+=	tex-hyplain-[0-9]*:../../print/tex-hyplain
+# depend inputnormalization
 # depend insbox
 DEPENDS+=	tex-js-misc-[0-9]*:../../print/tex-js-misc
 DEPENDS+=	tex-kastrup>=2010:../../math/tex-kastrup
@@ -104,9 +106,11 @@ DEPENDS+=	tex-tex-ps>=2010:../../graphics/tex-tex-ps
 DEPENDS+=	tex-tex4ht-[0-9]*:../../print/tex-tex4ht
 # depend texapi
 # depend texdate
+# depend texdimens
 DEPENDS+=	tex-texinfo-[0-9]*:../../print/tex-texinfo
 DEPENDS+=	tex-timetable-[0-9]*:../../print/tex-timetable
 DEPENDS+=	tex-tracklang-[0-9]*:../../print/tex-tracklang
+# depend transparent-io
 DEPENDS+=	tex-treetex-[0-9]*:../../print/tex-treetex
 # depend trigonometry
 DEPENDS+=	tex-ulem>=2013:../../print/tex-ulem

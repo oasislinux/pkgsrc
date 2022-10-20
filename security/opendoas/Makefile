@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.3 2021/11/26 08:40:40 pin Exp $
+# $NetBSD: Makefile,v 1.5 2022/07/04 08:25:58 pin Exp $
 
-DISTNAME=	opendoas-6.8.1
+DISTNAME=	opendoas-6.8.2
 CATEGORIES=	security
 MASTER_SITES=	${MASTER_SITE_GITHUB:=duncaen/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
@@ -13,6 +13,9 @@ LICENSE=	isc
 CONFLICTS=	doas-[0-9]*
 
 WRKSRC=		${WRKDIR}/OpenDoas-${PKGVERSION_NOREV}
+
+CFLAGS.NetBSD+=		-D_OPENBSD_SOURCE
+LDFLAGS.NetBSD+=	-lutil
 
 SUBST_CLASSES+=		paths
 SUBST_MESSAGE.paths=	Fixing hardcoded paths.

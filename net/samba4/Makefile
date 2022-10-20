@@ -1,15 +1,6 @@
-# $NetBSD: Makefile,v 1.137 2022/01/31 13:45:12 taca Exp $
+# $NetBSD: Makefile,v 1.150 2022/09/12 16:04:57 adam Exp $
 
-# WARNING: DO NOT UPDATE WITHOUT RESOLVING THIS ISSUE:
-#
-# Samba 4.14 is incompatible with procfs in NetBSD 9.2 and other
-# BSDs!
-#
-# Please do not update without testing on NetBSD 9.2!
-#
-# https://bugzilla.samba.org/show_bug.cgi?id=14727
-#
-DISTNAME=	samba-4.13.17
+DISTNAME=	samba-4.16.5
 CATEGORIES=	net
 MASTER_SITES=	https://download.samba.org/pub/samba/stable/
 
@@ -26,6 +17,7 @@ GCC_REQD+=	4.4
 BUILD_DEPENDS+=	libxslt-[0-9]*:../../textproc/libxslt
 BUILD_DEPENDS+=	docbook-xml-[0-9]*:../../textproc/docbook-xml
 BUILD_DEPENDS+=	docbook-xsl>=1.79.2:../../textproc/docbook-xsl
+DEPENDS+=	p5-JSON>=4.05:../../converters/p5-JSON
 DEPENDS+=	p5-Parse-Yapp>=1.05:../../devel/p5-Parse-Yapp
 DEPENDS+=	${PYPKGPREFIX}-dns-[0-9]*:../../net/py-dns
 DEPENDS+=	${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
@@ -64,7 +56,7 @@ FILES_SUBST+=		SMB_PID=${SMB_PID}
 
 # mktemp is useful for the replacement adduser script, but don't require
 # a full dependency since it's not actually needed by samba.
-USE_TOOLS+=		gmake mktemp perl:run pkg-config flex
+USE_TOOLS+=		gmake mktemp perl:run pkg-config flex bison
 
 .if ${OPSYS} == "NetBSD"
 USE_GNU_ICONV=		yes	# FIXME: something doesn't work on NetBSD
@@ -99,7 +91,6 @@ CONFIGURE_ARGS+=	--with-privatelibdir=${SMB_PRIVATELIB}
 CONFIGURE_ARGS+=	--with-privileged-socket-dir=${SMB_PRIVSOCKETS}
 CONFIGURE_ARGS+=	--with-configdir=${SMB_CONFIG}
 CONFIGURE_ARGS+=	--with-libiconv=${BUILDLINK_PREFIX.iconv}
-#CONFIGURE_ARGS+=	--bundled-libraries=com_err
 CONFIGURE_ARGS+=	--abi-check-disable
 CONFIGURE_ARGS+=	--disable-symbol-versions
 .if defined(MAKE_JOBS) && !empty(MAKE_JOBS) && !(defined(MAKE_JOBS_SAFE) && !empty(MAKE_JOBS_SAFE:M[nN][oO]))
@@ -125,7 +116,7 @@ LDFLAGS+=		${COMPILER_RPATH_FLAG}${SMB_PRIVATELIB}
 CFLAGS.SunOS+=		-DHAVE_SOLARIS_GETGRENT_R
 # workaround https://bugzilla.samba.org/show_bug.cgi?id=12502 for now
 CFLAGS.SunOS+=		-DMSG_NOSIGNAL=0
-LDFLAGS.SunOS+=		-lsocket -lnsl -lsendfile
+LDFLAGS.SunOS+=		-lsocket -lsendfile
 
 .include "options.mk"
 
@@ -168,7 +159,7 @@ SUBST_SED.docbook+=	-e 's,http://docbook.sourceforge.net/release/xsl/current,${P
 SUBST_CLASSES+=		paths
 SUBST_MESSAGE.paths=	Fixing paths.
 SUBST_FILES.paths=	${WRKDIR}/adduser.sh ${WRKDIR}/deluser.sh
-SUBST_FILES.paths+=	source3/script/findsmb.in source4/heimdal_build/roken.h
+SUBST_FILES.paths+=	third_party/heimdal_build/roken.h
 SUBST_STAGE.paths=	pre-configure
 SUBST_SED.paths+=	-e 's,@PERL@,${PERL5},g'
 SUBST_VARS.paths=	AWK CAT MKTEMP RM PWD_MKDB SH PERL PKG_SYSCONFBASE
@@ -217,7 +208,7 @@ REPLACE_PYTHON+=	source4/scripting/bin/*
 .endif
 .include "../../archivers/libarchive/buildlink3.mk"
 .include "../../converters/libiconv/buildlink3.mk"
-BUILDLINK_API_DEPENDS.ldb+=	ldb>=2.2.3
+BUILDLINK_API_DEPENDS.ldb+=	ldb>=2.5.2
 .include "../../databases/ldb/buildlink3.mk"
 .include "../../databases/lmdb/buildlink3.mk"
 .include "../../devel/cmocka/buildlink3.mk"

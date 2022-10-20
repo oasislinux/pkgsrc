@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.17 2021/12/08 16:02:55 adam Exp $
+# $NetBSD: Makefile,v 1.22 2022/06/28 11:37:55 wiz Exp $
 
-DISTNAME=	liblxqt-1.0.0
-PKGREVISION=	1
+DISTNAME=	liblxqt-1.1.0
+PKGREVISION=	2
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_GITHUB:=lxqt/}
 GITHUB_RELEASE=	${PKGVERSION_NOREV}
@@ -22,8 +22,11 @@ CMAKE_ARG_PATH=	..
 pre-configure:
 	${MKDIR} -p ${WRKSRC}/build
 
-TOOL_DEPENDS+=	lxqt-build-tools>=0.10.0:../../devel/lxqt-build-tools
+TOOL_DEPENDS+=	lxqt-build-tools>=0.11.0:../../devel/lxqt-build-tools
 TOOL_DEPENDS+=	qt5-qttools-[0-9]*:../../x11/qt5-qttools
+
+LDFLAGS.SunOS+=			-lsocket
+BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,-Bsymbolic-functions
 
 .include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../x11/qt5-qtx11extras/buildlink3.mk"

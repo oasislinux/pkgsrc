@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.54 2021/12/02 18:15:26 nia Exp $
+# $NetBSD: Makefile,v 1.56 2022/07/19 11:59:05 hauke Exp $
 
 DISTNAME=	xf86-video-ati-19.1.0
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_XORG:=driver/}
 EXTRACT_SUFX=	.tar.bz2
@@ -25,7 +25,7 @@ CONFIGURE_ARGS+=	--enable-glamor
 
 CONFIGURE_ENV.SunOS+=	DRIVER_MAN_SUFFIX=4
 
-X11_BUILTIN_NAME=	xf86-video-ati
+X11_DRV_NAME=	ati
 .include "../../meta-pkgs/modular-xorg/avoid-duplicate.mk"
 .include "../../devel/zlib/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libdrm+=	libdrm>=2.4.58

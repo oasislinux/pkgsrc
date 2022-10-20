@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.46 2022/01/10 01:46:33 ryoon Exp $
+# $NetBSD: Makefile,v 1.49 2022/09/11 12:51:51 wiz Exp $
 
 DISTNAME=	gource-0.51
-PKGREVISION=	8
+PKGREVISION=	11
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_GITHUB:=acaudwell/}
 GITHUB_PROJECT=	Gource

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.10 2021/12/08 16:05:36 adam Exp $
+# $NetBSD: Makefile,v 1.12 2022/08/11 05:09:00 gutteridge Exp $
 #
 
-PKGREVISION= 7
+PKGREVISION= 9
 .include "../../math/xylib/Makefile.common"
 
 PKGNAME=	${DISTNAME:S/lib/convert/g}

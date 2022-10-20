@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.95 2022/01/28 09:07:58 adam Exp $
+# $NetBSD: Makefile,v 1.99 2022/10/07 10:10:05 adam Exp $
 
 .include "../../devel/git/Makefile.common"
 
@@ -67,6 +67,7 @@ CONFIGURE_ENV+=		gitexecdir=${GITCOREDIR}
 
 MAKE_FLAGS+=		INSTALL=${INSTALL:Q}
 MAKE_ENV+=		PERLLIBDIR=${PERL5_INSTALLVENDORLIB}
+MAKE_ENV+=		NO_GITWEB=1
 
 GIT_TEMPLATE_INSTDIR=	${EGDIR}/${GIT_TEMPLATEDIR}
 MAKE_ENV+=		GIT_TEMPLATE_INSTDIR=${GIT_TEMPLATE_INSTDIR}
@@ -88,7 +89,7 @@ SUBST_MESSAGE.test-shell=	Use bash as TEST_SHELL_PATH
 SUBST_STAGE.test-shell=		pre-build
 SUBST_SED.test-shell=		-e '/^TEST_SHELL_PATH/ s;$$(SHELL_PATH);${TOOLS_BASH};'
 
-LDFLAGS.SunOS+=		-lintl -lnsl
+LDFLAGS.SunOS+=		-lnsl
 
 .include "../../mk/compiler.mk"
 .if !empty(PKGSRC_COMPILER:Mclang)

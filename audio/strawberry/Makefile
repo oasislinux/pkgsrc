@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.29 2022/01/30 13:57:49 nia Exp $
+# $NetBSD: Makefile,v 1.40 2022/09/11 12:51:23 wiz Exp $
 
-DISTNAME=	strawberry-1.0.1
+DISTNAME=	strawberry-1.0.7
+PKGREVISION=	1
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_GITHUB:=strawberrymusicplayer/}
 GITHUB_RELEASE=	${PKGVERSION_NOREV}
 EXTRACT_SUFX=	.tar.xz
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
+MAINTAINER=	nia@NetBSD.org
 HOMEPAGE=	https://www.strawberrymusicplayer.org/
 COMMENT=	Music player and music collection organizer (based on Clementine)
 LICENSE=	gnu-gpl-v3
@@ -16,6 +17,7 @@ TOOL_DEPENDS+=	qt5-qttools-[0-9]*:../../x11/qt5-qttools
 USE_CMAKE=	yes
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	pkg-config
+GCC_REQD+=	7 # std::optional
 
 DEPENDS+=	gst-plugins1-flac-[0-9]*:../../audio/gst-plugins1-flac
 DEPENDS+=	gst-plugins1-mpg123-[0-9]*:../../audio/gst-plugins1-mpg123
@@ -38,6 +40,14 @@ DEPENDS+=	gst-plugins1-oss-[0-9]*:../../audio/gst-plugins1-oss
 
 .if ${OPSYS} == "NetBSD"
 PREFER.sqlite3=	pkgsrc # fts5
+# This package will link against libstdc++.so from the pkgsrc GCC when the
+# base OS GCC doesn't meet the minimum requirement. Thus we do this so the
+# appropriate gcc-libs package will be captured as a dependency, otherwise
+# binary packages will be broken.
+.  if ${OPSYS_VERSION} < 090000
+USE_PKGSRC_GCC=		yes
+USE_PKGSRC_GCC_RUNTIME=	yes
+.  endif
 .endif
 
 INSTALLATION_DIRS+=	${PKGMANDIR}/man1
@@ -61,6 +71,7 @@ post-install:
 .include "../../math/fftw/buildlink3.mk"
 .include "../../misc/libcdio/buildlink3.mk"
 .include "../../multimedia/gst-plugins1-base/buildlink3.mk"
+.include "../../multimedia/gst-plugins1-good/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../x11/qt5-qtbase/buildlink3.mk"

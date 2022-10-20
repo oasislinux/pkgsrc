@@ -1,0 +1,15 @@
+$NetBSD: patch-configure,v 1.1 2022/07/01 23:31:49 rin Exp $
+
+Fix SunOS flags.
+
+--- configure.orig	2022-07-02 08:12:29.625197786 +0900
++++ configure	2022-07-02 08:12:43.989244826 +0900
+@@ -14101,7 +14101,7 @@
+     sunos*)       DLLDFLAGS="${DLLDFLAGS=-assert nodefinitions}" ;;
+     sysv4*|esix*) DLLDFLAGS="${DLLDFLAGS=-G $ldflags}" ;;
+     aix*)         DLLDFLAGS="${DLLDFLAGS=-G -bexpall -lc}" ;;
+-    solaris*|sysv4*|esix*) DLLDFLAGS="${DLLDFLAGS=-G}" ;;
++    solaris*|sysv4*|esix*) DLLDFLAGS="${DLLDFLAGS=-shared}" ;;
+     darwin*)      DLLDFLAGS="${DLLDFLAGS=-bundle -flat_namespace -undefined suppress}" ;;
+     beos*|haiku*) DLLDFLAGS="${DLLDFLAGS=-nostart}" ;;
+     openbsd*)

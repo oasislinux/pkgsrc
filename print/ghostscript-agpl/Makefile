@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.65 2022/01/22 13:51:55 triaxx Exp $
+# $NetBSD: Makefile,v 1.68 2022/07/14 23:46:26 dholland Exp $
 
 DISTNAME=	ghostscript-${GS_VERSION}
 PKGNAME=	${DISTNAME:S/ghostscript/ghostscript-agpl/}

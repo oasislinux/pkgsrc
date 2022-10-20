@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.18 2021/03/08 08:13:08 jaapb Exp $
+# $NetBSD: Makefile,v 1.20 2022/05/24 18:59:35 jaapb Exp $
 
-DISTNAME=	uutf-1.0.2
+DISTNAME=	uutf-1.0.3
 PKGNAME=	ocaml-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	textproc
 MASTER_SITES=	http://erratique.ch/software/uutf/releases/
 EXTRACT_SUFX=	.tbz
@@ -15,7 +14,7 @@ LICENSE=	isc
 OCAML_USE_TOPKG=	yes
 INSTALLATION_DIRS+=	bin share/doc/uutf
 
-.include "../../mk/ocaml.mk"
+.include "../../lang/ocaml/ocaml.mk"
 
 # Normally, we'd do this using opam-installer, but that requires
 # this package.

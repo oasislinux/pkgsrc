@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.2 2022/08/28 21:38:42 mef Exp $
+
+BLAKE2s (lens-aeson-1.2.2.tar.gz) = 89240eef538a307c71931d5d758e6f79131ca2ec6229fee0fcbf067d73e5484b
+SHA512 (lens-aeson-1.2.2.tar.gz) = 91aac545d7e296879176ead2870b36e02a23c238c2378e4e91bd6e3feb14407b7be8e072240a81effbdc864952552ad7f273546e3718ad93a619e5616388536d
+Size (lens-aeson-1.2.2.tar.gz) = 8290 bytes

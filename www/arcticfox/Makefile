@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.2 2022/02/08 10:49:04 nia Exp $
+# $NetBSD: Makefile,v 1.15 2022/10/12 16:09:28 nia Exp $
 
-DISTNAME=	arcticfox-39.0
+DISTNAME=	arcticfox-40.0
 CATEGORIES=	www
-MASTER_SITES=	${MASTER_SITE_GITHUB:=wicknix/}
+MASTER_SITES=	${MASTER_SITE_GITHUB:=rmottola/}
 GITHUB_PROJECT=	Arctic-Fox
 GITHUB_TAG=	v${PKGVERSION_NOREV}
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
+MAINTAINER=	nia@NetBSD.org
 HOMEPAGE=	https://github.com/wicknix/Arctic-Fox
 COMMENT=	Web browser for aging systems, forked from Firefox
 LICENSE=	mpl-1.1
@@ -20,6 +20,7 @@ USE_LANGUAGES=	c c++
 CONFIGURE_ARGS+=	--disable-crashreporter
 CONFIGURE_ARGS+=	--disable-tests
 CONFIGURE_ARGS+=	--disable-debug
+CONFIGURE_ARGS+=	--disable-gstreamer
 CONFIGURE_ARGS+=	--disable-updater
 CONFIGURE_ARGS+=	--disable-mozril-geoloc
 CONFIGURE_ARGS+=	--disable-webrtc
@@ -80,9 +81,9 @@ REPLACE_PYTHON+=		xpcom/idl-parser/xpidl/xpidl.py
 REPLACE_PYTHON+=		xpcom/typelib/xpt/tools/xpt.py
 
 PYTHON_VERSIONS_ACCEPTED=	27
+PYTHON_FOR_BUILD_ONLY=		tool
 TOOL_DEPENDS+=			${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 
-NOT_PAX_MPROTECT_SAFE+=		bin/arcticfox
 NOT_PAX_MPROTECT_SAFE+=		lib/${PKGNAME_NOREV}/arcticfox
 NOT_PAX_MPROTECT_SAFE+=		lib/${PKGNAME_NOREV}/arcticfox-bin
 
@@ -93,6 +94,8 @@ pre-configure:
 	${CP} ${FILESDIR}/cubeb_sun.c ${WRKSRC}/media/libcubeb/src
 
 post-install:
+	${RM} -rf ${DESTDIR}${PREFIX}/include
+	${RM} -rf ${DESTDIR}${PREFIX}/share/idl
 	${INSTALL_DATA} ${WRKSRC}/browser/branding/arcticfox/default16.png \
 	    ${DESTDIR}${PREFIX}/share/icons/hicolor/16x16/apps/arcticfox.png
 	${INSTALL_DATA} ${WRKSRC}/browser/branding/arcticfox/default32.png \
@@ -107,7 +110,7 @@ post-install:
 .include "options.mk"
 .include "../../archivers/bzip2/buildlink3.mk"
 .if ${OPSYS} == "Linux"
-.include "../../audio/alsa-lib/buildlink3.mk"
+.  include "../../audio/alsa-lib/buildlink3.mk"
 .endif
 .include "../../devel/nspr/buildlink3.mk"
 .include "../../devel/nss/buildlink3.mk"
@@ -129,4 +132,5 @@ BUILDLINK_API_DEPENDS.libevent+=	libevent>=1.1
 .include "../../x11/libXt/buildlink3.mk"
 .include "../../x11/pixman/buildlink3.mk"
 #.include "../../mk/jpeg.buildlink3.mk"
+.include "../../mk/atomic64.mk"
 .include "../../mk/bsd.pkg.mk"

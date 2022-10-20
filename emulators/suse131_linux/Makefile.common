@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.23 2021/05/11 14:57:56 hauke Exp $
+# $NetBSD: Makefile.common,v 1.26 2022/10/01 15:09:02 wiz Exp $
 #
 # used by emulators/suse131_alsa/Makefile
 # used by emulators/suse131_aspell/Makefile
@@ -13,6 +13,7 @@
 # used by emulators/suse131_glib2/Makefile
 # used by emulators/suse131_glx/Makefile
 # used by emulators/suse131_gtk2/Makefile
+# used by emulators/suse131_gtk3/Makefile
 # used by emulators/suse131_krb5/Makefile
 # used by emulators/suse131_libSDL/Makefile
 # used by emulators/suse131_libaudiofile/Makefile
@@ -67,6 +68,9 @@ EMUL_PLATFORMS+=	linux-i386
 ONLY_FOR_PLATFORM+=	NetBSD-6.99*-x86_64
 ONLY_FOR_PLATFORM+=	NetBSD-[7-9]*-x86_64
 ONLY_FOR_PLATFORM+=	FreeBSD-1[0-9]*-x86_64
+
+CHECK_PIE_SUPPORTED=	no
+CHECK_RELRO_SUPPORTED=	no
 
 .include "../../mk/bsd.prefs.mk"
 

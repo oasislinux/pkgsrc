@@ -1,15 +1,17 @@
-# $NetBSD: Makefile,v 1.20 2021/12/08 16:03:07 adam Exp $
+# $NetBSD: Makefile,v 1.27 2022/09/11 12:51:14 wiz Exp $
 
 DISTNAME=	buzztrax-0.10.2
-PKGREVISION=	12
+PKGREVISION=	18
 CATEGORIES=	audio
 MASTER_SITES=	https://files.buzztrax.org/releases/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	https://buzztrax.org/
+HOMEPAGE=	https://www.buzztrax.org/
 COMMENT=	Modular, free, open source music studio
 LICENSE=	gnu-lgpl-v2.1
 
+# wavenc
+TOOL_DEPENDS+=	gst-plugins1-good-[0-9]*:../../multimedia/gst-plugins1-good
 TOOL_DEPENDS+=	libxslt-[0-9]*:../../textproc/libxslt
 
 CONFLICTS+=	buzztard-[0-9]*

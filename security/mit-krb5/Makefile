@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.113 2021/08/26 06:31:33 adam Exp $
+# $NetBSD: Makefile,v 1.115 2022/07/29 20:22:44 jperkin Exp $
 
-BRANCHNAME=	1.18
-DISTNAME=	krb5-${BRANCHNAME}.4
+BRANCHNAME=	1.19
+DISTNAME=	krb5-${BRANCHNAME}.3
 PKGNAME=	mit-${DISTNAME}
 CATEGORIES=	security
 # It is not clear how stable this URL scheme is.

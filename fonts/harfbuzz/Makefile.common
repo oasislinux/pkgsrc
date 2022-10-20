@@ -1,7 +1,7 @@
-# $NetBSD: Makefile.common,v 1.12 2022/02/06 17:13:17 adam Exp $
+# $NetBSD: Makefile.common,v 1.27 2022/09/26 17:33:52 wiz Exp $
 # used by fonts/harfbuzz-icu/Makefile
 
-DISTNAME=	harfbuzz-3.3.2
+DISTNAME=	harfbuzz-5.2.0
 CATEGORIES=	fonts
 MASTER_SITES=	${MASTER_SITE_GITHUB:=harfbuzz/}
 GITHUB_RELEASE=	${PKGVERSION_NOREV}
@@ -14,7 +14,7 @@ LICENSE=	mit
 WRKSRC=		${WRKDIR}/${DISTNAME}
 
 DISTINFO_FILE=	${.CURDIR}/../../fonts/harfbuzz/distinfo
-#PATCHDIR=	${.CURDIR}/../../fonts/harfbuzz/patches
+PATCHDIR=	${.CURDIR}/../../fonts/harfbuzz/patches
 
 # C++11
 GCC_REQD+=	4.9
@@ -27,7 +27,7 @@ USE_TOOLS+=	pkg-config
 
 # cairo/fontconfig are only needed for command line utilities
 MESON_ARGS+=	-Dcairo=disabled
-MESON_ARGS+=	-Dintrospection=disabled
+MESON_ARGS+=	-Dintrospection=enabled
 MESON_ARGS+=	-Dbenchmark=disabled
 
 PLIST_VARS+=		graphite2
@@ -38,6 +38,7 @@ PLIST.graphite2=	yes
 MESON_ARGS+=		-Dgraphite=disabled
 .endif
 
+PLIST_SUBST=		SOVER=${PKGVERSION_NOREV:S/./0/g}
 PKGCONFIG_OVERRIDE+=	output/meson-private/*.pc
 
 PKGCONFIG_OVERRIDE_STAGE=	pre-install
@@ -76,6 +77,8 @@ PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 .include "../../devel/meson/build.mk"
 .include "../../devel/glib2/buildlink3.mk"
+BUILDLINK_DEPMETHOD.gobject-introspection+=	build
+.include "../../devel/gobject-introspection/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 #BUILDLINK_API_DEPENDS.cairo+=	cairo>=1.8.0
 #.include "../../graphics/cairo/buildlink3.mk"

@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.53 2021/05/24 19:52:26 wiz Exp $
+# $NetBSD: Makefile,v 1.55 2022/07/29 05:59:41 rin Exp $
 #
 
 DISTNAME=	Image-Imlib2-2.03
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	19
+PKGREVISION=	21
 CATEGORIES=	graphics perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Image/}
 
@@ -12,8 +12,9 @@ HOMEPAGE=	https://metacpan.org/release/Image-Imlib2
 COMMENT=	Interface to the Imlib2 image library
 LICENSE=	${PERL5_LICENSE}
 
-# versions before that contained a broken imlib2-config
-BUILDLINK_API_DEPENDS.imlib2+=	imlib2>=1.2.0nb2
+USE_TOOLS+=	pkg-config
+
+BUILDLINK_API_DEPENDS.imlib2+=	imlib2>=1.9.1
 
 PERL5_PACKLIST=		auto/Image/Imlib2/.packlist
 PERL5_MODULE_TYPE=	Module::Build

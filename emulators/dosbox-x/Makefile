@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.32 2021/12/08 16:04:15 adam Exp $
+# $NetBSD: Makefile,v 1.41 2022/09/27 20:58:23 wiz Exp $
 
-DISTNAME=	dosbox-x-0.83.16
-PKGREVISION=	3
+DISTNAME=	dosbox-x-0.83.25
+PKGREVISION=	4
 CATEGORIES=	emulators
 MASTER_SITES=	${MASTER_SITE_GITHUB:=joncampbell123/}
 GITHUB_TAG=	dosbox-x-v${PKGVERSION_NOREV}
@@ -15,6 +15,8 @@ WRKSRC=		${WRKDIR}/dosbox-x-${GITHUB_TAG}
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	autoconf autoreconf automake pkg-config
 USE_LANGUAGES=	c c++
+
+TOOL_DEPENDS+=	dos2unix-[0-9]*:../../converters/dos2unix
 
 # C++11
 GCC_REQD+=	4.7
@@ -44,18 +46,11 @@ CONFIGURE_ARGS+=	--disable-dynamic-core
 NOT_PAX_MPROTECT_SAFE+=	bin/dosbox-x
 .endif
 
-PKGCONFIG_OVERRIDE+=	vs2015/libpng/libpng.pc.in
-PKGCONFIG_OVERRIDE+=	vs2015/sdl/sdl.pc.in
-PKGCONFIG_OVERRIDE+=	vs2015/sdl2/sdl2.pc.in
-PKGCONFIG_OVERRIDE+=	vs2015/sdlnet/SDL_net.pc.in
-PKGCONFIG_OVERRIDE+=	vs2015/zlib/zlib.pc.in
-
 INSTALLATION_DIRS+=	bin share/dosbox-x
 INSTALLATION_DIRS+=	share/applications
 INSTALLATION_DIRS+=	share/pixmaps
 
-CHECK_PORTABILITY_SKIP+=	vs2015/sdl2/build-scripts/androidbuildlibs.sh
-CHECK_PORTABILITY_SKIP+=	vs2015/sdl2/build-scripts/iosbuild.sh
+CHECK_PORTABILITY_SKIP+=	vs/sdl2/build-scripts/*.sh
 CHECK_PORTABILITY_SKIP+=	make-flatpak-sdl2.sh
 CHECK_PORTABILITY_SKIP+=	make-flatpak.sh
 # [[ is used in an developer target that isn't useful for us
@@ -63,6 +58,9 @@ CHECK_PORTABILITY_SKIP+=	Makefile.in Makefile.am
 
 BUILDLINK_TRANSFORM+=	rm:-Wno-int-to-void-pointer-cast
 BUILDLINK_TRANSFORM+=	rm:-Wno-address-of-packed-member
+
+post-extract:
+	dos2unix ${WRKSRC}/include/iconvpp.hpp
 
 pre-configure:
 	cd ${WRKSRC} && autoreconf -fi

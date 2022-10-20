@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.69 2022/01/31 11:48:26 adam Exp $
+# $NetBSD: Makefile,v 1.80 2022/10/19 13:56:32 nia Exp $
 
-DISTNAME=	dns-lexicon-3.9.2
-PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/dns-//}
+DISTNAME=	dns_lexicon-3.11.6
+PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/dns_//}
 CATEGORIES=	net python
 MASTER_SITES=	${MASTER_SITE_PYPI:=d/dns-lexicon/}
 
@@ -11,9 +11,8 @@ COMMENT=	Manipulate DNS records on various DNS providers
 LICENSE=	mit
 
 DEPENDS+=	${PYPKGPREFIX}-beautifulsoup4>=4:../../www/py-beautifulsoup4
-DEPENDS+=	${PYPKGPREFIX}-cryptography>=2:../../security/py-cryptography
 DEPENDS+=	${PYPKGPREFIX}-requests>=2:../../devel/py-requests
-DEPENDS+=	${PYPKGPREFIX}-tldextract>=3:../../net/py-tldextract
+DEPENDS+=	${PYPKGPREFIX}-tldextract>=2:../../net/py-tldextract
 DEPENDS+=	${PYPKGPREFIX}-yaml>=5:../../textproc/py-yaml
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-xdist>=1.26.1:../../devel/py-test-xdist
 
@@ -32,4 +31,6 @@ do-test:
 	cd ${WRKSRC}/lexicon && ${SETENV} ${TEST_ENV} pytest-${PYVERSSUFFIX} tests/test_*
 
 .include "../../lang/python/egg.mk"
+PYTHON_VERSIONED_DEPENDENCIES+=	cryptography
+.include "../../lang/python/versioned_dependencies.mk"
 .include "../../mk/bsd.pkg.mk"

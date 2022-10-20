@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.2 2022/09/01 05:54:10 markd Exp $
+
+BLAKE2s (zhnumber.r63898.tar.xz) = 2ed4312615b027b20776d4a3869cda02551e2abd04020e86c5a74d0dcfaee732
+SHA512 (zhnumber.r63898.tar.xz) = 51715396c543d910e0833e1b1b23f54fd27d36b52dc6c368bdecd8e118edd4aedc6dc0d7a3376fdc52f626fe29dfc47b7f58436d1d2e661fd91f7a0e23053086
+Size (zhnumber.r63898.tar.xz) = 8608 bytes

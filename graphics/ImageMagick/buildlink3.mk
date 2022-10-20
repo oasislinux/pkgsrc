@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.90 2021/12/08 16:02:07 adam Exp $
+# $NetBSD: buildlink3.mk,v 1.94 2022/09/19 17:41:26 nia Exp $
 
 BUILDLINK_TREE+=	ImageMagick
 
@@ -6,8 +6,9 @@ BUILDLINK_TREE+=	ImageMagick
 IMAGEMAGICK_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.ImageMagick+=	ImageMagick>=5.5.7.11nb1
-BUILDLINK_ABI_DEPENDS.ImageMagick+=	ImageMagick>=7.1.0.16
+BUILDLINK_ABI_DEPENDS.ImageMagick+=	ImageMagick>=7.1.0.37nb1
 BUILDLINK_PKGSRCDIR.ImageMagick?=	../../graphics/ImageMagick
+BUILDLINK_INCDIRS.ImageMagick+=		include/ImageMagick-7
 
 pkgbase := ImageMagick
 .include "../../mk/pkg-build-options.mk"
@@ -27,6 +28,9 @@ pkgbase := ImageMagick
 .if ${PKG_BUILD_OPTIONS.ImageMagick:Mopenexr}
 .include "../../graphics/openexr/buildlink3.mk"
 .endif
+.if ${PKG_BUILD_OPTIONS.ImageMagick:Mtiff}
+.include "../../graphics/tiff/buildlink3.mk"
+.endif
 .if ${PKG_BUILD_OPTIONS.ImageMagick:Mwmf}
 .include "../../graphics/libwmf/buildlink3.mk"
 .endif
@@ -45,7 +49,6 @@ pkgbase := ImageMagick
 .include "../../graphics/lcms2/buildlink3.mk"
 .include "../../graphics/libwebp/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
-.include "../../graphics/tiff/buildlink3.mk"
 .include "../../math/fftw/buildlink3.mk"
 .include "../../print/ghostscript/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"

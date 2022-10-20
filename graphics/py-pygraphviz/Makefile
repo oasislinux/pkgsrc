@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.13 2022/02/08 11:00:19 adam Exp $
+# $NetBSD: Makefile,v 1.16 2022/10/17 12:13:38 adam Exp $
 
-DISTNAME=	pygraphviz-1.8
+DISTNAME=	pygraphviz-1.10
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	graphics python
 MASTER_SITES=	${MASTER_SITE_PYPI:=p/pygraphviz/}
@@ -11,7 +11,6 @@ HOMEPAGE=	https://pygraphviz.github.io/
 COMMENT=	Python interface to the Graphviz package
 LICENSE=	original-bsd
 
-#TEST_DEPENDS+=	${PYPKGPREFIX}-doctest-ignore-unicode>=0.1.2:../..
 TEST_DEPENDS+=	${PYPKGPREFIX}-mock>=2.0.0:../../devel/py-mock
 TEST_DEPENDS+=	${PYPKGPREFIX}-nose>=1.3.7:../../devel/py-nose
 

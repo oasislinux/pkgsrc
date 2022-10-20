@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.30 2022/01/13 19:31:25 wiz Exp $
+# $NetBSD: Makefile,v 1.33 2022/10/19 14:25:20 nia Exp $
 
 DISTNAME=	cheroot-6.5.8
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
@@ -12,8 +12,8 @@ COMMENT=	High-performance, pure-Python HTTP server used by CherryPy
 LICENSE=	modified-bsd
 
 DEPENDS+=	${PYPKGPREFIX}-six>=1.11.0:../../lang/py-six
-BUILD_DEPENDS+=	${PYPKGPREFIX}-setuptools_scm_git_archive>=1.0:../../devel/py-setuptools_scm_git_archive
-TEST_DEPENDS+=	${PYPKGPREFIX}-OpenSSL-[0-9]*:../../security/py-OpenSSL
+DEPENDS+=	${PYPKGPREFIX}-more-itertools-[0-9]*:../../devel/py-more-itertools
+BUILD_DEPENDS+=	${PYPKGPREFIX}-setuptools_scm>=7.0.0:../../devel/py-setuptools_scm
 TEST_DEPENDS+=	${PYPKGPREFIX}-coverage>=4.5.3:../../devel/py-coverage
 TEST_DEPENDS+=	${PYPKGPREFIX}-ddt-[0-9]*:../../devel/py-ddt
 TEST_DEPENDS+=	${PYPKGPREFIX}-portend-[0-9]*:../../net/py-portend
@@ -27,10 +27,7 @@ TEST_DEPENDS+=	${PYPKGPREFIX}-test-watch>=4.2.0:../../devel/py-test-watch
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-xdist>=1.28.0:../../devel/py-test-xdist
 TEST_DEPENDS+=	${PYPKGPREFIX}-trustme>=0.4.0:../../security/py-trustme
 
-.include "../../lang/python/pyversion.mk"
-.if ${_PYTHON_VERSION} == 27
-DEPENDS+=	${PYPKGPREFIX}-backports.functools_lru_cache-[0-9]*:../../devel/py-backports.functools_lru_cache
-.endif
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 USE_LANGUAGES=	# none
 
@@ -43,9 +40,7 @@ post-install:
 do-test:
 	cd ${WRKSRC} && py.test-${PYVERSSUFFIX}
 
-PYTHON_VERSIONED_DEPENDENCIES+=	more-itertools
-PYTHON_VERSIONED_DEPENDENCIES+=	setuptools_scm:build
-
-.include "../../lang/python/versioned_dependencies.mk"
 .include "../../lang/python/egg.mk"
+PYTHON_VERSIONED_DEPENDENCIES+=	OpenSSL:test
+.include "../../lang/python/versioned_dependencies.mk"
 .include "../../mk/bsd.pkg.mk"

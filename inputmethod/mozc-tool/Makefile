@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.67 2021/12/08 16:05:17 adam Exp $
+# $NetBSD: Makefile,v 1.70 2022/04/24 22:19:15 tnn Exp $
 
 PKGNAME=	${DISTNAME:S/mozc-/mozc-tool-/}
-PKGREVISION=	7
+PKGREVISION=	9
 
 INSTALLATION_DIRS+=	libexec
 
@@ -20,3 +20,4 @@ do-install:
 		${DESTDIR}${PREFIX}/libexec
 
 .include "../../inputmethod/mozc-server/Makefile.common"
+.include "../../mk/bsd.pkg.mk"

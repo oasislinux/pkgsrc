@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.30 2021/12/08 16:03:08 adam Exp $
+# $NetBSD: Makefile,v 1.32 2022/09/11 12:51:16 wiz Exp $
 #
 
 DISTNAME=	flactag-2.0.4
-PKGREVISION=	15
+PKGREVISION=	17
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=flactag/}
 

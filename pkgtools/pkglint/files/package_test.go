@@ -1341,6 +1341,19 @@ func (s *Suite) Test_Package_check__patches_Makefile(c *check.C) {
 		"1 warning found.")
 }
 
+func (s *Suite) Test_Package_check__redundant_WRKSRC(c *check.C) {
+	t := s.Init(c)
+
+	t.SetUpPackage("category/package",
+		"WRKSRC=\t${WRKDIR}/package-1.0")
+
+	t.Main("-q", "category/package")
+
+	t.CheckOutputLines(
+		"NOTE: ~/category/package/Makefile:20: " +
+			"Setting WRKSRC to \"${WRKDIR}/package-1.0\" is redundant.")
+}
+
 func (s *Suite) Test_Package_checkDescr__DESCR_SRC(c *check.C) {
 	t := s.Init(c)
 
@@ -1566,6 +1579,58 @@ func (s *Suite) Test_Package_checkDistfilesInDistinfo__no_distfiles(c *check.C) 
 	// For completely empty DISTFILES, the check is skipped.
 	t.CheckOutputLines(
 		"WARN: distinfo: This file should not exist.")
+}
+
+func (s *Suite) Test_Package_checkPkgConfig__no_buildlink3(c *check.C) {
+	t := s.Init(c)
+
+	t.SetUpTool("pkg-config", "", Nowhere)
+	t.SetUpPackage("category/package",
+		"USE_TOOLS+=\tpkg-config")
+	t.Chdir("category/package")
+	t.FinishSetUp()
+
+	pkg := NewPackage(".")
+	pkg.Check()
+
+	t.CheckOutputLines(
+		"WARN: Makefile:1: The package uses the tool \"pkg-config\" " +
+			"but doesn't include any buildlink3 file.")
+}
+
+func (s *Suite) Test_Package_checkPkgConfig__plain_buildlink3(c *check.C) {
+	t := s.Init(c)
+
+	t.SetUpTool("pkg-config", "", Nowhere)
+	t.SetUpPackage("category/package",
+		"USE_TOOLS+=\tpkg-config",
+		".include \"../../devel/library/buildlink3.mk\"")
+	t.SetUpPackage("devel/library")
+	t.CreateFileBuildlink3("devel/library/buildlink3.mk")
+	t.Chdir("category/package")
+	t.FinishSetUp()
+
+	pkg := NewPackage(".")
+	pkg.Check()
+
+	t.CheckOutputEmpty()
+}
+
+func (s *Suite) Test_Package_checkPkgConfig__mk_buildlink3(c *check.C) {
+	t := s.Init(c)
+
+	t.SetUpTool("pkg-config", "", Nowhere)
+	t.SetUpPackage("category/package",
+		"USE_TOOLS+=\tpkg-config",
+		".include \"../../mk/curses.buildlink3.mk\"")
+	t.CreateFileLines("mk/curses.buildlink3.mk")
+	t.Chdir("category/package")
+	t.FinishSetUp()
+
+	pkg := NewPackage(".")
+	pkg.Check()
+
+	t.CheckOutputEmpty()
 }
 
 func (s *Suite) Test_Package_checkfilePackageMakefile__GNU_CONFIGURE(c *check.C) {
@@ -2014,9 +2079,12 @@ func (s *Suite) Test_Package_CheckVarorder__with_optional_variables(c *check.C) 
 	pkg.CheckVarorder(mklines)
 
 	// TODO: Make this warning more specific to the actual situation.
+
+	// Before 2022-03-11, the GitHub variables were allowed above DISTNAME,
+	// which allowed more variation than necessary and made the warning longer.
 	t.CheckOutputLines(
 		"WARN: Makefile:3: The canonical order of the variables is " +
-			"GITHUB_PROJECT, DISTNAME, CATEGORIES, GITHUB_PROJECT, empty line, " +
+			"DISTNAME, CATEGORIES, GITHUB_PROJECT, empty line, " +
 			"COMMENT, LICENSE.")
 }
 
@@ -2042,7 +2110,8 @@ func (s *Suite) Test_Package_CheckVarorder__no_tracing(c *check.C) {
 }
 
 // Ensure that comments and empty lines do not lead to panics.
-// This would be when accessing fields from the MkLine without checking the line type before.
+// This had been the case when the code accessed fields like Varname from the
+// MkLine without checking the line type before.
 func (s *Suite) Test_Package_CheckVarorder__comments_do_not_crash(c *check.C) {
 	t := s.Init(c)
 
@@ -2062,7 +2131,7 @@ func (s *Suite) Test_Package_CheckVarorder__comments_do_not_crash(c *check.C) {
 
 	t.CheckOutputLines(
 		"WARN: Makefile:3: The canonical order of the variables is " +
-			"GITHUB_PROJECT, DISTNAME, CATEGORIES, GITHUB_PROJECT, empty line, " +
+			"DISTNAME, CATEGORIES, GITHUB_PROJECT, empty line, " +
 			"COMMENT, LICENSE.")
 }
 
@@ -2176,7 +2245,12 @@ func (s *Suite) Test_Package_CheckVarorder__GITHUB_PROJECT_at_the_top(c *check.C
 
 	pkg.CheckVarorder(mklines)
 
-	t.CheckOutputEmpty()
+	// Before 2022-03-11, the GitHub variables were allowed above DISTNAME,
+	// which allowed more variation than necessary and made the warning longer.
+	t.CheckOutputLines(
+		"WARN: Makefile:3: The canonical order of the variables is " +
+			"DISTNAME, CATEGORIES, MASTER_SITES, GITHUB_PROJECT, " +
+			"GITHUB_TAG, empty line, COMMENT, LICENSE.")
 }
 
 func (s *Suite) Test_Package_CheckVarorder__GITHUB_PROJECT_at_the_bottom(c *check.C) {
@@ -2279,7 +2353,7 @@ func (s *Suite) Test_Package_CheckVarorder__diagnostics(c *check.C) {
 
 	t.CheckOutputLines(
 		"WARN: Makefile:3: The canonical order of the variables is " +
-			"GITHUB_PROJECT, DISTNAME, PKGNAME, CATEGORIES, " +
+			"DISTNAME, PKGNAME, CATEGORIES, " +
 			"MASTER_SITES, GITHUB_PROJECT, DIST_SUBDIR, empty line, " +
 			"MAINTAINER, HOMEPAGE, COMMENT, LICENSE.")
 
@@ -2287,11 +2361,11 @@ func (s *Suite) Test_Package_CheckVarorder__diagnostics(c *check.C) {
 	mklines = t.NewMkLines("Makefile",
 		MkCvsID,
 		"",
-		"GITHUB_PROJECT= pkgbase",
 		"DISTNAME=       v1.0",
 		"PKGNAME=        ${GITHUB_PROJECT}-${DISTNAME}",
 		"CATEGORIES=     net",
 		"MASTER_SITES=   ${MASTER_SITE_GITHUB:=project/}",
+		"GITHUB_PROJECT= pkgbase",
 		"DIST_SUBDIR=    ${GITHUB_PROJECT}",
 		"",
 		"MAINTAINER=     maintainer@example.org",

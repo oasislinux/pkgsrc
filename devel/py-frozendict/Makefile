@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.7 2022/02/07 21:14:41 adam Exp $
+# $NetBSD: Makefile,v 1.11 2022/07/26 08:43:00 adam Exp $
 
-DISTNAME=	frozendict-2.3.0
+DISTNAME=	frozendict-2.3.4
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_PYPI:=f/frozendict/}
@@ -11,8 +11,6 @@ COMMENT=	Immutable wrapper around dictionaries
 LICENSE=	mit
 
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-[0-9]*:../../devel/py-test
-
-USE_LANGUAGES=	c
 
 PYTHON_VERSIONS_INCOMPATIBLE=	27
 

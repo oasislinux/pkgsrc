@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.11 2021/12/08 16:01:46 adam Exp $
+# $NetBSD: Makefile,v 1.13 2022/10/06 14:30:55 nros Exp $
 
 DISTNAME=	telepathy-qt-0.9.8
 PKGNAME=	${DISTNAME:S/qt/qt5/g}
-PKGREVISION=	10
+PKGREVISION=	11
 CATEGORIES=	chat
 MASTER_SITES=	https://telepathy.freedesktop.org/releases/telepathy-qt/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	https://telepathy.freedesktop.org/releases/telepathy-qt/
+HOMEPAGE=	https://telepathy.freedesktop.org/
 COMMENT=	Qt5 bindings for telepathy
 LICENSE=	gnu-lgpl-v2.1
 

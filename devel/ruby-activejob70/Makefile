@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1 2021/12/19 05:53:19 taca Exp $
+# $NetBSD: Makefile,v 1.3 2022/10/10 03:36:48 taca Exp $
 
 DISTNAME=	activejob-${RAILS_VERSION}
 PKGNAME=	${RUBY_PKGPREFIX}-activejob${RUBY_RAILS}-${RAILS_VERSION}

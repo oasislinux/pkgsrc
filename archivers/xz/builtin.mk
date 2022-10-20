@@ -1,4 +1,4 @@
-# $NetBSD: builtin.mk,v 1.6 2019/11/02 22:54:28 rillig Exp $
+# $NetBSD: builtin.mk,v 1.9 2022/08/24 06:58:13 adam Exp $
 
 BUILTIN_PKG:=	xz
 
@@ -25,8 +25,7 @@ MAKEVARS+=	IS_BUILTIN.xz
 ### If there is a built-in implementation, then set BUILTIN_PKG.<pkg> to
 ### a package name to represent the built-in package.
 ###
-.if !defined(BUILTIN_PKG.xz) && \
-    !empty(IS_BUILTIN.xz:M[yY][eE][sS])
+.if !defined(BUILTIN_PKG.xz) && ${IS_BUILTIN.xz:M[yY][eE][sS]}
 BUILTIN_VERSION.xz!=							\
 	${AWK} 'BEGIN { M = "0" }					\
 		/\#define[ 	]+LZMA_VERSION_MAJOR/ { M = $$3 }	\
@@ -53,13 +52,12 @@ MAKEVARS+=	BUILTIN_PKG.xz
 USE_BUILTIN.xz=	no
 .  else
 USE_BUILTIN.xz=	${IS_BUILTIN.xz}
-.    if defined(BUILTIN_PKG.xz) && \
-        !empty(IS_BUILTIN.xz:M[yY][eE][sS])
+.    if defined(BUILTIN_PKG.xz) && ${IS_BUILTIN.xz:M[yY][eE][sS]}
 USE_BUILTIN.xz=	yes
 .      for _dep_ in ${BUILDLINK_API_DEPENDS.xz}
-.        if !empty(USE_BUILTIN.xz:M[yY][eE][sS])
+.        if ${USE_BUILTIN.xz:M[yY][eE][sS]}
 USE_BUILTIN.xz!=							\
-	if ${PKG_ADMIN} pmatch ${_dep_:Q} ${BUILTIN_PKG.xz:Q}; then	\
+	if ${PKG_ADMIN} pmatch ${_dep_:Q} ${BUILTIN_PKG.xz}; then	\
 		${ECHO} yes;						\
 	else								\
 		${ECHO} no;						\
@@ -81,7 +79,7 @@ MAKEVARS+=	USE_BUILTIN.xz
 # implementation.
 #
 .if defined(USE_XZ)
-.  if !empty(IS_BUILTIN.xz:M[nN][oO])
+.  if ${IS_BUILTIN.xz:M[nN][oO]}
 USE_BUILTIN.xz=	no
 .  endif
 .endif
@@ -92,15 +90,15 @@ USE_BUILTIN.xz=	no
 ###
 
 CHECK_BUILTIN.xz?=	no
-.if !empty(CHECK_BUILTIN.xz:M[nN][oO])
+.if ${CHECK_BUILTIN.xz:M[nN][oO]}
 
-.  if !empty(USE_BUILTIN.xz:M[yY][eE][sS])
-BUILDLINK_FILES.xz+=	lib/pkgconfig/xz.pc
+.  if ${USE_BUILTIN.xz:M[yY][eE][sS]}
+BUILDLINK_FILES.xz+=	lib/pkgconfig/liblzma.pc
 .  endif
 
 # Fake pkg-config for builtin xz on NetBSD
 
-.  if !empty(USE_BUILTIN.xz:M[yY][eE][sS])
+.  if ${USE_BUILTIN.xz:M[yY][eE][sS]}
 .    if !empty(USE_TOOLS:C/:.*//:Mpkg-config)
 do-configure-pre-hook: override-liblzma-pkgconfig
 
@@ -112,21 +110,30 @@ override-message-liblzma-pkgconfig:
 	@${STEP_MSG} "Generating pkg-config files for builtin xz package."
 
 override-liblzma-pkgconfig:
-	${RUN}						\
-	${MKDIR} ${BLKDIR_PKGCFG};			\
-	{						\
-	${ECHO} "prefix=${LIBLZMA_PREFIX}";		\
-	${ECHO} "exec_prefix=\$${prefix}";		\
-	${ECHO} "libdir=\$${exec_prefix}/lib";		\
-	${ECHO} "includedir=\$${prefix}/include";	\
-	${ECHO} "";					\
-	${ECHO} "Name: liblzma";			\
-	${ECHO} "Description: Generic purpose data compression library";	\
-	${ECHO} "Version: ${BUILTIN_VERSION.xz}";	\
-	${ECHO} "Libs: ${COMPILER_RPATH_FLAG}\$${libdir} -L\$${libdir} -llzma";	\
-	${ECHO} "Libs.private: -pthread";	\
-	${ECHO} "Cflags: -I\$${includedir}";		\
-	} >> ${BLKDIR_PKGCFG}/${LIBLZMA_PKGCFGF};
+	${RUN}								\
+	dst=${BLKDIR_PKGCFG}/${LIBLZMA_PKGCFGF};			\
+	src=${BUILDLINK_PREFIX.xz}/lib${LIBABISUFFIX}/pkgconfig/liblzma.pc; \
+	if [ ! -f $${dst} ]; then					\
+		if [ -f $${src} ]; then					\
+			${ECHO_BUILDLINK_MSG} "Symlinking $${src}";	\
+			${LN} -sf $${src} $${dst};			\
+		else							\
+			${MKDIR} ${BLKDIR_PKGCFG};			\
+			{						\
+			${ECHO} "prefix=${BUILDLINK_PREFIX.xz}";	\
+			${ECHO} "exec_prefix=\$${prefix}";		\
+			${ECHO} "libdir=\$${exec_prefix}/lib";		\
+			${ECHO} "includedir=\$${prefix}/include";	\
+			${ECHO} "";					\
+			${ECHO} "Name: liblzma";			\
+			${ECHO} "Description: Generic purpose data compression library";	\
+			${ECHO} "Version: ${BUILTIN_VERSION.xz}";	\
+			${ECHO} "Libs: ${COMPILER_RPATH_FLAG}\$${libdir} -L\$${libdir} -llzma";	\
+			${ECHO} "Libs.private: -pthread";		\
+			${ECHO} "Cflags: -I\$${includedir}";		\
+			} > ${BLKDIR_PKGCFG}/${LIBLZMA_PKGCFGF};	\
+		fi;							\
+	fi
 .    endif
 .  endif
 

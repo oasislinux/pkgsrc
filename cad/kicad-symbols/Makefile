@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.6 2022/01/02 15:54:12 tnn Exp $
-#
+# $NetBSD: Makefile,v 1.10 2022/08/15 20:55:35 adam Exp $
 
-V=		6.0.0
-DISTNAME=	kicad-symbols-${V}
+DISTNAME=	kicad-symbols-6.0.6
 CATEGORIES=	cad
-MASTER_SITES=	https://gitlab.com/kicad/libraries/kicad-symbols/-/archive/${V}/
+MASTER_SITES=	${MASTER_SITE_GITLAB:=kicad/libraries/}
+GITLAB_RELEASE=	${PKGVERSION_NOREV}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -13,6 +12,6 @@ COMMENT=	Schematic symbol libraries for the schematic CAD software
 LICENSE=	cc-by-sa-v4.0
 
 USE_CMAKE=	yes
+USE_LANGUAGES=	# none
 
-.include "../../mk/bsd.prefs.mk"
 .include "../../mk/bsd.pkg.mk"

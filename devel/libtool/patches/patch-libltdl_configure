@@ -1,20 +1,100 @@
-$NetBSD: patch-libltdl_configure,v 1.2 2018/11/13 21:44:42 sevan Exp $
+$NetBSD: patch-libltdl_configure,v 1.5 2022/08/04 12:23:21 jperkin Exp $
 
 Automatically generated using manual-* patches and bootstrap.
 DO NOT MODIFY THIS PATCH MANUALLY!  YOUR CHANGES WILL BE LOST!
 
---- libltdl/configure.orig	2018-11-13 09:14:36.380678459 +0000
+--- libltdl/configure.orig	2022-08-04 11:35:59.000000000 +0000
 +++ libltdl/configure
-@@ -4788,7 +4788,7 @@ else
+@@ -703,6 +703,9 @@ AM_BACKSLASH
+ AM_DEFAULT_VERBOSITY
+ AM_DEFAULT_V
+ AM_V
++CSCOPE
++ETAGS
++CTAGS
+ am__untar
+ am__tar
+ AMTAR
+@@ -745,7 +748,6 @@ infodir
+ docdir
+ oldincludedir
+ includedir
+-runstatedir
+ localstatedir
+ sharedstatedir
+ sysconfdir
+@@ -829,7 +831,6 @@ datadir='${datarootdir}'
+ sysconfdir='${prefix}/etc'
+ sharedstatedir='${prefix}/com'
+ localstatedir='${prefix}/var'
+-runstatedir='${localstatedir}/run'
+ includedir='${prefix}/include'
+ oldincludedir='/usr/include'
+ docdir='${datarootdir}/doc/${PACKAGE_TARNAME}'
+@@ -1082,15 +1083,6 @@ do
+   | -silent | --silent | --silen | --sile | --sil)
+     silent=yes ;;
+ 
+-  -runstatedir | --runstatedir | --runstatedi | --runstated \
+-  | --runstate | --runstat | --runsta | --runst | --runs \
+-  | --run | --ru | --r)
+-    ac_prev=runstatedir ;;
+-  -runstatedir=* | --runstatedir=* | --runstatedi=* | --runstated=* \
+-  | --runstate=* | --runstat=* | --runsta=* | --runst=* | --runs=* \
+-  | --run=* | --ru=* | --r=*)
+-    runstatedir=$ac_optarg ;;
+-
+   -sbindir | --sbindir | --sbindi | --sbind | --sbin | --sbi | --sb)
+     ac_prev=sbindir ;;
+   -sbindir=* | --sbindir=* | --sbindi=* | --sbind=* | --sbin=* \
+@@ -1228,7 +1220,7 @@ fi
+ for ac_var in	exec_prefix prefix bindir sbindir libexecdir datarootdir \
+ 		datadir sysconfdir sharedstatedir localstatedir includedir \
+ 		oldincludedir docdir infodir htmldir dvidir pdfdir psdir \
+-		libdir localedir mandir runstatedir
++		libdir localedir mandir
+ do
+   eval ac_val=\$$ac_var
+   # Remove trailing slashes.
+@@ -1381,7 +1373,6 @@ Fine tuning of the installation director
+   --sysconfdir=DIR        read-only single-machine data [PREFIX/etc]
+   --sharedstatedir=DIR    modifiable architecture-independent data [PREFIX/com]
+   --localstatedir=DIR     modifiable single-machine data [PREFIX/var]
+-  --runstatedir=DIR       modifiable per-process data [LOCALSTATEDIR/run]
+   --libdir=DIR            object code libraries [EPREFIX/lib]
+   --includedir=DIR        C header files [PREFIX/include]
+   --oldincludedir=DIR     C header files for non-gcc [/usr/include]
+@@ -2824,6 +2815,20 @@ am__tar='$${TAR-tar} chof - "$$tardir"' 
+ 
+ 
+ 
++# Variables for tags utilities; see am/tags.am
++if test -z "$CTAGS"; then
++  CTAGS=ctags
++fi
++
++if test -z "$ETAGS"; then
++  ETAGS=etags
++fi
++
++if test -z "$CSCOPE"; then
++  CSCOPE=cscope
++fi
++
++
+ 
+ # POSIX will say in a future version that running "rm -f" with no argument
+ # is OK; and we want to be able to make that assumption in our Makefile
+@@ -4796,7 +4801,7 @@ else
      lt_cv_sys_max_cmd_len=8192;
      ;;
  
--  bitrig* | darwin* | dragonfly* | freebsd* | netbsd* | openbsd*)
-+  bitrig* | darwin* | dragonfly* | freebsd* | minix* | netbsd* | openbsd* | mirbsd*)
+-  bitrig* | darwin* | dragonfly* | freebsd* | midnightbsd* | netbsd* | openbsd*)
++  bitrig* | darwin* | dragonfly* | freebsd* | midnightbsd* | minix* | netbsd* | openbsd*)
      # This has been around since 386BSD, at least.  Likely further.
      if test -x /sbin/sysctl; then
        lt_cv_sys_max_cmd_len=`/sbin/sysctl -n kern.argmax`
-@@ -4886,6 +4886,9 @@ max_cmd_len=$lt_cv_sys_max_cmd_len
+@@ -4894,6 +4899,9 @@ max_cmd_len=$lt_cv_sys_max_cmd_len
  
  
  
@@ -24,7 +104,7 @@ DO NOT MODIFY THIS PATCH MANUALLY!  YOUR CHANGES WILL BE LOST!
  : ${CP="cp -f"}
  : ${MV="mv -f"}
  : ${RM="rm -f"}
-@@ -5254,12 +5257,19 @@ linux* | k*bsd*-gnu | kopensolaris*-gnu 
+@@ -5360,12 +5368,8 @@ linux* | k*bsd*-gnu | kopensolaris*-gnu 
    lt_cv_deplibs_check_method=pass_all
    ;;
  
@@ -34,23 +114,12 @@ DO NOT MODIFY THIS PATCH MANUALLY!  YOUR CHANGES WILL BE LOST!
 -  else
 -    lt_cv_deplibs_check_method='match_pattern /lib[^/]+(\.so|_pic\.a)$'
 -  fi
-+midnightbsd*)
-+  # might to use match_pattern like MirBSD, but there is no well-defined
-+  # naming scheme for libraries yet, as the current one is deprecated, and
-+  # the new one in a state of flux especially between mports and MirPorts
-+  lt_cv_deplibs_check_method=pass_all
-+  ;;
-+
-+mirbsd*)
-+  lt_cv_deplibs_check_method='match_pattern /lib[^/]+(\.so\.[0-9]+\.[0-9]+|\.so|_pic\.a)$'
-+  ;;
-+
 +netbsd* | minix*)
 +  lt_cv_deplibs_check_method='match_pattern /lib[^/]+(\.so|_pic\.a)$'
    ;;
  
  newos6*)
-@@ -5269,7 +5279,7 @@ newos6*)
+@@ -5375,7 +5379,7 @@ newos6*)
    ;;
  
  *nto* | *qnx*)
@@ -59,16 +128,23 @@ DO NOT MODIFY THIS PATCH MANUALLY!  YOUR CHANGES WILL BE LOST!
    ;;
  
  openbsd* | bitrig*)
-@@ -5901,7 +5911,7 @@ fi
+@@ -6021,12 +6025,9 @@ if test -n "$RANLIB"; then
+   old_archive_cmds="$old_archive_cmds~\$RANLIB \$tool_oldlib"
+ fi
  
- case $host_os in
-   darwin*)
+-case $host_os in
+-  darwin*)
 -    lock_old_archive_extraction=yes ;;
-+    lock_old_archive_extraction=no ;;	# work around bug #14579
-   *)
-     lock_old_archive_extraction=no ;;
- esac
-@@ -5990,7 +6000,7 @@ osf*)
+-  *)
+-    lock_old_archive_extraction=no ;;
+-esac
++# libtool bug#14579
++lock_old_archive_extraction=no
++
+ 
+ 
+ 
+@@ -6112,7 +6113,7 @@ osf*)
    symcode='[BCDEGQRST]'
    ;;
  solaris*)
@@ -77,7 +153,7 @@ DO NOT MODIFY THIS PATCH MANUALLY!  YOUR CHANGES WILL BE LOST!
    ;;
  sco3.2v5*)
    symcode='[DT]'
-@@ -6386,7 +6396,10 @@ func_cc_basename ()
+@@ -6508,7 +6509,10 @@ func_cc_basename ()
          *) break;;
        esac
      done
@@ -89,7 +165,7 @@ DO NOT MODIFY THIS PATCH MANUALLY!  YOUR CHANGES WILL BE LOST!
  }
  
  # Check whether --enable-libtool-lock was given.
-@@ -8635,9 +8648,16 @@ lt_prog_compiler_static=
+@@ -8752,9 +8756,16 @@ lt_prog_compiler_static=
        ;;
  
      darwin* | rhapsody*)
@@ -107,7 +183,7 @@ DO NOT MODIFY THIS PATCH MANUALLY!  YOUR CHANGES WILL BE LOST!
        ;;
  
      haiku*)
-@@ -8665,6 +8685,13 @@ lt_prog_compiler_static=
+@@ -8782,6 +8793,13 @@ lt_prog_compiler_static=
        # Instead, we relocate shared libraries at runtime.
        ;;
  
@@ -121,23 +197,7 @@ DO NOT MODIFY THIS PATCH MANUALLY!  YOUR CHANGES WILL BE LOST!
      msdosdjgpp*)
        # Just because we use GCC doesn't mean we suddenly get shared libraries
        # on systems that don't support them.
-@@ -8842,6 +8869,15 @@ lt_prog_compiler_static=
-       esac
-       ;;
- 
-+    mirbsd*)
-+      case $cc_basename in
-+      # pkgsrc f77 is f2c, which uses gcc underneath.
-+      f77*)
-+	lt_prog_compiler_wl='-Wl,'
-+	;;
-+      esac
-+      ;;
-+
-     newsos6)
-       lt_prog_compiler_pic='-KPIC'
-       lt_prog_compiler_static='-Bstatic'
-@@ -8917,6 +8953,9 @@ lt_prog_compiler_static=
+@@ -9034,6 +9052,9 @@ lt_prog_compiler_static=
  
  case $host_os in
    # For platforms that do not support PIC, -DPIC is meaningless:
@@ -147,7 +207,7 @@ DO NOT MODIFY THIS PATCH MANUALLY!  YOUR CHANGES WILL BE LOST!
    *djgpp*)
      lt_prog_compiler_pic=
      ;;
-@@ -9495,16 +9534,29 @@ _LT_EOF
+@@ -9613,14 +9634,13 @@ _LT_EOF
        fi
        ;;
  
@@ -155,22 +215,10 @@ DO NOT MODIFY THIS PATCH MANUALLY!  YOUR CHANGES WILL BE LOST!
 -      if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
 -	archive_cmds='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
 -	wlarc=
-+    mirbsd*)
-+      if test -f /usr/libexec/ld.so; then
-+        hardcode_direct=yes
-+        hardcode_shlibpath_var=no
-+        hardcode_direct_absolute=yes
-+        archive_cmds='$CC -shared $pic_flag -o $lib $libobjs $deplibs $compiler_flags'
-+        archive_expsym_cmds='$CC -shared $pic_flag -o $lib $libobjs $deplibs $compiler_flags ${wl}-retain-symbols-file,$export_symbols'
-+        hardcode_libdir_flag_spec='${wl}-rpath,$libdir'
-+        export_dynamic_flag_spec='${wl}-E'
-       else
+-      else
 -	archive_cmds='$CC -shared $pic_flag $libobjs $deplibs $compiler_flags $wl-soname $wl$soname -o $lib'
 -	archive_expsym_cmds='$CC -shared $pic_flag $libobjs $deplibs $compiler_flags $wl-soname $wl$soname $wl-retain-symbols-file $wl$export_symbols -o $lib'
-+        ld_shlibs=no
-       fi
-       ;;
- 
+-      fi
 +    netbsd* | minix*)
 +      archive_cmds='$CC -shared $pic_flag $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
 +      archive_expsym_cmds='$CC -shared $pic_flag $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname ${wl}-retain-symbols-file $wl$export_symbols -o $lib'
@@ -178,12 +226,10 @@ DO NOT MODIFY THIS PATCH MANUALLY!  YOUR CHANGES WILL BE LOST!
 +      hardcode_direct=yes
 +      hardcode_shlibpath_var=no
 +      output_verbose_link_cmd=func_echo_all
-+      ;;
-+
+       ;;
+ 
      solaris*)
-       if $LD -v 2>&1 | $GREP 'BFD 2\.8' > /dev/null; then
- 	ld_shlibs=no
-@@ -9964,7 +10016,7 @@ fi
+@@ -10082,7 +10102,7 @@ fi
    allow_undefined_flag=$_lt_dar_allow_undefined
    case $cc_basename in
       ifort*|nagfor*) _lt_dar_can_shared=yes ;;
@@ -192,30 +238,17 @@ DO NOT MODIFY THIS PATCH MANUALLY!  YOUR CHANGES WILL BE LOST!
    esac
    if test yes = "$_lt_dar_can_shared"; then
      output_verbose_link_cmd=func_echo_all
-@@ -10186,15 +10238,28 @@ $as_echo "$lt_cv_irix_exported_symbol" >
+@@ -10304,15 +10324,13 @@ $as_echo "$lt_cv_irix_exported_symbol" >
        esac
        ;;
  
 -    netbsd*)
 -      if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
 -	archive_cmds='$LD -Bshareable -o $lib $libobjs $deplibs $linker_flags'  # a.out
-+    mirbsd*)
-+     if test -f /usr/libexec/ld.so; then
-+	hardcode_direct=yes
-+	hardcode_shlibpath_var=no
-+	hardcode_direct_absolute=yes
-+	archive_cmds='$CC -shared $pic_flag $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags -o $lib'
-+	archive_expsym_cmds='$CC -shared $pic_flag $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags ${wl}-retain-symbols-file,$export_symbols -o $lib'
-+	hardcode_libdir_flag_spec='${wl}-rpath,$libdir'
-+	export_dynamic_flag_spec='${wl}-E'
-+	whole_archive_flag_spec="$wlarc"'--whole-archive$convenience '"$wlarc"'--no-whole-archive'
-       else
+-      else
 -	archive_cmds='$LD -shared -o $lib $libobjs $deplibs $linker_flags'      # ELF
-+	ld_shlibs=no
-       fi
+-      fi
 -      hardcode_libdir_flag_spec='-R$libdir'
-+      ;;
-+
 +    netbsd* | minix*)
 +      archive_cmds='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
 +      archive_expsym_cmds='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname ${wl}-retain-symbols-file $wl$export_symbols -o $lib'
@@ -226,7 +259,7 @@ DO NOT MODIFY THIS PATCH MANUALLY!  YOUR CHANGES WILL BE LOST!
        ;;
  
      newsos6)
-@@ -10206,6 +10271,11 @@ $as_echo "$lt_cv_irix_exported_symbol" >
+@@ -10324,6 +10342,11 @@ $as_echo "$lt_cv_irix_exported_symbol" >
        ;;
  
      *nto* | *qnx*)
@@ -238,16 +271,16 @@ DO NOT MODIFY THIS PATCH MANUALLY!  YOUR CHANGES WILL BE LOST!
        ;;
  
      openbsd* | bitrig*)
-@@ -11050,7 +11120,7 @@ dgux*)
+@@ -11169,7 +11192,7 @@ dgux*)
    shlibpath_var=LD_LIBRARY_PATH
    ;;
  
--freebsd* | dragonfly*)
-+freebsd*)
+-freebsd* | dragonfly* | midnightbsd*)
++freebsd* | midnightbsd*)
    # DragonFly does not have aout.  When/if they implement a new
    # versioning mechanism, adjust this.
    if test -x /usr/bin/objformat; then
-@@ -11095,6 +11165,17 @@ freebsd* | dragonfly*)
+@@ -11214,6 +11237,17 @@ freebsd* | dragonfly* | midnightbsd*)
    esac
    ;;
  
@@ -265,7 +298,7 @@ DO NOT MODIFY THIS PATCH MANUALLY!  YOUR CHANGES WILL BE LOST!
  haiku*)
    version_type=linux # correct to gnu/linux during the next big refactor
    need_lib_prefix=no
-@@ -11172,12 +11253,7 @@ interix[3-9]*)
+@@ -11291,12 +11325,7 @@ interix[3-9]*)
  irix5* | irix6* | nonstopux*)
    case $host_os in
      nonstopux*) version_type=nonstopux ;;
@@ -279,21 +312,10 @@ DO NOT MODIFY THIS PATCH MANUALLY!  YOUR CHANGES WILL BE LOST!
    esac
    need_lib_prefix=no
    need_version=no
-@@ -11301,19 +11377,48 @@ fi
+@@ -11420,19 +11449,25 @@ fi
    dynamic_linker='GNU/Linux ld.so'
    ;;
  
-+midnightbsd*)
-+  version_type=linux
-+  need_lib_prefix=no
-+  need_version=no
-+  library_names_spec='${libname}${release}${shared_ext}${versuffix2} ${libname}${release}${shared_ext} $libname${shared_ext}'
-+  finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
-+  shlibpath_var=LD_LIBRARY_PATH
-+  shlibpath_overrides_runpath=yes
-+  hardcode_into_libs=yes
-+  ;;
-+
 +minix*)
 +  version_type=linux
 +  need_lib_prefix=no
@@ -304,18 +326,6 @@ DO NOT MODIFY THIS PATCH MANUALLY!  YOUR CHANGES WILL BE LOST!
 +  shlibpath_var=LD_LIBRARY_PATH
 +  shlibpath_overrides_runpath=yes
 +  hardcode_into_libs=yes
-+  ;;
-+
-+mirbsd*)
-+  version_type=linux
-+  sys_lib_search_path_spec="/usr/lib"
-+  sys_lib_dlsearch_path_spec="/usr/lib"
-+  need_lib_prefix=no
-+  need_version=no
-+  library_names_spec='${libname}${release}${shared_ext}${versuffix2} ${libname}${shared_ext}${versuffix2}'
-+  finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
-+  shlibpath_var=LD_LIBRARY_PATH
-+  shlibpath_overrides_runpath=yes
 +  ;;
 +
  netbsd*)
@@ -338,7 +348,7 @@ DO NOT MODIFY THIS PATCH MANUALLY!  YOUR CHANGES WILL BE LOST!
    shlibpath_var=LD_LIBRARY_PATH
    shlibpath_overrides_runpath=yes
    hardcode_into_libs=yes
-@@ -11339,7 +11444,7 @@ newsos6)
+@@ -11458,7 +11493,7 @@ newsos6)
    ;;
  
  openbsd* | bitrig*)
@@ -347,7 +357,7 @@ DO NOT MODIFY THIS PATCH MANUALLY!  YOUR CHANGES WILL BE LOST!
    sys_lib_dlsearch_path_spec=/usr/lib
    need_lib_prefix=no
    if test -z "`echo __ELF__ | $CC -E - | $GREP __ELF__`"; then
-@@ -11347,7 +11452,7 @@ openbsd* | bitrig*)
+@@ -11466,7 +11501,7 @@ openbsd* | bitrig*)
    else
      need_version=yes
    fi
@@ -356,19 +366,16 @@ DO NOT MODIFY THIS PATCH MANUALLY!  YOUR CHANGES WILL BE LOST!
    finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
    shlibpath_var=LD_LIBRARY_PATH
    shlibpath_overrides_runpath=yes
-@@ -12923,7 +13028,10 @@ else
+@@ -13053,7 +13088,7 @@ else
      # at 6.2 and later dlopen does load deplibs.
      lt_cv_sys_dlopen_deplibs=yes
      ;;
 -  netbsd*)
-+  mirbsd*)
-+    lt_cv_sys_dlopen_deplibs=yes
-+    ;;
 +  netbsd* | minix*)
      lt_cv_sys_dlopen_deplibs=yes
      ;;
    openbsd*)
-@@ -15440,7 +15548,10 @@ func_cc_basename ()
+@@ -15581,7 +15616,10 @@ func_cc_basename ()
          *) break;;
        esac
      done

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.26 2021/11/14 20:01:17 adam Exp $
+# $NetBSD: Makefile,v 1.28 2022/07/10 19:25:00 wiz Exp $
 
 DISTNAME=	salt-3004
 PKGNAME=	${DISTNAME:S/-/-docs-/}
+PKGREVISION=	2
 CATEGORIES=	sysutils python
 MASTER_SITES=	${MASTER_SITE_PYPI:=s/salt/}
 
@@ -12,8 +13,8 @@ LICENSE=	apache-2.0
 
 USE_TOOLS+=	gmake pax
 
-BUILD_DEPENDS+=	${PYPKGPREFIX}-sphinx>=1.2.3nb1*:../../textproc/py-sphinx1
-BUILD_DEPENDS+=	${PYPKGPREFIX}-sqlite3>=1.2.3nb1*:../../databases/py-sqlite3
+BUILD_DEPENDS+=	${PYPKGPREFIX}-sphinx>=1.2.3nb1:../../textproc/py-sphinx
+BUILD_DEPENDS+=	${PYPKGPREFIX}-sqlite3>=1.2.3nb1:../../databases/py-sqlite3
 
 NO_CONFIGURE=	yes
 BUILD_DIRS=	doc
@@ -30,7 +31,7 @@ PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 # Contains hardcoded paths that may refer to paths used during the build, for
 # example /opt/tools on SmartOS.
-CHECK_WRKREF_SKIP+=    */*.html */*.txt
+CHECK_WRKREF_SKIP+=	*/*.html */*.txt
 
 do-install:
 	cd ${WRKSRC}/doc/_build/html && ${PAX} -rw -pp . ${DESTDIR}${PREFIX}/${HTMLDIR}

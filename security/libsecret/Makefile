@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.27 2021/12/08 16:02:34 adam Exp $
+# $NetBSD: Makefile,v 1.30 2022/07/22 17:07:14 micha Exp $
 
 DISTNAME=	libsecret-0.20.4
-PKGREVISION=	3
+PKGREVISION=	6
 CATEGORIES=	security gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libsecret/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.xz
@@ -25,8 +25,8 @@ PKGCONFIG_OVERRIDE+=	libsecret/libsecret.pc.in
 
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.44.0
 .include "../../devel/glib2/buildlink3.mk"
-BUILDLINK_DEPMETHOD.vala?=	build
+BUILDLINK_DEPMETHOD.gobject-introspection=	build
+.include "../../devel/gobject-introspection/buildlink3.mk"
 .include "../../lang/vala/buildlink3.mk"
 .include "../../security/libgcrypt/buildlink3.mk"
-.include "options.mk"
 .include "../../mk/bsd.pkg.mk"

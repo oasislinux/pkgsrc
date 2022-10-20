@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.28 2021/12/08 16:03:08 adam Exp $
+# $NetBSD: Makefile,v 1.33 2022/09/11 12:51:15 wiz Exp $
 #
 
 DISTNAME=	darkice-1.4
-PKGREVISION=	3
+PKGREVISION=	6
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_GITHUB:=rafael2k/}
 GITHUB_RELEASE=	v${PKGVERSION_NOREV}
@@ -13,8 +13,10 @@ COMMENT=	IceCast, IceCast2, and ShoutCast live audio streamer
 LICENSE=	gnu-gpl-v3
 
 GNU_CONFIGURE=	yes
-USE_LANGUAGES=	c c++
+# Uses std::regex without setting -std=...
+USE_LANGUAGES=	c c++11
 USE_TOOLS+=	gmake pkg-config
+GCC_REQD+=	4.7 # C++11
 
 EGDIR=		${PREFIX}/share/examples/darkice
 HTMLDIR=	${PREFIX}/share/doc/darkice

@@ -1,15 +1,13 @@
-$NetBSD: distinfo,v 1.56 2021/10/26 11:12:10 nia Exp $
+$NetBSD: distinfo,v 1.61 2022/09/28 20:16:37 leot Exp $
 
-BLAKE2s (mupdf-1.19.0-source.tar.gz) = bc9aebbacd16bf721bd5cdcf0e2fd3003c1f5737a734ab774a2697741bbf1221
-SHA512 (mupdf-1.19.0-source.tar.gz) = c6bb0e4331212d5d01d2f5e04f7e981b195c144d282db99ddd3ae263ae2e5ff09a727b0b5a50942f1a21cacb46b23f76ff9fe00b67f5fab1eebe9d66158c5d09
-Size (mupdf-1.19.0-source.tar.gz) = 90778757 bytes
+BLAKE2s (mupdf-1.20.3-source.tar.gz) = 0c6c8272e3343562ca4c3926723819b18cc9b0558989bc7623ce63b219315a35
+SHA512 (mupdf-1.20.3-source.tar.gz) = ed3fe09971223c500fb85558bb3f8c4a605c82fca3cd2217cdf4758e44bdfe3ef4106c95037d7a8ea536117414e5acbfa14aa736bfb7e33e591050c12c07a0ee
+Size (mupdf-1.20.3-source.tar.gz) = 88457290 bytes
 SHA1 (patch-Makelists) = 474ad296aa550272b9d734e2b001af1371ae06ad
-SHA1 (patch-Makethird) = 415a3fe6e0e58a948565b9098c8325e85d19d561
-SHA1 (patch-ab) = 3323dd627001e76c47e6b231b2d93952e3c3acf3
-SHA1 (patch-ac) = 1bcbb499dd00cef04d3123daefe2d7b92b567054
+SHA1 (patch-Makethird) = fdddf41a3c44a1fda04c7ce1b51284dd918e3c54
+SHA1 (patch-ab) = acbb4e8a34ccad701323a521600f361175668b9e
+SHA1 (patch-ac) = d3d70857bdffa9e4264444c2047f1ad909f141ce
 SHA1 (patch-ae) = c6b113818b32cb4470e8549c00a16e0b2f364ede
-SHA1 (patch-platform_gl_gl-app.h) = 48f48f13c9a6376231de25aa63411560ea9d91ca
-SHA1 (patch-platform_gl_gl-main.c) = c760d16f0ac4a9b09800869d22b7324724bc007b
-SHA1 (patch-source_fitz_color-lcms.c) = a43f5046063c68dea16824b9364c386505b6fadd
+SHA1 (patch-platform_gl_gl-app.h) = 1e915249010acd3ff1343f0607e785d06577fe78
+SHA1 (patch-scripts_hexdump.sh) = 1f1299e24ffa5e6bf040f73b75dc49dd6f5272c4
 SHA1 (patch-source_fitz_load-jpx.c) = 8d7f58168c8429a82127b821387298341a1fcbfb
-SHA1 (patch-thirdparty_mujs_Makefile) = e959ad04995bf2268563d2c2939edd5dba12e4b2

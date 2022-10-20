@@ -1,0 +1,24 @@
+$NetBSD: patch-configure,v 1.2 2022/09/22 11:47:14 wiz Exp $
+
+* Support llvm 14 & 15.
+* Support NetBSD for mcode backend. (not used)
+
+--- configure.orig	2022-02-28 18:46:53.000000000 +0000
++++ configure
+@@ -281,6 +281,8 @@ if test $backend = llvm; then
+        check_version 11.1 $llvm_version ||
+        check_version 12.0 $llvm_version ||
+        check_version 13.0 $llvm_version ||
++       check_version 14.0 $llvm_version ||
++       check_version 15.0 $llvm_version ||
+        false; then
+     echo "Debugging is enabled with llvm $llvm_version"
+   else
+@@ -379,6 +381,7 @@ if test $backend = mcode; then
+     *mingw32*) ortho_flags="Flags_Windows${mcode64}" ;;
+     *linux*)   ortho_flags="Flags_Linux${mcode64}" ;;
+     *openbsd*) ortho_flags="Flags_Macosx${mcode64}" ;;
++    *netbsd*) ortho_flags="Flags_Macosx${mcode64}" ;;
+     *) echo "Unsupported $build build for mcode"; exit 1;;
+   esac
+   echo "Generate ortho_code-x86-flags.ads"

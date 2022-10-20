@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.15 2018/06/15 20:46:01 tez Exp $
+# $NetBSD: buildlink3.mk,v 1.17 2022/07/29 20:22:44 jperkin Exp $
 
 BUILDLINK_TREE+=	mit-krb5
 
@@ -6,6 +6,7 @@ BUILDLINK_TREE+=	mit-krb5
 MIT_KRB5_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.mit-krb5+=	mit-krb5>=1.4
+BUILDLINK_ABI_DEPENDS.mit-krb5?=	mit-krb5>=1.18.4nb1
 BUILDLINK_PKGSRCDIR.mit-krb5?=		../../security/mit-krb5
 .endif # MIT_KRB5_BUILDLINK3_MK
 

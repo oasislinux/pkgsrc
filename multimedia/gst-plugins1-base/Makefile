@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.29 2021/12/08 16:02:23 adam Exp $
+# $NetBSD: Makefile,v 1.32 2022/07/18 15:40:56 wiz Exp $
 
 PKGNAME=	${DISTNAME:S/plugins/plugins1/}
-PKGREVISION=	1
 CATEGORIES=	multimedia gnome
 
 COMMENT=	Open source multimedia framework - base plugins
@@ -52,6 +51,7 @@ MAKE_ENV+=	LD_LIBRARY_PATH=${WRKSRC}/output/gst-libs/gst/tag:${WRKSRC}/output/gs
 #Timeout:            0
 
 .include "Makefile.common"
+BUILDLINK_DEPMETHOD.gobject-introspection=	build
 .include "../../devel/gobject-introspection/buildlink3.mk"
 .include "../../multimedia/gstreamer1/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.72 2021/12/08 16:05:15 adam Exp $
+# $NetBSD: Makefile,v 1.75 2022/04/24 22:19:15 tnn Exp $
 
 PKGNAME=	ibus-${DISTNAME}
-PKGREVISION=	7
+PKGREVISION=	9
 
 INSTALLATION_DIRS+=	libexec share/ibus share/ibus/component \
 			share/ibus-mozc
@@ -30,3 +30,4 @@ do-install:
 
 .include "../../inputmethod/ibus/buildlink3.mk"
 .include "../../inputmethod/mozc-server/Makefile.common"
+.include "../../mk/bsd.pkg.mk"

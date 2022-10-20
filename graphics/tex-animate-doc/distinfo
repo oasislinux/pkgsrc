@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.17 2021/10/26 10:46:56 nia Exp $
+$NetBSD: distinfo,v 1.19 2022/09/01 03:13:00 markd Exp $
 
-BLAKE2s (animate.doc.r56583.tar.xz) = 52d15390bd3357b815605c4276caeb0172653046534b127c2b7d508019675c12
-SHA512 (animate.doc.r56583.tar.xz) = 95fc8d11094fc1e339ebe7c7db4ea88237790358bbd9bbec8420e3f53bac986ad2b8e6dc5e962c2d0c3f0de348b7b1cbc39b0289cee26276009e914e3ce15943
-Size (animate.doc.r56583.tar.xz) = 3145132 bytes
+BLAKE2s (animate.doc.r64043.tar.xz) = d7b5672dcb068d16ba3cec307a219347fb1a0a4400eb89a064bdfe6fa56f910f
+SHA512 (animate.doc.r64043.tar.xz) = cb102aecec17d2d15dcdbdb09a08aac09f2a76a7dba8ccfe7351d48ff3c4bb99d015701ccbf4036de91fae14da576dd2adbd06959224f9540004575e971271fe
+Size (animate.doc.r64043.tar.xz) = 3143244 bytes

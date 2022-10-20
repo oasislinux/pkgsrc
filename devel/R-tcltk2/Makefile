@@ -1,13 +1,17 @@
-# $NetBSD: Makefile,v 1.4 2020/12/04 20:45:05 nia Exp $
+# $NetBSD: Makefile,v 1.7 2022/06/30 11:18:10 nia Exp $
 
 R_PKGNAME=	tcltk2
 R_PKGVER=	1.2-11
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	devel
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Tcl/Tk additions
 LICENSE=	gnu-lgpl-v3	# + file LICENSE
+
+.if empty(DISPLAY)
+PKG_FAIL_REASON=	"PR pkg/56696: DISPLAY must be set to a working X11 display."
+.endif
 
 USE_LANGUAGES=	# none
 

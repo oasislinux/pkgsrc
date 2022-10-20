@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.11 2022/01/24 12:50:27 adam Exp $
+@comment $NetBSD: PLIST,v 1.13 2022/08/18 16:45:30 adam Exp $
 ${PYSITELIB}/${EGG_INFODIR}/PKG-INFO
 ${PYSITELIB}/${EGG_INFODIR}/SOURCES.txt
 ${PYSITELIB}/${EGG_INFODIR}/dependency_links.txt
@@ -52,6 +52,9 @@ ${PYSITELIB}/asyncssh/crypto/chacha.pyo
 ${PYSITELIB}/asyncssh/crypto/cipher.py
 ${PYSITELIB}/asyncssh/crypto/cipher.pyc
 ${PYSITELIB}/asyncssh/crypto/cipher.pyo
+${PYSITELIB}/asyncssh/crypto/dh.py
+${PYSITELIB}/asyncssh/crypto/dh.pyc
+${PYSITELIB}/asyncssh/crypto/dh.pyo
 ${PYSITELIB}/asyncssh/crypto/dsa.py
 ${PYSITELIB}/asyncssh/crypto/dsa.pyc
 ${PYSITELIB}/asyncssh/crypto/dsa.pyo
@@ -73,6 +76,9 @@ ${PYSITELIB}/asyncssh/crypto/misc.pyo
 ${PYSITELIB}/asyncssh/crypto/rsa.py
 ${PYSITELIB}/asyncssh/crypto/rsa.pyc
 ${PYSITELIB}/asyncssh/crypto/rsa.pyo
+${PYSITELIB}/asyncssh/crypto/sntrup.py
+${PYSITELIB}/asyncssh/crypto/sntrup.pyc
+${PYSITELIB}/asyncssh/crypto/sntrup.pyo
 ${PYSITELIB}/asyncssh/crypto/umac.py
 ${PYSITELIB}/asyncssh/crypto/umac.pyc
 ${PYSITELIB}/asyncssh/crypto/umac.pyo

@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.46 2022/01/31 14:21:00 adam Exp $
+# $NetBSD: Makefile,v 1.48 2022/06/30 11:18:09 nia Exp $
 
-DISTNAME=	tdb-1.4.6
+DISTNAME=	tdb-1.4.7
+PKGREVISION=	1
 CATEGORIES=	databases
 MASTER_SITES=	http://www.samba.org/ftp/tdb/
 
@@ -19,9 +20,6 @@ PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 USE_TOOLS+=		gmake
 HAS_CONFIGURE=		yes
-CONFIG_SHELL=		${PYTHONBIN}
-CONFIGURE_SCRIPT=	${WRKSRC}/buildtools/bin/waf
-CONFIGURE_ARGS+=	configure
 CONFIGURE_ARGS+=	--mandir=${PREFIX}/${PKGMANDIR}
 CONFIGURE_ARGS+=	--abi-check-disable
 CONFIGURE_ARGS+=	--disable-symbol-versions

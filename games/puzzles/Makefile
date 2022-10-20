@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.70 2021/12/08 16:04:39 adam Exp $
+# $NetBSD: Makefile,v 1.73 2022/06/28 11:33:56 wiz Exp $
 
-DISTNAME=	puzzles-20181212
-GIT_COMMIT=	ced51ada363d895eee796dd03923042f97f95321
-PKGREVISION=	8
+DISTNAME=	puzzles-20220127
+GIT_COMMIT=	c43a34fbfe430d235bafc379595761880a19ed9f
+PKGREVISION=	1
 CATEGORIES=	games
 MASTER_SITES=	-https://git.tartarus.org/?p=simon/puzzles.git;a=snapshot;h=${GIT_COMMIT};sf=tgz
 
@@ -11,23 +11,24 @@ HOMEPAGE=	https://www.chiark.greenend.org.uk/~sgtatham/puzzles/
 COMMENT=	Collection of small one-player puzzle games by Simon Tatham
 LICENSE=	mit
 
+BUILD_DEPENDS+=		halibut>=1.1:../../textproc/halibut
+BUILD_DEPENDS+=		ImageMagick-[0-9]*:../../graphics/ImageMagick
+
 WRKSRC=		${WRKDIR}/puzzles-${GIT_COMMIT:C,(.......).*,\1,}
-USE_TOOLS+=	gmake pkg-config perl autoreconf autoconf automake
 AUTO_MKDIRS=	yes
 
-BUILD_DEPENDS+=		halibut>=1.1:../../textproc/halibut
-
 USE_LANGUAGES=		c99
-GNU_CONFIGURE=		yes
-BUILDLINK_TRANSFORM+=	rm:-Werror
-MAKE_FLAGS=		prefix=${PREFIX}
-MAKE_FLAGS+=		gamesdir=${PREFIX}/bin
-CFLAGS+=		-DREVISION=${DISTNAME:S/puzzles-//}
+USE_CMAKE=		yes
+USE_TOOLS+=		perl pkg-config
+
+SUBST_CLASSES+=		net
+SUBST_STAGE.net=	pre-configure
+SUBST_FILES.net=	CMakeLists.txt
+SUBST_SED.net=		-e 's,puzzle(net$$,&game,'
 
 pre-configure:
-	cd ${WRKSRC} && perl mkfiles.pl
-	cd ${WRKSRC} && ${SH} mkauto.sh
-	cd ${WRKSRC} && gmake -f Makefile.doc puzzles.txt
+	cd ${WRKSRC} && make -f Makefile.doc puzzles.txt
+	cd ${WRKSRC} && mv net.c netgame.c && mv icons/net.sav icons/netgame.sav
 
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/puzzles.txt \

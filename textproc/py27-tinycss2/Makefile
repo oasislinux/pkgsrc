@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.2 2022/01/04 20:55:10 wiz Exp $
+# $NetBSD: Makefile,v 1.4 2022/08/24 08:41:09 wiz Exp $
 
 DISTNAME=	tinycss2-0.6.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	textproc python
 MASTER_SITES=	${MASTER_SITE_PYPI:=t/tinycss2/}
 
@@ -16,7 +16,7 @@ PYTHON_VERSIONS_ACCEPTED=	27
 USE_LANGUAGES=	# empty
 
 DEPENDS+=	${PYPKGPREFIX}-webencodings>=0.4:../../textproc/py-webencodings
-TEST_DEPENDS+=	${PYPKGPREFIX}-test-cov-[0-9]*:../../devel/py-test-cov
+TEST_DEPENDS+=	${PYPKGPREFIX}-test-cov-[0-9]*:../../devel/py27-test-cov
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-flake8-[0-9]*:../../devel/py-test-flake8
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-isort-[0-9]*:../../devel/py-test-isort
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-runner-[0-9]*:../../devel/py-test-runner

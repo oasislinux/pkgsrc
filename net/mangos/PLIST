@@ -1,0 +1,12 @@
+@comment $NetBSD: PLIST,v 1.2 2022/09/20 19:21:30 wiz Exp $
+bin/bus
+bin/context
+bin/macat
+bin/pair
+bin/perf
+bin/pipeline
+bin/pubsub
+bin/raw
+bin/reqrep
+bin/survey
+bin/websocket

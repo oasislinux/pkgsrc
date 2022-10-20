@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.78 2021/12/01 13:01:16 nia Exp $
+# $NetBSD: Makefile,v 1.84 2022/10/19 17:14:32 he Exp $
 
-DISTNAME=	pixman-0.40.0
+DISTNAME=	pixman-0.42.0
 PKGREVISION=	2
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_XORG:=lib/}
@@ -19,11 +19,11 @@ CONFIGURE_ARGS+=	--disable-sse2
 .endif
 
 USE_LIBTOOL=	yes
-USE_TOOLS+=	pkg-config perl
+USE_TOOLS+=	perl
 
 PKGCONFIG_OVERRIDE+=	pixman-1.pc.in
 PKGCONFIG_OVERRIDE+=	pixman-1-uninstalled.pc.in
 
-X11_BUILTIN_NAME?=		pixman
+X11_LIB_NAME?=		pixman
 .include "../../meta-pkgs/modular-xorg/avoid-duplicate.mk"
 .include "../../mk/bsd.pkg.mk"

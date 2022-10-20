@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2021/05/24 19:52:16 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2022/09/18 19:06:27 he Exp $
 
 DISTNAME=	freecell-solver-5.14.0
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	games
 MASTER_SITES=	https://fc-solve.shlomifish.org/downloads/fc-solve/
 EXTRACT_SUFX=	.tar.xz
@@ -39,6 +39,11 @@ SUBST_STAGE.man=	pre-configure
 SUBST_MESSAGE.man=	Fix man dir.
 SUBST_FILES.man=	cmake/Shlomif_Common.cmake
 SUBST_SED.man=		-e 's:share/man:man:'
+
+.if ${MACHINE_ARCH} == "powerpc"
+# for 128-bit ints
+.include "../../devel/gmp/buildlink3.mk"
+.endif
 
 .include "../../lang/python/application.mk"
 .include "../../lang/python/tool.mk"

@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.33 2021/12/14 14:47:28 taca Exp $
+@comment $NetBSD: PLIST,v 1.35 2022/09/04 17:00:14 taca Exp $
 bin/puppet${RUBY_SUFFIX}
 ${GEM_HOME}/cache/${GEM_NAME}.gem
 ${GEM_LIBDIR}/CODEOWNERS
@@ -2324,6 +2324,7 @@ ${GEM_LIBDIR}/spec/unit/util/windows/security_descriptor_spec.rb
 ${GEM_LIBDIR}/spec/unit/util/windows/service_spec.rb
 ${GEM_LIBDIR}/spec/unit/util/windows/sid_spec.rb
 ${GEM_LIBDIR}/spec/unit/util/windows/string_spec.rb
+${GEM_LIBDIR}/spec/unit/util/windows_spec.rb
 ${GEM_LIBDIR}/spec/unit/util/yaml_spec.rb
 ${GEM_LIBDIR}/spec/unit/util_spec.rb
 ${GEM_LIBDIR}/spec/unit/version_spec.rb
@@ -2341,7 +2342,3 @@ ${GEM_LIBDIR}/tasks/parser.rake
 ${GEM_LIBDIR}/tasks/yard.rake
 ${GEM_HOME}/specifications/${GEM_NAME}.gemspec
 ${EGDIR}/puppet.conf
-${PLIST.sunos}lib/svc/method/svc-puppetd
-${PLIST.sunos}lib/svc/method/svc-puppetmasterd
-${PLIST.sunos}${EGDIR}/svc/puppet
-${PLIST.sunos}${EGDIR}/svc/puppet.xml

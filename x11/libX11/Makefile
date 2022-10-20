@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.61 2021/12/10 08:54:43 wiz Exp $
+# $NetBSD: Makefile,v 1.66 2022/08/30 18:33:24 wiz Exp $
 
-DISTNAME=		libX11-1.7.3.1
+DISTNAME=		libX11-1.8.1
 CATEGORIES=		x11 devel
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
 EXTRACT_SUFX=		.tar.xz
@@ -18,10 +18,6 @@ CONFIGURE_ARGS+=	--disable-specs
 PKGCONFIG_OVERRIDE+=	x11.pc.in
 
 CONFIGURE_ENV+=		FILE_MAN_SUFFIX=5
-
-CONFIGURE_ARGS.NetBSD+=	--disable-malloc0returnsnull
-# for reallocarray()
-CPPFLAGS.NetBSD+=	-D_OPENBSD_SOURCE
 
 .include "../../mk/pthread.buildlink3.mk"
 CPPFLAGS.OSF1+=		${PTHREAD_CFLAGS} # Required by compiler if including pthread.h
@@ -44,7 +40,7 @@ CONFIGURE_ENV+=		CC_FOR_BUILD=${NATIVE_CC:Q}
 TOOL_DEPENDS+=		xorgproto-[0-9]*:../../x11/xorgproto
 .endif
 
-X11_BUILTIN_NAME?=		libX11
+X11_LIB_NAME?=		libX11
 .include "../../meta-pkgs/modular-xorg/avoid-duplicate.mk"
 .include "../../x11/xorgproto/buildlink3.mk"
 .include "../../x11/libXau/buildlink3.mk"

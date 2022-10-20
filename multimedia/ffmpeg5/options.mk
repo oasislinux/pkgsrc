@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.1 2022/01/31 23:16:41 ryoon Exp $
+# $NetBSD: options.mk,v 1.5 2022/09/26 17:41:07 adam Exp $
 
 # Global and legacy options
 
@@ -191,7 +191,6 @@ CONFIGURE_ARGS+=	--enable-libspeex
 
 # Raspberry Pi support
 .if !empty(PKG_OPTIONS:Mrpi)
-CONFIGURE_ARGS+=	--disable-xvmc
 CONFIGURE_ARGS+=	--enable-omx-rpi
 CONFIGURE_ARGS+=	--enable-mmal
 SUBST_CLASSES+=		vc
@@ -211,10 +210,9 @@ CONFIGURE_ARGS+=	--enable-libxvid
 
 # x264 support
 .if !empty(PKG_OPTIONS:Mx264)
-# ABI change between 20090326 and 20100201
-BUILDLINK_API_DEPENDS.x264-devel+=	x264-devel>=20111207
+BUILDLINK_API_DEPENDS.x264+=	x264>=20220601
 CONFIGURE_ARGS+=	--enable-libx264
-.include "../../multimedia/x264-devel/buildlink3.mk"
+.include "../../multimedia/x264/buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--disable-libx264
 .endif

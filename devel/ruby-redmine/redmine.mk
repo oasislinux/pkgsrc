@@ -1,4 +1,4 @@
-# $NetBSD: redmine.mk,v 1.4 2021/11/07 17:21:19 khorben Exp $
+# $NetBSD: redmine.mk,v 1.7 2022/10/09 15:36:48 taca Exp $
 
 .if !defined(_RUBY_REDMINE_MK)
 _RUBY_REDMINE_MK=	# defined
@@ -11,15 +11,15 @@ _RUBY_REDMINE_MK=	# defined
 # RM_VERSION_DEFAULT
 #	Select default Redmine version.
 #
-#	Possible values: 41 42
-#	Default: 42
+#	Possible values: 42 50
+#	Default: 42 or 50 (Ruby 3.0 and later)
 #
 #
 # === Package-settable variables ===
 #
 # RM_VERSIONS_SUPPORTED
 #	Supported Redmine version.
-#	Possible values: 41 42
+#	Possible values: 42 50
 #	Default: 42
 #
 #
@@ -27,19 +27,19 @@ _RUBY_REDMINE_MK=	# defined
 #
 # RM_VER
 #	Redmine version.
-#	Possible values: 41 42
+#	Possible values: 42 50
 #	Default: 42
 #
 # RM_DIR
 #	Redmine directory.
 #
 
-.if ${RUBY_VER} == "26"
+.if ${RUBY_VER} == 27
 RM_VERSION_DEFAULT?=	42
-RM_VERSIONS_SUPPORTED?=	42 41
-.elif ${RUBY_VER} == "27"
-RM_VERSION_DEFAULT?=	42
-RM_VERSIONS_SUPPORTED?=	42
+RM_VERSIONS_SUPPORTED?=	42 50
+.elif ${RUBY_VER} >= 30
+RM_VERSION_DEFAULT?=	50
+RM_VERSIONS_SUPPORTED?=	50
 .else
 .error "There is no redmine support Ruby ${RUBY_VERSION}"
 .endif
@@ -63,7 +63,7 @@ RM_MINOR=	${RM_VERSION:C/([0-9]+)\.([0-9]+)\.([0-9]+)/\2/}
 RM_VER=		${RM_MAJOR}${RM_MINOR}
 .endif
 
-.if "${RM_VER}" == "41" || "${RM_VER}" == "42"
+.if "${RM_VER}" == 42 || "${RM_VER}" == 50
 REDMINE_DEPENDS=	${RUBY_PKGPREFIX}-redmine${RM_VER}-[0-9]*:../../devel/ruby-redmine${RM_VER}
 RM_PLUGINDIR=		${RM_DIR}/plugins
 RM_THEMEDIR=		${RM_DIR}/public/themes

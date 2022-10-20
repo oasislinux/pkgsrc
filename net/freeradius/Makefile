@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.112 2021/06/30 22:20:32 mef Exp $
+# $NetBSD: Makefile,v 1.116 2022/07/20 01:19:55 gutteridge Exp $
 
 .include "Makefile.common"
 
 PKGNAME=	${DISTNAME:S/-server//}
+PKGREVISION=	3
 COMMENT=	Free RADIUS server implementation
 
 BUILD_DEFS+=		VARBASE
@@ -80,5 +81,4 @@ post-install:
 	${RM} -f ${DESTDIR}${PREFIX}/lib/*.a ${DESTDIR}${PREFIX}/lib/*.la
 
 .include "../../mk/pam.buildlink3.mk"
-.include "../../mk/atomic64.mk"
 .include "../../mk/bsd.pkg.mk"

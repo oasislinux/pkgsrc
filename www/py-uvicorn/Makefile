@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.28 2022/02/05 12:11:09 adam Exp $
+# $NetBSD: Makefile,v 1.32 2022/09/08 15:23:23 adam Exp $
 
-DISTNAME=	uvicorn-0.17.4
+DISTNAME=	uvicorn-0.18.3
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	www python
 MASTER_SITES=	${MASTER_SITE_PYPI:=u/uvicorn/}
@@ -10,11 +10,13 @@ HOMEPAGE=	https://www.uvicorn.org/
 COMMENT=	The lightning-fast ASGI server
 LICENSE=	modified-bsd
 
-DEPENDS+=	${PYPKGPREFIX}-asgiref>=3.4.0:../../www/py-asgiref
+BUILD_DEPENDS+=	${PYPKGPREFIX}-hatchling-[0-9]*:../../devel/py-hatchling
 DEPENDS+=	${PYPKGPREFIX}-click>=7.0:../../devel/py-click
 DEPENDS+=	${PYPKGPREFIX}-h11>=0.8:../../www/py-h11
-DEPENDS+=	${PYPKGPREFIX}-httptools>=0.2.0:../../www/py-httptools
-DEPENDS+=	${PYPKGPREFIX}-uvloop>=0.14.0:../../devel/py-uvloop
+# standard
+DEPENDS+=	${PYPKGPREFIX}-dotenv>=0.13:../../devel/py-dotenv
+DEPENDS+=	${PYPKGPREFIX}-httptools>=0.4.0:../../www/py-httptools
+DEPENDS+=	${PYPKGPREFIX}-uvloop>=0.15.2:../../devel/py-uvloop
 DEPENDS+=	${PYPKGPREFIX}-websockets>=10.0:../../www/py-websockets
 
 PYTHON_VERSIONS_INCOMPATIBLE=	27
@@ -32,5 +34,5 @@ post-install:
 	cd ${DESTDIR}${PREFIX}/bin && \
 	${MV} uvicorn uvicorn-${PYVERSSUFFIX} || ${TRUE}
 
-.include "../../lang/python/egg.mk"
+.include "../../lang/python/wheel.mk"
 .include "../../mk/bsd.pkg.mk"

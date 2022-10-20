@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.4 2022/02/03 08:15:51 adam Exp $
+# $NetBSD: Makefile,v 1.6 2022/07/20 08:49:13 adam Exp $
 
-DISTNAME=	types-toml-0.10.3
+DISTNAME=	types-toml-0.10.8
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_PYPI:=t/types-toml/}

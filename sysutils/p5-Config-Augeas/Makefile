@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.13 2021/12/08 16:06:35 adam Exp $
+# $NetBSD: Makefile,v 1.15 2022/06/28 11:35:59 wiz Exp $
 
 DISTNAME=	Config-Augeas-1.000
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	11
+PKGREVISION=	13
 CATEGORIES=	perl5 sysutils
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/R/RA/RAPHINK/}
 

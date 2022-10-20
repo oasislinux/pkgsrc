@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.36 2021/05/24 19:54:36 wiz Exp $
+# $NetBSD: Makefile,v 1.38 2022/06/28 11:36:24 wiz Exp $
 
-DISTNAME=		Search-Xapian-1.2.25.4
+DISTNAME=		Search-Xapian-1.2.25.5
 PKGNAME=		${DISTNAME:S/^/p5-/}
 PKGREVISION=		1
 CATEGORIES=		textproc perl5

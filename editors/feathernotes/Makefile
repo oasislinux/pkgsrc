@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.15 2022/01/06 07:53:46 pin Exp $
+# $NetBSD: Makefile,v 1.18 2022/08/15 06:55:16 pin Exp $
 
-VERSION=	0.10.0
+VERSION=	1.0.0
 DISTNAME=	FeatherNotes-V${VERSION}
 PKGNAME=	feathernotes-${VERSION}
 CATEGORIES=	editors
@@ -13,15 +13,17 @@ COMMENT=	Lightweight Qt5 hierarchical notes-manager
 LICENSE=	gnu-gpl-v3
 
 WRKSRC=		${WRKDIR}/FeatherNotes-${VERSION}
+USE_CMAKE=	yes
 USE_TOOLS+=	pkg-config
-USE_LANGUAGES=	c++
+USE_LANGUAGES=	c c++
 
-INSTALL_MAKE_FLAGS+=	INSTALL_ROOT=${DESTDIR}
+CONFIGURE_DIRS=	build
+CMAKE_ARG_PATH=	..
 
-do-configure:
-	cd ${WRKSRC} && \
-	${SETENV} ${CONFIGURE_ENV} \
-	${QTDIR}/bin/qmake -o Makefile PREFIX=${PREFIX}
+CMAKE_ARGS+=	-DCMAKE_INSTALL_PREFIX=${PREFIX}
+
+pre-configure:
+	${MKDIR} -p ${WRKSRC}/build
 
 TOOL_DEPENDS+=	qt5-qttools-[0-9]*:../../x11/qt5-qttools
 

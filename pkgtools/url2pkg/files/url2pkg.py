@@ -1,5 +1,5 @@
 #! @PYTHONBIN@
-# $NetBSD: url2pkg.py,v 1.42 2022/02/08 20:48:09 rillig Exp $
+# $NetBSD: url2pkg.py,v 1.45 2022/08/26 20:11:35 rillig Exp $
 
 # Copyright (c) 2019 The NetBSD Foundation, Inc.
 # All rights reserved.
@@ -108,7 +108,12 @@ class Globals:
 
     def bmake(self, *args: str) -> None:
         self.debug('running bmake {0} in {1}', args, str(self.pkgdir))
-        subprocess.check_call([self.make, *args], cwd=self.pkgdir)
+        env = dict(os.environ)
+        env.update({
+            # Resuming transfers only works when distinfo already exists.
+            'PKG_RESUME_TRANSFERS': 'no',
+        })
+        subprocess.check_call([self.make, *args], cwd=self.pkgdir, env=env)
 
     def show_var(self, varname: str) -> str:
         output = subprocess.check_output(
@@ -118,14 +123,13 @@ class Globals:
     def pkgsrc_license(self, license_name: str) -> str:
         comment = ''
 
-        def suffix(suf: str, comm: str):
-            nonlocal license_name, comment
-            if comment == '' and license_name.endswith(suf):
-                comment = f'\t# {comm}'
-                license_name = license_name[:-len(suf)].rstrip()
+        if comment == '' and license_name.endswith('| file LICENSE'):
+            comment = f'\t# OR file LICENSE'
+            license_name = license_name[:-len('| file LICENSE')].rstrip()
 
-        suffix('| file LICENSE', 'OR file LICENSE')
-        suffix('+ file LICENSE', '+ file LICENSE')
+        if comment == '' and license_name.endswith('+ file LICENSE'):
+            comment = f'\t# + file LICENSE'
+            license_name = license_name[:-len('+ file LICENSE')].rstrip()
 
         known_licenses = (
             ('2-clause-bsd', 'BSD-2', 'bsd2', 'BSD_2_clause'),
@@ -1021,7 +1025,7 @@ class Adjuster:
         cmd = f'{self.g.pythonbin} setup.py build'
         env = {
             'PYTHONDONTWRITEBYTECODE': 'x',
-            'PYTHONPATH': self.g.libdir
+            'PYTHONPATH': f'{self.g.libdir}/python'
         }
         self.read_dependencies(cmd, env, self.abs_wrksrc, 'py-', '${PYPKGPREFIX}-')
 

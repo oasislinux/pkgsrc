@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.11 2021/10/26 11:06:35 nia Exp $
+$NetBSD: distinfo,v 1.13 2022/07/08 14:22:34 wiz Exp $
 
-BLAKE2s (dropbox-11.4.1.tar.gz) = a9902ff3806c4e393e86dd01af4c668925eca9c6ec28ab6b11813a283baf7c28
-SHA512 (dropbox-11.4.1.tar.gz) = f038eb8f96a8863d756d0b3e20b587e93549e11fd10e7abd386ac5cdce285760b7111ef3f675f6daa18d52c9d8c8ff5a33e88082c4b59c0e759e336c34a62be6
-Size (dropbox-11.4.1.tar.gz) = 551940 bytes
+BLAKE2s (dropbox-11.32.0.tar.gz) = 09057e2d1fed132c50513e45eb4b300afdebc60f3dfe215e288273f5bb3eb050
+SHA512 (dropbox-11.32.0.tar.gz) = e221879479b7f412e7994b9ec69cc89b7a1b0d622357647317bf9771ece71a37aa3f26a97f4bd10650007cedc4c61d4549b250d675a1529709a48e6ffea55c9e
+Size (dropbox-11.32.0.tar.gz) = 577938 bytes
 SHA1 (patch-setup.py) = b4a312c16a7ae37ae10806b5e3e29ed41ed0a98e

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.22 2022/01/31 14:23:21 adam Exp $
+# $NetBSD: Makefile,v 1.29 2022/10/03 12:36:43 adam Exp $
 
-DISTNAME=	rich-11.1.0
+DISTNAME=	rich-12.6.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	comms python
 MASTER_SITES=	${MASTER_SITE_PYPI:=r/rich/}
@@ -10,15 +10,14 @@ HOMEPAGE=	https://github.com/willmcgugan/rich
 COMMENT=	Render rich text, tables, progress bars, syntax highlighting
 LICENSE=	mit
 
-DEPENDS+=	${PYPKGPREFIX}-colorama>=0.4.0:../../comms/py-colorama
 DEPENDS+=	${PYPKGPREFIX}-commonmark>=0.9.0:../../textproc/py-commonmark
 DEPENDS+=	${PYPKGPREFIX}-pygments>=2.6.0:../../textproc/py-pygments
 
 PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 .include "../../lang/python/pyversion.mk"
-.if ${_PYTHON_VERSION} < 38
-DEPENDS+=	${PYPKGPREFIX}-typing-extensions>=3.7.4:../../devel/py-typing-extensions
+.if ${_PYTHON_VERSION} < 39
+DEPENDS+=	${PYPKGPREFIX}-typing-extensions>=4.0.0:../../devel/py-typing-extensions
 .endif
 
 USE_LANGUAGES=	# none

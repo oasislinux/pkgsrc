@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.30 2021/12/29 06:05:19 taca Exp $
+# $NetBSD: Makefile,v 1.32 2022/09/10 15:58:51 taca Exp $
 
 MODNAME=		http
-PECL_VERSION=		3.2.4
+PECL_VERSION=		3.3.0
 CATEGORIES+=		www
 
 PECL_DISTNAME=		pecl_http-${PECL_VERSION}
@@ -17,7 +17,11 @@ PHP_VERSIONS_ACCEPTED=	74
 
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
+USE_TOOLS+=		bash
 
+CHECK_PORTABILITY_SKIP+=	configure
+
+CONFIG_SHELL=		${TOOLS_PATH.bash}
 CONFIGURE_ARGS+=	--with-http
 CONFIGURE_ARGS+=	--with-http-libcurl-dir=${BUILDLINK_PREFIX.curl}
 CONFIGURE_ARGS+=	--with-http-libevent-dir=${BUILDLINK_PREFIX.libevent}

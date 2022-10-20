@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.28 2021/04/25 06:09:41 nia Exp $
+# $NetBSD: options.mk,v 1.30 2022/09/20 06:20:47 nia Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.mpv
 
@@ -9,19 +9,23 @@ PKG_OPTIONS_GROUP.gl=		opengl rpi
 # audio outputs
 PKG_SUPPORTED_OPTIONS+=		alsa jack openal pulseaudio
 # video outputs
-PKG_SUPPORTED_OPTIONS+=		caca libdrm x11
+PKG_SUPPORTED_OPTIONS+=		caca libdrm sixel x11
 # audio/video outputs
 PKG_SUPPORTED_OPTIONS+=		sdl2
 # misc
 PKG_SUPPORTED_OPTIONS+=		bluray lua
 
-PKG_SUGGESTED_OPTIONS=		bluray lua sdl2
+PKG_SUGGESTED_OPTIONS=		bluray lua sdl2 sixel
 PKG_SUGGESTED_OPTIONS.Linux+=	alsa pulseaudio
 
 .include "../../mk/bsd.fast.prefs.mk"
 
 .if ${OPSYS} != "Darwin"
-PKG_SUGGESTED_OPTIONS+=		opengl libdrm x11
+PKG_SUGGESTED_OPTIONS+=		opengl x11
+.endif
+
+.if ${OPSYS} == "NetBSD" || ${OPSYS} == "Linux"
+PKG_SUGGESTED_OPTIONS+=		libdrm
 .endif
 
 .include "../../multimedia/libva/available.mk"
@@ -200,4 +204,14 @@ WAF_CONFIGURE_ARGS+=	--enable-x11
 .include "../../x11/libXxf86vm/buildlink3.mk"
 .else
 WAF_CONFIGURE_ARGS+=	--disable-x11
+.endif
+
+###
+### Sixel support (video output)
+###
+.if !empty(PKG_OPTIONS:Msixel)
+WAF_CONFIGURE_ARGS+=	--enable-sixel
+.include "../../graphics/libsixel/buildlink3.mk"
+.else
+WAF_CONFIGURE_ARGS+=	--disable-sixel
 .endif

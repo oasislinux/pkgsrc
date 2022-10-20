@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.15 2021/11/11 12:02:50 kim Exp $
+# $NetBSD: Makefile,v 1.17 2022/08/06 17:21:05 he Exp $
 
 DISTNAME=	dnsdist-1.5.1
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	net
 MASTER_SITES=	https://downloads.powerdns.com/releases/
 EXTRACT_SUFX=	.tar.bz2
@@ -55,4 +55,5 @@ post-install:
 .include "../../net/fstrm/buildlink3.mk"
 .include "../../security/libsodium/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
+.include "../../mk/atomic64.mk"
 .include "../../mk/bsd.pkg.mk"

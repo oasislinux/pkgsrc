@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.82 2022/01/09 11:58:14 wiz Exp $
+# $NetBSD: Makefile,v 1.86 2022/09/17 19:16:53 nros Exp $
 
-DISTNAME=		tortoisehg-6.0
+DISTNAME=		tortoisehg-6.2.2
 PKGNAME=		${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=		2
 CATEGORIES=		devel python
 MASTER_SITES=		https://www.mercurial-scm.org/release/tortoisehg/targz/
 
@@ -11,13 +10,14 @@ HOMEPAGE=		https://tortoisehg.bitbucket.io/
 COMMENT=		GUI for Mercurial
 LICENSE=		gnu-gpl-v2
 
+BUILD_DEPENDS+=	${PYPKGPREFIX}-sphinx-[0-9]*:../../textproc/py-sphinx
+DEPENDS+=	${PYPKGPREFIX}-iniparse>=0.4:../../textproc/py-iniparse
+DEPENDS+=	${PYPKGPREFIX}-mercurial>=5.0.0:../../devel/py-mercurial
+DEPENDS+=	${PYPKGPREFIX}-pygments-[0-9]*:../../textproc/py-pygments
+
 USE_TOOLS+=		pax
 
 REPLACE_PYTHON+=	thg
-
-BUILD_DEPENDS+=	${PYPKGPREFIX}-sphinx>=1.3.4nb1<2:../../textproc/py-sphinx1
-DEPENDS+=	${PYPKGPREFIX}-iniparse>=0.4:../../textproc/py-iniparse
-DEPENDS+=	${PYPKGPREFIX}-mercurial>=5.0.0:../../devel/py-mercurial
 
 thg_icon=		/share/pixmaps/tortoisehg/icons/thg_logo.ico
 SUBST_CLASSES+=		df
@@ -31,7 +31,7 @@ INSTALLATION_DIRS+=	share/doc/tortoisehg
 
 PYTHON_SELF_CONFLICT=	yes
 
-PYTHON_VERSIONED_DEPENDENCIES=	pygments
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 pre-build:
 	${RUN} cd ${WRKSRC}/doc && ${MAKE_PROGRAM} SPHINXBUILD=sphinx-build-${PYVERSSUFFIX} html
@@ -47,7 +47,6 @@ post-install:
 
 .include "../../lang/python/application.mk"
 .include "../../lang/python/egg.mk"
-.include "../../lang/python/versioned_dependencies.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/py-qt5-qscintilla/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

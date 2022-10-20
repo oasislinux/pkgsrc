@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.95 2022/01/08 11:16:05 wiz Exp $
+# $NetBSD: Makefile,v 1.100 2022/08/07 08:40:03 wiz Exp $
 
 .include "../../print/poppler/Makefile.common"
 
@@ -51,8 +51,10 @@ post-install:
 #.include "../../lang/python/tool.mk"
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.41.0
 .include "../../devel/glib2/buildlink3.mk"
+BUILDLINK_DEPMETHOD.gobject-introspection=	build
 .include "../../devel/gobject-introspection/buildlink3.mk"
 .include "../../graphics/cairo-gobject/buildlink3.mk"
 .include "../../mk/jpeg.buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
+.include "../../lang/python/tool.mk"
 .include "../../mk/bsd.pkg.mk"

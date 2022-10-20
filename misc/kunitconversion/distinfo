@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.13 2021/10/26 10:59:11 nia Exp $
+$NetBSD: distinfo,v 1.15 2022/09/29 01:03:17 markd Exp $
 
-BLAKE2s (kunitconversion-5.80.0.tar.xz) = 8a67a3b857ad85639eec504de0e7cbaf17ea7b5eb40af9c99a53d55caf146b7e
-SHA512 (kunitconversion-5.80.0.tar.xz) = ad2509c262a6f60f0eaec9c2d77105302623dc602cb44b2c3d15b0cf3186c37a24d65e18def72857d69b26eb6684f7a6d033e0e87adfd05b0a4ebc7dd0b58a81
-Size (kunitconversion-5.80.0.tar.xz) = 860568 bytes
+BLAKE2s (kunitconversion-5.98.0.tar.xz) = e3ceb6a12de8906c96751d00866aa19a486437d695ef88374bf1a0d43c23c0b7
+SHA512 (kunitconversion-5.98.0.tar.xz) = 1ea9524208165b57346508b36a59bd57f1293e399cb549cf9d5eba072f6a6ffca653319f9c1b35d38508f89fb1add09c2e25eeae239ecf055a6b554600d9bef7
+Size (kunitconversion-5.98.0.tar.xz) = 899204 bytes

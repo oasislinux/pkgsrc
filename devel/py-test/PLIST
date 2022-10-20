@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.20 2020/12/14 06:21:38 adam Exp $
+@comment $NetBSD: PLIST,v 1.22 2022/04/05 19:11:12 adam Exp $
 bin/py.test-${PYVERSSUFFIX}
 bin/pytest-${PYVERSSUFFIX}
 ${PYSITELIB}/${EGG_INFODIR}/PKG-INFO
@@ -65,6 +65,9 @@ ${PYSITELIB}/_pytest/config/__init__.pyo
 ${PYSITELIB}/_pytest/config/argparsing.py
 ${PYSITELIB}/_pytest/config/argparsing.pyc
 ${PYSITELIB}/_pytest/config/argparsing.pyo
+${PYSITELIB}/_pytest/config/compat.py
+${PYSITELIB}/_pytest/config/compat.pyc
+${PYSITELIB}/_pytest/config/compat.pyo
 ${PYSITELIB}/_pytest/config/exceptions.py
 ${PYSITELIB}/_pytest/config/exceptions.pyc
 ${PYSITELIB}/_pytest/config/exceptions.pyo
@@ -98,6 +101,9 @@ ${PYSITELIB}/_pytest/hookspec.pyo
 ${PYSITELIB}/_pytest/junitxml.py
 ${PYSITELIB}/_pytest/junitxml.pyc
 ${PYSITELIB}/_pytest/junitxml.pyo
+${PYSITELIB}/_pytest/legacypath.py
+${PYSITELIB}/_pytest/legacypath.pyc
+${PYSITELIB}/_pytest/legacypath.pyo
 ${PYSITELIB}/_pytest/logging.py
 ${PYSITELIB}/_pytest/logging.pyc
 ${PYSITELIB}/_pytest/logging.pyo
@@ -144,6 +150,9 @@ ${PYSITELIB}/_pytest/python.pyo
 ${PYSITELIB}/_pytest/python_api.py
 ${PYSITELIB}/_pytest/python_api.pyc
 ${PYSITELIB}/_pytest/python_api.pyo
+${PYSITELIB}/_pytest/python_path.py
+${PYSITELIB}/_pytest/python_path.pyc
+${PYSITELIB}/_pytest/python_path.pyo
 ${PYSITELIB}/_pytest/recwarn.py
 ${PYSITELIB}/_pytest/recwarn.pyc
 ${PYSITELIB}/_pytest/recwarn.pyo
@@ -153,6 +162,9 @@ ${PYSITELIB}/_pytest/reports.pyo
 ${PYSITELIB}/_pytest/runner.py
 ${PYSITELIB}/_pytest/runner.pyc
 ${PYSITELIB}/_pytest/runner.pyo
+${PYSITELIB}/_pytest/scope.py
+${PYSITELIB}/_pytest/scope.pyc
+${PYSITELIB}/_pytest/scope.pyo
 ${PYSITELIB}/_pytest/setuponly.py
 ${PYSITELIB}/_pytest/setuponly.pyc
 ${PYSITELIB}/_pytest/setuponly.pyo
@@ -162,12 +174,12 @@ ${PYSITELIB}/_pytest/setupplan.pyo
 ${PYSITELIB}/_pytest/skipping.py
 ${PYSITELIB}/_pytest/skipping.pyc
 ${PYSITELIB}/_pytest/skipping.pyo
+${PYSITELIB}/_pytest/stash.py
+${PYSITELIB}/_pytest/stash.pyc
+${PYSITELIB}/_pytest/stash.pyo
 ${PYSITELIB}/_pytest/stepwise.py
 ${PYSITELIB}/_pytest/stepwise.pyc
 ${PYSITELIB}/_pytest/stepwise.pyo
-${PYSITELIB}/_pytest/store.py
-${PYSITELIB}/_pytest/store.pyc
-${PYSITELIB}/_pytest/store.pyo
 ${PYSITELIB}/_pytest/terminal.py
 ${PYSITELIB}/_pytest/terminal.pyc
 ${PYSITELIB}/_pytest/terminal.pyo
@@ -198,7 +210,4 @@ ${PYSITELIB}/pytest/__init__.pyo
 ${PYSITELIB}/pytest/__main__.py
 ${PYSITELIB}/pytest/__main__.pyc
 ${PYSITELIB}/pytest/__main__.pyo
-${PYSITELIB}/pytest/collect.py
-${PYSITELIB}/pytest/collect.pyc
-${PYSITELIB}/pytest/collect.pyo
 ${PYSITELIB}/pytest/py.typed

@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.20 2022/01/12 21:39:33 fcambus Exp $
+# $NetBSD: Makefile,v 1.24 2022/09/11 17:44:59 fcambus Exp $
 
-DISTNAME=	tig-2.5.5
+DISTNAME=	tig-2.5.7
 CATEGORIES=	devel scm
 MASTER_SITES=	${MASTER_SITE_GITHUB:=jonas/}
 GITHUB_RELEASE=	${DISTNAME}
 
-MAINTAINER=	fcambus@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://jonas.github.io/tig/
 COMMENT=	Ncurses-based GIT repository tool
 LICENSE=	gnu-gpl-v2
@@ -15,7 +15,7 @@ TOOL_DEPENDS+=	xmlto-[0-9]*:../../textproc/xmlto
 DEPENDS+=	git-base-[0-9]*:../../devel/git-base
 
 GNU_CONFIGURE=	yes
-USE_TOOLS+=	gmake
+USE_TOOLS+=	gmake gsed
 USE_NCURSES=	yes	# Display issues with NetBSD curses(3)
 
 CONF_FILES=	${EGDIR}/tigrc ${PKG_SYSCONFDIR}/tigrc

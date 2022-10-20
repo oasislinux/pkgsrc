@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.67 2021/12/08 16:06:03 adam Exp $
+# $NetBSD: Makefile,v 1.70 2022/07/24 21:15:18 wiz Exp $
 
 VERSION=	1.0.1
 DISTNAME=	Nagstamon-${VERSION}
 PKGNAME=	${DISTNAME:S/N/n/}
-PKGREVISION=	21
+PKGREVISION=	24
 CATEGORIES=	net python
 MASTER_SITES=	https://nagstamon.ifw-dresden.de/files-nagstamon/stable/
 
@@ -17,7 +17,6 @@ DEPENDS+=	${PYPKGPREFIX}-libxslt>=1.1.24:../../textproc/py-libxslt
 DEPENDS+=	sox>=14.0.1:../../audio/sox
 
 USE_LANGUAGES=		# none
-PYDISTUTILSPKG=		yes
 
 WRKSRC=			${WRKDIR}/Nagstamon
 
@@ -43,5 +42,5 @@ post-install:
 .include "../../x11/py-gtk2/buildlink3.mk"
 .include "../../x11/py-gnome2-extras/buildlink3.mk"
 .include "../../lang/python/application.mk"
-.include "../../lang/python/extension.mk"
+.include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

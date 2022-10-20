@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.98 2022/01/20 12:57:13 jperkin Exp $
+# $NetBSD: Makefile,v 1.104 2022/08/11 01:32:50 gutteridge Exp $
 
 .include "dist.mk"
 
 PKGNAME=	python27-${PY_DISTVERSION}
-PKGREVISION=	7
+PKGREVISION=	9
 CATEGORIES=	lang python
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -21,6 +21,7 @@ CONFIGURE_ARGS+=	--enable-shared
 CONFIGURE_ARGS+=	--with-dbmliborder=ndbm:bdb
 CONFIGURE_ARGS+=	--with-system-ffi
 CONFIGURE_ARGS+=	--with-threads
+CONFIGURE_ARGS+=	PKG_CONFIG=${PREFIX}/bin/pkg-config
 CONFIGURE_ENV+=		MKDIR_P=${MKDIR:Q}
 CONFIGURE_ENV+=		OPT=${CFLAGS:M*:Q}
 PKGCONFIG_OVERRIDE+=	Misc/python.pc.in
@@ -104,7 +105,11 @@ PLIST.extra-so=	yes
 # modules will not be built.
 .if ${OPSYS} == "Darwin"
 .  if exists(${OSX_SDK_PATH}/usr/include)
-CFLAGS+=	-I${OSX_SDK_PATH:Q}/usr/include
+CFLAGS+=		-I${OSX_SDK_PATH:Q}/usr/include
+SUBST_CLASSES+=		sdkpath
+SUBST_STAGE.sdkpath=	pre-configure
+SUBST_FILES.sdkpath=	Lib/distutils/unixccompiler.py
+SUBST_VARS.sdkpath=	OSX_SDK_PATH
 .  endif
 .  if exists(${OSX_SDK_PATH}/System/Library/Frameworks/QuickTime.framework)
 PLIST.qt=	yes

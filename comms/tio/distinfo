@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.3 2021/10/26 10:06:06 nia Exp $
+$NetBSD: distinfo,v 1.11 2022/06/18 14:52:15 fcambus Exp $
 
-BLAKE2s (tio-1.32.tar.xz) = 0759f74a40dab68d5f5a89b6582bcba2c7ed8c626e01c86a1933e24292a2285c
-SHA512 (tio-1.32.tar.xz) = 6ec216ea8e60fe8fb09e3bc378d8178f0d27789ba876e5a763c1eeef7de064831143270e644e64658d3b9acaf3c1b406f1e3331acc4c8bee91fd56851b99941f
-Size (tio-1.32.tar.xz) = 88976 bytes
+BLAKE2s (tio-1.40.tar.xz) = f8348db14f7a5c1b5d1b09cf7a2773be78e2b7686e5924742560b402ff62b4d8
+SHA512 (tio-1.40.tar.xz) = 41f92d757fea3099e9974c64736aa75f69961ba5baf7b01cdb281656bcbf6490afe3748ce49c080624b5f4d3493a8398b8d702be0423f2bcbd0f0484bf76fdf6
+Size (tio-1.40.tar.xz) = 3069480 bytes

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.114 2021/12/08 16:05:59 adam Exp $
+# $NetBSD: Makefile,v 1.116 2022/08/09 12:08:29 jperkin Exp $
 
 DISTNAME=	gtk-gnutella-1.1.11
-PKGREVISION=	17
+PKGREVISION=	18
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gtk-gnutella/}
 EXTRACT_SUFX=	.tar.bz2
@@ -22,7 +22,7 @@ CONFIGURE_ARGS+=	--cc=${CC:Q}
 CONFIGURE_ARGS+=	--cflags=${CFLAGS:Unone:Q}
 CONFIGURE_ARGS+=	--yacc="yacc"
 
-LDFLAGS.SunOS+=	-lsocket -lnsl -liconv
+LDFLAGS.SunOS+=	-lsocket -lnsl
 
 .include "options.mk"
 

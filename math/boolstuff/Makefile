@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2021/05/24 19:52:55 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2022/07/25 11:12:25 wiz Exp $
 
 DISTNAME=	boolstuff-0.1.16
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	math
 MASTER_SITES=	http://perso.b2b2c.ca/~sarrazip/dev/
 
@@ -12,7 +12,6 @@ LICENSE=	gnu-gpl-v2
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
-USE_TOOLS+=	pkg-config
 USE_LANGUAGES=	c c++
 TOOLS_BROKEN+=	perl
 

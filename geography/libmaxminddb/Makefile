@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.6 2021/05/01 16:08:45 fcambus Exp $
+# $NetBSD: Makefile,v 1.10 2022/10/07 20:03:16 fcambus Exp $
 
-DISTNAME=	libmaxminddb-1.6.0
+DISTNAME=	libmaxminddb-1.7.1
 CATEGORIES=	geography
 MASTER_SITES=	${MASTER_SITE_GITHUB:=maxmind/}
 GITHUB_RELEASE=	${PKGVERSION_NOREV}
 
-MAINTAINER=	fcambus@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://maxmind.github.io/libmaxminddb/
 COMMENT=	C library for the MaxMind DB file format
 LICENSE=	apache-2.0
@@ -13,7 +13,7 @@ LICENSE=	apache-2.0
 GNU_CONFIGURE=	yes
 USE_LANGUAGES+=	c99
 USE_LIBTOOL=	yes
-USE_TOOLS+=	gmake pkg-config
+USE_TOOLS+=	gmake
 
 PKGCONFIG_OVERRIDE+=	src/libmaxminddb.pc.in
 

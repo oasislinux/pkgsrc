@@ -1,12 +1,20 @@
-This package provides the certificates distributed by the Mozilla
-Project and will, by default, install certificates trusted by the
-Mozilla Project in the system OpenSSL certificate store.  Modification
-of system configuration files is very irregular as pkgsrc should not
-write anything outside of ${PREFIX}.
+This package contains the update-ca-certificates(8) tool maintained by
+the Debian Project (in the ca-certificates package they distribute) to
+manage the set of configured trust anchors for openssl.
 
-The sysadmin can configure the list of trusted certificates and also
-add local certificates as needed by editing ca-certificates.conf and
-re-running update-ca-certificates.
+The ca-certificates framework enables the sysadmin to configure the
+certificates to install, using multiple sources of CA certificates, for
+example to include local CAs. See update-ca-certificates(8) for details.
+
+This package also contains the certificate authorities shipped with
+Mozilla's browser to allow SSL-based applications to check for the
+authenticity of SSL connections.
+
+Please note that Debian, NetBSD, and pkgsrc can neither confirm nor deny
+whether the certificate authorities whose certificates are included in
+this package have in any way been audited for trustworthiness or RFC
+3647 compliance.  Full responsibility to assess them belongs to the
+local system administrator.
 
 See also the mozilla-rootcerts and mozilla-rootcerts-openssl packages
-for an alternative approach.
+for alternative approaches to installing CA certificates.

@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.31 2021/12/19 11:37:10 nia Exp $
+# $NetBSD: Makefile,v 1.36 2022/09/27 20:58:23 wiz Exp $
 
 DISTNAME=	mgba-0.9.3
+PKGREVISION=	5
 CATEGORIES=	emulators
 MASTER_SITES=	${MASTER_SITE_GITHUB:=mgba-emu/}
 

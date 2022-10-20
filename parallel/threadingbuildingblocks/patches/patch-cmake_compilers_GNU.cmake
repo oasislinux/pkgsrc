@@ -1,17 +1,15 @@
-$NetBSD: patch-cmake_compilers_GNU.cmake,v 1.2 2021/07/29 20:03:28 fcambus Exp $
+$NetBSD: patch-cmake_compilers_GNU.cmake,v 1.4 2022/07/01 22:38:25 adam Exp $
 
-Only link against dl on Linux.
+Automatically choose dl library.
 
---- cmake/compilers/GNU.cmake.orig	2021-07-29 16:43:31.799016814 +0000
+--- cmake/compilers/GNU.cmake.orig	2021-12-17 13:40:54.000000000 +0000
 +++ cmake/compilers/GNU.cmake
-@@ -37,7 +37,9 @@ if (CMAKE_SYSTEM_PROCESSOR MATCHES "(x86
-     set(TBB_COMMON_COMPILE_FLAGS ${TBB_COMMON_COMPILE_FLAGS} -mrtm $<$<AND:$<NOT:$<CXX_COMPILER_ID:Intel>>,$<NOT:$<VERSION_LESS:${CMAKE_CXX_COMPILER_VERSION},11.0>>>:-mwaitpkg>)
+@@ -41,7 +41,7 @@ if (CMAKE_SYSTEM_PROCESSOR MATCHES "(x86
  endif()
  
--set(TBB_COMMON_LINK_LIBS dl)
-+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
-+    set(TBB_COMMON_LINK_LIBS dl)
-+endif()
+ if (NOT MINGW)
+-    set(TBB_COMMON_LINK_LIBS dl)
++    set(TBB_COMMON_LINK_LIBS ${CMAKE_DL_LIBS})
+ endif()
  
  # Ignore -Werror set through add_compile_options() or added to CMAKE_CXX_FLAGS if TBB_STRICT is disabled.
- if (NOT TBB_STRICT AND COMMAND tbb_remove_compile_flag)

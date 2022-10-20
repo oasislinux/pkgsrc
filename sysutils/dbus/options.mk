@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.13 2019/11/04 21:28:43 rillig Exp $
+# $NetBSD: options.mk,v 1.15 2022/03/20 15:19:21 wiz Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.dbus
 PKG_SUPPORTED_OPTIONS+=	debug x11
@@ -35,7 +35,8 @@ CONFIGURE_ARGS+=	--disable-kqueue
 .endif
 
 .if !empty(PKG_OPTIONS:Mx11)
-CONFIGURE_ARGS+=	--with-x
+CONFIGURE_ARGS+=	--with-x=auto
+CONFIGURE_ARGS+=	--enable-x11-autolaunch
 .  include "../../x11/libX11/buildlink3.mk"
 BUILDLINK_DEPMETHOD.libXt=	build
 .  include "../../x11/libXt/buildlink3.mk"

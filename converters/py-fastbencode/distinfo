@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.3 2022/09/13 07:59:34 adam Exp $
+
+BLAKE2s (fastbencode-0.0.12.tar.gz) = efd0ea747cf889ba582ca2d4ccd2703e48c7cd3a97f43cb76582483e21b3f333
+SHA512 (fastbencode-0.0.12.tar.gz) = 8c3d354944bdb28dab9396033fcf2c355a35aa7c49e5207fb29bb2de76ced0f256eb2cb54a7d3f8ec98d957e6c3aa4245b7682e78e720c0b206c4e6ee96f535b
+Size (fastbencode-0.0.12.tar.gz) = 84318 bytes

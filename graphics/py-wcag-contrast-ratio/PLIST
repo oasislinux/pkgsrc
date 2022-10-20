@@ -1,0 +1,12 @@
+@comment $NetBSD: PLIST,v 1.2 2022/04/30 11:02:31 wiz Exp $
+${PLIST.py3x}${PYSITELIB}/${EGG_INFODIR}/PKG-INFO
+${PLIST.py3x}${PYSITELIB}/${EGG_INFODIR}/SOURCES.txt
+${PLIST.py3x}${PYSITELIB}/${EGG_INFODIR}/dependency_links.txt
+${PLIST.py3x}${PYSITELIB}/${EGG_INFODIR}/top_level.txt
+${PLIST.py2x}${PYSITELIB}/${EGG_INFODIR}
+${PYSITELIB}/wcag_contrast_ratio/__init__.py
+${PYSITELIB}/wcag_contrast_ratio/__init__.pyc
+${PYSITELIB}/wcag_contrast_ratio/__init__.pyo
+${PYSITELIB}/wcag_contrast_ratio/contrast.py
+${PYSITELIB}/wcag_contrast_ratio/contrast.pyc
+${PYSITELIB}/wcag_contrast_ratio/contrast.pyo

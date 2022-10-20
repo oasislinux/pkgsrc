@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.4 2022/01/18 02:48:12 pho Exp $
+# $NetBSD: Makefile,v 1.7 2022/02/26 03:58:08 pho Exp $
 
-DISTNAME=	streaming-commons-0.2.2.1
+DISTNAME=	streaming-commons-0.2.2.4
 PKGREVISION=	2
 CATEGORIES=	devel
 

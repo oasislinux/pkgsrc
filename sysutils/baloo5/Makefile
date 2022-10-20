@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.51 2021/12/08 16:02:37 adam Exp $
+# $NetBSD: Makefile,v 1.59 2022/09/29 01:16:10 markd Exp $
 
 DISTNAME=	baloo-${KF5VER}
 PKGNAME=	baloo5-${KF5VER}
-PKGREVISION=	4
 CATEGORIES=	sysutils
 
 HOMEPAGE=	https://community.kde.org/Frameworks
@@ -39,7 +38,7 @@ SUBST_SED.fix-moc=	-e 's;"${PREFIX}/include",;;g'
 
 .include "../../mk/bsd.prefs.mk"
 
-.if ${OPSYS} != "Linux"
+.if ${OPSYS} != "Linux" && ${OPSYS} != "SunOS"
 .include "../../devel/libinotify/buildlink3.mk"
 .endif
 .include "../../databases/lmdb/buildlink3.mk"

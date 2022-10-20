@@ -9,7 +9,6 @@ use Cwd qw(abs_path);
 use File::Basename;
 use File::Spec;
 use version;
-use File::Find::Rule;
 use Getopt::Long;
 use Pod::Usage qw(pod2usage);
 
@@ -146,8 +145,10 @@ sub is_ne
 sub get_pkg_vars
 {
     my $varnames = join( " ", @_ );
-    my @vals = qx($make_bin show-vars VARNAMES="$varnames");  chomp @vals;
-    return @vals;
+    my @vals = qx($make_bin show-vars VARNAMES="$varnames");
+    my $retval = $?;
+    chomp @vals;
+    return $?, @vals;
 }
 
 sub get_inst_pkgs
@@ -294,13 +295,18 @@ my %distmods = get_modules_by_distribution();
 my ( $pkg2update, $pkgok, $pkgcrank ) = ( 0, 0, 0 );
 
 my $pkgsrc_base = find_pkgsrc_dir();
-my @p5_pkg_dirs = find( directory => name => "p5-*", in => $pkgsrc_base );
+my @p5_pkg_dirs = glob($pkgsrc_base . "/*/p5-*" );
    @p5_pkg_dirs = sort @p5_pkg_dirs;
 
 foreach my $dn (@p5_pkg_dirs)
 {
     chdir( $dn );
-    my ($distnm, $extract_sufx, $pkgnm, $maint ) = get_pkg_vars( qw(DISTNAME EXTRACT_SUFX PKGNAME MAINTAINER) );
+    my ( $result, $distnm, $extract_sufx, $pkgnm, $maint ) = get_pkg_vars( qw(DISTNAME EXTRACT_SUFX PKGNAME MAINTAINER) );
+    if ( $result != 0) {
+	$writer->write_entry( $dn, "", "out of sync?", "n/a", "!=", "n/a", "" );
+	++$pkgcrank;
+	next;
+    }
     my $pkgver = 0;
     if( $distnm =~ m/^(.*)-(v?[0-9].*?)$/ )
     {

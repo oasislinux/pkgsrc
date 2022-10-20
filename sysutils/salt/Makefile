@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.77 2022/01/05 15:41:23 wiz Exp $
+# $NetBSD: Makefile,v 1.80 2022/09/30 10:02:12 sborrill Exp $
 
 DISTNAME=	salt-3004
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_PYPI:=s/salt/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://saltstack.org/
+HOMEPAGE=	https://saltproject.io/
 COMMENT=	Remote execution and configuration management system
 LICENSE=	apache-2.0
 
@@ -74,6 +74,7 @@ SUBST_NOOP_OK.fix-path=	yes
 
 # Contains hardcoded paths to find installed libraries.
 CHECK_WRKREF_SKIP+=	*/salt/utils/rsax931.py
+CHECK_WRKREF_SKIP+=	*/smartos.*
 
 CHECK_PORTABILITY_SKIP+=	pkg/*/* pkg/*/*/*
 

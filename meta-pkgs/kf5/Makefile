@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.21 2021/09/05 00:05:41 markd Exp $
+# $NetBSD: Makefile,v 1.25 2022/09/29 01:49:24 markd Exp $
 
 DISTNAME=	kf5-${KF5VER}
-PKGREVISION=	2
 CATEGORIES=	meta-pkgs x11 kde
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -10,7 +9,11 @@ MAINTAINER=	markd@NetBSD.org
 HOMEPAGE=	https://www.kde.org/
 COMMENT=	"meta-package" for the KDE Frameworks 5
 
-KF5VER=		5.80.0
+KF5VER=		5.98.0
+
+META_PACKAGE=	yes
+
+.include "../../devel/wayland/platform.mk"
 
 DEPENDS+=	attica-qt5>=${KF5VER}:../../misc/attica-qt5
 DEPENDS+=	baloo5>=${KF5VER}:../../sysutils/baloo5
@@ -72,7 +75,9 @@ DEPENDS+=	ktexteditor>=${KF5VER}:../../devel/ktexteditor
 DEPENDS+=	ktextwidgets>=${KF5VER}:../../x11/ktextwidgets
 DEPENDS+=	kunitconversion>=${KF5VER}:../../misc/kunitconversion
 DEPENDS+=	kwallet>=${KF5VER}:../../security/kwallet
+.if ${PLATFORM_SUPPORTS_WAYLAND} == "yes"
 DEPENDS+=	kwayland>=${KF5VER}:../../devel/kwayland
+.endif
 DEPENDS+=	kwidgetsaddons>=${KF5VER}:../../x11/kwidgetsaddons
 DEPENDS+=	kwindowsystem>=${KF5VER}:../../x11/kwindowsystem
 DEPENDS+=	kxmlgui>=${KF5VER}:../../x11/kxmlgui
@@ -89,7 +94,5 @@ DEPENDS+=	sonnet>=${KF5VER}:../../textproc/sonnet
 DEPENDS+=	syndication>=${KF5VER}:../../www/syndication
 DEPENDS+=	syntax-highlighting>=${KF5VER}:../../textproc/syntax-highlighting
 DEPENDS+=	threadweaver>=${KF5VER}:../../devel/threadweaver
-
-META_PACKAGE=	yes
 
 .include "../../mk/bsd.pkg.mk"

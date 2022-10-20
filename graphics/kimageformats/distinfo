@@ -1,8 +1,5 @@
-$NetBSD: distinfo,v 1.14 2021/10/26 10:46:23 nia Exp $
+$NetBSD: distinfo,v 1.16 2022/09/29 00:52:14 markd Exp $
 
-BLAKE2s (kimageformats-5.80.0.tar.xz) = cd501a8299e00c04ee58b06d77f11e9e7ffad4264485ce7e5452363f3e8c68aa
-SHA512 (kimageformats-5.80.0.tar.xz) = 07669deb80af6ed3055f34ca5ef82583deeafde4a7d2591dd479fa10db48e39007e82cf70645363b742c7f90c73d6d3f5cfcfed7e5cd80ca8856e4d0aa9e9d39
-Size (kimageformats-5.80.0.tar.xz) = 590368 bytes
-SHA1 (patch-CMakeLists.txt) = ac96040c8da9cc316ab418c4f10d0a131557828a
-SHA1 (patch-src_imageformats_CMakeLists.txt) = fc82f4aa7009403d82751d583f866b10dd5c7c17
-SHA1 (patch-src_imageformats_exr.cpp) = 91db996c0cfa9fb7e70b8ebf6242dee8c9cae8d8
+BLAKE2s (kimageformats-5.98.0.tar.xz) = 06174e515ed2b4ac5103560b19ce08342a43ed70804c4b025d83deb389d55220
+SHA512 (kimageformats-5.98.0.tar.xz) = 4c37067ff252daa596bff0eba324774bf1b214e47b629326f83ee61904f71b06d0e4376484bda62419c0e4eaae8afde1ea6ab1c7b5aac7aabd3d722ebece9274
+Size (kimageformats-5.98.0.tar.xz) = 5312392 bytes

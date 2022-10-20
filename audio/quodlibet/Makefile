@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.15 2022/01/09 16:18:55 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2022/06/30 11:18:03 nia Exp $
 
-DISTNAME=	quodlibet-4.4.0
-PKGREVISION=	4
+DISTNAME=	quodlibet-4.5.0
+PKGREVISION=	2
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_GITHUB:=quodlibet/}
 GITHUB_PROJECT=	quodlibet
@@ -36,11 +36,6 @@ USE_TOOLS+=	msgfmt
 
 INSTALLATION_DIRS+=	${PKGMANDIR}/man1
 
-# msgfmt: unknown option -- desktop
-.if ${OPSYS} == "NetBSD"
-TOOLS_PLATFORM.msgfmt=
-.endif
-
 # Requires Python 3.5 or higher
 PYTHON_VERSIONS_INCOMPATIBLE=	27
 
@@ -48,6 +43,7 @@ post-install:
 	${MV} ${DESTDIR}${PREFIX}/share/man/man1/* ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1 || ${TRUE}
 
 .include "../../lang/python/egg.mk"
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../multimedia/gst-plugins1-good/buildlink3.mk"
 .include "../../net/libsoup/buildlink3.mk"

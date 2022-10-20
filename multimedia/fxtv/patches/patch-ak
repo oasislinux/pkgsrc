@@ -1,4 +1,4 @@
-$NetBSD: patch-ak,v 1.2 2011/07/05 03:27:22 dholland Exp $
+$NetBSD: patch-ak,v 1.4 2022/04/24 10:57:28 tnn Exp $
 
 Handle always-on-top.
 Handle png.

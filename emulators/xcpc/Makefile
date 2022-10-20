@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2021/12/08 16:04:20 adam Exp $
+# $NetBSD: Makefile,v 1.4 2022/08/09 12:08:31 jperkin Exp $
 
 DISTNAME=	xcpc-20070122
 PKGREVISION=	1

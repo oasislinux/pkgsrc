@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.65 2021/12/08 16:04:26 adam Exp $
+# $NetBSD: Makefile,v 1.69 2022/07/15 21:05:32 wiz Exp $
 
 DISTNAME=	crossfire-1.71.0
 PKGNAME=	${DISTNAME:S/crossfire-/crossfire-server-/1}
-PKGREVISION=	15
+PKGREVISION=	18
 CATEGORIES=	games
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=crossfire/}
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
@@ -21,6 +21,8 @@ USE_TOOLS+=	gmake perl:run bash:run csh:run ksh
 CONFIG_SHELL=	ksh
 GNU_CONFIGURE=	yes
 PLIST_SRC=	${WRKDIR}/PLIST PLIST
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27 310
 
 BUILD_DEFS+=	VARBASE
 

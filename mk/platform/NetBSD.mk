@@ -1,4 +1,4 @@
-# $NetBSD: NetBSD.mk,v 1.70 2021/11/29 16:14:23 jperkin Exp $
+# $NetBSD: NetBSD.mk,v 1.73 2022/09/27 08:46:33 jperkin Exp $
 #
 # Variable definitions for the NetBSD operating system.
 
@@ -15,6 +15,10 @@ TYPE?=		type				# Shell builtin
 
 # pax-as-tar, found on <=8, and optionally later, fails on many archives.
 EXTRACT_USING?=	bsdtar
+
+.if ${OPSYS_VERSION} < 090000
+EXTRACT_ENV+=	LC_CTYPE=en_US.UTF-8
+.endif
 
 USERADD?=	/usr/sbin/useradd
 GROUPADD?=	/usr/sbin/groupadd
@@ -155,6 +159,12 @@ _OPSYS_SUPPORTS_FORTIFY=yes
 _OPSYS_SUPPORTS_MKPIE=	yes
 .endif
 
+.if (${MACHINE_ARCH} == "i386" || \
+    ${MACHINE_ARCH} == "x86_64") && \
+    ${OPSYS_VERSION} >= 090000
+OPSYS_HAS_STATIC_PIE=	# defined
+.endif
+
 # Register support for RELRO on supported architectures
 .if (${MACHINE_ARCH} == "i386") || \
     (${MACHINE_ARCH} == "x86_64") || \
@@ -188,6 +198,7 @@ PKG_DBDIR_ERROR=	Compatibility pkgdb location exists, but PKG_DBDIR not specifie
 .endif
 
 _OPSYS_SUPPORTS_CWRAPPERS=	yes
+_OPSYS_SUPPORTS_MKTOOLS=	yes
 
 # use readelf in check/bsd.check-vars.mk
 _OPSYS_CAN_CHECK_RELRO=		yes

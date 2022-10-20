@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.163 2021/12/08 16:04:10 adam Exp $
+# $NetBSD: Makefile,v 1.169 2022/08/11 05:08:16 gutteridge Exp $
 
 DISTNAME=	gedit-3.36.2
-PKGREVISION=	7
+PKGREVISION=	11
 CATEGORIES=	editors gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gedit/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.xz
@@ -15,7 +15,6 @@ PREV_PKGPATH=	editors/gedit3
 
 USE_TOOLS+=			gettext msgfmt perl pkg-config
 USE_TOOLS+=			itstool
-_TOOLS_USE_PKGSRC.msgfmt=	yes
 
 PYTHON_VERSIONS_INCOMPATIBLE=	27
 PY_PATCHPLIST=			yes
@@ -33,6 +32,7 @@ pre-configure:
 
 
 .include "../../devel/gobject-introspection/buildlink3.mk"
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
 BUILDLINK_API_DEPENDS.libpeas+=	libpeas>=1.14.1
 .include "../../devel/libpeas/buildlink3.mk"
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.52

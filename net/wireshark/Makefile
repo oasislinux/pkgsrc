@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.264 2021/12/30 20:20:19 adam Exp $
+# $NetBSD: Makefile,v 1.279 2022/09/11 14:12:02 wiz Exp $
 
-DISTNAME=	wireshark-3.6.1
+DISTNAME=	wireshark-3.6.8
 CATEGORIES=	net
 MASTER_SITES=	https://www.wireshark.org/download/src/
 EXTRACT_SUFX=	.tar.xz
@@ -16,6 +16,7 @@ USE_CMAKE=		yes
 CMAKE_ARGS+=		-DCMAKE_BUILD_TYPE=Release
 CMAKE_ARGS+=		-DENABLE_APPLICATION_BUNDLE=OFF
 CMAKE_ARGS+=		-DVCSVERSION_OVERRIDE=${PKGVERSION_NOREV}
+CMAKE_ARGS+=		-DCMAKE_DISABLE_FIND_PACKAGE_Asciidoctor=TRUE
 CMAKE_ARG_PATH=		..
 CONFIGURE_DIRS=		build
 
@@ -24,13 +25,13 @@ USE_TOOLS+=		gmake perl pkg-config bison lex
 PKGCONFIG_OVERRIDE+=	wireshark.pc.in
 
 CHECK_PORTABILITY_SKIP+=	packaging/macosx/*/*
+CHECK_PORTABILITY_SKIP+=	packaging/macosx/osx-app.sh.in
 CHECK_PORTABILITY_SKIP+=	tools/bsd-setup.sh
 
 PTHREAD_OPTS+=		require
 
 PYTHON_VERSIONS_INCOMPATIBLE=	27 # Python 2.7 is not supported
 PYTHON_FOR_BUILD_ONLY=		yes
-REPLACE_PYTHON+=		help/faq.py
 REPLACE_PYTHON+=		tools/asn2deb
 REPLACE_PYTHON+=		tools/asn2wrs.py
 REPLACE_PYTHON+=		tools/html2text.py
@@ -41,6 +42,8 @@ REPLACE_PYTHON+=		tools/ncp2222.py
 REPLACE_PYTHON+=		tools/netscreen2dump.py
 REPLACE_PYTHON+=		tools/pkt-from-core.py
 REPLACE_PYTHON+=		tools/rdps.py
+
+CFLAGS.SunOS+=		-D__EXTENSIONS__ # for getc_unlocked(3)
 
 pre-configure:
 	${MKDIR} ${WRKSRC}/build

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.62 2022/01/28 12:06:04 wiz Exp $
+# $NetBSD: Makefile,v 1.66 2022/08/11 05:08:37 gutteridge Exp $
 
-DISTNAME=	gpsd-3.23.1
-PKGREVISION=	1
+DISTNAME=	gpsd-3.24
+PKGREVISION=	3
 CATEGORIES=	geography
 MASTER_SITES=	http://download-mirror.savannah.gnu.org/releases/gpsd/
 # will probably switch to https://gitlab.com/gpsd/gpsd/releases
@@ -47,6 +47,8 @@ SCONS_ARGS+=	leapfetch=no
 # scons is hard to understand, so enable debugging always
 SCONS_ARGS+=	--debug=explain,prepare
 
+RCD_SCRIPTS=	gpsd
+
 SUBST_CLASSES+=		pyenv
 SUBST_MESSAGE.pyenv=	Fixing Python path in test script
 # We would choose post-configure, but gpsd's build system blurs
@@ -84,15 +86,8 @@ PLIST_SUBST+=	PLIST_SO=.so
 PLIST_SUBST+=	PLIST_DYLIB=
 .endif
 
-# \todo Consider not including this and using the pre-built man pages.
 .include "../../lang/ruby/rubyversion.mk"
 TOOL_DEPENDS+=	${RUBY_PKGPREFIX}-asciidoctor>=2.0.0:../../textproc/ruby-asciidoctor
-
-SUBST_CLASSES+=		ad
-SUBST_STAGE.ad=		pre-build
-SUBST_MESSAGE.ad=	Correcting the asciidoctor binary name.
-SUBST_FILES.ad+=	SConscript
-SUBST_SED.ad+=		-e "s,asciidoctor26,asciidoctor${RUBY_SUFFIX},g"
 
 # \todo Change to TOOLS or BUILD_DEPENDS after scons support is improved.
 .include "../../devel/scons/buildlink3.mk"

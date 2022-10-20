@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.42 2021/10/12 13:46:14 tnn Exp $
+# $NetBSD: Makefile,v 1.45 2022/08/10 21:54:46 jperkin Exp $
 
 GCC_PKGNAME=		gcc7
 .include		"version.mk"
 
 DISTNAME=	gcc-${GCC7_DIST_VERSION}
 PKGNAME=	${GCC_PKGNAME}-${GCC7_DIST_VERSION}
-PKGREVISION=	5
+PKGREVISION=	6
 ## When bumping the PKGREVISION of this package the PKGREVISION of
 ## lang/gcc7-libs needs to be bumped to be at least 1 more than the
 ## PKGREVISION of this package!
@@ -23,6 +23,7 @@ DISTFILES=		${DEFAULT_DISTFILES}
 
 # Relocations result in a linker error on AArch64, but not x86.
 MKPIE_SUPPORTED=	no
+CHECK_RELRO_SKIP+=	${GCC_PKGNAME}/lib/*
 
 NOT_FOR_PLATFORM=	Interix-*-* Darwin-*-aarch64
 
@@ -124,7 +125,6 @@ MAKE_ENV.SunOS+=	ac_cv_func_mkostemp=no
 
 .if !empty(PKGSRC_COMPILER:Mclang) || ${OPSYS} == "DragonFly"
 CONFIGURE_ARGS+=	--disable-bootstrap
-CHECK_RELRO_SKIP+=	${GCC_PKGNAME}/lib/*
 .endif
 
 .if !empty(MACHINE_PLATFORM:MNetBSD-*-i386) || !empty(MACHINE_PLATFORM:MLinux-*-i386)
@@ -160,8 +160,7 @@ CONFIGURE_ARGS+=	--with-gnu-as --with-as=/usr/sfw/bin/gas
 .  elif exists(/usr/ccs/bin/as)
 CONFIGURE_ARGS+=	--without-gnu-as --with-as=/usr/ccs/bin/as
 .  else
-BUILDLINK_DEPMETHOD.binutils=	full
-.    include "../../devel/binutils/buildlink3.mk"
+DEPENDS+=		binutils-[0-9]*:../../devel/binutils
 CONFIGURE_ARGS+=	--with-gnu-as --with-as=${PREFIX}/bin/gas
 .  endif
 .endif

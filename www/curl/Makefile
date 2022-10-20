@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.253 2022/01/15 15:51:29 ryoon Exp $
+# $NetBSD: Makefile,v 1.261 2022/09/01 07:05:39 adam Exp $
 
-DISTNAME=	curl-7.81.0
+DISTNAME=	curl-7.85.0
 CATEGORIES=	www
 MASTER_SITES=	https://curl.se/download/
 EXTRACT_SUFX=	.tar.xz
@@ -14,6 +14,8 @@ LICENSE=	mit
 BUILD_DEFS+=	IPV6_READY
 
 TEST_DEPENDS+=	${PYPKGPREFIX}-impacket-[0-9]*:../../net/py-impacket
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27 # py-impacket
 
 USE_TOOLS+=		nroff perl
 USE_LIBTOOL=		yes

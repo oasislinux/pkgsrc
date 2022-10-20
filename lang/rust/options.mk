@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.17 2021/11/20 16:09:46 he Exp $
+# $NetBSD: options.mk,v 1.28 2022/09/01 09:59:46 jperkin Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.rust
 PKG_SUPPORTED_OPTIONS+=	rust-cargo-static rust-docs
@@ -7,11 +7,16 @@ PKG_SUPPORTED_OPTIONS+=	rust-cargo-static rust-docs
 
 # The bundled LLVM current has issues building on SunOS.
 .if ${OPSYS} != "SunOS"
-PKG_SUPPORTED_OPTIONS+=		rust-llvm
-# There may be compatibility issues with base LLVM.
-.  if !empty(HAVE_LLVM)
-PKG_SUGGESTED_OPTIONS+=		rust-llvm
+PKG_SUPPORTED_OPTIONS+=		rust-internal-llvm
+# There may be compatibility issues with the base LLVM on e.g. NetBSD.
+.  if !empty(HAVE_LLVM) || !empty(MACHINE_PLATFORM:MDarwin-*-aarch64)
+PKG_SUGGESTED_OPTIONS+=		rust-internal-llvm
 .  endif
+.endif
+
+# If cross-building, always use the internal LLVM
+.if !empty(TARGET)
+PKG_SUGGESTED_OPTIONS+=		rust-internal-llvm
 .endif
 
 # Bundle OpenSSL and curl into the cargo binary when producing
@@ -20,18 +25,18 @@ PKG_SUGGESTED_OPTIONS+=		rust-llvm
 PKG_SUGGESTED_OPTIONS+=	rust-cargo-static
 .endif
 
+PKG_OPTIONS_LEGACY_OPTS+=	rust-llvm:rust-internal-llvm
+
 .include "../../mk/bsd.options.mk"
 
 #
-# Use the internal copy of LLVM.
-# This contains some extra optimizations.
+# Use the internal copy of LLVM or the external one?
 #
-.if empty(PKG_OPTIONS:Mrust-llvm)
+.if empty(PKG_OPTIONS:Mrust-internal-llvm)
 .include "../../lang/llvm/buildlink3.mk"
 CONFIGURE_ARGS+=	--enable-llvm-link-shared
+#CONFIGURE_ARGS+=	--llvm-libunwind=system
 CONFIGURE_ARGS+=	--llvm-root=${BUILDLINK_PREFIX.llvm}
-# XXX: fix for Rust 1.41.0 https://github.com/rust-lang/rust/issues/68714
-MAKE_ENV+=	LIBRARY_PATH=${BUILDLINK_PREFIX.llvm}/lib
 .endif
 
 #

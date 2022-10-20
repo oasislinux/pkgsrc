@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.44 2018/11/29 00:36:23 markd Exp $
+# $NetBSD: Makefile,v 1.46 2022/06/05 02:36:41 mef Exp $
 
 DISTNAME=	vm-8.2.0b
 PKGNAME=	${EMACS_PKGNAME_PREFIX}${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	mail
 MASTER_SITES=	https://launchpad.net/vm/8.2.x/8.2.0b/+download/
 EXTRACT_SUFX=	.tgz
@@ -30,5 +31,5 @@ PIXMAPDIR.xemacs=	${EMACS_LISPPREFIX:H}/etc/vm
 
 .include "../../editors/emacs/modules.mk"
 
-.include "../../misc/bbdb/buildlink3.mk"
+.include "../../misc/bbdb2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

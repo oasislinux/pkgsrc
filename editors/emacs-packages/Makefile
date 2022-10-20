@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.30 2021/04/02 04:12:00 taca Exp $
+# $NetBSD: Makefile,v 1.34 2022/06/05 02:43:33 mef Exp $
 
-DISTNAME=	emacs-packages-0.11
-CATEGORIES=	meta-pkgs editors
+DISTNAME=	emacs-packages-0.12
+PKGREVISION=	1
+CATEGORIES=	editors meta-pkgs
 MASTER_SITES=	# empty
 DISTFILES=	# empty
 
@@ -9,7 +10,7 @@ MAINTAINER=	uebayasi@NetBSD.org
 HOMEPAGE=	# empty
 COMMENT=	Meta-package for the GNU Emacs lisp packages
 
-META_PACKAGE=	# empty
+META_PACKAGE=	yes
 
 .include "../../editors/emacs/modules.mk"
 
@@ -19,7 +20,7 @@ META_PACKAGE=	# empty
 DEPENDS+=	${EMACS_PKGNAME_PREFIX}apel-[0-9]*:../../devel/apel
 DEPENDS+=	${EMACS_PKGNAME_PREFIX}artist-[0-9]*:../../graphics/artist
 DEPENDS+=	${EMACS_PKGNAME_PREFIX}auctex-[0-9]*:../../print/auctex
-DEPENDS+=	${EMACS_PKGNAME_PREFIX}bbdb-[0-9]*:../../misc/bbdb
+DEPENDS+=	${EMACS_PKGNAME_PREFIX}bbdb2-[0-9]*:../../misc/bbdb2
 .if defined(_EMACS_VERSION_EMACS_MAJOR) && ${_EMACS_VERSION_EMACS_MAJOR} == "20"
 DEPENDS+=	${EMACS_PKGNAME_PREFIX}calc-[0-9]*:../../math/calc
 .endif
@@ -64,7 +65,6 @@ DEPENDS+=	${EMACS_PKGNAME_PREFIX}pcl-cvs-[0-9]*:../../devel/pcl-cvs
 .endif
 #DEPENDS+=	${EMACS_PKGNAME_PREFIX}pvs-[0-9]*:../../devel/pvs	# XXX pvs-license
 DEPENDS+=	${EMACS_PKGNAME_PREFIX}psgml-mode-[0-9]*:../../textproc/psgml-mode
-DEPENDS+=	${EMACS_PKGNAME_PREFIX}python-mode-[0-9]*:../../devel/python-mode
 DEPENDS+=	${EMACS_PKGNAME_PREFIX}ruby-rd-mode-[0-9]*:../../devel/ruby-rd-mode
 .if ${EMACS_VERSION_MAJOR} < 23
 DEPENDS+=	${EMACS_PKGNAME_PREFIX}semantic-[0-9]*:../../devel/semantic

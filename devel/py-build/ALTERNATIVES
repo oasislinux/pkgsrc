@@ -1,0 +1,1 @@
+bin/pyproject-build @PREFIX@/bin/pyproject-build-@PYVERSSUFFIX@

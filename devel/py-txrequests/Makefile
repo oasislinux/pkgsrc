@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2022/01/04 20:53:46 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2022/07/08 14:28:07 wiz Exp $
 
 DISTNAME=	txrequests-0.9.6
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
@@ -12,7 +12,9 @@ COMMENT=	Asynchronous Python HTTP Requests for Humans
 LICENSE=	apache-2.0
 
 DEPENDS+=	${PYPKGPREFIX}-requests>=1.2.0:../../devel/py-requests
-DEPENDS+=	${PYPKGPREFIX}-twisted>=9.0.0:../../net/py-twisted
+DEPENDS+=	${PYPKGPREFIX}-twisted-[0-9]*:../../net/py-twisted
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 USE_LANGUAGES=	# none
 

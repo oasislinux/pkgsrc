@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.99 2021/08/06 01:29:27 gutteridge Exp $
+# $NetBSD: Makefile,v 1.101 2022/06/28 11:35:25 wiz Exp $
 
-PKGNAME=	pkgdiff-1.9
-PKGREVISION=	2
+PKGNAME=	pkgdiff-1.10
+PKGREVISION=	1
 CATEGORIES=	pkgtools devel
 
 MAINTAINER=	wiz@NetBSD.org

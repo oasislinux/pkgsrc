@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.28 2021/06/07 09:12:32 adam Exp $
+# $NetBSD: Makefile,v 1.30 2022/07/25 11:12:26 wiz Exp $
 
 DISTNAME=	libogg-1.3.5
+PKGREVISION=	1
 CATEGORIES=	multimedia devel
 MASTER_SITES=	http://downloads.xiph.org/releases/ogg/
 EXTRACT_SUFX=	.tar.xz
@@ -11,7 +12,6 @@ COMMENT=	Ogg project codecs library
 LICENSE=	modified-bsd
 
 USE_LIBTOOL=		yes
-USE_TOOLS+=		pkg-config
 GNU_CONFIGURE=		yes
 PKGCONFIG_OVERRIDE+=	ogg.pc.in
 TEST_TARGET=		check

@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.30 2022/01/05 15:40:59 wiz Exp $
+# $NetBSD: Makefile,v 1.33 2022/08/10 13:39:19 adam Exp $
 
-DISTNAME=	zfec-1.5.5
+DISTNAME=	zfec-1.5.7.2
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	2
 CATEGORIES=	converters python
 MASTER_SITES=	${MASTER_SITE_PYPI:=z/zfec/}
 
@@ -16,10 +15,7 @@ DEPENDS+=	${PYPKGPREFIX}-pyutil>=3.0.0:../../devel/py-pyutil
 TEST_DEPENDS+=	${PYPKGPREFIX}-setuptools_trial-[0-9]*:../../devel/py-setuptools_trial
 TEST_DEPENDS+=	${PYPKGPREFIX}-twisted-[0-9]*:../../net/py-twisted
 
-.include "../../lang/python/pyversion.mk"
-.if ${_PYTHON_VERSION} == 27
-DEPENDS+=	${PYPKGPREFIX}-argparse>=0.8:../../devel/py-argparse
-.endif
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 REPLACE_PYTHON+=	zfec/cmdline_zfec.py
 REPLACE_PYTHON+=	zfec/cmdline_zunfec.py

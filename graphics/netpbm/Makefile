@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.233 2021/12/20 20:41:38 nia Exp $
+# $NetBSD: Makefile,v 1.237 2022/09/20 09:52:40 wiz Exp $
 
-DISTNAME=	netpbm-10.86.25
+DISTNAME=	netpbm-10.86.34
 CATEGORIES=	graphics
 MASTER_SITES=	#
 # manually created from svn checkout of
@@ -13,7 +13,7 @@ MASTER_SITES=	#
 # # pamhomography not part of 10.86.25
 # rm userguide/pamhomography.1
 # tar -cvzf /archive/distfiles/netpbm-docs-r${SVN_REVISION}.tar.gz userguide/*.[0-9]
-DISTFILES=	${DISTNAME}${EXTRACT_SUFX} netpbm-docs-r4156${EXTRACT_SUFX}
+DISTFILES=	${DISTNAME}${EXTRACT_SUFX} netpbm-docs-r4426${EXTRACT_SUFX}
 
 MAINTAINER=	adam@NetBSD.org
 HOMEPAGE=	http://netpbm.sourceforge.net/

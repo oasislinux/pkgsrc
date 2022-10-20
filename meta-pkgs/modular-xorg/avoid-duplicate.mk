@@ -1,11 +1,19 @@
-# $NetBSD: avoid-duplicate.mk,v 1.1 2021/12/01 12:48:17 nia Exp $
+# $NetBSD: avoid-duplicate.mk,v 1.4 2022/04/10 08:52:01 nia Exp $
 
-BUILTIN_PKG=		${X11_BUILTIN_NAME}
+.include "../../mk/bsd.fast.prefs.mk"
 
-.include "${.INCLUDEDFROMDIR}/builtin.mk"
-
-.if ${X11_TYPE} == "native" && ${USE_BUILTIN.${X11_BUILTIN_NAME}} == "yes"
-RESTRICTED=		"Package set is using native X11 component"
-NO_BIN_ON_FTP=		${RESTRICTED}
-NO_BIN_ON_CDROM=	${RESTRICTED}
+.if ${X11_TYPE} == "native"
+.  if !empty(X11_BIN_NAME)
+.    if exists(${X11BASE}/bin/${X11_BIN_NAME})
+PKG_SKIP_REASON+=	"Package set is using native X11 component"
+.    endif
+.  elif !empty(X11_LIB_NAME)
+.    if exists(${X11BASE}/lib/${X11_LIB_NAME}.so)
+PKG_SKIP_REASON+=	"Package set is using native X11 component"
+.    endif
+.  elif !empty(X11_DRV_NAME)
+.    if exists(${X11BASE}/lib/modules/drivers/${X11_DRV_NAME}_drv.so)
+PKG_SKIP_REASON+=	"Package set is using native X11 component"
+.    endif
+.  endif
 .endif

@@ -1,4 +1,4 @@
-# $NetBSD: bsd.prefs.mk,v 1.416 2022/01/18 01:41:09 pho Exp $
+# $NetBSD: bsd.prefs.mk,v 1.428 2022/09/29 02:25:16 charlotte Exp $
 #
 # This file includes the mk.conf file, which contains the user settings.
 #
@@ -81,6 +81,8 @@ _CLEANING:=	${"${.TARGETS:C,( [[:alnum:]-]*clean[[:alnum:]-]*)+$,,W:M*clean*}":?
 UNAME=/usr/bin/uname
 .elif exists(/bin/uname)
 UNAME=/bin/uname
+.elif exists(/run/current-system/sw/bin/uname)
+UNAME=/run/current-system/sw/bin/uname
 .else
 UNAME=echo Unknown
 .endif
@@ -112,7 +114,7 @@ MAKEFLAGS+=		OS_VERSION=${OS_VERSION:Q}
 #
 .if !defined(OPSYS_VERSION)
 _OPSYS_VERSION_CMD=	${UNAME} -r | \
-			awk -F. '{printf "%02d%02d%02d", $$1, $$2, $$3}'
+			awk -F. '{major=int($$1); minor=int($$2); if (minor>=100) minor=99; patch=int($$3); if (patch>=100) patch=99; printf "%02d%02d%02d", major, minor, patch}'
 OPSYS_VERSION=		${_OPSYS_VERSION_CMD:sh}
 MAKEFLAGS+=		OPSYS_VERSION=${OPSYS_VERSION:Q}
 .endif
@@ -170,10 +172,6 @@ LOWER_VENDOR?=		ibm
 .elif ${OPSYS} == "BSDOS"
 LOWER_OPSYS?=		bsdi
 
-.elif ${OPSYS} == "Bitrig"
-LOWER_OPSYS?= 		bitrig
-LOWER_VENDOR?= 		unknown
-
 .elif ${OPSYS} == "Cygwin"
 LOWER_OPSYS?=		cygwin
 LOWER_VENDOR?=		pc
@@ -186,7 +184,7 @@ LOWER_OPSYS?=		darwin
 LOWER_OPSYS_VERSUFFIX=	${OS_VERSION:C/([0-9]*).*/\1/}
 LOWER_VENDOR?=		apple
 _OPSYS_VERSION_CMD=	sw_vers -productVersion | \
-			awk -F. '{printf("%02d%02d%02d", $$1, $$2, $$3)}'
+			awk -F. '{major=int($$1); minor=int($$2); if (minor>=100) minor=99; patch=int($$3); if (patch>=100) patch=99; printf "%02d%02d%02d", major, minor, patch}'
 
 .elif ${OPSYS} == "DragonFly"
 OS_VERSION:=		${OS_VERSION:C/-.*$//}
@@ -336,6 +334,33 @@ NATIVE_MACHINE_PLATFORM?=	${OPSYS}-${OS_VERSION}-${NATIVE_MACHINE_ARCH}
 MACHINE_PLATFORM?=		${OPSYS}-${OS_VERSION}-${MACHINE_ARCH}
 NATIVE_MACHINE_GNU_PLATFORM?=	${NATIVE_MACHINE_GNU_ARCH}-${LOWER_VENDOR}-${LOWER_OPSYS:C/[0-9]//g}${NATIVE_APPEND_ELF}${LOWER_OPSYS_VERSUFFIX}${NATIVE_APPEND_ABI}
 MACHINE_GNU_PLATFORM?=		${MACHINE_GNU_ARCH}-${LOWER_VENDOR}-${LOWER_OPSYS:C/[0-9]//g}${APPEND_ELF}${LOWER_OPSYS_VERSUFFIX}${APPEND_ABI}
+
+#
+# cross-libtool is special -- it is built as a native package, but it
+# needs tools set up as if for a cross-compiled package because it
+# remembers the paths for use to later assist in cross-compiling other
+# packages.
+#
+# So normally TOOLS_USE_CROSS_COMPILE is the same as USE_CROSS_COMPILE,
+# but for cross-libtool, we set TOOLS_USE_CROSS_COMPILE=yes while doing
+# the rest of the native package build with USE_CROSS_COMPILE=no.
+#
+# This can't live inside the cross-libtool makefile because the
+# TARGET_ARCH / MACHINE_ARCH / NATIVE_MACHINE_ARCH switcheroo has to
+# happen in the middle of this file -- after NATIVE_MACHINE_ARCH is
+# determined, before MACHINE_ARCH is used for anything else.
+#
+.if !empty(LIBTOOL_CROSS_COMPILE:M[yY][eE][sS])
+.  if !defined(TARGET_ARCH)
+PKG_FAIL_REASON+=	"Must set TARGET_ARCH for cross-libtool."
+.  endif
+MACHINE_ARCH:=			${TARGET_ARCH}
+_BUILD_DEFS.MACHINE_ARCH=	${NATIVE_MACHINE_ARCH}
+_BUILD_DEFS.MACHINE_GNU_ARCH=	${NATIVE_MACHINE_GNU_ARCH}
+TOOLS_USE_CROSS_COMPILE=	yes
+.else
+TOOLS_USE_CROSS_COMPILE=	${USE_CROSS_COMPILE:Uno}
+.endif
 
 # Needed to prevent an "install:" target from being created in bsd.own.mk.
 NEED_OWN_INSTALL_TARGET=no
@@ -520,6 +545,11 @@ _CROSS_DESTDIR=	${CROSS_DESTDIR}
 .  endif
 .endif
 
+# TOOLS_CROSS_DESTDIR is used for the libtool build to make a wrapper
+# that points at the cross-destdir as sysroot, without setting
+# _CROSS_DESTDIR because we're actually building a native package.
+TOOLS_CROSS_DESTDIR=		${CROSS_DESTDIR}
+
 # Depends on MACHINE_ARCH override above
 .if ${OPSYS} == "NetBSD"
 # XXX NATIVE_OBJECT_FMT is a cop-out -- but seriously, who is going to
@@ -685,8 +715,12 @@ MAKEFLAGS+=		_PKGSRCDIR=${_PKGSRCDIR:Q}
 .endif
 PKGSRCDIR=		${_PKGSRCDIR}
 
+.if !empty(USE_CROSS_COMPILE:M[yY][eE][sS])
+_CROSSDIR_SUFFIX=	.${MACHINE_ARCH}
+.endif
+
 DISTDIR?=		${PKGSRCDIR}/distfiles
-PACKAGES?=		${PKGSRCDIR}/packages
+PACKAGES?=		${PKGSRCDIR}/packages${_CROSSDIR_SUFFIX}
 TEMPLATES?=		${PKGSRCDIR}/templates
 
 PATCHDIR?=		${.CURDIR}/patches
@@ -711,13 +745,13 @@ BUILD_DIR!=		cd ${.CURDIR} && ${PWD_CMD}
 _HOSTNAME!=		${UNAME} -n
 MAKEFLAGS+=		_HOSTNAME=${_HOSTNAME:Q}
 .  endif
-WRKDIR_BASENAME?=	work.${_HOSTNAME:C|\..*||}
+WRKDIR_BASENAME?=	work${_CROSSDIR_SUFFIX}.${_HOSTNAME:C|\..*||}
 MAKEFLAGS+=		OBJHOSTNAME=${OBJHOSTNAME:Q}
 .elif defined(OBJMACHINE)
 WRKDIR_BASENAME?=	work.${MACHINE_ARCH}
 MAKEFLAGS+=		OBJMACHINE=${OBJMACHINE:Q}
 .else
-WRKDIR_BASENAME?=	work
+WRKDIR_BASENAME?=	work${_CROSSDIR_SUFFIX}
 .endif
 
 WRKDIR?=		${BUILD_DIR}/${WRKDIR_BASENAME}
@@ -807,7 +841,11 @@ _PKGSRC_USE_STACK_CHECK=no
 .if ${PKGSRC_USE_STACK_CHECK:tl} != "no" && \
     ${STACK_CHECK_SUPPORTED:Uyes:tl} == "yes" && \
     ${_OPSYS_SUPPORTS_STACK_CHECK:Uno} == "yes"
+.  if ${PKGSRC_USE_STACK_CHECK:tl} == "stack-clash"
+_PKGSRC_USE_STACK_CHECK=stack-clash
+.  else
 _PKGSRC_USE_STACK_CHECK=yes
+.  endif
 .endif
 
 # Enable CTF conversion if the user requested it, the OPSYS supports it, there
@@ -834,6 +872,16 @@ _PKGSRC_USE_CTF=	no
 _USE_CWRAPPERS=		yes
 .else
 _USE_CWRAPPERS=		no
+.endif
+
+# Use C-based tools to speed up pkgsrc infrastructure tasks.
+.if empty(PKGPATH:Mpkgtools/mktools) && \
+    (${PKGSRC_USE_MKTOOLS:tl} == "yes" || \
+    (${PKGSRC_USE_MKTOOLS:tl} == "auto" && \
+     ${_OPSYS_SUPPORTS_MKTOOLS:Uno} == "yes"))
+_PKGSRC_USE_MKTOOLS=	yes
+.else
+_PKGSRC_USE_MKTOOLS=	no
 .endif
 
 # Wrapper framework definitions
@@ -887,7 +935,7 @@ LP32PLATFORMS=		*-*-earm* *-*-hppa *-*-i386 *-*-m68000 *-*-m68k \
 # Keywords: BROKEN_ON_PLATFORM 64bit
 #
 LP64PLATFORMS=		*-*-aarch64 *-*-aarch64eb *-*-alpha *-*-ia64 \
-			*-*-powerpc64 *-*-riscv64 *-*-sparc64 *-*-x86_64
+			*-*-powerpc64* *-*-riscv64 *-*-sparc64 *-*-x86_64
 
 # Lists of big-endian and little-endian platforms, to be used with
 # BROKEN_ON_PLATFORM.

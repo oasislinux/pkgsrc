@@ -1,4 +1,4 @@
-# $NetBSD: rails.mk,v 1.110 2022/01/16 14:02:54 taca Exp $
+# $NetBSD: rails.mk,v 1.137 2022/09/10 12:40:14 taca Exp $
 
 .if !defined(_RUBY_RAILS_MK)
 _RUBY_RAILS_MK=	# defined
@@ -47,12 +47,12 @@ _RUBY_RAILS_MK=	# defined
 #
 # current Ruby on Rails versions.
 #
-RUBY_RAILS52_VERSION?=	5.2.6
-RUBY_RAILS60_VERSION?=	6.0.4.4
-RUBY_RAILS61_VERSION?=	6.1.4.4
-RUBY_RAILS70_VERSION?=	7.0.1
+RUBY_RAILS52_VERSION?=	5.2.8.1
+RUBY_RAILS60_VERSION?=	6.0.6
+RUBY_RAILS61_VERSION?=	6.1.7
+RUBY_RAILS70_VERSION?=	7.0.4
 
-RUBY_RAILS_ACCEPTED?=	# defined
+RUBY_RAILS_ACCEPTED?=	# empty
 RUBY_RAILS_DEFAULT?=	52
 
 RUBY_RAILS_STRICT_DEP?=	no
@@ -88,7 +88,7 @@ RUBY_RAILS?=	${rr}
 .  endfor
 .endif
 
-RUBY_RAILS?=	${RUBY_RAILS_SUPPORTED}
+RUBY_RAILS_REQD?=	${RUBY_RAILS}
 
 .if ${RUBY_RAILS} == "70"
 RAILS_VERSION:=	${RUBY_RAILS70_VERSION}
@@ -108,17 +108,17 @@ _RAILS_MINOR=	${RAILS_VERSION:C/([0-9]+)\.([0-9]+)\..*/\2/}
 _RAILS_TEENY=	${RAILS_VERSION:C/([0-9]+)\.([0-9]+)\.([0-9]+).*/\3/}
 
 #
-# If RUBY_RAILS_STRICT_DEP is defined, match exact current Ruby no Rails
-# version.
-# Otherwise allow greater minor version.
+# If RUBY_RAILS_STRICT_DEP is defined, match exact current Ruby on Rails
+# version. Otherwise allow greater minor version.
+#
 
 .if !empty(RUBY_RAILS_STRICT_DEP:M[yY][eE][sS])
-_RAILS_NEXT!=	${EXPR} ${_RAILS_TEENY} + 1
-_RAILS_DEP=	\
-	${RUBY_RAILS}>=${RAILS_VERSION}<${_RAILS_MAJOR}.${_RAILS_MINOR}.${_RAILS_NEXT}
+_RAILS_NEXT_CMD=	${EXPR} ${_RAILS_TEENY} + 1
+_RAILS_DEP= \
+	${RUBY_RAILS}>=${RAILS_VERSION}<${_RAILS_MAJOR}.${_RAILS_MINOR}.${_RAILS_NEXT_CMD:sh}
 .else
-_RAILS_NEXT!=	${EXPR} ${_RAILS_MINOR} + 1
-_RAILS_DEP=	${RUBY_RAILS}>=${RAILS_VERSION}<${_RAILS_MAJOR}.${_RAILS_NEXT}
+_RAILS_NEXT_CMD=	${EXPR} ${_RAILS_MINOR} + 1
+_RAILS_DEP=	${RUBY_RAILS}>=${RAILS_VERSION}<${_RAILS_MAJOR}.${_RAILS_NEXT_CMD:sh}
 .endif
 
 #

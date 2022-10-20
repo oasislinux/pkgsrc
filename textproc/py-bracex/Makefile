@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.2 2022/01/04 20:54:52 wiz Exp $
+# $NetBSD: Makefile,v 1.4 2022/08/31 19:41:57 wiz Exp $
 
-DISTNAME=	bracex-2.1.1
+DISTNAME=	bracex-2.3
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 PKGREVISION=	1
 CATEGORIES=	textproc python
@@ -11,9 +11,11 @@ HOMEPAGE=	https://github.com/facelessuser/bracex
 COMMENT=	Bash style brace expander
 LICENSE=	mit
 
+BUILD_DEPENDS+=	${PYPKGPREFIX}-hatchling>=0.21.1:../../devel/py-hatchling
+
 USE_LANGUAGES=	# none
 
 PYTHON_VERSIONS_INCOMPATIBLE=	27
 
-.include "../../lang/python/egg.mk"
+.include "../../lang/python/wheel.mk"
 .include "../../mk/bsd.pkg.mk"

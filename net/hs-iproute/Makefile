@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.3 2022/01/18 02:48:19 pho Exp $
+# $NetBSD: Makefile,v 1.6 2022/02/26 03:58:19 pho Exp $
 
-DISTNAME=	iproute-1.7.11
+DISTNAME=	iproute-1.7.12
 PKGREVISION=	2
 CATEGORIES=	net
 

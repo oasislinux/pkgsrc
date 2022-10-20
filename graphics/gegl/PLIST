@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.34 2022/01/04 12:58:25 ryoon Exp $
+@comment $NetBSD: PLIST,v 1.40 2022/07/24 10:47:36 wiz Exp $
 bin/gegl
 bin/gegl-imgcmp
 include/gegl-0.4/gegl-apply.h
@@ -87,13 +87,29 @@ include/gegl-0.4/sc/sc-sample.h
 lib/gegl-0.4/dropshadow2.json
 lib/gegl-0.4/exr-load.${SOEXT}
 lib/gegl-0.4/exr-save.${SOEXT}
+${PLIST.neon}lib/gegl-0.4/gegl-common-arm-neon.${SOEXT}
+${PLIST.neon}lib/gegl-0.4/gegl-common-cxx-arm-neon.${SOEXT}
+${PLIST.x86_64}lib/gegl-0.4/gegl-common-cxx-x86_64-v2.${SOEXT}
+${PLIST.x86_64}lib/gegl-0.4/gegl-common-cxx-x86_64-v3.${SOEXT}
 lib/gegl-0.4/gegl-common-cxx.${SOEXT}
+${PLIST.neon}lib/gegl-0.4/gegl-common-gpl3-arm-neon.${SOEXT}
+${PLIST.x86_64}lib/gegl-0.4/gegl-common-gpl3-x86_64-v2.${SOEXT}
+${PLIST.x86_64}lib/gegl-0.4/gegl-common-gpl3-x86_64-v3.${SOEXT}
 lib/gegl-0.4/gegl-common-gpl3.${SOEXT}
+${PLIST.x86_64}lib/gegl-0.4/gegl-common-x86_64-v2.${SOEXT}
+${PLIST.x86_64}lib/gegl-0.4/gegl-common-x86_64-v3.${SOEXT}
 lib/gegl-0.4/gegl-common.${SOEXT}
 lib/gegl-0.4/gegl-core.${SOEXT}
+${PLIST.neon}lib/gegl-0.4/gegl-generated-arm-neon.${SOEXT}
+${PLIST.x86_64}lib/gegl-0.4/gegl-generated-x86_64-v2.${SOEXT}
+${PLIST.x86_64}lib/gegl-0.4/gegl-generated-x86_64-v3.${SOEXT}
 lib/gegl-0.4/gegl-generated.${SOEXT}
+${PLIST.neon}lib/gegl-0.4/gegl-transformops-arm-neon.${SOEXT}
+${PLIST.x86_64}lib/gegl-0.4/gegl-transformops-x86_64-v2.${SOEXT}
+${PLIST.x86_64}lib/gegl-0.4/gegl-transformops-x86_64-v3.${SOEXT}
 lib/gegl-0.4/gif-load.${SOEXT}
 lib/gegl-0.4/grey2.json
+${PLIST.jasper}lib/gegl-0.4/jp2-load.${SOEXT}
 lib/gegl-0.4/jpg-load.${SOEXT}
 lib/gegl-0.4/jpg-save.${SOEXT}
 lib/gegl-0.4/lcms-from-profile.${SOEXT}
@@ -111,7 +127,7 @@ lib/gegl-0.4/rgbe-save.${SOEXT}
 lib/gegl-0.4/sdl2-display.${SOEXT}
 lib/gegl-0.4/seamless-clone-compose.${SOEXT}
 lib/gegl-0.4/seamless-clone.${SOEXT}
-lib/gegl-0.4/svg-load.${SOEXT}
+${PLIST.svg}lib/gegl-0.4/svg-load.${SOEXT}
 lib/gegl-0.4/text.${SOEXT}
 lib/gegl-0.4/tiff-load.${SOEXT}
 lib/gegl-0.4/tiff-save.${SOEXT}
@@ -119,13 +135,16 @@ lib/gegl-0.4/transformops.${SOEXT}
 lib/gegl-0.4/vector-stroke.${SOEXT}
 lib/gegl-0.4/webp-load.${SOEXT}
 lib/gegl-0.4/webp-save.${SOEXT}
+lib/girepository-1.0/Gegl-0.4.typelib
 lib/libgegl-0.4.${SOEXT}
-lib/libgegl-0.4.${SOEXT}.0
-lib/libgegl-0.4.${SOEXT}.0.433.1
+${PLIST.darwin}lib/libgegl-0.4.0.dylib
+${PLIST.notdarwin}lib/libgegl-0.4.${SOEXT}.0
+${PLIST.notdarwin}lib/libgegl-0.4.${SOEXT}.0.437.1
 lib/libgegl-npd-0.4.${SOEXT}
 lib/libgegl-sc-0.4.${SOEXT}
 lib/pkgconfig/gegl-0.4.pc
 lib/pkgconfig/gegl-sc-0.4.pc
+share/gir-1.0/Gegl-0.4.gir
 share/locale/bs/LC_MESSAGES/gegl-0.4.mo
 share/locale/ca/LC_MESSAGES/gegl-0.4.mo
 share/locale/da/LC_MESSAGES/gegl-0.4.mo
@@ -141,6 +160,7 @@ share/locale/hr/LC_MESSAGES/gegl-0.4.mo
 share/locale/id/LC_MESSAGES/gegl-0.4.mo
 share/locale/is/LC_MESSAGES/gegl-0.4.mo
 share/locale/it/LC_MESSAGES/gegl-0.4.mo
+share/locale/ka/LC_MESSAGES/gegl-0.4.mo
 share/locale/kab/LC_MESSAGES/gegl-0.4.mo
 share/locale/ko/LC_MESSAGES/gegl-0.4.mo
 share/locale/lv/LC_MESSAGES/gegl-0.4.mo
@@ -162,3 +182,5 @@ share/locale/sv/LC_MESSAGES/gegl-0.4.mo
 share/locale/tr/LC_MESSAGES/gegl-0.4.mo
 share/locale/uk/LC_MESSAGES/gegl-0.4.mo
 share/locale/zh_CN/LC_MESSAGES/gegl-0.4.mo
+share/vala/vapi/gegl-0.4.deps
+share/vala/vapi/gegl-0.4.vapi

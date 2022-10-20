@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.7 2022/01/28 11:04:19 pin Exp $
+# $NetBSD: Makefile,v 1.11 2022/08/02 11:17:11 pin Exp $
 
-DISTNAME=	wiki-tui-0.4.5
+DISTNAME=	wiki-tui-0.5.1
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_GITHUB:=Builditluc/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
@@ -22,7 +22,8 @@ RUSTFLAGS+=	-C link-arg=${COMPILER_RPATH_FLAG}${BUILDLINK_PREFIX.openssl}/lib
 RUSTFLAGS+=	-C link-arg=${COMPILER_RPATH_FLAG}${BUILDLINK_PREFIX.ncursesw}/lib
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/target/release/wiki-tui ${DESTDIR}${PREFIX}/bin
+	${INSTALL_PROGRAM} ${WRKSRC}/target/release/wiki-tui \
+		${DESTDIR}${PREFIX}/bin
 
 .include "../../lang/rust/cargo.mk"
 .include "../../security/openssl/buildlink3.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: depends.mk,v 1.13 2021/04/06 18:46:06 joerg Exp $
+# $NetBSD: depends.mk,v 1.15 2022/03/28 10:49:12 tnn Exp $
 
 # This command prints out the dependency patterns for all full (run-time)
 # dependencies of the package.

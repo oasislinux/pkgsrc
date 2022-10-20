@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.41 2022/01/10 17:05:27 adam Exp $
+# $NetBSD: Makefile,v 1.46 2022/09/05 08:31:14 adam Exp $
 
-DISTNAME=	psutil-5.9.0
+DISTNAME=	psutil-5.9.2
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	sysutils python
 MASTER_SITES=	${MASTER_SITE_PYPI:=p/psutil/}
@@ -10,20 +10,14 @@ HOMEPAGE=	https://github.com/giampaolo/psutil
 COMMENT=	Cross-platform process and system utilities module for Python
 LICENSE=	modified-bsd
 
-.include "../../lang/python/pyversion.mk"
-.if ${_PYTHON_VERSION} == 27
-TEST_DEPENDS+=	${PYPKGPREFIX}-enum34-[0-9]*:../../devel/py-enum34
-TEST_DEPENDS+=	${PYPKGPREFIX}-ipaddress-[0-9]*:../../net/py-ipaddress
-TEST_DEPENDS+=	${PYPKGPREFIX}-mock-[0-9]*:../../devel/py-mock
-TEST_DEPENDS+=	${PYPKGPREFIX}-unittest2-[0-9]*:../../devel/py-unittest2
-.endif
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 .include "../../mk/bsd.prefs.mk"
 
 # facilitate PLIST processing
 .if ${OPSYS} == "Darwin"
 PLIST_SUBST+=	SYSTEM=osx
-.elif !empty(OPSYS:M*BSD)
+.elif ${OPSYS:M*BSD}
 PLIST_SUBST+=	SYSTEM=bsd
 .else
 PLIST_SUBST+=	SYSTEM=${OPSYS:tl}

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.11 2021/12/08 16:06:29 adam Exp $
+# $NetBSD: Makefile,v 1.18 2022/09/11 12:52:06 wiz Exp $
 
 DISTNAME=	gnome-control-center-40.0
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/${PKGBASE}/${PKGVERSION_NOREV:R}/}
-PKGREVISION=	3
+PKGREVISION=	8
 CATEGORIES=	sysutils gnome
 EXTRACT_SUFX=	.tar.xz
 
@@ -18,19 +18,13 @@ MESON_ARGS+=	-Dcheese=false
 MESON_ARGS+=	-Dtests=false
 MESON_ARGS+=	-Dwayland=false
 
-.include "../../mk/bsd.prefs.mk"
-
-# msgfmt: unknown option -- desktop
-.if ${OPSYS} == "NetBSD"
-TOOLS_PLATFORM.msgfmt=
-.endif
-
 PYTHON_FOR_BUILD_ONLY=	tool
 
 PKGCONFIG_OVERRIDE_STAGE=	pre-install
 PKGCONFIG_OVERRIDE+=		output/panels/keyboard/gnome-keybindings.pc
 
 .include "../../devel/meson/build.mk"
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
 .include "../../devel/glib2/schemas.mk"
 .include "../../audio/gsound/buildlink3.mk"
 .include "../../audio/pulseaudio/buildlink3.mk"

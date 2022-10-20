@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2022/01/18 02:48:10 pho Exp $
+# $NetBSD: Makefile,v 1.10 2022/08/22 10:13:24 wiz Exp $
 
-DISTNAME=	mono-traversable-1.0.15.1
-PKGREVISION=	2
+DISTNAME=	mono-traversable-1.0.15.3
+PKGREVISION=	4
 CATEGORIES=	devel
 
 MAINTAINER=	pho@cielonegro.org

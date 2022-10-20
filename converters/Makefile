@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.189 2021/09/09 07:31:02 adam Exp $
+# $NetBSD: Makefile,v 1.196 2022/07/27 19:05:47 rhialto Exp $
 #
 
 COMMENT=	Document format and character code converters
@@ -32,10 +32,14 @@ SUBDIR+=	fribidi
 SUBDIR+=	gbase
 SUBDIR+=	help2man
 SUBDIR+=	hs-aeson
+SUBDIR+=	hs-aeson-better-errors
 SUBDIR+=	hs-aeson-pretty
 SUBDIR+=	hs-base16-bytestring
 SUBDIR+=	hs-base64-bytestring
+SUBDIR+=	hs-cborg-json
 SUBDIR+=	hs-emojis
+SUBDIR+=	hs-hslua-aeson
+SUBDIR+=	hs-lens-aeson
 SUBDIR+=	hs-text-conversions
 SUBDIR+=	hztty
 SUBDIR+=	ish
@@ -114,15 +118,16 @@ SUBDIR+=	py-base58
 SUBDIR+=	py-bidi
 SUBDIR+=	py-cairosvg
 SUBDIR+=	py-chardet
+SUBDIR+=	py-chardet4
 SUBDIR+=	py-charset-normalizer
 SUBDIR+=	py-confusable_homoglyphs
 SUBDIR+=	py-emoji
+SUBDIR+=	py-fastbencode
 SUBDIR+=	py-jpCodecs
 SUBDIR+=	py-reedsolo
 SUBDIR+=	py-simplejson
 SUBDIR+=	py-unicode-slugify
 SUBDIR+=	py-yenc
-SUBDIR+=	py-zbase32
 SUBDIR+=	py-zfec
 SUBDIR+=	py-zhCodecs
 SUBDIR+=	py27-cairosvg

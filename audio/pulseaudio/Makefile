@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.166 2021/12/08 16:01:44 adam Exp $
+# $NetBSD: Makefile,v 1.174 2022/09/11 12:51:04 wiz Exp $
 
-DISTNAME=	pulseaudio-15.0
+DISTNAME=	pulseaudio-16.1
 PKGREVISION=	1
 CATEGORIES=	audio
 MASTER_SITES=	https://freedesktop.org/software/pulseaudio/releases/
@@ -27,16 +27,13 @@ SUBST_FILES.egdir+=	src/pulse/meson.build
 SUBST_FILES.egdir+=	src/daemon/meson.build
 SUBST_VARS.egdir+=	EGDIR
 
-# Requires --desktop in msgfmt.
-_TOOLS_USE_PKGSRC.msgfmt=	yes
-
 LIBTOOL_REQD=	2.4
 GCC_REQD+=	4.8
 
-USE_LANGUAGES=		c c++
+USE_LANGUAGES=		c11 c++
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=		bash:run gmake gm4
+USE_TOOLS+=		bash:run gm4
 USE_TOOLS+=		msgfmt perl:build pkg-config
 MESON_ARGS+=		-Dtcpwrap=disabled
 MESON_ARGS+=		--localedir=${PKGLOCALEDIR}/locale
@@ -57,7 +54,7 @@ REPLACE_BASH+=	src/utils/pa-info
 .include "../../mk/bsd.prefs.mk"
 
 # broken test for TLS
-.if ((${OPSYS} == "NetBSD" && !empty(OS_VERSION:M[45].*)) || \
+.if ((${OPSYS} == "NetBSD" && ${OPSYS_VERSION} < 060000) || \
      (${OPSYS} == "Darwin" && !empty(PKGSRC_COMPILER:Mclang)))
 CONFIGURE_ENV+=		ac_cv_tls=none
 .endif
@@ -74,8 +71,6 @@ MAKE_FLAGS+=		bashcompletiondir=${PREFIX}/share/bash-completion/completions
 .include "../../devel/libatomic_ops/buildlink3.mk"
 .endif
 
-# Version number in patch-configure.ac.must be changed too.
-PLIST_SUBST+=		PULSELIBVER=15.0
 PLIST_VARS+=		alsa evdev oss
 
 .if ${SHLIB_TYPE} == "dylib"
@@ -83,6 +78,7 @@ PLIST_SUBST+=		SOEXT=dylib
 .else
 PLIST_SUBST+=		SOEXT=so
 .endif
+PRINT_PLIST_AWK+=	{ gsub(/\.so/, ".$${SOEXT}"); }
 
 # Build module-mmkbd-evdev.so under Linux
 .if ${OPSYS} == "Linux"
@@ -95,7 +91,6 @@ PLIST.oss=		yes
 PLIST.alsa=		yes
 .include "../../audio/alsa-lib/buildlink3.mk"
 .elif ${OPSYS} == "SunOS"
-USE_LANGUAGES+=		c99
 CPPFLAGS+=		-D_XOPEN_SOURCE=600 -D__EXTENSIONS__ -DBSD_COMP
 .  if ${OS_VERSION} == "5.11"
 PLIST.oss=		yes
@@ -112,7 +107,7 @@ LDFLAGS.SunOS+=		-lsocket -lnsl
 
 # Do not depend on RPATH $ORIGIN.
 LDFLAGS+=		${COMPILER_RPATH_FLAG}${PREFIX}/lib/pulseaudio
-LDFLAGS+=		${COMPILER_RPATH_FLAG}${PREFIX}/lib/pulse-${PKGVERSION_NOREV}/modules
+LDFLAGS+=		${COMPILER_RPATH_FLAG}${PREFIX}/lib/pulseaudio/modules
 
 INSTALLATION_DIRS=	share/examples/pulse
 
@@ -147,6 +142,7 @@ BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,-version-script=${WRKSRC}/src/pulse/map-file
 .include "../../audio/speexdsp/buildlink3.mk"
 .include "../../databases/tdb/buildlink3.mk"
 .include "../../devel/check/buildlink3.mk"
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/libltdl/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"

@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.6 2021/05/24 19:53:24 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2022/06/28 11:35:07 wiz Exp $
 
 DISTNAME=	MaxMind-DB-Common-0.040001
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	net perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/M/MA/MAXMIND/}
 
-MAINTAINER=	fcambus@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://metacpan.org/release/MaxMind-DB-Common
 COMMENT=	Code shared by the MaxMind DB reader and writer modules
 LICENSE=	artistic-2.0

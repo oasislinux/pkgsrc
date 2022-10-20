@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.117 2022/01/10 01:46:33 ryoon Exp $
+# $NetBSD: Makefile,v 1.121 2022/08/11 05:08:42 gutteridge Exp $
 
-DISTNAME=	hugin-2020.0.0
-PKGREVISION=	7
+DISTNAME=	hugin-2021.0.0
+PKGREVISION=	2
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=hugin/}
 EXTRACT_SUFX=	.tar.bz2
@@ -69,5 +69,5 @@ post-patch:
 .include "../../lang/python/extension.mk"
 .include "../../math/fftw/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../x11/wxGTK30/buildlink3.mk"
+.include "../../x11/wxGTK31/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.52 2021/09/28 19:52:17 gdt Exp $
+# $NetBSD: Makefile,v 1.54 2022/06/28 11:34:08 wiz Exp $
 #
 
 DISTNAME=	hamlib-${VERSION}
@@ -6,6 +6,7 @@ DISTNAME=	hamlib-${VERSION}
 VERSION=	4.3.1
 VERSIOND=	${VERSION}
 VERSIONF=	${VERSION}
+PKGREVISION=	1
 CATEGORIES=	ham
 MASTER_SITES=	https://github.com/Hamlib/Hamlib/releases/download/${VERSIOND}/
 #MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=hamlib/}
@@ -25,6 +26,8 @@ USE_LIBTOOL=	yes
 CONFIGURE_ARGS+=	--without-tcl-binding \
 			--without-perl-binding \
 			--without-python-binding
+
+CHECK_PORTABILITY_SKIP+=	scripts/build-w64-jtsdk.sh
 
 # Reported to upstream mailinglist 20210915
 post-install:

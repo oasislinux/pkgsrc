@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.177 2022/01/21 20:37:07 adam Exp $
+# $NetBSD: Makefile,v 1.187 2022/09/14 07:24:06 adam Exp $
 
-DISTNAME=	wesnoth-1.16.2
+DISTNAME=	wesnoth-1.16.6
 CATEGORIES=	games
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=wesnoth/}
 EXTRACT_SUFX=	.tar.bz2
@@ -50,18 +50,15 @@ REPLACE_PYTHON+=	data/tools/wesnoth_addon_manager
 REPLACE_PYTHON+=	utils/ai_test/*.py
 REPLACE_PYTHON+=	utils/*.py
 
-.include "../../mk/bsd.prefs.mk"
-.if ${OPSYS} == "NetBSD" && !empty(OS_VERSION:M4.*)
-USE_TOOLS+=		gmake
-.endif
-
 PLIST_VARS+=		icons
+
+.include "../../mk/bsd.prefs.mk"
 
 .if ${OPSYS} != "Darwin" && ${OPSYS} != "Cygwin"
 PLIST.icons=		yes
 .endif
 
-LDFLAGS.SunOS+=		-lintl -lsocket
+LDFLAGS.SunOS+=		-lsocket
 
 .include "../../audio/SDL2_mixer/buildlink3.mk"
 .include "../../audio/libvorbis/buildlink3.mk"

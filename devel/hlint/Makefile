@@ -1,13 +1,16 @@
-# $NetBSD: Makefile,v 1.2 2022/01/18 02:48:02 pho Exp $
+# $NetBSD: Makefile,v 1.8 2022/09/07 06:50:45 pho Exp $
 
-DISTNAME=	hlint-3.3.1
+DISTNAME=	hlint-3.3.6
 PKGNAME=	${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	5
 CATEGORIES=	devel
 
 MAINTAINER=	pho@cielonegro.org
 COMMENT=	Haskell source code suggestions
 LICENSE=	modified-bsd
+
+BROKEN=		"${PKGBASE} is currently incompatible with GHC 9.2.x"
+BROKEN+=	"Work is underway: https://github.com/ndmitchell/hlint/issues/1314"
 
 .include "../../converters/hs-aeson/buildlink3.mk"
 .include "../../devel/hs-ansi-terminal/buildlink3.mk"

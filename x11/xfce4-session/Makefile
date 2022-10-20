@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.94 2022/02/06 17:42:47 gutteridge Exp $
+# $NetBSD: Makefile,v 1.98 2022/09/18 23:04:00 gutteridge Exp $
 
 .include "../../meta-pkgs/xfce4/Makefile.common"
 
 DISTNAME=		xfce4-session-4.16.0
-PKGREVISION=		2
+PKGREVISION=		5
 CATEGORIES=		x11
 MASTER_SITES+=		https://archive.xfce.org/src/xfce/xfce4-session/4.16/
 
@@ -26,13 +26,13 @@ MAKE_DIRS+=	${PKG_SYSCONFDIR} ${PKG_SYSCONFDIR}/autostart
 MAKE_DIRS+=	${EGDIR} ${EGDIR}/autostart ${EGDIR}/xfconf
 MAKE_DIRS+=	${EGDIR}/xfconf/xfce-perchannel-xml
 
-CONF_FILES=	${EGDIR}/autostart/xscreensaver.desktop					\
-		${PKG_SYSCONFDIR}/autostart/xscreensaver.desktop			\
-		${EGDIR}/xfconf/xfce-perchannel-xml/xfce4-session.xml			\
-		${PKG_SYSCONFDIR}/xfce4/xfconf/xfce-perchannel-xml/xfce4-session.xml	\
-		${EGDIR}/Xft.xrdb							\
-		${PKG_SYSCONFDIR}/xfce4/Xft.xrdb					\
-		${EGDIR}/xinitrc							\
+CONF_FILES=	${EGDIR}/autostart/xscreensaver.desktop			\
+		${PKG_SYSCONFDIR}/autostart/xscreensaver.desktop	\
+		${EGDIR}/xfconf/xfce-perchannel-xml/xfce4-session.xml	\
+		${PKG_SYSCONFDIR}/xfce4/xfconf/xfce-perchannel-xml/xfce4-session.xml \
+		${EGDIR}/Xft.xrdb					\
+		${PKG_SYSCONFDIR}/xfce4/Xft.xrdb			\
+		${EGDIR}/xinitrc					\
 		${PKG_SYSCONFDIR}/xfce4/xinitrc
 
 .if ${OPSYS} == Darwin
@@ -41,7 +41,6 @@ CONF_FILES=	${EGDIR}/autostart/xscreensaver.desktop					\
 
 .include "options.mk"
 
-.include "../../devel/libglade/buildlink3.mk"
 .include "../../devel/libwnck3/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/libxfce4ui/buildlink3.mk"

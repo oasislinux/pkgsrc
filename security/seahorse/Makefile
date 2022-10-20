@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.169 2021/12/08 16:06:24 adam Exp $
+# $NetBSD: Makefile,v 1.175 2022/08/11 05:09:13 gutteridge Exp $
 
 DISTNAME=	seahorse-3.38.0.1
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/${PKGBASE}/3.38/}
-PKGREVISION=	4
+PKGREVISION=	8
 CATEGORIES=	security gnome
 EXTRACT_SUFX=	.tar.xz
 
@@ -17,16 +17,10 @@ USE_TOOLS+=	gdbus-codegen
 # Why does it want specific point releases?
 MESON_ARGS+=	-Dcheck-compatible-gpg=false
 
-.include "../../mk/bsd.prefs.mk"
-
-# msgfmt: unknown option -- xml
-.if ${OPSYS} == "NetBSD"
-TOOLS_PLATFORM.msgfmt=
-.endif
-
 PYTHON_FOR_BUILD_ONLY=	tool
 
 .include "../../devel/meson/build.mk"
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
 .include "../../devel/glib2/schemas.mk"
 .include "../../devel/gobject-introspection/buildlink3.mk"
 .include "../../devel/libhandy1/buildlink3.mk"

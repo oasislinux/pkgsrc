@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.54 2022/01/05 15:41:10 wiz Exp $
+# $NetBSD: Makefile,v 1.57 2022/10/03 16:40:21 gdt Exp $
 
-VERSION_BASE=	1.16.0
+VERSION_BASE=	1.18.0
 VERSION_RC=
 DISTNAME=	tahoe-lafs-${VERSION_BASE}${VERSION_RC}
-PKGREVISION=	2
 CATEGORIES=	filesystems
 MASTER_SITES=	https://tahoe-lafs.org/downloads/
 
@@ -14,8 +13,6 @@ LICENSE=	gnu-gpl-v2
 
 USE_TOOLS=	gmake
 
-# tahoe works with 27, but we depend on things which are
-# not available for 27 in pkgsrc.
 PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 USE_PKG_RESOURCES=	yes
@@ -23,7 +20,8 @@ USE_PKG_RESOURCES=	yes
 # The world sees this as part of base python.
 DEPENDS+=	${PYPKGPREFIX}-sqlite3-[0-9]*:../../databases/py-sqlite3
 
-## Dependencies are from tahoe's setup.py, in order
+## Dependencies are from tahoe's setup.py, in order, and try to follow
+## setup.py's version requirements.
 # install_requires
 # setuptools 28.8.0
 DEPENDS+=	${PYPKGPREFIX}-zfec>=1.1.0:../../converters/py-zfec
@@ -33,8 +31,7 @@ DEPENDS+=	${PYPKGPREFIX}-cryptography>=2.6:../../security/py-cryptography
 # twisted needs tls, conch options.  pkgsrc has tls.
 # TODO: conch??
 DEPENDS+=	${PYPKGPREFIX}-twisted>=19.10.0:../../net/py-twisted
-# bcrypt and appdirs required as twisted deps at runtime
-# TODO: resolve
+# bcrypt and appdirs are required as twisted deps at runtime
 DEPENDS+=	${PYPKGPREFIX}-bcrypt-[0-9]*:../../security/py-bcrypt
 DEPENDS+=	${PYPKGPREFIX}-appdirs-[0-9]*:../../devel/py-appdirs
 DEPENDS+=	${PYPKGPREFIX}-yaml>=3.11:../../textproc/py-yaml
@@ -48,6 +45,8 @@ DEPENDS+=	${PYPKGPREFIX}-future>=0.18.2:../../devel/py-future
 DEPENDS+=	${PYPKGPREFIX}-netifaces-[0-9]*:../../net/py-netifaces
 DEPENDS+=	${PYPKGPREFIX}-pyutil>=3.3.0:../../devel/py-pyutil
 DEPENDS+=	${PYPKGPREFIX}-distro>=1.4.0:../../devel/py-distro
+DEPENDS+=	${PYPKGPREFIX}-collections-extended-[0-9]*:../../devel/py-collections-extended
+
 # tor_requires
 DEPENDS+=	${PYPKGPREFIX}-txtorcon>=0.17.0:../../net/py-txtorcon
 # txi2p-requires

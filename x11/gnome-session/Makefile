@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.206 2021/12/08 16:07:04 adam Exp $
+# $NetBSD: Makefile,v 1.210 2022/08/11 05:09:26 gutteridge Exp $
 
 DISTNAME=		gnome-session-40.1.1
-PKGREVISION=		1
+PKGREVISION=		3
 CATEGORIES=		x11 gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/${PKGBASE}/${PKGVERSION_NOREV:R:R}/}
 EXTRACT_SUFX=		.tar.xz
@@ -16,13 +16,6 @@ TOOL_DEPENDS+=		xmlto-[0-9]*:../../textproc/xmlto
 
 USE_TOOLS+=		pkg-config msgfmt xgettext
 USE_TOOLS+=		gdbus-codegen
-
-.include "../../mk/bsd.prefs.mk"
-
-# msgfmt: unknown option -- xml
-.if ${OPSYS} == "NetBSD"
-TOOLS_PLATFORM.msgfmt=
-.endif
 
 .include "../../graphics/MesaLib/features.mk"
 
@@ -43,6 +36,7 @@ PYTHON_FOR_BUILD_ONLY=	tool
 .include "../../devel/meson/build.mk"
 .include "../../graphics/MesaLib/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.16.0
 .include "../../devel/glib2/schemas.mk"
 .include "../../devel/pango/buildlink3.mk"

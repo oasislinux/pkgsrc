@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.10 2021/12/08 16:02:46 adam Exp $
+# $NetBSD: Makefile,v 1.12 2022/08/11 05:09:21 gutteridge Exp $
 
 DISTNAME=	mutter-40.2
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	wm gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/${PKGBASE}/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.xz
@@ -80,6 +80,7 @@ BUILDLINK_API_DEPENDS.gsettings-desktop-schemas+=       gsettings-desktop-schema
 .include "../../x11/libICE/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
+.include "../../x11/libxkbcommon/buildlink3.mk"
 .include "../../x11/libxkbfile/buildlink3.mk"
 .include "../../x11/gnome-desktop3/buildlink3.mk"
 .include "../../x11/startup-notification/buildlink3.mk"

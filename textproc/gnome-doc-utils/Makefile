@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.79 2021/12/08 16:06:44 adam Exp $
+# $NetBSD: Makefile,v 1.82 2022/07/08 15:06:08 wiz Exp $
 
 DISTNAME=	gnome-doc-utils-0.20.10
-PKGREVISION=	10
+PKGREVISION=	12
 CATEGORIES=	textproc gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-doc-utils/0.20/}
 EXTRACT_SUFX=	.tar.xz
@@ -21,6 +21,8 @@ MAKE_JOBS_SAFE=		no
 TEST_TARGET=		check
 USE_PKGLOCALEDIR=	YES
 REPLACE_BASH=		tools/gnome-doc-tool.in
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 CONFIGURE_ARGS+=	PYTHON=${PYTHONBIN:Q}
 

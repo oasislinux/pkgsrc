@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2022/01/18 02:48:27 pho Exp $
+# $NetBSD: Makefile,v 1.8 2022/08/22 10:13:25 wiz Exp $
 
 DISTNAME=	libyaml-0.1.2
-PKGREVISION=	2
+PKGREVISION=	6
 CATEGORIES=	textproc
 
 MAINTAINER=	pho@cielonegro.org

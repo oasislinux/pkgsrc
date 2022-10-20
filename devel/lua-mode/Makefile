@@ -1,17 +1,16 @@
-# $NetBSD: Makefile,v 1.10 2020/11/05 22:34:33 nikita Exp $
+# $NetBSD: Makefile,v 1.13 2022/08/17 12:43:43 tnn Exp $
 
-DISTNAME=	v${VERSION}
-VERSION=	20201010
-PKGNAME=	${EMACS_PKGNAME_PREFIX}lua-mode-${VERSION}
+DISTNAME=	lua-mode-20210802
+PKGNAME=	${EMACS_PKGNAME_PREFIX}${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel lua
-MASTER_SITES=	https://github.com/immerrr/lua-mode/archive/
+MASTER_SITES=	${MASTER_SITE_GITHUB:=immerrr/}
+GITHUB_TAG=	v${PKGVERSION_NOREV}
 
 MAINTAINER=	cheusov@NetBSD.org
 HOMEPAGE=	https://github.com/immerrr/lua-mode/
 COMMENT=	Emacs major mode for editing Lua code
 LICENSE=	gnu-gpl-v2 # or newer
-
-WRKSRC=			${WRKDIR}/lua-mode-${VERSION}
 
 USE_LANGUAGES=		# none
 NO_CONFIGURE=		yes

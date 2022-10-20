@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.87 2022/01/13 03:57:27 gutteridge Exp $
+# $NetBSD: buildlink3.mk,v 1.92 2022/08/11 05:09:24 gutteridge Exp $
 
 BUILDLINK_TREE+=	webkit-gtk
 
@@ -6,7 +6,7 @@ BUILDLINK_TREE+=	webkit-gtk
 WEBKIT_GTK_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.webkit-gtk+=	webkit-gtk>=2.8
-BUILDLINK_ABI_DEPENDS.webkit-gtk?=	webkit-gtk>=2.34.2
+BUILDLINK_ABI_DEPENDS.webkit-gtk?=	webkit-gtk>=2.36.6nb1
 BUILDLINK_PKGSRCDIR.webkit-gtk?=	../../www/webkit-gtk
 
 # This is necessary to match the package requirement.
@@ -15,7 +15,7 @@ GCC_REQD+=	8
 pkgbase := webkit-gtk
 .include "../../mk/pkg-build-options.mk"
 
-.if !empty(PKG_BUILD_OPTIONS.webkit-gtk:Menchant)
+.if ${PKG_BUILD_OPTIONS.webkit-gtk:Menchant}
 .include "../../textproc/enchant2/buildlink3.mk"
 .endif
 

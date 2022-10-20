@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2022/01/04 20:53:44 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2022/09/11 18:10:03 wiz Exp $
 
 PKGREVISION= 1
 .include "../../devel/thrift/Makefile.version"
@@ -15,6 +15,8 @@ TEST_DEPENDS+=	${PYPKGPREFIX}-twisted-[0-9]*:../../net/py-twisted
 
 USE_LANGUAGES=	c c++
 PYSETUPSUBDIR=	lib/py
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

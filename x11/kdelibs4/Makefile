@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.129 2022/01/10 01:46:47 ryoon Exp $
+# $NetBSD: Makefile,v 1.132 2022/08/09 12:08:35 jperkin Exp $
 
 DISTNAME=	kdelibs-4.14.38
 PKGNAME=	${DISTNAME:S/-4/4-4/}
-PKGREVISION=	26
+PKGREVISION=	28
 CATEGORIES=	x11
 COMMENT=	Support libraries for the KDE integrated X11 desktop
 MASTER_SITES=	${MASTER_SITE_KDE:=applications/17.08.3/src/}
@@ -83,7 +83,6 @@ PLIST.kgrantpty=	yes
 
 CFLAGS.SunOS+=		-D__EXTENSIONS__
 LDFLAGS.Darwin+=	-lintl
-LDFLAGS.SunOS+=		-lintl
 
 # jasper uses SIZE_MAX and friends in its headers.
 CXXFLAGS+=	-D__STDC_LIMIT_MACROS

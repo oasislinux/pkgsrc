@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.17 2021/06/06 23:32:40 markd Exp $
-#
+# $NetBSD: Makefile,v 1.20 2022/08/19 18:31:23 wiz Exp $
 
-PKGNAME=	texlive2pkg-1.10
+PKGNAME=	texlive2pkg-1.12
 CATEGORIES=	pkgtools
 
 MAINTAINER=	markd@NetBSD.org
@@ -14,7 +13,6 @@ NO_CHECKSUM=		yes
 NO_BUILD=		yes
 USE_LANGUAGES=		# none
 USE_TOOLS+=		ftp:run perl:run xzcat:run
-AUTO_MKDIRS=		yes
 
 SUBST_CLASSES+=		tools
 SUBST_STAGE.tools=	pre-configure

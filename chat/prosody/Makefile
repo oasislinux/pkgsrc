@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.35 2022/01/13 14:25:12 wiz Exp $
+# $NetBSD: Makefile,v 1.42 2022/08/11 15:41:30 khorben Exp $
 
-DISTNAME=		prosody-0.11.12
+DISTNAME=		prosody-0.12.1
+PKGREVISION=		1
 CATEGORIES=		chat
 MASTER_SITES=		https://prosody.im/downloads/source/
 
@@ -13,12 +14,13 @@ DEPENDS+=		${LUA_PKGPREFIX}-expat>=1.2:../../textproc/lua-expat
 DEPENDS+=		${LUA_PKGPREFIX}-filesystem>=1.6.2:../../devel/lua-filesystem
 DEPENDS+=		${LUA_PKGPREFIX}-sec>=0.3.3:../../security/lua-sec
 DEPENDS+=		${LUA_PKGPREFIX}-socket>=2.0:../../net/lua-socket
+DEPENDS+=		${LUA_PKGPREFIX}-unbound-[0-9]*:../../net/lua-unbound
 
 HAS_CONFIGURE=		yes
-USE_LANGUAGES=		c99
+USE_LANGUAGES=		c
 BUILD_DEFS+=		VARBASE
 
-LUA_VERSIONS_ACCEPTED=	52 51
+LUA_VERSIONS_ACCEPTED=	54 52 51
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -28,9 +30,9 @@ PROSODY_DATA?=		${VARBASE}/db/prosody
 PROSODY_LOG?=		${VARBASE}/log/prosody
 PROSODY_RUN?=		${VARBASE}/run/prosody
 
-OWN_DIRS_PERMS+=	${PROSODY_DATA} ${PROSODY_USER} ${PROSODY_GROUP} 0770
-OWN_DIRS_PERMS+=	${PROSODY_LOG} ${PROSODY_USER} ${PROSODY_GROUP} 0770
-OWN_DIRS_PERMS+=	${PROSODY_RUN} ${PROSODY_USER} ${PROSODY_GROUP} 0770
+OWN_DIRS_PERMS+=	${PROSODY_DATA} ${PROSODY_USER} ${PROSODY_GROUP} 0750
+OWN_DIRS_PERMS+=	${PROSODY_LOG} ${PROSODY_USER} ${PROSODY_GROUP} 0750
+OWN_DIRS_PERMS+=	${PROSODY_RUN} ${PROSODY_USER} ${PROSODY_GROUP} 0750
 MAKE_DIRS+=		${PKG_SYSCONFDIR}/certs
 
 PKG_USERS_VARS=			PROSODY_USER
@@ -38,7 +40,6 @@ PKG_GROUPS_VARS=		PROSODY_GROUP
 PKG_GROUPS=			${PROSODY_GROUP}
 PKG_USERS=			${PROSODY_USER}:${PROSODY_GROUP}
 PKG_GECOS.${PROSODY_USER}=	Prosody daemon user
-PKG_HOME.${PROSODY_USER}=	${PROSODY_DATA}
 PKG_SHELL.${PROSODY_USER}=	${NOLOGIN}
 
 PKG_SYSCONFSUBDIR=	${PKGBASE}
@@ -51,8 +52,8 @@ REPLACE_LUA+=		prosody prosodyctl
 SUBST_CLASSES+=		path
 SUBST_MESSAGE.path=	Fixing default paths
 SUBST_STAGE.path=	pre-configure
-SUBST_FILES.path=	makefile man/prosodyctl.man prosody.cfg.lua.dist
-SUBST_SED.path=		-e 's,/etc/prosody,${PKG_SYSCONFDIR},g'
+SUBST_FILES.path=	makefile prosody.cfg.lua.dist
+SUBST_SED.path=		-e 's,$$(CONFIG),$${DESTDIR}${EGDIR},g'
 SUBST_VARS.path=	EGDIR PROSODY_DATA PROSODY_LOG PROSODY_RUN
 
 CONFIGURE_ARGS+=	--cflags=${CFLAGS:Q}
@@ -68,6 +69,9 @@ MAKE_ENV.SunOS+=	SOCKET_LIB=-lsocket
 MAKE_FILE=		makefile
 
 RCD_SCRIPTS=		prosody
+FILES_SUBST+=		PROSODY_RUN=${PROSODY_RUN}
+FILES_SUBST+=		PROSODY_USER=${PROSODY_USER}
+FILES_SUBST+=		PROSODY_GROUP=${PROSODY_GROUP}
 
 TEST_TARGET=		test
 
@@ -76,4 +80,5 @@ TEST_TARGET=		test
 .include "../../devel/libidn/buildlink3.mk"
 .include "../../lang/lua/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
+.include "../../textproc/icu/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

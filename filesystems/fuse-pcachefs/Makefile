@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.14 2022/01/09 20:06:05 pho Exp $
+# $NetBSD: Makefile,v 1.16 2022/06/30 11:18:23 nia Exp $
 
 DISTNAME=	fuse-pcachefs-0.3
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	filesystems
 MASTER_SITES=	${MASTER_SITE_GITHUB:=ibizaman/}
 GITHUB_PROJECT=	pcachefs
@@ -28,5 +28,4 @@ post-install:
 .include "../../filesystems/py-fuse-bindings/buildlink3.mk"
 .include "../../lang/python/egg.mk"
 .include "../../mk/fuse.buildlink3.mk"
-.include "../../lang/python/versioned_dependencies.mk"
 .include "../../mk/bsd.pkg.mk"

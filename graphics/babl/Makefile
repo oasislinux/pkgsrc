@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.42 2021/12/08 16:04:48 adam Exp $
+# $NetBSD: Makefile,v 1.53 2022/10/08 11:15:53 nia Exp $
 
-DISTNAME=	babl-0.1.88
-PKGREVISION=	1
+DISTNAME=	babl-0.1.96
 CATEGORIES=	graphics
 MASTER_SITES=	https://download.gimp.org/pub/babl/${PKGVERSION_NOREV:R}/
 EXTRACT_SUFX=	.tar.xz
@@ -15,7 +14,6 @@ USE_TOOLS+=	pkg-config
 USE_LANGUAGES=	c99
 
 MESON_ARGS+=	-Dwith-docs=false
-MESON_ARGS+=	-Denable-gir=false
 
 PKGCONFIG_OVERRIDE+=	babl.pc.in
 
@@ -32,14 +30,49 @@ PLIST.not_Darwin=	yes
 PLIST_SUBST+=		SOEXT="so"
 .endif
 
+PLIST_VARS+=		x86_64
+.if ${MACHINE_ARCH} == "x86_64"
+PLIST.x86_64=		yes
+.endif
+
+PLIST_VARS+=		arm
+.if !empty(MACHINE_ARCH:Mearm*)
+PLIST.arm=		yes
+.endif
+
+PKG_OPTIONS_VAR=	PKG_OPTIONS.babl
+PKG_SUPPORTED_OPTIONS=
+.if (${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64")
+PKG_SUPPORTED_OPTIONS+=	mmx
+.endif
+
+.include "../../mk/compiler.mk"
+
+.if (${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64") \
+	&& empty(CC_VERSION:Mgcc-7.*)
+PKG_SUGGESTED_OPTIONS+=	mmx
+.endif
+
+.include "../../mk/bsd.options.mk"
+
+.if !empty(PKG_OPTIONS:Mmmx)
+MESON_ARGS+=	-Denable-mmx=true
+.else
+MESON_ARGS+=	-Denable-mmx=false
+.endif
+
 # Apply removals to post-wrapper transformed arguments.
 BUILDLINK_TRANSFORM.Darwin+=	rm:-Wl,--version-script
 BUILDLINK_TRANSFORM.Darwin+=	rm:-Wl,babl.map
 BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,--version-script
 BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,babl.map
 
+TEST_ENV+=	LD_LIBRARY_PATH=${WRKSRC}/output/babl
+
 .include "../../devel/meson/build.mk"
 .include "../../devel/glib2/buildlink3.mk"
+.include "../../devel/gobject-introspection/buildlink3.mk"
+.include "../../lang/vala/buildlink3.mk"
 .include "../../graphics/lcms2/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/dlopen.buildlink3.mk"

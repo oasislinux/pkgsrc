@@ -1,11 +1,9 @@
-# $NetBSD: options.mk,v 1.4 2019/11/10 21:44:38 nia Exp $
+# $NetBSD: options.mk,v 1.6 2022/07/01 12:28:12 martin Exp $
 #
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.webkit-gtk
-PKG_SUPPORTED_OPTIONS=	debug enchant opengl webkit-jit introspection
-PKG_SUGGESTED_OPTIONS=	enchant opengl introspection
-
-PLIST_VARS=	introspection
+PKG_SUPPORTED_OPTIONS=	debug debug-info enchant opengl webkit-jit
+PKG_SUGGESTED_OPTIONS=	enchant opengl
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -41,6 +39,9 @@ CONFIGURE_ARGS+=	--enable-debug \
 CONFIGURE_ARGS+=	--disable-debug \
 			--enable-optimizations
 .endif
+.if !empty(PKG_OPTIONS:Mdebug-info)
+CONFIGURE_ARGS+=	--enable-debug-symbols=yes
+.endif
 
 #
 # OpenGL support: enable support for GLX, WebGL and accelerated compositing
@@ -66,17 +67,4 @@ CONFIGURE_ARGS+=	--enable-spellcheck
 .include "../../textproc/enchant/buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--disable-spellcheck
-.endif
-
-#
-# Introspection
-#
-.if !empty(PKG_OPTIONS:Mintrospection)
-PLIST.introspection	= yes
-BUILDLINK_API_DEPENDS.gobject-introspection+=	gobject-introspection>=0.9.5
-BUILDLINK_DEPMETHOD.gobject-introspection+=	build
-.include "../../devel/gobject-introspection/buildlink3.mk"
-CONFIGURE_ARGS+=	--enable-introspection
-.else
-CONFIGURE_ARGS+=	--disable-introspection
 .endif

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.13 2021/12/08 16:06:20 adam Exp $
+# $NetBSD: Makefile,v 1.17 2022/06/28 11:35:37 wiz Exp $
 
-DISTNAME=	lxqt-policykit-1.0.0
-PKGREVISION=	1
+DISTNAME=	lxqt-policykit-1.1.0
+PKGREVISION=	2
 CATEGORIES=	security
 MASTER_SITES=	${MASTER_SITE_GITHUB:=lxqt/}
 GITHUB_RELEASE=	${PKGVERSION_NOREV}
@@ -29,7 +29,7 @@ CONF_FILES+=	${AUTOSTART_CONF}/lxqt-policykit-agent.desktop \
 pre-configure:
 	${MKDIR} -p ${WRKSRC}/build
 
-TOOL_DEPENDS+=	lxqt-build-tools>=0.10.0:../../devel/lxqt-build-tools
+TOOL_DEPENDS+=	lxqt-build-tools>=0.11.0:../../devel/lxqt-build-tools
 TOOL_DEPENDS+=	qt5-qttools-[0-9]*:../../x11/qt5-qttools
 
 .include "../../x11/liblxqt/buildlink3.mk"

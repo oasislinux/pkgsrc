@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2020/05/21 16:04:22 taca Exp $
+# $NetBSD: Makefile,v 1.5 2022/07/13 14:44:09 taca Exp $
 
 DISTNAME=	railties-${RAILS_VERSION}
 PKGNAME=	${RUBY_PKGPREFIX}-railties${RUBY_RAILS}-${RAILS_VERSION}

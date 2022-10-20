@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.25 2020/12/20 11:06:40 prlw1 Exp $
+# $NetBSD: Makefile,v 1.27 2022/07/24 21:24:55 wiz Exp $
 
 .include "../../devel/glib2/Makefile.common"
 

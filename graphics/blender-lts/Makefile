@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.15 2022/01/10 01:46:33 ryoon Exp $
+# $NetBSD: Makefile,v 1.21 2022/09/27 20:58:24 wiz Exp $
 
 DISTNAME=	blender-2.83.5
-PKGREVISION=	13
+PKGREVISION=	18
 CATEGORIES=	graphics
 MASTER_SITES=	https://download.blender.org/source/
 EXTRACT_SUFX=	.tar.xz
@@ -52,7 +52,7 @@ INSTALLATION_DIRS=	bin share/blender
 
 CHECK_PORTABILITY_SKIP+=	doc/python_api/sphinx_doc_gen.sh
 
-PYTHON_VERSIONS_INCOMPATIBLE=	27
+PYTHON_VERSIONS_ACCEPTED=	38 37
 
 pre-configure:
 	${MKDIR} ${WRKSRC}/build

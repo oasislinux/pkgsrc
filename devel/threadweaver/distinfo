@@ -1,5 +1,6 @@
-$NetBSD: distinfo,v 1.13 2021/10/26 10:20:03 nia Exp $
+$NetBSD: distinfo,v 1.16 2022/09/29 00:36:34 markd Exp $
 
-BLAKE2s (threadweaver-5.80.0.tar.xz) = 41615082d05ab2ecb98e7795588edd9193f6305d08fe9fc5d24784306b24a87c
-SHA512 (threadweaver-5.80.0.tar.xz) = e7b30f2fdee4b1d4ec5153afe83bcbc238d7075214fb6623639ee5700ee62cea5b51ca335b1b08b1fc7ca471e55dda6b87e5a1b9d4660c299d6dfacfa5573e73
-Size (threadweaver-5.80.0.tar.xz) = 1410660 bytes
+BLAKE2s (threadweaver-5.98.0.tar.xz) = d175053118903b2ebc903afb0a42e5bae39efa8926cd5024b191a30a833d2763
+SHA512 (threadweaver-5.98.0.tar.xz) = 7ddef1bd50ba45b10f92ebe52a6206ad2c18de17d6eff83a9e5021395a64aa68c4e553c8f18e2737a2da25c1b6efd1736dd95b2a71c6d2ba0408a5bd25082123
+Size (threadweaver-5.98.0.tar.xz) = 1413012 bytes
+SHA1 (patch-examples_ThumbNailer_AverageLoadManager.cpp) = a5aa7c2839ece6a213f8c70cc1ec8dd92fc55986

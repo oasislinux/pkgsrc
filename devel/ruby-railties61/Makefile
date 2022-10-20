@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1 2021/02/14 14:06:29 taca Exp $
+# $NetBSD: Makefile,v 1.4 2022/07/13 14:46:24 taca Exp $
 
 DISTNAME=	railties-${RAILS_VERSION}
 PKGNAME=	${RUBY_PKGPREFIX}-railties${RUBY_RAILS}-${RAILS_VERSION}
@@ -6,7 +6,7 @@ CATEGORIES=	devel
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.rubyonrails.org/
-COMMENT=	Tools for creating, working with, and running Rails 6.0
+COMMENT=	Tools for creating, working with, and running Rails 6.1
 LICENSE=	mit
 
 DEPENDS+=	${RUBY_ACTIONPACK_DEPENDS}

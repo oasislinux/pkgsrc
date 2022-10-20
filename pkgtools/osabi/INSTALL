@@ -1,4 +1,4 @@
-# $NetBSD: INSTALL,v 1.5 2018/11/21 14:15:32 jmcneill Exp $
+# $NetBSD: INSTALL,v 1.7 2022/07/24 20:56:56 nia Exp $
 
 UNAME="@UNAME@"
 PKG_ADMIN="@PKG_ADMIN@"

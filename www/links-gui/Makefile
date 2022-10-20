@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.100 2022/01/23 22:07:49 fcambus Exp $
+# $NetBSD: Makefile,v 1.102 2022/05/29 17:59:30 fcambus Exp $
 
 PKGNAME=	${DISTNAME:S/links/&-gui/}
 COMMENT=	Lynx-like text and graphics WWW browser
@@ -21,6 +21,7 @@ CONFIGURE_ARGS+=	--without-librsvg
 
 .include "../../fonts/fontconfig/buildlink3.mk"
 .include "../../graphics/freetype2/buildlink3.mk"
+.include "../../graphics/libwebp/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../graphics/tiff/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"

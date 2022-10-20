@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.52 2021/12/08 16:06:01 adam Exp $
+# $NetBSD: Makefile,v 1.59 2022/09/29 01:09:36 markd Exp $
 
 DISTNAME=	krdc-${KAPPSVER}
-PKGREVISION=	6
 CATEGORIES=	net
 
 HOMEPAGE=	https://kde.org/applications/internet/krdc/
@@ -13,6 +12,8 @@ LICENSE=	gnu-lgpl-v2 AND gnu-gpl-v2 AND gnu-fdl-v1.2
 BUILD_DEPENDS+=	kdoctools>=5.19.0:../../devel/kdoctools
 
 USE_TOOLS+=	msgmerge pkg-config
+
+LDFLAGS.SunOS+=	-lsocket -lnsl
 
 .include "../../devel/kcmutils/buildlink3.mk"
 .include "../../devel/knotifyconfig/buildlink3.mk"

@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.25 2022/02/01 13:37:33 fcambus Exp $
+# $NetBSD: Makefile,v 1.34 2022/10/01 11:50:24 fcambus Exp $
 
-DISTNAME=	dbip-city-lite-2022-02.mmdb
-PKGNAME=	dbip-city-lite-2022.02
+DISTNAME=	dbip-city-lite-2022-10.mmdb
+PKGNAME=	dbip-city-lite-2022.10
 CATEGORIES=	net
 MASTER_SITES=	https://download.db-ip.com/free/
 EXTRACT_SUFX=	.gz
 
-MAINTAINER=	fcambus@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://db-ip.com/db/download/ip-to-city-lite
 COMMENT=	DB-IP IP to City Lite: IPv4/v6 address to city
 LICENSE=	cc-by-v4.0

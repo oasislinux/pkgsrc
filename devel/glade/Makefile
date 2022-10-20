@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.103 2021/12/08 16:01:52 adam Exp $
+# $NetBSD: Makefile,v 1.109 2022/09/26 09:22:49 wiz Exp $
 
-DISTNAME=		glade-3.36.0
-PKGREVISION=		4
+DISTNAME=		glade-3.40.0
 CATEGORIES=		devel
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/glade/3.36/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/glade/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=		.tar.xz
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
@@ -14,16 +13,13 @@ LICENSE=		gnu-gpl-v2
 TOOL_DEPENDS+=		libxslt-[0-9]*:../../textproc/libxslt
 BUILD_DEPENDS+=		docbook-xsl-[0-9]*:../../textproc/docbook-xsl
 
-GNU_CONFIGURE=		yes
-USE_LIBTOOL=		yes
-USE_TOOLS+=		pkg-config intltool gmake msgfmt
-USE_TOOLS+=		itstool
-
-# Requires --xml in msgfmt.
-_TOOLS_USE_PKGSRC.msgfmt=	yes
+USE_TOOLS+=		itstool msgfmt pkg-config
 
 PKGCONFIG_OVERRIDE+=	data/gladeui-2.0.pc.in
 
+.include "../../devel/meson/build.mk"
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
+.include "../../devel/gobject-introspection/buildlink3.mk"
 .include "../../x11/gtk3/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.157 2021/12/13 13:47:06 micha Exp $
+# $NetBSD: Makefile,v 1.163 2022/09/30 18:11:58 adam Exp $
 
-DISTNAME=	doxygen-1.9.2.src
+DISTNAME=	doxygen-1.9.5.src
 PKGNAME=	${DISTNAME:S/.src//}
 CATEGORIES=	devel
 MASTER_SITES=	http://doxygen.nl/files/
@@ -14,9 +14,11 @@ BUILD_DEPENDS+=	${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 
 WRKSRC=			${WRKDIR}/${PKGNAME_NOREV}
 UNLIMIT_RESOURCES+=	datasize
-# doxygen upstream uses this version of flex
-FLEX_REQD=		2.5.35
-# Uses -std=c++14
+# doxygen changelog says at least this version of flex is required
+FLEX_REQD=		2.6.4
+# doxygen changelog says a C++17 compiler is required. Uses -std=gnu++1z
+# Native std::filesystem requires GCC 9. Patch for emulation is still present
+# Tested to work with GCC 7.5.0 from NetBSD 9.2
 GCC_REQD+=		5
 USE_CMAKE=		yes
 USE_LANGUAGES=		c c++

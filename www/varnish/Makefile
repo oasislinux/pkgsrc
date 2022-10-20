@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.33 2022/01/09 02:55:08 tnn Exp $
+# $NetBSD: Makefile,v 1.38 2022/09/04 12:04:02 tnn Exp $
 
-DISTNAME=	varnish-7.0.1
+DISTNAME=	varnish-7.1.1
 CATEGORIES=	www
 MASTER_SITES=	https://varnish-cache.org/_downloads/
 EXTRACT_SUFX=	.tgz
@@ -11,7 +11,9 @@ COMMENT=	High-performace HTTP accelerator
 LICENSE=	modified-bsd
 
 BUILD_DEPENDS+=			${PYPKGPREFIX}-docutils>=0.12:../../textproc/py-docutils
-PYTHON_VERSIONED_DEPENDENCIES=	sphinx:tool
+TOOL_DEPENDS+=			${PYPKGPREFIX}-sphinx-[0-9]*:../../textproc/py-sphinx
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
@@ -45,7 +47,7 @@ FILES_SUBST+=		VRNUSER=${VRNUSER}
 FILES_SUBST+=		VRNGROUP=${VRNGROUP}
 
 REPLACE_PYTHON+=	lib/libvcc/vmodtool.py
-REPLACE_PYTHON+=	lib/libvcc/vsctool.py
+REPLACE_PYTHON+=	lib/libvsc/vsctool.py
 
 CONFIGURE_ARGS+=	--localstatedir=${STATEDIR}
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFBASE}
@@ -79,7 +81,6 @@ TEST_TARGET=		check
 .include "../../devel/pcre2/buildlink3.mk"
 .include "../../devel/libexecinfo/buildlink3.mk"
 .include "../../lang/python/application.mk"
-.include "../../lang/python/versioned_dependencies.mk"
 .include "../../mk/curses.buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/readline.buildlink3.mk"

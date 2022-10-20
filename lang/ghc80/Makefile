@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.15 2021/12/08 16:02:15 adam Exp $
+# $NetBSD: Makefile,v 1.18 2022/06/30 11:18:32 nia Exp $
 # -----------------------------------------------------------------------------
 # Package metadata
 #
 DISTNAME=	ghc-8.0.2-src
 PKGNAME=	${DISTNAME:S/-src$//}
-PKGREVISION=	6
+PKGREVISION=	8
 CATEGORIES=	lang
 MASTER_SITES=	https://downloads.haskell.org/~ghc/${PKGVERSION_NOREV}/
 EXTRACT_SUFX=	.tar.xz
@@ -178,7 +178,7 @@ BUILD_DEPENDS+=	${PYPKGPREFIX}-sphinx-[0-9]*:../../textproc/py-sphinx
 # NetBSD 9.x have libcurses with a newer major version than the
 # bootstrap kit is linked against. For now, work around this with
 # compat80.
-.if ${OPSYS} == "NetBSD" && empty(OS_VERSION:M[0-8].*)
+.if ${OPSYS} == "NetBSD" && ${OPSYS_VERSION} >= 090000
 BUILD_DEPENDS+=	compat80-[0-9]*:../../emulators/compat80
 # In a sandboxed build environment, we have to reach over to the
 # installed libraries themselves, since the symlinks compat80 adds

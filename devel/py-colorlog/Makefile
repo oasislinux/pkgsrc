@@ -1,0 +1,18 @@
+# $NetBSD: Makefile,v 1.3 2022/09/14 11:29:28 adam Exp $
+
+DISTNAME=	colorlog-6.7.0
+PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
+CATEGORIES=	devel python
+MASTER_SITES=	${MASTER_SITE_PYPI:=c/colorlog/}
+
+MAINTAINER=	kamelderouiche@yahoo.com
+HOMEPAGE=	https://github.com/borntyping/python-colorlog
+COMMENT=	Log formatting with colors
+LICENSE=	mit
+
+USE_LANGUAGES=	# none
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
+
+.include "../../lang/python/egg.mk"
+.include "../../mk/bsd.pkg.mk"

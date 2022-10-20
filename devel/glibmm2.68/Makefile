@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.3 2021/12/08 16:01:52 adam Exp $
+# $NetBSD: Makefile,v 1.5 2022/06/28 11:31:44 wiz Exp $
 
-DISTNAME=	glibmm-2.68.1
+DISTNAME=	glibmm-2.68.2
 PKGNAME=	${DISTNAME:S/glibmm/glibmm2.68/}
 PKGREVISION=	1
 CATEGORIES=	devel gnome

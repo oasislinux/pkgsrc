@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.29 2020/04/06 17:14:44 jperkin Exp $
+# $NetBSD: Makefile,v 1.31 2022/07/10 01:10:44 wiz Exp $
 
-DISTNAME=	libepoxy-1.5.4
+DISTNAME=	libepoxy-1.5.9
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_GITHUB:=anholt/}
 GITHUB_RELEASE=	${PKGVERSION_NOREV}
@@ -12,6 +12,8 @@ COMMENT=	Library for OpenGL function pointer management
 LICENSE=	mit
 
 BUILD_DEPENDS+=	${PYPKGPREFIX}-expat>=0:../../textproc/py-expat
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 USE_TOOLS+=		pkg-config
 PKGCONFIG_OVERRIDE+=	epoxy.pc.in

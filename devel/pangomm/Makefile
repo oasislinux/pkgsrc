@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.65 2021/12/08 16:02:01 adam Exp $
+# $NetBSD: Makefile,v 1.68 2022/06/28 11:33:41 wiz Exp $
 
-DISTNAME=	pangomm-2.46.1
+DISTNAME=	pangomm-2.46.2
 PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/pangomm/${PKGVERSION_NOREV:R}/}

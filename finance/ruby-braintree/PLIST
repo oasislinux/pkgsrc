@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.9 2021/11/23 14:24:37 taca Exp $
+@comment $NetBSD: PLIST,v 1.11 2022/08/26 15:36:33 taca Exp $
 ${GEM_HOME}/cache/${GEM_NAME}.gem
 ${GEM_LIBDIR}/LICENSE
 ${GEM_LIBDIR}/braintree.gemspec
@@ -47,10 +47,17 @@ ${GEM_LIBDIR}/lib/braintree/dispute_gateway.rb
 ${GEM_LIBDIR}/lib/braintree/dispute_search.rb
 ${GEM_LIBDIR}/lib/braintree/document_upload.rb
 ${GEM_LIBDIR}/lib/braintree/document_upload_gateway.rb
+${GEM_LIBDIR}/lib/braintree/enriched_customer_data.rb
 ${GEM_LIBDIR}/lib/braintree/error_codes.rb
 ${GEM_LIBDIR}/lib/braintree/error_result.rb
 ${GEM_LIBDIR}/lib/braintree/errors.rb
 ${GEM_LIBDIR}/lib/braintree/exceptions.rb
+${GEM_LIBDIR}/lib/braintree/exchange_rate.rb
+${GEM_LIBDIR}/lib/braintree/exchange_rate_quote.rb
+${GEM_LIBDIR}/lib/braintree/exchange_rate_quote_gateway.rb
+${GEM_LIBDIR}/lib/braintree/exchange_rate_quote_input.rb
+${GEM_LIBDIR}/lib/braintree/exchange_rate_quote_request.rb
+${GEM_LIBDIR}/lib/braintree/exchange_rate_quote_response.rb
 ${GEM_LIBDIR}/lib/braintree/facilitated_details.rb
 ${GEM_LIBDIR}/lib/braintree/facilitator_details.rb
 ${GEM_LIBDIR}/lib/braintree/gateway.rb
@@ -77,6 +84,7 @@ ${GEM_LIBDIR}/lib/braintree/paginated_collection.rb
 ${GEM_LIBDIR}/lib/braintree/paginated_result.rb
 ${GEM_LIBDIR}/lib/braintree/payment_instrument_type.rb
 ${GEM_LIBDIR}/lib/braintree/payment_method.rb
+${GEM_LIBDIR}/lib/braintree/payment_method_customer_data_updated_metadata.rb
 ${GEM_LIBDIR}/lib/braintree/payment_method_gateway.rb
 ${GEM_LIBDIR}/lib/braintree/payment_method_nonce.rb
 ${GEM_LIBDIR}/lib/braintree/payment_method_nonce_details.rb
@@ -91,6 +99,7 @@ ${GEM_LIBDIR}/lib/braintree/processor_response_types.rb
 ${GEM_LIBDIR}/lib/braintree/resource_collection.rb
 ${GEM_LIBDIR}/lib/braintree/revoked_payment_method_metadata.rb
 ${GEM_LIBDIR}/lib/braintree/risk_data.rb
+${GEM_LIBDIR}/lib/braintree/risk_data/liability_shift.rb
 ${GEM_LIBDIR}/lib/braintree/samsung_pay_card.rb
 ${GEM_LIBDIR}/lib/braintree/settlement_batch_summary.rb
 ${GEM_LIBDIR}/lib/braintree/settlement_batch_summary_gateway.rb
@@ -143,6 +152,7 @@ ${GEM_LIBDIR}/lib/braintree/util.rb
 ${GEM_LIBDIR}/lib/braintree/validation_error.rb
 ${GEM_LIBDIR}/lib/braintree/validation_error_collection.rb
 ${GEM_LIBDIR}/lib/braintree/venmo_account.rb
+${GEM_LIBDIR}/lib/braintree/venmo_profile_data.rb
 ${GEM_LIBDIR}/lib/braintree/version.rb
 ${GEM_LIBDIR}/lib/braintree/visa_checkout_card.rb
 ${GEM_LIBDIR}/lib/braintree/webhook_notification.rb
@@ -178,6 +188,7 @@ ${GEM_LIBDIR}/spec/integration/braintree/dispute_search_spec.rb
 ${GEM_LIBDIR}/spec/integration/braintree/dispute_spec.rb
 ${GEM_LIBDIR}/spec/integration/braintree/document_upload_spec.rb
 ${GEM_LIBDIR}/spec/integration/braintree/error_codes_spec.rb
+${GEM_LIBDIR}/spec/integration/braintree/exchange_rate_quote_spec.rb
 ${GEM_LIBDIR}/spec/integration/braintree/graphql_client_spec.rb
 ${GEM_LIBDIR}/spec/integration/braintree/http_spec.rb
 ${GEM_LIBDIR}/spec/integration/braintree/merchant_account_spec.rb
@@ -224,20 +235,28 @@ ${GEM_LIBDIR}/spec/unit/braintree/disbursement_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/dispute_search_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/dispute_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/document_upload_spec.rb
+${GEM_LIBDIR}/spec/unit/braintree/enriched_customer_data_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/error_result_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/errors_spec.rb
+${GEM_LIBDIR}/spec/unit/braintree/exchange_rate_quote_input_spec.rb
+${GEM_LIBDIR}/spec/unit/braintree/exchange_rate_quote_request_spec.rb
+${GEM_LIBDIR}/spec/unit/braintree/exchange_rate_quote_response_spec.rb
+${GEM_LIBDIR}/spec/unit/braintree/exchange_rate_quote_spec.rb
+${GEM_LIBDIR}/spec/unit/braintree/exchange_rate_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/http_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/local_payment_completed_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/local_payment_expired_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/local_payment_funded_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/merchant_account_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/modification_spec.rb
+${GEM_LIBDIR}/spec/unit/braintree/payment_method_customer_data_updated_metadata_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/payment_method_nonce_details_payer_info_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/payment_method_nonce_details_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/payment_method_nonce_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/payment_method_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/paypal_account_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/resource_collection_spec.rb
+${GEM_LIBDIR}/spec/unit/braintree/risk_data/liability_shift.rb
 ${GEM_LIBDIR}/spec/unit/braintree/risk_data_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/sha256_digest_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/signature_service_spec.rb
@@ -259,6 +278,7 @@ ${GEM_LIBDIR}/spec/unit/braintree/us_bank_account_verification_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/util_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/validation_error_collection_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/validation_error_spec.rb
+${GEM_LIBDIR}/spec/unit/braintree/venmo_profile_data_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/webhook_notification_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/xml/libxml_spec.rb
 ${GEM_LIBDIR}/spec/unit/braintree/xml/parser_spec.rb

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.12 2021/12/08 16:04:00 adam Exp $
+# $NetBSD: Makefile,v 1.20 2022/09/29 00:38:16 markd Exp $
 
 DISTNAME=	kio-extras-${KAPPSVER}
-PKGREVISION=	9
 CATEGORIES=	misc
 
 HOMEPAGE=	https://kde.org/applications/internet/
@@ -28,12 +27,21 @@ SUBST_FILES.fix-moc=	_KDE_build/*/CMakeFiles/*_autogen.dir/AutogenInfo.json
 SUBST_NOOP_OK.fix-moc=	yes
 SUBST_SED.fix-moc=	-e 's;"${PREFIX}/include",;;g'
 
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "SunOS"
+TOOL_DEPENDS+=		coreutils>=0:../../sysutils/coreutils
+TOOLS_CREATE+=		md5sum
+TOOLS_PATH.md5sum=	${PREFIX}/bin/gmd5sum
+.endif
+
 .include "../../audio/taglib/buildlink3.mk"
 .include "../../databases/shared-mime-info/buildlink3.mk"
 .include "../../devel/gperf/buildlink3.mk"
 .include "../../devel/kpty/buildlink3.mk"
 .include "../../devel/libmtp/buildlink3.mk"
 .include "../../graphics/exiv2/buildlink3.mk"
+.include "../../graphics/libkexiv2/buildlink3.mk"
 .include "../../graphics/openexr/buildlink3.mk"
 .include "../../net/kdnssd/buildlink3.mk"
 .include "../../net/kdsoap/buildlink3.mk"

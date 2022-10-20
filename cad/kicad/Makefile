@@ -1,11 +1,13 @@
-# $NetBSD: Makefile,v 1.59 2022/01/10 01:46:22 ryoon Exp $
+# $NetBSD: Makefile,v 1.66 2022/08/11 05:08:05 gutteridge Exp $
 #
 
-V=		6.0.0
+V=		6.0.6
 DISTNAME=	kicad-${V}
 PKGREVISION=	1
 CATEGORIES=	cad
-MASTER_SITES=	https://gitlab.com/kicad/code/kicad/-/archive/${V}/
+MASTER_SITES=	${MASTER_SITE_GITLAB:=kicad/code/}
+GITLAB_PROJECT=	kicad
+GITLAB_RELEASE=	${V}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -19,7 +21,7 @@ DEPENDS+=	git-base-[0-9]*:../../devel/git-base
 USE_PKGLOCALEDIR=	yes
 USE_LANGUAGES=		c c++11
 USE_CMAKE=		yes
-USE_TOOLS+=		pkg-config
+USE_TOOLS+=		pkg-config msgfmt msgmerge xgettext
 
 CMAKE_ARGS+=		-DCMAKE_BUILD_TYPE=Release
 CMAKE_ARGS+=		-DKICAD_SPICE=OFF
@@ -40,6 +42,8 @@ PY_PATCHPLIST=		yes
 # I didn't commit them yet because it segfaults. -tnn 20220102
 NOT_FOR_PLATFORM+=	Darwin-*-*
 
+# needs 64-bit CAS for std::atomic<size_t>
+.include "../../mk/atomic64.mk"
 .include "../../devel/boost-libs/buildlink3.mk"
 .include "../../devel/cmake/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"

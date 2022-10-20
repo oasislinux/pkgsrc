@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.35 2021/12/08 16:04:20 adam Exp $
+# $NetBSD: Makefile,v 1.39 2022/09/11 12:51:35 wiz Exp $
 
 DISTNAME=		xnp2-0.86
-PKGREVISION=		12
+PKGREVISION=		16
 CATEGORIES=		emulators
 MASTER_SITES=		http://www.nonakap.org/np2/release/
 EXTRACT_SUFX=		.tar.bz2
@@ -18,9 +18,7 @@ CONFIGURE_DIRS=		x11
 GNU_CONFIGURE=		yes
 
 CONFIGURE_ARGS+=	--enable-build-all
-# XXX audio/SDL2_mixer requires multimedia/smpeg2 but it conflicts with
-#     multimedia/smpeg which is required by audio/SDL_mixer
-CONFIGURE_ARGS+=	--disable-sdl2
+CONFIGURE_ARGS+=	--enable-sdl2
 
 # Workaround for glib2-2.68.0 c++ fallout.
 CXXFLAGS+=		-DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_66
@@ -37,7 +35,7 @@ post-install:
 
 BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.6.0
 .include "../../x11/gtk2/buildlink3.mk"
-.include "../../devel/SDL/buildlink3.mk"
-.include "../../audio/SDL_mixer/buildlink3.mk"
+.include "../../devel/SDL2/buildlink3.mk"
+.include "../../audio/SDL2_mixer/buildlink3.mk"
 .include "../../devel/libusb1/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

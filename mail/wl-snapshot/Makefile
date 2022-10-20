@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2020/01/18 21:49:55 jperkin Exp $
+# $NetBSD: Makefile,v 1.14 2022/06/05 02:36:41 mef Exp $
 
 DISTNAME=	wl-beta_2.15.9+0.20190919
 PKGNAME=	${EMACS_PKGNAME_PREFIX}${DISTNAME:S/beta_//:S/+0//}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_DEBIAN:=pool/main/w/wl-beta/}
 EXTRACT_SUFX=	.orig.tar.gz
@@ -42,7 +42,7 @@ EMACS_BUILDLINK=	# empty
 .include "../../devel/apel/buildlink3.mk"
 .include "../../devel/semi/buildlink3.mk"
 .include "../../editors/emacs/modules.mk"
-.include "../../misc/bbdb/buildlink3.mk"
+.include "../../misc/bbdb2/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 
 post-install:

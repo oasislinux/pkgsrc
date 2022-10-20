@@ -1,8 +1,8 @@
-$NetBSD: distinfo,v 1.63 2022/01/19 12:59:38 adam Exp $
+$NetBSD: distinfo,v 1.67 2022/10/15 18:26:27 triaxx Exp $
 
-BLAKE2s (rabbitmq-server-3.9.13.tar.xz) = 3fcddfc45bd12b6bcbc32023d35efa74f5c66f2083ad5d0421e9319fcd47f677
-SHA512 (rabbitmq-server-3.9.13.tar.xz) = 1db5af4b13cd2f0ccb48041d2f44d2d4a9706e21c27491d7c5cffdc6bccfb5ab801d5d1fe1c0d784447b233208dc53c4ecbd36779a73ec974c44131fc6b43142
-Size (rabbitmq-server-3.9.13.tar.xz) = 4816788 bytes
-SHA1 (patch-Makefile) = 088a3ed04dc72215f1ca3b34b49bb4047a531e89
-SHA1 (patch-deps_rabbit__common_src_rabbit__env.erl) = 1e8222356162cba7362d22808671777f3fcf1629
-SHA1 (patch-deps_rabbit_scripts_rabbitmq-env) = db168c8ff5a5e7b22186f57947c27c7a1c5ccae6
+BLAKE2s (rabbitmq-server-3.11.1.tar.xz) = 186a70ef033a47b4cf74e8cd4d831b42edb8f284773e939d28a29d0df624fb4b
+SHA512 (rabbitmq-server-3.11.1.tar.xz) = c7e4c4f022fdf415868ed991a87b1f5df33216e4aaa556d5fbd7d6c2f7db848136fef595cb8391ef06d715e5ff2b14ced8f3d3f9abb37ed33a6951969d506c3f
+Size (rabbitmq-server-3.11.1.tar.xz) = 3752780 bytes
+SHA1 (patch-Makefile) = 588638e2aa993fa59ab316a598840384d74a0a32
+SHA1 (patch-deps_rabbit__common_src_rabbit__env.erl) = a717f620387e3c954e2f751c9b8921c93a1826f4
+SHA1 (patch-deps_rabbit_scripts_rabbitmq-env) = 10f56071b2af001ef2fad6bc916f03bd4f299e8b

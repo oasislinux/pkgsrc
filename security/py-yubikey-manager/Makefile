@@ -1,4 +1,4 @@
-#	$NetBSD: Makefile,v 1.5 2022/01/05 15:41:20 wiz Exp $
+#	$NetBSD: Makefile,v 1.7 2022/10/19 14:25:20 nia Exp $
 
 .include "../../security/ykman/version.mk"
 
@@ -15,9 +15,7 @@ HOMEPAGE=	https://developers.yubico.com/yubikey-manager/
 COMMENT=	Yubico YubiKey manager library
 LICENSE=	2-clause-bsd
 
-DEPENDS+=	${PYPKGPREFIX}-OpenSSL>=0:../../security/py-OpenSSL
 DEPENDS+=	${PYPKGPREFIX}-click>=0:../../devel/py-click
-DEPENDS+=	${PYPKGPREFIX}-cryptography>=0:../../security/py-cryptography
 DEPENDS+=	${PYPKGPREFIX}-fido2>=0:../../security/py-fido2
 DEPENDS+=	${PYPKGPREFIX}-scard>=0:../../devel/py-scard
 DEPENDS+=	${PYPKGPREFIX}-six>=0:../../lang/py-six
@@ -33,4 +31,7 @@ post-install:
 
 .include "../../lang/python/egg.mk"
 .include "../../security/ykpers/buildlink3.mk"
+PYTHON_VERSIONED_DEPENDENCIES+=	cryptography
+PYTHON_VERSIONED_DEPENDENCIES+=	OpenSSL
+.include "../../lang/python/versioned_dependencies.mk"
 .include "../../mk/bsd.pkg.mk"

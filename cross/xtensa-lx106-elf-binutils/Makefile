@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2021/05/24 19:49:28 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2022/08/22 15:33:32 tnn Exp $
 
 DISTNAME=	binutils-gdb-xtensa-2.31_20190405
 PKGNAME=	${DISTNAME:C/binutils-gdb-xtensa/xtensa-lx106-elf-binutils/}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	cross
 MASTER_SITES=	${MASTER_SITE_GITHUB:=jcmvbkbc/}
 GITHUB_PROJECT=	binutils-gdb-xtensa
@@ -17,7 +17,7 @@ INFO_FILES=		yes
 GNU_CONFIGURE=		yes
 GNU_CONFIGURE_STRICT=	no # several sub-configures know --enable-nls
 USE_LIBTOOL=		yes
-USE_TOOLS+=		gmake makeinfo perl
+USE_TOOLS+=		gmake makeinfo perl bison
 
 OBJDIR=			../build
 CONFIGURE_DIRS=		${OBJDIR}

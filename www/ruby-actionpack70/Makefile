@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1 2021/12/19 06:01:40 taca Exp $
+# $NetBSD: Makefile,v 1.4 2022/10/10 03:36:51 taca Exp $
 
 DISTNAME=	actionpack-${RAILS_VERSION}
 PKGNAME=	${RUBY_PKGPREFIX}-actionpack${RUBY_RAILS}-${RAILS_VERSION}
@@ -6,7 +6,7 @@ CATEGORIES=	www
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.rubyonrails.org/
-COMMENT=	Toolkit for building modeling frameworks (part of Rails 6.0)
+COMMENT=	Toolkit for building modeling frameworks (part of Rails 7.0)
 LICENSE=	mit
 
 DEPENDS+=	${RUBY_ACTIONVIEW_DEPENDS}

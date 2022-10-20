@@ -1,5 +1,5 @@
 #!/bin/sh
-# $NetBSD: mkreadme,v 1.33 2021/04/05 10:32:38 nia Exp $
+# $NetBSD: mkreadme,v 1.35 2022/07/17 13:37:30 taca Exp $
 #
 # Script for index.html generation
 #
@@ -154,7 +154,7 @@ do
 	shift
 	;;
 
-    # We're generating index.html's for a CD-ROM
+    # We're generating index.html's for an FTP server
     -f|--ftp)
 	ftp_readme=yes
 	shift
@@ -414,7 +414,7 @@ fi
 ######################################################################
 
 echo " "
-echo "Generating package indexx.html files"
+echo "Generating package index.html files"
 echo " "
 if [ "x$DEBUG" = "xyes" ]; then
     debug=1;

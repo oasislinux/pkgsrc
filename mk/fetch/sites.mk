@@ -1,4 +1,4 @@
-# $NetBSD: sites.mk,v 1.177 2021/08/31 11:33:04 markd Exp $
+# $NetBSD: sites.mk,v 1.180 2022/10/02 14:55:29 wiz Exp $
 #
 # This Makefile fragment defines read-only MASTER_SITE_* variables
 # representing some well-known master distribution sites for software.
@@ -20,6 +20,9 @@ MASTER_SITE_GNU+=       \
 
 MASTER_SITE_GITHUB+=    \
 	https://github.com/
+
+MASTER_SITE_GITLAB+=	\
+	https://gitlab.com/
 
 MASTER_SITE_GNUSTEP+=   \
 	ftp://ftp.gnustep.org/pub/gnustep/
@@ -82,7 +85,6 @@ MASTER_SITE_KDE+=	\
 	ftp://www.dnsbalance.ring.gr.jp/pub/X/kde/stable/ \
 	http://www.dnsbalance.ring.gr.jp/archives/X/kde/stable/ \
 	ftp://ftp.gtlib.gatech.edu/pub/kde/stable/ \
-	ftp://kde.mirrors.tds.net/pub/kde/stable/ \
 	ftp://ftp-stud.fht-esslingen.de/pub/Mirrors/ftp.kde.org/pub/kde/stable/ \
 	ftp://mirrors.dotsrc.org/kde/stable/ \
 	ftp://ftp.fi.muni.cz/pub/kde/stable/
@@ -120,7 +122,8 @@ MASTER_SITE_XEMACS+=    \
 # http://www.ibiblio.org/pub/mirrors/apache/ returns 200 for missing
 # files, which is incompatible with resuming transfers.
 MASTER_SITE_APACHE+=    \
-	http://www.apache.org/dist/ \
+	https://downloads.apache.org/ \
+	https://archive.apache.org/dist/ \
 	http://www.eu.apache.org/dist/ \
 	http://apache.oregonstate.edu/ \
 	http://apache.mirrors.tds.net/ \

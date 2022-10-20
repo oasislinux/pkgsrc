@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.166 2021/12/06 22:09:13 pin Exp $
+# $NetBSD: Makefile,v 1.172 2022/09/30 19:42:05 pin Exp $
 #
 
 COMMENT=	X11 window managers, configuration tools, and themes
@@ -30,6 +30,8 @@ SUBDIR+=	dwm
 SUBDIR+=	e16menuedit2
 SUBDIR+=	e16themes
 SUBDIR+=	echinus
+SUBDIR+=	emwm
+SUBDIR+=	emwm-utils
 SUBDIR+=	enlightenment16
 SUBDIR+=	evilwm
 SUBDIR+=	fluxbox
@@ -39,6 +41,7 @@ SUBDIR+=	frankenwm
 SUBDIR+=	fvwm
 SUBDIR+=	fvwm-themes
 SUBDIR+=	fvwm3
+SUBDIR+=	glazier
 SUBDIR+=	golem
 SUBDIR+=	herbstluftwm
 SUBDIR+=	i3
@@ -49,6 +52,7 @@ SUBDIR+=	icewm14
 SUBDIR+=	icewmconf
 SUBDIR+=	jwm
 SUBDIR+=	larswm
+SUBDIR+=	lefthk
 SUBDIR+=	leftwm
 SUBDIR+=	libAppleWM
 SUBDIR+=	lwm
@@ -57,6 +61,7 @@ SUBDIR+=	matchbox-wm
 SUBDIR+=	mate-netbook
 SUBDIR+=	mcwm
 SUBDIR+=	mlvwm
+SUBDIR+=	mmutils
 SUBDIR+=	musca
 SUBDIR+=	mutter
 SUBDIR+=	notion
@@ -105,6 +110,7 @@ SUBDIR+=	wmextra
 SUBDIR+=	wmi
 SUBDIR+=	wmii
 SUBDIR+=	wmutils-core
+SUBDIR+=	wmutils-libwm
 SUBDIR+=	wmutils-opt
 SUBDIR+=	wmx
 SUBDIR+=	wmx-gnome

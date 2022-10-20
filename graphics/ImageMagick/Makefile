@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.300 2021/12/12 09:37:42 wiz Exp $
+# $NetBSD: Makefile,v 1.309 2022/10/19 15:43:19 jperkin Exp $
 
 .include "Makefile.common"
 
@@ -41,6 +41,8 @@ GCC_REQD+=		3.0
 .if ${MACHINE_ARCH} == "mipsel"
 CFLAGS+=		-O
 .endif
+
+LDFLAGS.SunOS+=		-lsendfile
 
 PKG_SYSCONFSUBDIR=	ImageMagick-${IM_MAJOR_LIB_VER}
 EGDIR=			${PREFIX}/share/examples/ImageMagick
@@ -85,6 +87,11 @@ SUBST_SED.fix-pc=	-e 's,@PKG_CONFIG@,pkg-config,g'
 CTF_FILES_SKIP+=	lib/libMagickCore-7.Q16HDRI.so.*
 CTF_FILES_SKIP+=	lib/libMagickWand-7.Q16HDRI.so.*
 
+.include "../../print/ghostscript/buildlink3.mk"
+.if ${PKG_BUILD_OPTIONS.ghostscript:Mghostscript-gpl}
+CFLAGS+=		-DPKGSRC_USE_OLD_GHOSTSCRIPT
+.endif
+
 .include "../../archivers/bzip2/buildlink3.mk"
 .include "../../archivers/xz/buildlink3.mk"
 .include "../../devel/libltdl/buildlink3.mk"
@@ -94,8 +101,6 @@ CTF_FILES_SKIP+=	lib/libMagickWand-7.Q16HDRI.so.*
 .include "../../graphics/lcms2/buildlink3.mk"
 .include "../../graphics/libwebp/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
-.include "../../graphics/tiff/buildlink3.mk"
 .include "../../math/fftw/buildlink3.mk"
-.include "../../print/ghostscript/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

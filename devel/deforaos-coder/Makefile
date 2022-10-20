@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.32 2021/12/08 16:03:55 adam Exp $
+# $NetBSD: Makefile,v 1.34 2022/08/11 05:08:08 gutteridge Exp $
 
 DISTNAME=	Coder-0.3.0
 PKGNAME=	deforaos-coder-0.3.0
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	devel
 MASTER_SITES=	https://ftp.defora.org/pub/DeforaOS/Apps/Desktop/src/Coder/
 
@@ -46,6 +46,7 @@ post-install:
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../databases/deforaos-libdatabase/buildlink3.mk"
 .include "../../devel/deforaos-asm/buildlink3.mk"
+.include "../../devel/deforaos-configure/deforaos-configure.mk"
 .include "../../x11/libXtst/buildlink3.mk"
 .include "../../x11/deforaos-libdesktop/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"

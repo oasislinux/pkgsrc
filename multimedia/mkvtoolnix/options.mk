@@ -1,16 +1,26 @@
-# $NetBSD: options.mk,v 1.4 2021/07/14 07:39:05 adam Exp $
+# $NetBSD: options.mk,v 1.8 2022/10/07 04:29:07 adam Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.mkvtoolnix
-PKG_SUPPORTED_OPTIONS=	gui
+PKG_SUPPORTED_OPTIONS=	doc gui
+PKG_SUGGESTED_OPTIONS=	doc
 
 .include "../../mk/bsd.options.mk"
 
-PLIST_SRC=		${PLIST_SRC_DFLT}
+PLIST_VARS+=	doc gui
 
 .if !empty(PKG_OPTIONS:Mgui)
-PLIST_SRC+=		PLIST.gui
+PLIST.gui=		yes
 CONFIGURE_ARGS+=	--enable-gui
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
+.include "../../x11/qt5-qtsvg/buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--disable-gui
+.endif
+
+.if !empty(PKG_OPTIONS:Mdoc)
+PLIST.doc=		yes
+CONFIGURE_ARGS+=	--with-po4a
+BUILD_DEPENDS+=		po4a-[0-9]*:../../textproc/po4a
+.else
+CONFIGURE_ARGS+=	--without-po4a
 .endif

@@ -1,7 +1,8 @@
-@comment $NetBSD: PLIST,v 1.17 2019/07/03 17:19:00 adam Exp $
+@comment $NetBSD: PLIST,v 1.19 2022/07/12 09:20:40 adam Exp $
 ${PYSITELIB}/${EGG_INFODIR}/PKG-INFO
 ${PYSITELIB}/${EGG_INFODIR}/SOURCES.txt
 ${PYSITELIB}/${EGG_INFODIR}/dependency_links.txt
+${PYSITELIB}/${EGG_INFODIR}/requires.txt
 ${PYSITELIB}/${EGG_INFODIR}/top_level.txt
 ${PYSITELIB}/${EGG_INFODIR}/zip-safe
 ${PYSITELIB}/PIL/BdfFontFile.py
@@ -34,6 +35,9 @@ ${PYSITELIB}/PIL/EpsImagePlugin.pyo
 ${PYSITELIB}/PIL/ExifTags.py
 ${PYSITELIB}/PIL/ExifTags.pyc
 ${PYSITELIB}/PIL/ExifTags.pyo
+${PYSITELIB}/PIL/FitsImagePlugin.py
+${PYSITELIB}/PIL/FitsImagePlugin.pyc
+${PYSITELIB}/PIL/FitsImagePlugin.pyo
 ${PYSITELIB}/PIL/FitsStubImagePlugin.py
 ${PYSITELIB}/PIL/FitsStubImagePlugin.pyc
 ${PYSITELIB}/PIL/FitsStubImagePlugin.pyo
@@ -268,6 +272,9 @@ ${PYSITELIB}/PIL/__main__.pyo
 ${PYSITELIB}/PIL/_binary.py
 ${PYSITELIB}/PIL/_binary.pyc
 ${PYSITELIB}/PIL/_binary.pyo
+${PYSITELIB}/PIL/_deprecate.py
+${PYSITELIB}/PIL/_deprecate.pyc
+${PYSITELIB}/PIL/_deprecate.pyo
 ${PYSITELIB}/PIL/_imaging.so
 ${PYSITELIB}/PIL/_imagingcms.so
 ${PYSITELIB}/PIL/_imagingft.so

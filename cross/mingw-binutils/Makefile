@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.11 2021/09/26 02:33:14 mef Exp $
+# $NetBSD: Makefile,v 1.13 2022/05/15 11:26:44 tnn Exp $
 
-DISTNAME=	binutils-2.18
-PKGNAME=	mingw-${DISTNAME:S/-src//}
-PKGREVISION=	2
+DISTNAME=	binutils-2.18a
+PKGNAME=	mingw-binutils-2.18
+PKGREVISION=	3
 CATEGORIES=	cross
 MASTER_SITES=	${MASTER_SITE_GNU:=binutils/}
 EXTRACT_SUFX=	.tar.bz2
@@ -26,6 +26,8 @@ SUBST_MESSAGE.bash=	Replace $(SHELL) to bash
 SUBST_SED.bash=		-e s,@@BASH@@,${PREFIX}/bin/bash,
 
 INSTALLATION_DIRS+=	cross/bin
+
+WRKSRC=		${WRKDIR}/binutils-2.18
 
 post-install:
 .for f in windres dllwrap

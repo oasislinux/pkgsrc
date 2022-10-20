@@ -1,10 +1,10 @@
-$NetBSD: patch-configure,v 1.5 2020/04/01 08:24:07 adam Exp $
+$NetBSD: patch-configure,v 1.7 2022/09/28 13:25:57 adam Exp $
 
 Fix linking on Darwin.
 
---- configure.orig	2020-03-19 15:24:05.000000000 +0000
+--- configure.orig	2022-09-27 12:46:24.000000000 +0000
 +++ configure
-@@ -9698,7 +9698,6 @@ $as_echo "#define _UNICODE 1" >>confdefs
+@@ -11379,7 +11379,6 @@ $as_echo "#define DYN_NCRYPT 1" >>confde
    *darwin*)
      have_macosx=yes
      save_LDFLAGS="$LDFLAGS"

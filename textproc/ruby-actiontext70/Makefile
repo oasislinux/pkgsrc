@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1 2021/12/19 06:21:17 taca Exp $
+# $NetBSD: Makefile,v 1.4 2022/10/10 03:36:50 taca Exp $
 
 DISTNAME=	actiontext-${RAILS_VERSION}
 PKGNAME=	${RUBY_PKGPREFIX}-actiontext${RUBY_RAILS}-${RAILS_VERSION}
@@ -6,7 +6,7 @@ CATEGORIES=	textproc devel
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.rubyonrails.org/
-COMMENT=	Rich text framework (for Rails 6.0)
+COMMENT=	Rich text framework (for Rails 7.0)
 LICENSE=	mit
 
 DEPENDS+=	${RUBY_ACTIVESTORAGE_DEPENDS}

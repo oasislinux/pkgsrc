@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.10 2021/10/26 11:14:24 nia Exp $
+$NetBSD: distinfo,v 1.13 2022/09/01 04:59:09 markd Exp $
 
-BLAKE2s (polyglossia.doc.r58869.tar.xz) = 79a738dcad5cf1e7ae156c0657524280c927ae295b910545d65154f4e8b87dbd
-SHA512 (polyglossia.doc.r58869.tar.xz) = 64147a6df9eb9f12f0c74792f3b7e0d9c465354a3966d7b1279aa64432021d37d1bbbfc2a310c1a27fef92723ba5803bdcb25995ce930e134553383c3b766904
-Size (polyglossia.doc.r58869.tar.xz) = 641576 bytes
+BLAKE2s (polyglossia.doc.r63931.tar.xz) = 8edc5dc7571166affa5576ce6e4a06a9f1dc437d2668e82207e56dc9fde1b47c
+SHA512 (polyglossia.doc.r63931.tar.xz) = 8407fb667abc29e1b9b2aabe6add71280a3b82a377d423f537d6f4c987b466fe55d473719b8bb0a219c51256bdc1cc9e86b56a125a8930826b56efc9565dbd51
+Size (polyglossia.doc.r63931.tar.xz) = 656908 bytes

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2020/08/17 20:20:01 leot Exp $
+# $NetBSD: Makefile,v 1.16 2022/10/15 02:45:01 rin Exp $
 
 DISTNAME=	eltclsh-1.9
 PKGREVISION=	7

@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.20 2021/05/24 19:52:56 wiz Exp $
+# $NetBSD: Makefile,v 1.23 2022/06/28 11:34:37 wiz Exp $
 #
 
-VERSION=	1.7
+VERSION=	1.12
 GITHUB_PROJECT=	Zarith
 GITHUB_TAG=	release-${VERSION}
 DISTNAME=	${GITHUB_PROJECT}-${VERSION}
 PKGNAME=	ocaml-${DISTNAME:tl}
-PKGREVISION=	4
+PKGREVISION=	1
 CATEGORIES=	math
 MASTER_SITES=	${MASTER_SITE_GITHUB:=ocaml/}
 
@@ -28,5 +28,5 @@ OCAML_USE_FINDLIB=	yes
 REPLACE_PERL+=	z_pp.pl
 
 .include "../../devel/gmp/buildlink3.mk"
-.include "../../mk/ocaml.mk"
+.include "../../lang/ocaml/ocaml.mk"
 .include "../../mk/bsd.pkg.mk"

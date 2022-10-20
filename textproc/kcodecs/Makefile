@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.49 2021/12/08 16:02:42 adam Exp $
+# $NetBSD: Makefile,v 1.55 2022/09/29 01:18:44 markd Exp $
 
 DISTNAME=	kcodecs-${KF5VER}
-PKGREVISION=	4
 CATEGORIES=	textproc
 
 HOMEPAGE=	https://community.kde.org/Frameworks

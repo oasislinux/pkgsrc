@@ -1,11 +1,11 @@
-# $NetBSD: tools.NetBSD.mk,v 1.68 2021/10/22 19:00:06 jperkin Exp $
+# $NetBSD: tools.NetBSD.mk,v 1.72 2022/05/24 13:08:26 nia Exp $
 #
 # System-supplied tools for the NetBSD operating system.
 
 TOOLS_PLATFORM.[?=		[			# shell builtin
 TOOLS_PLATFORM.awk?=		/usr/bin/awk
 TOOLS_PLATFORM.basename?=	/usr/bin/basename
-.if empty(MACHINE_PLATFORM:MNetBSD-[0-8].*) || !empty(MKBSDTAR:U:Myes)
+.if ${OPSYS_VERSION} >= 090000 || !empty(MKBSDTAR:U:Myes)
 TOOLS_PLATFORM.bsdtar?=		/bin/tar
 .endif
 TOOLS_PLATFORM.byacc?=		/usr/bin/yacc
@@ -58,7 +58,7 @@ TOOLS_PLATFORM.head?=		/usr/bin/head
 TOOLS_PLATFORM.hostname?=	/bin/hostname
 TOOLS_PLATFORM.id?=		/usr/bin/id
 TOOLS_PLATFORM.ident?=		/usr/bin/ident
-.if empty(USE_CROSS_COMPILE:M[yY][eE][sS])
+.if empty(TOOLS_USE_CROSS_COMPILE:M[yY][eE][sS])
 TOOLS_PLATFORM.install?=	/usr/bin/install
 .else
 TOOLS_PLATFORM.install?=	${TOOLDIR}/bin/${MACHINE_GNU_PLATFORM}-install
@@ -101,7 +101,7 @@ TOOLS_PLATFORM.paxctl?=		/usr/sbin/paxctl
 .endif
 TOOLS_PLATFORM.printf?=		/usr/bin/printf
 TOOLS_PLATFORM.pwd?=		/bin/pwd
-.if empty(USE_CROSS_COMPILE:M[yY][eE][sS])
+.if empty(TOOLS_USE_CROSS_COMPILE:M[yY][eE][sS])
 TOOLS_PLATFORM.readelf?=	/usr/bin/readelf
 .else
 TOOLS_PLATFORM.readelf?=	${TOOLDIR}/bin/${MACHINE_GNU_PLATFORM}-readelf
@@ -119,7 +119,7 @@ TOOLS_PLATFORM.shlock?=		/usr/bin/shlock
 TOOLS_PLATFORM.sleep?=		/bin/sleep
 TOOLS_PLATFORM.soelim?=		/usr/bin/soelim
 TOOLS_PLATFORM.sort?=		/usr/bin/sort
-.if empty(USE_CROSS_COMPILE:M[yY][eE][sS])
+.if empty(TOOLS_USE_CROSS_COMPILE:M[yY][eE][sS])
 TOOLS_PLATFORM.strip?=		/usr/bin/strip
 .else
 TOOLS_PLATFORM.strip?=		${TOOLDIR}/bin/${MACHINE_GNU_PLATFORM}-strip
@@ -155,7 +155,7 @@ TOOLS_PLATFORM.xzcat?=		/usr/bin/xzcat
 .endif
 TOOLS_PLATFORM.yacc?=		/usr/bin/yacc
 
-.if !empty(USE_CROSS_COMPILE:M[yY][eE][sS])
+.if !empty(TOOLS_USE_CROSS_COMPILE:M[yY][eE][sS])
 .  for _t_ in ar as ld nm objcopy objdump ranlib readelf strip
 TOOLS_PATH.${MACHINE_GNU_PLATFORM}-${_t_}?=	\
 	${TOOLDIR}/bin/${MACHINE_GNU_PLATFORM}-${_t_}
@@ -166,6 +166,8 @@ TOOLS_PATH.ar?=		${TOOLDIR}/bin/${MACHINE_GNU_PLATFORM}-ar
 TOOLS_CREATE+=			ar
 TOOLS_PATH.ranlib?=		${TOOLDIR}/bin/${MACHINE_GNU_PLATFORM}-ranlib
 TOOLS_CREATE+=			ranlib
+TOOLS_PATH.readelf?=		${TOOLDIR}/bin/${MACHINE_GNU_PLATFORM}-readelf
+TOOLS_CREATE+=			readelf
 
 NATIVE_CC:=	/usr/bin/cc -B /usr/libexec -B /usr/bin
 CC=		${TOOLDIR}/bin/${MACHINE_GNU_PLATFORM}-gcc
@@ -175,5 +177,8 @@ CXX=		${TOOLDIR}/bin/${MACHINE_GNU_PLATFORM}-g++
 
 NATIVE_LD:=	/usr/bin/ld
 LD=		${TOOLDIR}/bin/${MACHINE_GNU_PLATFORM}-ld
+
+NATIVE_AR:=	/usr/bin/ar
+NATIVE_RANLIB:=	/usr/bin/ranlib
 
 .endif

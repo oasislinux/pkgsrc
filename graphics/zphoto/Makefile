@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.83 2021/12/08 16:05:08 adam Exp $
+# $NetBSD: Makefile,v 1.86 2022/07/29 06:01:21 rin Exp $
 
 DISTNAME=	zphoto-1.2
-PKGREVISION=	73
+PKGREVISION=	76
 CATEGORIES=	graphics
 MASTER_SITES=	http://0xcc.net/zphoto/
 
@@ -14,7 +14,7 @@ LICENSE=	gnu-lgpl-v2.1
 
 USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=		yes
-USE_TOOLS+=		gmake perl
+USE_TOOLS+=		gmake perl pkg-config
 USE_LANGUAGES=		c c++
 
 CONFIGURE_ARGS+=	--with-libiconv-prefix=${BUILDLINK_PREFIX.libiconv}

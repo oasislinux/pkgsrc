@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.49 2021/12/08 16:04:40 adam Exp $
+# $NetBSD: Makefile,v 1.51 2022/08/09 12:08:36 jperkin Exp $
 
 DISTNAME=	quarry-0.2.0
-PKGREVISION=	39
+PKGREVISION=	40
 CATEGORIES=	games
 #MASTER_SITES=	http://download.gna.org/quarry/
 
@@ -12,8 +12,6 @@ COMMENT=	Multi-purpose GUI for several board games
 GNU_CONFIGURE=		yes
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake pkg-config
-
-LDFLAGS.SunOS+=	-liconv
 
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../databases/shared-mime-info/mimedb.mk"

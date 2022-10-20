@@ -80,7 +80,6 @@ bugzilla-xmlimportbugs	Bulk import/export of bugs in XML format.
 bzip2			Enable compression using bzip2.
 caca			Enable libcaca support.
 cairo			Enable cairo support.
-camlp4			Enable camlp4 support.
 camlzip			Enable camlzip support (for zip/gz/jar).
 canlock			Enable Cancel-Lock support.
 canna			Use Canna as Japanese conversion program.
@@ -186,6 +185,7 @@ elinks-exmode		Enable vi-like command entry.
 elinks-fastmem		Allow direct use of system memory allocation functions.
 elinks-html-highlight	Enable HTML highlighting using DOM engine.
 elinks-root-exec	Allow elinks to run as root.
+emacs			Build included Emacs files.
 emacs-w3m		W3m browser extention.
 embedded-server		Enable embedded server support for MySQL.
 enchant			Add spell checking support using enchant.
@@ -241,6 +241,7 @@ fontconfig		Enable FONTCONFIG (fonts/fontconfig) support.
 fortran			Support programs written in Fortran.
 fossil-system-sqlite	Use pkgsrc sqlite for fossil instead of built-in.
 fossil-th1-hooks	Add support for TH1 scripts in fossil.
+fpx			Enable Flashpix support.
 freediameter-all-extensions	Build all extensions for freeDiameter (except test and debug).
 freeradius-simul-use	Enable Simultaneous-Use.
 freeswitch-08k		8000Hz Audio Files
@@ -291,6 +292,7 @@ gnome			Enable GNOME support.
 gnome-keyring		Enable GNOME keyring support.
 gnomecanvas		Enable GNOME canvas support
 gnomevfs		Enable GNOME Virtual File System support.
+gnucash-finance-quote	Install p5-Finance-Quote for stock quote fetching support.
 gnupg1			Use GNU Privacy Guard (GnuPG) Version 1.x
 gnupg2			Use GNU Privacy Guard (GnuPG) Version 2.0
 gnuplot			Enable gnuplot support.
@@ -369,7 +371,6 @@ inspircd-sqllog		Enable logging of network-wide data for your network into a dat
 inspircd-sqloper	Enable storage of oper credentials in an SQL table.
 inspircd-sqlutils	Enable developer utilities which allow certain other SQL modules to be implemented easily.
 inspircd-ziplinks	Compress data before transmitting it between servers.
-introspection		Enable GObject Introspection support.
 iodbc			Enable ODBC support via iODBC.
 ipa			Select IPA fonts.
 ipa-memfunc-debug	Enable ipa_memfunc debugging.
@@ -384,6 +385,7 @@ iso			Build a .iso file.
 ispell			Add spell checking support using ispell.
 jabber			Enable support for jabber/gtalk.
 jack			Enable support for the JACK audio server.
+jansson			Enable JSON support using the jansson library.
 jasper			Enable JPEG 2000 support using the jasper library.
 java			Enable Java support.
 javascript		Enable Javascript support.
@@ -498,6 +500,7 @@ libsmi			Use libsmi for SMI MIB support.
 libsoup			Use libsoup for SOUP support.
 libsoxr			Enable libsoxr (resample) support.
 libspiff		Use libspiff for XML shareable playlist support.
+libssh			Use libssh for SSHv2 protocol support.
 libssh2			Use libssh2 for SSHv2 protocol support.
 libthai			Use libthai for Thai word segmentation.
 libusb			Enable USB access.
@@ -508,6 +511,7 @@ libwebp			Enable libwebp support.
 libwildmidi		Enable MIDI support using libwildmidi.
 libwww-aliases		Install aliases for p5-libwww (e.g. HEAD, GET etc.).
 libxml2			Use the libxml2 library for XML support.
+lighttpd		Enable support for lighttpd web server.
 lilypond		Enable LilyPond music typesetter support.
 links			Use and enable support for the links browser.
 lirc			Enable LIRC receiving and sending IR signals support.
@@ -519,6 +523,7 @@ llvm-target-arm		Support code generation for ARM CPUs.
 llvm-target-mips	Support code generation for MIPS CPUs.
 llvm-target-powerpc	Support code generation for PowerPC CPUs.
 llvm-target-sparc	Support code generation for SPARC CPUs.
+llvm-target-webassembly	Support code generation for WebAssembly virtual machine.
 lmdb			Enable lmdb support.
 lprng-priv-ports	Connections must be made from privileged ports.
 lprng-suid		Install LPRng executables setuid root.
@@ -654,6 +659,7 @@ opendkim-filter		Build opendkim-filter support.
 openexr			Use OpenEXR as imaging library.
 opengl			Use OpenGL as display library.
 opengrok-build		Enable building of OpenGrok from source.
+openipmi		Enable OpenIPMI support.
 openldap		Enable OpenLDAP support.
 openmp	Enable OpenMP multithreading.
 openmpi-vampirtrace	Build VampirTrace as part of OpenMPI.
@@ -744,9 +750,10 @@ rtmp			Enable rtmp:// support using rtmpdump.
 rtree			Enable R-tree support.
 ruby			Enable Ruby support.
 ruby-build-ri-db	Build and install database for Ruby's ri utility.
+ruby-unicorn		Enable unicorn support.
 rust			Enable Rust support.
 rust-cargo-static	Build cargo semi-statically with built-in curl+openssl
-rust-llvm		Use Rust internal LLVM in builds.
+rust-internal-llvm	Use Rust internal LLVM in builds.
 samba			Enable Samba file and print services support.
 samplerate		Enable libsamplerate support.
 sane			Enable support for SANE scanners.
@@ -769,6 +776,7 @@ sendmail-milter		Build the milter with support for the Sendmail MTA.
 sendmail-socketmap	Enable Sendmail SOCKETMAP support.
 serf			Use serf HTTP/WebDAV client library.
 serialconsole		Enable use of serial console.
+sge			Support for Sun Grid Engine batch scheduler
 shine			Enable shine (non-FPU mp3) support.
 shout			Enable SHOUTcast support.
 sidplay			Enable support for the SID audio file format.
@@ -784,6 +792,7 @@ skk			Use SKK for Kana-to-Kanji conversion.
 skkdic-expr2		Enable fast skkdic-expr tool.
 slang			Enable S-Lang support.
 slp			Enable Service Location Protocol support.
+slurm			Support Slurm batch scheduler.
 small-net		Tune for a smaller networks.
 smime			Enable S/MIME support.
 smokeping-speedycgi	Enable SpeedyCGI.
@@ -809,6 +818,8 @@ speex			Enable speex support.
 spf			Enable Sender Policy Framework support.
 sphinx			Enable Sphinx full-text search.
 spice			Enable Spice-Space support.
+spotify-player-album-image	Displays album art on spotify-player.
+spotify-player-lyric-finder	Lyric finder library for spotify-player.
 sqlite			Enable SQLite support.
 sqlite3			Enable SQLite3 support.
 squid-arp-acl		Enable use of ARP ACL lists (ether address).
@@ -849,6 +860,7 @@ subversion-plaintext-storage	Enable cleartest password storage.
 suexec			Enable suEXEC support in Apache web server.
 suhosin			Enable suhosin security enhancements for PHP.
 sun-jre-jce		Use unlimited strength cryptography extension.
+sunaudio		Enable Sun audio support.
 svg			Enable SVG support.
 svn			Enable subversion support.
 sybase			Enable Sybase/MS SQL Server support.
@@ -967,6 +979,7 @@ xlsx			Enable XLSX support.
 xml			Enable XML support.
 xmlrpc			Enable XMLRPC support.
 xpm			Enable X PixMap image format support.
+xps			Enable XPS support.
 xrandr			Enable Xrandr support.
 xrender			Enable Xrender support.
 xscreensaver-webcollage	Install webcollage screensaver.
@@ -978,6 +991,7 @@ xterm-toolbar		Enable toolbar support in xterm.
 xtest			Use XTEST Extension Library.
 xvid			Enable usage of XVid codecs.
 xvideo			Enable X-Video Motion Compensation library support.
+z3			Enable support for the Z3 theorem prover.
 zenmap			Enable nmap GUI frontend.
 zip			Support zip archives.
 ziplinks		Compress data before transmitting it between servers.

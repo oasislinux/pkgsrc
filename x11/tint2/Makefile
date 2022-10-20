@@ -1,10 +1,12 @@
-# $NetBSD: Makefile,v 1.59 2021/12/08 16:07:14 adam Exp $
+# $NetBSD: Makefile,v 1.64 2022/08/11 05:09:33 gutteridge Exp $
 
-DISTNAME=		tint2-v17.0.1
+DISTNAME=		tint2-v17.0.2
 PKGNAME=		${DISTNAME:S/-v/-/}
-PKGREVISION=		1
+PKGREVISION=		2
 CATEGORIES=		x11
-MASTER_SITES=		https://gitlab.com/o9000/tint2/-/archive/v${PKGVERSION_NOREV}/
+MASTER_SITES=		${MASTER_SITE_GITLAB:=o9000/}
+GITLAB_PROJECT=		tint2
+GITLAB_RELEASE=		v${PKGVERSION_NOREV}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		fernandotcl@gmail.com
@@ -24,6 +26,9 @@ CONF_FILES=		${PREFIX}/share/examples/tint2/tint2rc \
 
 CMAKE_ARGS.Linux=	-DENABLE_BATTERY=ON
 CMAKE_ARGS.*=		-DENABLE_BATTERY=OFF
+
+CFLAGS.SunOS+=		-D_XOPEN_SOURCE=600 -D__EXTENSIONS__
+CFLAGS.SunOS+=		-Du_int8_t=uint8_t -Du_int32_t=uint32_t -Du_int64_t=uint64_t
 
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/themes/tint2rc \

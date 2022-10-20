@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.3 2021/09/18 03:53:43 mef Exp $
+# $NetBSD: Makefile,v 1.5 2022/08/31 18:41:07 brook Exp $
 
 R_PKGNAME=	nimble
-R_PKGVER=	0.11.1
+R_PKGVER=	0.12.2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	MCMC, Particle Filtering, and Programmable Hierarchical Modeling
@@ -14,6 +14,7 @@ DEPENDS+=	R-igraph>=1.2.4.1:../../math/R-igraph
 TEST_DEPENDS+=	R-testthat-[0-9]*:../../devel/R-testthat
 
 USE_LANGUAGES=	c++ fortran
+USE_TOOLS+=	gmake
 
 EIGEN_FILES+=	PardisoSupport
 EIGEN_FILES+=	src/Core/Assign_MKL.h

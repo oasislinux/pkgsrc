@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.11 2021/10/26 11:13:05 nia Exp $
+$NetBSD: distinfo,v 1.13 2022/09/01 10:26:59 markd Exp $
 
-BLAKE2s (cweb.doc.r57972.tar.xz) = 0e3cbf49e8c76208fd18262d631d167245af4bbf2620d85264cbd226ab5be630
-SHA512 (cweb.doc.r57972.tar.xz) = e2b13d368b1c338e487c9ac770a8f0da5ea5a58880774b8b6b5a53047a2485d1cc98682808ab1161b308f7480f5a1fcbfd2c45ac39646a3aca8ae92d17db9f92
-Size (cweb.doc.r57972.tar.xz) = 389396 bytes
+BLAKE2s (cweb.doc.r63787.tar.xz) = 014249dd89ee856675d79b8be7e66730b28d6f1c851bb3078e2a998aa7cbdbc7
+SHA512 (cweb.doc.r63787.tar.xz) = 5f93f097784efb55c9746fbdcf1b047df329a49dbe5805543787e00b2d011a4ac546f612f5dc51c154101f7474b67f23b4a105239d52bf129b6fcf37540a75fd
+Size (cweb.doc.r63787.tar.xz) = 76428 bytes

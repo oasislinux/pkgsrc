@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.49 2021/05/24 19:53:21 wiz Exp $
+# $NetBSD: Makefile,v 1.52 2022/08/26 10:27:14 wiz Exp $
 
 DISTNAME=		netdisco-1.3.3_with_mibs
 PKGNAME=		${DISTNAME:S/_with_mibs//}
-PKGREVISION=		6
+PKGREVISION=		9
 CATEGORIES=		net
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=netdisco/}
-SITES.oui.txt=		http://standards.ieee.org/regauth/oui/
-DISTFILES=		${DEFAULT_DISTFILES} oui.txt
+OUI_TXT=		oui-20220822.txt
+#SITES.${OUI_TXT}=	-https://standards-oui.ieee.org/oui/oui.txt
+DISTFILES=		${DEFAULT_DISTFILES} ${OUI_TXT}
 
 MAINTAINER=		bouyer@NetBSD.org
 HOMEPAGE=		http://www.netdisco.org/
@@ -139,15 +140,15 @@ do-build:
 	done
 	cd ${WRKSRC:Q} && \
 	${FIND} . \( -name '*.orig' -o -name '*.bak' \) -print | ${XARGS} ${RM} -f
-	${CP} ${DISTDIR}/oui.txt ${WRKSRC:Q}
+	${CP} ${DISTDIR}/${OUI_TXT} ${WRKSRC:Q}
 
 do-install:
-	${RM} -f ${WRKSRC:Q}/bin/netdisco_daemon
 	cd ${WRKSRC:Q} && pax -rw -pp . ${DESTDIR}${PREFIX:Q}/netdisco
 	set -e; \
 	for i in netdisco.conf netdisco-topology.txt netdisco.crontab \
 	    netdisco_apache.conf netdisco_apache_dir.conf; do \
 		${MV} ${DESTDIR}${PREFIX:Q}/netdisco/"$$i" ${DESTDIR}${EGDIR:Q}/ ;\
 	done
+	${RM} -f ${DESTDIR}${PREFIX:Q}/netdisco/bin/netdisco_daemon
 
 .include "../../mk/bsd.pkg.mk"

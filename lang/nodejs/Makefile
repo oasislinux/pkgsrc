@@ -1,9 +1,11 @@
-# $NetBSD: Makefile,v 1.224 2022/01/11 08:02:04 adam Exp $
+# $NetBSD: Makefile,v 1.243 2022/10/17 11:03:07 adam Exp $
 
-DISTNAME=	node-v14.18.3
+DISTNAME=	node-v18.11.0
 EXTRACT_SUFX=	.tar.xz
 
-USE_LANGUAGES=	c gnu++14
+USE_LANGUAGES=	c gnu++17
+
+BUILD_DEPENDS+=	${PYPKGPREFIX}-expat>=0:../../textproc/py-expat
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -13,9 +15,12 @@ MAKE_ENV+=	LD_LIBRARY_PATH=${PREFIX}/lib
 CONFIGURE_ARGS+=	--shared-brotli
 CONFIGURE_ARGS+=	--shared-nghttp2
 CONFIGURE_ARGS+=	--with-intl=system-icu
+CONFIGURE_ARGS+=	--without-corepack
 
-PYTHON_VERSIONS_ACCEPTED=	27
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
+CHECK_PORTABILITY_SKIP+=	deps/v8/tools/cppgc/export_to_github.sh
+CHECK_PORTABILITY_SKIP+=	deps/v8/tools/cppgc/test_cmake.sh
 CHECK_PORTABILITY_SKIP+=	tools/macos-installer/pkgbuild/npm/scripts/preinstall
 
 .if ${MACHINE_ARCH} == "i386"
@@ -26,9 +31,9 @@ CXXFLAGS+=	-mstackrealign
 .include "options.mk"
 
 # Node turns on -latomic for arm, mips and ppc.
-.if !empty(MACHINE_ARCH:M*arm*) || \
-    !empty(MACHINE_ARCH:M*powerpc*) || \
-    !empty(MACHINE_ARCH:M*mips*)
+.if ${MACHINE_ARCH:M*arm*} || \
+    ${MACHINE_ARCH:M*powerpc*} || \
+    ${MACHINE_ARCH:M*mips*}
 .include "../../devel/libatomic/buildlink3.mk"
 .endif
 

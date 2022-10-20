@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.257 2022/01/10 01:46:22 ryoon Exp $
+# $NetBSD: Makefile,v 1.278 2022/10/17 07:45:13 triaxx Exp $
 
-DISTNAME=	mpd-0.23.5
+DISTNAME=	mpd-0.23.10
 PKGNAME=	${DISTNAME:S/mpd/musicpd/}
-PKGREVISION=	1
 CATEGORIES=	audio
 MASTER_SITES=	https://www.musicpd.org/download/mpd/${PKGVERSION_NOREV:R}/
 EXTRACT_SUFX=	.tar.xz
@@ -11,6 +10,8 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.musicpd.org/
 COMMENT=	Remote controllable audio player
 LICENSE=	gnu-gpl-v2
+
+TOOL_DEPENDS+=	${PYPKGPREFIX}-sphinx-[0-9]*:../../textproc/py-sphinx
 
 CONFLICTS=	mpd-[0-9]*
 
@@ -22,8 +23,7 @@ USE_LANGUAGES=	c c++
 #
 # Please be cautious of raising this requirement - mpd seems to adopt new C++
 # standards quickly. Notably, gcc8 from pkgsrc doesn't have support for
-# NetBSD/earmv7hf. gcc10 should, but fails for other reasons (TODO:
-# investigate).
+# NetBSD/earmv7hf.
 GCC_REQD+=	7
 
 MESON_ARGS+=	-Ddocumentation=enabled
@@ -72,6 +72,7 @@ EGDIR=		${PREFIX}/share/examples/mpd
 CONF_FILES+=	${EGDIR}/mpd.conf ${PKG_SYSCONFDIR}/mpd.conf
 CONF_FILES+=	${EGDIR}/logrotate.d/mpd ${PKG_SYSCONFDIR}/logrotate.d/mpd
 RCD_SCRIPTS=	mpd
+MAKE_DIRS+=	${PKG_SYSCONFDIR}/logrotate.d
 
 FILES_SUBST+=	MPD_USER=${MPD_USER:Q}
 FILES_SUBST+=	MPD_GROUP=${MPD_GROUP:Q}
@@ -88,6 +89,7 @@ OWN_DIRS_PERMS+=	${VARBASE}/lib/mpd/music \
 OWN_DIRS_PERMS+=	${VARBASE}/lib/mpd/playlists \
 			${MPD_USER} ${MPD_GROUP} 0755
 
+LDFLAGS.SunOS+=		-lnsl -lsocket
 CPPFLAGS.SunOS+=	-std=gnu99 -D_XOPEN_SOURCE=600 -D__EXTENSIONS__
 
 .include "options.mk"
@@ -105,11 +107,22 @@ SUBST_FILES.sphinx=	doc/meson.build
 SUBST_MESSAGE.sphinx=	Fixing sphinx binary name.
 SUBST_SED.sphinx+=	-e "s,sphinx-build,sphinx-build-${PYVERSSUFFIX},"
 
+SUBST_CLASSES+=		doc
+SUBST_STAGE.doc=	pre-configure
+SUBST_FILES.doc=	doc/mpd.conf.5.rst
+SUBST_MESSAGE.doc=	Fixing sysconfdir path in mpd.conf location.
+SUBST_VARS.doc+=	PKG_SYSCONFDIR
+
+SUBST_CLASSES+=		sidplay
+SUBST_STAGE.sidplay=	pre-configure
+SUBST_FILES.sidplay=	src/decoder/plugins/meson.build
+SUBST_MESSAGE.sidplay=	Add directory of sidplay2 to search resid-buidler library in.
+SUBST_VARS.sidplay+=	PREFIX
+
 INSTALLATION_DIRS=	${EGDIR} ${EGDIR}/logrotate.d
 
-PYTHON_FOR_BUILD_ONLY=	tool
-
-PYTHON_VERSIONED_DEPENDENCIES=	sphinx:tool
+PYTHON_FOR_BUILD_ONLY=		tool
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 post-extract:
 	${CP} ${FILESDIR}/mpd.conf ${WRKSRC}/mpd.conf
@@ -119,6 +132,7 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/doc/mpdconf.example ${DESTDIR}${EGDIR}
 	${INSTALL_DATA} ${FILESDIR}/mpd.logrotate ${DESTDIR}${EGDIR}/logrotate.d/mpd
 
+.include "../../lang/python/pyversion.mk"
 .include "../../devel/meson/build.mk"
 BUILDLINK_API_DEPENDS.flac+=	flac>=1.2
 .include "../../audio/flac/buildlink3.mk"
@@ -131,7 +145,6 @@ BUILDLINK_API_DEPENDS.flac+=	flac>=1.2
 .include "../../devel/pcre2/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
-.include "../../lang/python/versioned_dependencies.mk"
 .include "../../security/libgcrypt/buildlink3.mk"
 .include "../../textproc/expat/buildlink3.mk"
 .include "../../textproc/fmtlib/buildlink3.mk"

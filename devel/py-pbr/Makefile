@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.35 2022/01/27 11:23:16 wiz Exp $
+# $NetBSD: Makefile,v 1.37 2022/04/29 23:22:31 wiz Exp $
 
-DISTNAME=	pbr-5.8.0
+DISTNAME=	pbr-5.8.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	2
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_PYPI:=p/pbr/}
 
@@ -24,8 +23,10 @@ TEST_DEPENDS+=	${PYPKGPREFIX}-sphinx-[0-9]*:../../textproc/py-sphinx
 TEST_DEPENDS+=	${PYPKGPREFIX}-wheel>=0.32.0:../../devel/py-wheel
 # not packaged: hacking, stestr
 
+PYTHON_VERSIONS_INCOMPATIBLE=	27
+
 # circular dependency - testtools depends on pbr
-#PYTHON_VERSIONED_DEPENDENCIES+=	testtools:test
+#TEST_DEPENDS+=	${PYPKGPREFIX}-testtools-[0-9]*:../../devel/py-testtools
 
 REPLACE_PYTHON+=	pbr/tests/testpackage/setup.py
 
@@ -37,5 +38,4 @@ post-install:
 
 .include "../../lang/python/application.mk"
 .include "../../lang/python/egg.mk"
-.include "../../lang/python/versioned_dependencies.mk"
 .include "../../mk/bsd.pkg.mk"

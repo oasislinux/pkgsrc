@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.17 2021/06/07 01:04:08 markd Exp $
+# $NetBSD: Makefile,v 1.19 2022/08/22 11:37:22 markd Exp $
 
 DISTNAME=	collection-latexrecommended
-PKGNAME=	texlive-${DISTNAME}-2021
+PKGNAME=	texlive-${DISTNAME}-2022
 CATEGORIES=	meta-pkgs
 MASTER_SITES=	# empty
-TEXLIVE_REV=	57862
+TEXLIVE_REV=	63547
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.tug.org/texlive/

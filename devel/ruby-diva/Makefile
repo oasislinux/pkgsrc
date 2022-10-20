@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.11 2022/01/08 15:13:46 tsutsui Exp $
+# $NetBSD: Makefile,v 1.13 2022/10/10 03:36:48 taca Exp $
 
 DISTNAME=	diva-2.0.1
 PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME}

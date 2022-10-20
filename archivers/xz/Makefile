@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.29 2020/05/03 10:10:43 adam Exp $
+# $NetBSD: Makefile,v 1.32 2022/10/13 16:35:10 adam Exp $
 
-DISTNAME=	xz-5.2.5
+DISTNAME=	xz-5.2.7
 CATEGORIES=	archivers
 MASTER_SITES=	https://tukaani.org/xz/
 EXTRACT_SUFX=	.tar.bz2
@@ -13,7 +13,6 @@ LICENSE=	public-domain AND gnu-gpl-v2
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 PKGCONFIG_OVERRIDE=	src/liblzma/liblzma.pc.in
-
 TEST_TARGET=		check
 
 CONFLICTS=	lzma-[0-9]* lzma-utils-[0-9]* lzmalib-[0-9]*

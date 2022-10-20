@@ -1,17 +1,19 @@
-# $NetBSD: Makefile,v 1.8 2021/12/22 16:00:06 schmonz Exp $
+# $NetBSD: Makefile,v 1.12 2022/08/17 12:15:40 tnn Exp $
 
-DISTNAME=	execline-2.8.2.0
+DISTNAME=	execline-2.8.3.0
 CATEGORIES=	lang shells
 MASTER_SITES=	${HOMEPAGE}
-DISTFILES=	${DISTNAME}${EXTRACT_SUFX} ${MANPAGES}
+DISTFILES=	${DISTNAME}${EXTRACT_SUFX} ${MANPAGES_DIST}
 
-MAINTAINER=	cfkoch@edgebsd.org
+MAINTAINER=	charlotte@NetBSD.org
 HOMEPAGE=	https://skarnet.org/software/execline/
 COMMENT=	The execline scripting language
 LICENSE=	isc
 
-MANPAGES=		v2.8.1.0.4.tar.gz
-SITES.${MANPAGES}=	${MASTER_SITE_GITHUB:=flexibeast/execline-man-pages/archive/}
+# man-pages version is usually not exactly in-sync with PKGVERSION_NOREV
+MANPAGES_VERSION=	2.8.3.0.2
+MANPAGES_DIST=		execline-man-pages-${MANPAGES_VERSION}.tar.gz
+SITES.${MANPAGES_DIST}=	-${MASTER_SITE_GITHUB:=flexibeast/execline-man-pages/archive/}v${MANPAGES_VERSION}.tar.gz
 
 USE_TOOLS+=		gmake
 HAS_CONFIGURE=		yes

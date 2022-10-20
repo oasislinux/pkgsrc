@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.24 2021/12/01 13:01:14 nia Exp $
+# $NetBSD: Makefile,v 1.28 2022/09/11 08:20:16 wiz Exp $
 
-DISTNAME=	libXft-2.3.4
+DISTNAME=	libXft-2.3.6
 CATEGORIES=	x11 fonts
 MASTER_SITES=	${MASTER_SITE_XORG:=lib/}
-EXTRACT_SUFX=	.tar.bz2
+EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	joerg@NetBSD.org
 HOMEPAGE=	https://www.freedesktop.org/wiki/Software/Xft/
@@ -16,8 +16,6 @@ USE_LIBTOOL=		YES
 USE_TOOLS+=		pkg-config
 PKGCONFIG_OVERRIDE=	xft.pc.in
 
-X11_BUILTIN_NAME?=		libXft
-.include "../../meta-pkgs/modular-xorg/avoid-duplicate.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../fonts/fontconfig/buildlink3.mk"
 .include "../../graphics/freetype2/buildlink3.mk"

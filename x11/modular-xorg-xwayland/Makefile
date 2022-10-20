@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2021/12/15 23:35:00 wiz Exp $
+# $NetBSD: Makefile,v 1.14 2022/08/11 05:09:31 gutteridge Exp $
 
 DISTNAME=	xorg-server-${XORG_VERSION}
 PKGNAME=	modular-xorg-xwayland-${XORG_VERSION}
+PKGREVISION=	1
 
 .include "../../devel/wayland/platform.mk"
 
@@ -15,6 +16,7 @@ PATCHDIR=		${.CURDIR}/../../x11/modular-xorg-server/patches
 MAINTAINER=	nia@NetBSD.org
 COMMENT=	Server for running X clients under Wayland from modular X.org
 
+BROKEN=		"needs updating to separate unshared distfile"
 .include "../../x11/modular-xorg-server/Makefile.common"
 
 CONFIGURE_ARGS+=	--disable-xorg

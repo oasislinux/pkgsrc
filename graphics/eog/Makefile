@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.112 2021/12/08 16:04:51 adam Exp $
+# $NetBSD: Makefile,v 1.118 2022/08/11 05:08:40 gutteridge Exp $
 
-DISTNAME=	eog-3.38.0
-PKGREVISION=	2
+DISTNAME=	eog-40.3
+PKGREVISION=	3
 CATEGORIES=	graphics gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/eog/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.xz
@@ -20,19 +20,13 @@ MESON_ARGS+=	-Dlibportal=false
 
 LDFLAGS+=	${COMPILER_RPATH_FLAG}${PREFIX}/lib/eog
 
-.include "../../mk/bsd.prefs.mk"
-
-# msgfmt: unknown option -- desktop
-.if ${OPSYS} == "NetBSD"
-TOOLS_PLATFORM.msgfmt=
-.endif
-
 PYTHON_FOR_BUILD_ONLY=	tool
 
 PKGCONFIG_OVERRIDE_STAGE=	pre-install
 PKGCONFIG_OVERRIDE+=		output/meson-private/eog.pc
 
 .include "../../devel/meson/build.mk"
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.42.0
 .include "../../devel/glib2/schemas.mk"
 .include "../../devel/gobject-introspection/buildlink3.mk"

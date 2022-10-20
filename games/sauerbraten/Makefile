@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2021/12/08 16:04:40 adam Exp $
+# $NetBSD: Makefile,v 1.10 2022/09/11 12:51:47 wiz Exp $
 
 DISTNAME=	sauerbraten_2020_12_27_linux
 PKGNAME=	sauerbraten-2020_12_27
-PKGREVISION=	2
+PKGREVISION=	5
 CATEGORIES=	games
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=sauerbraten/}
 EXTRACT_SUFX=	.tar.bz2
@@ -23,6 +23,7 @@ BUILD_TARGET=	client master server
 RELRO_SUPPORTED=	no
 
 LDFLAGS.NetBSD+=	-lrt
+LDFLAGS.SunOS+=		-lsocket -lnsl
 
 INSTALLATION_DIRS+=	bin
 INSTALLATION_DIRS+=	libexec

@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.5 2021/05/02 20:05:24 pin Exp $
+# $NetBSD: Makefile,v 1.7 2022/08/22 19:46:47 tnn Exp $
 
 DISTNAME=	xnotify-0.8.1
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_GITHUB:=phillbush/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
 
-MAINTAINER=	pin@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/phillbush/xnotify
 COMMENT=	Read notifications from stdin and display them on the screen
 LICENSE=	mit
@@ -24,6 +24,8 @@ SUBST_SED.configmk+=	-e 's,^FREETYPEINC *=.*,FREETYPEINC != freetype-config --cf
 SUBST_SED.configmk+=	-e 's/cc/${CC:Q}/'
 
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
+
+CFLAGS.SunOS+=		-D_XOPEN_SOURCE=500
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/xnotify ${DESTDIR}${PREFIX}/bin

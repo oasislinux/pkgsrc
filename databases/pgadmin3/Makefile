@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.76 2021/12/08 16:03:41 adam Exp $
+# $NetBSD: Makefile,v 1.79 2022/08/11 05:08:07 gutteridge Exp $
 
 DISTNAME=	pgadmin3-1.22.2
-PKGREVISION=	11
+PKGREVISION=	14
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_PGSQL:=pgadmin/pgadmin3/v${PKGVERSION_NOREV}/src/}
 
@@ -13,6 +13,8 @@ LICENSE=	postgresql-license
 USE_LANGUAGES=		c99 c++11
 USE_TOOLS+=		echo gmake sed
 GNU_CONFIGURE=		yes
+
+PGSQL_VERSIONS_ACCEPTED=	13 12 11 10
 
 GNU_CONFIGURE_WX_CONFIG=	no
 

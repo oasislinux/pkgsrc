@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.1 2012/12/17 00:32:49 khorben Exp $
+# $NetBSD: options.mk,v 1.3 2022/06/13 07:11:33 wiz Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.deforaos-panel
 PKG_SUPPORTED_OPTIONS=	embedded
@@ -6,5 +6,5 @@ PKG_SUPPORTED_OPTIONS=	embedded
 .include "../../mk/bsd.options.mk"
 
 .if !empty(PKG_OPTIONS:Membedded)
-MAKE_FLAGS+=	CPPFLAGS=-DEMBEDDED
+DEFORAOS_CONFIGURE_MODE=	embedded-debug
 .endif

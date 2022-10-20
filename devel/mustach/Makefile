@@ -1,8 +1,11 @@
-# $NetBSD: Makefile,v 1.8 2021/11/20 00:31:10 sjmulder Exp $
+# $NetBSD: Makefile,v 1.10 2022/05/24 11:58:58 nikita Exp $
 
 DISTNAME=	mustach-1.2.2
+PKGREVISION=	1
 CATEGORIES=	devel
-MASTER_SITES=	https://gitlab.com/jobol/mustach/-/archive/${PKGVERSION_NOREV}/
+MASTER_SITES=	${MASTER_SITE_GITLAB:=jobol/}
+GITLAB_PROJECT=	mustach
+GITLAB_RELEASE=	${PKGVERSION_NOREV}
 
 MAINTAINER=	sjmulder@NetBSD.org
 HOMEPAGE=	https://gitlab.com/jobol/mustach

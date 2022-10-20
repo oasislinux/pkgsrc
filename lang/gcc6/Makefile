@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.34 2021/10/12 13:46:14 tnn Exp $
+# $NetBSD: Makefile,v 1.37 2022/06/28 11:34:11 wiz Exp $
 
 GCC_PKGNAME=		gcc6
 .include		"version.mk"
@@ -8,7 +8,7 @@ PKGNAME=	${GCC_PKGNAME}-${GCC6_DIST_VERSION}
 ## When bumping the PKGREVISION of this package the PKGREVISION of
 ## lang/gcc6-libs needs to be bumped to be at least 1 more than the
 ## PKGREVISION of this package!
-PKGREVISION=	7
+PKGREVISION=	8
 CATEGORIES=	lang
 MASTER_SITES=	${MASTER_SITE_GNU:=gcc/gcc-${GCC6_DIST_VERSION}/}
 EXTRACT_SUFX=	.tar.xz
@@ -21,8 +21,11 @@ LICENSE=	gnu-gpl-v2 AND gnu-gpl-v3 AND gnu-lgpl-v2 AND gnu-lgpl-v3
 DISTFILES=		${DEFAULT_DISTFILES}
 EXTRACT_ONLY=		${DEFAULT_DISTFILES}
 
+# RELRO not applied correctly (needs investigation)
+RELRO_SUPPORTED=	no
 # Relocations result in a linker error on AArch64, but not x86.
 MKPIE_SUPPORTED=	no
+CHECK_RELRO_SKIP+=	${GCC_PKGNAME}/lib/*
 
 NOT_FOR_PLATFORM=	Interix-*-*
 
@@ -134,7 +137,6 @@ MAKE_ENV.SunOS+=	ac_cv_func_mkostemp=no
 
 .if !empty(PKGSRC_COMPILER:Mclang) || ${OPSYS} == "DragonFly"
 CONFIGURE_ARGS+=	--disable-bootstrap
-CHECK_RELRO_SKIP+=	${GCC_PKGNAME}/lib/*
 .endif
 
 .if !empty(MACHINE_PLATFORM:MNetBSD-*-i386) || !empty(MACHINE_PLATFORM:MLinux-*-i386)

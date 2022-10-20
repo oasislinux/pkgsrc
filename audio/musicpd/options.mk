@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.39 2021/11/01 21:51:20 wiz Exp $
+# $NetBSD: options.mk,v 1.44 2022/07/27 09:42:45 wiz Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.musicpd
 
@@ -6,7 +6,7 @@ PKG_OPTIONS_VAR=	PKG_OPTIONS.musicpd
 PKG_SUPPORTED_OPTIONS+=	jack openal libao pulseaudio
 # codecs
 PKG_SUPPORTED_OPTIONS+=	adplug faad ffmpeg fluidsynth libgme libwildmidi
-PKG_SUPPORTED_OPTIONS+=	mikmod modplug musepack wavpack
+PKG_SUPPORTED_OPTIONS+=	mikmod modplug musepack sidplay wavpack
 # codecs (encoding only)
 PKG_SUPPORTED_OPTIONS+=	lame shine twolame
 # archive formats
@@ -83,7 +83,7 @@ MESON_ARGS+=	-Dfaad=disabled
 .endif
 
 .if !empty(PKG_OPTIONS:Mffmpeg)
-.  include "../../multimedia/ffmpeg4/buildlink3.mk"
+.  include "../../multimedia/ffmpeg5/buildlink3.mk"
 .else
 MESON_ARGS+=	-Dffmpeg=disabled
 .endif
@@ -198,14 +198,14 @@ MESON_ARGS+=	-Dsamplerate=disabled
 MESON_ARGS+=	-Dshine=disabled
 .endif
 
-# src/decoder/plugins/meson.build:170:6: ERROR: C++ shared or static library 'resid-builder' not found
-#.if !empty(PKG_OPTIONS:Msidplay)
-#.  include "../../audio/libsidplay2/buildlink3.mk"
-#.else
-#MESON_ARGS+=	-Dsidplay=disabled
-#.endif
+.if !empty(PKG_OPTIONS:Msidplay)
+.  include "../../audio/libsidplay2/buildlink3.mk"
+.else
+MESON_ARGS+=	-Dsidplay=disabled
+.endif
 
 .if !empty(PKG_OPTIONS:Mshout)
+BUILDLINK_API_DEPENDS.libshout+=	libshout>=2.4.0
 .  include "../../audio/libshout/buildlink3.mk"
 .  include "../../audio/lame/buildlink3.mk"
 .else

@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.2 2021/03/08 08:12:49 jaapb Exp $
+# $NetBSD: Makefile,v 1.4 2022/05/24 18:59:22 jaapb Exp $
 
-VERSION=	1.0.0
+VERSION=	1.1.0
 GITHUB_PROJECT=	bigarray-compat
 DISTNAME=	ocaml-${GITHUB_PROJECT}-${VERSION}
-PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GITHUB:=mirage/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
@@ -16,5 +15,5 @@ LICENSE=	isc
 OCAML_USE_OPAM=	yes
 OCAML_USE_DUNE=	yes
 
-.include "../../mk/ocaml.mk"
+.include "../../lang/ocaml/ocaml.mk"
 .include "../../mk/bsd.pkg.mk"

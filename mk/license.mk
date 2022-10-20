@@ -1,4 +1,4 @@
-# $NetBSD: license.mk,v 1.110 2022/01/01 13:55:48 rillig Exp $
+# $NetBSD: license.mk,v 1.115 2022/07/15 00:51:13 gutteridge Exp $
 #
 # This file handles everything about the LICENSE variable. It is
 # included automatically by bsd.pkg.mk.
@@ -106,7 +106,7 @@
 
 # The convention is that Free and Open Source licenses do not have a
 # -license suffix, and non-Free licenses end in -license.  Thus,
-# license in DEFAULT_ACCEPTABLE_LICENSES should not end in -license.
+# licenses in DEFAULT_ACCEPTABLE_LICENSES should not end in -license.
 #
 # First, we set DEFAULT_ACCEPTABLE_LICENSES to the set of licenses
 # formally approved as Free Software by FSF or Open Source by OSI,
@@ -117,6 +117,7 @@ DEFAULT_ACCEPTABLE_LICENSES= \
 	apache-1.1 apache-2.0 \
 	arphic-public \
 	artistic artistic-2.0 \
+	beer-ware \
 	boost-license \
 	cc-by-sa-v3.0 \
 	cc-by-sa-v4.0 \
@@ -133,7 +134,10 @@ DEFAULT_ACCEPTABLE_LICENSES= \
 	gnu-gpl-v1 \
 	gnu-gpl-v2 gnu-lgpl-v2 gnu-lgpl-v2.1 \
 	gnu-gpl-v3 gnu-lgpl-v3 \
+	happy \
 	hpnd \
+	ijg \
+	info-zip \
 	ipafont \
 	ipl-1.0 \
 	isc \
@@ -157,15 +161,15 @@ DEFAULT_ACCEPTABLE_LICENSES= \
 	python-software-foundation \
 	qpl-v1.0 \
 	sgi-free-software-b-v2.0 \
-	sleepycat-public \
 	sissl-1.1 \
+	sleepycat-public \
 	unicode \
 	unlicense \
+	vera-ttf-license \
 	w3c \
 	x11 \
 	zlib \
-	zpl-2.0 \
-	zpl-2.1 \
+	zpl-2.0 zpl-2.1 \
 	zsh
 
 # The following licenses meet the DFSG (but are not formally approved
@@ -190,8 +194,8 @@ DEFAULT_ACCEPTABLE_LICENSES+=	enlightenment16
 # The following licenses do not currently meet our standards for
 # inclusion.
 
-# mostly inline with Free Software principles and typefaces can not be
-# sold by itself.
+# Mostly in line with Free Software principles and typefaces can not be
+# sold by themselves.
 DEFAULT_ACCEPTABLE_LICENSES+=	vera-ttf-license
 
 ##### Variant spellings

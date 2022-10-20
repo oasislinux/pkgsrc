@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.11 2021/06/05 04:08:01 markd Exp $
+# $NetBSD: Makefile,v 1.13 2022/09/01 04:41:50 markd Exp $
 
 DISTNAME=	mathtools
-PKGNAME=	tex-${DISTNAME}-1.27
-TEXLIVE_REV=	58856
+PKGNAME=	tex-${DISTNAME}-1.29
+TEXLIVE_REV=	63767
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://ctan.org/pkg/mathtools

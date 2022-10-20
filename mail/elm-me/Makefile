@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.40 2021/05/24 19:52:39 wiz Exp $
+# $NetBSD: Makefile,v 1.42 2022/06/28 11:34:20 wiz Exp $
 
 DISTNAME=		elm-2.4ME+93
 PKGNAME=		elm-me-2.4.93
-PKGREVISION=		7
+PKGREVISION=		8
 CATEGORIES=		mail
 MASTER_SITES=		http://ftp.funet.fi/pub/unix/mail/elm/elm-2.4ME+/
 
@@ -21,7 +21,7 @@ CONFIG_SHELL=		ksh
 CONFIGURE_SCRIPT=	./Configure
 CONFIGURE_ARGS+=	-S
 
-INSTALL_DIRS=		${WRKSRC} nls
+INSTALL_DIRS=		. nls
 INSTALLATION_DIRS=	share/nls/C
 
 CONF_FILES=		${PREFIX}/lib/elm.mimetypes-dist		\

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.19 2021/12/08 16:03:02 adam Exp $
+# $NetBSD: Makefile,v 1.26 2022/09/11 12:52:12 wiz Exp $
 
 DISTNAME=	qwt-6.1.5
 PKGNAME=	qwt6-qt5-6.1.5
-PKGREVISION=	8
+PKGREVISION=	13
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=qwt/}
 EXTRACT_SUFX=	.tar.bz2
@@ -33,6 +33,16 @@ do-configure:
 # Appparently this plugin has a valid expectation that libqwt is
 # already loaded, at least as used in qgis.
 CHECK_SHLIBS_SKIP+=	qt5/plugins/designer/libqwt_designer_plugin.so
+CHECK_SHLIBS_SKIP+=	qt5/plugins/designer/libqwt_designer_plugin.dylib
+
+.include "../../mk/bsd.prefs.mk"
+
+post-install:
+.if ${OPSYS} == "Darwin"
+	install_name_tool	\
+	  -id       ${PREFIX}/qwt-${PKGVERSION_NOREV}/lib/libqwt.${PKGVERSION_NOREV}.dylib	\
+	  ${DESTDIR}${PREFIX}/qwt-${PKGVERSION_NOREV}/lib/libqwt.${PKGVERSION_NOREV}.dylib
+.endif
 
 .include "../../x11/qt5-qttools/buildlink3.mk"
 .include "../../x11/qt5-qtbase/buildlink3.mk"

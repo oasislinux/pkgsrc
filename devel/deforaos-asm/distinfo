@@ -1,7 +1,5 @@
-$NetBSD: distinfo,v 1.4 2021/10/26 10:14:31 nia Exp $
+$NetBSD: distinfo,v 1.7 2022/10/17 00:19:00 khorben Exp $
 
-BLAKE2s (Asm-0.2.3.tar.gz) = c33ce3377ede601cc424dbc88087afc5f33af6b2fb481b2d5918d355ead1e62b
-SHA512 (Asm-0.2.3.tar.gz) = 01a78be3e5850d68e683c66b4a357e054b5cd137f1a34e7d1e695a0755eeee90dc1efb5e4c487354d4e375e01f73443d91f5875403354cfc37055a6f8bd6b25a
-Size (Asm-0.2.3.tar.gz) = 111944 bytes
-SHA1 (patch-Makefile) = f671907e213321b54a759669b00f158425c76165
-SHA1 (patch-doc_gtkdoc_Asm-docs.xml) = cbe2857fa158a819ece776709985ba9797426e13
+BLAKE2s (Asm-0.2.7.tar.gz) = 05bc6eafa9ba85955031c493eff6d67fb17af531ee32a125926472ee22d2ab07
+SHA512 (Asm-0.2.7.tar.gz) = cbdd38082789a6ce8931d57c8d495cf3059d84407143d51bda09cd9046aade1b35297dd00cdbcae15ef070c4162b4bd93503db67b31161d83f57b3a4af2e9af8
+Size (Asm-0.2.7.tar.gz) = 136658 bytes

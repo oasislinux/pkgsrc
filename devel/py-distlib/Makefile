@@ -1,17 +1,23 @@
-# $NetBSD: Makefile,v 1.1 2022/01/10 19:33:39 adam Exp $
+# $NetBSD: Makefile,v 1.4 2022/08/27 08:27:02 adam Exp $
 
-DISTNAME=	distlib-0.3.4
+DISTNAME=	distlib-0.3.6
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_PYPI:=d/distlib/}
-EXTRACT_SUFX=	.zip
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	https://bitbucket.org/pypa/distlib
+HOMEPAGE=	https://github.com/pypa/distlib
 COMMENT=	Distribution utilities
 LICENSE=	python-software-foundation
 
+BUILD_DEPENDS+=	${PYPKGPREFIX}-wheel>=0.29.0:../../devel/py-wheel
+
 USE_LANGUAGES=	# none
 
-.include "../../lang/python/egg.mk"
+PYTHON_VERSIONS_INCOMPATIBLE=	27
+
+do-test:
+	cd ${WRKSRC} && ${PYTHONBIN} tests/test_all.py
+
+.include "../../lang/python/wheel.mk"
 .include "../../mk/bsd.pkg.mk"

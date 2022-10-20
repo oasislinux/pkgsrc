@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.35 2022/02/03 20:38:40 adam Exp $
+# $NetBSD: Makefile,v 1.41 2022/08/18 23:55:26 gutteridge Exp $
 
 .include "../../lang/llvm/version.mk"
 
@@ -16,12 +16,12 @@ DEPENDS+=	clang-${PKGVERSION_NOREV}{,nb*}:../../lang/clang
 DEPENDS+=	swig3>=3.0:../../devel/swig3
 DEPENDS+=	${PYPKGPREFIX}-six-[0-9]*:../../lang/py-six
 
-CONFIGURE_DIRS=		${WRKDIR}/build
+CONFIGURE_DIRS=		build
 CMAKE_ARG_PATH=		${WRKSRC}
 
 USE_CMAKE=		yes
 USE_LANGUAGES=		c c++14
-GCC_REQD+=		4.8
+GCC_REQD+=		7
 PY_PATCHPLIST=		yes
 
 CMAKE_ARGS+=	-DLLVM_CONFIG=${LLVM_CONFIG_PATH}
@@ -63,21 +63,21 @@ TEST_ENV+=		LD_LIBRARY_PATH=${WRKDIR}/build/lib
 
 .include "../../mk/bsd.prefs.mk"
 
-PLIST_VARS+=	posix
-.if ${OPSYS} != "Darwin"
-PLIST.posix=	yes
-.endif
-
 .if ${OPSYS} == "NetBSD"
 .  if exists(/usr/include/panel.h)
 CMAKE_ARGS+=	-DLLDB_DISABLE_CURSES:BOOL=FALSE
 .  else
 CMAKE_ARGS+=	-DLLDB_DISABLE_CURSES:BOOL=TRUE
 .  endif
+
+.  if ${OPSYS_VERSION} < 99922
+# lacks ptrace(2) PT_STOP
+PKG_FAIL_REASON+=	"Only NetBSD >= 9.99.22 provides ptrace(2) PT_STOP"
+.  endif
 .endif
 
 post-extract:
-	${MKDIR} ${WRKDIR}/build
+	${MKDIR} ${WRKSRC}/build
 
 #.include "../../devel/googletest/buildlink3.mk" # check-lldb-unit
 .include "../../devel/libatomic_ops/buildlink3.mk"

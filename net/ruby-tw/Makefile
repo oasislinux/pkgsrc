@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.25 2022/01/14 15:51:50 taca Exp $
+# $NetBSD: Makefile,v 1.27 2022/10/10 03:36:50 taca Exp $
 
 DISTNAME=	tw-1.3.1
 CATEGORIES=	net

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.53 2021/12/08 16:05:16 adam Exp $
+# $NetBSD: Makefile,v 1.56 2022/04/24 22:19:15 tnn Exp $
 
 PKGNAME=	${DISTNAME:S/mozc-/mozc-renderer-/}
-PKGREVISION=	7
+PKGREVISION=	9
 
 CONFLICTS+=	ibus-mozc<=1.13.1651.102
 
@@ -30,3 +30,4 @@ do-install:
 		${DESTDIR}${PREFIX}/share/icons/mozc.png
 
 .include "../../inputmethod/mozc-server/Makefile.common"
+.include "../../mk/bsd.pkg.mk"

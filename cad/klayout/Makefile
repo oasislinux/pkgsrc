@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.45 2022/01/24 22:34:07 mef Exp $
+# $NetBSD: Makefile,v 1.53 2022/09/18 12:51:32 mef Exp $
 
-DISTNAME=	klayout-0.27.7
+DISTNAME=	klayout-0.27.11
 CATEGORIES=	cad
 MASTER_SITES=	http://www.klayout.org/downloads/source/
 
@@ -30,7 +30,7 @@ AUTO_MKDIRS=		yes
 INSTALL_BINDIR=		${DESTDIR}${PREFIX}/bin
 INSTALL_LIBDIR=		${DESTDIR}${PREFIX}/lib/klayout
 REL_DIR=		bin-release
-PLUGINS_DIR=		db_plugins lay_plugins pymod
+PLUGINS_DIRS=		db_plugins lay_plugins pymod
 
 PLIST_SUBST+=		PKGVERSION_MAJOR_MINOR=${PKGVERSION_NOREV:C/([0-9]+\.[0-9]+)\.[0-9]*/\1/}
 
@@ -53,7 +53,7 @@ do-build:
 
 do-install:
 	cd ${WRKSRC}/${REL_DIR} && \
-	${PAX} -wr libklayout* ${PLUGINS_DIR} ${INSTALL_LIBDIR}
+	${PAX} -wr libklayout* ${PLUGINS_DIRS} ${INSTALL_LIBDIR}
 	${INSTALL_PROGRAM} ${WRKSRC}/${REL_DIR}/strm* \
 		${INSTALL_BINDIR}
 	${INSTALL_PROGRAM} ${WRKSRC}/${REL_DIR}/klayout \

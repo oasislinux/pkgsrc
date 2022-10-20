@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.37 2021/12/08 16:05:51 adam Exp $
+# $NetBSD: Makefile,v 1.46 2022/10/04 10:45:43 wiz Exp $
 
 DISTNAME=	obs-studio-26.1.2
-PKGREVISION=	9
+PKGREVISION=	18
 CATEGORIES=	multimedia
 MASTER_SITES=	${MASTER_SITE_GITHUB:=obsproject/}
 
@@ -15,6 +15,7 @@ USE_TOOLS+=	pkg-config
 USE_LANGUAGES=	c gnu++11
 
 CMAKE_ARGS+=	-DDISABLE_LIBFDK=BOOL:ON
+CMAKE_ARGS+=	-DOBS_VERSION_OVERRIDE="${PKGVERSION}"
 
 TOOL_DEPENDS+=	swig3>=3.0:../../devel/swig3
 
@@ -48,7 +49,7 @@ CMAKE_ARGS+=	-DDISABLE_LUA=ON
 .include "../../lang/python/pyversion.mk"
 .include "../../multimedia/ffmpeg4/buildlink3.mk"
 .include "../../multimedia/vlc/buildlink3.mk"
-.include "../../multimedia/x264-devel/buildlink3.mk"
+.include "../../multimedia/x264/buildlink3.mk"
 .include "../../security/mbedtls/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../textproc/jansson/buildlink3.mk"

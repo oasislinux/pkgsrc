@@ -1,13 +1,13 @@
-$NetBSD: distinfo,v 1.9 2022/01/26 13:38:06 ryoon Exp $
+$NetBSD: distinfo,v 1.17 2022/09/06 15:38:35 nia Exp $
 
-BLAKE2s (firefox-91.5.0esr.source.tar.xz) = ede7eb4257b2709ac5c05806761a0ab3a4cc6fb262eeb970ee47fba1bc2504fd
-SHA512 (firefox-91.5.0esr.source.tar.xz) = 1712415b6b73c6a21edfefc39eaba5fcbbca54032f78627c0005d291501d16ef4daffb8b9a160d1d5361113ceba04eb5ddb21d903e3dd8d58838aa9596f2d781
-Size (firefox-91.5.0esr.source.tar.xz) = 381371300 bytes
+BLAKE2s (firefox-91.13.0esr.source.tar.xz) = a531749a2d4610eac5ec648e6d6dfbf6b990c09b03c9d2a1c252c66c8cff90b6
+SHA512 (firefox-91.13.0esr.source.tar.xz) = 38b4cc52de21e76d6061e6ba175e1cbfd888a16070aa951f5a44283f2db9d7e94f2504621f0da78feac6e71491a6d0e7038f63dd0ae112dcad700eb02e9aa516
+Size (firefox-91.13.0esr.source.tar.xz) = 380053584 bytes
 BLAKE2s (nodejs-output-91.0.tgz) = 5007b8d20d6264a4cd573b465643cff83c2adc75ad7dd9fba97ff5fcae787c9f
 SHA512 (nodejs-output-91.0.tgz) = 3a457101a4aaa5ae955b77c41ba6b0d98eb5dd0ae9d6d8cc77c0c7bc0e844238a9c0d86cd1838ffb6a37ad8851f871c21e4ca1bb59d11e58fc42c5fec88c298c
 Size (nodejs-output-91.0.tgz) = 201061 bytes
 SHA1 (patch-aa) = 15b8567cee2af9853f6949c80345ffcb1fd3852a
-SHA1 (patch-browser_app_profile_firefox.js) = 89cea0a66457c96ad0b94aaa524aa5942ad781d0
+SHA1 (patch-browser_app_profile_firefox.js) = 7f6b4361fe62ccc2d1c092a5ace97ea2085727bf
 SHA1 (patch-build_moz.configure_rust.configure) = 25ddfacd29cebbc6db005dbe61a2a7446d480678
 SHA1 (patch-config_gcc-stl-wrapper.template.h) = 9d88c7b1ccfdd3c6bd2dcd9530a36ad4a501d97a
 SHA1 (patch-config_makefiles_rust.mk) = 72d7e9ecee3ccf7ef5f741aac8e35509b41ab7b8
@@ -17,6 +17,7 @@ SHA1 (patch-gfx_angle_checkout_src_compiler_translator_InfoSink.h) = 2db2859ff7d
 SHA1 (patch-gfx_cairo_cairo_src_cairo-type1-subset.c) = 89a9d934ef76706c552c0b81e6cbc0f45b1ffd2c
 SHA1 (patch-gfx_skia_skia_src_core_SkCpu.cpp) = 36218819254f3681b9c717d652ea78c9f20d49ad
 SHA1 (patch-gfx_thebes_gfxPlatform.cpp) = f6f8996f0818a1b890698c7cc5054d49cb1e8924
+SHA1 (patch-gfx_webrender__bindings_webrender__ffi.h) = 44e73ff006ca1a4bbd42e15a09d7577bfa774353
 SHA1 (patch-gfx_wr_swgl_build.rs) = df6ebfaabb4d27994e59a9d0eaf12c7cf08415fb
 SHA1 (patch-ipc_chromium_src_base_message__pump__libevent.cc) = 4a6606da590cfb8d855bde58b9c6f90e98d0870c
 SHA1 (patch-ipc_chromium_src_base_platform__thread__posix.cc) = 35d20981d33ccdb1d8ffb8039e48798777f11658

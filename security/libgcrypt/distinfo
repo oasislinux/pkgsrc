@@ -1,10 +1,11 @@
-$NetBSD: distinfo,v 1.93 2021/10/26 11:17:13 nia Exp $
+$NetBSD: distinfo,v 1.96 2022/09/18 08:42:45 nros Exp $
 
-BLAKE2s (libgcrypt-1.9.4.tar.bz2) = 881456d8ff2275757803a2066dde5849565a03e9d2536e6490359e807f83b097
-SHA512 (libgcrypt-1.9.4.tar.bz2) = d0e117ac73c94d70e9521ee1e6328691498cc8328f8c4e21338096908f5c04c7b838966eb63d59494565f4e19f506c07dab4f4d922150d75610d9f7b57abbf60
-Size (libgcrypt-1.9.4.tar.bz2) = 3239704 bytes
+BLAKE2s (libgcrypt-1.10.1.tar.bz2) = 9c70b204486365abb3b4731e14078d284952df672215d72f9d0ac6b508f82a8d
+SHA512 (libgcrypt-1.10.1.tar.bz2) = e5ca7966624fff16c3013795836a2c4377f0193dbb4ac5ad2b79654b1fa8992e17d83816569a402212dc8367a7980d4141f5d6ac282bae6b9f02186365b61f13
+Size (libgcrypt-1.10.1.tar.bz2) = 3778457 bytes
 SHA1 (patch-aa) = 60b3f4453b217ed8879a2ffd8d485c0195ffb5f8
 SHA1 (patch-cipher_rijndael-arm.S) = ef3cb7f481022440780eb48ae31cbfad0a3ec115
 SHA1 (patch-configure) = edc92453a0843ab0442da7f1b9df2ef4c219bdf5
 SHA1 (patch-mpi_config.links) = 0e87480ead46914653405bb9c693554180ccd126
+SHA1 (patch-random_Makefile.in) = c72c5bcd2e0d5eee9c14b1ee04a683bc9ccec958
 SHA1 (patch-src_visibility.h) = 8cbbf6803ab34b4b7dda832aa8ee18247aa89518

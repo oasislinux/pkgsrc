@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.5 2022/01/18 02:48:24 pho Exp $
+# $NetBSD: Makefile,v 1.9 2022/08/22 10:39:13 wiz Exp $
 
-DISTNAME=	cassava-0.5.2.0
-PKGREVISION=	2
+DISTNAME=	cassava-0.5.3.0
 CATEGORIES=	textproc
 
 MAINTAINER=	pkgsrc-users@NetBSD.org

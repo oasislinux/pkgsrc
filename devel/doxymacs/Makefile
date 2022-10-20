@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.16 2021/12/08 16:03:56 adam Exp $
+# $NetBSD: Makefile,v 1.18 2022/05/14 22:25:33 dholland Exp $
 #
 
 DISTNAME=	doxymacs-1.8.0
 PKGNAME=	${EMACS_PKGNAME_PREFIX}${DISTNAME}
-PKGREVISION=	7
+PKGREVISION=	9
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=doxymacs/}
 

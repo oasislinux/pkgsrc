@@ -1,15 +1,15 @@
-# $NetBSD: Makefile,v 1.44 2021/12/08 16:02:25 adam Exp $
+# $NetBSD: Makefile,v 1.49 2022/09/29 05:35:49 markd Exp $
 
 DISTNAME=	phonon-4.11.1
 PKGNAME=	${DISTNAME:S/-/-qt5-/}
-PKGREVISION=	4
+PKGREVISION=	8
 CATEGORIES=	multimedia
 MASTER_SITES=	${MASTER_SITE_KDE:=phonon/4.11.1/}
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	markd@NetBSD.org
 COMMENT=	Multimedia API for KF5
-HOMEPAGE=	https://phonon.kde.org/
+HOMEPAGE=	https://community.kde.org/Phonon
 LICENSE=	gnu-lgpl-v2.1
 
 USE_TOOLS+=	pkg-config gmake

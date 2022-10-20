@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.19 2021/06/06 01:41:37 markd Exp $
+# $NetBSD: Makefile,v 1.21 2022/04/19 04:31:53 markd Exp $
 
 DISTNAME=	tex4ht
-PKGNAME=	tex-${DISTNAME}-2021
-TEXLIVE_REV=	59459
+PKGNAME=	tex-${DISTNAME}-2022
+TEXLIVE_REV=	63055
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://ctan.org/pkg/tex4ht

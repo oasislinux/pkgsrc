@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.18 2021/12/01 13:01:15 nia Exp $
+# $NetBSD: Makefile,v 1.20 2022/04/10 08:53:17 nia Exp $
 
-DISTNAME=		libXvMC-1.0.12
+DISTNAME=		libXvMC-1.0.13
 CATEGORIES=		x11
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
-EXTRACT_SUFX=		.tar.bz2
+EXTRACT_SUFX=		.tar.xz
 
 MAINTAINER=		joerg@NetBSD.org
 HOMEPAGE=		https://xorg.freedesktop.org/
@@ -19,7 +19,7 @@ PKGCONFIG_OVERRIDE+=	xvmc-wrapper.pc.in
 
 CONFIGURE_ARGS.NetBSD+=	--disable-malloc0returnsnull
 
-X11_BUILTIN_NAME?=		libXvMC
+X11_LIB_NAME?=		libXvMC
 .include "../../meta-pkgs/modular-xorg/avoid-duplicate.mk"
 .include "../../meta-pkgs/modular-xorg/hacks.mk"
 BUILDLINK_API_DEPENDS.libX11+=	libX11>=1.6

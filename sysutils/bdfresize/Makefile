@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.1 2019/08/14 17:21:06 fcambus Exp $
+# $NetBSD: Makefile,v 1.3 2022/07/24 14:53:10 fcambus Exp $
 
 DISTNAME=	bdfresize-1.5
 CATEGORIES=	sysutils
-MASTER_SITES=	https://www.distfiles.pl/
+MASTER_SITES=	http://openlab.ring.gr.jp/efont/dist/tools/bdfresize/
 
-MAINTAINER=	fcambus@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://openlab.jp/efont/
 COMMENT=	Tool for resizing BDF format fonts
 LICENSE=	gnu-gpl-v2
 

@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.1 2022/01/20 23:22:34 leot Exp $
+# $NetBSD: Makefile,v 1.15 2022/10/05 11:32:59 bsiegert Exp $
 
-DISTNAME=	conftest-0.30.0
+DISTNAME=	conftest-0.34.0
+PKGREVISION=	4
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GITHUB:=open-policy-agent/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
@@ -11,8 +12,8 @@ COMMENT=	Tests structured configuration data via OPA Rego query language
 LICENSE=	apache-2.0
 
 GO_BUILD_PATTERN+=	-ldflags ' \
-			-X github.com/open-policy-agent/conftest/internal/commands.version=${GITHUB_TAG}' \
-			.
+			-X github.com/open-policy-agent/conftest/internal/commands.version=${GITHUB_TAG}'
+GO_BUILD_PATTERN+=	.
 
 .include "go-modules.mk"
 

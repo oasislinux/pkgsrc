@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.11 2021/10/26 11:34:20 nia Exp $
+$NetBSD: distinfo,v 1.13 2022/09/29 01:28:25 markd Exp $
 
-BLAKE2s (qqc2-desktop-style-5.80.0.tar.xz) = 2f470d6eac81e1ab1018ac4d94178c54f3bcf2a2d74d512bd9f0a6bdab2eff14
-SHA512 (qqc2-desktop-style-5.80.0.tar.xz) = c5c3be2f8f1257a978136e8a3ae9942bbb5389411338a8d50cde34ec1a007d5c16acb8e0ce755265b0ba088bd71cdc0966ffab44a541c3bc7895ce2f56ce33c0
-Size (qqc2-desktop-style-5.80.0.tar.xz) = 60092 bytes
+BLAKE2s (qqc2-desktop-style-5.98.0.tar.xz) = 19286f20fd8633f22926ec7dad31c4dbca81d711012b125ba6a77592ae306974
+SHA512 (qqc2-desktop-style-5.98.0.tar.xz) = a64a3b523854155270ec6ac8f45ffca421897f5a186fc0ad42de59f43996f39747fee219bf25832af1e58fa4ce3f5c9686332c093383262aad9e52c9b05424d0
+Size (qqc2-desktop-style-5.98.0.tar.xz) = 66392 bytes

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.101 2021/12/08 16:04:39 adam Exp $
+# $NetBSD: Makefile,v 1.107 2022/09/11 12:51:46 wiz Exp $
 
-DISTNAME=	openttd-1.11.2-source
+DISTNAME=	openttd-12.2-source
 PKGNAME=	${DISTNAME:S/-source//}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	games
 MASTER_SITES=	https://proxy.binaries.openttd.org/openttd-releases/${PKGVERSION_NOREV}/
 EXTRACT_SUFX=	.tar.xz
@@ -20,7 +20,7 @@ CONFIGURE_DIRS=	build
 CMAKE_ARG_PATH=	..
 
 # C++17
-GCC_REQD+=	7
+GCC_REQD+=	8 # std::charconv
 
 BUILD_DEFS+=	VARBASE
 

@@ -1,20 +1,16 @@
-# $NetBSD: Makefile,v 1.3 2021/12/08 16:02:08 adam Exp $
+# $NetBSD: Makefile,v 1.7 2022/09/11 12:51:08 wiz Exp $
 
-GITHUB_PROJECT=	FNA3D
-GITHUB_TAG=	21.01
-DISTNAME=	21.01
-PKGNAME=	${GITHUB_PROJECT:tl}-${DISTNAME}
+DISTNAME=	FNA3D-22.05
+PKGNAME=	${DISTNAME:tl}
 PKGREVISION=	2
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_GITHUB:=FNA-XNA/}
-DIST_SUBDIR=	${GITHUB_PROJECT}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://fna-xna.github.io/
 COMMENT=	3D graphics library for FNA
 LICENSE=	zlib
 
-WRKSRC=		${WRKDIR}/FNA3D-21.01
 USE_CMAKE=	yes
 
 # No upstream install target

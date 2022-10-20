@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.267 2022/01/30 09:38:39 js Exp $
+# $NetBSD: Makefile,v 1.273 2022/09/17 15:58:48 pin Exp $
 #
 
 COMMENT=	Communication programs
@@ -14,6 +14,7 @@ SUBDIR+=	bitlbee-mastodon
 SUBDIR+=	bitlbee-steam
 SUBDIR+=	bnc
 SUBDIR+=	carbons-purple
+SUBDIR+=	catgirl
 SUBDIR+=	centerim
 SUBDIR+=	centerim5
 SUBDIR+=	cgiirc
@@ -72,14 +73,13 @@ SUBDIR+=	libmsn
 SUBDIR+=	libotr
 SUBDIR+=	libpurple
 SUBDIR+=	libsignal-protocol-c
+SUBDIR+=	libstrophe
 SUBDIR+=	libtelepathy
 SUBDIR+=	libtlen
 SUBDIR+=	loudmouth
 SUBDIR+=	lurch-purple
 SUBDIR+=	matrix-synapse
 SUBDIR+=	matterircd
-SUBDIR+=	maubot
-SUBDIR+=	mautrix-hangouts
 SUBDIR+=	mautrix-telegram
 SUBDIR+=	mcabber
 SUBDIR+=	meanwhile
@@ -122,6 +122,7 @@ SUBDIR+=	riece
 SUBDIR+=	roxirc
 SUBDIR+=	ruby-net-irc
 SUBDIR+=	scrollz
+SUBDIR+=	senpai
 SUBDIR+=	silc-client
 SUBDIR+=	silc-client-icb
 SUBDIR+=	silc-server
@@ -149,6 +150,7 @@ SUBDIR+=	tkirc2
 SUBDIR+=	tootstream
 SUBDIR+=	toxcore
 SUBDIR+=	unrealircd
+SUBDIR+=	unrealircd6
 SUBDIR+=	weechat
 SUBDIR+=	xaric
 SUBDIR+=	ysm

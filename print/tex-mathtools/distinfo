@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.11 2021/10/26 11:14:02 nia Exp $
+$NetBSD: distinfo,v 1.13 2022/09/01 04:41:50 markd Exp $
 
-BLAKE2s (mathtools.r58856.tar.xz) = aaa5032e1aba7e4b3b7e29b0ec4e130aba4a4196e8f49a806bac0ac1577a1869
-SHA512 (mathtools.r58856.tar.xz) = ceb283012776179cdec04899c28cd55c76811d9ece89b3ea188ae47619296db94983f8b768dbd0cf0909c9e7da4b0f1b1bae7e3de4a96193249ed57fc987683a
-Size (mathtools.r58856.tar.xz) = 20024 bytes
+BLAKE2s (mathtools.r63767.tar.xz) = 0408f5bc09e0e328cf6ae34612e4f6c21f1829f33a87e483216b44df0cc7e1ff
+SHA512 (mathtools.r63767.tar.xz) = 767b804aeec1ee62667529a523a22e38a4a20dbb7a3a4f74476d25f5cceed38b001b21fc2e8eeec6313e25ee3066ee05b47e1fad3ecce228d6ee13e2d78f6dd4
+Size (mathtools.r63767.tar.xz) = 20472 bytes

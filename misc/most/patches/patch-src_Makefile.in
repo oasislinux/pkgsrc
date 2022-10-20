@@ -1,0 +1,47 @@
+$NetBSD: patch-src_Makefile.in,v 1.1 2022/05/21 21:38:36 fcambus Exp $
+
+--- src/Makefile.in.orig	2018-10-29 07:55:02.000000000 +0000
++++ src/Makefile.in
+@@ -22,7 +22,7 @@ prefix		= @prefix@
+ exec_prefix	= @exec_prefix@
+ datarootdir	= @datarootdir@
+ BIN_DIR		= $(prefix)/bin
+-MAN_DIR		= $(datarootdir)/man
++MAN_DIR		= $(PREFIX)/$(PKGMANDIR)
+ DOC_DIR		= $(datarootdir)/doc/most
+ SYS_INITFILE	= @sysconfdir@/most.conf
+ MKINSDIR	= ../autoconf/mkinsdir.sh
+@@ -79,20 +79,20 @@ clean:
+ distclean: clean
+ 	/bin/rm -rf $(OBJDIR) Makefile sysconf.h
+ installdirs:
+-	$(MKINSDIR) $(DEST_DOCDIR)
+-	$(MKINSDIR) $(DEST_MANDIR)/man1
+-	$(MKINSDIR) $(DEST_BINDIR)
++	#$(MKINSDIR) $(DEST_DOCDIR)
++	$(BSD_INSTALL_MAN_DIR) $(DEST_MANDIR)/man1
++	$(BSD_INSTALL_PROGRAM_DIR) $(DEST_BINDIR)
+ install: all installdirs
+-	$(INSTALL) -s $(OBJDIR)/most $(DEST_BINDIR)
+-	$(INSTALL_DATA) ../doc/most.1 $(DEST_MANDIR)/man1
+-	@for i in $(DOC_FILES); \
+-	do \
+-		echo $(INSTALL_DATA) $$i $(DEST_DOCDIR)/; \
+-		$(INSTALL_DATA) $$i $(DEST_DOCDIR)/; \
+-		if [ "$$?" != "0" ]; then \
+-		  exit 1; \
+-		fi; \
+-	done
++	$(BSD_INSTALL_PROGRAM) $(OBJDIR)/most $(DEST_BINDIR)
++	$(BSD_INSTALL_MAN) ../doc/most.1 $(DEST_MANDIR)/man1
++	#@for i in $(DOC_FILES); \
++	#do \
++	#	echo $(INSTALL_DATA) $$i $(DEST_DOCDIR)/; \
++	#	$(INSTALL_DATA) $$i $(DEST_DOCDIR)/; \
++	#	if [ "$$?" != "0" ]; then \
++	#	  exit 1; \
++	#	fi; \
++	#done
+ # The symlinks target is for my own private use.  It simply creates the object
+ # directory as a symbolic link to a local disk instead of an NFS mounted one.
+ symlinks:

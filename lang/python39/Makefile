@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.18 2022/01/27 21:33:42 schmonz Exp $
+# $NetBSD: Makefile,v 1.22 2022/09/07 15:33:19 adam Exp $
 
 .include "dist.mk"
 
@@ -35,6 +35,27 @@ PTHREAD_OPTS+=	require
 .include "../../mk/pthread.buildlink3.mk"
 
 .include "../../mk/bsd.prefs.mk"
+
+.if !empty(USE_CROSS_COMPILE:M[yY][eE][sS])
+TOOL_DEPENDS+=		${PKGNAME}:../../${PKGPATH}
+# XXX copied from ../../lang/python/pyversion.mk to avoid including it
+# XXX should use NATIVE_PREFIX but we don't have that
+CONFIGURE_ARGS+=	PYTHON_FOR_BUILD=${PREFIX:Q}/bin/python3.9
+CONFIGURE_ARGS+=	MACHDEP=${PY_PLATNAME}
+CONFIGURE_ARGS+=	\
+	_PYTHON_HOST_PLATFORM=${LOWER_OPSYS}-${MACHINE_GNU_ARCH}
+CONFIGURE_ARGS+=	ac_sys_system=${OPSYS}
+.  if ${OPSYS} == "OSF1"
+CONFIGURE_ARGS+=	ac_cv_buggy_getaddrinfo=true
+.  else
+CONFIGURE_ARGS+=	ac_cv_buggy_getaddrinfo=false
+.  endif
+CONFIGURE_ARGS.NetBSD+=	ac_cv_file__dev_ptmx=yes
+CONFIGURE_ARGS.NetBSD+=	ac_cv_file__dev_ptc=no
+MAKE_ENV+=		\
+	_PYTHON_HOST_PLATFORM=${LOWER_OPSYS}-${MACHINE_GNU_ARCH}
+MAKE_ENV+=		_PYTHON_PROJECT_BASE=${WRKSRC:Q}
+.endif
 
 # http://bugs.python.org/issue13241
 .if !empty(MACHINE_PLATFORM:MDarwin-1[12].*)
@@ -191,9 +212,11 @@ hpux-postinstall:
 		${DESTDIR}${PREFIX}/lib/libpython3.9.sl.1.0
 .endif
 
-post-install: setuptools-postinstall
-.PHONY: setuptools-postinstall
-setuptools-postinstall:
+INSTALLATION_DIRS+=	lib/python${PY_VER_SUFFIX}/site-packages
+
+pre-install: setuptools-preinstall
+.PHONY: setuptools-preinstall
+setuptools-preinstall:
 	${INSTALL_DATA} ${.CURDIR}/../../devel/py-setuptools/files/_distutils_system_mod \
 		${DESTDIR}${PREFIX}/lib/python${PY_VER_SUFFIX}/site-packages/_distutils_system_mod.py
 

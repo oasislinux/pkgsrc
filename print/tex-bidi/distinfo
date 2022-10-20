@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.2 2022/08/19 20:04:07 wiz Exp $
+
+BLAKE2s (bidi.r63930.tar.xz) = 408bac859278345a5216ea3a7ce047bc1e2c3da32e64705ea3ce8b9472e49f33
+SHA512 (bidi.r63930.tar.xz) = 11ec479b0df845e4510bd0091cac5170c6cfc352eb10aede104a2b10789d1082e75e2bbfb47afa8ff42c1c3c710c19a66ba4a3e0caa0f8cca33a4c445df216ef
+Size (bidi.r63930.tar.xz) = 131436 bytes

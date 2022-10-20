@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.12 2022/01/24 05:52:27 adam Exp $
+# $NetBSD: Makefile,v 1.14 2022/07/13 20:07:26 adam Exp $
 
-DISTNAME=	scp-0.14.2
+DISTNAME=	scp-0.14.4
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	net python
 MASTER_SITES=	${MASTER_SITE_PYPI:=s/scp/}
@@ -13,6 +13,8 @@ LICENSE=	gnu-lgpl-v2.1
 DEPENDS+=	${PYPKGPREFIX}-paramiko-[0-9]*:../../security/py-paramiko
 
 USE_LANGUAGES=	# none
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27 # py-paramiko
 
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

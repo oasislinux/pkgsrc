@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.7 2022/01/10 00:00:05 tnn Exp $
+# $NetBSD: Makefile,v 1.9 2022/04/18 19:11:32 adam Exp $
 
 GITHUB_PROJECT=	wasi-libc
-GITHUB_TAG=	ad5133410f66b93a2381db5b542aad5e0964db96
-DISTNAME=	wasi-libc-0.0.0pre20210923
+GITHUB_TAG=	079adff840032c3455eb1cb34dc9ceaa0b2bfc0c
+DISTNAME=	wasi-libc-0.0.0pre20220311
+PKGREVISION=	1
 CATEGORIES=	lang
 MASTER_SITES=	${MASTER_SITE_GITHUB:=WebAssembly/}
 

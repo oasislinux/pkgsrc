@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.51 2021/12/08 16:05:28 adam Exp $
+# $NetBSD: Makefile,v 1.53 2022/08/09 12:08:30 jperkin Exp $
 #
 
 DISTNAME=	milter-manager-${VERSION}

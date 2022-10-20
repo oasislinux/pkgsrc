@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.64 2021/12/08 16:07:17 adam Exp $
+# $NetBSD: Makefile,v 1.70 2022/08/11 05:09:35 gutteridge Exp $
 
+PKGREVISION= 1
 .include "../../meta-pkgs/xfce4/Makefile.common"
 
-DISTNAME=	xfce4-terminal-0.8.10
-PKGREVISION=	2
+DISTNAME=	xfce4-terminal-1.0.4
 CATEGORIES=	x11
-MASTER_SITES=	https://archive.xfce.org/src/apps/xfce4-terminal/0.8/
+MASTER_SITES=	https://archive.xfce.org/src/apps/xfce4-terminal/1.0/
 
 HOMEPAGE=	https://docs.xfce.org/apps/terminal/start
 COMMENT=	Xfce terminal emulator
-
-MAKE_JOBS_SAFE=	no
 
 .include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"

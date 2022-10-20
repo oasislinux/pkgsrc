@@ -1,11 +1,13 @@
-# $NetBSD: options.mk,v 1.21 2021/05/25 09:08:10 thor Exp $
+# $NetBSD: options.mk,v 1.23 2022/10/04 07:13:52 wiz Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.cairo
 PKG_SUPPORTED_OPTIONS=	x11 xcb
 .if exists(/System/Library/Frameworks/Quartz.framework)
 PKG_SUPPORTED_OPTIONS+=	quartz
-.endif
+PKG_SUGGESTED_OPTIONS+=	quartz
+.else
 PKG_SUGGESTED_OPTIONS=	x11 xcb
+.endif
 
 .include "../../mk/bsd.options.mk"
 

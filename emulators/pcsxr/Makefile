@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2021/12/08 16:04:18 adam Exp $
+# $NetBSD: Makefile,v 1.7 2022/09/11 12:51:34 wiz Exp $
 
 DISTNAME=	pcsxr-1.9.95.20190306
-PKGREVISION=	2
+PKGREVISION=	5
 CATEGORIES=	emulators
 MASTER_SITES=	${MASTER_SITE_GITHUB:=iCatButler/}
 GITHUB_PROJECT=	pcsxr

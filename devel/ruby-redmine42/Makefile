@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.7 2022/01/18 13:35:42 taca Exp $
+# $NetBSD: Makefile,v 1.16 2022/10/10 03:24:52 taca Exp $
 
 DISTNAME=	redmine-${RM_VERSION}
 PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME:S/redmine/redmine${RM_VER}/}
-PKGREVISION=	3
 CATEGORIES=	devel
 MASTER_SITES=	https://www.redmine.org/releases/
 
@@ -11,15 +10,22 @@ HOMEPAGE=	https://www.redmine.org/
 COMMENT=	Flexible project management web application
 LICENSE=	gnu-gpl-v2 # and so on.
 
-RM_VERSION=	4.2.3
+USE_TOOLS+=	pax
+
+RM_VERSION=	4.2.8
 
 NO_BUILD=	yes
 
-RUBY_VERSIONS_ACCEPTED=	26 27
+RUBY_VERSIONS_ACCEPTED=	27
 
 RUBY_RAILS_ACCEPTED=	52
 
-OVERRIDE_GEMSPEC+=	nokogiri>=1.11.0 mini_mime>=1.0.1 csv>=3.1.1
+OVERRIDE_GEMSPEC+=	csv>=3.1.1 i18n>=1.8.2 mini_mime>=1.0.1
+
+REPLACE_RUBY+=	bin/*
+REPLACE_RUBY+=	extra/mail_handler/rdm-mailhandler.rb
+REPLACE_RUBY+=	extra/svn/reposman.rb
+REPLACE_RUBY+=	public/dispatch.fcgi.example
 
 .include "../../lang/ruby/modules.mk"
 
@@ -28,14 +34,14 @@ DEPENDS+=	${RUBY_RAILS_DEPENDS}
 DEPENDS+=	${RUBY_PKGPREFIX}-rouge>=3.26:../../www/ruby-rouge
 DEPENDS+=	${RUBY_PKGPREFIX}-request_store>=1.5.0<1.6:../../www/ruby-request_store
 # ruby-mail depends it.
-#DEPENDS+=	${RUBY_PKGPREFIX}-mini_mime>=1.0.1<1.1:../../mail/ruby-mini_mime
-DEPENDS+=	${RUBY_PKGPREFIX}-actionpack${RUBY_RAILS}-xml_parser>=2.0:../../textproc/ruby-actionpack-xml_parser
-DEPENDS+=	${RUBY_PKGPREFIX}-roadie-rails${RUBY_RAILS}>=2.2.0<2.3:../../mail/ruby-roadie-rails
+#DEPENDS+=	${RUBY_PKGPREFIX}-mini_mime>=1.0.1:../../mail/ruby-mini_mime
+DEPENDS+=	${RUBY_PKGPREFIX}-actionpack52-xml_parser>=2.0:../../textproc/ruby-actionpack52-xml_parser
+DEPENDS+=	${RUBY_PKGPREFIX}-roadie-rails2_${RUBY_RAILS}>=2.2.0<2.3:../../mail/ruby-roadie-rails2
 DEPENDS+=	${RUBY_PKGPREFIX}-marcel>=1.0.0:../../devel/ruby-marcel
 DEPENDS+=	${RUBY_PKGPREFIX}-mail>=2.7.1<2.8:../../mail/ruby-mail
 DEPENDS+=	${RUBY_PKGPREFIX}-csv>=3.1.1:../../textproc/ruby-csv
-DEPENDS+=	${RUBY_PKGPREFIX}-nokogiri>=1.11.1:../../textproc/ruby-nokogiri
-DEPENDS+=	${RUBY_PKGPREFIX}-i18n>=1.8.2<1.9:../../devel/ruby-i18n
+DEPENDS+=	${RUBY_PKGPREFIX}-nokogiri>=1.13.6:../../textproc/ruby-nokogiri
+DEPENDS+=	${RUBY_PKGPREFIX}-i18n>=1.8.2<2:../../devel/ruby-i18n
 DEPENDS+=	${RUBY_PKGPREFIX}-rbpdf>=1.20.0<1.21:../../print/ruby-rbpdf
 DEPENDS+=	${RUBY_PKGPREFIX}-addressable>=0:../../net/ruby-addressable
 DEPENDS+=	${RUBY_PKGPREFIX}-zip>=2.3.0<2.4:../../archivers/ruby-zip
@@ -49,11 +55,6 @@ DEPENDS+=	${RUBY_PKGPREFIX}-mini-magick>=4.11.0<4.12:../../graphics/ruby-mini-ma
 DEPENDS+=	${RUBY_PKGPREFIX}-redcarpet>=3.5.1<3.6:../../textproc/ruby-redcarpet
 
 .include "options.mk"
-
-REPLACE_RUBY+=	${DISTNAME}/bin/*
-REPLACE_RUBY+=	${DISTNAME}/extra/mail_handler/rdm-mailhandler.rb
-REPLACE_RUBY+=	${DISTNAME}/extra/svn/reposman.rb
-REPLACE_RUBY+=	${DISTNAME}/public/dispatch.fcgi.example
 
 SUBST_CLASSES+=		shell
 SUBST_FILES.shell=	${DESTDIR}${PREFIX}/bin/redmine42_*${RUBY_SUFFIX}.sh
@@ -85,10 +86,7 @@ FILES_SUBST+=	WWWGRP=${APACHE_GROUP} WWWOWN=${APACHE_USER} \
 		RM_DIR=${RM_DIR}
 
 do-install:
-	cd ${WRKSRC} && ${FIND} . -type d -exec ${INSTALL_DATA_DIR} \
-		${DESTDIR}${PREFIX}/${RM_DIR}/{} \;
-	cd ${WRKSRC} && ${FIND} . -type f ! -name "*.orig" -exec \
-		${INSTALL_DATA} {} ${DESTDIR}${PREFIX}/${RM_DIR}/{} \;
+	cd ${WRKSRC} && ${PAX} -rw -pp . ${DESTDIR}${PREFIX}/${RM_DIR}/
 	${INSTALL_SCRIPT} ${FILESDIR}/redmine42_migrate_plugins.sh \
 		${DESTDIR}${PREFIX}/bin/redmine42_migrate_plugins${RUBY_SUFFIX}.sh
 	${INSTALL_SCRIPT} ${FILESDIR}/redmine42_generate_secret_token.sh \
@@ -99,7 +97,11 @@ do-install:
 		${DESTDIR}${PREFIX}/bin/redmine42_load_default_data${RUBY_SUFFIX}.sh
 
 post-install: unicorn-post-install
-	${FIND} ${DESTDIR}/ -name ".*" \( -type f -or -type d \) | xargs rm -rf
+	${FIND} ${DESTDIR}${PREFIX}/${RM_DIR} \
+		\( -name ".*" -or -name "*.orig" \) -type f -exec ${RM} {} \;
+	${RM} -rf ${DESTDIR}${PREFIX}/${RM_DIR}/.github
+	${CHMOD} -x ${DESTDIR}${PREFIX}/${RM_DIR}/Rakefile
+	${CHMOD} -R g-w ${DESTDIR}${PREFIX}/${RM_DIR}
 	${MV} ${DESTDIR}${PREFIX}/${RM_DIR}/config/configuration.yml.example \
 		${DESTDIR}/${EGDIR}
 	${MV} ${DESTDIR}${PREFIX}/${RM_DIR}/config/database.yml.example \

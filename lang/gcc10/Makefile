@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.14 2021/10/12 13:46:14 tnn Exp $
+# $NetBSD: Makefile,v 1.19 2022/07/03 15:59:17 wiz Exp $
 
 GCC_PKGNAME=		gcc10
-PKGREVISION=		1
 .include		"version.mk"
 
 DISTNAME=	gcc-${GCC10_DIST_VERSION}
@@ -23,6 +22,7 @@ EXTRACT_ONLY=		${DEFAULT_DISTFILES}
 
 # Relocations result in a linker error on AArch64, but not x86.
 MKPIE_SUPPORTED=	no
+CHECK_RELRO_SKIP+=	${GCC_PKGNAME}/lib/*
 
 NOT_FOR_PLATFORM=	Interix-*-*
 
@@ -107,8 +107,9 @@ CONFIGURE_ARGS+=	--enable-long-long
 CONFIGURE_ARGS+=	--with-local-prefix=${GCC_PREFIX:Q}
 CONFIGURE_ARGS+=	--enable-threads=posix
 CONFIGURE_ARGS+=	--with-boot-ldflags=${BOOT_LDFLAGS:Q}
-CONFIGURE_ARGS+=	--with-system-zlib
 CONFIGURE_ARGS+=	--without-zstd
+# causes build errors even when using lang/gcc10 to self-host.
+CONFIGURE_ARGS.SunOS+=	--disable-libsanitizer
 # multilib on Darwin requires fat-binaries
 CONFIGURE_ARGS.Darwin+=	--disable-multilib
 .if !empty(OSX_SDK_PATH)
@@ -125,7 +126,6 @@ MAKE_ENV.SunOS+=	ac_cv_func_mkostemp=no
 
 .if !empty(PKGSRC_COMPILER:Mclang) || ${OPSYS} == "DragonFly"
 CONFIGURE_ARGS+=	--disable-bootstrap
-CHECK_RELRO_SKIP+=	${GCC_PKGNAME}/lib/*
 .endif
 
 .if !empty(MACHINE_PLATFORM:MNetBSD-*-i386) || !empty(MACHINE_PLATFORM:MLinux-*-i386)
@@ -199,7 +199,14 @@ GENERATE_PLIST+= \
 	cd ${DESTDIR}${PREFIX} && \
 	${FIND} ${GCC_SUBPREFIX} \( -type f -o -type l \) -print | ${SORT};
 
-.include "../../devel/zlib/buildlink3.mk"
+CHECK_BUILTIN.zlib:= yes
+.include "../../devel/zlib/builtin.mk"
+CHECK_BUILTIN.zlib:= no
+.if !empty(USE_BUILTIN.zlib:M[yY][eE][sS])
+CONFIGURE_ARGS+=	--with-system-zlib
+.else
+CONFIGURE_ARGS+=	--without-system-zlib
+.endif
 .include "../../mk/dlopen.buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

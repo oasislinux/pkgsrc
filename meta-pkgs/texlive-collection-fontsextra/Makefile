@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.25 2021/06/07 11:33:49 markd Exp $
+# $NetBSD: Makefile,v 1.29 2022/08/22 11:41:31 markd Exp $
 
 DISTNAME=	collection-fontsextra
-PKGNAME=	texlive-${DISTNAME}-2021pre1
+PKGNAME=	texlive-${DISTNAME}-2022pre1
 CATEGORIES=	meta-pkgs
 MASTER_SITES=	# empty
-TEXLIVE_REV=	58253
+TEXLIVE_REV=	63936
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.tug.org/texlive/
@@ -12,7 +12,7 @@ COMMENT=	Additional fonts for TeX
 
 DEPENDS+=	texlive-collection-basic>=2014:../../meta-pkgs/texlive-collection-basic
 
-DEPENDS+=	tex-Asana-Math-[0-9]*:../../fonts/tex-Asana-Math
+# depend aboensis
 DEPENDS+=	tex-academicons-[0-9]*:../../fonts/tex-academicons
 DEPENDS+=	tex-accanthis-[0-9]*:../../fonts/tex-accanthis
 DEPENDS+=	tex-adforn-[0-9]*:../../fonts/tex-adforn
@@ -24,6 +24,7 @@ DEPENDS+=	tex-alegreya-[0-9]*:../../fonts/tex-alegreya
 DEPENDS+=	tex-allrunes-[0-9]*:../../fonts/tex-allrunes
 # depend almendra
 DEPENDS+=	tex-almfixed-[0-9]*:../../fonts/tex-almfixed
+# andika
 DEPENDS+=	tex-anonymouspro-[0-9]*:../../fonts/tex-anonymouspro
 DEPENDS+=	tex-antiqua-[0-9]*:../../fonts/tex-antiqua
 DEPENDS+=	tex-antt-[0-9]*:../../fonts/tex-antt
@@ -32,6 +33,7 @@ DEPENDS+=	tex-archaic-[0-9]*:../../fonts/tex-archaic
 DEPENDS+=	tex-arev-[0-9]*:../../fonts/tex-arev
 # depend arimo
 # depend arvo
+DEPENDS+=	tex-asana-math-[0-9]*:../../fonts/tex-Asana-Math
 # depend asapsym
 DEPENDS+=	tex-ascii-font-[0-9]*:../../fonts/tex-ascii-font
 DEPENDS+=	tex-aspectratio-[0-9]*:../../fonts/tex-aspectratio
@@ -50,6 +52,7 @@ DEPENDS+=	tex-bbm-[0-9]*:../../fonts/tex-bbm
 DEPENDS+=	tex-bbm-macros-[0-9]*:../../print/tex-bbm-macros
 DEPENDS+=	tex-bbold-[0-9]*:../../fonts/tex-bbold
 DEPENDS+=	tex-bbold-type1-[0-9]*:../../fonts/tex-bbold-type1
+# depend bboldx
 DEPENDS+=	tex-belleek-[0-9]*:../../fonts/tex-belleek
 DEPENDS+=	tex-bera-[0-9]*:../../fonts/tex-bera
 DEPENDS+=	tex-berenisadf-[0-9]*:../../fonts/tex-berenisadf
@@ -95,6 +98,7 @@ DEPENDS+=	tex-cmtiup-[0-9]*:../../fonts/tex-cmtiup
 DEPENDS+=	tex-comfortaa-[0-9]*:../../fonts/tex-comfortaa
 DEPENDS+=	tex-comicneue-[0-9]*:../../fonts/tex-comicneue
 DEPENDS+=	tex-concmath-fonts-[0-9]*:../../fonts/tex-concmath-fonts
+# depend concmath-otf
 DEPENDS+=	tex-cookingsymbols-[0-9]*:../../fonts/tex-cookingsymbols
 # depend cormorantgaramond
 DEPENDS+=	tex-countriesofeurope-[0-9]*:../../fonts/tex-countriesofeurope
@@ -184,7 +188,10 @@ DEPENDS+=	tex-greenpoint-[0-9]*:../../fonts/tex-greenpoint
 DEPENDS+=	tex-grotesq-[0-9]*:../../fonts/tex-grotesq
 # depend gudea
 DEPENDS+=	tex-hacm-[0-9]*:../../fonts/tex-hacm
+# depend hamnosys
 DEPENDS+=	tex-hands-[0-9]*:../../fonts/tex-hands
+# depend hep-font
+# depend hep-math-font
 DEPENDS+=	tex-heuristica-[0-9]*:../../fonts/tex-heuristica
 DEPENDS+=	tex-hfbright-[0-9]*:../../fonts/tex-hfbright
 DEPENDS+=	tex-hfoldsty-[0-9]*:../../fonts/tex-hfoldsty
@@ -221,7 +228,7 @@ DEPENDS+=	tex-librebaskerville-[0-9]*:../../fonts/tex-librebaskerville
 DEPENDS+=	tex-librecaslon-[0-9]*:../../fonts/tex-librecaslon
 # depend librefranklin
 DEPENDS+=	tex-libris-[0-9]*:../../fonts/tex-libris
-DEPENDS+=	tex-linearA-[0-9]*:../../fonts/tex-linearA
+DEPENDS+=	tex-lineara-[0-9]*:../../fonts/tex-linearA
 # depend linguisticspro
 DEPENDS+=	tex-lobster2-[0-9]*:../../fonts/tex-lobster2
 # depend logix
@@ -299,11 +306,13 @@ DEPENDS+=	tex-sauterfonts-[0-9]*:../../fonts/tex-sauterfonts
 DEPENDS+=	tex-schulschriften-[0-9]*:../../print/tex-schulschriften
 DEPENDS+=	tex-semaphor-[0-9]*:../../fonts/tex-semaphor
 # depend shobhika
+# depend simpleicons
 DEPENDS+=	tex-skull-[0-9]*:../../fonts/tex-skull
 DEPENDS+=	tex-sourcecodepro-[0-9]*:../../fonts/tex-sourcecodepro
 DEPENDS+=	tex-sourcesanspro-[0-9]*:../../fonts/tex-sourcesanspro
 DEPENDS+=	tex-sourceserifpro-[0-9]*:../../fonts/tex-sourceserifpro
 # depend spectral
+# depend srbtiks
 DEPENDS+=	tex-starfont-[0-9]*:../../fonts/tex-starfont
 DEPENDS+=	tex-staves-[0-9]*:../../fonts/tex-staves
 # depend step
@@ -314,6 +323,7 @@ DEPENDS+=	tex-stix2-otf-[0-9]*:../../fonts/tex-stix2-otf
 # depend stix2-type1
 DEPENDS+=	tex-superiors-[0-9]*:../../fonts/tex-superiors
 # depend svrsymbols
+# depend symbats3
 DEPENDS+=	tex-tapir-[0-9]*:../../fonts/tex-tapir
 # depend tempora
 DEPENDS+=	tex-tengwarscript-[0-9]*:../../fonts/tex-tengwarscript
@@ -336,8 +346,10 @@ DEPENDS+=	tex-urwchancal-[0-9]*:../../fonts/tex-urwchancal
 DEPENDS+=	tex-venturisadf-[0-9]*:../../fonts/tex-venturisadf
 DEPENDS+=	tex-wsuipa-[0-9]*:../../fonts/tex-wsuipa
 DEPENDS+=	tex-xcharter-[0-9]*:../../fonts/tex-xcharter
+# depend xcharter-math
 DEPENDS+=	tex-xits-[0-9]*:../../fonts/tex-xits
 DEPENDS+=	tex-yfonts-[0-9]*:../../print/tex-yfonts
+# yfonts-otf
 DEPENDS+=	tex-yfonts-t1-[0-9]*:../../fonts/tex-yfonts-t1
 # depend yinit-otf
 DEPENDS+=	tex-zlmtt-[0-9]*:../../fonts/tex-zlmtt

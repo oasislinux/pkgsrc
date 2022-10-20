@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.2 2022/09/07 02:53:51 pho Exp $
+
+BLAKE2s (purescript-0.15.4.tar.gz) = bef501e953a2cfc2f86eaedd3e0d5d21d8741fe2e70d164cd8ad5bc28ddc3d5a
+SHA512 (purescript-0.15.4.tar.gz) = edcbffabe8ad8aa0bfbfb217343d826988ad63838b3312d07e396fa29f57c42486536d8389db524ba56a6c6ff3137cd20c4a15e389dc9c4bd5026cb907c12d82
+Size (purescript-0.15.4.tar.gz) = 760462 bytes

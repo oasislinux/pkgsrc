@@ -1,6 +1,5 @@
-$NetBSD: distinfo,v 1.11 2021/10/26 10:15:04 nia Exp $
+$NetBSD: distinfo,v 1.13 2022/08/19 12:30:14 wiz Exp $
 
-BLAKE2s (vector-0.12.0.3.tar.gz) = 216f5aa423c0ce69fe5c397016dc0cf20e288a040049e746fdb692d61b6a9a7d
-SHA512 (vector-0.12.0.3.tar.gz) = 176646ae612866064303cd200e9d940fec1645bb88176a89adb00df3b9a6df96200e3c9cf85a57af3a1481d6633b353da8e03d7a6c467c40e926275fe8d36853
-Size (vector-0.12.0.3.tar.gz) = 124899 bytes
-SHA1 (patch-vector.cabal) = aae23c57dcb3df8fe3e3d8c20f15887fa6087065
+BLAKE2s (vector-0.13.0.0.tar.gz) = 8b374b32fb62b0b723c313d3773165503ea97a217c6fd7c66cc0e4496fabed98
+SHA512 (vector-0.13.0.0.tar.gz) = aadb33cb1acf3cc634631fbf6a8764fb92514a43c17395e305c9fcc91e0768ce51cec30c542a9ba998bf90e297732082ef5dbbf74232c885d613ac0fb7bcd2e1
+Size (vector-0.13.0.0.tar.gz) = 154509 bytes

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.112 2021/12/08 16:02:32 adam Exp $
+# $NetBSD: Makefile,v 1.116 2022/08/11 05:09:12 gutteridge Exp $
 
-PKGREVISION= 17
+PKGREVISION= 20
 .include "../../print/evince3/Makefile.common"
 
 COMMENT=		Document viewer
@@ -14,6 +14,7 @@ USE_TOOLS+=	gsed
 
 CONFIGURE_ARGS+=	--disable-compile-warnings
 
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
 .include "../../devel/glib2/schemas.mk"
 .include "../../graphics/librsvg/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
@@ -21,5 +22,4 @@ CONFIGURE_ARGS+=	--disable-compile-warnings
 BUILDLINK_DEPMETHOD.libXt=	build
 .include "../../x11/libXt/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"
-
 .include "../../mk/bsd.pkg.mk"

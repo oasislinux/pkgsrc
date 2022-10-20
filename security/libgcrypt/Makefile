@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.104 2021/08/30 15:53:43 wiz Exp $
+# $NetBSD: Makefile,v 1.107 2022/09/18 08:50:59 nros Exp $
 
-DISTNAME=	libgcrypt-1.9.4
+DISTNAME=	libgcrypt-1.10.1
 CATEGORIES=	security
 MASTER_SITES=	https://gnupg.org/ftp/gcrypt/libgcrypt/
 EXTRACT_SUFX=	.tar.bz2
@@ -27,6 +27,8 @@ SUBST_FILES.rpath=	src/libgcrypt-config.in
 SUBST_STAGE.rpath=	pre-configure
 SUBST_MESSAGE.rpath=	Fixing rpath flags
 SUBST_VARS.rpath=	COMPILER_RPATH_FLAG
+
+PKGCONFIG_OVERRIDE+=	src/libgcrypt.pc.in
 
 .include "options.mk"
 

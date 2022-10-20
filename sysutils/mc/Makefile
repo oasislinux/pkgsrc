@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.125 2021/12/08 16:06:34 adam Exp $
+# $NetBSD: Makefile,v 1.129 2022/08/09 12:08:33 jperkin Exp $
 
-DISTNAME=	mc-4.8.27
+DISTNAME=	mc-4.8.28
 PKGREVISION=	1
 CATEGORIES=	sysutils
 # Supports HTTPS, but cert is invalid...

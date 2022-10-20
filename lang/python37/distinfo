@@ -1,12 +1,11 @@
-$NetBSD: distinfo,v 1.31 2022/01/20 13:03:23 jperkin Exp $
+$NetBSD: distinfo,v 1.34 2022/10/12 08:38:36 adam Exp $
 
-BLAKE2s (Python-3.7.12.tar.xz) = 74fece84e0ce91742bfcc2686d964158fe4d1f5c537e7be61e63d28d21efc495
-SHA512 (Python-3.7.12.tar.xz) = e1a5942908c1d1469c0ab129fb4287d4ba6eb2a030e88fd71c043fe187a1bc86c00878dab29147199617a361a0c60d9e720fe3bc58bc7bc4cc8ec4bb50c7ea2a
-Size (Python-3.7.12.tar.xz) = 17401916 bytes
+BLAKE2s (Python-3.7.15.tar.xz) = 88be85eec1aa74145810f3ab0b84baecd416499fb7aa70d9808a2cdfcc82907c
+SHA512 (Python-3.7.15.tar.xz) = f2ad9b900b31f7af970615d15102bea95759291a024ec3f6d5637893240f0b11094a319883fd39918d2103b283e65db1b6aa375935e22822f7ac8e745fdf4973
+Size (Python-3.7.15.tar.xz) = 18123180 bytes
 SHA1 (patch-Lib___osx__support.py) = dbec9925c1a0b6b845101df9825af52d83317773
 SHA1 (patch-Lib_ctypes_____init____.py) = ded12eb372028288d85ba88b43e45549c6f48144
 SHA1 (patch-Lib_ctypes_macholib_dyld.py) = 267f0b39f116bc9df0b24c277b48ce59cfecd397
-SHA1 (patch-Lib_ctypes_test_test__macholib.py) = 76bb73619e5a27aa1009d4c65e3be1f69b9b6e91
 SHA1 (patch-Lib_ctypes_util.py) = 032cc99ebad93ddddfd89073c60424a952e3faa3
 SHA1 (patch-Lib_distutils_sysconfig.py) = 6822eafb4dfded86d7f7353831816aeb8119e6cf
 SHA1 (patch-Lib_distutils_unixccompiler.py) = 2e65a8dd5dd3fe25957206c062106fa7a6fc4e69

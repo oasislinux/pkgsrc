@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.18 2022/01/31 09:52:04 wiz Exp $
+$NetBSD: distinfo,v 1.22 2022/04/29 11:57:21 adam Exp $
 
-BLAKE2s (click-8.0.3.tar.gz) = 7915e6a16eb209cc7ba39f64f346487ad83b0b39db077335f716e336eb127de1
-SHA512 (click-8.0.3.tar.gz) = f6dcda8014503bc3e5b3599a5ce870b6d927a67e62c3dc88cc7b193db9bede1f1242905e56128b51df12e61fb0c15909d028a7bcb466655a8e01357c121aacda
-Size (click-8.0.3.tar.gz) = 329034 bytes
+BLAKE2s (click-8.1.3.tar.gz) = 8c0e3160ba5eec6f8fd42b82cc3ab6e778babfb375429d9568c3e563d666497b
+SHA512 (click-8.1.3.tar.gz) = be5b0c8b72ef7c10854f31406668ca4d6f826381deff10bb6a87a406166c09af97e2165f1327094d96abade15efb872892af37f20fdbc855b659cb2c7bd2f2c5
+Size (click-8.1.3.tar.gz) = 331147 bytes

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.34 2021/10/12 13:46:15 tnn Exp $
+# $NetBSD: Makefile,v 1.39 2022/08/10 21:54:47 jperkin Exp $
 
 GCC_PKGNAME=	gcc9
 .include "version.mk"
@@ -8,7 +8,7 @@ PKGNAME=	${GCC_PKGNAME}-${GCC9_DIST_VERSION}
 ## When bumping the PKGREVISION of this package the PKGREVISION of
 ## lang/gcc9-libs needs to be bumped to be at least 1 more than the
 ## PKGREVISION of this package!
-PKGREVISION=	7
+PKGREVISION=	9
 CATEGORIES=	lang
 MASTER_SITES=	${MASTER_SITE_GNU:=gcc/gcc-${GCC9_VERSION}/}
 EXTRACT_SUFX=	.tar.xz
@@ -28,6 +28,7 @@ USE_TOOLS.NetBSD+=	gsed
 
 # Relocations result in a linker error on AArch64, but not x86.
 MKPIE_SUPPORTED=	no
+CHECK_RELRO_SKIP+=	${GCC_PKGNAME}/lib/*
 
 GNU_CONFIGURE=		yes
 GNU_CONFIGURE_STRICT=	no # has several configure scripts
@@ -39,8 +40,6 @@ GCC9_PREFIX=		${PREFIX}/${GCC9_SUBPREFIX}
 GNU_CONFIGURE_PREFIX=	${GCC9_PREFIX}
 INFO_FILES=		yes
 CONFIGURE_ARGS+=	--disable-libstdcxx-pch
-CONFIGURE_ARGS+=	--with-system-zlib
-CONFIGURE_ARGS.Linux+=	--without-system-zlib # to prevent "-lz not found"
 
 UNLIMIT_RESOURCES=	datasize stacksize
 
@@ -130,7 +129,6 @@ MAKE_ENV.SunOS+=	ac_cv_func_mkostemp=no
 
 .if !empty(PKGSRC_COMPILER:Mclang) || ${OPSYS} == "DragonFly"
 CONFIGURE_ARGS+=	--disable-bootstrap
-CHECK_RELRO_SKIP+=	${GCC_PKGNAME}/lib/*
 .endif
 
 .if ${MACHINE_PLATFORM:MNetBSD-*-i386} || ${MACHINE_PLATFORM:MLinux-*-i386}
@@ -166,8 +164,7 @@ CONFIGURE_ARGS+=	--with-gnu-as --with-as=/usr/sfw/bin/gas
 .  elif exists(/usr/ccs/bin/as)
 CONFIGURE_ARGS+=	--without-gnu-as --with-as=/usr/ccs/bin/as
 .  else
-BUILDLINK_DEPMETHOD.binutils=	full
-.    include "../../devel/binutils/buildlink3.mk"
+DEPENDS+=		binutils-[0-9]*:../../devel/binutils
 CONFIGURE_ARGS+=	--with-gnu-as --with-as=${PREFIX}/bin/gas
 .  endif
 .endif
@@ -204,7 +201,15 @@ GENERATE_PLIST+= \
 	cd ${DESTDIR}${PREFIX} && \
 	${FIND} ${GCC9_SUBPREFIX} \( -type f -o -type l \) -print | ${SORT};
 
+CHECK_BUILTIN.zlib:=	yes
+.include "../../devel/zlib/builtin.mk"
+CHECK_BUILTIN.zlib:=	no
+.if !empty(USE_BUILTIN.zlib:M[yY][eE][sS])
+CONFIGURE_ARGS+=	--with-system-zlib
 .include "../../devel/zlib/buildlink3.mk"
+.else
+CONFIGURE_ARGS+=	--without-system-zlib
+.endif
 .include "../../lang/python/application.mk"
 .include "../../mk/dlopen.buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"

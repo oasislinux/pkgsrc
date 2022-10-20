@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.88 2021/09/09 12:14:42 nia Exp $
+# $NetBSD: Makefile,v 1.91 2022/09/11 12:51:04 wiz Exp $
 
-DISTNAME=	libsndfile-1.0.31
+DISTNAME=	libsndfile-1.1.0
 PKGREVISION=	2
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_GITHUB:=libsndfile/}
 GITHUB_PROJECT=	libsndfile
 GITHUB_RELEASE=	${PKGVERSION_NOREV}
-EXTRACT_SUFX=	.tar.bz2
+EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://libsndfile.github.io/libsndfile/
@@ -33,8 +33,10 @@ CXXFLAGS+=		-features=extensions
 .endif
 
 .include "../../audio/flac/buildlink3.mk"
+.include "../../audio/lame/buildlink3.mk"
 .include "../../audio/libopus/buildlink3.mk"
 .include "../../audio/libvorbis/buildlink3.mk"
+.include "../../audio/mpg123/buildlink3.mk"
 .include "../../lang/python/tool.mk"
 BUILDLINK_API_DEPENDS.libogg+=	libogg>=1.1.3
 .include "../../multimedia/libogg/buildlink3.mk"

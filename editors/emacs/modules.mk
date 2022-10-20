@@ -1,4 +1,4 @@
-# $NetBSD: modules.mk,v 1.29 2020/10/08 00:15:35 gutteridge Exp $
+# $NetBSD: modules.mk,v 1.31 2022/05/14 21:57:01 dholland Exp $
 #
 # This Makefile fragment handles Emacs Lisp Packages (== ELPs).
 #
@@ -12,8 +12,9 @@
 #		XEmacs
 #			->${PREFIX}/lib/xemacs/site-packages/lisp/foo/...
 #
-#	* You can't install an ELP for both Emacs and XEmacs
-#	  simultaneously.
+#	* You can't necessarily install an ELP for both Emacs and XEmacs
+#	  simultaneously, though because of the above path difference many
+#	  do not conflict with one another.
 #
 #	* XEmacs packages' names are prefixed by "xemacs-".
 #
@@ -41,6 +42,7 @@
 #			The user's favourite Emacs version.  The default
 #			value is set in mk/defaults/mk.conf.
 #		Possible values:
+#			emacs28, emacs28nox,
 #			emacs27, emacs27nox, emacs26, emacs26nox,
 #			emacs25, emacs25nox, emacs21, emacs21nox,
 #			emacs20, xemacs215, xemacs215nox,
@@ -63,11 +65,13 @@
 #		Description:
 #			Versions the ELP accepts (supports).
 #		Possible values:
+#			emacs28, emacs28nox,
 #			emacs27, emacs27nox, emacs26, emacs26nox,
 #			emacs25, emacs25nox, emacs21, emacs21nox,
 #			emacs20, xemacs215, xemacs215nox,
 #			xemacs214, xemacs214nox
 #		Default value:
+#			emacs28, emacs28nox,
 #			emacs27, emacs27nox, emacs26, emacs26nox,
 #			emacs25, emacs25nox, emacs21, emacs21nox,
 #			emacs20, xemacs215, xemacs215nox,
@@ -180,10 +184,10 @@
 #		Possible values:
 #			XXX
 #
-#	FOR_{emacs27,emacs27nox,emacs26,emacs26nox,emacs25,emacs25nox,emacs21,emacs21nox,emacs20,xemacs215,xemacs215nox,xemacs214,xemacs214nox}
+#	FOR_{emacs28,emacs28nox,emacs27,emacs27nox,emacs26,emacs26nox,emacs25,emacs25nox,emacs21,emacs21nox,emacs20,xemacs215,xemacs215nox,xemacs214,xemacs214nox}
 #	FOR_{emacs,xemacs}
 #	FOR_{emacs_x,emacs_nox}
-#	NOTFOR_{emacs27,emacs27nox,emacs26,eemacs26nox,macs25,emacs25nox,emacs21,emacs21nox,emacs20,xemacs215,xemacs215nox,xemacs214,xemacs214nox}
+#	NOTFOR_{emacs28,emacs28nox,emacs27,emacs27nox,emacs26,eemacs26nox,macs25,emacs25nox,emacs21,emacs21nox,emacs20,xemacs215,xemacs215nox,xemacs214,xemacs214nox}
 #	NOTFOR_{emacs,xemacs}
 #	NOTFOR_{emacs_x,emacs_nox}
 #		Description:
@@ -232,6 +236,7 @@ BUILD_DEFS_EFFECTS+=	${_SYS_VARS.emacs}
 _EMACS_VERSIONS_ALL= \
 	emacs20 emacs21 emacs21nox emacs25 emacs25nox emacs26 emacs26nox \
 	emacs27 emacs27nox \
+	emacs28 emacs28nox \
 	xemacs214 xemacs214nox xemacs215 xemacs215nox
 
 _EMACS_PKGDIR_MAP= \
@@ -244,6 +249,8 @@ _EMACS_PKGDIR_MAP= \
 	emacs26nox@../../editors/emacs26-nox11 \
 	emacs27@../../editors/emacs27 \
 	emacs27nox@../../editors/emacs27-nox11 \
+	emacs28@../../editors/emacs28 \
+	emacs28nox@../../editors/emacs28-nox11 \
 	xemacs214@../../editors/xemacs \
 	xemacs214nox@../../editors/xemacs-nox11 \
 	xemacs215@../../editors/xemacs-current \
@@ -253,13 +260,11 @@ _EMACS_ETCDIR.emacs=		share
 _EMACS_INFODIR.emacs=		${PKGINFODIR}
 _EMACS_LISPDIR.emacs=		share/emacs/site-lisp
 _EMACS_PKGNAME_PREFIX.emacs=
-_EMACS_CONFLICTS.emacs=		xemacs-${PKGBASE}-[0-9]*
 
 _EMACS_ETCDIR.xemacs=		lib/xemacs/site-packages/etc
 _EMACS_INFODIR.xemacs=		lib/xemacs/site-packages/info
 _EMACS_LISPDIR.xemacs=		lib/xemacs/site-packages/lisp
 _EMACS_PKGNAME_PREFIX.xemacs=	xemacs-
-_EMACS_CONFLICTS.xemacs=	${PKGBASE:C|^xemacs-||}-[0-9]*
 
 #
 # Version decision
@@ -293,7 +298,6 @@ _EMACS_PKGDIR=	${_EMACS_PKGDIR_MAP:M${_EMACS_TYPE}@*:C|${_EMACS_TYPE}@||}
 #
 
 DEPENDS+=	${_EMACS_REQD}:${_EMACS_PKGDIR}
-CONFLICTS+=	${_EMACS_CONFLICTS.${_EMACS_FLAVOR}}
 
 EMACS_MODULES?=
 .for _mod_ in ${EMACS_MODULES}
@@ -355,11 +359,7 @@ PRINT_PLIST_AWK+=	{ gsub(/${EMACS_LISPPREFIX:S|${PREFIX}/||:S|/|\\/|g}/, \
 .if defined(EMACS_BUILDLINK)
 _EMACS_DIR=	${BUILDLINK_DIR}/share/emacs
 # A development version usually claims three digits, say, 27.0.50 etc.
-.  if ${EMACS_TYPE} == emacs28
-ALL_ENV+=	EMACSLOADPATH=${_EMACS_DIR}/${_EMACS_VERSION_MAJOR}.${_EMACS_VERSION_MINOR}.${_EMACS_VERSION_MICRO}/lisp:${_EMACS_DIR}/site-lisp
-.  else
 ALL_ENV+=	EMACSLOADPATH=${_EMACS_DIR}/${_EMACS_VERSION_MAJOR}.${_EMACS_VERSION_MINOR}/lisp:${_EMACS_DIR}/site-lisp
-.  endif
 .include	"${_EMACS_PKGDIR}/buildlink3.mk"
 .endif
 

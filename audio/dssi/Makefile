@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.2 2021/09/08 21:04:54 nia Exp $
+# $NetBSD: Makefile,v 1.4 2022/09/11 12:51:03 wiz Exp $
 
 DISTNAME=	dssi-1.1.1
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=dssi/}
 

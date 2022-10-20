@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.8 2021/10/26 11:23:30 nia Exp $
+$NetBSD: distinfo,v 1.10 2022/08/30 15:51:38 taca Exp $
 
-BLAKE2s (yajl-ruby-1.4.1.gem) = 1f342b1efb5d94ea2197a492d406015aa6d8a3d7b570520313591905a42d09f2
-SHA512 (yajl-ruby-1.4.1.gem) = 24cd82380658d784bbf0a7a16d4048125cc5a856b0e0b4d3bdec29a550a9131d3959f9a75eba0d18d5db8d0a23158fb7ef6ea6f60d221a7bc3d8efc437d52df5
-Size (yajl-ruby-1.4.1.gem) = 557056 bytes
+BLAKE2s (yajl-ruby-1.4.3.gem) = c28dd6ca95a01767d8a1ffcf6fdf9755c2d20e3345b2ec9ac879bbac6a0338a5
+SHA512 (yajl-ruby-1.4.3.gem) = 8cfde677f11ad80a468dce7876b97aa87fa35d78fcd727d4542e00c09cc28d1cca3301cf7c4e1f773edf2192262ec8d6ffab93b11d488d2b048d8013f6c7645a
+Size (yajl-ruby-1.4.3.gem) = 558592 bytes

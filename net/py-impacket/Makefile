@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.9 2022/01/05 15:41:16 wiz Exp $
+# $NetBSD: Makefile,v 1.11 2022/10/19 14:25:19 nia Exp $
 
 DISTNAME=	impacket-0.9.24
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
@@ -11,7 +11,6 @@ HOMEPAGE=	https://www.secureauth.com/labs/open-source-tools/impacket
 COMMENT=	Collection of Python classes for working with network protocols
 LICENSE=	apache-1.1
 
-DEPENDS+=	${PYPKGPREFIX}-OpenSSL>=0.16.2:../../security/py-OpenSSL
 DEPENDS+=	${PYPKGPREFIX}-asn1>=0.2.3:../../security/py-asn1
 DEPENDS+=	${PYPKGPREFIX}-chardet-[0-9]*:../../converters/py-chardet
 DEPENDS+=	${PYPKGPREFIX}-cryptodome-[0-9]*:../../security/py-cryptodome
@@ -24,10 +23,7 @@ TEST_DEPENDS+=	${PYPKGPREFIX}-coverage-[0-9]*:../../devel/py-coverage
 
 USE_PKG_RESOURCES=	yes
 
-.include "../../lang/python/pyversion.mk"
-.if ${_PYTHON_VERSION} == 27
-DEPENDS+=	${PYPKGPREFIX}-argparse-[0-9]*:../../devel/py-argparse
-.endif
+PYTHON_VERSIONS_INCOMPATIBLE=	27 # flask
 
 SUBST_CLASSES+=		crypto
 SUBST_STAGE.crypto=	pre-configure
@@ -71,4 +67,6 @@ ticketer wmiexec wmipersist wmiquery
 .endfor
 
 .include "../../lang/python/egg.mk"
+PYTHON_VERSIONED_DEPENDENCIES+=	OpenSSL
+.include "../../lang/python/versioned_dependencies.mk"
 .include "../../mk/bsd.pkg.mk"

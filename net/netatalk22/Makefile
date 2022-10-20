@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.45 2022/01/28 21:18:18 nat Exp $
+# $NetBSD: Makefile,v 1.47 2022/06/28 11:35:04 wiz Exp $
 
 DISTNAME=	netatalk-2.2.6
 PKGNAME=	${DISTNAME:C/-/22-/}
-PKGREVISION=	30
+PKGREVISION=	31
 CATEGORIES=	net print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=netatalk/}
 EXTRACT_SUFX=	.tar.bz2
@@ -71,7 +71,7 @@ PLIST.rcd=		yes
 
 PLIST_VARS+=		ea
 .if ${OPSYS} == "SunOS" || ${OPSYS} == "DragonFly" || ${OPSYS} == "Linux" || \
-	(${OPSYS} == "NetBSD" && empty(OS_VERSION:M[0-6].[0-8].*)) || \
+	(${OPSYS} == "NetBSD" && ${OPSYS_VERSION} >= 070000) || \
 	${OPSYS} == "FreeBSD"
 PLIST.ea=		yes
 .endif

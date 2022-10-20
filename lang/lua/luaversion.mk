@@ -1,4 +1,4 @@
-# $NetBSD: luaversion.mk,v 1.15 2020/08/25 22:46:24 gutteridge Exp $
+# $NetBSD: luaversion.mk,v 1.17 2022/06/28 09:39:59 nia Exp $
 
 # This file determines which Lua version is used as a dependency for
 # a package.
@@ -9,7 +9,7 @@
 #	The preferred lua version to use.
 #
 #	Possible values: 51 52 53 54
-#	Default: 53
+#	Default: 54
 #
 # === Infrastructure variables ===
 #
@@ -79,7 +79,7 @@ LUA_VERSION_REQD?= ${PKGNAME_OLD:C/(^.*-|^)lua([0-9][0-9])-.*/\2/}
 BUILD_DEFS+=		LUA_VERSION_DEFAULT
 BUILD_DEFS_EFFECTS+=	LUA_PACKAGE
 
-LUA_VERSION_DEFAULT?=	53
+LUA_VERSION_DEFAULT?=	54
 LUA_VERSIONS_ACCEPTED?=	54 53 52 51
 LUA_VERSIONS_INCOMPATIBLE?=# empty
 

@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.18 2022/02/06 05:31:57 pho Exp $
+# $NetBSD: Makefile,v 1.21 2022/06/30 11:18:33 nia Exp $
 # -----------------------------------------------------------------------------
 # Package metadata
 #
 DISTNAME=	ghc-9.0.2-src
-PKGREVISION=	1
+PKGREVISION=	2
 PKGNAME=	${DISTNAME:S/-src$//}
 CATEGORIES=	lang
 MASTER_SITES=	https://downloads.haskell.org/~ghc/${PKGVERSION_NOREV}/
@@ -103,17 +103,21 @@ CONFIGURE_ENV+=	CONF_GCC_LINKER_OPTS_STAGE${stage}=${LDFLAGS:M*:Q}
 # the buildlink.
 .endfor
 
-# The use of internal variable in mk/bsd.prefs.mk is not very satisfying,
-# but the current infrastructure does not export a public variable
-# indicating whether a PIE build is requested or not. Note that we can't
-# build stage-1 compiler as PIE, because our bootkit libraries aren't
+# The use of internal variable ${_PKGSRC_MKPIE} in mk/bsd.prefs.mk is not
+# very satisfying, but the current infrastructure does not export a public
+# variable indicating whether a PIE build is requested or not. Note that we
+# can't build stage-1 compiler as PIE, because our bootkit libraries aren't
 # necessarily built as PIC.
 .for stage in 0 1 2
 .  if ${stage} == 0
 CONFIGURE_ENV+=	CONF_CC_OPTS_STAGE${stage}=${CFLAGS:M*:Q}
 .  else
+.    if ${_PKGSRC_MKPIE} == "yes"
 CONFIGURE_ENV+=	CONF_HC_OPTS_STAGE${stage}=-fPIC\ -pie
 CONFIGURE_ENV+=	CONF_CC_OPTS_STAGE${stage}=${CFLAGS:M*:Q}\ -fPIC
+.    else
+CONFIGURE_ENV+=	CONF_CC_OPTS_STAGE${stage}=${CFLAGS:M*:Q}
+.    endif
 .  endif
 .endfor
 
@@ -231,7 +235,7 @@ BUILD_DEPENDS+=	${PYPKGPREFIX}-sphinx-[0-9]*:../../textproc/py-sphinx
 # NetBSD 9.x have libcurses with a newer major version than the
 # bootstrap kit is linked against. For now, work around this with
 # compat80.
-.if !empty(MACHINE_PLATFORM:MNetBSD-*-x86_64) && empty(OS_VERSION:M[0-8].*)
+.if !empty(MACHINE_PLATFORM:MNetBSD-*-x86_64) && ${OPSYS_VERSION} >= 090000
 BUILD_DEPENDS+=	compat80-[0-9]*:../../emulators/compat80
 # In a sandboxed build environment, we have to reach over to the
 # installed libraries themselves, since the symlinks compat80 adds

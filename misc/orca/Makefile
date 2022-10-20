@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.58 2021/12/08 16:05:42 adam Exp $
+# $NetBSD: Makefile,v 1.62 2022/08/11 05:09:03 gutteridge Exp $
 
 DISTNAME=	orca-3.34.1
-PKGREVISION=	6
+PKGREVISION=	8
 CATEGORIES=	misc gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/orca/3.34/}
 EXTRACT_SUFX=	.tar.xz
@@ -22,9 +22,6 @@ PY_PATCHPLIST=	yes
 USE_TOOLS+=	pkg-config gmake itstool
 USE_TOOLS+=	msgfmt msgmerge xgettext
 
-# XXX msgfmt: unknown option -- desktop
-_TOOLS_USE_PKGSRC.msgfmt=	yes
-
 # Python 3 only
 PYTHON_VERSIONS_INCOMPATIBLE=	27
 
@@ -32,6 +29,7 @@ CHECK_PORTABILITY_SKIP+=	run_pylint.sh.in
 
 .include "../../devel/glib2/schemas.mk"
 .include "../../audio/speech-dispatcher/buildlink3.mk"
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
 .include "../../devel/libwnck3/buildlink3.mk"
 .include "../../devel/py-gobject3-common/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"

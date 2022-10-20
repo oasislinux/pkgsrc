@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.3 2020/10/12 21:52:30 kim Exp $
+# $NetBSD: Makefile,v 1.10 2022/10/19 13:56:32 nia Exp $
 
-PKGNAME=	ca-certificates-20200601
-PKGREVISION=	1
+PKGNAME=	ca-certificates-20211016
+PKGREVISION=	4
 DISTNAME=	${PKGNAME_NOREV:C/-([^-]*)$/_\1/}
 CATEGORIES=	security
 MASTER_SITES=	http://deb.debian.org/debian/pool/main/c/ca-certificates/
@@ -12,8 +12,9 @@ HOMEPAGE=	https://packages.debian.org/source/sid/ca-certificates
 COMMENT=	Root CA certificates from the Mozilla Project
 LICENSE=	gnu-gpl-v2 AND mpl-2.0
 
-NO_CONFIGURE=		yes
-PYTHON_FOR_BUILD_ONLY=	yes
+NO_CONFIGURE=			yes
+PYTHON_FOR_BUILD_ONLY=		tool
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 USE_TOOLS=	echo:run find:run ln:run openssl:run rm:run sed:run sort:run wc:run
 
@@ -23,10 +24,9 @@ DOCDIR=		${PREFIX}/share/doc/${PKGBASE}
 EGDIR=		${PREFIX}/share/examples/${PKGBASE}
 MANDIR=		${PREFIX}/${PKGMANDIR}/man8
 
-# Set paths depending on whether we depend on builtin or pkgsrc
-# openssl.  \todo Arguably, we should consider installing into both
-# builtin and pkgsrc, if both exist, but this requires much more
-# thought.
+# Set default certificate store path depending on whether we depend on
+# builtin or pkgsrc openssl.
+
 CHECK_BUILTIN.openssl=	yes
 .include "../../security/openssl/builtin.mk"
 CHECK_BUILTIN.openssl=	no
@@ -45,20 +45,24 @@ SUBST_MESSAGE.paths=	Replacing hard-coded paths.
 SUBST_STAGE.paths=	post-build
 SUBST_FILES.paths=	Makefile sbin/Makefile
 SUBST_FILES.paths+=	ca-certificates.conf
+SUBST_FILES.paths+=	ca-certificates-dir.conf
 SUBST_FILES.paths+=	sbin/update-ca-certificates sbin/update-ca-certificates.8
 SUBST_FILES.paths+=	README.pkgsrc
 SUBST_SED.paths=	-e 's,/usr/sbin,${PREFIX}/sbin,g'
-SUBST_SED.paths+=	-e 's,/etc/ca-certificates.conf,${PKG_SYSCONFDIR}/ca-certificates.conf,g'
+SUBST_SED.paths+=	-e 's,/etc/ca-certificates,${PKG_SYSCONFDIR}/ca-certificates,g'
 SUBST_SED.paths+=	-e 's,/etc/ssl,${SSLDIR},g'
 SUBST_SED.paths+=	-e 's,/usr/share/ca-certificates,${DATADIR},g'
 
 INSTALLATION_DIRS=	sbin ${DATADIR} ${DOCDIR} ${EGDIR} ${MANDIR}
 
 CONF_FILES=		${EGDIR}/ca-certificates.conf \
-			${PKG_SYSCONFDIR}/ca-certificates.conf
+			${PKG_SYSCONFDIR}/ca-certificates.conf \
+			${EGDIR}/ca-certificates-dir.conf \
+			${PKG_SYSCONFDIR}/ca-certificates-dir.conf
 
 pre-build:
-	@${CP} ${FILESDIR}/ca-certificates.conf ${FILESDIR}/README.pkgsrc ${WRKSRC}/
+	@${CP} ${FILESDIR}/ca-certificates.conf ${FILESDIR}/ca-certificates-dir.conf \
+	    ${FILESDIR}/README.pkgsrc ${WRKSRC}/
 	@${GREP} '^share/ca-certificates/' ${FILESDIR}/../PLIST \
 	    >> ${WRKSRC}/ca-certificates.conf
 
@@ -76,7 +80,10 @@ post-install:
 	    ${DESTDIR}${DOCDIR}/
 	${INSTALL_DATA} \
 	    ${WRKSRC}/ca-certificates.conf \
+	    ${WRKSRC}/ca-certificates-dir.conf \
 	    ${DESTDIR}${EGDIR}/
 
 .include "../../lang/python/tool.mk"
+PYTHON_VERSIONED_DEPENDENCIES+=	cryptography:tool
+.include "../../lang/python/versioned_dependencies.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.2 2021/04/23 09:35:56 pho Exp $
+@comment $NetBSD: PLIST,v 1.4 2022/09/07 01:36:31 pho Exp $
 lib/memory-${PKGVERSION}/${HS_VERSION}/package-description
 lib/memory-${PKGVERSION}/${HS_VERSION}/package-id
 lib/${HS_PLATFORM}/libHS${HS_PKGID}-${HS_VER}.so
@@ -80,9 +80,6 @@ lib/${HS_PLATFORM}/${HS_PKGID}/Data/Memory/Internal/DeepSeq.p_hi
 lib/${HS_PLATFORM}/${HS_PKGID}/Data/Memory/Internal/Imports.dyn_hi
 lib/${HS_PLATFORM}/${HS_PKGID}/Data/Memory/Internal/Imports.hi
 lib/${HS_PLATFORM}/${HS_PKGID}/Data/Memory/Internal/Imports.p_hi
-lib/${HS_PLATFORM}/${HS_PKGID}/Data/Memory/Internal/Scrubber.dyn_hi
-lib/${HS_PLATFORM}/${HS_PKGID}/Data/Memory/Internal/Scrubber.hi
-lib/${HS_PLATFORM}/${HS_PKGID}/Data/Memory/Internal/Scrubber.p_hi
 lib/${HS_PLATFORM}/${HS_PKGID}/Data/Memory/MemMap/Posix.dyn_hi
 lib/${HS_PLATFORM}/${HS_PKGID}/Data/Memory/MemMap/Posix.hi
 lib/${HS_PLATFORM}/${HS_PKGID}/Data/Memory/MemMap/Posix.p_hi

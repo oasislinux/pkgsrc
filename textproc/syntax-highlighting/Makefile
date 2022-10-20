@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.41 2021/12/08 16:02:45 adam Exp $
+# $NetBSD: Makefile,v 1.49 2022/09/29 01:18:44 markd Exp $
 
 DISTNAME=	syntax-highlighting-${KF5VER}
-PKGREVISION=	5
 CATEGORIES=	textproc
 
 HOMEPAGE=	https://community.kde.org/Frameworks
@@ -13,6 +12,7 @@ LICENSE=	gnu-lgpl-v2.1
 USE_TOOLS+=	perl
 
 CHECK_PORTABILITY_SKIP+=	autotests/input/highlight.sh
+CHECK_PORTABILITY_SKIP+=	autotests/folding/highlight.sh.fold
 
 .include "../../x11/qt5-qtbase/buildlink3.mk"
 BUILDLINK_DEPMETHOD.qt5-qttools= build

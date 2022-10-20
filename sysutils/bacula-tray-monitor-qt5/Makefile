@@ -1,8 +1,6 @@
-# $NetBSD: Makefile,v 1.13 2021/12/08 16:06:25 adam Exp $
+# $NetBSD: Makefile,v 1.18 2022/10/12 20:59:19 markd Exp $
 
 PKGNAME=	${DISTNAME:S/-/-tray-monitor-qt5-/}
-PKGREVISION=	2
-#PKGREVISION=	2
 COMMENT=	System tray monitor for Bacula - The Network Backup Solution
 
 DISTINFO_FILE=		${.CURDIR}/../../sysutils/bacula/distinfo
@@ -28,5 +26,6 @@ post-install:
 
 .include "../../sysutils/bacula/Makefile.common"
 .include "../../sysutils/bacula/buildlink3.mk"
+.include "../../devel/libinotify/buildlink3.mk"
 .include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

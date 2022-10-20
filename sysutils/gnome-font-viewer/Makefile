@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2021/12/08 16:06:29 adam Exp $
+# $NetBSD: Makefile,v 1.7 2022/08/11 05:09:15 gutteridge Exp $
 
 DISTNAME=	gnome-font-viewer-3.34.0
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/${PKGBASE}/${PKGVERSION_NOREV:R}/}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	sysutils gnome
 EXTRACT_SUFX=	.tar.xz
 
@@ -13,16 +13,10 @@ LICENSE=	gnu-gpl-v2
 
 USE_TOOLS+=	pkg-config msgfmt xgettext
 
-.include "../../mk/bsd.prefs.mk"
-
-# msgfmt: unknown option -- xml
-.if ${OPSYS} == "NetBSD"
-TOOLS_PLATFORM.msgfmt=
-.endif
-
 PYTHON_FOR_BUILD_ONLY=	tool
 
 .include "../../devel/meson/build.mk"
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
 .include "../../devel/glib2/schemas.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"

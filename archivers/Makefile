@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.189 2022/01/17 17:49:05 rhialto Exp $
+# $NetBSD: Makefile,v 1.191 2022/06/17 23:05:24 wiz Exp $
 #
 
 COMMENT=	Archivers and compression tools
@@ -108,7 +108,6 @@ SUBDIR+=	py-libarchive-c
 SUBDIR+=	py-lz4
 SUBDIR+=	py-rarfile
 SUBDIR+=	py-unrardll
-SUBDIR+=	py-yuicompressor
 SUBDIR+=	py-zipp
 SUBDIR+=	py-zipp1
 SUBDIR+=	py-zipstream
@@ -133,6 +132,7 @@ SUBDIR+=	star
 SUBDIR+=	szip
 SUBDIR+=	tartest
 SUBDIR+=	torrentzip
+SUBDIR+=	trrntzip
 SUBDIR+=	unace
 SUBDIR+=	unace-bin
 SUBDIR+=	unalz

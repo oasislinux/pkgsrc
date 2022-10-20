@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.95 2021/10/26 18:42:55 tm Exp $
+# $NetBSD: Makefile,v 1.97 2022/08/23 21:49:55 wiz Exp $
 
 DISTNAME=	mailman-2.1.35
+PKGREVISION=	1
 CATEGORIES=	mail www
 MASTER_SITES=	https://launchpad.net/mailman/2.1/2.1.35/+download/
 EXTRACT_SUFX=	.tgz
@@ -10,7 +11,7 @@ HOMEPAGE=	https://www.list.org/
 COMMENT=	The GNU Mailing List Manager
 LICENSE=	gnu-gpl-v2
 
-DEPENDS+=	${PYPKGPREFIX}-dns-[0-9]*:../../net/py-dns
+DEPENDS+=	${PYPKGPREFIX}-dns-[0-9]*:../../net/py-dns1
 
 .include "../../mk/bsd.prefs.mk"
 

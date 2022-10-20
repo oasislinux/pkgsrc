@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.26 2021/05/24 19:50:03 wiz Exp $
+# $NetBSD: Makefile,v 1.29 2022/06/28 11:31:49 wiz Exp $
 
-VERSION=	1.9.0
+VERSION=	1.10.4
 GITHUB_PROJECT=	ocaml-re
 DISTNAME=	${GITHUB_PROJECT}-${VERSION}
-PKGREVISION=	4
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GITHUB:=ocaml/}
 
@@ -18,6 +18,6 @@ INSTALLATION_DIRS+=	${OCAML_SITELIBDIR}/re/emacs ${OCAML_SITELIBDIR}/re/glob \
 			share/doc/re
 OCAML_USE_DUNE=		yes
 
-.include "../../mk/ocaml.mk"
+.include "../../lang/ocaml/ocaml.mk"
 .include "../../devel/ocaml-seq/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

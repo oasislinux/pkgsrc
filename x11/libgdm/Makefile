@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2021/12/08 16:07:07 adam Exp $
+# $NetBSD: Makefile,v 1.8 2022/08/11 05:09:29 gutteridge Exp $
 
 DISTNAME=	gdm-40.0
 PKGNAME=	lib${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	x11 gnome
 MASTER_SITES=	${MASTER_SITE_GITHUB:=GNOME/}
 GITHUB_PROJECT=	gdm
@@ -17,7 +17,7 @@ DEPENDS+=	zenity>=3.32.0:../../x11/zenity
 USE_PKGLOCALEDIR=	YES
 GNU_CONFIGURE=		YES
 USE_LIBTOOL=		YES
-USE_TOOLS+=		msgfmt pkg-config gdbus-codegen
+USE_TOOLS+=		msgfmt pkg-config gdbus-codegen itstool
 BUILD_DEFS+=		VARBASE
 
 USE_LANGUAGES=		c c++

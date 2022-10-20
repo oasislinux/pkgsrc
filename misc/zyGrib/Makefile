@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.69 2021/12/08 16:05:45 adam Exp $
+# $NetBSD: Makefile,v 1.74 2022/09/11 12:52:00 wiz Exp $
 #
 
 DISTNAME=	zyGrib-8.0.1
-PKGREVISION=	15
+PKGREVISION=	19
 CATEGORIES=	misc
 MASTER_SITES=	https://www.zygrib.org/getfile.php?file=
 EXTRACT_SUFX=	.tgz
@@ -166,7 +166,7 @@ do-install:
 
 .include "../../archivers/bzip2/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
-.include "../../graphics/jpeg/buildlink3.mk"
+.include "../../mk/jpeg.buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../graphics/jasper/buildlink3.mk"
 .include "../../geography/libnova/buildlink3.mk"

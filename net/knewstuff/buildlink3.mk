@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.35 2021/11/15 22:53:59 wiz Exp $
+# $NetBSD: buildlink3.mk,v 1.40 2022/09/11 12:51:10 wiz Exp $
 
 BUILDLINK_TREE+=	knewstuff
 
@@ -6,7 +6,7 @@ BUILDLINK_TREE+=	knewstuff
 KNEWSTUFF_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.knewstuff+=	knewstuff>=5.21.0
-BUILDLINK_ABI_DEPENDS.knewstuff?=	knewstuff>=5.80.0nb3
+BUILDLINK_ABI_DEPENDS.knewstuff?=	knewstuff>=5.93.0nb3
 BUILDLINK_PKGSRCDIR.knewstuff?=		../../net/knewstuff
 
 .include "../../devel/kio/buildlink3.mk"

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.13 2022/01/26 18:24:08 mrg Exp $
+# $NetBSD: Makefile,v 1.28 2022/09/27 20:58:29 wiz Exp $
 
-DISTNAME=	qtwebengine-everywhere-src-${QTVERSION}
+DISTNAME=	qtwebengine-everywhere-opensource-src-${QTVERSION}
 PKGNAME=	qt5-qtwebengine-${QTVERSION}
-PKGREVISION=	8
+PKGREVISION=	1
 COMMENT=	Chromium-based web engine for Qt5
 
 MAKE_ENV+=		QTDIR=${QTDIR}
@@ -19,40 +19,45 @@ TOOL_DEPENDS+=	ninja-build-[0-9]*:../../devel/ninja-build
 TOOL_DEPENDS+=	gperf-[0-9]*:../../devel/gperf
 #TOOL_DEPENDS+=	libxml2-[0-9]*:../../textproc/libxml2
 #TOOL_DEPENDS+=	libxslt-[0-9]*:../../textproc/libxslt
+TOOL_DEPENDS+=	${PYPKGPREFIX}-cElementTree-[0-9]*:../../textproc/py-cElementTree
 TOOL_DEPENDS+=	${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 TOOL_DEPENDS+=	yasm-[0-9]*:../../devel/yasm
-BUILD_DEPENDS+=	nodejs-[0-9]*:../../lang/nodejs
+BUILD_DEPENDS+=	nodejs>=14:../../lang/nodejs
 
 #JPEG_ACCEPTED=	libjpeg-turbo
 
 BUILDLINK_TRANSFORM.NetBSD+=	rm:-fgnu-inline-asm
 
-MAKE_ENV+=	NINJAJOBS="-j ${MAKE_JOBS:U1}"
+MAKE_ENV+=	NINJAJOBS="-j ${_MAKE_JOBS_N:U1}"
 
-#UNLIMIT_RESOURCES+=	cputime
+UNLIMIT_RESOURCES+=	datasize
 
-CHECK_PORTABILITY_SKIP+=	src/3rdparty/chromium/third_party/sqlite/src/configure
-CHECK_PORTABILITY_SKIP+=	src/3rdparty/chromium/third_party/protobuf/post_process_dist.sh
 CHECK_PORTABILITY_SKIP+=	src/3rdparty/chromium/third_party/ffmpeg/configure
+CHECK_PORTABILITY_SKIP+=	src/3rdparty/chromium/third_party/opus/src/doc/build_draft.sh
+CHECK_PORTABILITY_SKIP+=	src/3rdparty/chromium/third_party/protobuf/post_process_dist.sh
+CHECK_PORTABILITY_SKIP+=	src/3rdparty/chromium/third_party/protobuf/src/google/protobuf/compiler/zip_output_unittest.sh
+CHECK_PORTABILITY_SKIP+=	src/3rdparty/chromium/third_party/sqlite/src/configure
 CHECK_PORTABILITY_SKIP+=	src/3rdparty/chromium/third_party/xdg-utils/scripts/xdg-terminal
 CHECK_PORTABILITY_SKIP+=	src/3rdparty/chromium/third_party/xdg-utils/scripts/xdg-terminal.in
+CHECK_PORTABILITY_SKIP+=	src/3rdparty/chromium/v8/tools/cppgc/export_to_github.sh
+CHECK_PORTABILITY_SKIP+=	src/3rdparty/chromium/v8/tools/cppgc/test_cmake.sh
 CHECK_PORTABILITY_SKIP+=	src/3rdparty/chromium/v8/tools/run-llprof.sh
 
 # These libraries are used from the system and the build infrastructure
 # removes them from the bundled third_party directory and replaces them
 # with hooks to use them from the system.
-GN_SYSTEM_LIBS=	libevent libxslt yasm
+GN_SYSTEM_LIBS=	libevent libxslt #yasm
 CHROMESRC=	${WRKSRC}/src/3rdparty/chromium
 
 pre-configure:
-	cp ${FILESDIR}/netbsd.pri ${WRKSRC}/src/core/config/
-	cp ${FILESDIR}/openbsd.pri ${WRKSRC}/src/core/config/
-	cp ${FILESDIR}/netbsd.pri ${WRKSRC}/src/buildtools/config/
-	cp ${FILESDIR}/openbsd.pri ${WRKSRC}/src/buildtools/config/
-	mkdir -p ${CHROMESRC}/media/audio/sndio ${CHROMESRC}/media/audio/openbsd
-	cp ${FILESDIR}/sndio_* ${CHROMESRC}/media/audio/sndio
-	cp ${FILESDIR}/hid_* ${CHROMESRC}/services/device/hid
-	cp ${FILESDIR}/audio_manager_openbsd.* ${CHROMESRC}/media/audio/openbsd
+	${CP} ${FILESDIR}/netbsd.pri ${WRKSRC}/src/core/config/
+	${CP} ${FILESDIR}/openbsd.pri ${WRKSRC}/src/core/config/
+	${CP} ${FILESDIR}/netbsd.pri ${WRKSRC}/src/buildtools/config/
+	${CP} ${FILESDIR}/openbsd.pri ${WRKSRC}/src/buildtools/config/
+	${MKDIR} ${CHROMESRC}/media/audio/sndio ${CHROMESRC}/media/audio/openbsd
+	${CP} ${FILESDIR}/sndio_* ${CHROMESRC}/media/audio/sndio
+	${CP} ${FILESDIR}/hid_* ${CHROMESRC}/services/device/hid
+	${CP} ${FILESDIR}/audio_manager_openbsd.* ${CHROMESRC}/media/audio/openbsd
 	cd ${WRKSRC} && env -i ${MAKE_ENV} ${CHROMESRC}/build/linux/unbundle/replace_gn_files.py \
 		--system-libraries ${GN_SYSTEM_LIBS}
 
@@ -69,7 +74,9 @@ post-install:
 
 .include "../../mk/bsd.prefs.mk"
 
+.if ${OPSYS} != "Darwin"
 .include "../../audio/alsa-lib/buildlink3.mk"
+.endif
 .include "../../audio/libopus/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .if ${OPSYS} == "Darwin" || ${OPSYS} == "Linux" || ${OPSYS} == "NetBSD"
@@ -85,13 +92,15 @@ post-install:
 #.include "../../mk/jpeg.buildlink3.mk"
 .include "../../graphics/lcms2/buildlink3.mk"
 .include "../../graphics/libwebp/buildlink3.mk"
-.include "../../multimedia/ffmpeg4/buildlink3.mk"
-.include "../../multimedia/libvpx/buildlink3.mk"
 PYTHON_VERSIONS_ACCEPTED=	27
 PYTHON_FOR_BUILD_ONLY=	tool
 .include "../../lang/python/tool.mk"
+# does not support ffmpeg5 as of 5.15.4
+.include "../../multimedia/ffmpeg4/buildlink3.mk"
+.include "../../multimedia/libvpx/buildlink3.mk"
 .include "../../print/libcups/buildlink3.mk"
 .include "../../print/poppler-cpp/buildlink3.mk"
+BUILDLINK_API_DEPENDS.pciutils+=	pciutils>=3.8
 .include "../../sysutils/pciutils/buildlink3.mk"
 .include "../../sysutils/pciutils/libname.mk"
 # Use -lpciutils instead of -lpci for pkgsrc.
@@ -104,6 +113,8 @@ BUILDLINK_TRANSFORM+=   l:pci:${PCIUTILS_LIBNAME}
 .if ${OPSYS} != "Darwin"
 .include "../../multimedia/gst-plugins1-bad/buildlink3.mk"
 .include "../../x11/libXcomposite/buildlink3.mk"
+.include "../../x11/libXtst/buildlink3.mk"
+.include "../../x11/libxkbfile/buildlink3.mk"
 .endif
 .include "../../x11/qt5-qtdeclarative/buildlink3.mk"
 .include "../../x11/qt5-qtlocation/buildlink3.mk"

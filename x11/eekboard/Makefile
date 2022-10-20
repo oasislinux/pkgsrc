@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.66 2021/12/08 16:02:49 adam Exp $
+# $NetBSD: Makefile,v 1.71 2022/08/11 05:09:25 gutteridge Exp $
 
 DISTNAME=	eekboard-1.0.8
-PKGREVISION=	35
+PKGREVISION=	39
 MASTER_SITES=	${MASTER_SITE_GITHUB:=ueno/}
 GITHUB_PROJECT=	eekboard
 GITHUB_TAG=	${DISTNAME}
@@ -16,6 +16,8 @@ GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake pkg-config intltool msgfmt msgmerge xgettext
+
+CONFIGURE_ARGS+=	--enable-introspection=yes
 
 WRKSRC=		${WRKDIR}/${DISTNAME}
 
@@ -43,6 +45,8 @@ TEST_TARGET=		check
 .include "../../devel/at-spi2-core/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
+BUILDLINK_DEPMETHOD.gobject-introspection=	build
+.include "../../devel/gobject-introspection/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../textproc/libcroco/buildlink3.mk"

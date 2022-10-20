@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.5 2022/01/18 02:48:29 pho Exp $
+# $NetBSD: Makefile,v 1.8 2022/02/26 03:58:31 pho Exp $
 
-DISTNAME=	text-short-0.1.3
+DISTNAME=	text-short-0.1.5
 PKGREVISION=	2
 CATEGORIES=	textproc
 

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2022/01/18 02:48:17 pho Exp $
+# $NetBSD: Makefile,v 1.6 2022/02/26 03:58:16 pho Exp $
 
 DISTNAME=	comonad-5.0.8
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	math
 
 MAINTAINER=	pho@cielonegro.org

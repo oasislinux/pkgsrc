@@ -1,12 +1,9 @@
-# $NetBSD: Makefile,v 1.243 2022/01/10 01:46:33 ryoon Exp $
+# $NetBSD: Makefile,v 1.253 2022/08/11 05:08:42 gutteridge Exp $
 
-DISTNAME=	inkscape-1.1.1_2021-09-20_3bf5ae0d25
-PKGNAME=	inkscape-1.1.1
-PKGREVISION=	2
+DISTNAME=	inkscape-1.2.1
+PKGREVISION=	1
 CATEGORIES=	graphics
-# master site is using a weird redirect that ftp(1) does not support
-#MASTER_SITES=	https://inkscape.org/gallery/item/29255/
-#https://media.inkscape.org/dl/resources/file/
+MASTER_SITES=	https://media.inkscape.org/dl/resources/file/
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	reed@reedmedia.net
@@ -23,11 +20,8 @@ DEPENDS+=		${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 DEPENDS+=		${PYPKGPREFIX}-lxml-[0-9]*:../../textproc/py-lxml
 DEPENDS+=		${PYPKGPREFIX}-serial-[0-9]*:../../comms/py-serial
 DEPENDS+=		${PYPKGPREFIX}-scour-[0-9]*:../../graphics/py-scour
-# for desktop
-TOOL_DEPENDS+=		gettext-tools-[0-9]*:../../devel/gettext-tools
-TOOLS_PLATFORM.msgfmt=	# empty
 
-WRKSRC=		${WRKDIR}/${DISTNAME}
+WRKSRC=		${WRKDIR}/inkscape-1.2.1_2022-07-14_9c6d41e410
 
 # std::optional
 GCC_REQD+=		7
@@ -105,6 +99,7 @@ BUILDLINK_API_DEPENDS.boehm-gc+=	boehm-gc>=7.4
 .include "../../converters/libwpg/buildlink3.mk"
 .include "../../devel/boehm-gc/buildlink3.mk"
 .include "../../devel/boost-headers/buildlink3.mk"
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
 .include "../../devel/googletest/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libsigcpp+=	libsigc++>=2.0.12
 .include "../../devel/libsigc++/buildlink3.mk"

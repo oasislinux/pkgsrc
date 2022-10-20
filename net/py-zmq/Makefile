@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.33 2022/01/04 20:54:34 wiz Exp $
+# $NetBSD: Makefile,v 1.37 2022/08/18 16:51:37 adam Exp $
 
-DISTNAME=	pyzmq-22.3.0
+DISTNAME=	pyzmq-23.2.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/^py//}
-PKGREVISION=	1
 CATEGORIES=	net python
 MASTER_SITES=	${MASTER_SITE_PYPI:=p/pyzmq/}
 
@@ -12,6 +11,7 @@ COMMENT=	Python bindings for zeromq
 LICENSE=	gnu-lgpl-v3 AND modified-bsd
 
 DEPENDS+=	${PYPKGPREFIX}-cython-[0-9]*:../../devel/py-cython
+DEPENDS+=	${PYPKGPREFIX}-packaging-[0-9]*:../../devel/py-packaging
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-[0-9]*:../../devel/py-test
 
 USE_TOOLS+=	pkg-config

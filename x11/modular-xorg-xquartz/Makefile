@@ -1,20 +1,19 @@
-# $NetBSD: Makefile,v 1.14 2021/02/25 12:30:58 ryoon Exp $
+# $NetBSD: Makefile,v 1.18 2022/05/14 21:32:33 schmonz Exp $
 
-DISTNAME=	xorg-server-1.17.2
-PKGNAME=	${DISTNAME:S/xorg-server/modular-xorg-xquartz/}
-PKGREVISION=	6
+DISTNAME=	modular-xorg-xquartz-1.20.99.1.20210408
 CATEGORIES=	x11
-MASTER_SITES=	https://www.x.org/releases/individual/xserver/
-EXTRACT_SUFX=	.tar.bz2
+MASTER_SITES=	${MASTER_SITE_GITHUB:=XQuartz/}
+GITHUB_PROJECT=	xorg-server
+GITHUB_TAG=	199f278a1b7570b1cb6e24b8bedb4d721b3c9938
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	https://www.x.org/releases/individual/xserver/
+HOMEPAGE=	https://www.xquartz.org/
 COMMENT=	X11 server for Mac OS X
 LICENSE=	mit
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
-USE_TOOLS+=	gmake pkg-config
+USE_TOOLS+=	gmake pkg-config autoconf automake autoreconf
 USE_LANGUAGES=	c c++ objc
 
 ONLY_FOR_PLATFORM=	Darwin-*-*
@@ -31,7 +30,7 @@ DEPENDS+=		xkeyboard-config-[0-9]*:../../x11/xkeyboard-config
 
 # Needed by X11.app:
 DEPENDS+=		quartz-wm-[0-9]*:../../wm/quartz-wm
-DEPENDS+=		xterm-[0-9]*:../../x11/xterm
+DEPENDS+=		{xterm,mxterm}-[0-9]*:../../x11/xterm
 DEPENDS+=		xinit-[0-9]*:../../x11/xinit
 
 LEGACY_FONT_PATHS=
@@ -49,8 +48,6 @@ CONFIGURE_ARGS+=	--disable-kdrive
 CONFIGURE_ARGS+=	--disable-config-hal
 CONFIGURE_ARGS+=	--disable-dmx
 CONFIGURE_ARGS+=	--disable-xwin
-CONFIGURE_ARGS+=	--disable-xfake
-CONFIGURE_ARGS+=	--disable-xfbdev
 
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE:Q}
 CONFIGURE_ARGS+=	--with-xkb-output=${XKB_OUTPUT_DIR:Q}
@@ -58,15 +55,12 @@ CONFIGURE_ARGS+=	--with-fontrootdir=${PREFIX}/share/fonts/X11
 CONFIGURE_ARGS+=	--with-default-font-path=${FONT_PATHS:ts,:Q}
 
 CONFIGURE_ARGS+=	--with-builder-addr="tech-x11@NetBSD.org"
-CONFIGURE_ARGS+=	--with-os-vendor="The NetBSD Foundation"
-CONFIGURE_ARGS+=	--with-os-name=${MACHINE_PLATFORM:Q}
 
 CONFIGURE_ARGS+=	--enable-xtrans-send-fds
 CONFIGURE_ARGS+=	--enable-dri
 CONFIGURE_ARGS+=	--enable-dri2
 CONFIGURE_ARGS+=	--enable-dri3
 CONFIGURE_ARGS+=	--enable-glx
-CONFIGURE_ARGS+=	--enable-aiglx
 CONFIGURE_ARGS+=	--enable-glamor
 CONFIGURE_ARGS+=	--enable-ipv6
 
@@ -85,9 +79,16 @@ MAKE_ENV+=		OSX_SDK_PATH=${XCODE_SDK_PATH}
 
 MESSAGE_SUBST+=		PREFIX=${PREFIX}
 
+CHECK_PORTABILITY_SKIP+=	test/scripts/*
+CHECK_PORTABILITY_SKIP+=	hw/xquartz/bundle/*
+
+pre-configure:
+	cd ${WRKSRC} && autoreconf -vif
+
 .include "../../devel/ncurses/buildlink3.mk"
 .include "../../devel/xorg-util-macros/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
+.include "../../fonts/font-util/buildlink3.mk"
 .include "../../fonts/libfontenc/buildlink3.mk"
 .include "../../graphics/libepoxy/buildlink3.mk"
 .include "../../graphics/MesaLib/buildlink3.mk"
@@ -98,7 +99,7 @@ MESSAGE_SUBST+=		PREFIX=${PREFIX}
 .include "../../x11/libXaw/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXfixes/buildlink3.mk"
-.include "../../x11/libXfont/buildlink3.mk"
+.include "../../x11/libXfont2/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"
 .include "../../x11/libXxf86vm/buildlink3.mk"
 .include "../../x11/libXinerama/buildlink3.mk"

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.50 2021/12/08 16:04:35 adam Exp $
+# $NetBSD: Makefile,v 1.57 2022/09/29 00:47:31 markd Exp $
 
 DISTNAME=	ksirk-${KAPPSVER}
-PKGREVISION=	4
 CATEGORIES=	games
 
 HOMEPAGE=	https://kde.org/applications/games/ksirk/
@@ -13,6 +12,8 @@ LICENSE=	gnu-lgpl-v2 AND gnu-gpl-v2 AND gnu-fdl-v1.2
 BUILD_DEPENDS+=	kdoctools>=5.19.0:../../devel/kdoctools
 
 USE_TOOLS+=	msgmerge
+
+LDFLAGS.SunOS+=	-lsocket -lnsl -lresolv
 
 .include "../../games/libkdegames/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"

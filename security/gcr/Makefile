@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.21 2022/01/13 08:02:29 adam Exp $
+# $NetBSD: Makefile,v 1.27 2022/08/11 05:09:13 gutteridge Exp $
 
 DISTNAME=	gcr-3.38.1
+PKGREVISION=	4
 CATEGORIES=	security
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gcr/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.xz
@@ -20,13 +21,6 @@ GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--enable-gtk-doc
 CONFIGURE_ARGS+=	--enable-vala
 
-.include "../../mk/bsd.prefs.mk"
-
-# To avoid msgfmt: unknown option -- desktop
-.if ${OPSYS} == "NetBSD"
-TOOLS_PLATFORM.msgfmt=
-.endif
-
 PKGCONFIG_OVERRIDE+=	gck-1.pc.in
 PKGCONFIG_OVERRIDE+=	gcr-base-3.pc.in
 PKGCONFIG_OVERRIDE+=	gcr-ui.pc.in
@@ -37,6 +31,7 @@ TEST_TARGET=		check
 pre-configure:
 	cd ${WRKSRC} && NOCONFIGURE=1 ./autogen.sh
 
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.38
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/gobject-introspection/buildlink3.mk"

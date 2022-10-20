@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.3 2021/10/26 10:26:04 nia Exp $
+$NetBSD: distinfo,v 1.5 2022/09/12 10:57:49 adam Exp $
 
-BLAKE2s (eth_abi-2.1.1.tar.gz) = 8392825c7b3b70385a6fff85cc05cd03e34792697d2d6cc4783de5216cba2064
-SHA512 (eth_abi-2.1.1.tar.gz) = dd104616c3fbc9d30b1ed0ae2e283ae1b5c3274fa3c8549573bce1988566f7315cc98fe0807675426da44c37568982be4f1369e6659ad5682bb5cf4ddf676159
-Size (eth_abi-2.1.1.tar.gz) = 966047 bytes
+BLAKE2s (eth_abi-3.0.1.tar.gz) = 8a52830ae4f9db37d959772cb495a032d13c9a2007902e72f88db16cf6c9e99e
+SHA512 (eth_abi-3.0.1.tar.gz) = c8ad0548a3829cf4f9f14b3d4427cf151aa482db277edaa2e242e77012913423312c89ba1d1c43d62bc3dcc307a74a72c616051032d4f832ac4eb13dd0d5335b
+Size (eth_abi-3.0.1.tar.gz) = 484550 bytes

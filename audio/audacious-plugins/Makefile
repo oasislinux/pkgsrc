@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.128 2021/12/08 16:03:06 adam Exp $
+# $NetBSD: Makefile,v 1.135 2022/09/27 20:58:21 wiz Exp $
 
 DISTNAME=	audacious-plugins-4.1
-PKGREVISION=	9
+PKGREVISION=	15
 CATEGORIES=	audio
 MASTER_SITES=	https://distfiles.audacious-media-player.org/
 EXTRACT_SUFX=	.tar.bz2
@@ -43,16 +43,31 @@ SUBST_SED.oss+=		-e "s,/dev/dsp,${DEVOSSAUDIO},g"
 CONFIGURE_ARGS+=	--disable-oss4
 .endif
 
-PLIST_VARS+=	dbus
-
-.include "options.mk"
 .include "../../audio/audacious/buildlink3.mk"
+
+PLIST_VARS+=		gtk2
+.if ${PKG_BUILD_OPTIONS.audacious:Mgtk2}
+PLIST.gtk2+=		yes
+.else
+CONFIGURE_ARGS+=	--disable-gtk
+.endif
+
+PLIST_VARS+=		qt5
+.if ${PKG_BUILD_OPTIONS.audacious:Mqt5}
+PLIST.qt5=		yes
+.else
+CONFIGURE_ARGS+=	--disable-qt
+.endif
+
+PLIST_VARS+=	dbus
 .if ${PKG_BUILD_OPTIONS.audacious:Mdbus}
 USE_TOOLS+=		gdbus-codegen
 PLIST.dbus=		yes
 .else
 CONFIGURE_ARGS+=	--disable-mpris2
 .endif
+
+.include "options.mk"
 .include "../../audio/faad2/buildlink3.mk"
 .include "../../audio/lame/buildlink3.mk"
 .include "../../audio/libcddb/buildlink3.mk"

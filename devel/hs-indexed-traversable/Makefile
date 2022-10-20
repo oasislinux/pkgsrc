@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.4 2022/01/18 02:48:09 pho Exp $
+# $NetBSD: Makefile,v 1.7 2022/02/26 03:57:59 pho Exp $
 
-DISTNAME=	indexed-traversable-0.1.1
+DISTNAME=	indexed-traversable-0.1.2
 PKGREVISION=	2
 CATEGORIES=	devel
 

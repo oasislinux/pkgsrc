@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.100 2021/12/08 16:04:49 adam Exp $
+# $NetBSD: Makefile,v 1.105 2022/08/11 05:08:39 gutteridge Exp $
 
 DISTNAME=	cheese-3.34.0
-PKGREVISION=	9
+PKGREVISION=	12
 CATEGORIES=	graphics gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/cheese/3.34/}
 EXTRACT_SUFX=	.tar.xz
@@ -26,9 +26,6 @@ PYTHON_FOR_BUILD_ONLY=	tool
 # https://gitlab.gnome.org/GNOME/json-glib/issues/35
 MAKE_ENV+=	LD_LIBRARY_PATH=${WRKSRC}/output/libcheese
 
-# XXX msgfmt: unknown option -- desktop
-_TOOLS_USE_PKGSRC.msgfmt=	yes
-
 PKGCONFIG_OVERRIDE_STAGE=	pre-install
 PKGCONFIG_OVERRIDE+=		output/meson-private/cheese.pc
 PKGCONFIG_OVERRIDE+=		output/meson-private/cheese-gtk.pc
@@ -36,6 +33,7 @@ PKGCONFIG_OVERRIDE+=		output/meson-private/cheese-gtk.pc
 .include "../../devel/meson/build.mk"
 .include "../../devel/glib2/schemas.mk"
 .include "../../audio/libcanberra/buildlink3.mk"
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
 BUILDLINK_DEPMETHOD.gobject-introspection?=	build
 .include "../../devel/gobject-introspection/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"

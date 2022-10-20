@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.26 2022/01/30 15:44:15 gdt Exp $
+$NetBSD: distinfo,v 1.30 2022/09/02 15:07:07 gdt Exp $
 
-BLAKE2s (gama-2.17.tar.gz) = b0477e214ce2d1b730c1b0270829239182eafc2f0199bd09addf6082bcf1936d
-SHA512 (gama-2.17.tar.gz) = 6714ed1debcf63dcaa151751cb190dcbb895c29e615ea692a146dbfc728da2bdd80a9aee63e07f40105aae7d82f53a985247b528cbf4cfa03655123775780438
-Size (gama-2.17.tar.gz) = 14691510 bytes
+BLAKE2s (gama-2.22.tar.gz) = fa2d355adfbf203d754c62eaf33a1b73783250b4c18b8a02f2b37f81347e411b
+SHA512 (gama-2.22.tar.gz) = b29ca48eceef7b445db518000c8ada72ac7865a0db1dfb364affa6fa36ffe13b7ef8ba92934160d7fbb4461b768d8f2e1cd33bdec95d4928a63695ccbfe17df9
+Size (gama-2.22.tar.gz) = 14830891 bytes

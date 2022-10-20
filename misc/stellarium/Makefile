@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.130 2021/12/30 20:22:08 adam Exp $
+# $NetBSD: Makefile,v 1.139 2022/10/03 09:07:03 adam Exp $
 
-DISTNAME=	stellarium-0.21.3
+DISTNAME=	stellarium-1.0
 CATEGORIES=	misc
 MASTER_SITES=	${MASTER_SITE_GITHUB:=Stellarium/}
 GITHUB_RELEASE=	v${PKGVERSION_NOREV}
@@ -15,6 +15,7 @@ USE_LANGUAGES=		c c++
 USE_TOOLS+=		msgfmt perl pod2man
 
 CMAKE_ARGS+=	-DENABLE_GPS=OFF
+CMAKE_ARGS+=	-DENABLE_SHOWMYSKY=OFF
 
 LDFLAGS.SunOS+=	-lnsl -lsocket
 
@@ -31,6 +32,7 @@ PLIST.desktop=		yes
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
+.include "../../x11/qt5-qtcharts/buildlink3.mk"
 .include "../../x11/qt5-qtscript/buildlink3.mk"
 .include "../../x11/qt5-qtserialport/buildlink3.mk"
 .include "../../x11/qt5-qttools/buildlink3.mk"

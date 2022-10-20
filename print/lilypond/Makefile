@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.134 2021/12/08 16:06:14 adam Exp $
+# $NetBSD: Makefile,v 1.141 2022/06/30 11:18:45 nia Exp $
 
 DISTNAME=	lilypond-2.18.2
-PKGREVISION=	24
+PKGREVISION=	27
 CATEGORIES=	print
 MASTER_SITES=	http://download.linuxaudio.org/lilypond/sources/v2.18/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://lilypond.org/
 COMMENT=	GNU Music Typesetter
-LICENSE=	gnu-gpl-v2
+LICENSE=	gnu-gpl-v3 AND gnu-fdl-v1.3 AND ofl-v1.1
 
 BUILD_DEPENDS+=	tex-metafont-[0-9]*:../../fonts/tex-metafont
 BUILD_DEPENDS+=	tex-metapost-[0-9]*:../../graphics/tex-metapost
@@ -37,7 +37,11 @@ GNU_CONFIGURE=		YES
 USE_PKGLOCALEDIR=	YES
 USE_LANGUAGES=		c c++
 USE_TOOLS+=		bison flex gmake gs:run makeinfo perl pkg-config msgfmt
-USE_TOOLS+=		texi2html zip
+# GNU grep will likely not be required after this package is next updated,
+# assuming the package no longer greps binary files for strings. This is a
+# build fix workaround for GNU grep >= 3.5 changing its behaviour in this
+# regard.
+USE_TOOLS+=		ggrep texi2html zip
 MAKE_FILE=		GNUmakefile
 
 .include "../../mk/bsd.prefs.mk"
@@ -54,7 +58,7 @@ CONFIGURE_ARGS+=	--with-ncsb-dir=${PREFIX}/share/fonts/urw
 CONFIGURE_ENV+=		PYTHON=${PYTHONBIN:Q}
 
 REPLACE_PYTHON+=		scripts/build/yyout2grammar.py
-PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 2.18.0
+PYTHON_VERSIONS_ACCEPTED=	27 # Ported to 3.x as of 2.21
 PLIST_SUBST+=			PKGVERSION=${PKGVERSION:S/nb${PKGREVISION}//}
 
 # needs FlexLexer.h
@@ -64,8 +68,12 @@ BUILDLINK_API_DEPENDS.flex+=	flex>=2.6.0
 .include "../../devel/flex/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
 .include "../../fonts/fontconfig/buildlink3.mk"
-# lilypond's configure rejects guile2
-.include "../../lang/guile/buildlink3.mk"
+# lilypond's configure rejects guile2.  2.23.9 and above support and
+# require Guile 2.2 instead, also stating "Newer versions, such as Guile
+# 3.0, may work but are not officially supported (yet)."  See e.g.,
+#  https://gitlab.com/lilypond/lilypond/-/issues/6163
+#  http://lilypond.org/doc/v2.23/Documentation/contributor/requirements-for-running-lilypond
+.include "../../lang/guile18/buildlink3.mk"
 .include "../../lang/python/application.mk"
 .include "../../mk/omf-scrollkeeper.mk"
 .include "../../mk/bsd.pkg.mk"

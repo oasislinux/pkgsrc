@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.84 2022/01/04 20:54:40 wiz Exp $
+# $NetBSD: Makefile,v 1.90 2022/09/08 05:08:52 adam Exp $
 
-DISTNAME=	cryptography-3.3.2
+DISTNAME=	cryptography-38.0.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	security python
 MASTER_SITES=	${MASTER_SITE_PYPI:=c/cryptography/}
 
@@ -11,26 +10,40 @@ HOMEPAGE=	https://github.com/pyca/cryptography
 COMMENT=	Cryptographic recipes and primitives for Python
 LICENSE=	apache-2.0 OR modified-bsd
 
+BUILD_DEPENDS+=	${PYPKGPREFIX}-setuptools-rust-[0-9]*:../../devel/py-setuptools-rust
 DEPENDS+=	${PYPKGPREFIX}-cffi>=1.11.4:../../devel/py-cffi
 DEPENDS+=	${PYPKGPREFIX}-six>=1.4.1:../../lang/py-six
 TEST_DEPENDS+=	${PYPKGPREFIX}-cryptography_vectors-[0-9]*:../../security/py-cryptography_vectors
+TEST_DEPENDS+=	${PYPKGPREFIX}-hypothesis>=3.79.3:../../devel/py-hypothesis
 TEST_DEPENDS+=	${PYPKGPREFIX}-iso8601-[0-9]*:../../time/py-iso8601
 TEST_DEPENDS+=	${PYPKGPREFIX}-pretend-[0-9]*:../../devel/py-pretend
 TEST_DEPENDS+=	${PYPKGPREFIX}-pytz-[0-9]*:../../time/py-pytz
+TEST_DEPENDS+=	${PYPKGPREFIX}-test>=6.2.0:../../devel/py-test
+TEST_DEPENDS+=	${PYPKGPREFIX}-test-benchmark-[0-9]*:../../devel/py-test-benchmark
+TEST_DEPENDS+=	${PYPKGPREFIX}-test-subtests-[0-9]*:../../devel/py-test-subtests
 
-PYTHON_VERSIONED_DEPENDENCIES=	test:test
-PYTHON_VERSIONED_DEPENDENCIES+=	hypothesis:test
+CARGO_WRKSRC=	${WRKSRC}/src/rust
 
-.include "../../lang/python/pyversion.mk"
-.if ${_PYTHON_VERSION} == 27
-DEPENDS+=	${PYPKGPREFIX}-enum34-[0-9]*:../../devel/py-enum34
-DEPENDS+=	${PYPKGPREFIX}-ipaddress-[0-9]*:../../net/py-ipaddress
+MAKE_ENV+=	CARGO_NET_OFFLINE=true
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
+
+pre-build:
+	cd ${WRKSRC} && ${LN} -f -s src/rust/.cargo .cargo
+
+.include "../../mk/bsd.prefs.mk"
+.if ${OPSYS} == "Darwin"
+post-install:
+	install_name_tool -id ${PREFIX}/${PYSITELIB}/cryptography/hazmat/bindings/_rust.abi3.so \
+	${DESTDIR}${PREFIX}/${PYSITELIB}/cryptography/hazmat/bindings/_rust.abi3.so
 .endif
 
 do-test:
-	cd ${WRKSRC} && pytest-${PYVERSSUFFIX}
+	cd ${WRKSRC} && ${SETENV} ${TEST_ENV} pytest-${PYVERSSUFFIX} tests
+
+.include "cargo-depends.mk"
 
 .include "../../lang/python/egg.mk"
-.include "../../lang/python/versioned_dependencies.mk"
+.include "../../lang/rust/cargo.mk"
 .include "../../security/openssl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

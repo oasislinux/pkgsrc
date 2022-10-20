@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2022/01/14 10:36:08 pin Exp $
+# $NetBSD: Makefile,v 1.8 2022/09/02 11:47:29 pin Exp $
 
-DISTNAME=	delta-0.11.3
-PKGNAME=	git-delta-0.11.3
+DISTNAME=	delta-0.14.0
+PKGNAME=	git-delta-0.14.0
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_GITHUB:=dandavison/}
 GITHUB_PROJECT=	delta
@@ -16,7 +16,8 @@ LICENSE=	mit
 INSTALLATION_DIRS=	bin
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/target/release/delta ${DESTDIR}${PREFIX}/bin
+	${INSTALL_PROGRAM} ${WRKSRC}/target/release/delta \
+		${DESTDIR}${PREFIX}/bin
 
 .include "../../lang/rust/cargo.mk"
 .include "../../mk/bsd.pkg.mk"

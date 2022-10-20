@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.1 2021/08/03 17:23:46 fcambus Exp $
+# $NetBSD: Makefile,v 1.6 2022/10/19 14:25:18 nia Exp $
 
-GITHUB_PROJECT=	dnc
 DISTNAME=	dnc-0.2.0
+PKGREVISION=	1
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_GITHUB:=fcambus/}
 GITHUB_RELEASE=	${PKGVERSION_NOREV}
+GITHUB_PROJECT=	dnc
 
-MAINTAINER=	fcambus@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/fcambus/dnc/
 COMMENT=	CLI tool to check domain names configuration
 LICENSE=	2-clause-bsd
@@ -14,8 +15,9 @@ LICENSE=	2-clause-bsd
 USE_LANGUAGES=	# none
 
 DEPENDS+=	${PYPKGPREFIX}-dns-[0-9]*:../../net/py-dns
-DEPENDS+=	${PYPKGPREFIX}-OpenSSL-[0-9]*:../../security/py-OpenSSL
 DEPENDS+=	${PYPKGPREFIX}-prettytable-[0-9]*:../../textproc/py-prettytable
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 NO_BUILD=	yes
 
@@ -30,4 +32,6 @@ do-install:
 	                     ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
 
 .include "../../lang/python/application.mk"
+PYTHON_VERSIONED_DEPENDENCIES+=	OpenSSL
+.include "../../lang/python/versioned_dependencies.mk"
 .include "../../mk/bsd.pkg.mk"

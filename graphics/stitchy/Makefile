@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.2 2021/08/03 09:02:49 pin Exp $
+# $NetBSD: Makefile,v 1.4 2022/04/22 07:38:56 pin Exp $
 
-DISTNAME=	Stitchy-0.1.3
+DISTNAME=	Stitchy-0.1.4
 PKGNAME=	${DISTNAME:tl}
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_GITHUB:=grimace87/}
 GITHUB_PROJECT=	Stitchy
-GITHUB_TAG=	86c57866ff2186e765ab7a2877a2103689611290
+GITHUB_TAG=	489cc133dfc07d0d267b9547917eb1f44016be90
 
 MAINTAINER=	pin@NetBSD.org
 HOMEPAGE=	https://github.com/grimace87/Stitchy/
@@ -17,7 +17,8 @@ LICENSE=	mit
 INSTALLATION_DIRS=	bin
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/target/release/stitchy ${DESTDIR}${PREFIX}/bin
+	${INSTALL_PROGRAM} ${WRKSRC}/target/release/stitchy \
+		${DESTDIR}${PREFIX}/bin
 
 .include "../../lang/rust/cargo.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.35 2021/04/25 06:05:21 wiz Exp $
+# $NetBSD: Makefile,v 1.37 2022/06/07 10:40:36 wiz Exp $
 
 DISTNAME=	ttt-1.8.2
 PKGREVISION=	10
@@ -6,7 +6,7 @@ CATEGORIES=	net
 #MASTER_SITES=	ftp://ftp.sonycsl.co.jp/pub/kjc/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	https://www.sonycsl.co.jp/person/kjc/software.html
+#HOMEPAGE=	https://www.sonycsl.co.jp/person/kjc/software.html
 COMMENT=	Tele Traffic Tapper
 
 GNU_CONFIGURE=		yes
@@ -24,21 +24,12 @@ REPLACE.sys-BLTWISH.old=	.*bltwish
 REPLACE.sys-BLTWISH.new=	${PREFIX}/bin/bltwish
 REPLACE_FILES.sys-BLTWISH=	ttt.tcl
 
-
-.include "../../mk/bsd.prefs.mk"
-
 CFLAGS+=		-DUSE_INTERP_RESULT
 CONFIGURE_ARGS+=	ttt_cv_prog_cflags=${CFLAGS:Q}
 
-.if ${OPSYS} == "NetBSD"
-.  if empty(OS_VERSION:M1.[56]*)
-.include "../../mk/pthread.buildlink3.mk"
-.  endif
-.endif
-
 .include "options.mk"
-
 .include "../../net/libpcap/buildlink3.mk"
 .include "../../x11/blt/buildlink3.mk"
 .include "../../x11/tk/buildlink3.mk"
+.include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.43 2021/05/24 19:49:59 wiz Exp $
+# $NetBSD: Makefile,v 1.45 2022/06/28 11:31:46 wiz Exp $
 
 DISTNAME=	ldapsdk_12311998
 PKGNAME=	${DISTNAME:S/_/-/}
-PKGREVISION=	11
+PKGREVISION=	12
 CATEGORIES=	devel databases
 MASTER_SITES=	${MASTER_SITE_MOZILLA_ALL:=directory/c-sdk/ancient/}
 
@@ -33,6 +33,8 @@ AUTO_MKDIRS=			yes
 
 post-extract:
 	${LN} -s FreeBSD.mk ${WRKSRC}/config/DragonFly.mk
+	# copy rather than link this as it'll need to be patched
+	cp ${WRKSRC}/config/Rhapsody.mk ${WRKSRC}/config/Darwin.mk
 
 do-configure:
 	${ECHO} "PKG_SYSCONFDIR=${PKG_SYSCONFDIR}" >> ${WRKSRC}/config/rules.mk

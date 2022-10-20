@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.11 2021/12/08 16:04:18 adam Exp $
+# $NetBSD: Makefile,v 1.17 2022/09/11 12:51:34 wiz Exp $
 
 PKGREVISION= 1
 .include "Makefile.common"
@@ -19,6 +19,7 @@ BUILDLINK_TRANSFORM+=	rm:-Werror
 .include "../../graphics/MesaLib/buildlink3.mk"
 .endif
 
+.include "options.mk"
 .include "../../devel/SDL2/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../mk/dlopen.buildlink3.mk"

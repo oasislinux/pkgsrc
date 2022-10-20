@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.40 2021/12/08 16:04:30 adam Exp $
+# $NetBSD: Makefile,v 1.45 2022/09/20 06:59:53 nia Exp $
 
 DISTNAME=	gnome-sudoku-40.2
-PKGREVISION=	2
+PKGREVISION=	6
 CATEGORIES=	games gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-sudoku/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.xz
@@ -12,7 +12,6 @@ COMMENT=	Number grid logic puzzle
 LICENSE=	gnu-gpl-v3
 
 USE_LANGUAGES=		c c++11
-USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		msgfmt pkg-config itstool
 
 PYTHON_FOR_BUILD_ONLY=    tool

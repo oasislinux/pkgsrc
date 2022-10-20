@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.54 2021/12/08 16:03:23 adam Exp $
+# $NetBSD: Makefile,v 1.57 2022/08/11 05:08:05 gutteridge Exp $
 #
 
 DISTNAME=	gnome-chemistry-utils-0.14.16
-PKGREVISION=	7
+PKGREVISION=	10
 CATEGORIES=	biology
 MASTER_SITES=	http://download-mirror.savannah.gnu.org/releases/gchemutils/0.14/
 EXTRACT_SUFX=	.tar.bz2

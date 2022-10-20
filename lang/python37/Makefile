@@ -1,6 +1,5 @@
-# $NetBSD: Makefile,v 1.33 2022/01/27 21:33:42 schmonz Exp $
+# $NetBSD: Makefile,v 1.36 2022/07/29 20:37:48 jperkin Exp $
 
-PKGREVISION= 3
 .include "dist.mk"
 
 PKGNAME=	python37-${PY_DISTVERSION}
@@ -190,9 +189,16 @@ hpux-postinstall:
 		${DESTDIR}${PREFIX}/lib/libpython3.7.sl.1.0
 .endif
 
-post-install: setuptools-postinstall
-.PHONY: setuptools-postinstall
-setuptools-postinstall:
+INSTALLATION_DIRS+=	lib/python${PY_VER_SUFFIX}/site-packages
+
+# PKG_CONFIG_LIBDIR references to BUILDLINK_DIR
+CHECK_WRKREF_SKIP+=	lib/python${PY_VER_SUFFIX}/_sysconfigdata*
+CHECK_WRKREF_SKIP+=	lib/python${PY_VER_SUFFIX}/__pycache__/_sysconfigdata*
+CHECK_WRKREF_SKIP+=	lib/python${PY_VER_SUFFIX}/config-${PY_VER_SUFFIX}/Makefile
+
+pre-install: setuptools-preinstall
+.PHONY: setuptools-preinstall
+setuptools-preinstall:
 	${INSTALL_DATA} ${.CURDIR}/../../devel/py-setuptools/files/_distutils_system_mod \
 		${DESTDIR}${PREFIX}/lib/python${PY_VER_SUFFIX}/site-packages/_distutils_system_mod.py
 

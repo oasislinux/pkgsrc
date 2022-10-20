@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.11 2021/12/08 16:04:39 adam Exp $
+# $NetBSD: Makefile,v 1.16 2022/09/11 12:51:46 wiz Exp $
 
-DISTNAME=	oshu-2.0.1
-PKGREVISION=	6
+DISTNAME=	oshu-2.0.2
+PKGREVISION=	3
 CATEGORIES=	games
 MASTER_SITES=	${MASTER_SITE_GITHUB:=fmang/}
 
@@ -22,5 +22,5 @@ CMAKE_ARGS+=	-DOSHU_SKINS="minimal"
 .include "../../devel/pango/buildlink3.mk"
 .include "../../graphics/cairo/buildlink3.mk"
 .include "../../graphics/SDL2_image/buildlink3.mk"
-.include "../../multimedia/ffmpeg4/buildlink3.mk"
+.include "../../multimedia/ffmpeg5/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

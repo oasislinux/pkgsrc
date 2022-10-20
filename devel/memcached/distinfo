@@ -1,8 +1,8 @@
-$NetBSD: distinfo,v 1.49 2022/01/25 19:16:49 jperkin Exp $
+$NetBSD: distinfo,v 1.52 2022/09/01 07:06:24 adam Exp $
 
-BLAKE2s (memcached-1.6.13.tar.gz) = f837961b4bfb853e11c11834bc563e13bbe4eb2874aa20b541f0c2613be05378
-SHA512 (memcached-1.6.13.tar.gz) = 3f3ef37f5838d8b1b8100cdb77b2226d8d29eef093bcb2c9a03f2420144aa35a5c8c1c957134eddce1fdd37a05b5ffc19058baf05dd3aad60fca12f8c81eaf1d
-Size (memcached-1.6.13.tar.gz) = 1031167 bytes
+BLAKE2s (memcached-1.6.17.tar.gz) = 162f7e27906ac5a1a44b20c5fb45a87668b3e0f36d72139c85aa0dc06e3c532a
+SHA512 (memcached-1.6.17.tar.gz) = 90ddd1e0dac3eb27273c1ee0bf6a7f75248f0267bca37b88455ff48727ab4f9db07382484d1e0c9b4a0126198b147f53aea4c993259ac608e8de393e11dad673
+Size (memcached-1.6.17.tar.gz) = 1713186 bytes
 SHA1 (patch-Makefile.in) = d0dce85040734a2532d4dced9daed0032433e80f
 SHA1 (patch-configure) = af14c5bbbd0db296bb100f70761ac60ee71c70f4
 SHA1 (patch-items.c) = 33e9ff564f755fa2ef201978cb509800ea400fa0

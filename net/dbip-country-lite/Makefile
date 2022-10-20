@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.25 2022/02/01 13:41:47 fcambus Exp $
+# $NetBSD: Makefile,v 1.34 2022/10/01 11:51:40 fcambus Exp $
 
-DISTNAME=	dbip-country-lite-2022-02.mmdb
-PKGNAME=	dbip-country-lite-2022.02
+DISTNAME=	dbip-country-lite-2022-10.mmdb
+PKGNAME=	dbip-country-lite-2022.10
 CATEGORIES=	net
 MASTER_SITES=	https://download.db-ip.com/free/
 EXTRACT_SUFX=	.gz
 
-MAINTAINER=	fcambus@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://db-ip.com/db/download/ip-to-country-lite
 COMMENT=	DB-IP IP to Country Lite: IPv4/v6 address to country
 LICENSE=	cc-by-v4.0

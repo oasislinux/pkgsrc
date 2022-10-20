@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.7 2021/12/08 16:04:28 adam Exp $
+# $NetBSD: Makefile,v 1.11 2022/09/11 12:51:39 wiz Exp $
 
 DISTNAME=	fallingtime-1.0.2
-PKGREVISION=	4
+PKGREVISION=	7
 CATEGORIES=	games
 MASTER_SITES=	${MASTER_SITE_GITHUB:=cxong/}
 GITHUB_PROJECT=	FallingTime
 
-MAINTAINER=	cfkoch@edgebsd.org
+MAINTAINER=	charlotte@NetBSD.org
 HOMEPAGE=	https://github.com/cxong/FallingTime
 COMMENT=	Arcade game inspired by Fall Down
 LICENSE=	gnu-gpl-v2

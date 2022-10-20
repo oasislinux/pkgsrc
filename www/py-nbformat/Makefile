@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.12 2022/01/05 15:41:30 wiz Exp $
+# $NetBSD: Makefile,v 1.14 2022/05/04 07:30:55 adam Exp $
 
-DISTNAME=	nbformat-5.1.3
+DISTNAME=	nbformat-5.4.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	3
 CATEGORIES=	www python
 MASTER_SITES=	${MASTER_SITE_PYPI:=n/nbformat/}
 
@@ -11,9 +10,9 @@ HOMEPAGE=	https://jupyter.org/
 COMMENT=	Jupyter Notebook format
 LICENSE=	modified-bsd
 
-DEPENDS+=	${PYPKGPREFIX}-ipython_genutils-[0-9]*:../../devel/py-ipython_genutils
+DEPENDS+=	${PYPKGPREFIX}-fastjsonschema-[0-9]*:../../textproc/py-fastjsonschema
 DEPENDS+=	${PYPKGPREFIX}-jupyter_core-[0-9]*:../../devel/py-jupyter_core
-DEPENDS+=	${PYPKGPREFIX}-jsonschema>=2.5.1:../../textproc/py-jsonschema
+DEPENDS+=	${PYPKGPREFIX}-jsonschema>=2.6:../../textproc/py-jsonschema
 DEPENDS+=	${PYPKGPREFIX}-traitlets>=4.1:../../devel/py-traitlets
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-[0-9]*:../../devel/py-test
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-cov-[0-9]*:../../devel/py-test-cov
@@ -26,7 +25,8 @@ PYTHON_VERSIONS_INCOMPATIBLE=	27
 USE_PKG_RESOURCES=	yes
 
 post-install:
-	cd ${DESTDIR}${PREFIX}/bin && mv jupyter-trust jupyter-trust-${PYVERSSUFFIX} || ${TRUE}
+	cd ${DESTDIR}${PREFIX}/bin && \
+	${MV} jupyter-trust jupyter-trust-${PYVERSSUFFIX} || ${TRUE}
 
 do-test:
 	cd ${WRKSRC} && ${SETENV} ${TEST_ENV} pytest-${PYVERSSUFFIX}

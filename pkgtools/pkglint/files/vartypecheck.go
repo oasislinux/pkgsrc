@@ -397,6 +397,9 @@ func (cv *VartypeCheck) DependencyPattern() {
 		if defpat == nil || defpat.LowerOp == "" {
 			return
 		}
+		if containsVarUse(defpat.LowerOp) || containsVarUse(deppat.Lower) {
+			return
+		}
 		limit := condInt(defpat.LowerOp == ">=" && deppat.LowerOp == ">", 1, 0)
 		if pkgver.Compare(deppat.Lower, defpat.Lower) < limit {
 			cv.Notef("The requirement %s%s is already guaranteed by the %s%s from %s.",
@@ -1606,6 +1609,22 @@ func (cv *VartypeCheck) WrapperTransform() {
 
 func (cv *VartypeCheck) WrkdirSubdirectory() {
 	cv.Pathname()
+
+	if hasPrefix(cv.Value, "${WRKDIR}/") && cv.MkLines.pkg != nil {
+		distname := cv.MkLines.pkg.redundant.get("DISTNAME").vari
+		if distname.IsConstant() && cv.Value[10:] == distname.ConstantValue() {
+			fix := cv.Autofix()
+			fix.Notef("Setting WRKSRC to %q is redundant.", cv.Value)
+			fix.Delete()
+			fix.Apply()
+
+			// XXX: Resetting the Line and MkLine should be handled universally
+			//  by Autofix. Without this hack, pkglint would crash later when
+			//  aligning the variable assignments.
+			cv.MkLine.Line.Text = ""
+			cv.MkLine.data = mkLineEmpty{}
+		}
+	}
 }
 
 // WrksrcPathPattern is a shell pattern for existing pathnames, possibly including slashes.

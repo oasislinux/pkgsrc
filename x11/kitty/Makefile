@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.28 2022/02/08 12:35:44 pin Exp $
+# $NetBSD: Makefile,v 1.36 2022/09/27 07:45:50 pin Exp $
 
-DISTNAME=	kitty-0.24.2
+DISTNAME=	kitty-0.26.3
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_GITHUB:=kovidgoyal/}
 GITHUB_PROJECT=	kitty
@@ -12,7 +12,7 @@ HOMEPAGE=	https://sw.kovidgoyal.net/kitty/index.html
 COMMENT=	GPU based terminal emulator
 LICENSE=	gnu-gpl-v3
 
-USE_LANGUAGES=	c99
+USE_LANGUAGES=	c
 EXTRACT_USING=	bsdtar
 USE_TOOLS+=	gmake pkg-config
 
@@ -25,6 +25,8 @@ BUILDLINK_TRANSFORM+=	rm:-pedantic-errors
 # kitty's homegrown packaging expects the functionality of tic(1) that
 # comes with ncurses.
 USE_NCURSES=	yes
+
+CHECK_INTERPRETER_SKIP=	lib/kitty/shell-integration/ssh/askpass.py
 
 INSTALLATION_DIRS+=	${PKGMANDIR}/man1 ${PKGMANDIR}/man5
 
@@ -43,6 +45,7 @@ do-install:
 	    ${DESTDIR}${PREFIX}/${PKGMANDIR}/man5/kitty.conf.5 || ${TRUE}
 # pkgsrc framwork only handles optimization level 1 files correctly
 	${FIND} ${DESTDIR} -type f -name *.opt-2.pyc -print0 | ${XARGS} -0 ${RM} -rf
+	${FIND} ${DESTDIR} -name '*.orig' -exec rm -rf '{}' ';'
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -69,6 +72,7 @@ do-install:
 .include "../../lang/python/application.mk"
 .include "../../lang/python/extension.mk"
 .include "../../lang/python/tool.mk"
+.include "../../security/openssl/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/dlopen.buildlink3.mk"
 BUILDLINK_TRANSFORM+=	opt:-ldl:${BUILDLINK_LDADD.dl:Q}

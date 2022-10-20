@@ -1,12 +1,11 @@
-# $NetBSD: buildlink3.mk,v 1.1 2022/01/31 23:16:41 ryoon Exp $
+# $NetBSD: buildlink3.mk,v 1.6 2022/09/26 17:41:07 adam Exp $
 
 BUILDLINK_TREE+=	ffmpeg5
 
 .if !defined(FFMPEG5_BUILDLINK3_MK)
 FFMPEG5_BUILDLINK3_MK:=
 
-BUILDLINK_API_DEPENDS.ffmpeg5+=	ffmpeg5>=5.0
-BUILDLINK_ABI_DEPENDS.ffmpeg5+=	ffmpeg5>=5.0
+BUILDLINK_API_DEPENDS.ffmpeg5+=	ffmpeg5>=5.1
 BUILDLINK_PKGSRCDIR.ffmpeg5?=	../../multimedia/ffmpeg5
 
 pkgbase := ffmpeg5
@@ -35,7 +34,7 @@ pkgbase := ffmpeg5
 .endif
 
 .if ${PKG_BUILD_OPTIONS.ffmpeg5:Mx264}
-.  include "../../multimedia/x264-devel/buildlink3.mk"
+.  include "../../multimedia/x264/buildlink3.mk"
 .endif
 
 .if ${PKG_BUILD_OPTIONS.ffmpeg5:Mlibvpx}

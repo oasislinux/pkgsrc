@@ -1,9 +1,8 @@
-# $NetBSD: haskell.mk,v 1.38 2022/02/07 02:58:24 pho Exp $
+# $NetBSD: haskell.mk,v 1.49 2022/09/08 15:18:48 pho Exp $
 #
-# This Makefile fragment handles Haskell Cabal packages.
-# Package configuration, building, installation, registration and
-# unregistration are fully automated.
-# See https://www.haskell.org/cabal/.
+# This Makefile fragment handles Haskell Cabal packages. Package
+# configuration, building, installation, registration and unregistration
+# are fully automated. See also mk/haskell/README.md for a packaging guide.
 #
 # Package-settable variables:
 #
@@ -14,11 +13,33 @@
 # MASTER_SITES
 #	Default to HackageDB URLs.
 #
+# HASKELL_PKG_NAME
+#	The name of the corresponding Cabal package, in case it differs
+#	from ${DISTNAME}.
+#
+#	Default value: ${DISTNAME}
+#
 # HASKELL_OPTIMIZATION_LEVEL
 #	Optimization level for compilation.
 #
 #	Possible values: 0 1 2
 #       Default value: 2
+#
+# HASKELL_ENABLE_DYNAMIC_EXECUTABLE
+#	Whether executables in the package should be linked dynamically or
+#	not.
+#
+#	Possible values: yes, no
+#	Default value: inherits ${HASKELL_ENABLE_SHARED_LIBRARY}
+#
+# HASKELL_UNRESTRICT_DEPENDENCIES
+#	A list of Cabal packages that the package depends on, whose version
+#	constraints are way too restricted to solve. Listing packages in
+#	this variable will cause the *.cabal file to be rewritten so that
+#	any version is accepted. Use this with care, because not all
+#	incompatibilities are caught during build time.
+#
+#	Default value: empty
 #
 # User-settable variables:
 #
@@ -58,12 +79,14 @@ _USER_VARS.haskell= \
 	HASKELL_ENABLE_LIBRARY_PROFILING \
 	HASKELL_ENABLE_HADDOCK_DOCUMENTATION \
 	HS_UPDATE_PLIST
-_SYS_VARS.haskell= \
-	PKGNAME DISTNAME MASTER_SITES MASTER_SITE_HASKELL_HACKAGE \
-	HOMEPAGE UNLIMIT_RESOURCES PREFIX
-_DEF_VARS.haskell= \
+_PKG_VARS.haskell= \
+	HASKELL_ENABLE_DYNAMIC_EXECUTABLE \
 	HASKELL_OPTIMIZATION_LEVEL \
 	HASKELL_PKG_NAME \
+	HASKELL_UNRESTRICT_DEPENDENCIES \
+	PKGNAME HOMEPAGE MASTER_SITES
+_DEF_VARS.haskell= \
+	BUILDLINK_PASSTHRU_DIRS \
 	USE_LANGUAGES \
 	CONFIGURE_ARGS \
 	PLIST_SUBST \
@@ -74,18 +97,25 @@ _DEF_VARS.haskell= \
 	INSTALLATION_DIRS \
 	INSTALL_TEMPLATES \
 	DEINSTALL_TEMPLATES \
+	UNLIMIT_RESOURCES \
 	_HASKELL_VERSION_CMD \
 	_HASKELL_BIN \
 	_HASKELL_PKG_BIN \
-	_HASKELL_PKG_DESCR_FILE \
+	_HASKELL_PKG_DESCR_FILE_OR_DIR \
 	_HASKELL_PKG_ID_FILE \
 	_HASKELL_VERSION
 _USE_VARS.haskell= \
+	DISTNAME \
 	PKG_VERBOSE \
 	BUILDLINK_PREFIX.ghc \
+	MASTER_SITE_HASKELL_HACKAGE \
 	PKGDIR DESTDIR \
+	PREFIX \
 	WRKSRC
+_SORTED_VARS.haskell= \
+	HASKELL_UNRESTRICT_DEPENDENCIES
 _LISTED_VARS.haskell= \
+	BUILDLINK_PASSTHRU_DIRS \
 	CONFIGURE_ARGS \
 	PLIST_SUBST \
 	PRINT_PLIST_AWK \
@@ -97,19 +127,17 @@ PKGNAME?=	hs-${DISTNAME}
 MASTER_SITES?=	${MASTER_SITE_HASKELL_HACKAGE:=${DISTNAME}/}
 HOMEPAGE?=	http://hackage.haskell.org/package/${DISTNAME:C/-[^-]*$//}
 
-# Cabal packages may use pkg-config, but url2pkg can't detect
-# that. (PHO: I think that should be handled by url2pkg (2009-05-20))
-USE_TOOLS+=	pkg-config
-
 # GHC can be a memory hog, so don't apply regular limits.
 UNLIMIT_RESOURCES+=	datasize virtualsize
 
 HASKELL_OPTIMIZATION_LEVEL?=		2
+HASKELL_ENABLE_DYNAMIC_EXECUTABLE?=	${HASKELL_ENABLE_SHARED_LIBRARY}
 HASKELL_ENABLE_SHARED_LIBRARY?=		yes
 HASKELL_ENABLE_LIBRARY_PROFILING?=	yes
 HASKELL_ENABLE_HADDOCK_DOCUMENTATION?=	yes
+HASKELL_UNRESTRICT_DEPENDENCIES?=	# empty
 
-.include "../../lang/ghc90/buildlink3.mk"
+.include "../../lang/ghc92/buildlink3.mk"
 
 # Some Cabal packages requires preprocessors to build, and we don't
 # want them to implicitly depend on such tools. Place dummy scripts by
@@ -134,6 +162,24 @@ _HASKELL_BUILD_SETUP_OPTS=	-package-env -
 # GHC requires C compiler.
 USE_LANGUAGES+=	c
 
+# Haskell packages don't use semvars but they use something similar to it,
+# which is called Haskell PVP (https://pvp.haskell.org/). Packages usually
+# have version constraints on their dependencies that specify not only
+# lower bounds but also upper bounds. The problem is that, while lower
+# bounds are mostly accurate, package authors can not be sure about upper
+# bounds so they tend to be too pessimistic about compatibility.
+.if !empty(HASKELL_UNRESTRICT_DEPENDENCIES)
+SUBST_CLASSES+=		cabal
+SUBST_STAGE.cabal?=	post-extract
+SUBST_FILES.cabal?=	${HASKELL_PKG_NAME:C/-[[:digit:].]+$//}.cabal
+SUBST_MESSAGE.cabal?=	Relaxing version constraints on dependencies
+.  for _pkg_ in ${HASKELL_UNRESTRICT_DEPENDENCIES}
+# Leading whitespace or commas to avoid mismatches, remove version
+# constraints up to end of line or ','.
+SUBST_SED.cabal+=	-Ee 's/((^|,)[[:space:]]*${_pkg_})[^[:alpha:],]+(,|$$)/\1\3/g'
+.  endfor
+.endif
+
 # Declarations for ../../mk/configure/configure.mk
 CONFIGURE_ARGS+=	--ghc
 CONFIGURE_ARGS+=	--with-compiler=${_HASKELL_BIN:Q}
@@ -145,23 +191,39 @@ PKGSRC_OVERRIDE_MKPIE=	yes
 CONFIGURE_ARGS+=	--ghc-option=-fPIC --ghc-option=-pie
 .endif
 
-.if ${HASKELL_ENABLE_SHARED_LIBRARY} == "yes"
-CONFIGURE_ARGS+=	--enable-shared --enable-executable-dynamic
+.if ${HASKELL_ENABLE_DYNAMIC_EXECUTABLE:tl} == "yes"
+CONFIGURE_ARGS+=	--enable-executable-dynamic
 .else
-CONFIGURE_ARGS+=	--disable-shared --disable-executable-dynamic
+CONFIGURE_ARGS+=	--disable-executable-dynamic
 .endif
 
-.if ${HASKELL_ENABLE_LIBRARY_PROFILING} == "yes"
+PLIST_VARS+=		shlibs
+PRINT_PLIST_AWK+=	/(\.dyn_hi|\/lib[^\/]+\.so)$$/ { $$0 = "$${PLIST.shlibs}" $$0 }
+.if ${HASKELL_ENABLE_SHARED_LIBRARY:tl} == "yes"
+CONFIGURE_ARGS+=	--enable-shared
+PLIST.shlibs=		yes
+.else
+CONFIGURE_ARGS+=	--disable-shared
+.endif
+
+PLIST_VARS+=		prof
+PRINT_PLIST_AWK+=	/(\.p_hi|\/lib[^\/]+_p\.a)$$/ { $$0 = "$${PLIST.prof}" $$0 }
+.if ${HASKELL_ENABLE_LIBRARY_PROFILING:tl} == "yes"
 CONFIGURE_ARGS+=	--enable-library-profiling
+PLIST.prof=		yes
 .else
 CONFIGURE_ARGS+=	--disable-library-profiling
 .endif
 
-.if ${HASKELL_ENABLE_HADDOCK_DOCUMENTATION} == "yes"
+PLIST_VARS+=		doc
+PRINT_PLIST_AWK+=	/\/doc\// { $$0 = "$${PLIST.doc}" $$0 }
+.if ${HASKELL_ENABLE_HADDOCK_DOCUMENTATION:tl} == "yes"
 CONFIGURE_ARGS+=	--with-haddock=${BUILDLINK_PREFIX.ghc:Q}/bin/haddock
+PLIST.doc=		yes
 .endif
 
 CONFIGURE_ARGS+=	-O${HASKELL_OPTIMIZATION_LEVEL}
+CONFIGURE_ARGS+=	--enable-split-sections
 
 # Support RELRO. When PKGSRC_USE_RELRO isn't set to "no",
 # mk/compiler/{ghc,clang}.mk add "-Wl,-z,relro" and optionally
@@ -178,16 +240,31 @@ _HS_ORIG_LD_CMD=	${SETENV} PATH=${_PATH_ORIG} which ld
 CONFIGURE_ARGS+=	--ghc-options=-pgmlm\ ${_HS_ORIG_LD_CMD:sh}
 CONFIGURE_ARGS+=	--ghc-options=-optlm\ -r
 
-.if !exists(${PKGDIR}/PLIST)
+# When a Template Haskell splice is to be evaluated by a dynamically-linked
+# GHC, it first compiles the splice and creates a .so file like
+# /tmp/ghc_XXXX/libghc_XX.so, then it dlopen's it. When the source file
+# contains more than one splice, subsequent splices will refer to previous
+# ones via "-L/tmp/ghc_XXXX -Wl,-rpath,/tmp/ghc_XXXX -lghc_XX". This means
+# /tmp/ghc_* must be protected from getting removed by our wrappers. We
+# also want to be explicit about the path to be chosen for temporary files.
+CONFIGURE_ARGS+=		--ghc-options=-tmpdir\ ${TMPDIR:U/tmp:Q}
+BUILDLINK_PASSTHRU_DIRS+=	${TMPDIR:U/tmp}
+
+# Some packages lack PLIST but they may have things like PLIST.common.
+.if empty(PLIST_SRC)
+.  if !exists(${PKGDIR}/PLIST)
 _HS_PLIST_STATUS=	missing
-.elif !${${GREP} "." ${PKGDIR}/PLIST || ${TRUE}:L:sh}
+.  elif !${${GREP} "." ${PKGDIR}/PLIST || ${TRUE}:L:sh}
 _HS_PLIST_STATUS=	missing
-.elif ${${GREP} HS_VERSION ${PKGDIR}/PLIST || ${TRUE}:L:sh}
+.  elif ${${GREP} HS_VERSION ${PKGDIR}/PLIST || ${TRUE}:L:sh}
 _HS_PLIST_STATUS=	ok
-.elif !${${GREP} "/package-description" ${PKGDIR}/PLIST || ${TRUE}:L:sh}
+.  elif !${${GREP} "/package-description" ${PKGDIR}/PLIST || ${TRUE}:L:sh}
 _HS_PLIST_STATUS=	ok
-.else
+.  else
 _HS_PLIST_STATUS=	outdated
+.  endif
+.else
+_HS_PLIST_STATUS=	ok
 .endif
 
 # Starting from GHC 7.10 (or 7.8?), packages are installed in directories
@@ -203,24 +280,48 @@ _HS_PLIST_STATUS=	outdated
 # from it.
 _HS_PLIST.platform.cmd=		${_HASKELL_PKG_BIN} --simple-output field base data-dir
 _HS_PLIST.platform=		${_HS_PLIST.platform.cmd:sh:H:T}
-# Package ID formatted as "{name}-{version}-{hash}": this only exists
-# if the package contains a library.
-_HS_PLIST.lib.pkg-id.cmd=	${CAT} ${DESTDIR}${_HASKELL_PKG_ID_FILE}
-_HS_PLIST.lib.pkg-id=		${exists(${DESTDIR}${_HASKELL_PKG_ID_FILE}):?${_HS_PLIST.lib.pkg-id.cmd:sh}:}
 # Abbreviated compiler version. Used for shared libraries.
 _HS_PLIST.short-ver=		${_HASKELL_VERSION:S,-,,}
 
-PLIST_SUBST+=		HS_PLATFORM=${_HS_PLIST.platform}
-PLIST_SUBST+=		HS_VERSION=${_HASKELL_VERSION}
-PLIST_SUBST+=		HS_VER=${_HS_PLIST.short-ver}
-_HS_PLIST_SUBST.lib=	HS_PKGID=${_HS_PLIST.lib.pkg-id}
-PLIST_SUBST+=		${!empty(_HS_PLIST.lib.pkg-id):?${_HS_PLIST_SUBST.lib}:}
+PLIST_SUBST+=			HS_PLATFORM=${_HS_PLIST.platform}
+PLIST_SUBST+=			HS_VERSION=${_HASKELL_VERSION}
+PLIST_SUBST+=			HS_VER=${_HS_PLIST.short-ver}
+# Package IDs formatted as "{name}-{version}-{hash}": these only exist if
+# the package contains at least one library.
+_HS_PLIST.subst-libs.cmd=	\
+	if [ -f ${DESTDIR:Q}${_HASKELL_PKG_ID_FILE:Q} ]; then \
+		n=`${WC} -l ${DESTDIR:Q}${_HASKELL_PKG_ID_FILE:Q} | ${AWK} '{print $$1}'`; \
+		if [ "$$n" -eq 1 ]; then \
+			pkg_id=`${CAT} ${DESTDIR:Q}${_HASKELL_PKG_ID_FILE:Q}`; \
+			${ECHO} "HS_PKGID=$${pkg_id}"; \
+		else \
+			i=1; \
+			while read pkg_id; do \
+				${ECHO} "HS_PKGID.$${i}=$${pkg_id}"; \
+				i=`${EXPR} $${i} + 1`; \
+			done < ${DESTDIR:Q}${_HASKELL_PKG_ID_FILE:Q}; \
+		fi; \
+	fi
+PLIST_SUBST+=			${_HS_PLIST.subst-libs.cmd:sh}
 
-PRINT_PLIST_AWK+=	{ gsub("${_HS_PLIST.platform}",   "$${HS_PLATFORM}") }
-PRINT_PLIST_AWK+=	{ gsub("${_HASKELL_VERSION}",     "$${HS_VERSION}" ) }
-PRINT_PLIST_AWK+=	{ gsub("${_HS_PLIST.short-ver}",  "$${HS_VER}"     ) }
-_HS_PRINT_PLIST_AWK.lib={ gsub("${_HS_PLIST.lib.pkg-id}", "$${HS_PKGID}"   ) }
-PRINT_PLIST_AWK+=	${!empty(_HS_PLIST.lib.pkg-id):?${_HS_PRINT_PLIST_AWK.lib}:}
+PRINT_PLIST_AWK+=		{ gsub("${_HS_PLIST.platform}",   "$${HS_PLATFORM}") }
+PRINT_PLIST_AWK+=		{ gsub("${_HASKELL_VERSION}",     "$${HS_VERSION}" ) }
+PRINT_PLIST_AWK+=		{ gsub("${_HS_PLIST.short-ver}",  "$${HS_VER}"     ) }
+_HS_PRINT_PLIST_AWK.libs.cmd=	\
+	if [ -f ${DESTDIR:Q}${_HASKELL_PKG_ID_FILE:Q} ]; then \
+		n=`${WC} -l ${DESTDIR:Q}${_HASKELL_PKG_ID_FILE:Q} | ${AWK} '{print $$1}'`; \
+		if [ "$$n" -eq 1 ]; then \
+			pkg_id=`${CAT} ${DESTDIR:Q}${_HASKELL_PKG_ID_FILE:Q}`; \
+			${ECHO} "{ gsub(\"$${pkg_id}\", \"\$${HS_PKGID}\") }"; \
+		else \
+			i=1; \
+			while read pkg_id; do \
+				${ECHO} "{ gsub(\"$${pkg_id}\", \"\$${HS_PKGID.$${i}}\") }"; \
+				i=`${EXPR} $${i} + 1`; \
+			done < ${DESTDIR:Q}${_HASKELL_PKG_ID_FILE:Q}; \
+		fi; \
+	fi
+PRINT_PLIST_AWK+=		${_HS_PRINT_PLIST_AWK.libs.cmd:sh}
 
 .if ${_HS_PLIST_STATUS} == missing || ${_HS_PLIST_STATUS} == outdated
 .  if ${HS_UPDATE_PLIST:tl} == yes
@@ -285,9 +386,15 @@ do-build:
 # for package registration (if any).
 HASKELL_PKG_NAME?=		${DISTNAME}
 _HASKELL_PKG_DESCR_DIR=		${PREFIX}/lib/${HASKELL_PKG_NAME}/${_HASKELL_VERSION}
-_HASKELL_PKG_DESCR_FILE=	${_HASKELL_PKG_DESCR_DIR}/package-description
+_HASKELL_PKG_DESCR_FILE_OR_DIR=	${_HASKELL_PKG_DESCR_DIR}/package-description
 _HASKELL_PKG_ID_FILE=		${_HASKELL_PKG_DESCR_DIR}/package-id
 
+# Packages may contain internal libraries. If this is the case, "./Setup
+# register --gen-pkg-config" creates a directory containing files named
+# {index}-{pkg-id} for each library. Otherwise it creates a single regular
+# file. "./Setup register --print-ipid" becomes useless in this case, as it
+# only prints the ID of the main library. devel/hs-attoparsec is an example
+# of such packages.
 INSTALLATION_DIRS+=		${_HASKELL_PKG_DESCR_DIR}
 do-install:
 	${RUN} ${_ULIMIT_CMD} cd ${WRKSRC} && \
@@ -296,9 +403,35 @@ do-install:
 			--print-ipid \
 			> dist/package-id && \
 		./Setup copy ${PKG_VERBOSE:D-v} --destdir=${DESTDIR:Q} && \
-		if [ -f dist/package-description ]; then \
+		if [ -d dist/package-description ]; then \
+			${INSTALL_DATA_DIR} ${DESTDIR:Q}${_HASKELL_PKG_DESCR_FILE_OR_DIR:Q}; \
+			${CAT} /dev/null > dist/package-id; \
+			i=1; \
+			while ${TRUE}; do \
+				found=no; \
+				for f in dist/package-description/$${i}-*; do \
+					if [ ! -f "$$f" ]; then \
+						break; \
+					fi; \
+					${INSTALL_DATA} "$$f" \
+						"${DESTDIR}${_HASKELL_PKG_DESCR_FILE_OR_DIR}/$${i}"; \
+					${ECHO} "$$f" | \
+						${SED} -e "s|dist/package-description/$${i}-||" \
+						>> dist/package-id; \
+					found=yes; \
+					break; \
+				done; \
+				if [ "$$found" = "yes" ]; then \
+					i=`${EXPR} $$i + 1`; \
+				else \
+					break; \
+				fi; \
+			done; \
+			${INSTALL_DATA} dist/package-id \
+				${DESTDIR:Q}${_HASKELL_PKG_ID_FILE:Q}; \
+		elif [ -f dist/package-description ]; then \
 			${INSTALL_DATA} dist/package-description \
-				${DESTDIR:Q}${_HASKELL_PKG_DESCR_FILE:Q}; \
+				${DESTDIR:Q}${_HASKELL_PKG_DESCR_FILE_OR_DIR:Q}; \
 			${INSTALL_DATA} dist/package-id \
 				${DESTDIR:Q}${_HASKELL_PKG_ID_FILE:Q}; \
 		fi
@@ -315,8 +448,11 @@ do-test:
 
 # Substitutions for INSTALL and DEINSTALL.
 FILES_SUBST+=	HASKELL_PKG_BIN=${_HASKELL_PKG_BIN}
-FILES_SUBST+=	HASKELL_PKG_DESCR_FILE=${_HASKELL_PKG_DESCR_FILE}
+FILES_SUBST+=	HASKELL_PKG_DESCR_FILE_OR_DIR=${_HASKELL_PKG_DESCR_FILE_OR_DIR}
 FILES_SUBST+=	HASKELL_PKG_ID_FILE=${_HASKELL_PKG_ID_FILE}
+FILES_SUBST+=	AWK=${AWK:Q}
+FILES_SUBST+=	EXPR=${EXPR:Q}
+FILES_SUBST+=	TRUE=${TRUE:Q}
 
 INSTALL_TEMPLATES+=	../../mk/haskell/INSTALL.in
 DEINSTALL_TEMPLATES+=	../../mk/haskell/DEINSTALL.in
@@ -325,6 +461,5 @@ DEINSTALL_TEMPLATES+=	../../mk/haskell/DEINSTALL.in
 # from the files in DESTDIR.
 _DEF_VARS.haskell+=	_HS_PLIST.platform
 _DEF_VARS.haskell+=	_HS_PLIST.short-ver
-_DEF_VARS.haskell+=	${!empty(_HS_PLIST.lib.pkg-id):?_HS_PLIST.lib.pkg-id:}
 
 .endif # HASKELL_MK

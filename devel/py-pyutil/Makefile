@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.26 2022/01/05 15:41:07 wiz Exp $
+# $NetBSD: Makefile,v 1.28 2022/09/11 18:10:03 wiz Exp $
 
 DISTNAME=	pyutil-3.3.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
@@ -13,7 +13,9 @@ LICENSE=	gnu-gpl-v2
 
 DEPENDS+=	${PYPKGPREFIX}-simplejson>=2.1.0:../../converters/py-simplejson
 TEST_DEPENDS+=	${PYPKGPREFIX}-mock>=1.3.0:../../devel/py-mock
-TEST_DEPENDS+=	${PYPKGPREFIX}-twisted>=15.5.0:../../net/py-twisted
+TEST_DEPENDS+=	${PYPKGPREFIX}-twisted>=0:../../net/py-twisted
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 USE_LANGUAGES=	# none
 

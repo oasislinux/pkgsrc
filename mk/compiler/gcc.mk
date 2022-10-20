@@ -1,4 +1,4 @@
-# $NetBSD: gcc.mk,v 1.235 2022/01/18 01:41:09 pho Exp $
+# $NetBSD: gcc.mk,v 1.246 2022/08/01 07:58:21 wiz Exp $
 #
 # This is the compiler definition for the GNU Compiler Collection.
 #
@@ -95,15 +95,17 @@ _DEF_VARS.gcc=	\
 	_LANGUAGES.gcc \
 	_LINKER_RPATH_FLAG \
 	_NEED_GCC6 _NEED_GCC7 _NEED_GCC8 _NEED_GCC9 \
-	_NEED_GCC10 \
+	_NEED_GCC10 _NEED_GCC12 \
 	_NEED_GCC_AUX _NEED_NEWER_GCC \
 	_PKGSRC_GCC_VERSION \
 	_USE_GCC_SHLIB _USE_PKGSRC_GCC \
 	_WRAP_EXTRA_ARGS.CC \
 	_EXTRA_CC_DIRS \
+	_C_STD_VERSIONS \
+	${_C_STD_VERSIONS:@std@_C_STD_FLAG.${std}@} \
 	_CXX_STD_VERSIONS \
 	${_CXX_STD_VERSIONS:@std@_CXX_STD_FLAG.${std}@} \
-	_MKPIE_CFLAGS.gcc _MKPIE_LDFLAGS.gcc \
+	_MKPIE_CFLAGS.gcc _MKPIE_LDFLAGS \
 	_FORTIFY_CFLAGS _RELRO_LDFLAGS _STACK_CHECK_CFLAGS \
 	_CTF_CFLAGS \
 	_GCC_DIR \
@@ -126,7 +128,7 @@ _USE_VARS.gcc=	\
 	_OPSYS_INCLUDE_DIRS _OPSYS_LIB_DIRS
 _IGN_VARS.gcc=	\
 	_GCC6_PATTERNS _GCC7_PATTERNS _GCC8_PATTERNS _GCC9_PATTERNS \
-	_GCC10_PATTERNS _GCC_AUX_PATTERNS
+	_GCC10_PATTERNS _GCC12_PATTERNS _GCC_AUX_PATTERNS
 _LISTED_VARS.gcc= \
 	MAKEFLAGS IMAKEOPTS LDFLAGS PREPEND_PATH
 .include "../../mk/bsd.prefs.mk"
@@ -150,7 +152,7 @@ GCC_REQD+=	20160822
 
 # _GCC_DIST_VERSION is the highest version of GCC installed by the pkgsrc
 # without the PKGREVISIONs.
-_GCC_DIST_NAME:=	gcc10
+_GCC_DIST_NAME:=	gcc12
 .include "../../lang/${_GCC_DIST_NAME}/version.mk"
 _GCC_DIST_VERSION:=	${${_GCC_DIST_NAME:tu}_DIST_VERSION}
 
@@ -168,6 +170,9 @@ _GCC9_PATTERNS= 9 9.*
 
 # _GCC10_PATTERNS matches N s.t. 10.0 <= N < 11.
 _GCC10_PATTERNS= 10 10.*
+
+# _GCC12_PATTERNS matches N s.t. 12.0 <= N < 13.
+_GCC12_PATTERNS= 12 12.*
 
 # _GCC_AUX_PATTERNS matches 8-digit date YYYYMMDD*
 _GCC_AUX_PATTERNS= 20[1-2][0-9][0-1][0-9][0-3][0-9]*
@@ -218,13 +223,20 @@ _GCC_VERSION=	0
 .endif
 _GCC_PKG=	gcc-${_GCC_VERSION:C/-.*$//}
 
+.for _version_ in ${_C_STD_VERSIONS}
+_C_STD_FLAG.${_version_}?=	-std=${_version_}
+.endfor
+# XXX: pkgsrc historically hardcoded c99=gnu99 so we retain that for now, but
+# we should look at removing this and be explicit in packages where required.
+_C_STD_FLAG.c99=	-std=gnu99
+
 .for _version_ in ${_CXX_STD_VERSIONS}
 _CXX_STD_FLAG.${_version_}?=	-std=${_version_}
-.  if !empty(_GCC_VERSION:M[34].[1234].*)
+.endfor
+.if !empty(_GCC_VERSION:M[34].[1234].*)
 _CXX_STD_FLAG.c++03=	-std=c++0x
 _CXX_STD_FLAG.gnu++03=	-std=gnu++0x
-.  endif
-.endfor
+.endif
 
 .if !empty(_CC:M${LOCALBASE}/*)
 _IS_BUILTIN_GCC=	NO
@@ -275,31 +287,59 @@ _GCC_REQD=	${_GCC_STRICTEST_REQD}
 _NEED_GCC6?=	no
 .for _pattern_ in ${_GCC6_PATTERNS}
 .  if !empty(_GCC_REQD:M${_pattern_})
+# XXX this won't work without adjustments elsewhere because of how
+# _GCC_REQD is processed.
+#.    if ${OPSYS} == "NetBSD" && ${OPSYS_VERSION} < 089937
+#USE_PKGSRC_GCC=		yes
+#USE_PKGSRC_GCC_RUNTIME=	yes
+#.    endif
 _NEED_GCC6=	yes
 .  endif
 .endfor
 _NEED_GCC7?=	no
 .for _pattern_ in ${_GCC7_PATTERNS}
 .  if !empty(_GCC_REQD:M${_pattern_})
+.    if ${OPSYS} == "NetBSD" && ${OPSYS_VERSION} < 089937
+USE_PKGSRC_GCC=		yes
+USE_PKGSRC_GCC_RUNTIME=	yes
+.    endif
 _NEED_GCC7=	yes
 .  endif
 .endfor
 _NEED_GCC8?=	no
 .for _pattern_ in ${_GCC8_PATTERNS}
 .  if !empty(_GCC_REQD:M${_pattern_})
+.    if ${OPSYS} == "NetBSD" && ${OPSYS_VERSION} < 099917
+USE_PKGSRC_GCC=		yes
+USE_PKGSRC_GCC_RUNTIME=	yes
+.    endif
 _NEED_GCC8=	yes
 .  endif
 .endfor
 _NEED_GCC9?=	no
 .for _pattern_ in ${_GCC9_PATTERNS}
 .  if !empty(_GCC_REQD:M${_pattern_})
+.    if ${OPSYS} == "NetBSD" && ${OPSYS_VERSION} < 099976
+USE_PKGSRC_GCC=		yes
+USE_PKGSRC_GCC_RUNTIME=	yes
+.    endif
 _NEED_GCC9=	yes
 .  endif
 .endfor
 _NEED_GCC10?=	no
 .for _pattern_ in ${_GCC10_PATTERNS}
 .  if !empty(_GCC_REQD:M${_pattern_})
+.    if ${OPSYS} == "NetBSD" && ${OPSYS_VERSION} < 099982
+USE_PKGSRC_GCC=		yes
+USE_PKGSRC_GCC_RUNTIME=	yes
+.    endif
 _NEED_GCC10=	yes
+.  endif
+.endfor
+_NEED_GCC12?=	no
+.for _pattern_ in ${_GCC12_PATTERNS}
+.  if !empty(_GCC_REQD:M${_pattern_})
+_NEED_GCC12=	yes
 .  endif
 .endfor
 _NEED_GCC_AUX?=	no
@@ -311,9 +351,21 @@ _NEED_NEWER_GCC=NO
 .endfor
 .if !empty(_NEED_GCC6:M[nN][oO]) && !empty(_NEED_GCC7:M[nN][oO]) && \
     !empty(_NEED_GCC8:M[nN][oO]) && !empty(_NEED_GCC9:M[nN][oO]) && \
-    !empty(_NEED_GCC10:M[nN][oO]) && \
+    !empty(_NEED_GCC10:M[nN][oO]) && !empty(_NEED_GCC12:M[nN][oO]) && \
     !empty(_NEED_GCC_AUX:M[nN][oO])
 _NEED_GCC8=	yes
+.endif
+
+# April 2022: GCC below 10 from pkgsrc is broken on 32-bit arm NetBSD.
+.if !empty(MACHINE_PLATFORM:MNetBSD-*-earm*) && \
+    ${OPSYS_VERSION} < 099900 && \
+    (${_NEED_GCC8:tl} == "yes" || ${_NEED_GCC9:tl} == "yes")
+_NEED_GCC6=	no
+_NEED_GCC7=	no
+_NEED_GCC8=	no
+_NEED_GCC9=	no
+_NEED_GCC10=	yes
+_NEED_GCC12=	yes
 .endif
 
 # Assume by default that GCC will only provide a C compiler.
@@ -328,6 +380,8 @@ LANGUAGES.gcc=	c c++ fortran fortran77 go java objc obj-c++
 LANGUAGES.gcc=	c c++ fortran fortran77 go java objc obj-c++
 .elif !empty(_NEED_GCC10:M[yY][eE][sS])
 LANGUAGES.gcc=	c c++ fortran fortran77 go java objc obj-c++
+.elif !empty(_NEED_GCC12:M[yY][eE][sS])
+LANGUAGES.gcc=	c c++ fortran fortran77 go java objc obj-c++
 .elif !empty(_NEED_GCC_AUX:M[yY][eE][sS])
 LANGUAGES.gcc=	c c++ fortran fortran77 objc ada
 .endif
@@ -339,28 +393,18 @@ _LANGUAGES.gcc+=	${LANGUAGES.gcc:M${_lang_}}
 _WRAP_EXTRA_ARGS.cc+=	-fcommon
 CWRAPPERS_PREPEND.cc+=	-fcommon
 
-.if !empty(USE_LANGUAGES:Mc99)
-_WRAP_EXTRA_ARGS.CC+=	-std=gnu99
-CWRAPPERS_APPEND.cc+=	-std=gnu99
-.endif
-
 .if ${_PKGSRC_MKPIE} == "yes"
 _MKPIE_CFLAGS.gcc=	-fPIC
-# XXX for executables it should be:
-#_MKPIE_CFLAGS.gcc=	-fPIE
 _MKPIE_FCFLAGS.gcc=	-fPIC
-# XXX for libraries a sink wrapper around gcc is required and used instead
-_MKPIE_LDFLAGS.gcc=	-pie
+# for libraries a sink wrapper around gcc is required and used instead
+_MKPIE_LDFLAGS=		-pie
 
 .  if ${PKGSRC_OVERRIDE_MKPIE:tl} == "no"
 _GCC_CFLAGS+=		${_MKPIE_CFLAGS.gcc}
 _GCC_FCFLAGS+=		${_MKPIE_FCFLAGS.gcc}
-#_GCC_LDFLAGS+=		${_MKPIE_LDFLAGS.gcc}
 CWRAPPERS_APPEND.cc+=	${_MKPIE_CFLAGS.gcc}
 CWRAPPERS_APPEND.cxx+=	${_MKPIE_CFLAGS.gcc}
 CWRAPPERS_APPEND.f77+=	${_MKPIE_FCFLAGS.gcc}
-# this differs for libraries and executables (handled in mk/cwrappers.mk)
-# CWRAPPERS_APPEND.ld+=	${_MKPIE_LDFLAGS.gcc}
 .  endif
 .endif
 
@@ -399,9 +443,11 @@ _RELRO_LDFLAGS=		-Wl,-zrelro
 _RELRO_LDFLAGS+=	-Wl,-z,common-page-size=0x10000
 .endif
 
-_STACK_CHECK_CFLAGS=	-fstack-check
-
 .if ${_PKGSRC_USE_STACK_CHECK} == "yes"
+_STACK_CHECK_CFLAGS=	-fstack-check
+_GCC_CFLAGS+=		${_STACK_CHECK_CFLAGS}
+.elif ${_PKGSRC_USE_STACK_CHECK} == "stack-clash"
+_STACK_CHECK_CFLAGS=	-fstack-clash-protection
 _GCC_CFLAGS+=		${_STACK_CHECK_CFLAGS}
 .endif
 
@@ -516,6 +562,27 @@ MAKEFLAGS+=		_IGNORE_GCC=yes
 .  if !defined(_IGNORE_GCC) && !empty(_LANGUAGES.gcc)
 _GCC_PKGSRCDIR=		../../lang/gcc10
 _GCC_DEPENDENCY=	gcc10>=${_GCC_REQD}:../../lang/gcc10
+.    if !empty(_LANGUAGES.gcc:Mc++) || \
+        !empty(_LANGUAGES.gcc:Mfortran) || \
+        !empty(_LANGUAGES.gcc:Mfortran77) || \
+        !empty(_LANGUAGES.gcc:Mgo) || \
+        !empty(_LANGUAGES.gcc:Mobjc) || \
+        !empty(_LANGUAGES.gcc:Mobj-c++)
+_USE_GCC_SHLIB?=	yes
+.    endif
+.  endif
+.elif !empty(_NEED_GCC12:M[yY][eE][sS])
+#
+# We require gcc-12.x in the lang/gcc12-* directory.
+#
+_GCC_PKGBASE=		gcc12
+.  if ${PKGPATH} == lang/gcc12
+_IGNORE_GCC=		yes
+MAKEFLAGS+=		_IGNORE_GCC=yes
+.  endif
+.  if !defined(_IGNORE_GCC) && !empty(_LANGUAGES.gcc)
+_GCC_PKGSRCDIR=		../../lang/gcc12
+_GCC_DEPENDENCY=	gcc12>=${_GCC_REQD}:../../lang/gcc12
 .    if !empty(_LANGUAGES.gcc:Mc++) || \
         !empty(_LANGUAGES.gcc:Mfortran) || \
         !empty(_LANGUAGES.gcc:Mfortran77) || \
@@ -673,7 +740,7 @@ _GCCBINDIR=	${_GCC_PREFIX}bin
 .elif !empty(_IS_BUILTIN_GCC:M[yY][eE][sS])
 _GCCBINDIR=	${_CC:H}
 .endif
-.if !empty(USE_CROSS_COMPILE:M[yY][eE][sS])
+.if !empty(TOOLS_USE_CROSS_COMPILE:M[yY][eE][sS])
 _GCC_BIN_PREFIX=	${MACHINE_GNU_PLATFORM}-
 .endif
 _GCC_BIN_PREFIX?=	# empty
@@ -839,7 +906,7 @@ PREPEND_PATH+=	${_GCC_DIR}/bin
 #  Special case packages which are themselves a dependency of gcc runtime.
 .  if ${PKGPATH} != devel/libtool-base && ${PKGPATH} != devel/binutils && \
       empty(PKGPATH:Mlang/gcc4?) && empty(PKGPATH:Mlang/gcc[5-9]) && \
-      empty(PKGPATH:Mlang/gcc10)
+      empty(PKGPATH:Mlang/gcc10) && empty(PKGPATH:Mlang/gcc12)
 .    if !empty(_GCC_PKGBASE:Mgcc6)
 .      include "../../lang/gcc6-libs/buildlink3.mk"
 .    elif !empty(_GCC_PKGBASE:Mgcc7)
@@ -850,6 +917,8 @@ PREPEND_PATH+=	${_GCC_DIR}/bin
 .      include "../../lang/gcc9-libs/buildlink3.mk"
 .    elif !empty(_GCC_PKGBASE:Mgcc10)
 .      include "../../lang/gcc10-libs/buildlink3.mk"
+.    elif !empty(_GCC_PKGBASE:Mgcc12)
+.      include "../../lang/gcc12-libs/buildlink3.mk"
 .    else
 PKG_FAIL_REASON+=	"No USE_PKGSRC_GCC_RUNTIME support for ${CC_VERSION}"
 .    endif

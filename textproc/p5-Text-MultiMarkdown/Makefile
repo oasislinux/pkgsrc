@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2021/05/24 19:54:44 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2022/06/28 11:36:33 wiz Exp $
 
 DISTNAME=	Text-MultiMarkdown-1.000035
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/B/BO/BOBTFISH/}
 
@@ -11,6 +11,7 @@ HOMEPAGE=	https://metacpan.org/release/Text-MultiMarkdown
 COMMENT=	Convert MultiMarkdown syntax to (X)HTML
 LICENSE=	modified-bsd
 
+BUILD_DEPENDS+=	p5-Module-Install-[0-9]*:../../devel/p5-Module-Install
 DEPENDS+=	p5-Text-Markdown>=1.0.26:../../textproc/p5-Text-Markdown
 DEPENDS+=	p5-List-MoreUtils-[0-9]*:../../devel/p5-List-MoreUtils
 DEPENDS+=	p5-HTML-Parser-[0-9]*:../../www/p5-HTML-Parser

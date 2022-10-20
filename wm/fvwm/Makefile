@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.57 2021/12/08 16:06:50 adam Exp $
+# $NetBSD: Makefile,v 1.61 2022/08/02 01:05:02 gutteridge Exp $
 
 DISTNAME=	fvwm-${FVWM_VER}
-PKGREVISION=	11
+PKGREVISION=	14
 CATEGORIES=	wm x11
 MASTER_SITES=	${MASTER_SITE_GITHUB:=fvwmorg/}
 GITHUB_RELEASE=	${FVWM_VER}
@@ -11,7 +11,7 @@ HOMEPAGE=	http://www.fvwm.org/
 COMMENT=	Newer version of X11 Virtual window manager
 LICENSE=	gnu-gpl-v2
 
-CONFLICTS=	fvwm1-[0-9]* fvwm2-[0-9]* metisse-[0-9]* xpmroot-[0-9]*
+CONFLICTS=	fvwm1-[0-9]* fvwm2-[0-9]* fvwm3-[0-9]* metisse-[0-9]* xpmroot-[0-9]*
 FVWM_VER=	2.6.9
 
 GNU_CONFIGURE=		YES

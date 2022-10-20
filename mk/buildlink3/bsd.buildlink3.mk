@@ -1,4 +1,4 @@
-# $NetBSD: bsd.buildlink3.mk,v 1.247 2021/06/08 10:10:02 bouyer Exp $
+# $NetBSD: bsd.buildlink3.mk,v 1.250 2022/07/09 08:19:18 rillig Exp $
 #
 # Copyright (c) 2004 The NetBSD Foundation, Inc.
 # All rights reserved.
@@ -92,8 +92,7 @@ PREPEND_PATH+=	${BUILDLINK_BINDIR}
 _BUILDLINK_DEPENDS:=
 _BUILDLINK_DEPTH:=
 .for _pkg_ in ${BUILDLINK_TREE}
-_BUILDLINK_pkg:=	${_pkg_:N-*}
-.  if empty(_BUILDLINK_pkg)
+.  if ${_pkg_:M-*}
 _BUILDLINK_DEPTH:=	${_BUILDLINK_DEPTH:S/+$//}
 .  else
 .    if empty(_BUILDLINK_DEPTH)
@@ -122,22 +121,16 @@ BUILDLINK_BUILTIN_MK.${_pkg_}?=	${BUILDLINK_PKGSRCDIR.${_pkg_}}/builtin.mk
 _stack_:=bot
 _ok_:=yes
 .for _pkg_ in ${BUILDLINK_TREE}
-# work around PR 47888
-_enter_:=${_pkg_:M-*}
-# work around another bug in netbsd-5's make (fixed in HEAD)
-_use_:=${USE_BUILTIN.${_pkg_:S/^-//}:M[Yy][Ee][Ss]}
-_ignore_:=${IGNORE_PKG.${_pkg_:S/^-//}:M[Yy][Ee][Ss]}
-
-.  if "${_pkg_}" == "x11-links" || "${_pkg_}" == "-x11-links"
+.  if ${_pkg_} == "x11-links" || ${_pkg_} == "-x11-links"
      # (nothing)
-.  elif empty(_enter_)
+.  elif !${_pkg_:M-*}
      # entering a package (in the buildlink tree)
      #.say "${_stack_:C/.*/  /} ${_pkg_}:"
      _stack_:=${_ok_} ${_stack_}
      _ok_:=yes
 .  else
      # leaving a package (in the buildlink tree)
-.    if !empty(_use_)
+.    if ${USE_BUILTIN.${_pkg_:S/^-//}:Uno:M[Yy][Ee][Ss]}
        # this package is going to use the builtin version
 .      if ${_ok_} != yes
          # not ok for it to be builtin; force it to pkgsrc
@@ -149,7 +142,7 @@ _ignore_:=${IGNORE_PKG.${_pkg_:S/^-//}:M[Yy][Ee][Ss]}
 .      else
          #.say "${_stack_:C/.*/  /} ${_pkg_:S/^-//} built-in"
 .      endif
-.    elif empty(_ignore_)
+.    elif !${IGNORE_PKG.${_pkg_:S/^-//}:Uno:M[Yy][Ee][Ss]}
        # no builtin version or not using it
        #.say "${_stack_:C/.*/  /} ${_pkg_:S/^-//} pkgsrc"
 .      if ${_ok_} == yes
@@ -660,7 +653,7 @@ _BLNK_FILES_CMD.${_pkg_}+=	)
 _BLNK_FILES_CMD.${_pkg_}+=	| ${SORT} -u
 
 ${_BLNK_COOKIE.${_pkg_}}:
-	${RUN}					\
+	${RUN}								\
 	case "${BUILDLINK_PREFIX.${_pkg_}}" in				\
 	*not_found)							\
 		${ERROR_MSG} "${BUILDLINK_API_DEPENDS.${_pkg_}} is not installed; can't buildlink files."; \
@@ -671,6 +664,7 @@ ${_BLNK_COOKIE.${_pkg_}}:
 		${ERROR_MSG} "[bsd.buildlink3.mk] X11BASE is not set correctly."; \
 		exit 1;							\
 	}
+.if ${_PKGSRC_USE_MKTOOLS} == "yes"
 	${RUN}								\
 	case "${BUILDLINK_PREFIX.${_pkg_}}" in				\
 	${LOCALBASE})   buildlink_dir="${BUILDLINK_DIR}" ;;		\
@@ -681,8 +675,48 @@ ${_BLNK_COOKIE.${_pkg_}}:
 	cd ${BUILDLINK_PREFIX.${_pkg_}} &&				\
 	${_BLNK_FILES_CMD.${_pkg_}} |					\
 	while read file; do						\
-		src="${_CROSS_DESTDIR}${BUILDLINK_PREFIX.${_pkg_}}/$$file";		\
-		if [ ! -f "$$src" ]; then					\
+		src="${_CROSS_DESTDIR}${BUILDLINK_PREFIX.${_pkg_}}/$$file"; \
+		[ -f "$$src" ] || continue;				\
+		dest="$$buildlink_dir/$$file";				\
+		if [ -n "${BUILDLINK_FNAME_TRANSFORM.${_pkg_}:Q}" ]; then \
+			dest=`${ECHO} $$dest | ${SED} ${BUILDLINK_FNAME_TRANSFORM.${_pkg_}}`; \
+		fi;							\
+		case "$$src" in						\
+		*.la)							\
+			dir="$${dest%/*}";				\
+			if [ ! -d "$$dir" ]; then			\
+				${MKDIR} "$$dir";			\
+			fi;						\
+			${_BLNK_LT_ARCHIVE_FILTER.${_pkg_}}		\
+				"$$src" > "$$dest";			\
+			;;						\
+		*)							\
+			${ECHO} "$$dest -> $$src" >>${.TARGET};		\
+			;;						\
+		esac;							\
+	done;								\
+	if [ -f ${.TARGET} ]; then					\
+		${PKG_MKSYMLINKS} < ${.TARGET} || {			\
+			${ECHO} "Removing ${.TARGET}";			\
+			${RM} -f ${.TARGET};				\
+			exit 1;						\
+		}							\
+	else								\
+		${TOUCH} ${TOUCH_FLAGS} ${.TARGET};			\
+	fi
+.else
+	${RUN}								\
+	case "${BUILDLINK_PREFIX.${_pkg_}}" in				\
+	${LOCALBASE})   buildlink_dir="${BUILDLINK_DIR}" ;;		\
+	${X11BASE})     buildlink_dir="${BUILDLINK_X11_DIR}" ;;		\
+	*)              buildlink_dir="${BUILDLINK_DIR}" ;;		\
+	esac;								\
+	[ -z "${BUILDLINK_PREFIX.${_pkg_}:Q}" ] ||			\
+	cd ${BUILDLINK_PREFIX.${_pkg_}} &&				\
+	${_BLNK_FILES_CMD.${_pkg_}} |					\
+	while read file; do						\
+		src="${_CROSS_DESTDIR}${BUILDLINK_PREFIX.${_pkg_}}/$$file"; \
+		if [ ! -f "$$src" ]; then				\
 			msg="$$src: not found";				\
 		else							\
 			if [ -z "${BUILDLINK_FNAME_TRANSFORM.${_pkg_}:Q}" ]; then \
@@ -713,6 +747,7 @@ ${_BLNK_COOKIE.${_pkg_}}:
 		fi;							\
 		${ECHO} "$$msg" >> ${.TARGET};				\
 	done
+.endif
 
 # _BLNK_LT_ARCHIVE_FILTER.${_pkg_} is a command-line filter used in
 # the previous target for transforming libtool archives (*.la) to

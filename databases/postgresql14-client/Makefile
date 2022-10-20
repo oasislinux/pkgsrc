@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2021/12/08 16:03:46 adam Exp $
+# $NetBSD: Makefile,v 1.11 2022/10/16 14:42:50 gdt Exp $
 
 PKGNAME=	${DISTNAME:S/-/14-client-/}
 PKGREVISION=	1
@@ -24,7 +24,7 @@ INSTALLATION_DIRS+=	bin
 # 1. The thread-safety test in ${WRSRC}/src/tools/thread does not pass on
 # NetBSD earlier than 4.0 or DragonFly.
 # 2. configure with --enable-thread-safety fails on OpenBSD.
-.if (${OPSYS} == "NetBSD" && !empty(OS_VERSION:M[0-3].*)) || \
+.if (${OPSYS} == "NetBSD" && ${OPSYS_VERSION} < 040000) || \
     ${OPSYS} == "DragonFly" || ${OPSYS} == "OpenBSD" || ${OPSYS} == "MirBSD"
 PGSQL_THREAD_SAFETY?=	no
 .endif

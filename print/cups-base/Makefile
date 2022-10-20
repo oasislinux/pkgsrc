@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.46 2021/12/08 16:02:31 adam Exp $
+# $NetBSD: Makefile,v 1.50 2022/10/06 02:09:42 markd Exp $
 
-PKGREVISION= 5
 .include "../../print/cups/Makefile.common"
 
 PKGNAME=	cups-base-${CUPS_VERS}
+PKGREVISION=	2
 MASTER_SITES=	${MASTER_SITE_GITHUB:=OpenPrinting/}
 
 MAINTAINER=	sbd@NetBSD.org
@@ -32,12 +32,10 @@ CONFIGURE_ARGS+=	--with-cups-group=${CUPS_GROUP}
 CONFIGURE_ARGS+=	--with-system-groups=${CUPS_SYSTEM_GROUPS:Q}
 CONFIGURE_ARGS+=	--with-exe-file-perm=0755
 CONFIGURE_ARGS+=	--enable-libpaper
-CONFIGURE_ARGS+=	--enable-ssl
-CONFIGURE_ARGS+=	--enable-gnutls
-CONFIGURE_ARGS+=	--disable-cdsassl
 CONFIGURE_ARGS+=	--without-bundledir
 CONFIGURE_ARGS+=	--without-icondir
 CONFIGURE_ARGS+=	--without-menudir
+CONFIGURE_ARGS+=	--with-tls=gnutls
 
 CONFIGURE_ENV+=		DSOFLAGS=${LDFLAGS:M*:Q}
 
@@ -46,6 +44,8 @@ CONFIGURE_ENV+=		DSOFLAGS=${LDFLAGS:M*:Q}
 
 # Explicitly disable epoll on illumos, it is provided for Linux compat only.
 CONFIGURE_ENV.SunOS+=	ac_cv_func_epoll_create=no
+
+CFLAGS.SunOS+=		-D_POSIX_PTHREAD_SEMANTICS
 
 LIBS+=			${BUILDLINK_LDADD.iconv}
 

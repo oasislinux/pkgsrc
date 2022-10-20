@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.49 2021/12/08 16:06:01 adam Exp $
+# $NetBSD: Makefile,v 1.57 2022/09/29 05:20:43 markd Exp $
 
 DISTNAME=	krfb-${KAPPSVER}
-PKGREVISION=	6
 CATEGORIES=	net
 
-HOMEPAGE=	https://kde.org/applications/system/krfb/
+HOMEPAGE=	https://apps.kde.org/krfb/
 COMMENT=	KDE desktop sharing
 LICENSE=	gnu-lgpl-v2 AND gnu-gpl-v2 AND gnu-fdl-v1.2
 
@@ -13,6 +12,8 @@ LICENSE=	gnu-lgpl-v2 AND gnu-gpl-v2 AND gnu-fdl-v1.2
 BUILD_DEPENDS+=	kdoctools>=5.19.0:../../devel/kdoctools
 
 USE_TOOLS+=	msgmerge pkg-config
+
+LDFLAGS.SunOS+=	-lsocket -lnsl
 
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../net/kdnssd/buildlink3.mk"

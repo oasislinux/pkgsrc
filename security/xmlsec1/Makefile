@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.38 2021/12/08 16:02:36 adam Exp $
+# $NetBSD: Makefile,v 1.40 2022/04/18 19:10:06 adam Exp $
 #
 
-DISTNAME=		xmlsec1-1.2.25
-PKGREVISION=		5
+DISTNAME=		xmlsec1-1.2.33
+PKGREVISION=		1
 CATEGORIES=		security
 MASTER_SITES=		https://www.aleksey.com/xmlsec/download/
 
@@ -16,11 +16,11 @@ USE_TOOLS+=		pkg-config
 USE_PKGLOCALEDIR=	yes
 USE_LIBTOOL=		yes
 
-PKGCONFIG_OVERRIDE+=	${WRKSRC}/xmlsec-gcrypt.pc.in
-PKGCONFIG_OVERRIDE+=	${WRKSRC}/xmlsec-gnutls.pc.in
-PKGCONFIG_OVERRIDE+=	${WRKSRC}/xmlsec-nss.pc.in
-PKGCONFIG_OVERRIDE+=	${WRKSRC}/xmlsec-openssl.pc.in
-PKGCONFIG_OVERRIDE+=	${WRKSRC}/xmlsec.pc.in
+PKGCONFIG_OVERRIDE+=	xmlsec-gcrypt.pc.in
+PKGCONFIG_OVERRIDE+=	xmlsec-gnutls.pc.in
+PKGCONFIG_OVERRIDE+=	xmlsec-nss.pc.in
+PKGCONFIG_OVERRIDE+=	xmlsec-openssl.pc.in
+PKGCONFIG_OVERRIDE+=	xmlsec.pc.in
 
 CONFIGURE_ARGS+=	--with-openssl=${BUILDLINK_PREFIX.openssl}
 CONFIGURE_ARGS+=	--without-gnutls

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.9 2022/01/23 11:02:02 pho Exp $
+# $NetBSD: Makefile,v 1.14 2022/09/12 12:12:51 jperkin Exp $
 
-PKGNAME=	go-bin-1.14.2
-PKGREVISION=	4
+PKGNAME=	go-bin-1.18.5
 CATEGORIES=	lang
 MASTER_SITES=	https://dl.google.com/go/
 
@@ -39,10 +38,7 @@ EXTRACT_ONLY+=			${DIST.darwin-amd64}
 .endif
 
 ONLY_FOR_PLATFORM+=		Darwin-*-aarch64
-.if !empty(MACHINE_PLATFORM:MDarwin-*-aarch64)
-PKGNAME=			go-bin-1.16.beta1
-.endif
-DIST.darwin-arm64=		go1.16beta1.darwin-arm64.tar.gz
+DIST.darwin-arm64=		go${PKGVERSION_NOREV}.darwin-arm64.tar.gz
 .if !empty(MACHINE_PLATFORM:MDarwin-*-aarch64) || make(distinfo)
 DISTFILES+=			${DIST.darwin-arm64}
 EXTRACT_ONLY+=			${DIST.darwin-arm64}
@@ -77,9 +73,13 @@ EXTRACT_ONLY+=			${DIST.linux-arm64}
 .endif
 
 ONLY_FOR_PLATFORM+=		NetBSD-*-aarch64
-DIST.netbsd-arm64=		go1.14.2.netbsd-arm64.tar.gz
+DIST.netbsd-arm64=		go1.17.8.netbsd-arm64.tar.gz
 SITES.${DIST.netbsd-arm64}=	https://cdn.NetBSD.org/pub/pkgsrc/misc/tnn/golang-aarch64/
 .if !empty(MACHINE_PLATFORM:MNetBSD-*-aarch64) || make(distinfo)
+.  if !make(distinfo)
+PKGNAME=			go-bin-1.17.8
+PKGREVISION?=			1
+.  endif
 DISTFILES+=			${DIST.netbsd-arm64}
 EXTRACT_ONLY+=			${DIST.netbsd-arm64}
 .endif
@@ -93,9 +93,9 @@ do-install:
 # running them outside.  We're left with no choice but to make it configurable
 # by the user.
 #
-.if !empty(MACHINE_PLATFORM:MDarwin-*-aarch64) && defined(DARWIN_CHROOTED)
+.if !empty(MACHINE_PLATFORM:MDarwin-*-*) && defined(DARWIN_CHROOTED)
 	for f in ${DESTDIR}${PREFIX}/go-bin/bin/* \
-		 ${DESTDIR}${PREFIX}/go-bin/pkg/tool/darwin_arm64/*; do \
+		 ${DESTDIR}${PREFIX}/go-bin/pkg/tool/darwin_*/*; do \
 		/usr/bin/codesign --remove-signature $$f; \
 	done
 .endif

@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.18 2021/12/01 13:01:13 nia Exp $
+# $NetBSD: Makefile,v 1.20 2022/08/29 09:44:32 wiz Exp $
 
-DISTNAME=		libXau-1.0.9
+DISTNAME=		libXau-1.0.10
 CATEGORIES=		x11 devel
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
-EXTRACT_SUFX=		.tar.bz2
+EXTRACT_SUFX=		.tar.xz
 
 MAINTAINER=		joerg@NetBSD.org
 HOMEPAGE=		https://xorg.freedesktop.org/
@@ -20,7 +20,7 @@ PKGCONFIG_OVERRIDE+=	xau.pc.in
 
 CPPFLAGS.OSF1+=		-pthread # Required by compiler if including pthread.h
 
-X11_BUILTIN_NAME?=		libXau
+X11_LIB_NAME?=		libXau
 .include "../../meta-pkgs/modular-xorg/avoid-duplicate.mk"
 .include "../../meta-pkgs/modular-xorg/hacks.mk"
 .include "../../mk/pthread.buildlink3.mk"

@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.93 2021/10/16 19:46:41 tm Exp $
+# $NetBSD: Makefile,v 1.96 2022/09/19 17:36:25 nia Exp $
 
 #PKGREVISION= 2
+PKGREVISION= 1
 .include "../../net/proftpd/Makefile.common"
 
 COMMENT=	Highly configurable FTP server software

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.66 2021/12/08 16:02:29 adam Exp $
+# $NetBSD: Makefile,v 1.68 2022/06/07 20:42:41 wiz Exp $
 
-PKGREVISION= 9
+PKGREVISION= 11
 .include "Makefile.common"
 
 # introspection Makefile uses GNUisms
@@ -9,5 +9,6 @@ CONFIGURE_ARGS+=	--without-gstreamer
 
 PKGCONFIG_OVERRIDE+=	nice/nice.pc.in
 
+BUILDLINK_DEPMETHOD.gobject-introspection=	build
 .include "../../devel/gobject-introspection/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

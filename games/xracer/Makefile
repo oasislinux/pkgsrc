@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.70 2021/12/08 16:04:44 adam Exp $
+# $NetBSD: Makefile,v 1.72 2022/08/11 05:08:37 gutteridge Exp $
 #
 
 DISTNAME=		xracer-0.96.9
-PKGREVISION=		26
+PKGREVISION=		28
 CATEGORIES=		games x11
 MASTER_SITES=		http://www.annexia.org/_file/
 

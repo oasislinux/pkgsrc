@@ -1,5 +1,4 @@
-# $NetBSD: Makefile,v 1.11 2020/09/18 20:18:55 schmonz Exp $
-#
+# $NetBSD: Makefile,v 1.13 2022/07/25 11:12:29 wiz Exp $
 
 DISTNAME=	discount-2.2.7
 CATEGORIES=	textproc
@@ -13,6 +12,8 @@ LICENSE=	modified-bsd
 
 WRKSRC=			${WRKDIR}/${PKGNAME_NOREV}
 
+CONFLICTS+=		multimarkdown-[0-9]*
+
 HAS_CONFIGURE=		YES
 CONFIGURE_SCRIPT=	./configure.sh
 CONFIGURE_ARGS=		--prefix=${PREFIX}
@@ -22,7 +23,6 @@ CONFIGURE_ARGS+=	--mandir=${PREFIX}/${PKGMANDIR}
 CONFIGURE_ARGS+=	--shared
 CONFIGURE_ARGS+=	--enable-all-features
 
-USE_TOOLS+=		pkg-config
 USE_LIBTOOL=		yes
 
 PKGCONFIG_OVERRIDE+=	libmarkdown.pc.in

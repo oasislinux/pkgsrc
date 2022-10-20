@@ -1,17 +1,17 @@
-# $NetBSD: Makefile,v 1.9 2020/08/17 20:17:17 leot Exp $
+# $NetBSD: Makefile,v 1.11 2022/10/04 10:21:19 wiz Exp $
 
 DISTNAME=	OCE-0.18.3
 PKGNAME=	${DISTNAME:tl}
 PKGREVISION=	2
 CATEGORIES=	cad
 MASTER_SITES=	${MASTER_SITE_GITHUB:=tpaviot/}
+GITHUB_TAG=	${DISTNAME}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/tpaviot/oce/
 COMMENT=	Open CASCADE Community Edition
 LICENSE=	gnu-lgpl-v2.1
 
-GITHUB_TAG=	${DISTNAME}
 WRKSRC=		${WRKDIR}/oce-${DISTNAME}
 
 USE_CMAKE=	yes
@@ -26,11 +26,24 @@ LDFLAGS+=	${COMPILER_RPATH_FLAG}${PREFIX}/lib/oce
 
 CMAKE_ARGS+=	-DOCE_INSTALL_PREFIX:PATH=${PREFIX}
 
+.include "../../mk/bsd.prefs.mk"
+
 SUBST_CLASSES+=		prefix
 SUBST_MESSAGE.prefix=	Fixing PREFIX path.
 SUBST_STAGE.prefix=	post-configure
-SUBST_FILES.prefix=	CMakeFiles/Export/lib/oce/OCE-libraries-release.cmake
+SUBST_FILES.prefix=	CMakeFiles/Export/*/OCE-libraries-release.cmake
+.if ${OPSYS} == Darwin
+SUBST_SED.prefix=	-e "s|${BUILDLINK_DIR}/lib/lib\([0-9a-zA-Z_-]*\)\.dylib|\1|g"
+.else
 SUBST_SED.prefix=	-e "s|${BUILDLINK_DIR}/lib/lib\([0-9a-zA-Z_-]*\)\.so|\1|g"
+.endif
+
+PLIST_VARS+=		Darwin not_Darwin
+.if ${OPSYS} == Darwin
+PLIST.Darwin=		yes
+.else
+PLIST.not_Darwin=	yes
+.endif
 
 .include "options.mk"
 

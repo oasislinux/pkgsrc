@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.2 2022/01/22 17:31:01 he Exp $
+# $NetBSD: Makefile,v 1.8 2022/10/12 08:48:33 he Exp $
 
-DISTNAME=	rust-src-1.57.0
+DISTNAME=	rust-src-1.63.0
 CATEGORIES=	lang
 MASTER_SITES=	${MASTER_SITE_LOCAL:=rust/}
 
@@ -8,27 +8,34 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.rust-lang.org/
 COMMENT=	Source for the rust std library
 LICENSE=	mit OR apache-2.0
+EXTRACT_SUFX=	.tar.xz
 
 USE_TOOLS+=	bash sh
 
 LIBDIR=			lib/rustlib/src/rust/library
 SRCLIB=			rust-src/${LIBDIR}
+IST_TOOLS=		stdarch/crates/intrinsic-test/acle/tools
 REPLACE_BASH+=		install.sh
 REPLACE_BASH+=		${SRCLIB}/backtrace/ci/debuglink.sh
 REPLACE_BASH+=		${SRCLIB}/stdarch/ci/dox.sh
 REPLACE_BASH+=		${SRCLIB}/stdarch/ci/run-docker.sh
 REPLACE_BASH+=		${SRCLIB}/stdarch/ci/run.sh
 REPLACE_BASH+=		${SRCLIB}/stdarch/ci/style.sh
+REPLACE_BASH+=		${SRCLIB}/${IST_TOOLS}/check-rst-syntax.sh
+REPLACE_BASH+=		${SRCLIB}/${IST_TOOLS}/generate-intrinsics-specs.sh
+REPLACE_BASH+=		${SRCLIB}/${IST_TOOLS}/generate-pdfs.sh
 
 REPLACE_PYTHON+=	${SRCLIB}/core/src/unicode/printable.py
+REPLACE_PYTHON+=	${SRCLIB}/${IST_TOOLS}/gen-intrinsics-specs.py
 
 REPLACE_SH+=		${SRCLIB}/backtrace/ci/android-sdk.sh
 
 NO_INTERPRETER+=	${SRCLIB}/backtrace/ci/android-ndk.sh
 NO_INTERPRETER+=	${SRCLIB}/backtrace/ci/debuglink-docker.sh
-NO_INTERPRETER+=	${SRCLIB}/backtrace/ci/miri-rustup.sh
 NO_INTERPRETER+=	${SRCLIB}/backtrace/ci/run-docker.sh
 
+ORIG_FILES+=		${LIBDIR}/backtrace/src/symbolize/gimli.rs.orig
+ORIG_FILES+=		${LIBDIR}/backtrace/src/symbolize/gimli/elf.rs.orig
 ORIG_FILES+=		${LIBDIR}/std/src/sys/unix/mod.rs.orig
 ORIG_FILES+=		${LIBDIR}/std/src/sys/unix/thread.rs.orig
 ORIG_FILES+=		${LIBDIR}/unwind/build.rs.orig

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.65 2022/01/10 01:46:37 ryoon Exp $
+# $NetBSD: Makefile,v 1.71 2022/10/04 09:45:53 wiz Exp $
 
-DISTNAME=	uhd-4.1.0.5
-PKGREVISION=	1
+DISTNAME=	uhd-4.3.0.0
 CATEGORIES=	ham
 MASTER_SITES=	${MASTER_SITE_GITHUB:=EttusResearch/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
@@ -11,19 +10,24 @@ HOMEPAGE=	https://github.com/EttusResearch/uhd
 COMMENT=	USRP (Universal Software Radio Peripheral) Hardware Drivers
 LICENSE=	gnu-gpl-v3
 
-DEPENDS+=	${PYPKGPREFIX}-mako-[0-9]*:../../devel/py-mako
-DEPENDS+=	${PYPKGPREFIX}-requests-[0-9]*:../../devel/py-requests
+DEPENDS+=	${PYPKGPREFIX}-mako>=0.4.2:../../devel/py-mako
+# Does not build
+#DEPENDS+=	${PYPKGPREFIX}-numpy>=1.11:../../math/py-numpy
+DEPENDS+=	${PYPKGPREFIX}-requests>=2.0:../../devel/py-requests
+DEPENDS+=	${PYPKGPREFIX}-ruamel-yaml>=0.15:../../devel/py-ruamel-yaml
 
 CMAKE_ARGS+=	-DLIB_SUFFIX=""
 CMAKE_ARGS+=	-DENABLE_MAN_PAGE_COMPRESSION=OFF
 CMAKE_ARGS+=	-DPKG_MAN_DIR=${PKGMANDIR}/man1
 CMAKE_ARGS+=	-DRST2HTML_EXECUTABLE=${PREFIX}/bin/rst2html-${PYVERSSUFFIX}.py
 CMAKE_ARGS+=	-Wno-dev
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
+
 .include "../../lang/python/pyversion.mk"
+
 CMAKE_ARGS+=	-DPYTHON_EXECUTABLE=${PYTHONBIN}
-.if !empty(_PYTHON_VERSION:M3*)
 CMAKE_ARGS+=	-DENABLE_PYTHON3=ON
-.endif
 
 # Upstream says C++11 is required, even though it is not documented.
 # It is documented that gcc 4.8 is required, when using gcc.
@@ -53,6 +57,7 @@ REPLACE_PYTHON+=	utils/uhd_power_cal.py
 REPLACE_PYTHON+=	utils/usrp2_card_burner.py
 REPLACE_PYTHON+=	utils/usrp2_card_burner_gui.py
 REPLACE_PYTHON+=	utils/usrp2_recovery.py
+REPLACE_PYTHON+=	utils/usrpctl.py
 REPLACE_PYTHON+=	tests/devtest/benchmark_rate_test.py
 REPLACE_PYTHON+=	tests/devtest/multi_usrp_test.py
 REPLACE_PYTHON+=	tests/devtest/python_api_test.py
@@ -72,6 +77,10 @@ REPLACE_PYTHON+=	tests/streaming_performance/run_E3xx_max_rate_tests.py
 REPLACE_PYTHON+=	tests/streaming_performance/run_N3xx_max_rate_tests.py
 REPLACE_PYTHON+=	tests/streaming_performance/run_X3xx_max_rate_tests.py
 
+# -pthread needed to turn on boost threads on some platforms
+CXXFLAGS.SunOS+=	-pthread
+LDFLAGS.SunOS+=		-lsocket
+
 INSTALLATION_DIRS+=	share/uhd
 INSTALLATION_DIRS+=	share/uhd/firmware
 INSTALLATION_DIRS+=	share/uhd/fpga
@@ -79,9 +88,14 @@ INSTALLATION_DIRS+=	share/uhd/images
 
 .include "options.mk"
 
+.if ${OPSYS} != "Darwin"
+PLIST_SRC+=	PLIST.x4xx
+.endif
+
 .include "../../devel/boost-libs/buildlink3.mk"
 .include "../../devel/libusb1/buildlink3.mk"
 .include "../../devel/orc/buildlink3.mk"
 .include "../../lang/python/application.mk"
+.include "../../mk/atomic64.mk"
 .include "../../mk/curses.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

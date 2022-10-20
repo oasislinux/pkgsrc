@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.3 2022/01/27 21:41:54 schmonz Exp $
+# $NetBSD: Makefile,v 1.20 2022/10/05 11:32:59 bsiegert Exp $
 
-DISTNAME=		goredo-1.22.0
+DISTNAME=		goredo-1.27.1
+PKGREVISION=		2
 CATEGORIES=		devel
 MASTER_SITES=		http://www.goredo.cypherpunks.ru/download/
 EXTRACT_SUFX=		.tar.zst
@@ -9,6 +10,8 @@ MAINTAINER=		schmonz@NetBSD.org
 HOMEPAGE=		http://www.goredo.cypherpunks.ru/
 COMMENT=		Go implementation of djb's redo
 LICENSE=		gnu-gpl-v3
+
+EXTRACT_USING=		bsdtar
 
 WRKSRC=			${WRKDIR}/${DISTNAME}/src
 

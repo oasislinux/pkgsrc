@@ -489,8 +489,13 @@ func (s *Suite) Test_VartypeCheck_DependencyPattern__smaller_version(c *check.C)
 	t := s.Init(c)
 
 	t.SetUpPackage("category/package",
+		"LIB_VERSION_SMALL=\t1.0",
+		"LIB_VERSION_LARGE=\t10.0",
+		"",
 		".include \"../../category/lib/buildlink3.mk\"",
 		"BUILDLINK_API_DEPENDS.lib+=\tlib>=1.0pkg",
+		"BUILDLINK_API_DEPENDS.lib+=\tlib>=${LIB_VERSION_SMALL}",
+		"BUILDLINK_API_DEPENDS.lib+=\tlib>=${LIB_VERSION_LARGE}",
 		"BUILDLINK_ABI_DEPENDS.lib+=\tlib>=1.1pkg")
 	t.SetUpPackage("category/lib")
 	t.CreateFileBuildlink3("category/lib/buildlink3.mk",
@@ -502,11 +507,11 @@ func (s *Suite) Test_VartypeCheck_DependencyPattern__smaller_version(c *check.C)
 	G.checkdirPackage(".")
 
 	t.CheckOutputLines(
-		"NOTE: Makefile:21: The requirement >=1.0pkg is already guaranteed "+
+		"NOTE: Makefile:24: The requirement >=1.0pkg is already guaranteed "+
 			"by the >=1.3api from ../../category/lib/buildlink3.mk:12.",
-		"ERROR: Makefile:22: Packages must only require API versions, "+
+		"ERROR: Makefile:27: Packages must only require API versions, "+
 			"not ABI versions of dependencies.",
-		"NOTE: Makefile:22: The requirement >=1.1pkg is already guaranteed "+
+		"NOTE: Makefile:27: The requirement >=1.1pkg is already guaranteed "+
 			"by the >=1.4abi from ../../category/lib/buildlink3.mk:13.")
 }
 
@@ -1621,7 +1626,7 @@ func (s *Suite) Test_VartypeCheck_PathnameSpace(c *check.C) {
 	t := s.Init(c)
 	// Invent a variable name since this data type is only used as part
 	// of CONF_FILES.
-	t.SetUpType("CONFIG_FILE", BtPathnameSpace,
+	t.SetUpVarType("CONFIG_FILE", BtPathnameSpace,
 		NoVartypeOptions, "*.mk: set, use")
 	vt := NewVartypeCheckTester(t, BtPathnameSpace)
 
@@ -2409,8 +2414,13 @@ func (s *Suite) Test_VartypeCheck_WrapperTransform(c *check.C) {
 }
 
 func (s *Suite) Test_VartypeCheck_WrkdirSubdirectory(c *check.C) {
-	vt := NewVartypeCheckTester(s.Init(c), BtWrkdirSubdirectory)
+	t := s.Init(c)
+	pkg := NewPackage(t.SetUpPackage("category/package"))
+	t.FinishSetUp()
+	vt := NewVartypeCheckTester(t, BtWrkdirSubdirectory)
+	pkg.Check() // To initialize pkg.redundant.
 
+	vt.Package(pkg)
 	vt.Varname("WRKSRC")
 	vt.Op(opAssign)
 	vt.Values(
@@ -2430,6 +2440,18 @@ func (s *Suite) Test_VartypeCheck_WrkdirSubdirectory(c *check.C) {
 	vt.Output(
 		"WARN: filename.mk:8: The pathname \"two words\" " +
 			"contains the invalid character \" \".")
+
+	vt.Values(
+		// TODO: Note the redundant definition.
+		"${WRKDIR}/package-1.0",
+		"${WRKDIR}/pkg-1.0",       // different package base
+		"${WRKDIR}/package-1.000", // different version string
+		"${WRKDIR}/package-1.1",   // different version
+	)
+
+	vt.Output(
+		"NOTE: filename.mk:21: " +
+			"Setting WRKSRC to \"${WRKDIR}/package-1.0\" is redundant.")
 }
 
 func (s *Suite) Test_VartypeCheck_WrksrcPathPattern(c *check.C) {
@@ -2621,8 +2643,16 @@ func NewVartypeCheckTester(t *Tester, basicType *BasicType) *VartypeCheckTester 
 	return &VartypeCheckTester{t, basicType, "filename.mk", 1, "", opAssign, nil}
 }
 
+// Package sets the package that gives context to the MkLines that are
+// temporarily created in all following calls to Values.
+//
+// Depending on the test case at hand, it may be enough to have a bare
+// package created by NewPackage, in other cases the package data needs to be
+// loaded using Package.load.
 func (vt *VartypeCheckTester) Package(pkg *Package) { vt.pkg = pkg }
 
+// Varname sets the variable name that will be used in all following calls to
+// Values.
 func (vt *VartypeCheckTester) Varname(varname string) {
 	vartype := G.Pkgsrc.VariableType(nil, varname)
 	assertNotNil(vartype)
@@ -2632,6 +2662,9 @@ func (vt *VartypeCheckTester) Varname(varname string) {
 	vt.nextSection()
 }
 
+// File sets the filename that will be used in all following calls to Values.
+// This is useful when testing the permissions of the variable, see
+// VarTypeRegistry.
 func (vt *VartypeCheckTester) File(filename CurrPath) {
 	vt.filename = filename
 	vt.lineno = 1

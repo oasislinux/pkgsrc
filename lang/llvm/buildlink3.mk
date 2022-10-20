@@ -1,12 +1,11 @@
-# $NetBSD: buildlink3.mk,v 1.16 2021/11/23 20:55:44 wiz Exp $
+# $NetBSD: buildlink3.mk,v 1.19 2022/08/12 08:37:58 pin Exp $
 
 BUILDLINK_TREE+=	llvm
 
 .if !defined(LLVM_BUILDLINK3_MK)
 LLVM_BUILDLINK3_MK:=
 
-BUILDLINK_API_DEPENDS.llvm+=	llvm>=10.0.1
-BUILDLINK_ABI_DEPENDS.llvm+=	llvm>=13.0.0
+BUILDLINK_API_DEPENDS.llvm+=	llvm>=14
 BUILDLINK_PKGSRCDIR.llvm?=	../../lang/llvm
 
 LLVM_CONFIG_PATH?=		${BUILDLINK_PREFIX.llvm}/bin/llvm-config
@@ -33,6 +32,7 @@ BUILDLINK_FILES.llvm+=		bin/llvm-cvtres
 BUILDLINK_FILES.llvm+=		bin/llvm-cxxdump
 BUILDLINK_FILES.llvm+=		bin/llvm-cxxfilt
 BUILDLINK_FILES.llvm+=		bin/llvm-cxxmap
+BUILDLINK_FILES.llvm+=		bin/llvm-debuginfod-find
 BUILDLINK_FILES.llvm+=		bin/llvm-diff
 BUILDLINK_FILES.llvm+=		bin/llvm-dis
 BUILDLINK_FILES.llvm+=		bin/llvm-dlltool
@@ -79,6 +79,7 @@ BUILDLINK_FILES.llvm+=		bin/llvm-strip
 BUILDLINK_FILES.llvm+=		bin/llvm-symbolizer
 BUILDLINK_FILES.llvm+=		bin/llvm-tapi-diff
 BUILDLINK_FILES.llvm+=		bin/llvm-tblgen
+BUILDLINK_FILES.llvm+=		bin/llvm-tli-checker
 BUILDLINK_FILES.llvm+=		bin/llvm-undname
 BUILDLINK_FILES.llvm+=		bin/llvm-windres
 BUILDLINK_FILES.llvm+=		bin/llvm-xray
@@ -96,6 +97,10 @@ pkgbase := llvm
 .include "../../mk/pkg-build-options.mk"
 .if ${PKG_BUILD_OPTIONS.llvm:Mterminfo}
 .include "../../mk/terminfo.buildlink3.mk"
+.endif
+
+.if ${PKG_BUILD_OPTIONS.llvm:Mz3}
+.include "../../math/z3/buildlink3.mk"
 .endif
 
 .include "../../devel/libexecinfo/buildlink3.mk"

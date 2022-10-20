@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2022/01/04 20:53:08 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2022/08/05 20:24:41 adam Exp $
 
-DISTNAME=	google-i18n-address-2.5.0
+DISTNAME=	google-i18n-address-2.5.2
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_PYPI:=g/google-i18n-address/}
 

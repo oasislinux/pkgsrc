@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.12 2021/03/08 08:13:04 jaapb Exp $
+# $NetBSD: Makefile,v 1.15 2022/05/24 18:59:34 jaapb Exp $
 
-VERSION=	2.1.0
+VERSION=	2.1.4
 GITHUB_PROJECT=	opam-file-format
 GITHUB_TAG=	${VERSION:S/_/-/}
 DISTNAME=	${GITHUB_PROJECT}-${VERSION}
 PKGNAME=	ocaml-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	misc
 MASTER_SITES=	${MASTER_SITE_GITHUB:=ocaml/}
 MAKE_JOBS_SAFE=	no
@@ -20,7 +19,7 @@ OCAML_USE_FINDLIB=	yes
 
 INSTALL_ENV+=	LIBDIR=${PREFIX}/${OCAML_SITELIBDIR}
 
-.include "../../mk/ocaml.mk"
+.include "../../lang/ocaml/ocaml.mk"
 
 .if ${OCAML_USE_OPT_COMPILER} == "yes"
 BUILD_TARGET=	all

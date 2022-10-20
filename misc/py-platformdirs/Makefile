@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2022/01/07 16:39:21 adam Exp $
+# $NetBSD: Makefile,v 1.8 2022/08/31 05:56:22 mef Exp $
 
-DISTNAME=	platformdirs-2.4.1
+DISTNAME=	platformdirs-2.5.2
+PKGREVISION=	1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	misc python
 MASTER_SITES=	${MASTER_SITE_PYPI:=p/platformdirs/}
@@ -10,11 +11,13 @@ HOMEPAGE=	https://github.com/platformdirs/platformdirs
 COMMENT=	Python module for determining appropriate platform-specific dirs
 LICENSE=	mit
 
-BUILD_DEPENDS+=	${PYPKGPREFIX}-setuptools_scm-[0-9]*:../../devel/py-setuptools_scm
+BUILD_DEPENDS+=	${PYPKGPREFIX}-hatchling>=0.22.0:../../devel/py-hatchling
+BUILD_DEPENDS+=	${PYPKGPREFIX}-hatch-vcs>0:../../devel/py-hatch-vcs
+BUILD_DEPENDS+=	${PYPKGPREFIX}-setuptools_scm>0:../../devel/py-setuptools_scm
 
 USE_LANGUAGES=	# none
 
 PYTHON_VERSIONS_INCOMPATIBLE=	27
 
-.include "../../lang/python/egg.mk"
+.include "../../lang/python/wheel.mk"
 .include "../../mk/bsd.pkg.mk"

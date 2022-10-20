@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.125 2021/12/08 16:05:06 adam Exp $
+# $NetBSD: Makefile,v 1.132 2022/08/11 05:08:47 gutteridge Exp $
 
 DISTNAME=	shotwell-0.30.8
-PKGREVISION=	18
+PKGREVISION=	22
 CATEGORIES=	graphics gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/shotwell/0.30/}
 EXTRACT_SUFX=	.tar.xz
@@ -15,13 +15,13 @@ USE_TOOLS+=	pkg-config msgfmt xgettext itstool
 
 MESON_ARGS+=	-Dudev=false
 
+BROKEN+=	"Incompatbile with latest Vala/libraw"
+
 # uses python3
 PYTHON_VERSIONS_INCOMPATIBLE=	27
 
-# XXX msgfmt: unknown option -- desktop
-_TOOLS_USE_PKGSRC.msgfmt=	yes
-
 .include "../../devel/meson/build.mk"
+.include "../../devel/gettext-tools/msgfmt-desktop.mk"
 .include "../../devel/glib2/schemas.mk"
 .include "../../devel/libgee/buildlink3.mk"
 .include "../../devel/libgphoto2/buildlink3.mk"

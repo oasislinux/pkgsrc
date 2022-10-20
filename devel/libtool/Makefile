@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.51 2021/05/24 19:50:01 wiz Exp $
+# $NetBSD: Makefile,v 1.53 2022/07/26 16:15:26 wiz Exp $
 
-META_PACKAGE=	# empty
+META_PACKAGE=	yes
 
-PKGREVISION= 1
 .include "Makefile.common"
 
 DEPENDS+=	${DISTNAME:S/-/-base-/}{,nb[0-9]*}:../../devel/libtool-base

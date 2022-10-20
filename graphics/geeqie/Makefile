@@ -1,15 +1,18 @@
-# $NetBSD: Makefile,v 1.93 2021/12/08 16:04:52 adam Exp $
+# $NetBSD: Makefile,v 1.96 2022/08/11 05:08:41 gutteridge Exp $
 
-DISTNAME=	geeqie-1.6
-PKGREVISION=	3
+DISTNAME=	geeqie-1.7.3
+PKGREVISION=	1
 CATEGORIES=	graphics
-MASTER_SITES=	http://www.geeqie.org/
+MASTER_SITES=	${MASTER_SITE_GITHUB:=BestImageViewer/}
 EXTRACT_SUFX=	.tar.xz
+GITHUB_RELEASE=	v${PKGVERSION_NOREV}
 
 MAINTAINER=	gdt@NetBSD.org
 HOMEPAGE=	http://www.geeqie.org/
 COMMENT=	Image viewer
 LICENSE=	gnu-gpl-v2
+
+BUILD_DEPENDS+=	gettext-m4-[0-9]*:../../devel/gettext-m4
 
 GNU_CONFIGURE=		yes
 
@@ -20,15 +23,20 @@ USE_LANGUAGES=		c c++
 USE_TOOLS=		bash:run gmake intltool msgfmt pkg-config automake autoconf autoreconf
 
 REPLACE_BASH+=		plugins/*/*
-REPLACE_BASH+=		gen_changelog.sh
+REPLACE_BASH+=		doc/*.sh
+REPLACE_BASH+=		g*.sh
+REPLACE_BASH+=		version.sh
 
-pre-configure:
-	cd ${WRKSRC} && NOCONFIGURE=yes ${SH} ./autogen.sh
+pre-configure: replace-interpreter
+	cd ${WRKSRC} && autoreconf -fiv
 
 .include "options.mk"
 
 .include "../../graphics/exiv2/buildlink3.mk"
 .include "../../graphics/lcms2/buildlink3.mk"
+.include "../../graphics/libheif/buildlink3.mk"
+.include "../../graphics/libwebp/buildlink3.mk"
+.include "../../graphics/openjpeg/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 BUILDLINK_API_DEPENDS.gnome-doc-utils+=	gnome-doc-utils>=0.20.10nb4
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
