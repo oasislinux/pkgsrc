@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.36 2022/07/22 17:07:15 micha Exp $
+# $NetBSD: Makefile,v 1.38 2022/11/23 16:19:06 adam Exp $
 
 DISTNAME=	uhttpmock-0.4.0
-PKGREVISION=	35
+PKGREVISION=	36
 CATEGORIES=	www devel
 MASTER_SITES=	http://tecnocode.co.uk/downloads/uhttpmock/
 EXTRACT_SUFX=	.tar.xz
@@ -16,6 +16,8 @@ USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake pkg-config
 
 PKGCONFIG_OVERRIDE+=	libuhttpmock/libuhttpmock.pc.in
+
+BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,--no-as-needed
 
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/gobject-introspection/buildlink3.mk"

@@ -1,12 +1,11 @@
-# $NetBSD: Makefile,v 1.17 2020/08/17 20:20:40 leot Exp $
+# $NetBSD: Makefile,v 1.19 2022/11/13 08:09:44 wiz Exp $
 
-DISTNAME=		xlogo-1.0.5
-PKGREVISION=		1
+DISTNAME=		xlogo-1.0.6
 CATEGORIES=		x11
 MASTER_SITES=		${MASTER_SITE_XORG:=app/}
-EXTRACT_SUFX=		.tar.bz2
+EXTRACT_SUFX=		.tar.xz
 
-MAINTAINER=		joerg@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		https://xorg.freedesktop.org/
 COMMENT=		X Window System logo
 

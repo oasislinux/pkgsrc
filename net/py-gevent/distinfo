@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.13 2021/12/12 20:06:23 adam Exp $
+$NetBSD: distinfo,v 1.15 2022/11/21 11:30:23 adam Exp $
 
-BLAKE2s (gevent-21.12.0.tar.gz) = ab7ea77a1aa883015f11d9f50d3ca47f77ab30cc54e1886b967476b947276a52
-SHA512 (gevent-21.12.0.tar.gz) = 805ddb475281b6c4c46cdf5a714915b6612512745121e7b153f3d33f3460135efa4994e0ff1601402d4f7b80d285cbfdc0d5d93799fbeb8ddbf2a52888cd91ad
-Size (gevent-21.12.0.tar.gz) = 6201851 bytes
+BLAKE2s (gevent-22.10.2.tar.gz) = c6c717aa99c97a8173f0db06168b261e2947e8613a03c003c336d6cab2ec7285
+SHA512 (gevent-22.10.2.tar.gz) = e4cf1ca94269a7418cd8c1fcc7efaa1b393921ec4d9f50b9a29f1059db102d6a41b6d7f4602b215b877d29696bf235c883ea7e3e52480133366afa839ec4bcd8
+Size (gevent-22.10.2.tar.gz) = 6551607 bytes

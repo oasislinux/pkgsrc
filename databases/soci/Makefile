@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.49 2022/04/18 19:10:45 adam Exp $
+# $NetBSD: Makefile,v 1.51 2022/11/23 16:19:44 adam Exp $
 #
 
 DISTNAME=	soci-3.2.2
-PKGREVISION=	43
+PKGREVISION=	44
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=soci/}
 
-MAINTAINER=	joerg@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://soci.sourceforge.net/
 COMMENT=	C++ database access library
 LICENSE=	boost-license

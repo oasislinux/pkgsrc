@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1643 2022/09/24 06:59:32 wiz Exp $
+# $NetBSD: Makefile,v 1.1648 2022/11/20 20:17:02 nikita Exp $
 #
 
 COMMENT=	Packages related to the World Wide Web
@@ -87,6 +87,7 @@ SUBDIR+=	checkbot
 SUBDIR+=	clearsilver
 SUBDIR+=	clearsilver-base
 SUBDIR+=	clisp-fastcgi
+SUBDIR+=	cobalt
 SUBDIR+=	contao35
 SUBDIR+=	cppcms
 SUBDIR+=	cratuity
@@ -134,6 +135,7 @@ SUBDIR+=	gitweb
 SUBDIR+=	go-ffuf
 SUBDIR+=	go-minify
 SUBDIR+=	goaccess
+SUBDIR+=	gotosocial
 SUBDIR+=	grafana
 SUBDIR+=	gtkasp2php
 SUBDIR+=	guile-haunt
@@ -833,6 +835,7 @@ SUBDIR+=	py-swish-e
 SUBDIR+=	py-terminado
 SUBDIR+=	py-test-django
 SUBDIR+=	py-test-httpbin
+SUBDIR+=	py-test-httpx
 SUBDIR+=	py-tornado
 SUBDIR+=	py-trytond-web-user
 SUBDIR+=	py-twill
@@ -998,7 +1001,6 @@ SUBDIR+=	ruby-tag
 SUBDIR+=	ruby-typhoeus
 SUBDIR+=	ruby-unicorn
 SUBDIR+=	ruby-url_mount
-SUBDIR+=	ruby-webkit-gtk
 SUBDIR+=	ruby-webrick
 SUBDIR+=	ruby-webrobots
 SUBDIR+=	ruby-websocket
@@ -1070,8 +1072,6 @@ SUBDIR+=	wdg-validate
 SUBDIR+=	webalizer
 SUBDIR+=	webby
 SUBDIR+=	webkit-gtk
-SUBDIR+=	webkit24-gtk
-SUBDIR+=	webkit24-gtk3
 SUBDIR+=	weblint
 SUBDIR+=	webnew
 SUBDIR+=	websvn

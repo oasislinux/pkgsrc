@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.129 2022/06/28 11:35:21 wiz Exp $
+# $NetBSD: Makefile,v 1.131 2022/11/23 16:20:55 adam Exp $
 
 DISTNAME=	vino-2.32.2
-PKGREVISION=	59
+PKGREVISION=	61
 CATEGORIES=	net gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/vino/2.32/}
 EXTRACT_SUFX=	.tar.bz2

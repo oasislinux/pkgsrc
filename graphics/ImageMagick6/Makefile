@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.47 2022/06/28 11:33:59 wiz Exp $
+# $NetBSD: Makefile,v 1.49 2022/11/23 16:18:46 adam Exp $
 
-PKGREVISION= 14
+PKGREVISION= 16
 .include "Makefile.common"
 
 PKGNAME=	ImageMagick6-${DISTVERSION}

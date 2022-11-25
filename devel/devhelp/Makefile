@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.147 2022/08/11 05:08:08 gutteridge Exp $
+# $NetBSD: Makefile,v 1.149 2022/11/23 16:19:47 adam Exp $
 
 DISTNAME=	devhelp-3.34.0
-PKGREVISION=	11
+PKGREVISION=	12
 CATEGORIES=	devel gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/devhelp/3.34/}
 EXTRACT_SUFX=	.tar.xz
@@ -16,6 +16,9 @@ USE_TOOLS+=	pkg-config msgfmt xgettext itstool
 # workaround for build failure
 # https://gitlab.gnome.org/GNOME/json-glib/issues/35
 MAKE_ENV+=	LD_LIBRARY_PATH=${WRKSRC}/output/devhelp
+
+BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,--version-script
+BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,${WRKSRC}/devhelp/symbol.map
 
 PYTHON_FOR_BUILD_ONLY=	tool
 

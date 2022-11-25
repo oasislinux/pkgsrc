@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.8 2022/09/29 10:08:14 adam Exp $
+# $NetBSD: Makefile,v 1.10 2022/11/01 18:29:31 wiz Exp $
 
-DISTNAME=	distro-1.7.0
+DISTNAME=	distro-1.8.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_PYPI:=d/distro/}
@@ -10,11 +10,10 @@ HOMEPAGE=	https://github.com/nir0s/distro
 COMMENT=	OS platform information API
 LICENSE=	apache-2.0
 
+BUILD_DEPENDS+=	${PYPKGPREFIX}-wheel-[0-9]*:../../devel/py-wheel
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-[0-9]*:../../devel/py-test
 
 USE_LANGUAGES=	# none
-
-USE_PKG_RESOURCES=	yes
 
 PYTHON_VERSIONS_INCOMPATIBLE=	27
 
@@ -25,6 +24,5 @@ post-install:
 do-test:
 	cd ${WRKSRC} && ${SETENV} ${TEST_ENV} pytest-${PYVERSSUFFIX}
 
-.include "../../lang/python/egg.mk"
-.include "../../lang/python/versioned_dependencies.mk"
+.include "../../lang/python/wheel.mk"
 .include "../../mk/bsd.pkg.mk"

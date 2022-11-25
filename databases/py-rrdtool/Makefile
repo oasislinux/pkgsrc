@@ -1,6 +1,5 @@
-# $NetBSD: Makefile,v 1.15 2022/04/18 19:10:44 adam Exp $
+# $NetBSD: Makefile,v 1.17 2022/11/25 10:41:15 adam Exp $
 
-PKGREVISION= 9
 .include "../../databases/rrdtool/Makefile.common"
 
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}

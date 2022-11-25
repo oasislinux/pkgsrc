@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2022/01/04 20:54:27 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2022/11/09 08:47:09 adam Exp $
 
-DISTNAME=	geventhttpclient-1.5.3
+DISTNAME=	geventhttpclient-2.0.8
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	net python
 MASTER_SITES=	${MASTER_SITE_PYPI:=g/geventhttpclient/}
 
@@ -15,6 +14,8 @@ DEPENDS+=	${PYPKGPREFIX}-brotli-[0-9]*:../../archivers/py-brotli
 DEPENDS+=	${PYPKGPREFIX}-certifi-[0-9]*:../../security/py-certifi
 DEPENDS+=	${PYPKGPREFIX}-gevent>=0.13:../../net/py-gevent
 DEPENDS+=	${PYPKGPREFIX}-six-[0-9]*:../../lang/py-six
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27 # py-certifi
 
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

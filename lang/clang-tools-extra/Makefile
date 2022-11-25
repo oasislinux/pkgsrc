@@ -1,5 +1,6 @@
-# $NetBSD: Makefile,v 1.19 2022/08/13 09:58:04 tnn Exp $
+# $NetBSD: Makefile,v 1.22 2022/11/23 16:20:30 adam Exp $
 
+PKGREVISION= 1
 .include "../../lang/clang/Makefile.common"
 
 PKGNAME=	${DISTNAME:S/clang/clang-tools-extra/:S/.src//}
@@ -8,10 +9,10 @@ COMMENT=	Extra Clang tools
 
 DEPENDS+=	clang>=${LLVM_VERSION}:../../lang/clang
 
-EXTRA_DIST=		${DISTNAME:S/clang/clang-tools-extra/}${EXTRACT_SUFX}
-SITES.${EXTRA_DIST}=	${MASTER_SITES:=${GITHUB_PROJECT}/releases/download/${GITHUB_RELEASE}/}
-
-DISTFILES=	${DEFAULT_DISTFILES} ${EXTRA_DIST}
+CLANG_TOOLS_EXTRA=	clang-tools-extra-${LLVM_VERSION}.src
+EXTRA_DIST+=		${CLANG_TOOLS_EXTRA}${EXTRACT_SUFX}
+SITES.${CLANG_TOOLS_EXTRA}${EXTRACT_SUFX}= \
+	${MASTER_SITES:=${GITHUB_PROJECT}/releases/download/${GITHUB_RELEASE}/}
 
 BUILD_TARGET=	clang-change-namespace clang-apply-replacements clang-doc
 BUILD_TARGET+=	clang-include-fixer clang-move clang-query clang-reorder-fields

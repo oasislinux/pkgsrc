@@ -1,16 +1,14 @@
-$NetBSD: distinfo,v 1.20 2022/08/14 19:54:31 tnn Exp $
+$NetBSD: distinfo,v 1.22 2022/11/16 20:53:59 adam Exp $
 
-BLAKE2s (libcxx-14.0.6.src.tar.xz) = e77dfac79fb977adf84345b7e4c2762b3fa89f3d1f611baa8f8fa6831d1bc68a
-SHA512 (libcxx-14.0.6.src.tar.xz) = c39bb01317e8ae7e5b23a677754a866953b6c45188c194d3d76fbd276de9565df8bcbcab8cf6606584af7dd30a61f39376c0e2de6b8c32c69f7fc592587e710d
-Size (libcxx-14.0.6.src.tar.xz) = 3065120 bytes
-BLAKE2s (libcxxabi-14.0.6.src.tar.xz) = c2bc894a75176b7f24517b6c045ddaccc61375453d56331f51dc9d03821804cc
-SHA512 (libcxxabi-14.0.6.src.tar.xz) = f61926ce9c8bf4d704d9ee03a795ebd23730099d56c385e3cbd1f8b588b337c1394d6548f55e1452df5040117a80765c977ba256547d53cd21895e91ef0fffa6
-Size (libcxxabi-14.0.6.src.tar.xz) = 561844 bytes
-BLAKE2s (llvm-14.0.6.src.tar.xz) = 2d44946453add45426569fd4187654f83881341c5c0109e4ffacc60e8f73af60
-SHA512 (llvm-14.0.6.src.tar.xz) = 6461bdde27aac17fa44c3e99a85ec47ffb181d0d4e5c3ef1c4286a59583e3b0c51af3c8081a300f45b99524340773a3011380059e3b3a571c3b0a8733e96fc1d
-Size (llvm-14.0.6.src.tar.xz) = 49660136 bytes
-SHA1 (patch-include_____config) = 01793dc2ec7db8f51d042fd0114649223036b089
-SHA1 (patch-include_____locale) = 16ce105c26adf43828699ddb2825ea2a199f2bda
+BLAKE2s (cmake-15.0.5.src.tar.xz) = 5f8beedf1c9349c13dba2f4a5fcfb9d482c96df32c34c284cfe682a681669f35
+SHA512 (cmake-15.0.5.src.tar.xz) = 493825f1b64abef6d56502d28e30056320bdda5a46a478fc85eec3a631c541da2d318fb9c3e3d3e6234f538121b7a1c60d34cba498fd6b7938d3558d24684fed
+Size (cmake-15.0.5.src.tar.xz) = 6976 bytes
+BLAKE2s (libcxx-15.0.5.src.tar.xz) = a8bfbbf97dd0fe08fdea716d34faa0bb12cf69c71a2ba285a9abb42f741f72b8
+SHA512 (libcxx-15.0.5.src.tar.xz) = a2c7ef80de782a008111fc35da906cbd853c1f2f2c9512ce99bd2575c1dcb842e4cc160a9beabc9a14dae3a208c665350f463c986374db9c4f642c81a88d95d8
+Size (libcxx-15.0.5.src.tar.xz) = 3331412 bytes
+BLAKE2s (libcxxabi-15.0.5.src.tar.xz) = 1792d74a99516c4192ab65b97843805096a4169d4124ad0a9089d8210789a3aa
+SHA512 (libcxxabi-15.0.5.src.tar.xz) = 5c4a931a270abfd9fdb64e248d07246a2c678eb7127103a9c8ade63a671d3a33de1d989c0f4a7e9ee2e15519441df5e5e9a8e722b048035b8d74dea6130f756b
+Size (libcxxabi-15.0.5.src.tar.xz) = 568696 bytes
 SHA1 (patch-src_charconv.cpp) = b8569ae77df4a5a7b627b3a9cb6691be73699dca
 SHA1 (patch-src_filesystem_filesystem__common.h) = 7b088ae8e577b482e05906434b510daed40469ae
 SHA1 (patch-src_include_to__chars__floating__point.h) = f7f880905609b87830ea657c7510fb3987448a09

@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.28 2020/04/25 17:21:38 rillig Exp $
+# $NetBSD: Makefile,v 1.30 2022/11/09 13:14:08 joerg Exp $
 
-DISTNAME=		imake-1.0.8
-CATEGORIES=		x11 devel
+DISTNAME=		imake-1.0.9
+CATEGORIES=		devel x11
 MASTER_SITES=		${MASTER_SITE_XORG:=util/}
-EXTRACT_SUFX=		.tar.bz2
+EXTRACT_SUFX=		.tar.xz
 
-MAINTAINER=		joerg@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		https://xorg.freedesktop.org/
-COMMENT=		Imake and other utilities from modular X.org
+COMMENT=		Obsolete build tool for X software
 
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		pkg-config makedepend:run

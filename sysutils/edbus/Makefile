@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.35 2021/12/08 16:02:38 adam Exp $
+# $NetBSD: Makefile,v 1.37 2022/11/09 13:14:16 joerg Exp $
 
 DISTNAME=	e_dbus-1.7.10
 PKGNAME=	${DISTNAME:S/e_dbus/edbus/}
-PKGREVISION=	6
+PKGREVISION=	7
 CATEGORIES=	sysutils
 MASTER_SITES=	https://download.enlightenment.org/att/releases/
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	joerg@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.enlightenment.org/
 COMMENT=	Convenience wrappers around dbus to ease integrating dbus with E17
 LICENSE=	2-clause-bsd

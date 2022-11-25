@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.658 2022/10/10 03:28:55 taca Exp $
+# $NetBSD: Makefile,v 1.662 2022/11/25 10:43:35 nros Exp $
 #
 
 COMMENT=	Programming languages
@@ -136,6 +136,7 @@ SUBDIR+=	js
 SUBDIR+=	kaffe
 SUBDIR+=	kaffe-x11
 SUBDIR+=	kali
+SUBDIR+=	kona
 SUBDIR+=	konoha
 SUBDIR+=	ksi
 SUBDIR+=	libBlocksRuntime
@@ -243,15 +244,18 @@ SUBDIR+=	py-spark-parser
 SUBDIR+=	py-uncompyle6
 SUBDIR+=	py27-html-docs
 SUBDIR+=	py310-html-docs
+SUBDIR+=	py311-html-docs
 SUBDIR+=	py37-html-docs
 SUBDIR+=	py38-html-docs
 SUBDIR+=	py39-html-docs
 SUBDIR+=	python27
 SUBDIR+=	python310
+SUBDIR+=	python311
 SUBDIR+=	python37
 SUBDIR+=	python38
 SUBDIR+=	python39
 SUBDIR+=	qore
+SUBDIR+=	qt6-qtlanguageserver
 SUBDIR+=	quickjs
 SUBDIR+=	racket
 SUBDIR+=	racket-textual
@@ -274,9 +278,7 @@ SUBDIR+=	ruby31
 SUBDIR+=	ruby31-base
 SUBDIR+=	runawk
 SUBDIR+=	rust
-SUBDIR+=	rust-analyzer
 SUBDIR+=	rust-bin
-SUBDIR+=	rust-src
 SUBDIR+=	sablevm
 SUBDIR+=	sablevm-classpath
 SUBDIR+=	sablevm-classpath-gui

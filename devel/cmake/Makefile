@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.199 2022/10/09 12:06:05 rhialto Exp $
+# $NetBSD: Makefile,v 1.202 2022/11/22 19:14:02 adam Exp $
 
 PKGREVISION=		1
 .include "Makefile.common"
 
-PKGREVISION=	1
 COMMENT=	Cross platform make
 
 USE_TOOLS+=		gmake
@@ -71,6 +70,7 @@ USE_CURSES=		wsyncup
 BUILDLINK_API_DEPENDS.libarchive+=	libarchive>=3.3.3
 BUILDLINK_API_DEPENDS.rhash+=	rhash>=1.4.2nb1
 .include "../../archivers/libarchive/buildlink3.mk"
+.include "../../archivers/zstd/buildlink3.mk"
 .include "../../devel/libexecinfo/buildlink3.mk"
 .include "../../devel/libuv/buildlink3.mk"
 .include "../../misc/rhash/buildlink3.mk"

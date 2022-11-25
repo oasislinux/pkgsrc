@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.191 2022/06/17 23:05:24 wiz Exp $
+# $NetBSD: Makefile,v 1.194 2022/10/24 07:52:54 fcambus Exp $
 #
 
 COMMENT=	Archivers and compression tools
@@ -63,6 +63,7 @@ SUBDIR+=	lz4
 SUBDIR+=	lz4json
 SUBDIR+=	lzip
 SUBDIR+=	lziprecover
+SUBDIR+=	lzlib
 SUBDIR+=	lzma
 SUBDIR+=	lzmalib
 SUBDIR+=	lzo
@@ -96,6 +97,7 @@ SUBDIR+=	php-zip
 SUBDIR+=	php-zlib
 SUBDIR+=	pigz
 SUBDIR+=	pixz
+SUBDIR+=	plzip
 SUBDIR+=	ppmd
 SUBDIR+=	ppunpack
 SUBDIR+=	pxz
@@ -130,6 +132,7 @@ SUBDIR+=	sarab
 SUBDIR+=	squsq
 SUBDIR+=	star
 SUBDIR+=	szip
+SUBDIR+=	tarlz
 SUBDIR+=	tartest
 SUBDIR+=	torrentzip
 SUBDIR+=	trrntzip

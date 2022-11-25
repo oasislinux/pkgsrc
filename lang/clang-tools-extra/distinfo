@@ -1,8 +1,11 @@
-$NetBSD: distinfo,v 1.13 2022/08/12 08:50:58 pin Exp $
+$NetBSD: distinfo,v 1.15 2022/11/16 20:53:58 adam Exp $
 
-BLAKE2s (clang-14.0.6.src.tar.xz) = a39d30a3475f93605cf5cf63374500d78b1583e5c738b3ad7693a9ef08c137c4
-SHA512 (clang-14.0.6.src.tar.xz) = 5f5497b57dd116225e90f321902f1015beb50c0b1bb90d0fc6c026f13aa748feabe44f98eb75e86f98f3b1785ad5e850210732f3eae75b942ecd520527dcd30b
-Size (clang-14.0.6.src.tar.xz) = 18539496 bytes
-BLAKE2s (clang-tools-extra-14.0.6.src.tar.xz) = 05206cb2740386d1dad37aa2368b0223e094455d11a181c1053efe479c1eaf96
-SHA512 (clang-tools-extra-14.0.6.src.tar.xz) = b55fd9872e52a27599e27fa665cf39af3d172814c0e7246ea0e57286e9eea42bf816f8b6d350334f3fe5e2fae35a8e59d59e71a3a5de330ecb0622ef7655e63f
-Size (clang-tools-extra-14.0.6.src.tar.xz) = 2849632 bytes
+BLAKE2s (clang-15.0.5.src.tar.xz) = cc126e6fa33fbc011ffac2390fc592c5c57c3902463a235796a6c92437ebf6cb
+SHA512 (clang-15.0.5.src.tar.xz) = 62b2be15b0e8c1fcfa8c35384e794a89ae13ab195454ce8409f255087abd9cfebea6c70658c794f4daaadfa3f6ecbb046ce6f7ba146afe6e0fc0d7d57471b432
+Size (clang-15.0.5.src.tar.xz) = 18542872 bytes
+BLAKE2s (clang-tools-extra-15.0.5.src.tar.xz) = 90fae3c66ff9ae66442d50ab86236372ace8a703cf876a2338041d9284ab5f46
+SHA512 (clang-tools-extra-15.0.5.src.tar.xz) = f6b64b48408f456922136ac75b42fd55ea05294381e40120d3716bed919b85948f9274af1e334926fbb04957c5339de1c0807b5549f2a750d9d07b62574421ac
+Size (clang-tools-extra-15.0.5.src.tar.xz) = 3075532 bytes
+BLAKE2s (cmake-15.0.5.src.tar.xz) = 5f8beedf1c9349c13dba2f4a5fcfb9d482c96df32c34c284cfe682a681669f35
+SHA512 (cmake-15.0.5.src.tar.xz) = 493825f1b64abef6d56502d28e30056320bdda5a46a478fc85eec3a631c541da2d318fb9c3e3d3e6234f538121b7a1c60d34cba498fd6b7938d3558d24684fed
+Size (cmake-15.0.5.src.tar.xz) = 6976 bytes

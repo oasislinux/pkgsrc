@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.61 2022/09/30 15:33:45 micha Exp $
+# $NetBSD: Makefile,v 1.63 2022/11/02 09:08:54 micha Exp $
 
-DISTNAME=	2022-09-18
+DISTNAME=	2022-10-16
 PKGNAME=	star-1.6.2
+PKGREVISION=	1
 CATEGORIES=	archivers
 MASTER_SITES=	https://codeberg.org/schilytools/schilytools/archive/
 DIST_SUBDIR=	schilytools
@@ -67,8 +68,8 @@ post-build:
 	else								\
 		${TBL} star/spax.1 >star/spax.1.tmp &&			\
 		${MV} -f star/spax.1.tmp star/spax.1 &&			\
-		${TBL} star/star.4 >star/star.4.tmp &&			\
-		${MV} -f star/star.4.tmp star/star.4 &&			\
+		${TBL} star/star.5 >star/star.5.tmp &&			\
+		${MV} -f star/star.5.tmp star/star.5 &&			\
 		${TOUCH} star/pkgsrc_tbl.done;				\
 	fi
 .endif

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.38 2022/07/22 17:07:14 micha Exp $
+# $NetBSD: Makefile,v 1.40 2022/11/23 16:18:56 adam Exp $
 
 DISTNAME=	gupnp-dlna-0.10.3
-PKGREVISION=	23
+PKGREVISION=	24
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gupnp-dlna/0.10/}
 EXTRACT_SUFX=	.tar.xz
@@ -18,6 +18,8 @@ USE_TOOLS+=	gmake pkg-config
 PKGCONFIG_OVERRIDE+=	gupnp-dlna-2.0.pc.in
 PKGCONFIG_OVERRIDE+=	gupnp-dlna-gst-2.0.pc.in
 #PKGCONFIG_OVERRIDE+=	gupnp-dlna-metadata-2.0.pc.in
+
+BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,--no-as-needed
 
 .include "../../archivers/xz/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"

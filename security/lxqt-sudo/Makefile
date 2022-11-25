@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.17 2022/06/28 11:35:37 wiz Exp $
+# $NetBSD: Makefile,v 1.19 2022/11/23 16:21:01 adam Exp $
 
-DISTNAME=	lxqt-sudo-1.1.0
-PKGREVISION=	2
+DISTNAME=	lxqt-sudo-1.2.0
+PKGREVISION=	1
 CATEGORIES=	security
 MASTER_SITES=	${MASTER_SITE_GITHUB:=lxqt/}
 GITHUB_RELEASE=	${PKGVERSION_NOREV}
@@ -24,7 +24,7 @@ CMAKE_ARGS+=	-DMSK_INSTALL_INCLUDES=/include
 pre-configure:
 	${MKDIR} -p ${WRKSRC}/build
 
-TOOL_DEPENDS+=	lxqt-build-tools>=0.11.0:../../devel/lxqt-build-tools
+TOOL_DEPENDS+=	lxqt-build-tools>=0.12.0:../../devel/lxqt-build-tools
 TOOL_DEPENDS+=	qt5-qttools-[0-9]*:../../x11/qt5-qttools
 DEPENDS+=	sudo-[0-9]*:../../security/sudo
 

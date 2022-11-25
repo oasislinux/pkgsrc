@@ -1,12 +1,11 @@
-# $NetBSD: Makefile,v 1.16 2020/01/18 23:35:53 rillig Exp $
+# $NetBSD: Makefile,v 1.18 2022/11/09 13:14:22 joerg Exp $
 
-DISTNAME=		libXrender-0.9.10
-PKGREVISION=		1
+DISTNAME=		libXrender-0.9.11
 CATEGORIES=		x11 devel
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
-EXTRACT_SUFX=		.tar.bz2
+EXTRACT_SUFX=		.tar.xz
 
-MAINTAINER=		joerg@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		https://xorg.freedesktop.org/
 COMMENT=		X Render Library
 LICENSE=		mit
@@ -18,8 +17,6 @@ GNU_CONFIGURE=		yes
 USE_TOOLS+=		pkg-config
 
 PKGCONFIG_OVERRIDE+=	xrender.pc.in
-
-CONFIGURE_ARGS.NetBSD+=	--disable-malloc0returnsnull
 
 .include "../../meta-pkgs/modular-xorg/hacks.mk"
 

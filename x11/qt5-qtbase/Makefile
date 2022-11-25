@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.120 2022/09/13 17:18:04 adam Exp $
+# $NetBSD: Makefile,v 1.124 2022/11/23 16:19:12 adam Exp $
 
 DISTNAME=	qtbase-everywhere-opensource-src-${QTVERSION}
 PKGNAME=	qt5-qtbase-${QTVERSION}
+PKGREVISION=	1
 COMMENT=	C++ X GUI toolkit
 
 .include "../../x11/qt5-qtbase/Makefile.common"
@@ -64,7 +65,12 @@ PLIST_VARS+=		egl
 
 .include "../../mk/compiler.mk"
 
+QMAKE_LFLAGS_GCSECTIONS?=	-Wl,--gc-sections
+QMAKE_LFLAGS_RELEASE?=		-Wl,-O1
+
 .if ${OPSYS} == "SunOS"
+QMAKE_LFLAGS_GCSECTIONS=	-Wl,-z,ignore
+QMAKE_LFLAGS_RELEASE=
 .  if !empty(PKGSRC_COMPILER:Mgcc) || !empty(PKGSRC_COMPILER:Mclang)
 .    if ${ABI:U} == "64"
 CONFIGURE_ARGS+=		-platform solaris-g++-64
@@ -89,6 +95,8 @@ SYS_LIBS=			-lbind -ldb -ldl
 CONFIGURE_ARGS+=		-platform freebsd-g++
 LDFLAGS+=			-lexecinfo
 .elif ${OPSYS} == "Darwin"
+QMAKE_LFLAGS_GCSECTIONS=	-Wl,-dead_strip
+QMAKE_LFLAGS_RELEASE=
 CONFIGURE_ARGS+=		-platform macx-clang
 CONFIGURE_ARGS+=		-no-framework
 # pkgsrc has a patch to avoid using SDK, but the configure
@@ -204,6 +212,8 @@ pre-configure:
 		-e 's:@COMPILER_RPATH_FLAG@:${COMPILER_RPATH_FLAG}:g' \
 		-e 's:@QMAKE_RANLIB@:${RANLIB}:g' \
 		-e 's:@QMAKE_EXTRA@:${QMAKE_EXTRA:Q}:g' \
+		-e 's:@QMAKE_LFLAGS_GCSECTIONS@:${QMAKE_LFLAGS_GCSECTIONS:Q}:g' \
+		-e 's:@QMAKE_LFLAGS_RELEASE@:${QMAKE_LFLAGS_RELEASE:Q}:g' \
 		${FILESDIR}/${QMAKE_CONF} > ${WRKSRC}/qmake.conf
 	for dir in ${WRKSRC}/mkspecs/*; do \
 			cp ${WRKSRC}/qmake.conf $${dir}; \

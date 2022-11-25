@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.1 2022/10/08 11:30:27 bsiegert Exp $
+# $NetBSD: Makefile,v 1.3 2022/11/21 18:20:44 jperkin Exp $
 
-DISTNAME=	outils-0.10
+DISTNAME=	outils-0.12
 PKGNAME=	${DISTNAME:S,outils,signify,}
 CATEGORIES=	security
 MASTER_SITES=	${MASTER_SITE_GITHUB:=leahneukirchen/}
@@ -40,6 +40,8 @@ SUBST_FILES.ints+=	${LIBSRCDIR}/*.c
 SUBST_FILES.ints+=	${LIBSRCDIR}/include/*.h
 SUBST_SED.ints=		-e 's|u_int|uint|g'
 .endif
+
+BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,--as-needed
 
 LIBS.SunOS+=	-lresolv -lrt
 

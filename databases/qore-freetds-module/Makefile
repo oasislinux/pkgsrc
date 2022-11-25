@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.20 2022/01/27 17:44:18 nros Exp $
+# $NetBSD: Makefile,v 1.22 2022/10/26 10:31:19 wiz Exp $
 
 DISTNAME=	qore-sybase-modules-1.1
 PKGNAME=	${DISTNAME:S/sybase-modules/freetds-module/}
+PKGREVISION=	2
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_GITHUB:=qorelanguage/}
 EXTRACT_SUFX=	.tar.bz2

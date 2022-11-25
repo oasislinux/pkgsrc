@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.43 2022/04/18 19:10:45 adam Exp $
+# $NetBSD: Makefile,v 1.45 2022/11/23 16:19:43 adam Exp $
 
 PKGNAME=	${PYPKGPREFIX}-sqlite3-${PY_DISTVERSION}
-PKGREVISION=	22
+PKGREVISION=	23
 CATEGORIES=	databases python
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -14,6 +14,15 @@ USE_GCC_RUNTIME=	yes
 PYDISTUTILSPKG=		yes
 PY_SETUP_SUBST+=	SQLITE_PREFIX=${BUILDLINK_PREFIX.sqlite3}
 PYSETUPINSTALLARGS+=	--install-lib ${PREFIX}/${PYLIB}/lib-dynload
+
+.include "../../lang/python/pyversion.mk"
+
+.if ${PYPKGPREFIX} == "py311"
+SUBST_CLASSES+=		py311
+SUBST_FILES.py311+=	setup.py
+SUBST_SED.py311+=	-e "s+'_sqlite/cache.c',+'_sqlite/blob.c',+"
+SUBST_STAGE.py311=	pre-build
+.endif
 
 .include "../../databases/sqlite3/buildlink3.mk"
 .include "../../lang/python/extension.mk"

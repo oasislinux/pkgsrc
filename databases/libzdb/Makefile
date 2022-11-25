@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.27 2022/04/18 19:09:42 adam Exp $
+# $NetBSD: Makefile,v 1.31 2022/11/23 16:18:35 adam Exp $
 
-DISTNAME=	libzdb-3.2.2
-PKGREVISION=	5
+DISTNAME=	libzdb-3.2.3
+PKGREVISION=	1
 CATEGORIES=	databases
 MASTER_SITES=	http://www.tildeslash.com/libzdb/dist/
 
-MAINTAINER=	evaldo@gardenali.biz
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.tildeslash.com/libzdb/
 COMMENT=	Zild Database Library, a fast thread-safe connection pooling library
 LICENSE=	gnu-gpl-v3

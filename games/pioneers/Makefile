@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.77 2022/08/11 05:08:34 gutteridge Exp $
+# $NetBSD: Makefile,v 1.79 2022/11/23 16:20:09 adam Exp $
 #
 
 DISTNAME=	pioneers-15.6
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	games gnome
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=pio/}
 
@@ -15,6 +15,8 @@ GNU_CONFIGURE=		YES
 USE_TOOLS+=		gmake pkg-config msgfmt intltool itstool
 USE_LIBTOOL=		YES
 USE_PKGLOCALEDIR=	YES
+
+BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,--as-needed
 
 BUILDLINK_DEPMETHOD.librsvg=	build	# generates icons
 

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.28 2022/05/26 08:53:59 adam Exp $
+# $NetBSD: Makefile,v 1.30 2022/11/04 19:46:48 adam Exp $
 
 .include "../../devel/cmake/Makefile.common"
 

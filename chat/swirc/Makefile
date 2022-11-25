@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.8 2022/10/07 14:24:07 fcambus Exp $
+# $NetBSD: Makefile,v 1.11 2022/11/15 15:07:33 fcambus Exp $
 
-DISTNAME=	swirc-3.3.6
+DISTNAME=	swirc-3.3.7
+PKGREVISION=	1
 CATEGORIES=	chat
 MASTER_SITES=	https://www.nifty-networks.net/swirc/releases/
 EXTRACT_SUFX=	.tgz
@@ -14,7 +15,7 @@ HAS_CONFIGURE=		yes
 USE_PKGLOCALEDIR=	yes
 USE_LANGUAGES=		c c++
 
-MAKE_FLAGS+=	Q= CC="${CC}" CXX="${CXX}"
+MAKE_FLAGS+=	Q= CC="${CC}" CXX="${CXX}" LDFLAGS="${LDFLAGS}"
 MAKE_FLAGS+=	DEST_MANUAL=${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
 MAKE_FLAGS+=	DEST_CONFMAN=${DESTDIR}${PREFIX}/${PKGMANDIR}/man5
 

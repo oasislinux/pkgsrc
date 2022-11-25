@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.13 2022/06/30 11:18:32 nia Exp $
+# $NetBSD: Makefile,v 1.16 2022/11/22 14:52:43 nia Exp $
 # -----------------------------------------------------------------------------
 # Package metadata
 #
@@ -16,7 +16,7 @@ LICENSE=	modified-bsd
 
 MKPIE_SUPPORTED=	no
 
-UNLIMIT_RESOURCES=	datasize virtualsize
+UNLIMIT_RESOURCES=	cputime datasize virtualsize
 
 # GHC requires GHC to build itself. We have to prepare stripped-down
 # binaries sufficient to bootstrap compilers for each platforms. If
@@ -219,12 +219,13 @@ BUILD_DEPENDS+=	${PYPKGPREFIX}-sphinx-[0-9]*:../../textproc/py-sphinx
 
 # NetBSD 9.x have libcurses with a newer major version than the
 # bootstrap kit is linked against. For now, work around this with
-# compat80.
+# compat libraries.
+#
+# In a sandboxed build environment, we have to reach over to the
+# installed libraries themselves, since the symlinks compatXX adds
+# to the /usr tree can't be applied.
 .if ${OPSYS} == "NetBSD" && ${OPSYS_VERSION} >= 090000
 BUILD_DEPENDS+=	compat80-[0-9]*:../../emulators/compat80
-# In a sandboxed build environment, we have to reach over to the
-# installed libraries themselves, since the symlinks compat80 adds
-# to the /usr tree can't be applied.
 ALL_ENV+=	LD_LIBRARY_PATH=${PREFIX}/emul/netbsd/usr/lib:${WRKDIR}/lib
 .endif
 

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.11 2022/08/30 11:45:19 sborrill Exp $
+# $NetBSD: Makefile,v 1.14 2022/11/14 19:40:20 adam Exp $
 
-DISTNAME=	google-auth-oauthlib-0.5.2
+DISTNAME=	google-auth-oauthlib-0.7.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	security python
 MASTER_SITES=	${MASTER_SITE_PYPI:=g/google-auth-oauthlib/}
@@ -10,7 +10,7 @@ HOMEPAGE=	https://github.com/GoogleCloudPlatform/google-auth-library-python-oaut
 COMMENT=	Google Authentication Library
 LICENSE=	apache-2.0
 
-DEPENDS+=	${PYPKGPREFIX}-google-auth>=1.0.0:../../security/py-google-auth
+DEPENDS+=	${PYPKGPREFIX}-google-auth>=2.14.0:../../security/py-google-auth
 DEPENDS+=	${PYPKGPREFIX}-requests-oauthlib>=0.7.0:../../security/py-requests-oauthlib
 
 USE_LANGUAGES=	# none

@@ -1,0 +1,7 @@
+===========================================================================
+$NetBSD: README.pkgsrc,v 1.1 2022/10/28 00:19:25 manu Exp $
+
+neon will look for a trusted certificarte bundle at
+        @SSLCERTS@/ca-certificates.crt
+
+===========================================================================

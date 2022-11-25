@@ -1,20 +1,16 @@
-# $NetBSD: Makefile,v 1.28 2022/07/10 19:25:00 wiz Exp $
+# $NetBSD: Makefile,v 1.30 2022/11/14 16:41:10 wiz Exp $
 
-DISTNAME=	salt-3004
+.include "../../sysutils/salt/Makefile.common"
+
 PKGNAME=	${DISTNAME:S/-/-docs-/}
-PKGREVISION=	2
-CATEGORIES=	sysutils python
-MASTER_SITES=	${MASTER_SITE_PYPI:=s/salt/}
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://saltstack.org/
 COMMENT=	Documentation for salt
-LICENSE=	apache-2.0
 
 USE_TOOLS+=	gmake pax
 
-BUILD_DEPENDS+=	${PYPKGPREFIX}-sphinx>=1.2.3nb1:../../textproc/py-sphinx
-BUILD_DEPENDS+=	${PYPKGPREFIX}-sqlite3>=1.2.3nb1:../../databases/py-sqlite3
+BUILD_DEPENDS+=	salt-[0-9]*:../../sysutils/salt
+TOOL_DEPENDS+=	${PYPKGPREFIX}-sphinx>=1.2.3nb1:../../textproc/py-sphinx
+TOOL_DEPENDS+=	${PYPKGPREFIX}-sqlite3>=1.2.3nb1:../../databases/py-sqlite3
 
 NO_CONFIGURE=	yes
 BUILD_DIRS=	doc

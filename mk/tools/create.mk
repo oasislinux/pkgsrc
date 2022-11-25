@@ -1,4 +1,4 @@
-# $NetBSD: create.mk,v 1.15 2022/10/07 11:42:51 jperkin Exp $
+# $NetBSD: create.mk,v 1.17 2022/11/24 11:09:34 jperkin Exp $
 #
 # Copyright (c) 2005, 2006 The NetBSD Foundation, Inc.
 # All rights reserved.

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.8 2022/06/30 11:18:33 nia Exp $
+# $NetBSD: Makefile,v 1.10 2022/11/22 14:35:32 nia Exp $
 # -----------------------------------------------------------------------------
 # Package metadata
 #
@@ -14,7 +14,7 @@ HOMEPAGE=	https://www.haskell.org/ghc/
 COMMENT=	Compiler for the functional language Haskell - 9.2 Release Series
 LICENSE=	modified-bsd
 
-UNLIMIT_RESOURCES=	datasize virtualsize
+UNLIMIT_RESOURCES=	cputime datasize virtualsize
 
 # GHC requires GHC to build itself. We have to prepare stripped-down
 # binaries sufficient to bootstrap compilers for each platform. If
@@ -235,12 +235,16 @@ BUILD_DEPENDS+=	${PYPKGPREFIX}-sphinx-[0-9]*:../../textproc/py-sphinx
 
 # NetBSD 9.x have libcurses with a newer major version than the
 # bootstrap kit is linked against. For now, work around this with
-# compat80.
-.if !empty(MACHINE_PLATFORM:MNetBSD-*-x86_64) && ${OPSYS_VERSION} >= 090000
-BUILD_DEPENDS+=	compat80-[0-9]*:../../emulators/compat80
+# compat libraries.
+#
 # In a sandboxed build environment, we have to reach over to the
-# installed libraries themselves, since the symlinks compat80 adds
+# installed libraries themselves, since the symlinks compatXX adds
 # to the /usr tree can't be applied.
+.if !empty(MACHINE_PLATFORM:MNetBSD-*-aarch64*) && ${OPSYS_VERSION} >= 099000
+BUILD_DEPENDS+=	compat90-[0-9]*:../../emulators/compat90
+ALL_ENV+=	LD_LIBRARY_PATH=${PREFIX}/emul/netbsd/usr/lib
+.elif !empty(MACHINE_PLATFORM:MNetBSD-*-x86_64) && ${OPSYS_VERSION} >= 090000
+BUILD_DEPENDS+=	compat80-[0-9]*:../../emulators/compat80
 ALL_ENV+=	LD_LIBRARY_PATH=${PREFIX}/emul/netbsd/usr/lib:${WRKDIR}/lib
 # XXX: ${WRKDIR}/lib is a temporary workaround for compat80 not having
 # libterminfo.so.1. See ./bootstrap.mk

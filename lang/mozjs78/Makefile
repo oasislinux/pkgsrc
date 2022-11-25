@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.27 2022/07/06 20:37:55 nia Exp $
+# $NetBSD: Makefile,v 1.29 2022/11/23 16:18:50 adam Exp $
 
 DISTNAME=	mozjs78_78.15.0.orig
 PKGNAME=	${DISTNAME:S/_/-/:S/.orig//}
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	lang
 MASTER_SITES=	http://deb.debian.org/debian/pool/main/m/mozjs78/
 EXTRACT_SUFX=	.tar.xz
@@ -60,7 +60,7 @@ SUBST_VARS.conf=	PREFIX
 PKGCONFIG_OVERRIDE+=	js/src/build/js.pc.in
 PKGCONFIG_OVERRIDE+=	js/src/ctypes/libffi/libffi.pc.in
 
-PYTHON_VERSIONS_ACCEPTED=	39 38 37
+PYTHON_VERSIONS_ACCEPTED=	39 38
 PYTHON_FOR_BUILD_ONLY=		tool
 TOOL_DEPENDS+=			${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 

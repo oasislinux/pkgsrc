@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.1 2022/05/11 00:19:30 gutteridge Exp $
+# $NetBSD: Makefile,v 1.3 2022/11/23 16:21:28 adam Exp $
 
-DISTNAME=	qtxdg-tools-3.9.1
+DISTNAME=	qtxdg-tools-3.10.0
+PKGREVISION=	1
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_GITHUB:=lxqt/}
 GITHUB_RELEASE=	${PKGVERSION_NOREV}
@@ -21,7 +22,7 @@ CMAKE_ARG_PATH=	..
 pre-configure:
 	${MKDIR} -p ${WRKSRC}/build
 
-TOOL_DEPENDS+=	lxqt-build-tools>=0.11.0:../../devel/lxqt-build-tools
+TOOL_DEPENDS+=	lxqt-build-tools>=0.12.0:../../devel/lxqt-build-tools
 TOOL_DEPENDS+=	qt5-qttools-[0-9]*:../../x11/qt5-qttools
 
 .include "../../x11/qt5-qtbase/buildlink3.mk"

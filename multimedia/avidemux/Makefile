@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.128 2022/09/11 12:52:00 wiz Exp $
-#
+# $NetBSD: Makefile,v 1.131 2022/11/23 16:20:42 adam Exp $
 
 DISTNAME=	avidemux_2.5.4
 PKGNAME=	${DISTNAME:S/_/-/}
-PKGREVISION=	60
+PKGREVISION=	62
 CATEGORIES=	multimedia
 MASTER_SITES=	http://download.berlios.de/avidemux/
 
@@ -72,7 +71,7 @@ post-install:
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../lang/spidermonkey/buildlink3.mk"
 .include "../../multimedia/xvidcore/buildlink3.mk"
-.include "../../multimedia/x264-devel/buildlink3.mk"
+.include "../../multimedia/x264/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"

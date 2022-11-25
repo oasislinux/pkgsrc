@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.111 2022/09/11 12:51:51 wiz Exp $
+# $NetBSD: Makefile,v 1.113 2022/11/25 09:24:54 wiz Exp $
 
-DISTNAME=	gegl-0.4.38
-PKGREVISION=	2
+DISTNAME=	gegl-0.4.40
 CATEGORIES=	graphics
 MASTER_SITES=	https://download.gimp.org/pub/gegl/${PKGVERSION_NOREV:R}/
 EXTRACT_SUFX=	.tar.xz
@@ -44,7 +43,7 @@ PLIST.x86_64=		yes
 .endif
 
 PLIST_VARS+=		neon
-.if !empty(MACHINE_ARCH:Mearmv[67]*)
+.if ${MACHINE_ARCH:Mearmv[67]*}
 PLIST.neon=		yes
 .endif
 

@@ -1,4 +1,4 @@
-# $NetBSD: mozilla-common.mk,v 1.1 2022/08/04 15:07:14 nia Exp $
+# $NetBSD: mozilla-common.mk,v 1.3 2022/11/07 00:55:15 gutteridge Exp $
 #
 # common Makefile fragment for mozilla packages based on gecko 2.0.
 #
@@ -6,7 +6,7 @@
 
 .include "../../mk/bsd.prefs.mk"
 
-PYTHON_VERSIONS_ACCEPTED+=	39 38 37
+PYTHON_VERSIONS_ACCEPTED+=	39 38
 PYTHON_FOR_BUILD_ONLY=		tool
 ALL_ENV+=			PYTHON3=${PYTHONBIN}
 
@@ -20,7 +20,7 @@ USE_LANGUAGES+=		c c++
 # ERROR: Only GCC 7.1 or newer is supported (found version 5.5.0).
 GCC_REQD+=		7
 
-TOOL_DEPENDS+=		cbindgen>=0.14.2:../../devel/cbindgen
+TOOL_DEPENDS+=		cbindgen>=0.24.0:../../devel/cbindgen
 .if ${MACHINE_ARCH} == "sparc64"
 CONFIGURE_ARGS+=	--disable-nodejs
 .else

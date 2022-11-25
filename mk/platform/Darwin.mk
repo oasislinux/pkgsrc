@@ -1,4 +1,4 @@
-# $NetBSD: Darwin.mk,v 1.118 2022/09/27 08:46:33 jperkin Exp $
+# $NetBSD: Darwin.mk,v 1.120 2022/11/02 10:59:28 tnn Exp $
 #
 # Variable definitions for the Darwin operating system.
 
@@ -27,6 +27,7 @@
 #	Catalina	10.15.x		19.x.y	11.x	(llvm clang 11)
 #	Big Sur		11.x		20.x.y	12.x	(llvm clang 12)
 #	Monterey	12.x		21.x.y	13.x	(llvm clang 13)
+#	Ventura		13.x		22.x.y	14.1+	(llvm clang 14)
 #
 
 # Tiger (and earlier) use Xfree 4.4.0 (and earlier)

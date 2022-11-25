@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1018 2022/10/09 16:09:30 pin Exp $
+# $NetBSD: Makefile,v 1.1022 2022/11/10 23:25:49 nikita Exp $
 #
 
 COMMENT=	System utilities
@@ -246,6 +246,7 @@ SUBDIR+=	gcombust
 SUBDIR+=	gdmap
 SUBDIR+=	genpasswd
 SUBDIR+=	gentoo
+SUBDIR+=	geteltorito
 SUBDIR+=	gfm
 SUBDIR+=	gkrellm
 SUBDIR+=	gkrellm-est
@@ -426,7 +427,6 @@ SUBDIR+=	lxtask
 SUBDIR+=	m1n1
 SUBDIR+=	macchina
 SUBDIR+=	magicrescue
-SUBDIR+=	manifold
 SUBDIR+=	mate-notification-daemon
 SUBDIR+=	mate-power-manager
 SUBDIR+=	mate-sensors-applet
@@ -573,6 +573,7 @@ SUBDIR+=	py-pid
 SUBDIR+=	py-psutil
 SUBDIR+=	py-ptyprocess
 SUBDIR+=	py-pyinotify
+SUBDIR+=	py-reprotest
 SUBDIR+=	py-salt-pepper
 SUBDIR+=	py-setconf
 SUBDIR+=	py-setproctitle
@@ -790,6 +791,7 @@ SUBDIR+=	u-boot-rockpro64
 SUBDIR+=	u-boot-rpi3-32
 SUBDIR+=	u-boot-sopine-baseboard
 SUBDIR+=	u-boot-tinker
+SUBDIR+=	u-boot-zynq-zturn
 SUBDIR+=	u-boot-zynq-zybo
 SUBDIR+=	u-boot-zynq-zybo-z7
 SUBDIR+=	ufetch

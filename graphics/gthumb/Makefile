@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.106 2022/07/14 23:46:22 dholland Exp $
+# $NetBSD: Makefile,v 1.108 2022/11/23 16:20:17 adam Exp $
 
 DISTNAME=	gthumb-2.14.4
-PKGREVISION=	33
+PKGREVISION=	34
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gthumb/2.14/}
 EXTRACT_SUFX=	.tar.xz
@@ -25,6 +25,8 @@ GCONF_SCHEMAS+=	gthumb_crop_options.schemas gthumb_image_print.schemas
 GCONF_SCHEMAS+=	gthumb_photo_importer.schemas gthumb_rename_series.schemas
 GCONF_SCHEMAS+=	gthumb_resize_images.schemas gthumb_resize_options.schemas
 GCONF_SCHEMAS+=	gthumb_webalbums.schemas
+
+BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,--as-needed
 
 .include "../../devel/GConf/schemas.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"

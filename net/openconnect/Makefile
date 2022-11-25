@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.23 2022/10/18 01:18:10 schmonz Exp $
+# $NetBSD: Makefile,v 1.25 2022/11/23 16:20:53 adam Exp $
 
 DISTNAME=	openconnect-9.01
+PKGREVISION=	1
 CATEGORIES=	net security
 MASTER_SITES=	https://www.infradead.org/openconnect/download/ \
 		ftp://ftp.infradead.org/pub/openconnect/
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
+MAINTAINER=	schmonz@NetBSD.org
 HOMEPAGE=	http://www.infradead.org/openconnect/
 COMMENT=	Open source VPN client
 LICENSE=	gnu-lgpl-v2.1

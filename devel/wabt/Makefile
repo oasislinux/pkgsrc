@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.14 2022/10/05 08:32:33 fcambus Exp $
+# $NetBSD: Makefile,v 1.16 2022/11/19 17:01:08 fcambus Exp $
 
-DISTNAME=	wabt-1.0.30
+DISTNAME=	wabt-1.0.31
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GITHUB:=WebAssembly/}
 
-MAINTAINER=	fcambus@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/WebAssembly/wabt/
 COMMENT=	The WebAssembly Binary Toolkit
 LICENSE=	apache-2.0

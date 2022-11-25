@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.150 2022/09/12 16:04:57 adam Exp $
+# $NetBSD: Makefile,v 1.154 2022/11/25 10:21:14 wiz Exp $
 
-DISTNAME=	samba-4.16.5
+DISTNAME=	samba-4.17.3
 CATEGORIES=	net
 MASTER_SITES=	https://download.samba.org/pub/samba/stable/
 
@@ -69,9 +69,7 @@ BROKEN_GETTEXT_DETECTION= yes
 #CONFIGURE_ARGS+=	--fatal-errors
 
 HAS_CONFIGURE=		yes
-CONFIG_SHELL=		${PYTHONBIN}
-CONFIGURE_SCRIPT=	${WRKSRC}/buildtools/bin/waf
-CONFIGURE_ARGS+=	configure
+CONFIGURE_SCRIPT=	${WRKSRC}/configure
 CONFIGURE_ARGS+=	--prefix=${PREFIX}
 CONFIGURE_ARGS+=	--infodir=${SMB_INFO}
 CONFIGURE_ARGS+=	--mandir=${SMB_MAN}
@@ -93,7 +91,7 @@ CONFIGURE_ARGS+=	--with-configdir=${SMB_CONFIG}
 CONFIGURE_ARGS+=	--with-libiconv=${BUILDLINK_PREFIX.iconv}
 CONFIGURE_ARGS+=	--abi-check-disable
 CONFIGURE_ARGS+=	--disable-symbol-versions
-.if defined(MAKE_JOBS) && !empty(MAKE_JOBS) && !(defined(MAKE_JOBS_SAFE) && !empty(MAKE_JOBS_SAFE:M[nN][oO]))
+.if defined(MAKE_JOBS) && !empty(MAKE_JOBS) && !(defined(MAKE_JOBS_SAFE) && ${MAKE_JOBS_SAFE:U:tl} == no)
 CONFIGURE_ARGS+=	--jobs=${MAKE_JOBS}
 .else
 CONFIGURE_ARGS+=	--jobs=1
@@ -208,14 +206,14 @@ REPLACE_PYTHON+=	source4/scripting/bin/*
 .endif
 .include "../../archivers/libarchive/buildlink3.mk"
 .include "../../converters/libiconv/buildlink3.mk"
-BUILDLINK_API_DEPENDS.ldb+=	ldb>=2.5.2
+BUILDLINK_API_DEPENDS.ldb+=	ldb>=2.6.1
 .include "../../databases/ldb/buildlink3.mk"
 .include "../../databases/lmdb/buildlink3.mk"
 .include "../../devel/cmocka/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/popt/buildlink3.mk"
 .include "../../devel/readline/buildlink3.mk"
-BUILDLINK_API_DEPENDS.talloc+=	talloc>=2.3.1
+BUILDLINK_API_DEPENDS.talloc+=	talloc>=2.3.4
 .include "../../devel/talloc/buildlink3.mk"
 .include "../../devel/tevent/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.71 2022/10/12 07:45:16 adam Exp $
+# $NetBSD: Makefile,v 1.73 2022/11/20 17:52:22 adam Exp $
 
-DISTNAME=	pylint-2.15.4
+DISTNAME=	pylint-2.15.6
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_PYPI:=p/pylint/}
@@ -11,14 +11,12 @@ COMMENT=	Python source code analyzer
 LICENSE=	gnu-gpl-v2
 
 BUILD_DEPENDS+=	${PYPKGPREFIX}-wheel>=0:../../devel/py-wheel
-DEPENDS+=	${PYPKGPREFIX}-astroid>=2.12.4:../../devel/py-astroid
+DEPENDS+=	${PYPKGPREFIX}-astroid>=2.12.12:../../devel/py-astroid
 DEPENDS+=	${PYPKGPREFIX}-dill>=0.2:../../textproc/py-dill
 DEPENDS+=	${PYPKGPREFIX}-isort>=4.2.5:../../devel/py-isort
 DEPENDS+=	${PYPKGPREFIX}-mccabe>=0.6:../../devel/py-mccabe
 DEPENDS+=	${PYPKGPREFIX}-platformdirs>=2.2.0:../../misc/py-platformdirs
 DEPENDS+=	${PYPKGPREFIX}-tomlkit>=0.10.1:../../textproc/py-tomlkit
-# ${_PYTHON_VERSION} < 311
-DEPENDS+=	${PYPKGPREFIX}-tomli>=1.1.0:../../textproc/py-tomli
 
 USE_LANGUAGES=	# none
 
@@ -27,6 +25,9 @@ PYTHON_VERSIONS_INCOMPATIBLE=	27
 .include "../../lang/python/pyversion.mk"
 .if ${_PYTHON_VERSION} < 310
 DEPENDS+=	${PYPKGPREFIX}-typing-extensions>=3.10.0:../../devel/py-typing-extensions
+.endif
+.if ${_PYTHON_VERSION} < 311
+DEPENDS+=	${PYPKGPREFIX}-tomli>=1.1.0:../../textproc/py-tomli
 .endif
 
 post-install:

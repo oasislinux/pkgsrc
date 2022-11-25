@@ -1,6 +1,9 @@
-$NetBSD: distinfo,v 1.13 2022/08/12 08:49:20 pin Exp $
+$NetBSD: distinfo,v 1.15 2022/11/16 20:53:59 adam Exp $
 
-BLAKE2s (openmp-14.0.6.src.tar.xz) = b56918c4cfcf7bf21cf123e395f615346caf2b8306cb2269b66a9fe6ffac828c
-SHA512 (openmp-14.0.6.src.tar.xz) = 0b29e25354d58d3f851c60fa4cd3e4e251092c4dadca995598b11757fa8d5d184e9895a362a6a23b67d6dd2a210ca64e681c3b47f3f225edbf048012762f0988
-Size (openmp-14.0.6.src.tar.xz) = 1205476 bytes
+BLAKE2s (cmake-15.0.5.src.tar.xz) = 5f8beedf1c9349c13dba2f4a5fcfb9d482c96df32c34c284cfe682a681669f35
+SHA512 (cmake-15.0.5.src.tar.xz) = 493825f1b64abef6d56502d28e30056320bdda5a46a478fc85eec3a631c541da2d318fb9c3e3d3e6234f538121b7a1c60d34cba498fd6b7938d3558d24684fed
+Size (cmake-15.0.5.src.tar.xz) = 6976 bytes
+BLAKE2s (openmp-15.0.5.src.tar.xz) = 622636c278a56452cc2151cc15ec861846e5d8e92b73e9eefd2d61bc8f4098ea
+SHA512 (openmp-15.0.5.src.tar.xz) = 62bd2ba5de7bfa3b14fb75ee14ae245307a663d715f272724c6e74b7611cd9e5d1bd82faf4fb8154b691843e1a0cb0906d45729bc9c0734889207fe75e150e7c
+Size (openmp-15.0.5.src.tar.xz) = 1184516 bytes
 SHA1 (patch-runtime_src_kmp__runtime.cpp) = 70f4396d4c1631fbd74692ef26b22d08675da547

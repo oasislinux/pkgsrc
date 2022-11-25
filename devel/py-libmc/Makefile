@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.10 2022/01/10 23:46:48 wiz Exp $
+# $NetBSD: Makefile,v 1.12 2022/11/14 15:22:01 wiz Exp $
 
-DISTNAME=	pylibmc-1.6.1
+DISTNAME=	pylibmc-1.6.3
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/py//}
-PKGREVISION=	1
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_PYPI:=p/pylibmc/}
 
@@ -10,6 +9,8 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://sendapatch.se/projects/pylibmc/
 COMMENT=	Quick and small memcached client for Python
 LICENSE=	modified-bsd
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 .include "../../devel/libmemcached/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"

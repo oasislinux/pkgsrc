@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.32 2022/10/06 13:57:53 gdt Exp $
+@comment $NetBSD: PLIST,v 1.37 2022/11/12 13:24:09 gdt Exp $
 bin/export_signing_key
 bin/generate_config
 bin/generate_log_config
@@ -140,8 +140,6 @@ ${PYSITELIB}/synapse/config/experimental.py
 ${PYSITELIB}/synapse/config/experimental.pyc
 ${PYSITELIB}/synapse/config/federation.py
 ${PYSITELIB}/synapse/config/federation.pyc
-${PYSITELIB}/synapse/config/groups.py
-${PYSITELIB}/synapse/config/groups.pyc
 ${PYSITELIB}/synapse/config/homeserver.py
 ${PYSITELIB}/synapse/config/homeserver.pyc
 ${PYSITELIB}/synapse/config/jwt.py
@@ -426,8 +424,6 @@ ${PYSITELIB}/synapse/notifier.py
 ${PYSITELIB}/synapse/notifier.pyc
 ${PYSITELIB}/synapse/push/__init__.py
 ${PYSITELIB}/synapse/push/__init__.pyc
-${PYSITELIB}/synapse/push/baserules.py
-${PYSITELIB}/synapse/push/baserules.pyc
 ${PYSITELIB}/synapse/push/bulk_push_rule_evaluator.py
 ${PYSITELIB}/synapse/push/bulk_push_rule_evaluator.pyc
 ${PYSITELIB}/synapse/push/clientformat.py
@@ -440,8 +436,6 @@ ${PYSITELIB}/synapse/push/mailer.py
 ${PYSITELIB}/synapse/push/mailer.pyc
 ${PYSITELIB}/synapse/push/presentable_names.py
 ${PYSITELIB}/synapse/push/presentable_names.pyc
-${PYSITELIB}/synapse/push/push_rule_evaluator.py
-${PYSITELIB}/synapse/push/push_rule_evaluator.pyc
 ${PYSITELIB}/synapse/push/push_tools.py
 ${PYSITELIB}/synapse/push/push_tools.pyc
 ${PYSITELIB}/synapse/push/push_types.py
@@ -477,6 +471,8 @@ ${PYSITELIB}/synapse/replication/http/register.py
 ${PYSITELIB}/synapse/replication/http/register.pyc
 ${PYSITELIB}/synapse/replication/http/send_event.py
 ${PYSITELIB}/synapse/replication/http/send_event.pyc
+${PYSITELIB}/synapse/replication/http/send_events.py
+${PYSITELIB}/synapse/replication/http/send_events.pyc
 ${PYSITELIB}/synapse/replication/http/state.py
 ${PYSITELIB}/synapse/replication/http/state.pyc
 ${PYSITELIB}/synapse/replication/http/streams.py
@@ -524,6 +520,7 @@ ${PYSITELIB}/synapse/replication/tcp/streams/events.pyc
 ${PYSITELIB}/synapse/replication/tcp/streams/federation.py
 ${PYSITELIB}/synapse/replication/tcp/streams/federation.pyc
 ${PYSITELIB}/synapse/res/providers.json
+${PYSITELIB}/synapse/res/templates/_base.html
 ${PYSITELIB}/synapse/res/templates/account_previously_renewed.html
 ${PYSITELIB}/synapse/res/templates/account_renewed.html
 ${PYSITELIB}/synapse/res/templates/add_threepid.html
@@ -568,6 +565,7 @@ ${PYSITELIB}/synapse/res/templates/sso_login_idp_picker.html
 ${PYSITELIB}/synapse/res/templates/sso_new_user_consent.html
 ${PYSITELIB}/synapse/res/templates/sso_partial_profile.html
 ${PYSITELIB}/synapse/res/templates/sso_redirect_confirm.html
+${PYSITELIB}/synapse/res/templates/style.css
 ${PYSITELIB}/synapse/res/templates/terms.html
 ${PYSITELIB}/synapse/rest/__init__.py
 ${PYSITELIB}/synapse/rest/__init__.pyc
@@ -627,6 +625,8 @@ ${PYSITELIB}/synapse/rest/client/knock.py
 ${PYSITELIB}/synapse/rest/client/knock.pyc
 ${PYSITELIB}/synapse/rest/client/login.py
 ${PYSITELIB}/synapse/rest/client/login.pyc
+${PYSITELIB}/synapse/rest/client/login_token_request.py
+${PYSITELIB}/synapse/rest/client/login_token_request.pyc
 ${PYSITELIB}/synapse/rest/client/logout.py
 ${PYSITELIB}/synapse/rest/client/logout.pyc
 ${PYSITELIB}/synapse/rest/client/models.py
@@ -655,6 +655,8 @@ ${PYSITELIB}/synapse/rest/client/register.py
 ${PYSITELIB}/synapse/rest/client/register.pyc
 ${PYSITELIB}/synapse/rest/client/relations.py
 ${PYSITELIB}/synapse/rest/client/relations.pyc
+${PYSITELIB}/synapse/rest/client/rendezvous.py
+${PYSITELIB}/synapse/rest/client/rendezvous.pyc
 ${PYSITELIB}/synapse/rest/client/report_event.py
 ${PYSITELIB}/synapse/rest/client/report_event.pyc
 ${PYSITELIB}/synapse/rest/client/room.py
@@ -737,6 +739,8 @@ ${PYSITELIB}/synapse/rest/synapse/client/new_user_consent.py
 ${PYSITELIB}/synapse/rest/synapse/client/new_user_consent.pyc
 ${PYSITELIB}/synapse/rest/synapse/client/oidc/__init__.py
 ${PYSITELIB}/synapse/rest/synapse/client/oidc/__init__.pyc
+${PYSITELIB}/synapse/rest/synapse/client/oidc/backchannel_logout_resource.py
+${PYSITELIB}/synapse/rest/synapse/client/oidc/backchannel_logout_resource.pyc
 ${PYSITELIB}/synapse/rest/synapse/client/oidc/callback_resource.py
 ${PYSITELIB}/synapse/rest/synapse/client/oidc/callback_resource.pyc
 ${PYSITELIB}/synapse/rest/synapse/client/password_reset.py
@@ -933,6 +937,8 @@ ${PYSITELIB}/synapse/storage/schema/common/delta/25/00background_updates.sql
 ${PYSITELIB}/synapse/storage/schema/common/delta/35/00background_updates_add_col.sql
 ${PYSITELIB}/synapse/storage/schema/common/delta/58/00background_update_ordering.sql
 ${PYSITELIB}/synapse/storage/schema/common/full_schemas/54/full.sql
+${PYSITELIB}/synapse/storage/schema/common/full_schemas/72/full.sql.postgres
+${PYSITELIB}/synapse/storage/schema/common/full_schemas/72/full.sql.sqlite
 ${PYSITELIB}/synapse/storage/schema/common/schema_version.sql
 ${PYSITELIB}/synapse/storage/schema/main/delta/12/v12.sql
 ${PYSITELIB}/synapse/storage/schema/main/delta/13/v13.sql
@@ -1256,7 +1262,34 @@ ${PYSITELIB}/synapse/storage/schema/main/delta/72/03drop_event_reference_hashes.
 ${PYSITELIB}/synapse/storage/schema/main/delta/72/03remove_groups.sql
 ${PYSITELIB}/synapse/storage/schema/main/delta/72/04drop_column_application_services_state_last_txn.sql.postgres
 ${PYSITELIB}/synapse/storage/schema/main/delta/72/04drop_column_application_services_state_last_txn.sql.sqlite
+${PYSITELIB}/synapse/storage/schema/main/delta/72/05receipts_event_stream_ordering.sql
 ${PYSITELIB}/synapse/storage/schema/main/delta/72/05remove_unstable_private_read_receipts.sql
+${PYSITELIB}/synapse/storage/schema/main/delta/72/06add_consent_ts_to_users.sql
+${PYSITELIB}/synapse/storage/schema/main/delta/72/06thread_notifications.sql
+${PYSITELIB}/synapse/storage/schema/main/delta/72/07force_update_current_state_events_membership.py
+${PYSITELIB}/synapse/storage/schema/main/delta/72/07force_update_current_state_events_membership.pyc
+${PYSITELIB}/synapse/storage/schema/main/delta/72/07thread_receipts.sql.postgres
+${PYSITELIB}/synapse/storage/schema/main/delta/72/07thread_receipts.sql.sqlite
+${PYSITELIB}/synapse/storage/schema/main/delta/72/08begin_cache_invalidation_seq_at_2.sql.postgres
+${PYSITELIB}/synapse/storage/schema/main/delta/72/08thread_receipts.sql
+${PYSITELIB}/synapse/storage/schema/main/delta/72/09partial_indices.sql.sqlite
+${PYSITELIB}/synapse/storage/schema/main/delta/73/01event_failed_pull_attempts.sql
+${PYSITELIB}/synapse/storage/schema/main/delta/73/02add_pusher_enabled.sql
+${PYSITELIB}/synapse/storage/schema/main/delta/73/02room_id_indexes_for_purging.sql
+${PYSITELIB}/synapse/storage/schema/main/delta/73/03pusher_device_id.sql
+${PYSITELIB}/synapse/storage/schema/main/delta/73/03users_approved_column.sql
+${PYSITELIB}/synapse/storage/schema/main/delta/73/04partial_join_details.sql
+${PYSITELIB}/synapse/storage/schema/main/delta/73/04pending_device_list_updates.sql
+${PYSITELIB}/synapse/storage/schema/main/delta/73/05old_push_actions.sql.postgres
+${PYSITELIB}/synapse/storage/schema/main/delta/73/05old_push_actions.sql.sqlite
+${PYSITELIB}/synapse/storage/schema/main/delta/73/06thread_notifications_thread_id_idx.sql
+${PYSITELIB}/synapse/storage/schema/main/delta/73/08thread_receipts_non_null.sql.postgres
+${PYSITELIB}/synapse/storage/schema/main/delta/73/08thread_receipts_non_null.sql.sqlite
+${PYSITELIB}/synapse/storage/schema/main/delta/73/09partial_joined_via_destination.sql
+${PYSITELIB}/synapse/storage/schema/main/delta/73/09threads_table.sql
+${PYSITELIB}/synapse/storage/schema/main/delta/73/10_update_sqlite_fts4_tokenizer.py
+${PYSITELIB}/synapse/storage/schema/main/delta/73/10_update_sqlite_fts4_tokenizer.pyc
+${PYSITELIB}/synapse/storage/schema/main/delta/73/10login_tokens.sql
 ${PYSITELIB}/synapse/storage/schema/main/full_schemas/16/application_services.sql
 ${PYSITELIB}/synapse/storage/schema/main/full_schemas/16/event_edges.sql
 ${PYSITELIB}/synapse/storage/schema/main/full_schemas/16/event_signatures.sql
@@ -1274,8 +1307,9 @@ ${PYSITELIB}/synapse/storage/schema/main/full_schemas/16/users.sql
 ${PYSITELIB}/synapse/storage/schema/main/full_schemas/54/full.sql.postgres
 ${PYSITELIB}/synapse/storage/schema/main/full_schemas/54/full.sql.sqlite
 ${PYSITELIB}/synapse/storage/schema/main/full_schemas/54/stream_positions.sql
+${PYSITELIB}/synapse/storage/schema/main/full_schemas/72/full.sql.postgres
+${PYSITELIB}/synapse/storage/schema/main/full_schemas/72/full.sql.sqlite
 ${PYSITELIB}/synapse/storage/schema/state/delta/23/drop_state_index.sql
-${PYSITELIB}/synapse/storage/schema/state/delta/30/state_stream.sql
 ${PYSITELIB}/synapse/storage/schema/state/delta/32/remove_state_indices.sql
 ${PYSITELIB}/synapse/storage/schema/state/delta/35/add_state_index.sql
 ${PYSITELIB}/synapse/storage/schema/state/delta/35/state.sql
@@ -1287,6 +1321,8 @@ ${PYSITELIB}/synapse/storage/schema/state/delta/61/02state_groups_state_n_distin
 ${PYSITELIB}/synapse/storage/schema/state/delta/70/08_state_group_edges_unique.sql
 ${PYSITELIB}/synapse/storage/schema/state/full_schemas/54/full.sql
 ${PYSITELIB}/synapse/storage/schema/state/full_schemas/54/sequence.sql.postgres
+${PYSITELIB}/synapse/storage/schema/state/full_schemas/72/full.sql.postgres
+${PYSITELIB}/synapse/storage/schema/state/full_schemas/72/full.sql.sqlite
 ${PYSITELIB}/synapse/storage/state.py
 ${PYSITELIB}/synapse/storage/state.pyc
 ${PYSITELIB}/synapse/storage/types.py
@@ -1305,6 +1341,7 @@ ${PYSITELIB}/synapse/streams/config.py
 ${PYSITELIB}/synapse/streams/config.pyc
 ${PYSITELIB}/synapse/streams/events.py
 ${PYSITELIB}/synapse/streams/events.pyc
+${PYSITELIB}/synapse/synapse_rust.abi3.so
 ${PYSITELIB}/synapse/types.py
 ${PYSITELIB}/synapse/types.pyc
 ${PYSITELIB}/synapse/util/__init__.py
@@ -1379,6 +1416,8 @@ ${PYSITELIB}/synapse/util/retryutils.py
 ${PYSITELIB}/synapse/util/retryutils.pyc
 ${PYSITELIB}/synapse/util/rlimit.py
 ${PYSITELIB}/synapse/util/rlimit.pyc
+${PYSITELIB}/synapse/util/rust.py
+${PYSITELIB}/synapse/util/rust.pyc
 ${PYSITELIB}/synapse/util/stringutils.py
 ${PYSITELIB}/synapse/util/stringutils.pyc
 ${PYSITELIB}/synapse/util/templates.py
@@ -1389,3 +1428,5 @@ ${PYSITELIB}/synapse/util/wheel_timer.py
 ${PYSITELIB}/synapse/util/wheel_timer.pyc
 ${PYSITELIB}/synapse/visibility.py
 ${PYSITELIB}/synapse/visibility.pyc
+share/doc/matrix-synapse/README.pkgsrc.NetBSD.txt
+share/doc/matrix-synapse/README.pkgsrc.txt

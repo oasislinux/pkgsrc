@@ -1,4 +1,4 @@
-# $NetBSD: mozilla-common.mk,v 1.1 2022/08/05 08:44:30 nia Exp $
+# $NetBSD: mozilla-common.mk,v 1.3 2022/11/08 00:35:13 gutteridge Exp $
 #
 # common Makefile fragment for mozilla packages based on gecko 2.0.
 #
@@ -8,15 +8,15 @@ GCC_REQD+=		6.1
 
 .include "../../mk/bsd.prefs.mk"
 
-# Python 2.7 and Python 3.6 or later are required simultaneously.
+# Python 2.7 and Python 3.8 or later are required simultaneously.
 PYTHON_VERSIONS_ACCEPTED=	27
 PYTHON_FOR_BUILD_ONLY=		tool
-.if !empty(PYTHON_VERSION_DEFAULT:M3[6789])
+.if !empty(PYTHON_VERSION_DEFAULT:M3[89])
 TOOL_DEPENDS+=			python${PYTHON_VERSION_DEFAULT}-[0-9]*:../../lang/python${PYTHON_VERSION_DEFAULT}
 ALL_ENV+=			PYTHON3=${PREFIX}/bin/python${PYTHON_VERSION_DEFAULT:S/3/3./}
 .else
-TOOL_DEPENDS+=			python37-[0-9]*:../../lang/python37
-ALL_ENV+=			PYTHON3=${PREFIX}/bin/python3.7
+TOOL_DEPENDS+=			python38-[0-9]*:../../lang/python38
+ALL_ENV+=			PYTHON3=${PREFIX}/bin/python3.8
 .endif
 
 HAS_CONFIGURE=		yes
@@ -25,7 +25,7 @@ USE_TOOLS+=		pkg-config perl gmake autoconf213 unzip zip
 USE_LANGUAGES+=		c99 gnu++14
 UNLIMIT_RESOURCES+=	datasize virtualsize
 
-TOOL_DEPENDS+=		cbindgen>=0.8.7:../../devel/cbindgen
+TOOL_DEPENDS+=		cbindgen>=0.24.0:../../devel/cbindgen
 .if ${MACHINE_ARCH} == "sparc64"
 CONFIGURE_ARGS+=	--disable-nodejs
 .else

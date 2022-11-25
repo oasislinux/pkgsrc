@@ -1,4 +1,4 @@
-#	$NetBSD: bsd.pkg.mk,v 1.2041 2022/07/31 19:16:33 wiz Exp $
+#	$NetBSD: bsd.pkg.mk,v 1.2045 2022/11/23 13:30:38 jperkin Exp $
 #
 # This file is in the public domain.
 #
@@ -182,7 +182,7 @@ ALL_ENV+=	LINKER_RPATH_FLAG=${LINKER_RPATH_FLAG:Q}
 ALL_ENV+=	PATH=${PATH:Q}:${LOCALBASE}/bin:${X11BASE}/bin
 ALL_ENV+=	PREFIX=${PREFIX}
 ALL_ENV+=	MAKELEVEL=0
-ALL_ENV+=	CONFIG_SITE=
+ALL_ENV+=	CONFIG_SITE=${PKGSRC_CONFIG_SITE:U}
 
 # This variable can be added to MAKE_ENV to ease installation of packages
 # that use BSD-style Makefiles.
@@ -339,7 +339,7 @@ ERROR_CAT?=		${SED} -e "s|^|ERROR: |" 1>&2
 
 # How to do nothing.  Override if you, for some strange reason, would rather
 # do something.
-DO_NADA?=		${TRUE}
+DO_NADA?=
 
 # the FAIL command executes its arguments and then exits with a non-zero
 # status.
@@ -420,7 +420,7 @@ ALL_ENV+=		HOME=${FAKEHOMEDIR}
 .PHONY: fake-home
 fake-home: ${FAKEHOMEDIR}
 ${FAKEHOMEDIR}:
-	${RUN} ${MKDIR} ${.TARGET}
+	@${MKDIR} ${.TARGET}
 
 # Use C-based wrappers or legacy shell versions.
 .if ${_USE_CWRAPPERS} == "yes"
@@ -812,25 +812,16 @@ PKG_ERROR_HANDLER.${_class_}?= \
 #
 .for _phase_ in ${_ALL_PHASES}
 ${_MAKEVARS_MK.${_phase_}}: ${WRKDIR}
-	${RUN}${RM} -f ${.TARGET}.tmp
-.  for _var_ in ${MAKEVARS:O:u}
-.    if defined(${_var_})
-	${RUN}					\
-	${ECHO} ${_var_}"=	"${${_var_}:Q} >> ${.TARGET}.tmp
-.    endif
-.  endfor
-	${RUN}					\
-	if ${TEST} -f ${.TARGET}.tmp; then				\
-		( ${ECHO} ".if !defined(_MAKEVARS_MK)";			\
-		  ${ECHO} "_MAKEVARS_MK=	defined";		\
-		  ${ECHO} "";						\
-		  ${CAT} ${.TARGET}.tmp;				\
-		  ${ECHO} "";						\
-		  ${ECHO} ".endif # _MAKEVARS_MK";			\
-		) > ${.TARGET};						\
-		${RM} -f ${.TARGET}.tmp;				\
-	fi
-	${RUN}${TOUCH} ${TOUCH_FLAGS} ${.TARGET}
+	${RUN} {							\
+		${ECHO} ".if !defined(_MAKEVARS_MK)";			\
+		${ECHO} "_MAKEVARS_MK=	defined";			\
+		${ECHO} "";						\
+		${MAKEVARS:O:u:@_v_@					\
+			${${_v_}:D${ECHO} ${_v_}"=	"${${_v_}:Q};}	\
+		@}							\
+		${ECHO} "";						\
+		${ECHO} ".endif # _MAKEVARS_MK";			\
+	} > ${.TARGET}
 .endfor
 
 .if make(pbulk-index) || make(pbulk-index-item) || make(pbulk-save-wrkdir)

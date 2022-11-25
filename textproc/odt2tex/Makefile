@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.15 2021/12/08 16:06:44 adam Exp $
+# $NetBSD: Makefile,v 1.17 2022/11/21 18:20:45 jperkin Exp $
 
 DISTNAME=	odt2tex-0.0.13
-PKGREVISION=	11
+PKGREVISION=	12
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_GITHUB:=simonaw/}
 
@@ -12,6 +12,8 @@ LICENSE=	mit
 
 USE_LANGUAGES=	c99
 USE_TOOLS+=	pkg-config
+
+BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,-O2
 
 .include "../../archivers/libzip/buildlink3.mk"
 .include "../../textproc/expat/buildlink3.mk"

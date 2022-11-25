@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.46 2022/10/17 16:50:03 andvar Exp $
+# $NetBSD: Makefile,v 1.48 2022/11/23 16:19:55 adam Exp $
 
 DISTNAME=	codelite-16.0
 GITHUB_TAG=	16.0.0-1
+PKGREVISION=	1
 CATEGORIES=	editors x11
 MASTER_SITES=	${MASTER_SITE_GITHUB:=eranif/}
 
@@ -66,6 +67,8 @@ REPLACE_PYTHON+=	codelite_open_helper.py
 LDFLAGS+=	${COMPILER_RPATH_FLAG}${PREFIX}/lib/codelite
 
 BUILDLINK_TRANSFORM+=	opt:-std=c++11:-std=gnu++11 # alloca
+
+BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,--disable-new-dtags
 
 .include "../../lang/nodejs/application.mk"
 .include "../../lang/nodejs/buildlink3.mk"

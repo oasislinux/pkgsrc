@@ -2,7 +2,7 @@ $NetBSD: patch-Modules_Platform_UnixPaths.cmake,v 1.2 2020/07/31 09:02:31 wiz Ex
 
 Patch in pkgsrc paths for finding stuff.
 
---- Modules/Platform/UnixPaths.cmake.orig	2020-07-15 11:19:20.000000000 +0000
+--- Modules/Platform/UnixPaths.cmake.orig	Wed Nov 16 14:42:03 2022
 +++ Modules/Platform/UnixPaths.cmake
 @@ -14,10 +14,12 @@ set(__UNIX_PATHS_INCLUDED 1)
  
@@ -43,9 +43,9 @@ Patch in pkgsrc paths for finding stuff.
    if(CMAKE_STAGING_PREFIX)
      list(APPEND CMAKE_SYSTEM_PREFIX_PATH
        # User-supplied staging prefix.
-@@ -45,23 +46,13 @@ if (NOT CMAKE_FIND_NO_INSTALL_PREFIX)
-   endif()
+@@ -46,23 +47,13 @@ if (NOT CMAKE_FIND_NO_INSTALL_PREFIX)
  endif()
+ _cmake_record_install_prefix()
  
 -# Non "standard" but common install prefixes
 -list(APPEND CMAKE_SYSTEM_PREFIX_PATH

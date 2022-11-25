@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.3 2022/06/13 09:23:57 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2022/11/24 11:59:30 wiz Exp $
 
-DISTNAME=	Botan-2.19.2
+DISTNAME=	Botan-2.19.3
 PKGNAME=	${DISTNAME:tl}
 CATEGORIES=	security
 MASTER_SITES=	https://botan.randombit.net/releases/
 EXTRACT_SUFX=	.tar.xz
 
-MAINTAINER=	joerg@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://botan.randombit.net/
 COMMENT=	Portable, easy to use, and efficient C++ crypto library (v2)
 LICENSE=	2-clause-bsd
@@ -42,9 +42,9 @@ CONFIGURE_ARGS+=	--cpu=i386
 CONFIGURE_ARGS+=	--cpu=ppc
 .elif ${MACHINE_ARCH} == "powerpc64"
 CONFIGURE_ARGS+=	--cpu=ppc64
-.elif !empty(MACHINE_ARCH:Maarch64*)
+.elif ${MACHINE_ARCH:Maarch64*}
 CONFIGURE_ARGS+=	--cpu=arm64
-.elif !empty(MACHINE_ARCH:Mearm*)
+.elif ${MACHINE_ARCH:Mearm*}
 CONFIGURE_ARGS+=	--cpu=arm32
 .endif
 

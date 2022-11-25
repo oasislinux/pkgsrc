@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.304 2022/09/17 14:05:36 tnn Exp $
+# $NetBSD: Makefile,v 1.306 2022/10/26 10:31:24 wiz Exp $
 
 DISTNAME=	qemu-7.1.0
+PKGREVISION=	1
 CATEGORIES=	emulators
 MASTER_SITES=	https://download.qemu.org/
 EXTRACT_SUFX=	.tar.xz
@@ -47,7 +48,6 @@ CONFIGURE_ARGS+=	--smbd=${PREFIX}/sbin/smbd
 CONFIGURE_ARGS+=	--mandir=${PREFIX}/${PKGMANDIR}
 CONFIGURE_ARGS+=	--enable-curses
 CONFIGURE_ARGS+=	--enable-docs
-CONFIGURE_ARGS+=	--enable-jemalloc
 CONFIGURE_ENV+=		mansuffix=/${PKGMANDIR}
 
 .if defined(PKGSRC_USE_SSP)
@@ -191,7 +191,6 @@ post-install:
 .include "../../archivers/lzo/buildlink3.mk"
 .include "../../archivers/zstd/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
-.include "../../devel/jemalloc/buildlink3.mk"
 .include "../../devel/snappy/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"

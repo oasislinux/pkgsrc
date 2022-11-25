@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.15 2022/08/11 05:09:31 gutteridge Exp $
+# $NetBSD: Makefile,v 1.17 2022/11/23 16:19:11 adam Exp $
 
 GITHUB_PROJECT=	lablgtk
 GITHUB_TAG=	${VERSION}
-VERSION=	3.1.2
+VERSION=	3.1.3
 DISTNAME=	${GITHUB_PROJECT}-${VERSION}
 PKGNAME=	ocaml-${GITHUB_PROJECT}3-${VERSION}
-PKGREVISION=	3
+PKGREVISION=	1
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_GITHUB:=garrigue/}
 
@@ -26,6 +26,7 @@ DUNE_BUILD_PACKAGES=	${OCAML_FINDLIB_DIRS}
 
 .include "options.mk"
 
+.include "../../devel/camlp-streams/buildlink3.mk"
 .include "../../graphics/ocaml-cairo/buildlink3.mk"
 .include "../../x11/gtk3/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

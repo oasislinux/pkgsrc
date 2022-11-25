@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.55 2022/08/10 09:17:47 adam Exp $
+# $NetBSD: Makefile,v 1.58 2022/11/11 07:52:15 taca Exp $
 
-DISTNAME=	pip-22.2.2
+DISTNAME=	pip-22.3.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_PYPI:=p/pip/}
@@ -25,6 +25,7 @@ FILES_SUBST+=  PYMAJORVERSION=${_PYTHON_VERSION:C/^([0-9]).*/\1/}
 
 post-install:
 	cd ${DESTDIR}${PREFIX}/bin && ${RM} -f pip pip[2-3]
+	${CHMOD} -R go-w ${DESTDIR}${PREFIX}/${PYSITELIB}
 
 # no tests included
 do-test:

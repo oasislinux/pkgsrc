@@ -1,11 +1,12 @@
-$NetBSD: distinfo,v 1.25 2022/08/12 08:39:56 pin Exp $
+$NetBSD: distinfo,v 1.27 2022/11/16 20:53:59 adam Exp $
 
-BLAKE2s (libcxx-14.0.6.src.tar.xz) = e77dfac79fb977adf84345b7e4c2762b3fa89f3d1f611baa8f8fa6831d1bc68a
-SHA512 (libcxx-14.0.6.src.tar.xz) = c39bb01317e8ae7e5b23a677754a866953b6c45188c194d3d76fbd276de9565df8bcbcab8cf6606584af7dd30a61f39376c0e2de6b8c32c69f7fc592587e710d
-Size (libcxx-14.0.6.src.tar.xz) = 3065120 bytes
-BLAKE2s (libunwind-14.0.6.src.tar.xz) = 21da632762db6524a46c1f721908b233265afe83728c1de5dd7757c662db0d99
-SHA512 (libunwind-14.0.6.src.tar.xz) = c8f3804c47ac33273238899e5682f9cb52465dcceff0e0ecf9925469620c6c9a62cc2c708a35a0e156b666e1198df52c5fff1da9d5ee3194605dfd62c296b058
-Size (libunwind-14.0.6.src.tar.xz) = 108680 bytes
-BLAKE2s (llvm-14.0.6.src.tar.xz) = 2d44946453add45426569fd4187654f83881341c5c0109e4ffacc60e8f73af60
-SHA512 (llvm-14.0.6.src.tar.xz) = 6461bdde27aac17fa44c3e99a85ec47ffb181d0d4e5c3ef1c4286a59583e3b0c51af3c8081a300f45b99524340773a3011380059e3b3a571c3b0a8733e96fc1d
-Size (llvm-14.0.6.src.tar.xz) = 49660136 bytes
+BLAKE2s (cmake-15.0.5.src.tar.xz) = 5f8beedf1c9349c13dba2f4a5fcfb9d482c96df32c34c284cfe682a681669f35
+SHA512 (cmake-15.0.5.src.tar.xz) = 493825f1b64abef6d56502d28e30056320bdda5a46a478fc85eec3a631c541da2d318fb9c3e3d3e6234f538121b7a1c60d34cba498fd6b7938d3558d24684fed
+Size (cmake-15.0.5.src.tar.xz) = 6976 bytes
+BLAKE2s (libcxx-15.0.5.src.tar.xz) = a8bfbbf97dd0fe08fdea716d34faa0bb12cf69c71a2ba285a9abb42f741f72b8
+SHA512 (libcxx-15.0.5.src.tar.xz) = a2c7ef80de782a008111fc35da906cbd853c1f2f2c9512ce99bd2575c1dcb842e4cc160a9beabc9a14dae3a208c665350f463c986374db9c4f642c81a88d95d8
+Size (libcxx-15.0.5.src.tar.xz) = 3331412 bytes
+BLAKE2s (libunwind-15.0.5.src.tar.xz) = 78aca456948f5faf08437a1f647ac9fd325c8197768c727f86a4b81a424615f0
+SHA512 (libunwind-15.0.5.src.tar.xz) = bc28e4fa53781e7a2cd437bd5f769b66fb14ad5cf2fd60519d856d16ec0fb35132020d8b5edf86baf832234edfcd553be8915b889c4624c2014f632e73688009
+Size (libunwind-15.0.5.src.tar.xz) = 113372 bytes
+SHA1 (patch-src_CMakeLists.txt) = 6f8902b27c596ba5216604a6ab3ac557021b50ab

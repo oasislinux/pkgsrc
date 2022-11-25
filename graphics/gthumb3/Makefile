@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.38 2022/08/11 05:08:42 gutteridge Exp $
+# $NetBSD: Makefile,v 1.40 2022/11/23 16:20:17 adam Exp $
 
 DISTNAME=	gthumb-3.0.2
-PKGREVISION=	34
+PKGREVISION=	35
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gthumb/3.0/}
 EXTRACT_SUFX=	.tar.xz
@@ -20,6 +20,8 @@ GNU_CONFIGURE=		yes
 # libopenraw (as of 0.0.9) is unusable (for quality reasons)
 # gthumb will use an external "dcraw" program if available
 CONFIGURE_ARGS+=	--disable-libopenraw
+
+BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,--as-needed
 
 .include "../../devel/glib2/schemas.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"

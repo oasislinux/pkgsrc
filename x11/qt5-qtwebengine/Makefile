@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.28 2022/09/27 20:58:29 wiz Exp $
+# $NetBSD: Makefile,v 1.31 2022/11/23 16:21:28 adam Exp $
 
 DISTNAME=	qtwebengine-everywhere-opensource-src-${QTVERSION}
 PKGNAME=	qt5-qtwebengine-${QTVERSION}

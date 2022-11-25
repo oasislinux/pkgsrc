@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.15 2022/10/12 16:09:28 nia Exp $
+# $NetBSD: Makefile,v 1.18 2022/11/23 16:21:18 adam Exp $
 
 DISTNAME=	arcticfox-40.0
+PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_GITHUB:=rmottola/}
 GITHUB_PROJECT=	Arctic-Fox
@@ -16,6 +17,9 @@ USE_TOOLS+=	zip unzip gmake
 
 GNU_CONFIGURE=	yes
 USE_LANGUAGES=	c c++
+
+OVERRIDE_GNU_CONFIG_SCRIPTS=	# yes
+OVERRIDE_DIRDEPTH=		5
 
 CONFIGURE_ARGS+=	--disable-crashreporter
 CONFIGURE_ARGS+=	--disable-tests

@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.13 2020/01/18 23:30:34 rillig Exp $
+# $NetBSD: Makefile,v 1.15 2022/11/09 13:14:08 joerg Exp $
 
-DISTNAME=		makedepend-1.0.6
+DISTNAME=		makedepend-1.0.7
 CATEGORIES=		devel
 MASTER_SITES=		${MASTER_SITE_XORG:=util/}
-EXTRACT_SUFX=		.tar.bz2
+EXTRACT_SUFX=		.tar.xz
 
-MAINTAINER=		joerg@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		https://xorg.freedesktop.org/
 COMMENT=		Dependency generator for make
 

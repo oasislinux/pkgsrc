@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.889 2022/10/06 11:10:24 markd Exp $
+# $NetBSD: Makefile,v 1.893 2022/11/14 19:34:37 wiz Exp $
 #
 
 COMMENT=	Desktop publishing
@@ -40,7 +40,7 @@ SUBDIR+=	electrix
 SUBDIR+=	enscript
 SUBDIR+=	epdfview
 SUBDIR+=	epstool
-SUBDIR+=	evince3
+SUBDIR+=	evince
 SUBDIR+=	fig2dev
 SUBDIR+=	flpsed
 SUBDIR+=	foliate
@@ -136,7 +136,6 @@ SUBDIR+=	py-octoprint
 SUBDIR+=	py-octoprint-filecheck
 SUBDIR+=	py-octoprint-firmwarecheck
 SUBDIR+=	py-octoprint-pisupport
-SUBDIR+=	py-pisa
 SUBDIR+=	py-pslib
 SUBDIR+=	py-pydyf
 SUBDIR+=	py-reportlab

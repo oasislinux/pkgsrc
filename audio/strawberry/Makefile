@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.40 2022/09/11 12:51:23 wiz Exp $
+# $NetBSD: Makefile,v 1.43 2022/11/23 16:19:24 adam Exp $
 
-DISTNAME=	strawberry-1.0.7
-PKGREVISION=	1
+DISTNAME=	strawberry-1.0.10
+PKGREVISION=	2
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_GITHUB:=strawberrymusicplayer/}
 GITHUB_RELEASE=	${PKGVERSION_NOREV}
@@ -18,6 +18,9 @@ USE_CMAKE=	yes
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	pkg-config
 GCC_REQD+=	7 # std::optional
+
+CMAKE_ARGS+=	-DBUILD_WITH_QT5=ON
+CMAKE_ARGS+=	-DBUILD_WITH_QT6=OFF
 
 DEPENDS+=	gst-plugins1-flac-[0-9]*:../../audio/gst-plugins1-flac
 DEPENDS+=	gst-plugins1-mpg123-[0-9]*:../../audio/gst-plugins1-mpg123
@@ -74,6 +77,7 @@ post-install:
 .include "../../multimedia/gst-plugins1-good/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
+.include "../../textproc/icu/buildlink3.mk"
 .include "../../x11/qt5-qtbase/buildlink3.mk"
 .if ${OPSYS} != "Darwin"
 .  include "../../x11/libxcb/buildlink3.mk"

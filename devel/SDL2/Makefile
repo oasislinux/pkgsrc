@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.68 2022/09/11 12:51:05 wiz Exp $
+# $NetBSD: Makefile,v 1.71 2022/11/25 09:51:02 wiz Exp $
 
-DISTNAME=	SDL2-2.24.0
-PKGREVISION=	2
+DISTNAME=	SDL2-2.26.0
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GITHUB:=libsdl-org/}
 GITHUB_PROJECT=	SDL
@@ -16,16 +15,6 @@ USE_LANGUAGES=	c c++
 USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake pkg-config
 GNU_CONFIGURE=	yes
-
-.include "../../mk/bsd.prefs.mk"
-.if ${OPSYS} == "NetBSD"
-SUBST_CLASSES+=		gsort
-SUBST_STAGE.gsort=	pre-configure
-SUBST_MESSAGE.gsort=	BSD sort has no -V option
-SUBST_FILES.gsort+=	configure
-SUBST_FILES.gsort+=	configure.ac
-SUBST_SED.gsort+=	-e 's,sort -V,sort,g'
-.endif
 
 # Let pkgsrc handle the rpath.
 CONFIGURE_ARGS+=	--disable-rpath
@@ -43,6 +32,8 @@ CONFIGURE_ARGS+=	--disable-esd
 
 # SDL has native audio(4) support, avoid building ossaudio(4) support.
 CONFIGURE_ARGS.NetBSD+=	--disable-oss
+
+LDFLAGS.FreeBSD+=	-lusb
 
 PKGCONFIG_OVERRIDE+=	sdl2.pc.in
 

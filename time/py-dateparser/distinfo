@@ -1,6 +1,5 @@
-$NetBSD: distinfo,v 1.10 2022/09/17 21:26:31 wiz Exp $
+$NetBSD: distinfo,v 1.13 2022/11/22 10:16:00 adam Exp $
 
-BLAKE2s (dateparser-1.1.1.tar.gz) = cce4fe48e04f54771b5650092462f6452f1cec6b84d5a09485737a71f4c2127d
-SHA512 (dateparser-1.1.1.tar.gz) = 2ef25877616ce6e0aaa4ede53b4c27e848a63e5237b6e4095071b1a4eb5e0162e25f0be6a96697a11628753b798c9dfeff5d098889bf409678f51a3f4446d944
-Size (dateparser-1.1.1.tar.gz) = 284013 bytes
-SHA1 (patch-setup.py) = e23760741deedb40a5647b093132296a5bc9384c
+BLAKE2s (dateparser-1.1.4.tar.gz) = 3ed6681111d9fd4311a0b5ec3cae572bdd62fbc33a182f8f0d39a1515f881989
+SHA512 (dateparser-1.1.4.tar.gz) = a20f821dea1ec8e6eb7033de91b1e74777607c4b31286a87e06d85c7278dad3c164ddc88640e0372d9f32eed72a40e28c58bea26a77fdc01c59d2d9fc70bb2d7
+Size (dateparser-1.1.4.tar.gz) = 294406 bytes

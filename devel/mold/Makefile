@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.24 2022/09/30 06:34:00 fcambus Exp $
+# $NetBSD: Makefile,v 1.26 2022/11/13 18:55:31 fcambus Exp $
 
-DISTNAME=	mold-1.5.1
+DISTNAME=	mold-1.6.0
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GITHUB:=rui314/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
 
-MAINTAINER=	fcambus@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/rui314/mold/
 COMMENT=	High performance drop-in replacement for existing Unix linkers
 LICENSE=	gnu-agpl-v3

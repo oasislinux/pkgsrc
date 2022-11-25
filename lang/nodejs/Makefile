@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.243 2022/10/17 11:03:07 adam Exp $
+# $NetBSD: Makefile,v 1.247 2022/11/23 12:09:44 adam Exp $
 
-DISTNAME=	node-v18.11.0
+DISTNAME=	node-v18.12.1
 EXTRACT_SUFX=	.tar.xz
 
 USE_LANGUAGES=	c gnu++17
@@ -15,18 +15,26 @@ MAKE_ENV+=	LD_LIBRARY_PATH=${PREFIX}/lib
 CONFIGURE_ARGS+=	--shared-brotli
 CONFIGURE_ARGS+=	--shared-nghttp2
 CONFIGURE_ARGS+=	--with-intl=system-icu
-CONFIGURE_ARGS+=	--without-corepack
 
-PYTHON_VERSIONS_INCOMPATIBLE=	27
+PYTHON_VERSIONS_INCOMPATIBLE=	27 311
 
 CHECK_PORTABILITY_SKIP+=	deps/v8/tools/cppgc/export_to_github.sh
 CHECK_PORTABILITY_SKIP+=	deps/v8/tools/cppgc/test_cmake.sh
 CHECK_PORTABILITY_SKIP+=	tools/macos-installer/pkgbuild/npm/scripts/preinstall
 
+REPLACE_NODEJS+=		deps/corepack/dist/*.js
+.include "../../lang/nodejs/application.mk"
+CHECK_INTERPRETER_SKIP+=	lib/node_modules/corepack/shims/*.ps1
+
 .if ${MACHINE_ARCH} == "i386"
 # required for SSE2 code under i386.
 CXXFLAGS+=	-mstackrealign
 .endif
+
+.PHONY: minusx
+post-install: minusx
+minusx:
+	${CHMOD} -x ${DESTDIR}${PREFIX}/lib/node_modules/corepack/shims/*.cmd
 
 .include "options.mk"
 

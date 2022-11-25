@@ -1,6 +1,9 @@
-$NetBSD: distinfo,v 1.25 2022/08/15 19:07:20 wiz Exp $
+$NetBSD: distinfo,v 1.27 2022/11/16 20:53:58 adam Exp $
 
-BLAKE2s (polly-14.0.6.src.tar.xz) = b787ce64b15d9f550d0c02966d43c5f18f2a601715780a2a34852b503bb81d5c
-SHA512 (polly-14.0.6.src.tar.xz) = a2a3c96d58975a2023a26aef87ec3a755b489d3fe62d5c18fc1a477a65e032e265f4fcebc3d28c2958c2e97de44673259a1e083cc8aebb5671685695501e7645
-Size (polly-14.0.6.src.tar.xz) = 9357684 bytes
+BLAKE2s (cmake-15.0.5.src.tar.xz) = 5f8beedf1c9349c13dba2f4a5fcfb9d482c96df32c34c284cfe682a681669f35
+SHA512 (cmake-15.0.5.src.tar.xz) = 493825f1b64abef6d56502d28e30056320bdda5a46a478fc85eec3a631c541da2d318fb9c3e3d3e6234f538121b7a1c60d34cba498fd6b7938d3558d24684fed
+Size (cmake-15.0.5.src.tar.xz) = 6976 bytes
+BLAKE2s (polly-15.0.5.src.tar.xz) = 984921c6455ed7812f10f621a7a2f071420f6520e17e75bbce12da5bda613a14
+SHA512 (polly-15.0.5.src.tar.xz) = d11783cf263c3fce4d6f32ff26babab43a2c09e4727626bb46763b0596c8c281471d362634e13b7d9234e41da82449a4d02ce3f35b35c6ac9fc14471c84b1bb7
+Size (polly-15.0.5.src.tar.xz) = 9361052 bytes
 SHA1 (patch-CMakeLists.txt) = 8138e11f858f23e0069c8fa0c07eff2b7aaf8c43

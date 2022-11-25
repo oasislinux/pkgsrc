@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.15 2022/08/02 16:06:01 wiz Exp $
+$NetBSD: distinfo,v 1.17 2022/11/22 12:54:44 adam Exp $
 
-BLAKE2s (zipp-3.8.1-py3-none-any.whl) = 40b77d58a4f9cbb04a7fa84e21cb7a9a2d73796604954dabe9499d680765eab1
-SHA512 (zipp-3.8.1-py3-none-any.whl) = d81c4259c49bc8f67440d74fab51f488dedc518591b63231699f5c9d6ce2c5f7fa56a4ee2d44dc4fadddce0dc72781af7c8a018a0d95bcdf52ba3985d834d034
-Size (zipp-3.8.1-py3-none-any.whl) = 5645 bytes
+BLAKE2s (zipp-3.10.0.tar.gz) = ecba0123affa098df68a08a072e22341bf5a9242f2377ce10ab7e94d6c66c929
+SHA512 (zipp-3.10.0.tar.gz) = 2e64b05eb0123eb3c3c87fbfe2da26721eb9e24142a43e794d04e5f86ab5fe4cf3e0e3e3497bfc9631ab61dd64226829772493f26e091a66148ddbdc5dfd8e51
+Size (zipp-3.10.0.tar.gz) = 15564 bytes

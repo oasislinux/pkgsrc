@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.12 2020/01/18 23:36:10 rillig Exp $
+# $NetBSD: Makefile,v 1.14 2022/11/13 21:20:52 wiz Exp $
 
-DISTNAME=		xlsclients-1.1.4
+DISTNAME=		xlsclients-1.1.5
 CATEGORIES=		x11
 MASTER_SITES=		${MASTER_SITE_XORG:=app/}
-EXTRACT_SUFX=		.tar.bz2
+EXTRACT_SUFX=		.tar.xz
 
-MAINTAINER=		joerg@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		https://xorg.freedesktop.org/
 COMMENT=		X client listing utility
 LICENSE=		mit

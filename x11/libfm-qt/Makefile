@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.21 2022/06/28 11:37:54 wiz Exp $
+# $NetBSD: Makefile,v 1.23 2022/11/23 16:19:09 adam Exp $
 
-DISTNAME=	libfm-qt-1.1.0
+DISTNAME=	libfm-qt-1.2.0
 PKGREVISION=	1
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_GITHUB:=lxqt/}
@@ -34,7 +34,7 @@ SUBST_SED.prefix+=	-e 's,/usr/share,${PREFIX}/share,g'
 pre-configure:
 	${MKDIR} -p ${WRKSRC}/build
 
-TOOL_DEPENDS+=	lxqt-build-tools>=0.11.0:../../devel/lxqt-build-tools
+TOOL_DEPENDS+=	lxqt-build-tools>=0.12.0:../../devel/lxqt-build-tools
 TOOL_DEPENDS+=	qt5-qttools-[0-9]*:../../x11/qt5-qttools
 
 BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,-Bsymbolic-functions

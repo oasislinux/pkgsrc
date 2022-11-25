@@ -1,8 +1,7 @@
-# $NetBSD: tools.SunOS.mk,v 1.52 2022/01/09 17:36:52 tnn Exp $
+# $NetBSD: tools.SunOS.mk,v 1.56 2022/11/22 13:18:59 jperkin Exp $
 #
-# System-supplied tools for the Solaris operating system.
+# System-supplied tools for the Solaris and illumos operating systems.
 #
-# We bootstrap a pdksh shell on this platform.
 
 TOOLS_PLATFORM.[?=		[			# shell builtin
 .if exists(/usr/bin/gawk)
@@ -72,11 +71,7 @@ TOOLS_PLATFORM.fgrep?=		/usr/xpg4/bin/grep -F
 .endif
 TOOLS_PLATFORM.env?=		/usr/bin/env
 TOOLS_PLATFORM.expr?=		/usr/xpg4/bin/expr
-.if exists(/usr/gnu/bin/false)	# if we are using OpenSolaris
-TOOLS_PLATFORM.false?=		/usr/gnu/bin/false
-.else
 TOOLS_PLATFORM.false?=		false			# shell builtin
-.endif
 TOOLS_PLATFORM.file?=		/usr/bin/file
 .if exists(/usr/gnu/bin/find)
 TOOLS_PLATFORM.find?=		/usr/gnu/bin/find
@@ -130,7 +125,7 @@ TOOLS_PLATFORM.install-info?=	/usr/bin/install-info
 .elif exists(/usr/sfw/bin/install-info)
 TOOLS_PLATFORM.install-info?=	/usr/sfw/bin/install-info
 .endif
-.if exists(/usr/bin/ginstall)	# if we are using OpenSolaris
+.if exists(/usr/bin/ginstall)
 TOOLS_PLATFORM.install?=	/usr/bin/ginstall
 .else
 TOOLS_PLATFORM.install?=	/usr/ucb/install
@@ -172,7 +167,7 @@ TOOLS_PLATFORM.openssl?=	/usr/bin/openssl
 #TOOLS_PLATFORM.pod2man?=	/usr/perl5/bin/pod2man
 #.endif
 TOOLS_PLATFORM.printf?=		/bin/printf
-TOOLS_PLATFORM.pwd?=		/bin/pwd
+TOOLS_PLATFORM.pwd?=		pwd			# shell builtin
 .if exists(/usr/gnu/bin/readelf)
 TOOLS_PLATFORM.readelf?=	/usr/gnu/bin/readelf
 .elif exists(/usr/sfw/bin/greadelf)
@@ -229,4 +224,19 @@ TOOLS_PLATFORM.zip?=		/usr/bin/zip
 TOOLS_PLATFORM.zipcloak?=	/usr/bin/zipcloak
 TOOLS_PLATFORM.zipnote?=	/usr/bin/zipnote
 TOOLS_PLATFORM.zipsplit?=	/usr/bin/zipsplit
+.endif
+
+#
+# If we've bootstrapped with bash as the default shell then ensure print is a
+# broken wrapper to work around a bug in the libtool configure script that
+# assumes print, if available, is always a builtin.  bash does not have print
+# builtin and /usr/bin/print gets called instead, affecting performance.
+#
+# Also ensure we do use any bash builtins instead of separate commands.
+#
+.if ${TOOLS_PLATFORM.sh:M*bash}
+TOOLS_CREATE+=		print
+TOOLS_PATH.print=	${FALSE}
+
+TOOLS_PLATFORM.printf=	printf
 .endif

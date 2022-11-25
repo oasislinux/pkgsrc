@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.877 2022/10/19 14:10:03 nia Exp $
+# $NetBSD: Makefile,v 1.880 2022/11/05 13:42:58 nikita Exp $
 #
 
 COMMENT=	Security and cryptography tools and libraries
@@ -110,6 +110,7 @@ SUBDIR+=	go-asn1-ber
 SUBDIR+=	go-crypto
 SUBDIR+=	go-mkcert
 SUBDIR+=	google-authenticator
+SUBDIR+=	gopass
 SUBDIR+=	gpa
 SUBDIR+=	gpg-tui
 SUBDIR+=	gpg2dot
@@ -503,8 +504,8 @@ SUBDIR+=	py-xmlsec
 SUBDIR+=	py-yara
 SUBDIR+=	py-yubiauth
 SUBDIR+=	py-yubikey-manager
-SUBDIR+=	py27-cryptography
 SUBDIR+=	py27-OpenSSL
+SUBDIR+=	py27-cryptography
 SUBDIR+=	pyca
 SUBDIR+=	qca2
 SUBDIR+=	qca2-gnupg
@@ -609,6 +610,7 @@ SUBDIR+=	sqlmap
 SUBDIR+=	srm
 SUBDIR+=	ssdeep
 SUBDIR+=	ssh-askpass
+SUBDIR+=	ssh-audit
 SUBDIR+=	sshfp
 SUBDIR+=	sshguard
 SUBDIR+=	sshpass

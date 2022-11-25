@@ -1,18 +1,21 @@
-# $NetBSD: Makefile,v 1.6 2022/04/18 19:11:36 adam Exp $
+# $NetBSD: Makefile,v 1.9 2022/11/23 16:20:36 adam Exp $
 
-DISTNAME=	sollya-7.0
-PKGREVISION=	5
+DISTNAME=	sollya-8.0
+PKGREVISION=	1
 CATEGORIES=	math
-MASTER_SITES=	https://gforge.inria.fr/frs/download.php/file/37749/
+MASTER_SITES=	https://www.sollya.org/releases/sollya-8.0/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://sollya.gforge.inria.fr/
+HOMEPAGE=	https://www.sollya.org/
 COMMENT=	Environment and library for safe floating-point code development
 LICENSE=	cecill-2.0 AND gnu-lgpl-v3
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
+USE_TOOLS+=	gmake
 USE_LANGUAGES=	c c++
+
+CONFIGURE_ARGS+=	--with-xml2-include=${PREFIX}/include/libxml2
 
 TEST_TARGET=	check
 

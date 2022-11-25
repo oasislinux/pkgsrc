@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.1 2022/10/09 16:12:17 pin Exp $
+# $NetBSD: Makefile,v 1.3 2022/11/24 15:23:32 pin Exp $
 
-DISTNAME=	bred-0.2.2
+DISTNAME=	bred-0.3.2
 CATEGORIES=	editors
 MASTER_SITES=	${MASTER_SITE_GITHUB:=manorajesh/}
-GITHUB_TAG=	86810429b9e2d590b45d3d58b8863e2850d0e80f
+GITHUB_TAG=	aa99902a2da5f47f99b7bef08a367fb1da68be6f
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/manorajesh/bred/

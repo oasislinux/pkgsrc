@@ -391,6 +391,7 @@ java			Enable Java support.
 javascript		Enable Javascript support.
 jdbc-mysql31		Enable MySQL JDBC driver.
 jdbc-mysql5		Enable MySQL JDBC driver.
+jemalloc		Enable the jemalloc memory allocator.
 jp2			Enable JPEG 2000 support using the openjpeg library.
 jpeg			Enable JPEG support.
 jre-jce			Enable the Java Cryptography Extension.
@@ -711,6 +712,7 @@ ppx			Enable PPX support.
 prime			Use Prime for Kana-to-Kanji conversion.
 proftpd-readme		Enable mod_readme.
 proj-grids		Enable optional grids for datum transformations in proj.
+ps			Enable PostScript support.
 psiconv			Enable psiconv support (for PSION 5 file formats).
 psl			Enable support for Public Suffix List.
 pstack			Enable pstack backtrace library.

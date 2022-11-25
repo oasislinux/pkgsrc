@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.965 2022/10/08 10:06:51 bsiegert Exp $
+# $NetBSD: Makefile,v 1.970 2022/11/24 11:11:38 nros Exp $
 #
 
 COMMENT=	Packages to support the X Window System
@@ -335,14 +335,12 @@ SUBDIR+=	py-keybinder
 SUBDIR+=	py-kiwi
 SUBDIR+=	py-pyperclip
 SUBDIR+=	py-qt-builder
-SUBDIR+=	py-qt4
 SUBDIR+=	py-qt5
 SUBDIR+=	py-qt5-qscintilla
 SUBDIR+=	py-qt5-webengine
 SUBDIR+=	py-qtgraph-qt5
 SUBDIR+=	py-qwt-qt5
 SUBDIR+=	py-sip
-SUBDIR+=	py-sip-qt4
 SUBDIR+=	py-sip-qt5
 SUBDIR+=	py-sip5
 SUBDIR+=	py-terminator
@@ -397,6 +395,7 @@ SUBDIR+=	qt5-qtx11extras
 SUBDIR+=	qt5-qtxmlpatterns
 SUBDIR+=	qt5-styleplugins
 SUBDIR+=	qt5ct
+SUBDIR+=	qt6-qtbase
 SUBDIR+=	qterminal
 SUBDIR+=	qtermwidget
 SUBDIR+=	qtxdg-tools
@@ -682,6 +681,7 @@ SUBDIR+=	xset
 SUBDIR+=	xsetroot
 SUBDIR+=	xsm
 SUBDIR+=	xsnow
+SUBDIR+=	xss-lock
 SUBDIR+=	xst
 SUBDIR+=	xstdcmap
 SUBDIR+=	xtar
@@ -693,6 +693,7 @@ SUBDIR+=	xtermset
 SUBDIR+=	xtoolwait
 SUBDIR+=	xtrace
 SUBDIR+=	xtrans
+SUBDIR+=	xtrlock
 SUBDIR+=	xtruss
 SUBDIR+=	xvattr
 SUBDIR+=	xvidcap

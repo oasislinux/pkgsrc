@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.13 2022/04/10 08:53:15 nia Exp $
+# $NetBSD: Makefile,v 1.15 2022/11/19 08:10:45 wiz Exp $
 
-DISTNAME=		libXdmcp-1.1.3
+DISTNAME=		libXdmcp-1.1.4
 CATEGORIES=		x11
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
-EXTRACT_SUFX=		.tar.bz2
+EXTRACT_SUFX=		.tar.xz
 
-MAINTAINER=		joerg@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		https://xorg.freedesktop.org/
 COMMENT=		X Display Manager Control Protocol library from X.org
 

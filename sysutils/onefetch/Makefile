@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.15 2022/03/30 16:11:23 pin Exp $
+# $NetBSD: Makefile,v 1.18 2022/10/31 21:28:03 pin Exp $
 
-DISTNAME=	onefetch-2.12.0
+DISTNAME=	onefetch-2.13.2
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_GITHUB:=o2sh/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
@@ -10,11 +10,15 @@ HOMEPAGE=	https://github.com/o2sh/onefetch/
 COMMENT=	Git repository summary on your terminal
 LICENSE=	mit
 
+BUILD_DEPENDS+=	cmake-[0-9]*:../../devel/cmake
+
 .include "cargo-depends.mk"
 
 USE_TOOLS+=		pkg-config
 
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
+
+RUSTFLAGS+=	-C link-arg=${COMPILER_RPATH_FLAG}${BUILDLINK_PREFIX.libgit2}/lib
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/target/release/onefetch \
@@ -22,7 +26,9 @@ do-install:
 	${INSTALL_MAN} ${WRKSRC}/docs/onefetch.1  \
 		${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/onefetch.1
 
-DEPENDS+=		git-base-[0-9]*:../../devel/git-base
+DEPENDS+=	git-base-[0-9]*:../../devel/git-base
 
 .include "../../lang/rust/cargo.mk"
+.include "../../devel/libgit2/buildlink3.mk"
+.include "../../security/openssl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.53 2022/04/18 19:11:23 adam Exp $
+# $NetBSD: Makefile,v 1.55 2022/11/23 16:20:23 adam Exp $
 
 DISTNAME=	tango-icon-theme-0.8.90
-PKGREVISION=	48
+PKGREVISION=	50
 CATEGORIES=	graphics
 MASTER_SITES=	http://tango.freedesktop.org/releases/
 
