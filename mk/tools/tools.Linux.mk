@@ -21,6 +21,9 @@ _LINUX_BINPATHS?=	/bin /usr/bin /sbin /usr/sbin
 .  if exists(${_path}/autopoint)
 TOOLS_PLATFORM.autopoint?=	${_path}/autopoint
 .  endif
+.  if exists(${_path}/awk)
+TOOLS_PLATFORM.awk?=		${_path}/awk
+.  endif
 .  if exists(${_path}/basename)
 TOOLS_PLATFORM.basename?=	${_path}/basename
 .  endif
@@ -287,13 +290,11 @@ TOOLS_PLATFORM.false?=		false			# shell builtin
 TOOLS_PLATFORM.test?=		test			# shell builtin
 TOOLS_PLATFORM.true?=		true			# shell builtin
 
-# assuming grep/sed/tar/awk are usually the GNU versions, is this safe?
+# assuming grep/sed/tar are usually the GNU versions, is this safe?
 
 .if !empty(TOOLS_PLATFORM.bison)
 TOOLS_PLATFORM.bison-yacc?=	${TOOLS_PLATFORM.bison} -y
 .endif
-
-TOOLS_PLATFORM.awk?=		${TOOLS_PLATFORM.gawk}
 
 TOOLS_PLATFORM.gsed?=		${TOOLS_PLATFORM.sed}
 TOOLS_PLATFORM.gtar?=		${TOOLS_PLATFORM.tar}
