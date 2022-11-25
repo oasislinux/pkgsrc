@@ -93,6 +93,9 @@ TOOLS_PLATFORM.file?=		${_path}/file
 .  if exists(${_path}/find)
 TOOLS_PLATFORM.find?=		${_path}/find
 .  endif
+.  if exists(${_path}/flex)
+TOOLS_PLATFORM.flex?=		${_path}/flex
+.  endif
 .  if exists(${_path}/gettext)
 TOOLS_PLATFORM.gettext?=	${_path}/gettext
 .  endif
@@ -150,6 +153,9 @@ TOOLS_PLATFORM.install-info?=	${_path}/install-info
 .  if exists(${_path}/ldconfig)
 TOOLS_PLATFORM.ldconfig?=	${_path}/ldconfig
 .  endif
+.  if exists(${_path}/lex)
+TOOLS_PLATFORM.lex?=		${_path}/lex
+.  endif
 .  if exists(${_path}/ln)
 TOOLS_PLATFORM.ln?=		${_path}/ln
 .  endif
@@ -188,6 +194,12 @@ TOOLS_PLATFORM.nroff?=		${_path}/nroff
 .  endif
 .  if exists(${_path}/openssl)
 TOOLS_PLATFORM.openssl?=	${_path}/openssl
+.  endif
+.  if exists(${_path}/patch)
+TOOLS_PLATFORM.patch?=		${_path}/patch
+.  endif
+.  if exists(${_path}/pax)
+TOOLS_PLATFORM.pax?=		${_path}/pax
 .  endif
 .  if exists(${_path}/printf)
 TOOLS_PLATFORM.printf?=		${_path}/printf
