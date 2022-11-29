@@ -4,7 +4,7 @@ Using the T option of GNU ar lead to malformed .a archive on NetBSD. Disable it.
 
 Add option to avoid use of builtin __int128_t type due to PR toolchain/57022
 
---- Source/cmake/OptionsCommon.cmake.orig	2022-06-30 09:49:38.479512200 +0000
+--- Source/cmake/OptionsCommon.cmake.orig	Wed Aug 31 07:59:57 2022
 +++ Source/cmake/OptionsCommon.cmake
 @@ -128,10 +128,10 @@ endif ()
  option(USE_THIN_ARCHIVES "Produce all static libraries as thin archives" ${USE_THIN_ARCHIVES_DEFAULT})
@@ -21,7 +21,7 @@ Add option to avoid use of builtin __int128_t type due to PR toolchain/57022
  endif ()
  
  set(ENABLE_DEBUG_FISSION_DEFAULT OFF)
-@@ -219,12 +219,18 @@ WEBKIT_CHECK_HAVE_STRUCT(HAVE_STAT_BIRTH
+@@ -219,11 +219,17 @@ WEBKIT_CHECK_HAVE_STRUCT(HAVE_STAT_BIRTHTIME "struct s
  WEBKIT_CHECK_HAVE_STRUCT(HAVE_TM_GMTOFF "struct tm" tm_gmtoff time.h)
  WEBKIT_CHECK_HAVE_STRUCT(HAVE_TM_ZONE "struct tm" tm_zone time.h)
  
@@ -33,10 +33,9 @@ Add option to avoid use of builtin __int128_t type due to PR toolchain/57022
  
  if (HAVE_INT128_VALUE)
    SET_AND_EXPOSE_TO_BUILD(HAVE_INT128_T INT128_VALUE)
- endif ()
++endif ()
 +else ()
 +  SET_AND_EXPOSE_TO_BUILD(HAVE_INT128_T FALSE)
-+endif ()
+ endif ()
  
  # Check which filesystem implementation is available if any
- if (STD_FILESYSTEM_IS_AVAILABLE)

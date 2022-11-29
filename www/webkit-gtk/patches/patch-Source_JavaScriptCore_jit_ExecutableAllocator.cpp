@@ -10,7 +10,7 @@ From OpenBSD ports.
 +++ Source/JavaScriptCore/jit/ExecutableAllocator.cpp
 @@ -93,7 +93,7 @@ static constexpr size_t maxIslandsPerReg
  #else
- static constexpr size_t fixedExecutableMemoryPoolSize = 128 * MB;
+ static constexpr size_t fixedExecutableMemoryPoolSize = 16 * MB;
  #endif
 -#elif CPU(X86_64)
 +#elif CPU(X86_64) && !OS(OPENBSD)

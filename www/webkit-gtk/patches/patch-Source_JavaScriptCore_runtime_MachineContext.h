@@ -6,7 +6,7 @@ Shared and applied upstream via <https://bugs.webkit.org/show_bug.cgi?id=241125>
 
 --- Source/JavaScriptCore/runtime/MachineContext.h.orig	2021-05-05 05:33:24.000000000 +0000
 +++ Source/JavaScriptCore/runtime/MachineContext.h
-@@ -196,6 +196,22 @@ static inline void*& stackPointerImpl(mc
+@@ -193,6 +193,22 @@ static inline void*& stackPointerImpl(mcontext_t& mach
  #error Unknown Architecture
  #endif
  
@@ -29,7 +29,7 @@ Shared and applied upstream via <https://bugs.webkit.org/show_bug.cgi?id=241125>
  #elif OS(FUCHSIA) || OS(LINUX)
  
  #if CPU(X86)
-@@ -347,6 +363,22 @@ static inline void*& framePointerImpl(mc
+@@ -338,6 +354,22 @@ static inline void*& framePointerImpl(mcontext_t& mach
  #error Unknown Architecture
  #endif
  
@@ -52,13 +52,13 @@ Shared and applied upstream via <https://bugs.webkit.org/show_bug.cgi?id=241125>
  #elif OS(FUCHSIA) || OS(LINUX)
  
  // The following sequence depends on glibc's sys/ucontext.h.
-@@ -497,6 +529,22 @@ static inline void*& instructionPointerI
+@@ -495,7 +527,23 @@ static inline void*& instructionPointerImpl(mcontext_t
  #else
  #error Unknown Architecture
  #endif
 + 
 +#elif OS(NETBSD)
-+
+ 
 +#if CPU(X86)
 +    return reinterpret_cast<void*&>((uintptr_t&) machineContext.__gregs[_REG_EIP]);
 +#elif CPU(X86_64)
@@ -72,16 +72,17 @@ Shared and applied upstream via <https://bugs.webkit.org/show_bug.cgi?id=241125>
 +#else
 +#error Unknown Architecture
 +#endif
- 
++
  #elif OS(FUCHSIA) || OS(LINUX)
  
-@@ -655,6 +703,22 @@ inline void*& argumentPointer<1>(mcontex
+ // The following sequence depends on glibc's sys/ucontext.h.
+@@ -651,7 +699,23 @@ inline void*& argumentPointer<1>(mcontext_t& machineCo
  #else
  #error Unknown Architecture
  #endif
 + 
 +#elif OS(NETBSD)
-+
+ 
 +#if CPU(X86)
 +    return reinterpret_cast<void*&>((uintptr_t&) machineContext.__gregs[_REG_EDX]);
 +#elif CPU(X86_64)
@@ -95,14 +96,14 @@ Shared and applied upstream via <https://bugs.webkit.org/show_bug.cgi?id=241125>
 +#else
 +#error Unknown Architecture
 +#endif
- 
++
  #elif OS(FUCHSIA) || OS(LINUX)
  
-@@ -772,6 +836,22 @@ inline void*& llintInstructionPointer(mc
- #else
+ // The following sequence depends on glibc's sys/ucontext.h.
+@@ -771,6 +835,22 @@ inline void*& llintInstructionPointer(mcontext_t& mach
  #error Unknown Architecture
  #endif
-+ 
+ 
 +#elif OS(NETBSD)
 +
 +#if CPU(X86)
@@ -118,6 +119,7 @@ Shared and applied upstream via <https://bugs.webkit.org/show_bug.cgi?id=241125>
 +#else
 +#error Unknown Architecture
 +#endif
++ 
+ #elif OS(NETBSD)
  
- #elif OS(FUCHSIA) || OS(LINUX)
- 
+ #if CPU(X86)
