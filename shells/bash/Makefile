@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.106 2022/11/08 16:39:49 kre Exp $
+# $NetBSD: Makefile,v 1.108 2022/11/25 23:29:47 adam Exp $
 
 BASH_VERSION=		5.2
-BASH_PATCHLEVEL=	9
+BASH_PATCHLEVEL=	12
 
 DISTNAME=	bash-${BASH_VERSION}
 PKGNAME=	bash-${BASH_VERSION}.${BASH_PATCHLEVEL}
@@ -10,7 +10,8 @@ MASTER_SITES=	${MASTER_SITE_GNU:=bash/}
 
 PATCH_SITES=	${MASTER_SITES:=bash-5.2-patches/}
 PATCHFILES+=	bash52-001 bash52-002 bash52-003 bash52-004 bash52-005
-PATCHFILES+=	bash52-006 bash52-007 bash52-008 bash52-009
+PATCHFILES+=	bash52-006 bash52-007 bash52-008 bash52-009 bash52-010
+PATCHFILES+=	bash52-011 bash52-012
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.gnu.org/software/bash/bash.html
@@ -69,7 +70,7 @@ BUILDLINK_API_DEPENDS.readline+=	readline>=7.0
 .include "../../devel/readline/buildlink3.mk"
 .endif
 
-.if !empty(USE_CROSS_COMPILE:M[yY][eE][sS]) && ${OPSYS} == "NetBSD"
+.if ${USE_CROSS_COMPILE:U:tl} == yes && ${OPSYS} == "NetBSD"
 CONFIGURE_ENV+=		CC_FOR_BUILD=${NATIVE_CC:Q}
 CONFIGURE_ENV+=		ac_cv_c_long_long=yes
 CONFIGURE_ENV+=		ac_cv_c_long_double=yes

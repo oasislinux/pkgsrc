@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.383 2022/09/26 16:08:25 ryoon Exp $
+# $NetBSD: Makefile,v 1.385 2022/12/03 14:57:08 wiz Exp $
 #
 
 COMMENT=	Fonts
@@ -126,6 +126,7 @@ SUBDIR+=	gsftopkk
 SUBDIR+=	gucharmap
 SUBDIR+=	harfbuzz
 SUBDIR+=	harfbuzz-icu
+SUBDIR+=	hubot-sans-ttf
 SUBDIR+=	ibm-plex-otf
 SUBDIR+=	ibm-plex-ttf
 SUBDIR+=	inconsolata-g
@@ -181,6 +182,7 @@ SUBDIR+=	misaki-fonts
 SUBDIR+=	mkfontalias
 SUBDIR+=	mkfontscale
 SUBDIR+=	mminstance
+SUBDIR+=	mona-sans-ttf
 SUBDIR+=	monafonts
 SUBDIR+=	monafonts-ttf
 SUBDIR+=	monoid

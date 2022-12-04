@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.2 2022/01/10 20:33:18 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2022/11/29 05:49:01 adam Exp $
 
-DISTNAME=	dicttoxml-1.7.4
+DISTNAME=	dicttoxml-1.7.11
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	textproc python
 MASTER_SITES=	${MASTER_SITE_PYPI:=d/dicttoxml/}
 
@@ -10,6 +9,8 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/quandyfactory/dicttoxml
 COMMENT=	Library for simple XML serialization
 LICENSE=	gnu-gpl-v2
+
+USE_LANGUAGES=	# none
 
 # No real tests
 do-test:

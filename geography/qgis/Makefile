@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.156 2022/11/23 00:57:21 gdt Exp $
+# $NetBSD: Makefile,v 1.161 2022/12/02 15:44:27 wiz Exp $
 
-# This is intentionally 3.22 Long Term Release.  Please do not update
+# This is intentionally 3.28 Long Term Release.  Please do not update
 # to later branches, and instead discuss whether/how we want multiple
 # versions.
-DISTNAME=	qgis-3.22.13
+DISTNAME=	qgis-3.28.1
+PKGREVISION=	1
 CATEGORIES=	geography
 MASTER_SITES=	https://qgis.org/downloads/
 EXTRACT_SUFX=	.tar.bz2
@@ -16,21 +17,25 @@ COMMENT=	Geographic Information System (GIS)
 LICENSE=	gnu-gpl-v2
 
 USE_CMAKE=		yes
-USE_LANGUAGES=		c c++ fortran77
+USE_LANGUAGES=		c c++17 fortran77
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		cmake bison flex perl pkg-config
-# Due to gmake spaces in filenames, we must use gmake.  An example is
-# "resources/function_help/json/Date and Time".
-# Further, gmake expects files that contain a $ such as "$area" to
-# appear, unsurprisingly, as "$$area" on the RHS of dependency rules.
-# NetBSD make, expects "$$$$area".  While cmake 3.17 produced
-# "$$area", cmake 3.18 produces "$$$$area", perhaps only on NetBSD.
+# Building 3.28.1 fails with BSD make.  One issue seem to be a
+# difference of opinion about quoting of $, with gmake wanting
+# "$$area" vs bmake perhaps wanting "$$$$area".  Another is filenames
+# with spaces, which are \-quoted in Makefiles, but bmake sees them as
+# separate files.
 USE_TOOLS+=		gmake
 
 PLIST_SRC=		PLIST
 
 DEPENDS+=		qca2-qt5-ossl-[0-9]*:../../security/qca2-qt5-ossl
+TOOL_DEPENDS+=		${PYPKGPREFIX}-sip6-[0-9]*:../../x11/py-sip6
+TOOL_DEPENDS+=		${PYPKGPREFIX}-qt-builder-[0-9]*:../../x11/py-qt-builder
+DEPENDS+=		${PYPKGPREFIX}-qt5-[0-9]*:../../x11/py-qt5
+DEPENDS+=		${PYPKGPREFIX}-qt5-qscintilla-[0-9]*:../../x11/py-qt5-qscintilla
+
 # This is needed to find qca2.
 CMAKE_PREFIX_PATH+=	${QTDIR}
 
@@ -58,10 +63,8 @@ SUBST_SED.pyqt+=		-e '/^SET/s,pyrcc5,&-${PYVERSSUFFIX},'
 SUBST_SED.pyqt+=		-e '/ *FIND_PROGRAM(__pyuic5 /s,"pyuic5,&-${PYVERSSUFFIX},'
 
 CMAKE_ARGS+=		-DWITH_BINDINGS:BOOL=TRUE
-CMAKE_ARGS+=		-DSIP_BINARY_PATH:PATH=${BUILDLINK_PREFIX.py-sip}/bin
 CMAKE_ARGS+=		-DWITH_INTERNAL_MARKUPSAFE=FALSE
 
-.include "../../lang/python/application.mk"
 PYTHON_VERSIONS_INCOMPATIBLE=	27 37 # py-gdal
 
 DEPENDS+=	${PYPKGPREFIX}-requests-[0-9]*:../../devel/py-requests
@@ -85,6 +88,7 @@ CMAKE_ARG_PATH=	..
 pre-configure:
 	${MKDIR} ${WRKSRC}/build
 
+.include "../../lang/python/pyversion.mk"
 .include "../../archivers/libzip/buildlink3.mk"
 .include "../../archivers/zstd/buildlink3.mk"
 ##.include "../../devel/qjson/buildlink3.mk"
@@ -103,9 +107,6 @@ pre-configure:
 .include "../../geography/spatialindex/buildlink3.mk"
 .include "../../security/qca2-qt5/buildlink3.mk"
 .include "../../security/qt5-qtkeychain/buildlink3.mk"
-.include "../../x11/py-sip/buildlink3.mk"
-.include "../../x11/py-qt5/buildlink3.mk"
-.include "../../x11/py-qt5-qscintilla/buildlink3.mk"
 .include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../x11/qt5-qttools/buildlink3.mk"
 .include "../../x11/qwt6-qt5/buildlink3.mk"

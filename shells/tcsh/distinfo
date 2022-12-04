@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.61 2022/11/23 23:19:23 kim Exp $
+$NetBSD: distinfo,v 1.63 2022/12/03 21:41:13 kim Exp $
 
-BLAKE2s (tcsh-6.24.02.tar.gz) = c344efdbe4a593dd84c6eac0aa6f4f504e1ed2c8f79564288baeaff334a283e6
-SHA512 (tcsh-6.24.02.tar.gz) = 0a1b9d592c76e662298f8bf86a53185877d3836ef15760e37402d917051c0dbcd4bc230aaa46c295324405fefe07215f589a9a836c92358542aa929f078846bd
-Size (tcsh-6.24.02.tar.gz) = 945889 bytes
+BLAKE2s (tcsh-6.24.04.tar.gz) = 8e1ad057583c5ecea8dbb397015a09112fbae47888372258ba1fbc4e37c0eaa5
+SHA512 (tcsh-6.24.04.tar.gz) = f1b90972add5a6606b379f9e8c712cd3c1d06f9554c4c8748fbd98a956251a835b71729ac40360ffbb71bbde9fc3986cc9ba6b381fd72670793a1112e1db7bae
+Size (tcsh-6.24.04.tar.gz) = 946314 bytes

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.662 2022/11/25 10:43:35 nros Exp $
+# $NetBSD: Makefile,v 1.666 2022/12/03 17:02:40 adam Exp $
 #
 
 COMMENT=	Programming languages
@@ -175,9 +175,9 @@ SUBDIR+=	nhc98
 SUBDIR+=	nim
 SUBDIR+=	njs
 SUBDIR+=	nodejs
-SUBDIR+=	nodejs12
 SUBDIR+=	nodejs14
 SUBDIR+=	nodejs16
+SUBDIR+=	nodejs18
 SUBDIR+=	npm
 SUBDIR+=	nqp
 SUBDIR+=	nuitka
@@ -191,6 +191,7 @@ SUBDIR+=	openjdk11
 SUBDIR+=	openjdk17
 SUBDIR+=	openjdk8
 SUBDIR+=	opensource-cobol
+SUBDIR+=	oracle-jdk17
 SUBDIR+=	oracle-jdk8
 SUBDIR+=	oracle-jre8
 SUBDIR+=	ossp-js
@@ -255,7 +256,9 @@ SUBDIR+=	python37
 SUBDIR+=	python38
 SUBDIR+=	python39
 SUBDIR+=	qore
+SUBDIR+=	qt6-qtdeclarative
 SUBDIR+=	qt6-qtlanguageserver
+SUBDIR+=	qt6-qtscxml
 SUBDIR+=	quickjs
 SUBDIR+=	racket
 SUBDIR+=	racket-textual

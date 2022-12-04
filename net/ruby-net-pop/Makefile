@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.3 2022/09/04 05:22:41 taca Exp $
+# $NetBSD: Makefile,v 1.6 2022/12/04 01:35:10 taca Exp $
 
-DISTNAME=	net-pop-0.1.1
-PKGREVISION=	1
+DISTNAME=	net-pop-0.1.2
 CATEGORIES=	net mail
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -16,8 +15,14 @@ DEPENDS+=	${RUBY_PKGPREFIX}-digest>=0:../../security/ruby-digest
 
 USE_LANGUAGES=	# none
 
-# Ruby 3.0 and 3.1 has the same version in it.
-RUBY_VERSIONS_ACCEPTED=	27
+# Ruby 3.1 has the same version of ruby-digest.
+RUBY_VERSIONS_ACCEPTED=	27 30
+
+.include "../../lang/ruby/rubyversion.mk"
+
+.if "net-pop-${RUBY_NET_POP_VER}" == ${DISTNAME}
+PKG_SKIP_REASON+=	"${DISTNAME} is included in ${RUBY_BASE}"
+.endif
 
 .include "../../lang/ruby/gem.mk"
 .include "../../mk/bsd.pkg.mk"

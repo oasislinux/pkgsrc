@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.2 2022/10/13 12:18:48 adam Exp $
+# $NetBSD: Makefile,v 1.4 2022/11/26 21:11:11 wiz Exp $
 
-DISTNAME=	subprocess-tee-0.3.5
+DISTNAME=	subprocess-tee-0.4.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	sysutils python
 MASTER_SITES=	${MASTER_SITE_PYPI:=s/subprocess-tee/}
@@ -10,11 +10,12 @@ HOMEPAGE=	https://github.com/pycontribs/subprocess-tee
 COMMENT=	Subprocess-tee
 LICENSE=	mit
 
-BUILD_DEPENDS+=	${PYPKGPREFIX}-setuptools_scm>=7.0.0:../../devel/py-setuptools_scm
+TOOL_DEPENDS+=	${PYPKGPREFIX}-setuptools_scm>=7.0.0:../../devel/py-setuptools_scm
+TOOL_DEPENDS+=	${PYPKGPREFIX}-wheel-[0-9]*:../../devel/py-wheel
 
 USE_LANGUAGES=	# none
 
 PYTHON_VERSIONS_INCOMPATIBLE=	27
 
-.include "../../lang/python/egg.mk"
+.include "../../lang/python/wheel.mk"
 .include "../../mk/bsd.pkg.mk"

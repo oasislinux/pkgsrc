@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.272 2022/11/23 16:20:37 adam Exp $
+# $NetBSD: Makefile,v 1.276 2022/12/03 13:25:49 gdt Exp $
 
+# Needs update to 6.9.0
 DISTNAME=	calibre-5.44.0
 PKGREVISION=	1
 CATEGORIES=	misc
-MASTER_SITES=	http://download.calibre-ebook.com/${PKGVERSION_NOREV}/
+MASTER_SITES=	https://download.calibre-ebook.com/${PKGVERSION_NOREV}/
 EXTRACT_SUFX=	.tar.xz
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
 
@@ -23,29 +24,30 @@ DEPENDS+=	${PYPKGPREFIX}-feedparser>=6.0.0:../../textproc/py-feedparser
 DEPENDS+=	${PYPKGPREFIX}-html2text-[0-9]*:../../textproc/py-html2text
 DEPENDS+=	${PYPKGPREFIX}-html5-parser-[0-9]*:../../textproc/py-html5-parser
 DEPENDS+=	${PYPKGPREFIX}-jeepney>=0.6.0:../../sysutils/py-jeepney
+DEPENDS+=	${PYPKGPREFIX}-markdown-[0-9]*:../../textproc/py-markdown
 DEPENDS+=	${PYPKGPREFIX}-mechanize>=0.1.11nb1:../../www/py-mechanize
 DEPENDS+=	${PYPKGPREFIX}-msgpack-[0-9]*:../../devel/py-msgpack
 DEPENDS+=	${PYPKGPREFIX}-netifaces>=0.8:../../net/py-netifaces
 DEPENDS+=	${PYPKGPREFIX}-Pillow>=2.7.0:../../graphics/py-Pillow
 DEPENDS+=	${PYPKGPREFIX}-psutil>=0.6.1:../../sysutils/py-psutil
 DEPENDS+=	${PYPKGPREFIX}-pygments-[0-9]*:../../textproc/py-pygments
+DEPENDS+=	${PYPKGPREFIX}-qt5-[0-9]*:../../x11/py-qt5
 DEPENDS+=	${PYPKGPREFIX}-qt5-webengine-[0-9]*:../../x11/py-qt5-webengine
 DEPENDS+=	${PYPKGPREFIX}-regex-[0-9]*:../../textproc/py-regex
-DEPENDS+=	${PYPKGPREFIX}-sip5>=5.5<6:../../x11/py-sip5
 DEPENDS+=	${PYPKGPREFIX}-six-[0-9]*:../../lang/py-six
 DEPENDS+=	${PYPKGPREFIX}-soupsieve-[0-9]*:../../www/py-soupsieve
 DEPENDS+=	${PYPKGPREFIX}-sqlite3-[0-9]*:../../databases/py-sqlite3
 DEPENDS+=	${PYPKGPREFIX}-zeroconf-[0-9]*:../../net/py-zeroconf
 
 # for installation
-BUILD_DEPENDS+=	${PYPKGPREFIX}-qt-builder>=1:../../x11/py-qt-builder
+TOOL_DEPENDS+=	${PYPKGPREFIX}-qt-builder>=1:../../x11/py-qt-builder
+TOOL_DEPENDS+=	${PYPKGPREFIX}-sip5>=5.5<6:../../x11/py-sip5
 BUILD_DEPENDS+=	xdg-utils>=1.0.2:../../misc/xdg-utils
 
 EXTRACT_USING=	bsdtar
 
 PYTHON_VERSIONS_INCOMPATIBLE=	27 # as of 5.x
-PYTHON_VERSIONS_INCOMPATIBLE+=	310 # as of 5.40.0
-PYTHON_VERSIONED_DEPENDENCIES+=	markdown
+PYTHON_VERSIONS_INCOMPATIBLE+=	310 311 # as of 5.40.0
 
 USE_LANGUAGES=			c c++
 USE_LIBTOOL=			yes
@@ -158,6 +160,4 @@ BUILDLINK_API_DEPENDS.poppler+=	poppler>=0.20.2
 .include "../../databases/shared-mime-info/mimedb.mk"
 .include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../x11/qt5-qtwebengine/buildlink3.mk"
-.include "../../x11/py-qt5/buildlink3.mk"
-.include "../../lang/python/versioned_dependencies.mk"
 .include "../../mk/bsd.pkg.mk"

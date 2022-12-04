@@ -1,32 +1,27 @@
-# $NetBSD: Makefile,v 1.15 2022/11/23 16:19:12 adam Exp $
+# $NetBSD: Makefile,v 1.18 2022/12/02 15:54:21 wiz Exp $
 
-PKGREVISION= 6
 .include "../../x11/qt5-qscintilla/Makefile.common"
 
-PKGNAME=	${PYPKGPREFIX}-qt5-${DISTNAME:tl}
+PKGNAME=	${PYPKGPREFIX}-qt5-${DISTNAME:S/_src//:tl}
 COMMENT=	QScintilla -- Python bindings
 
-BUILD_DIRS=	Python
-PY_PATCHPLIST=	yes
+TOOL_DEPENDS+=	${PYPKGPREFIX}-sip6-[0-9]*:../../x11/py-sip6
+TOOL_DEPENDS+=	${PYPKGPREFIX}-qt-builder-[0-9]*:../../x11/py-qt-builder
+DEPENDS+=	${PYPKGPREFIX}-qt5-[0-9]*:../../x11/py-qt5
 
-MAKE_FLAGS+=		TARGET=Qsci.la TARGETD=Qsci.la TARGETL=Qsci.la
-INSTALL_MAKE_FLAGS+=	INSTALL_ROOT=${DESTDIR}
-LIBS+=			-lqscintilla2
-MAKE_FLAGS+=		LDFLAGS=${LDFLAGS:Q}\ ${LIBS:Q}
+WRKSRC=		${WRKDIR}/${DISTNAME}/Python
 
-do-configure:
-	cd ${WRKSRC}/Python && ${SETENV} ${MAKE_ENV} ${PYTHONBIN} configure.py \
-		--pyqt PyQt5 \
-		--qmake=${QTDIR}/bin/qmake \
-		--sip=${PREFIX}/bin/sip${PYVERSSUFFIX} \
-		--pyqt-sipdir=${PREFIX}/share/sip${PYVERSSUFFIX}/PyQt5 \
-		--qsci-sipdir=${PREFIX}/share/sip${PYVERSSUFFIX}/PyQt5 \
-		--qsci-libdir=${QTDIR}/lib \
-		--apidir=${QTDIR}/qsci${PYVERSSUFFIX}
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
-.include "../../lang/python/extension.mk"
-.include "../../x11/py-sip/buildlink3.mk"
-.include "../../x11/py-qt5/buildlink3.mk"
+WHEEL_NAME=	${DISTNAME:S/_src//}
+
+post-extract:
+	cd ${WRKSRC} && ${CP} pyproject-qt5.toml pyproject.toml
+
+pre-configure:
+	${LN} -sf ${QTDIR}/bin/qmake ${BUILDLINK_DIR}/bin/
+
+.include "../../lang/python/wheel.mk"
 BUILDLINK_API_DEPENDS.qt5-qscintilla+=	qt5-qscintilla>=${PKGVERSION_NOREV}
 .include "../../x11/qt5-qscintilla/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

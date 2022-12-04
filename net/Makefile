@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1485 2022/11/09 08:25:17 sjmulder Exp $
+# $NetBSD: Makefile,v 1.1492 2022/12/03 16:03:25 adam Exp $
 #
 
 COMMENT=	Networking tools
@@ -270,6 +270,7 @@ SUBDIR+=	ipcalc
 SUBDIR+=	ipcheck
 SUBDIR+=	iperf2
 SUBDIR+=	iperf3
+SUBDIR+=	ipget
 SUBDIR+=	ipgrab
 SUBDIR+=	iplog
 SUBDIR+=	ipv6calc
@@ -451,6 +452,7 @@ SUBDIR+=	netpipes
 SUBDIR+=	netwake
 SUBDIR+=	nfdump
 SUBDIR+=	ngrep
+SUBDIR+=	ngtcp2
 SUBDIR+=	nicotine-plus
 SUBDIR+=	nicovideo-dl
 SUBDIR+=	nidentd
@@ -697,6 +699,7 @@ SUBDIR+=	py-boto3
 SUBDIR+=	py-botocore
 SUBDIR+=	py-cares
 SUBDIR+=	py-celery
+SUBDIR+=	py-comm
 SUBDIR+=	py-cymruwhois
 SUBDIR+=	py-digitalocean
 SUBDIR+=	py-dns
@@ -792,6 +795,8 @@ SUBDIR+=	py-zmq
 SUBDIR+=	pygopherd
 SUBDIR+=	qadsl
 SUBDIR+=	qbittorrent
+SUBDIR+=	qt6-qtremoteobjects
+SUBDIR+=	qt6-qtwebsockets
 SUBDIR+=	quagga
 SUBDIR+=	queryperf
 SUBDIR+=	quvi
@@ -853,6 +858,7 @@ SUBDIR+=	ruby-snmp
 SUBDIR+=	ruby-soap4r
 SUBDIR+=	ruby-stompserver
 SUBDIR+=	ruby-train-core
+SUBDIR+=	ruby-train-rest
 SUBDIR+=	ruby-train-winrm
 SUBDIR+=	ruby-tw
 SUBDIR+=	ruby-twitter
@@ -885,6 +891,7 @@ SUBDIR+=	sitescooper
 SUBDIR+=	slurm
 SUBDIR+=	smokeping
 SUBDIR+=	sniffit
+SUBDIR+=	sniffnet
 SUBDIR+=	sniproxy
 SUBDIR+=	snmptt
 SUBDIR+=	snort

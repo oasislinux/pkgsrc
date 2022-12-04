@@ -1,4 +1,4 @@
-$NetBSD: TODO,v 1.22372 2022/11/25 11:10:38 wiz Exp $
+$NetBSD: TODO,v 1.22385 2022/12/03 15:54:08 adam Exp $
 
 Suggested new packages
 ======================
@@ -373,7 +373,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o ImageMagick6-6.9.12.8
 	o JBidwatcher-2.5.6 [wants launch4j]
 	o LPRng-core-3.8.35
-	o MesaLib-22.2.4
+	o MesaLib-22.3.0
 	o OdfConverter-4.0
 	o PACK-0.0.4
 	o Pantomime-1.2.2
@@ -395,10 +395,8 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o R-poweRlaw-0.70.6
 	o R-quadprog-1.5.8
 	o R-tseries-0.10.48
-	o SOGo-2.4.3
-	o SOGo-5.7.1
-	o SOPE-2.4.3
-	o SOPE-5.7.1
+	o SOGo-5.8.0
+	o SOPE-5.8.0
 	o SQLiteCpp-2.5.0
 	o TeXmacs-2.1.1
 	o TiffIO-140a
@@ -534,7 +532,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o chrpath-0.16
 	o cim-5.1
 	o cjk-lyx-1.4.4
-	o clamav-0.105.0
+	o clamav-1.0.0
 	o classpath-0.99
 	o classpath-gui-0.99
 	o clawsker-0.7.13
@@ -551,7 +549,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o consul-1.9.5
 	o cook-2.31
 	o coordgenlibs-2.0.3
-	o couchdb-3.1.1
 	o courier-0.77.0
 	o courier-imap-4.16.1
 	o courier-mta-0.74.2
@@ -798,6 +795,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o h8300-elf-gcc-7.1.0
 	o hamster-applet-2.32.1
 	o hanzim-3.5
+	o haproxy-2.7
 	o harminv-1.4.1
 	o hashcash-1.23
 	o haskell-mode-13.20
@@ -1259,7 +1257,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o py-cassa-1.11.0
 	o py-configparser-5.0.0 [drops python-2.x support; pkgsrc only needs this package for python 2.x]
 	o py-django-4.1
-	o py-django-debug-toolbar-3.2.1
 	o py-django-tagging-0.5.0
 	o py-ephem3-3.7.6.0
 	o py-fecon235-6.18.1203
@@ -1276,7 +1273,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o py-musicbrainz-ngs-0.7.1
 	o py-newt-0.52.21
 	o py-omniORBpy-3.7
-	o py-openpyxl-3.0.10 [now supports only Python 3.x]
 	o py-pdf-parser-0.7.4
 	o py-postgresql-5.1.2
 	o py-ptt-1.10.2
@@ -1308,9 +1304,6 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o qca2-2.3.2
 	o qca2-gnupg-2.3.2
 	o qca2-ossl-2.3.2
-	o qca2-qt5-2.3.2
-	o qca2-qt5-gnupg-2.3.2
-	o qca2-qt5-ossl-2.3.2
 	o qconf-2.5
 	o qdirstat-1.8.1
 	o qt6-6.3.1 [in wip]
@@ -1350,8 +1343,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o rt4-4.4.4
 	o rtty-4.0 [at ftp://ftp.isc.org/isc/rtty/]
 	o rubber-1.5.1
-	o rudiments-1.4.2
-	o rust-1.65.0
+	o rust-1.65.0 [wip]
 	o rvault-0.4
 	o rvm-1.20
 	o sabayon-2.30.1
@@ -1414,12 +1406,11 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o spin-649
 	o spiped-1.6.1b
 	o spl-1.0pre6
-	o sqlrelay-1.9.3
 	o squeak-5.0
 	o squeak-vm-4.10.2.2765
 	o sqwebmail-5.8.2
 	o ssh-askpass-1.2.4.1
-	o sshguard-1.6.4
+	o sshguard-2.4.2
 	o stalin-0.11
 	o stan-math-2.26.1
 	o statist-1.3.0
@@ -1437,7 +1428,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o swi-prolog-jpl-8.3.22
 	o swi-prolog-lite-8.3.22
 	o swi-prolog-packages-8.3.22
-	o sympa-6.2.68
+	o sympa-6.2.70
 	o sysinfo-4.2.2
 	o system-tools-backends-2.10.1
 	o systrace-1.6e
@@ -1537,6 +1528,7 @@ For possible Perl packages updates, see http://www.NetBSD.org/~wiz/perl.html
 	o wMosaic-3.8.22
 	o wandio-4.2.3
 	o wap-utils-1.4.1
+	o wayland-protocols-1.31
 	o wbm-cyrus-imapd-1.6.8
 	o wbm-virtual-server-6.16
 	o wcalc-2.4

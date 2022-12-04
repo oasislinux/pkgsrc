@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.31 2021/10/26 10:15:40 nia Exp $
+$NetBSD: distinfo,v 1.33 2022/11/28 06:49:00 cheusov Exp $
 
-BLAKE2s (mk-configure-0.37.0.tar.gz) = 1605f61975d260c5ba8511dae6acbcb1293119d4fd2a5a45309a7f3fc90ec198
-SHA512 (mk-configure-0.37.0.tar.gz) = 3f81ca172b018920a013f3d8406d0194066f3e6ee7e9031e20445feaa0b61aa8e9b48f1e4706ea209af5ddb9501ec6e53f9c61e07d6d1ed7fee03c0846a82dc6
-Size (mk-configure-0.37.0.tar.gz) = 355916 bytes
+BLAKE2s (mk-configure-0.38.1.tar.gz) = bba869f41437603c8a459ee8a2376d204646b6086885dd5987f451dd814f47a1
+SHA512 (mk-configure-0.38.1.tar.gz) = eea44c074396bc338040de1476f43f6a112f4b42007b8d93fd0d3783cde659906489135d0ffc5ca7106457daa2093b5e5bf80e91357c0441b121352c671da932
+Size (mk-configure-0.38.1.tar.gz) = 359480 bytes

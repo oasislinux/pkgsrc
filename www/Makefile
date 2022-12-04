@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1648 2022/11/20 20:17:02 nikita Exp $
+# $NetBSD: Makefile,v 1.1652 2022/12/03 16:01:02 adam Exp $
 #
 
 COMMENT=	Packages related to the World Wide Web
@@ -211,6 +211,7 @@ SUBDIR+=	liferea
 SUBDIR+=	lighttpd
 SUBDIR+=	links
 SUBDIR+=	links-gui
+SUBDIR+=	litehtml
 SUBDIR+=	litmus
 SUBDIR+=	llgal
 SUBDIR+=	loggerhead
@@ -242,6 +243,7 @@ SUBDIR+=	netscape
 SUBDIR+=	netsurf
 SUBDIR+=	nghttp2
 SUBDIR+=	nghttp2-tools
+SUBDIR+=	nghttp3
 SUBDIR+=	nginx
 SUBDIR+=	nginx-devel
 SUBDIR+=	nostromo
@@ -873,6 +875,8 @@ SUBDIR+=	py-wtforms-test
 SUBDIR+=	py-yarl
 SUBDIR+=	py-zope.proxy
 SUBDIR+=	qDecoder
+SUBDIR+=	qt6-qthttpserver
+SUBDIR+=	qt6-qtwebchannel
 SUBDIR+=	qutebrowser
 SUBDIR+=	ramaze
 SUBDIR+=	rekonq

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.880 2022/11/05 13:42:58 nikita Exp $
+# $NetBSD: Makefile,v 1.882 2022/11/29 05:59:16 adam Exp $
 #
 
 COMMENT=	Security and cryptography tools and libraries
@@ -520,6 +520,7 @@ SUBDIR+=	qore-ssh2-module
 SUBDIR+=	qore-xmlsec-module
 SUBDIR+=	qt4-qtkeychain
 SUBDIR+=	qt5-qtkeychain
+SUBDIR+=	qt6-qtnetworkauth
 SUBDIR+=	racoon2
 SUBDIR+=	rc5des
 SUBDIR+=	rid
@@ -636,7 +637,7 @@ SUBDIR+=	trufflehog
 SUBDIR+=	validns
 SUBDIR+=	vault
 SUBDIR+=	vaultwarden
-SUBDIR+=	volatility
+SUBDIR+=	volatility3
 SUBDIR+=	wfuzz
 SUBDIR+=	wolfssl
 SUBDIR+=	xca
