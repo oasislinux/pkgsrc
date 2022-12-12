@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.105 2022/10/20 06:47:36 wiz Exp $
+# $NetBSD: Makefile,v 1.108 2022/12/04 22:39:43 js Exp $
 #
 
 COMMENT=	Cross-platform development utilities
@@ -36,6 +36,9 @@ SUBDIR+=	freemint-pml
 SUBDIR+=	gcc-mips-current
 SUBDIR+=	h8300-elf-binutils
 SUBDIR+=	h8300-elf-gcc
+SUBDIR+=	i586-pc-msdosdjgpp-binutils
+SUBDIR+=	i586-pc-msdosdjgpp-gcc
+SUBDIR+=	i586-pc-msdosdjgpp-sdk
 SUBDIR+=	icdprog
 SUBDIR+=	lwtools
 SUBDIR+=	mingw

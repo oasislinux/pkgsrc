@@ -1,19 +1,19 @@
-# $NetBSD: Makefile,v 1.1 2022/10/08 10:06:51 bsiegert Exp $
+# $NetBSD: Makefile,v 1.3 2022/12/07 09:15:36 vins Exp $
 
 DISTNAME=	xidle-20220718
 CATEGORIES=	x11
-MASTER_SITES=	https://sehnsucht.multics.org/pub/pkgsrc/distfiles/
+MASTER_SITES=	ftp://ftp.NetBSD.org/pub/NetBSD/misc/vins/dists/
 DIST_SUBDIR=	${PKGNAME_NOREV}
 EXTRACT_SUFX=	.tar.xz
 
-MAINTAINER=	vms@retrobsd.ddns.net
+MAINTAINER=	vins@NetBSD.org
 HOMEPAGE=	https://man.openbsd.org/xidle.1
 COMMENT=	Run a program on X inactivity
 LICENSE=	isc
 
-MAKEFLAGS+=	X11BASE=${X11BASE}
-MAKEFLAGS+=	MANDIR=${PKGMANDIR}
-MAKEFLAGS+=	CFLAGS=${CFLAGS:Q}
+MAKE_FLAGS+=	X11BASE=${X11BASE}
+MAKE_FLAGS+=	MANDIR=${PKGMANDIR}
+MAKE_FLAGS+=	CFLAGS=${CFLAGS:Q}
 
 SUBST_CLASSES+=		paths
 SUBST_STAGE.paths=	pre-configure
@@ -30,7 +30,11 @@ do-install:
 
 .include "../../mk/bsd.prefs.mk"
 
-.if ${OPSYS} == "Linux" 	# strtonum()
+.if ${OPSYS} == "NetBSD"	# strtonum()
+CFLAGS+=	-D_OPENBSD_SOURCE
+.endif
+
+.if ${OPSYS} == "Linux"		# strtonum()
 LDFLAGS+=   -lbsd
 .include "../../devel/libbsd/buildlink3.mk"
 .endif

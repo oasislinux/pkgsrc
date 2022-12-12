@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.67 2022/11/02 19:39:51 bsiegert Exp $
+# $NetBSD: Makefile,v 1.69 2022/12/10 12:16:45 gdt Exp $
 
 DISTNAME=	hugo-0.101.0
 PKGNAME=	go-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	5
 MASTER_SITES=	${MASTER_SITE_GITHUB:=gohugoio/}
 CATEGORIES=	www
 GITHUB_TAG=	v${PKGVERSION_NOREV}
@@ -14,6 +14,7 @@ COMMENT=	Fast & Modern Static Website Engine
 LICENSE=	apache-2.0
 
 GO_BUILD_PATTERN=	-tags "extended"
+# go-quic does not support 1.19
 GO_VERSION_DEFAULT=	118
 
 MAKE_ENV+=	"CGO_ENABLED=1"

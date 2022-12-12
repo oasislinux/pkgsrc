@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.1 2022/07/04 08:31:43 pin Exp $
+# $NetBSD: Makefile,v 1.3 2022/12/06 19:27:30 vins Exp $
 
 DISTNAME=	etsh-5.4.0
 CATEGORIES=	shells
 MASTER_SITES=	https://etsh.nl/src/etsh_5.4.0/
 EXTRACT_SUFX=	.tar.xz
 
-MAINTAINER=	vms@retrobsd.ddns.net
+MAINTAINER=	vins@NetBSD.org
 HOMEPAGE=	https://etsh.nl/
 COMMENT=	Enhanced port of Thompson shell from V6 UNIX
 LICENSE=	original-bsd AND modified-bsd AND 2-clause-bsd
@@ -17,23 +17,25 @@ PKG_SHELL=	bin/etsh
 EXPDIR:=	${PREFIX}/share/examples/etsh
 DOCDIR:=	${PREFIX}/share/doc/etsh
 
-MAKEFLAGS+=	PREFIX=${PREFIX}
-MAKEFLAGS+=	DESTDOCDIR=${DESTDIR}${DOCDIR}
-MAKEFLAGS+=	DESTEXPDIR=${DESTDIR}${EXPDIR}
-MAKEFLAGS+=	MANGRP:='' BINGRP:=''
+REPLACE_INTERPRETER+=	tsh
+REPLACE.tsh.old=	.*/bin/env etsh
+REPLACE.tsh.new=	${PREFIX}/bin/etsh
+REPLACE_FILES.tsh+=	libexec.etsh/etshdir
+REPLACE_FILES.tsh+=	libexec.etsh/history
+REPLACE_FILES.tsh+=	libexec.etsh/pev
 
-SUBST_CLASSES+=		paths
-SUBST_STAGE.paths=	pre-configure
-SUBST_FILES.paths+=	libexec.etsh/etshdir
-SUBST_FILES.paths+=	libexec.etsh/history
-SUBST_FILES.paths+=	libexec.etsh/pev
-SUBST_SED.paths=	-e 's|/usr/bin/env |${PREFIX}/bin/|'
+MAKE_FLAGS+=	PREFIX=${PREFIX}
+MAKE_FLAGS+=	DESTDOCDIR=${DESTDIR}${DOCDIR}
+MAKE_FLAGS+=	DESTEXPDIR=${DESTDIR}${EXPDIR}
+
+INSTALL_ENV+=	MANGRP=''
+INSTALL_ENV+=	BINGRP=''
 
 post-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE} exp
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE_PROGRAM:Q} exp
 
 post-install:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE} install-exp \
-	install-doc
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${INSTALL_ENV}			\
+		${MAKE_PROGRAM:Q} install-exp install-doc
 
 .include "../../mk/bsd.pkg.mk"

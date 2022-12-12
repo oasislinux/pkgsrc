@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2022/12/02 11:39:20 jperkin Exp $
+# $NetBSD: Makefile,v 1.7 2022/12/06 12:01:09 jperkin Exp $
 
 PKGNAME=	oracle-jdk17-17.0.5
 CATEGORIES=	lang java
@@ -15,7 +15,7 @@ NO_SRC_ON_CDROM=	${RESTRICTED}
 
 USE_TOOLS+=	pax
 
-EMUL_PLATFORMS=		linux-x86_64
+EMUL_PLATFORMS=		darwin-aarch64 darwin-x86_64 linux-aarch64 linux-x86_64
 EMUL_MODULES.linux=	alsa locale x11
 
 .include "../../mk/bsd.prefs.mk"
@@ -40,9 +40,11 @@ DISTFILES+=	jdk-${PKGVERSION_NOREV}_macos-x64_bin.tar.gz
 NOT_FOR_PLATFORM+=	${MACHINE_PLATFORM}
 .endif
 
-OPSYSVARS+=	WRKSRC
-WRKSRC.Darwin=	${WRKDIR}/jdk-${PKGVERSION_NOREV}.jdk/Contents/Home
-WRKSRC.*=	${WRKDIR}/jdk-${PKGVERSION_NOREV}
+.if ${OPSYS} == "Darwin"
+WRKSRC=		${WRKDIR}/jdk-${PKGVERSION_NOREV}.jdk/Contents/Home
+.else
+WRKSRC=		${WRKDIR}/jdk-${PKGVERSION_NOREV}
+.endif
 
 # Contains pre-built binaries
 CHECK_RELRO_SUPPORTED=	no

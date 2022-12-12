@@ -1,8 +1,5 @@
-$NetBSD: distinfo,v 1.57 2022/11/25 13:13:54 wiz Exp $
+$NetBSD: distinfo,v 1.59 2022/12/09 10:45:06 adam Exp $
 
-BLAKE2s (protobuf-4.21.9-py3-none-any.whl) = 6135497223901c60c861f6a86bd5cda71623a567a82690bdcce07cd95766a708
-SHA512 (protobuf-4.21.9-py3-none-any.whl) = f464fd87bfbdbddfa1f4f0033a5685abc8a71574a1b654ca1a5a910ec8ca2cbae4e09da4ad8d49b8729f5d98c20fbaa8ba49a84d433d27a746d53bef236af3d2
-Size (protobuf-4.21.9-py3-none-any.whl) = 291642 bytes
-BLAKE2s (protobuf-4.21.9.tar.gz) = b41cd82762363d1e82c2fb367fabe3fe712f7d3c0156fb26b348c37f52aa4b08
-SHA512 (protobuf-4.21.9.tar.gz) = 0350869d8abf890997625039c8f83b33d5d3d6a2898d02cb639b1ca78276af8ba0e24866d6cbbb36802ff84a305591f27892743f7d6e142608b5175a2c90f77b
-Size (protobuf-4.21.9.tar.gz) = 220396 bytes
+BLAKE2s (protobuf-4.21.11.tar.gz) = ad0370013cadf69d4c7de6076f2cd56c4a3828a26e3752a01262f7a3a999b7a6
+SHA512 (protobuf-4.21.11.tar.gz) = dd3062cb583de6d1998a23009531897983af5196a513e38645e445b608802fdd3ef28c575df27b6b4570ae2ed0c78f97206a572c55f18e9b479037a6002fb0ba
+Size (protobuf-4.21.11.tar.gz) = 220365 bytes

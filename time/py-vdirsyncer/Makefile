@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.61 2022/01/05 15:41:28 wiz Exp $
+# $NetBSD: Makefile,v 1.63 2022/12/11 08:58:11 wiz Exp $
 
 DISTNAME=	vdirsyncer-0.18.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}

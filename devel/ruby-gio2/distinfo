@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.9 2022/01/17 15:17:14 tsutsui Exp $
+$NetBSD: distinfo,v 1.11 2022/12/09 12:34:11 tsutsui Exp $
 
-BLAKE2s (gio2-3.5.1.gem) = aba78ebbb015d8ddf0f1a7b6874359c4125002492b4d6f62ffbfec1805a8f088
-SHA512 (gio2-3.5.1.gem) = 5abf66a3b06bcda2352f2b024f09ec8e626a7b72efe2c4a73deb56b1f120db0e05584c307501187ad643eacf0f96299c141655960746b5cfa0c514729696422c
-Size (gio2-3.5.1.gem) = 39936 bytes
+BLAKE2s (gio2-4.0.4.gem) = 0e1a5a6801f588eaf583efc58b3ea538583c3564c88bf05cdeeaab009080603e
+SHA512 (gio2-4.0.4.gem) = 805fd6f8341f556736186894ad9f48cf3ab27e955cdb0a21d21fa2dfac7e2d6f3ed1d02681f9dcebee5ecdcfed3daab09053f82f443f82f2b563de2a42747e98
+Size (gio2-4.0.4.gem) = 39936 bytes

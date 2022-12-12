@@ -1,4 +1,4 @@
-# $NetBSD: mozilla-common.mk,v 1.241 2022/10/12 01:02:39 gutteridge Exp $
+# $NetBSD: mozilla-common.mk,v 1.245 2022/12/11 21:06:32 tsutsui Exp $
 #
 # common Makefile fragment for mozilla packages based on gecko 2.0.
 #
@@ -7,12 +7,18 @@
 .include "../../mk/bsd.prefs.mk"
 
 PYTHON_VERSIONS_INCOMPATIBLE=	27
+# ERROR: .../firefox-105.0.3/xpcom/idl-parser/xpidl/xpidl.py:1620: Invalid regular expression for rule 't_multilinecomment'. global flags not at the start of the expression at position 26
+# ERROR: .../firefox/work/firefox-105.0.3/xpcom/idl-parser/xpidl/xpidl.py:1626: Invalid regular expression for rule 't_singlelinecomment'. global flags not at the start of the expression at position 24
+# ERROR: .../firefox/work/firefox-105.0.3/xpcom/idl-parser/xpidl/xpidl.py:1639: Invalid regular expression for rule 't_LCDATA'. global flags not at the start of the expression at position 13
+# leading to:
+# SyntaxError: Can't build lexer
+PYTHON_VERSIONS_INCOMPATIBLE+=	311
 PYTHON_FOR_BUILD_ONLY=		tool
 ALL_ENV+=			PYTHON3=${PYTHONBIN}
 
 HAS_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--prefix=${PREFIX}
-USE_TOOLS+=		pkg-config perl gmake autoconf213 gm4 unzip zip
+USE_TOOLS+=		pkg-config perl gmake gm4 unzip zip # autoconf213
 UNLIMIT_RESOURCES+=	datasize virtualsize
 
 USE_LANGUAGES+=		c c++
@@ -70,7 +76,7 @@ CHECK_PORTABILITY_SKIP+=	${MOZILLA_DIR}js/src/tests/update-test262.sh
 CHECK_PORTABILITY_SKIP+=	${MOZILLA_DIR}intl/icu/source/configure
 CHECK_PORTABILITY_SKIP+=	${MOZILLA_DIR}browser/components/loop/run-all-loop-tests.sh
 CHECK_PORTABILITY_SKIP+=	${MOZILLA_DIR}browser/extensions/loop/run-all-loop-tests.sh
-#CHECK_PORTABILITY_SKIP+=	${MOZILLA_DIR}modules/pdfium/update.sh
+CHECK_PORTABILITY_SKIP+=	${MOZILLA_DIR}third_party/libwebrtc/tools_webrtc/iwyu/apply-iwyu
 
 CONFIGURE_ARGS+=	--enable-default-toolkit=cairo-gtk3
 CONFIGURE_ARGS+=	--enable-release
@@ -205,7 +211,7 @@ BUILDLINK_API_DEPENDS.libevent+=	libevent>=1.1
 BUILDLINK_API_DEPENDS.nspr+=	nspr>=4.34
 .include "../../devel/nspr/buildlink3.mk"
 .include "../../textproc/icu/buildlink3.mk"
-BUILDLINK_API_DEPENDS.nss+=	nss>=3.82
+BUILDLINK_API_DEPENDS.nss+=	nss>=3.84
 .include "../../devel/nss/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 #.include "../../mk/jpeg.buildlink3.mk"
