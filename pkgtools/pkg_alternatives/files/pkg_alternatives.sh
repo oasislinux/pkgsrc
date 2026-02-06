@@ -670,32 +670,29 @@ warn() {
 # action.
 #
 main() {
-    args=$(getopt gp:sw ${*})
-    [ ${?} -eq 0 ] || usage
-    set -- ${args}
     what=package
-    while [ ${#} -gt 0 ]; do
-        case ${1} in
-            -g)
+    while getopts gp:sw flag; do
+        case $flag in
+            g)
                 what=package
                 ;;
-            -p)
-                Prefix=$2; shift
+            p)
+                Prefix=$OPTARG; shift
                 Conf_Dir=@CONFDIR@${Prefix}
                 Db_Dir=@DBDIR@${Prefix}
                 ;;
-            -s)
+            s)
                 Verbose=no
                 ;;
-            -w)
+            w)
                 what=wrapper
                 ;;
-            --)
-                shift; break
+            *)
+                usage
                 ;;
         esac
-        shift
     done
+    shift $(($OPTIND - 1))
 
     if [ ${#} -eq 0 ]; then
         usage
